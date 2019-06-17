@@ -2,6 +2,9 @@ package net.awesomekorean.baguni;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +16,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-//    FragmentManager fm;
-//    FragmentTransaction ft;
-//    Word word = new Word();
-//    Lesson lesson = new Lesson();
-//    Reading reading = new Reading();
-//    Writing writing = new Writing();
+    FragmentManager fm;
+    FragmentTransaction ft;
+    Dashboard dashboard = new Dashboard();
+    Vocabulary vocabulary = new Vocabulary();
+    Lesson lesson = new Lesson();
+    Reading reading = new Reading();
+    Writing writing = new Writing();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        setFrag(dashboard);
+
+    }
+
+    public void setFrag(Fragment page) {
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.main_frame, page);
+        ft.commit();
     }
 
     @Override
@@ -44,19 +58,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.menu_vocabulary:
-                Toast.makeText(getApplicationContext(),"vocabulary clicked", Toast.LENGTH_LONG).show();
+                setFrag(vocabulary);
                 break;
             case R.id.menu_lesson:
-                Toast.makeText(getApplicationContext(),"lesson clicked", Toast.LENGTH_LONG).show();
+                setFrag(lesson);
                 break;
             case R.id.menu_reading:
-                Toast.makeText(getApplicationContext(),"reading clicked", Toast.LENGTH_LONG).show();
+                setFrag(reading);
                 break;
             case R.id.menu_writing:
-                Toast.makeText(getApplicationContext(),"writing clicked", Toast.LENGTH_LONG).show();
+                setFrag(writing);
                 break;
             case R.id.menu_profile:
-                Toast.makeText(getApplicationContext(),"profile clicked", Toast.LENGTH_LONG).show();
+                setFrag(vocabulary);
                 break;
             case R.id.menu_option:
                 Toast.makeText(getApplicationContext(),"option clicked", Toast.LENGTH_LONG).show();

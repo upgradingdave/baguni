@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Word extends Fragment {
+public class Dashboard extends Fragment {
 
     View view;
 
@@ -16,7 +16,7 @@ public class Word extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.word, container, false);
+        view = inflater.inflate(R.layout.dashboard, container, false);
 
         return view;
     }
