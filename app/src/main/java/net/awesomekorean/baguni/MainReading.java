@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Writing extends Fragment {
+public class MainReading extends Fragment {
 
     View view;
 
@@ -16,7 +16,7 @@ public class Writing extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.writing, container, false);
+        view = inflater.inflate(R.layout.main_reading, container, false);
 
         return view;
     }

@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     FragmentManager fm;
     FragmentTransaction ft;
-    Dashboard dashboard = new Dashboard();
-    Vocabulary vocabulary = new Vocabulary();
-    Lesson lesson = new Lesson();
-    Reading reading = new Reading();
-    Writing writing = new Writing();
+    MainDashboard mainDashboard = new MainDashboard();
+    MainVocabulary mainVocabulary = new MainVocabulary();
+    MainLesson mainLesson = new MainLesson();
+    MainReading mainReading = new MainReading();
+    MainWriting mainWriting = new MainWriting();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        setFrag(dashboard);
+        setFrag(mainDashboard);
 
     }
 
@@ -58,19 +58,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.menu_vocabulary:
-                setFrag(vocabulary);
+                setFrag(mainVocabulary);
                 break;
             case R.id.menu_lesson:
-                setFrag(lesson);
+                setFrag(mainLesson);
                 break;
             case R.id.menu_reading:
-                setFrag(reading);
+                setFrag(mainReading);
                 break;
             case R.id.menu_writing:
-                setFrag(writing);
+                setFrag(mainWriting);
                 break;
             case R.id.menu_profile:
-                setFrag(vocabulary);
+                setFrag(mainVocabulary);
                 break;
             case R.id.menu_option:
                 Toast.makeText(getApplicationContext(),"option clicked", Toast.LENGTH_LONG).show();

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Dashboard extends Fragment {
+public class MainDashboard extends Fragment {
 
     View view;
 
@@ -16,7 +16,7 @@ public class Dashboard extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.dashboard, container, false);
+        view = inflater.inflate(R.layout.main_dashboard, container, false);
 
         return view;
     }

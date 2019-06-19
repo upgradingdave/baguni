@@ -9,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-public class Lesson extends Fragment implements Button.OnClickListener {
+public class MainLesson extends Fragment implements Button.OnClickListener {
 
     View view;
 
@@ -19,7 +18,7 @@ public class Lesson extends Fragment implements Button.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson, container, false);
+        view = inflater.inflate(R.layout.main_lesson, container, false);
 
         Button hangul = (Button) view.findViewById(R.id.btn_hangul);
         hangul.setOnClickListener(this);
@@ -32,7 +31,7 @@ public class Lesson extends Fragment implements Button.OnClickListener {
 
         switch (v.getId()) {
             case R.id.btn_hangul :
-                Intent intent = new Intent(getContext(), MainHangulLesson.class);
+                Intent intent = new Intent(getContext(), LessonHangulMenu.class);
                 startActivity(intent);
         }
     }
