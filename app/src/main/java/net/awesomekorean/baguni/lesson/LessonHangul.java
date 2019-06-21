@@ -23,6 +23,7 @@ public class LessonHangul extends AppCompatActivity {
 
     TextView textViewHangul;
     TextView textViewHangulExplain;
+    TextView textViewIntro;
 
     MediaPlayer mediaPlayer;
 
@@ -31,19 +32,16 @@ public class LessonHangul extends AppCompatActivity {
     String hangulIntro;
 
     int currentHangul = 0;
-
-    FragmentManager fm;
-    FragmentTransaction ft;
-    TextView textViewIntro;
-    LessonHangulIntro lessonHangulIntro = new LessonHangulIntro();
+    int introVisible = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul);
 
-        textViewHangul = findViewById(R.id.textviewHangul);
-        textViewHangulExplain = findViewById(R.id.textviewHangulExplain);
+        textViewHangul = findViewById(R.id.textViewHangul);
+        textViewHangulExplain = findViewById(R.id.textViewHangulExplain);
+        textViewIntro = findViewById(R.id.textViewIntro);
 
         Intent intent = getIntent();
 
@@ -55,8 +53,7 @@ public class LessonHangul extends AppCompatActivity {
                 hangul = consonant.hangul;
                 hangulExplain = consonant.hangulExplain;
                 hangulIntro = consonant.hangulIntro;
-                textViewHangul.setText(hangul[0]);
-                textViewHangulExplain.setText(hangulExplain[0]);
+                setInitial();
                 break;
 
             case "vowel" :
@@ -65,8 +62,7 @@ public class LessonHangul extends AppCompatActivity {
                 hangul = vowel.hangul;
                 hangulExplain = vowel.hangulExplain;
                 hangulIntro = vowel.hangulIntro;
-                textViewHangul.setText(hangul[0]);
-                textViewHangulExplain.setText(hangulExplain[0]);
+                setInitial();
                 break;
 
         }
@@ -77,7 +73,6 @@ public class LessonHangul extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                textViewIntro = (TextView) findViewById(R.id.intro);
 
                 switch (view.getId()) {
                     case R.id.btnLeft :
@@ -112,11 +107,16 @@ public class LessonHangul extends AppCompatActivity {
 
                     case R.id.btnIntro :
 
-                        fm = getSupportFragmentManager();
-                        ft = fm.beginTransaction();
-                        ft.replace(R.id.introFragment, lessonHangulIntro);
+                        textViewIntro.setText(hangulIntro);
 
-                        ft.commit();
+                        if(introVisible == 0) {
+                            textViewIntro.setVisibility(View.VISIBLE);
+                            introVisible = 1;
+                        } else {
+                            textViewIntro.setVisibility(View.GONE);
+                            introVisible = 0;
+                        }
+
                         break;
 
 
@@ -137,6 +137,12 @@ public class LessonHangul extends AppCompatActivity {
         btnHint.setOnClickListener(onClickListener);
         btnIntro.setOnClickListener(onClickListener);
 
+    }
+
+    private void setInitial() {
+
+        textViewHangul.setText(hangul[0]);
+        textViewHangulExplain.setText(hangulExplain[0]);
     }
 
 //    public void audioPlay() {
