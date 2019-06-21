@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:onClick="btnclick1"
+            android:onClick="btnConsonant"
             android:text="Consonant"
             android:textSize="20dp" />
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:onClick="btnclick2"
+            android:onClick="btnVowel"
             android:text="Vowel"
             android:textSize="20dp" />
 

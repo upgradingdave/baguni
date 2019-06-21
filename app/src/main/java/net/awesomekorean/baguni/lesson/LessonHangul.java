@@ -21,19 +21,20 @@ import java.io.File;
 
 public class LessonHangul extends AppCompatActivity {
 
-    String[] consonant = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
-    String[] consonantExplain = {"기역", "니은", "디귿", "리을", "미음", "비읍", "시옷", "이응, No sound", "지읒", "치읓", "키읔", "티읕", "피읖", "히읗", "쌍기역", "쌍디귿", "쌍비읍", "쌍시옷", "쌍지읒"};
-
-    TextView hangul;
-    TextView hangulExplain;
+    TextView textViewHangul;
+    TextView textViewHangulExplain;
 
     MediaPlayer mediaPlayer;
+
+    String[] hangul;
+    String[] hangulExplain;
+    String hangulIntro;
 
     int currentHangul = 0;
 
     FragmentManager fm;
     FragmentTransaction ft;
-    TextView intro;
+    TextView textViewIntro;
     LessonHangulIntro lessonHangulIntro = new LessonHangulIntro();
 
     @Override
@@ -41,14 +42,33 @@ public class LessonHangul extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul);
 
+        textViewHangul = findViewById(R.id.textviewHangul);
+        textViewHangulExplain = findViewById(R.id.textviewHangulExplain);
+
         Intent intent = getIntent();
 
-        Object conVowBat = intent.getExtras().getString("conVowBat");
-        System.out.println(conVowBat);
-        if(conVowBat == "consonant") {
-            System.out.println("CONSONANT!!!!!");
-        } else if(conVowBat == "vowel") {
-            System.out.println("VOWEL!!!!!!!");
+        switch (intent.getExtras().getString("conVowBat")) {
+
+            case "consonant" :
+
+                LessonHangulConsonant consonant = new LessonHangulConsonant();
+                hangul = consonant.hangul;
+                hangulExplain = consonant.hangulExplain;
+                hangulIntro = consonant.hangulIntro;
+                textViewHangul.setText(hangul[0]);
+                textViewHangulExplain.setText(hangulExplain[0]);
+                break;
+
+            case "vowel" :
+
+                LessonHangulVowel vowel = new LessonHangulVowel();
+                hangul = vowel.hangul;
+                hangulExplain = vowel.hangulExplain;
+                hangulIntro = vowel.hangulIntro;
+                textViewHangul.setText(hangul[0]);
+                textViewHangulExplain.setText(hangulExplain[0]);
+                break;
+
         }
 
 //        audioPlay();
@@ -57,30 +77,25 @@ public class LessonHangul extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                hangul = (TextView) findViewById(R.id.hangul);
-                hangulExplain = (TextView) findViewById(R.id.hangulExplain);
-                intro = (TextView) findViewById(R.id.intro);
-
-                System.out.println("introoo : " + intro);
-                System.out.println("hangul : " + hangul);
+                textViewIntro = (TextView) findViewById(R.id.intro);
 
                 switch (view.getId()) {
                     case R.id.btnLeft :
                         if(currentHangul == 0) {
-                            currentHangul = consonant.length-1;
+                            currentHangul = hangul.length-1;
                         } else {
                             currentHangul--;
                         }
-                        setHangul(consonant, consonantExplain);
+                        setHangul(hangul, hangulExplain);
                         break;
 
                     case R.id.btnRight :
-                        if(currentHangul == consonant.length-1) {
+                        if(currentHangul == hangul.length-1) {
                             currentHangul = 0;
                         } else {
                             currentHangul++;
                         }
-                        setHangul(consonant, consonantExplain);
+                        setHangul(hangul, hangulExplain);
                         break;
 
                     case R.id.btnListening :
@@ -97,22 +112,11 @@ public class LessonHangul extends AppCompatActivity {
 
                     case R.id.btnIntro :
 
-                        System.out.println("Introoo22222 : " + intro);
                         fm = getSupportFragmentManager();
                         ft = fm.beginTransaction();
                         ft.replace(R.id.introFragment, lessonHangulIntro);
 
                         ft.commit();
-                        if(intro != null) {
-                            intro.setText("Korean only has 14 consonants and 5 double consonants.\n"+
-                                    "We can make the sound of each consonant by using articulators like the lips, tongue, mouth, throat and nose.\n"+
-                                    "<b>That's why we should think about the correct position of each articulator.</b>\n"+
-                                    "This will make you pronounce Korean like a native Korean.\n" +
-                                    "Some of consonants could be similar to sounds in your language.\n" +
-                                    "But some of the others could be difficult to pronounce exactly right because you have never made that sound in your life.\n" +
-                                    "Your muscles in your mouth may not be strong enough to make that new sound yet.\n" +
-                                    "<b>Fortunately, we can train our muscles with practice.</b> Let's warm up your mouth before we start.");
-                        }
                         break;
 
 
@@ -151,8 +155,8 @@ public class LessonHangul extends AppCompatActivity {
 
     public void setHangul(String[] conVow, String[] conVowExplain) {
 
-        hangul.setText(conVow[currentHangul]);
-        hangulExplain.setText(conVowExplain[currentHangul]);
+        textViewHangul.setText(conVow[currentHangul]);
+        textViewHangulExplain.setText(conVowExplain[currentHangul]);
 
     }
 

@@ -35,10 +35,10 @@
                 />
 
             <TextView
-                android:id="@+id/hangul"
+                android:id="@+id/textviewHangul"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="ㄱ"
+                android:text=""
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical|center"
@@ -55,10 +55,10 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/hangulExplain"
+            android:id="@+id/textviewHangulExplain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기역"
+            android:text=""
             android:textSize="30dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"/>
