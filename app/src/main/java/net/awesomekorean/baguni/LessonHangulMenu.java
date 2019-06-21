@@ -16,8 +16,16 @@ public class LessonHangulMenu extends AppCompatActivity {
         setContentView(R.layout.activity_lesson_hangul_menu);
     }
 
-    public void onButtonClick(View v) {
+    public void btnclick1(View v) {
         Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
+        intent.putExtra("conVowBat", "consonant");
         startActivity(intent);
     }
+
+    public void btnclick2(View v) {
+        Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
+        intent.putExtra("conVowBat", "vowel");
+        startActivity(intent);
+    }
+
 }
