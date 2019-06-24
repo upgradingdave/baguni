@@ -86,6 +86,7 @@ public class LessonHangul extends AppCompatActivity {
                             currentHangul--;
                         }
                         setHangul(hangul, hangulExplain);
+                        visible(VISIBLE, GONE);
                         break;
 
                     case R.id.btnRight :
@@ -95,6 +96,7 @@ public class LessonHangul extends AppCompatActivity {
                             currentHangul++;
                         }
                         setHangul(hangul, hangulExplain);
+                        visible(VISIBLE, GONE);
                         break;
 
                     case R.id.btnListening :
@@ -113,6 +115,7 @@ public class LessonHangul extends AppCompatActivity {
 
                             visible(GONE, VISIBLE);
                             writingBtnClicked = 1;
+                            hintBtnClicked = 0;
 
                         } else {
                             visible(VISIBLE, GONE);
@@ -122,9 +125,9 @@ public class LessonHangul extends AppCompatActivity {
                         break;
 
                     case R.id.btnHint :
-                        if(writingBtnClicked == 0) {
+                        if(hintBtnClicked == 0) {
 
-                            String resName = "@drawable/h" + conVowBat + currentHangul;
+                            String resName = "@drawable/w" + conVowBat + currentHangul;
                             String packName = getApplicationContext().getPackageName();
                             int resID = getResources().getIdentifier(resName, "drawable", packName);
 
@@ -133,6 +136,7 @@ public class LessonHangul extends AppCompatActivity {
 
                             visible(GONE, VISIBLE);
                             hintBtnClicked = 1;
+                            writingBtnClicked = 0;
 
                         } else {
                             visible(VISIBLE, GONE);

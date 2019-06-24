@@ -14,10 +14,11 @@
 
         <Button
             android:id="@+id/btn_hangul"
+            android:layout_margin="10dp"
             android:text="Hangul"
             android:textSize="20dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             />
 
     </LinearLayout>
