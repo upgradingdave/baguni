@@ -1,38 +1,40 @@
 package net.awesomekorean.baguni.lesson;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.awesomekorean.baguni.R;
 
-import java.io.File;
+import java.net.URI;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class LessonHangul extends AppCompatActivity {
 
     TextView textViewHangul;
     TextView textViewHangulExplain;
     TextView textViewIntro;
+    ImageView imageViewHangul;
 
     MediaPlayer mediaPlayer;
 
     String[] hangul;
     String[] hangulExplain;
     String hangulIntro;
+    String conVowBat;
 
     int currentHangul = 0;
     int introVisible = 0;
+    int writingBtnClicked = 0;
+    int hintBtnClicked = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class LessonHangul extends AppCompatActivity {
             case "consonant" :
 
                 LessonHangulConsonant consonant = new LessonHangulConsonant();
+                conVowBat = "con";
                 hangul = consonant.hangul;
                 hangulExplain = consonant.hangulExplain;
                 hangulIntro = consonant.hangulIntro;
@@ -59,6 +62,7 @@ public class LessonHangul extends AppCompatActivity {
             case "vowel" :
 
                 LessonHangulVowel vowel = new LessonHangulVowel();
+                conVowBat = "bat";
                 hangul = vowel.hangul;
                 hangulExplain = vowel.hangulExplain;
                 hangulIntro = vowel.hangulIntro;
@@ -98,11 +102,43 @@ public class LessonHangul extends AppCompatActivity {
                         break;
 
                     case R.id.btnWriting :
-                        System.out.println("Writing button clicked");
+                        if(writingBtnClicked == 0) {
+
+                            String resName = "@drawable/w" + conVowBat + currentHangul;
+                            String packName = getApplicationContext().getPackageName();
+                            int resID = getResources().getIdentifier(resName, "drawable", packName);
+
+                            imageViewHangul = findViewById(R.id.imageViewHangul);
+                            imageViewHangul.setImageResource(resID);
+
+                            visible(GONE, VISIBLE);
+                            writingBtnClicked = 1;
+
+                        } else {
+                            visible(VISIBLE, GONE);
+                            writingBtnClicked = 0;
+                        }
+
                         break;
 
                     case R.id.btnHint :
-                        System.out.println("Hint button clicked");
+                        if(writingBtnClicked == 0) {
+
+                            String resName = "@drawable/h" + conVowBat + currentHangul;
+                            String packName = getApplicationContext().getPackageName();
+                            int resID = getResources().getIdentifier(resName, "drawable", packName);
+
+                            imageViewHangul = findViewById(R.id.imageViewHangul);
+                            imageViewHangul.setImageResource(resID);
+
+                            visible(GONE, VISIBLE);
+                            hintBtnClicked = 1;
+
+                        } else {
+                            visible(VISIBLE, GONE);
+                            hintBtnClicked = 0;
+                        }
+
                         break;
 
                     case R.id.btnIntro :
@@ -110,16 +146,14 @@ public class LessonHangul extends AppCompatActivity {
                         textViewIntro.setText(hangulIntro);
 
                         if(introVisible == 0) {
-                            textViewIntro.setVisibility(View.VISIBLE);
+                            textViewIntro.setVisibility(VISIBLE);
                             introVisible = 1;
                         } else {
-                            textViewIntro.setVisibility(View.GONE);
+                            textViewIntro.setVisibility(GONE);
                             introVisible = 0;
                         }
 
                         break;
-
-
                 }
             }
         };
@@ -139,24 +173,37 @@ public class LessonHangul extends AppCompatActivity {
 
     }
 
+    private void visible(int textView, int imageView) {
+        imageViewHangul.setVisibility(imageView);
+        textViewHangul.setVisibility(textView);
+
+    }
+
     private void setInitial() {
 
         textViewHangul.setText(hangul[0]);
         textViewHangulExplain.setText(hangulExplain[0]);
     }
 
-//    public void audioPlay() {
-//
-//        String string = "R.raw.con0";
-//
-//        Uri currentPlay = Uri.parse(string);
-//
-//        mediaPlayer = MediaPlayer.create(getApplicationContext(), currentPlay);
-//
-//        mediaPlayer.start();
-//
-//
-//    }
+
+
+    public void audioPlay() {
+
+        mediaPlayer = new MediaPlayer();
+
+        String string = "R.raw.con0";
+
+        Uri currentPlay = Uri.parse(string);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), currentPlay);
+
+        System.out.println("CunnrntPlay : " + currentPlay);
+        System.out.println("media!!! : " + mediaPlayer);
+
+        mediaPlayer.start();
+
+
+    }
 
 
     public void setHangul(String[] conVow, String[] conVowExplain) {

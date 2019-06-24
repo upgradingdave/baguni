@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingTop="50dp"
             android:layout_weight="1">
 
             <Button
@@ -37,12 +38,23 @@
             <TextView
                 android:id="@+id/textViewHangul"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text=""
+                android:layout_height="match_parent"
+                android:padding="10dp"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical|center"
-                android:textSize="200dp"
+                android:textSize="180dp"
+                android:visibility="visible"
+                />
+
+            <ImageView
+                android:id="@+id/imageViewHangul"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
                 />
 
             <Button
@@ -59,7 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="30dp"
+            android:textSize="20dp"
+            android:padding="10dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"/>
 
