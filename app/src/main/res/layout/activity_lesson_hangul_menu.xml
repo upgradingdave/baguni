@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LessonHangulMenu">
+    tools:context=".lesson.LessonHangulMenu">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,42 +13,44 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnConsonant"
+            android:id="@+id/btnMenuConsonant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:onClick="btnConsonant"
+            android:onClick="btnMenuConsonant"
             android:text="Consonant"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btnVowel"
+            android:id="@+id/btnMenuVowel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:onClick="btnVowel"
+            android:onClick="btnMenuVowel"
             android:text="Vowel"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btnBatchim"
+            android:id="@+id/btnMenuBatchim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="btnMenuBatchim"
             android:text="Batchim"
-            android:textSize="20dp"
-            android:layout_margin="20dp"/>
+            android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btnAssembly"
+            android:id="@+id/btnMenuAssembly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="btnMenuAssembly"
             android:text="Assembly"
-            android:textSize="20dp"
-            android:layout_margin="20dp"/>
+            android:textSize="20dp" />
         <Button
-            android:id="@+id/btnPractice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="btnMenuPractice"
             android:text="Practice"
             android:textSize="20dp"
             android:layout_margin="20dp"/>

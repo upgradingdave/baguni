@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import net.awesomekorean.baguni.lesson.LessonHangulMenu;
+
 public class MainLesson extends Fragment implements Button.OnClickListener {
 
     View view;

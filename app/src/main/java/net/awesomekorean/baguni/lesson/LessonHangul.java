@@ -127,7 +127,7 @@ public class LessonHangul extends AppCompatActivity {
                     case R.id.btnHint :
                         if(hintBtnClicked == 0) {
 
-                            String resName = "@drawable/w" + conVowBat + currentHangul;
+                            String resName = "@drawable/h" + conVowBat + currentHangul;
                             String packName = getApplicationContext().getPackageName();
                             int resID = getResources().getIdentifier(resName, "drawable", packName);
 

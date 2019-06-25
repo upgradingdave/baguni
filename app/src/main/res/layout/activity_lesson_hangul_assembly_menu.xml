@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".lesson.LessonHangulAssemblyMenu">
+
+    <LinearLayout
+        android:paddingTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:src="@drawable/cv_h"
+            android:layout_margin="10dp"
+            android:background="@android:color/white"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:onClick="cv_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:src="@drawable/cv_v"
+            android:layout_margin="10dp"
+            android:background="@android:color/white"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:onClick="cv_v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingBottom="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:src="@drawable/cvc_h"
+            android:layout_margin="10dp"
+            android:background="@android:color/white"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:onClick="cvc_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:src="@drawable/cvc_v"
+            android:layout_margin="10dp"
+            android:background="@android:color/white"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:onClick="cvc_v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
