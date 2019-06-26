@@ -38,6 +38,9 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
     Button batchim;
 
+    String[] consonant = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
+    String[] vowel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
             case "cv_h":
 
+                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"};
+
                 widthC = dpToPx(150);
                 heightC = dpToPx(250);
 
@@ -66,6 +71,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
                 setTextViewPosition(START, END);
 
                 batchim.setVisibility(View.GONE);
+
+                makeHangulBox(consonant, vowel);
 
                 break;
 
@@ -94,6 +101,12 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
 
         }
+    }
+
+    private void makeHangulBox(String[] consonant, String[] vowel) {
+
+
+
     }
 
     private void setTextViewPosition(int vPosition, int cPosition) {

@@ -18,6 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+
+        <Button
+            android:layout_margin="10dp"
+            android:text="repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -51,7 +59,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -78,8 +86,31 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/hangulBox"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/consonantBox"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="ㄱ"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vowelBox"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
 
 
