@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.awesomekorean.baguni.R;
 
@@ -52,6 +53,9 @@ public class LessonHangulAssembly extends AppCompatActivity {
     String[] consonant = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
     String[] vowel;
 
+    private View.OnClickListener hangulBoxBtnSelected;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,27 @@ public class LessonHangulAssembly extends AppCompatActivity {
         batchim = findViewById(R.id.btnBatchim);
 
         constraintLayout = findViewById(R.id.constraintLayout);
+
+        hangulBoxBtnSelected = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Button selectedBtn = (Button) view;
+                String selectedHangul = selectedBtn.getText().toString();
+
+                for(String string : consonant) {
+                    if (selectedHangul.equals(string)) {
+                        c.setText(selectedHangul);
+                    }
+                }
+
+                for(String string : vowel) {
+                    if(selectedHangul.equals(string)) {
+                        v.setText(selectedHangul);
+                    }
+                }
+
+            }
+        };
 
 
 
@@ -147,6 +172,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
             hangulBoxBtn.setLayoutParams(params);
 
             hangulBoxBtn.setText(addHangul);
+            hangulBoxBtn.setOnClickListener(hangulBoxBtnSelected);
 
             numberOfBox++;
 
@@ -200,6 +226,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
         vowelBoxLayout1.setVisibility(View.GONE);
         vowelBoxLayout2.setVisibility(View.GONE);
+        vowelBoxLayout3.setVisibility(View.GONE);
+
     }
 
     public void btnVowelClicked(View view) {
@@ -210,6 +238,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
         vowelBoxLayout1.setVisibility(View.VISIBLE);
         vowelBoxLayout2.setVisibility(View.VISIBLE);
+        vowelBoxLayout3.setVisibility(View.VISIBLE);
+
     }
 }
 
