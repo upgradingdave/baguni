@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,12 +31,21 @@ public class LessonHangulAssembly extends AppCompatActivity {
     ConstraintSet constraintSet = new ConstraintSet();
     ConstraintLayout constraintLayout;
 
-
     int widthC;
     int heightC;
 
     int widthV;
     int heightV;
+
+    int deviceWidth;
+
+    LinearLayout consonantBoxLayout1;
+    LinearLayout consonantBoxLayout2;
+    LinearLayout consonantBoxLayout3;
+    LinearLayout vowelBoxLayout1;
+    LinearLayout vowelBoxLayout2;
+    LinearLayout vowelBoxLayout3;
+
 
     Button batchim;
 
@@ -52,6 +63,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
         batchim = findViewById(R.id.btnBatchim);
 
         constraintLayout = findViewById(R.id.constraintLayout);
+
+
 
         Intent intent = getIntent();
 
@@ -103,13 +116,61 @@ public class LessonHangulAssembly extends AppCompatActivity {
         }
     }
 
-    private void makeHangulBox(String[] consonant, String[] vowel) {
+    public void makeHangulBox(String[] consonant, String[] vowel) {
+
+        consonantBoxLayout1 = findViewById(R.id.consonantBox1);
+        consonantBoxLayout2 = findViewById(R.id.consonantBox2);
+        consonantBoxLayout3 = findViewById(R.id.consonantBox3);
+        vowelBoxLayout1 = findViewById(R.id.vowelBox1);
+        vowelBoxLayout2 = findViewById(R.id.vowelBox2);
+        vowelBoxLayout3 = findViewById(R.id.vowelBox3);
+
+        getDisplayWidth();
+
+        makeHangulBoxIterate(consonant, consonantBoxLayout1, consonantBoxLayout2, consonantBoxLayout3);
+        makeHangulBoxIterate(vowel, vowelBoxLayout1, vowelBoxLayout2, vowelBoxLayout3);
 
 
 
     }
 
-    private void setTextViewPosition(int vPosition, int cPosition) {
+    private void makeHangulBoxIterate(String[] hangul, LinearLayout hangulBoxLayout1, LinearLayout hangulBoxLayout2, LinearLayout hangulBoxLayout3) {
+
+        int numberOfBox = 0;
+
+        for(String addHangul : hangul) {
+
+            Button hangulBoxBtn = new Button(this);
+
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(50), dpToPx(50));
+
+            hangulBoxBtn.setLayoutParams(params);
+
+            hangulBoxBtn.setText(addHangul);
+
+            numberOfBox++;
+
+            if (deviceWidth >= dpToPx(50 * numberOfBox)) {
+                hangulBoxLayout1.addView(hangulBoxBtn);
+            } else if (deviceWidth < dpToPx(50 * numberOfBox) && deviceWidth * 2 >= dpToPx(50 * numberOfBox)) {
+                hangulBoxLayout2.addView(hangulBoxBtn);
+            } else if (deviceWidth * 2 < dpToPx(50 * numberOfBox)) {
+                hangulBoxLayout3.addView(hangulBoxBtn);
+            }
+        }
+
+
+    }
+
+    private void getDisplayWidth() {
+
+        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
+
+        deviceWidth = dm.widthPixels;
+    }
+
+
+    public void setTextViewPosition(int vPosition, int cPosition) {
 
         constraintSet.clone(constraintLayout);
         constraintSet.connect(R.id.v, vPosition, R.id.c, cPosition);
@@ -117,7 +178,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
     }
 
-    private void setTextViewSize(int widthC, int heightC, int widthV, int heightV) {
+    public void setTextViewSize(int widthC, int heightC, int widthV, int heightV) {
 
         c.setLayoutParams(new ConstraintLayout.LayoutParams(widthC, heightC));
         v.setLayoutParams(new ConstraintLayout.LayoutParams(widthV, heightV));
@@ -129,6 +190,26 @@ public class LessonHangulAssembly extends AppCompatActivity {
         int pixels = (int) (dp * scale + 0.5f);
 
         return pixels;
+    }
+
+    public void btnConsonantClicked(View view) {
+
+        consonantBoxLayout1.setVisibility(View.VISIBLE);
+        consonantBoxLayout2.setVisibility(View.VISIBLE);
+        consonantBoxLayout3.setVisibility(View.VISIBLE);
+
+        vowelBoxLayout1.setVisibility(View.GONE);
+        vowelBoxLayout2.setVisibility(View.GONE);
+    }
+
+    public void btnVowelClicked(View view) {
+
+        consonantBoxLayout1.setVisibility(View.GONE);
+        consonantBoxLayout2.setVisibility(View.GONE);
+        consonantBoxLayout3.setVisibility(View.GONE);
+
+        vowelBoxLayout1.setVisibility(View.VISIBLE);
+        vowelBoxLayout2.setVisibility(View.VISIBLE);
     }
 }
 

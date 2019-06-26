@@ -31,7 +31,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_gravity="center"
-        android:layout_margin="50dp"
+        android:layout_margin="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -66,6 +66,7 @@
             android:id="@+id/btnConsonant"
             android:layout_weight="1"
             android:text="consonant"
+            android:onClick="btnConsonantClicked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -73,6 +74,7 @@
             android:id="@+id/btnVowel"
             android:layout_weight="1"
             android:text="vowel"
+            android:onClick="btnVowelClicked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -87,29 +89,51 @@
 
     <LinearLayout
         android:id="@+id/hangulBox"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/consonantBox"
+            android:id="@+id/consonantBox1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="ㄱ"
-                />
-
+            android:layout_height="wrap_content">
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/vowelBox"
+            android:id="@+id/consonantBox2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/consonantBox3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/vowelBox1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/vowelBox2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/vowelBox3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone"/>
 
 
