@@ -43,7 +43,7 @@ public class LessonHangulMenu extends AppCompatActivity {
     }
 
     public void btnMenuAssembly(View v) {
-        Intent intent = new Intent(getApplicationContext(), LessonHangulAssemblyMenu.class);
+        Intent intent = new Intent(getApplicationContext(), LessonHangulAssembly.class);
         startActivity(intent);
     }
 

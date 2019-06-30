@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,136 +8,203 @@
     tools:context=".lesson.LessonHangulAssembly">
 
     <LinearLayout
-        android:gravity="right"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_margin="10dp"
-            android:text="intro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-        <Button
-            android:layout_margin="10dp"
-            android:text="repeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-    </LinearLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            
-            android:gravity="center"
-            android:id="@+id/c"
-            android:text="C"
-            android:textSize="80dp"
-            android:background="@drawable/border"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-
-        <TextView
-            android:gravity="center"
-            android:id="@+id/v"
-            android:text="V"
-            android:textSize="80dp"
-            android:background="@drawable/border"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-
-    </android.support.constraint.ConstraintLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnConsonant"
-            android:layout_weight="1"
-            android:text="consonant"
-            android:onClick="btnConsonantClicked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnVowel"
-            android:layout_weight="1"
-            android:text="vowel"
-            android:onClick="btnVowelClicked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnBatchim"
-            android:layout_weight="1"
-            android:text="batchim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/hangulBox"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/consonantBox1"
-            android:orientation="horizontal"
+            android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnIntro"
+                android:layout_margin="10dp"
+                android:text="intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <Button
+                android:id="@+id/btnRepeat"
+                android:layout_margin="10dp"
+                android:text="repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/consonantBox2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp">
+
+            <ImageButton
+                android:id="@+id/cvH"
+                android:src="@drawable/cv_h"
+                android:layout_margin="10dp"
+                android:background="@android:color/white"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/cvV"
+                android:src="@drawable/cv_v"
+                android:layout_margin="10dp"
+                android:background="@android:color/white"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/cvcH"
+                android:src="@drawable/cvc_h"
+                android:layout_margin="10dp"
+                android:background="@android:color/white"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/cvcV"
+                android:src="@drawable/cvc_v"
+                android:layout_margin="10dp"
+                android:background="@android:color/white"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/assemblyTextView"
+            android:text=""
+            android:textSize="150dp"
+            android:background="@drawable/border"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnConsonant"
+                android:layout_weight="1"
+                android:text="consonant"
+                android:onClick="btnConsonantClicked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnVowel"
+                android:layout_weight="1"
+                android:text="vowel"
+                android:onClick="btnVowelClicked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnBatchim"
+                android:layout_weight="1"
+                android:text="batchim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/consonantBox3"
-            android:orientation="horizontal"
+            android:id="@+id/hangulBox"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/consonantBox1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/consonantBox2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/consonantBox3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/vowelBox1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/vowelBox2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/vowelBox3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/batchimBox1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/batchimBox2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/batchimBox3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
         </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/vowelBox1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/vowelBox2"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/vowelBox3"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
-
 
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textViewIntro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:background="@android:color/background_light"
+        android:visibility="gone"/>
+</android.support.constraint.ConstraintLayout>
