@@ -62,12 +62,23 @@ public class LessonHangul extends AppCompatActivity {
             case "vowel" :
 
                 LessonHangulVowel vowel = new LessonHangulVowel();
-                conVowBat = "bat";
+                conVowBat = "vow";
                 hangul = vowel.hangul;
                 hangulExplain = vowel.hangulExplain;
                 hangulIntro = vowel.hangulIntro;
                 setInitial();
                 break;
+
+            case "batchim" :
+
+                LessonHangulBatchim batchim = new LessonHangulBatchim();
+                conVowBat = "bat";
+                hangul = batchim.hangul;
+                hangulExplain = batchim.hangulExplain;
+                hangulIntro = batchim.hangulIntro;
+                setInitial();
+                break;
+
 
         }
 
