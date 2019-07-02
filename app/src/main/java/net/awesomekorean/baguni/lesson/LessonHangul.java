@@ -86,7 +86,9 @@ public class LessonHangul extends AppCompatActivity {
                             currentHangul--;
                         }
                         setHangul(hangul, hangulExplain);
-                        visible(VISIBLE, GONE);
+                        if(imageViewHangul != null) {
+                            visible(VISIBLE, GONE);
+                        }
                         break;
 
                     case R.id.btnRight :
@@ -96,7 +98,9 @@ public class LessonHangul extends AppCompatActivity {
                             currentHangul++;
                         }
                         setHangul(hangul, hangulExplain);
-                        visible(VISIBLE, GONE);
+                        if(imageViewHangul != null) {
+                            visible(VISIBLE, GONE);
+                        }
                         break;
 
                     case R.id.btnListening :
