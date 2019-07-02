@@ -36,6 +36,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
     int introVisible = 0;
 
+    Button btnConsonant;
     Button btnBatchim;
 
     LinearLayout consonantBoxLayout1;
@@ -48,6 +49,17 @@ public class LessonHangulAssembly extends AppCompatActivity {
     LinearLayout batchimBoxLayout2;
     LinearLayout batchimBoxLayout3;
 
+    Boolean consonantSelected = false;
+    Boolean vowelSelected = false;
+    Boolean batchimSelected = false;
+
+    String selectedConsonant = null;
+    String selectedVowel = null;
+    String selectedBatchim = null;
+
+    Boolean consonantBtnClicked = false;
+    Boolean vowelBtnClicked = false;
+    Boolean batBtnClicked = false;
 
     String[] consonant = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
     String[] vowel = {};
@@ -64,7 +76,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
                     "It sounds one of them and we will not learn about this yet.\n" +
                     "You can learn it easily when you start to learn words later.\n";
 
-    private View.OnClickListener hangulBoxBtnSelected;
+    public View.OnClickListener hangulBoxBtnSelected;
 
 
     @Override
@@ -81,6 +93,9 @@ public class LessonHangulAssembly extends AppCompatActivity {
         batchimBoxLayout1 = findViewById(R.id.batchimBox1);
         batchimBoxLayout2 = findViewById(R.id.batchimBox2);
         batchimBoxLayout3 = findViewById(R.id.batchimBox3);
+
+        assemblyTextView = findViewById(R.id.assemblyTextView);
+
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -112,6 +127,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
                         vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"};
 
+                        initialization();
+
                         btnBatchim.setVisibility(View.GONE);
 
                         makeHangulBox(consonant, vowel, batchim);
@@ -121,6 +138,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
                     case R.id.cvV :
 
                         vowel = new String[] {"ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅘ", "ㅙ", "ㅚ", "ㅝ", "ㅞ", "ㅟ", "ㅢ"};
+
+                        initialization();
 
                         btnBatchim.setVisibility(View.GONE);
 
@@ -132,6 +151,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
                         vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"};
 
+                        initialization();
+
                         btnBatchim.setVisibility(View.VISIBLE);
 
                         makeHangulBox(consonant, vowel, batchim);
@@ -142,6 +163,8 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
                         vowel = new String[] {"ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅘ", "ㅙ", "ㅚ", "ㅝ", "ㅞ", "ㅟ", "ㅢ"};
 
+                        initialization();
+
                         btnBatchim.setVisibility(View.VISIBLE);
 
                         makeHangulBox(consonant, vowel, batchim);
@@ -150,17 +173,23 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
                     case R.id.btnConsonant :
 
+                        conVowBtnClicked(true, false, false);
+
                         hangulBoxVisible(VISIBLE, GONE, GONE);
 
                         break;
 
                     case R.id.btnVowel :
 
+                        conVowBtnClicked(false, true, false);
+
                         hangulBoxVisible(GONE, VISIBLE, GONE);
 
                         break;
 
                     case R.id.btnBatchim :
+
+                        conVowBtnClicked(false, false, true);
 
                         hangulBoxVisible(GONE, GONE, VISIBLE);
 
@@ -172,11 +201,10 @@ public class LessonHangulAssembly extends AppCompatActivity {
         Button btnIntro = findViewById(R.id.btnIntro);
         Button btnRepeat = findViewById(R.id.btnRepeat);
         ImageButton cvH = findViewById(R.id.cvH);
-        cvH.setSelected(true);
         ImageButton cvV =findViewById(R.id.cvV);
         ImageButton cvcH = findViewById(R.id.cvcH);
         ImageButton cvcV = findViewById(R.id.cvcV);
-        Button btnConsonant = findViewById(R.id.btnConsonant);
+        btnConsonant = findViewById(R.id.btnConsonant);
         Button btnVowel = findViewById(R.id.btnVowel);
         btnBatchim =  findViewById(R.id.btnBatchim);
         btnIntro.setOnClickListener(onClickListener);
@@ -190,32 +218,75 @@ public class LessonHangulAssembly extends AppCompatActivity {
         btnBatchim.setOnClickListener(onClickListener);
 
 
+
         hangulBoxBtnSelected = new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                assemblyTextView = findViewById(R.id.assemblyTextView);
+
 
                 Button selectedBtn = (Button) view;
                 String selectedHangul = selectedBtn.getText().toString();
 
-                for(String string : consonant) {
-                    if (selectedHangul.equals(string)) {
-                        assemblyTextView.setText(selectedHangul);
-                    }
+                if (consonantBtnClicked) {
+                    displayHangul(selectedHangul, consonant);
+                } else if (vowelBtnClicked) {
+                    displayHangul(selectedHangul, vowel);
+                } else if (batBtnClicked) {
+                    displayHangul(selectedHangul, batchim);
                 }
 
-                for(String string : vowel) {
-                    if(selectedHangul.equals(string)) {
-                        assemblyTextView.setText(selectedHangul);
-                    }
+                if(consonantSelected == true && vowelSelected == true && batchimSelected == false) {
+                    HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel);
+                    assemblyTextView.setText(hangul.getAssembledHangul());
+                } else if(consonantSelected == true && vowelSelected == true && batchimSelected == true) {
+                    HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel, selectedBatchim);
+                    assemblyTextView.setText(hangul.getAssembledHangul());
+                } else {
+                    assemblyTextView.setText(selectedHangul);
                 }
+
 
             }
         };
+        cvH.callOnClick();
     }
 
+    public void initialization() {
+
+        assemblyTextView.setText("");
+        btnConsonant.callOnClick();
+        consonantSelected = false;
+        vowelSelected = false;
+        batchimSelected = false;
+    }
+
+    public void conVowBtnClicked(boolean con, boolean vow, boolean bat) {
+        consonantBtnClicked = con;
+        vowelBtnClicked = vow;
+        batBtnClicked = bat;
+    }
+
+    public void displayHangul(String selectedHangul, String[] conVow) {
+
+        for(String string : conVow) {
+            if (selectedHangul.equals(string)) {
+                assemblyTextView.setText(selectedHangul);
+            }
+        }
+
+        if (conVow == consonant) {
+            selectedConsonant = selectedHangul;
+            consonantSelected = true;
+        } else if (conVow == vowel) {
+            selectedVowel = selectedHangul;
+            vowelSelected = true;
+        } else if (conVow == batchim) {
+            selectedBatchim = selectedHangul;
+            batchimSelected = true;
+        }
+    }
 
 
     public void makeHangulBox(String[] consonant, String[] vowel, String[] batchim) {
@@ -300,6 +371,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
         batchimBoxLayout2.setVisibility(batchimBoxLayout);
         batchimBoxLayout3.setVisibility(batchimBoxLayout);
     }
+
 }
 
 
