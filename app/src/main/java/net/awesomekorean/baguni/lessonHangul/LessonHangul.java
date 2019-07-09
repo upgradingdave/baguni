@@ -1,6 +1,5 @@
-package net.awesomekorean.baguni.lesson;
+package net.awesomekorean.baguni.lessonHangul;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -11,9 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import net.awesomekorean.baguni.R;
-
-import java.net.URI;
-
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 

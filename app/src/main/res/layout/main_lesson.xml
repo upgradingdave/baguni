@@ -21,6 +21,16 @@
             android:layout_height="100dp"
             />
 
+        <Button
+            android:id="@+id/btn_lesson1"
+            android:layout_margin="10dp"
+            android:text="Lesson1"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
+
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

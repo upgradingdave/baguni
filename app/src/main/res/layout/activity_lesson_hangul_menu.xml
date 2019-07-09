@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".lesson.LessonHangulMenu">
+    tools:context=".lessonHangul.LessonHangulMenu">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,14 +47,6 @@
             android:onClick="btnMenuAssembly"
             android:text="Assembly"
             android:textSize="20dp" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnMenuPractice"
-            android:text="Practice"
-            android:textSize="20dp"
-            android:layout_margin="20dp"/>
-
 
     </LinearLayout>
 

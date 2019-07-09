@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lesson.LessonHangulAssembly">
-        </activity>
-        <activity android:name=".lesson.LessonHangul" />
-        <activity android:name=".lesson.LessonHangulMenu" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".lesson.LessonFrame">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity android:name=".lessonHangul.LessonHangulAssembly" />
+        <activity android:name=".lessonHangul.LessonHangul" />
+        <activity android:name=".lessonHangul.LessonHangulMenu" />
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 

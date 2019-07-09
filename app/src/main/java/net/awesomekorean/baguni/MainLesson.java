@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import net.awesomekorean.baguni.lesson.LessonHangulMenu;
+import net.awesomekorean.baguni.lesson.LessonFrame;
+import net.awesomekorean.baguni.lessonHangul.LessonHangulMenu;
 
 public class MainLesson extends Fragment implements Button.OnClickListener {
 
@@ -24,6 +25,8 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
 
         Button hangul = (Button) view.findViewById(R.id.btn_hangul);
         hangul.setOnClickListener(this);
+        Button lesson1 = (Button) view.findViewById(R.id.btn_lesson1);
+        lesson1.setOnClickListener(this);
 
         return view;
     }
@@ -36,6 +39,13 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
                 Intent intent = new Intent(getContext(), LessonHangulMenu.class);
                 startActivity(intent);
         }
+
+        switch (v.getId()) {
+            case R.id.btn_lesson1 :
+                Intent intent = new Intent(getContext(), LessonFrame.class);
+                startActivity(intent);
+        }
+
     }
 
 }

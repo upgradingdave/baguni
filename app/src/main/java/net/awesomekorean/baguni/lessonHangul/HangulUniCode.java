@@ -1,6 +1,4 @@
-package net.awesomekorean.baguni.lesson;
-
-import java.io.UnsupportedEncodingException;
+package net.awesomekorean.baguni.lessonHangul;
 
 public class HangulUniCode {
 

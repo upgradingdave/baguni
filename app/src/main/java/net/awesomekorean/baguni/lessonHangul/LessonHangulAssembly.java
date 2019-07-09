@@ -1,31 +1,19 @@
-package net.awesomekorean.baguni.lesson;
+package net.awesomekorean.baguni.lessonHangul;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.awesomekorean.baguni.R;
 
-import static android.support.constraint.ConstraintSet.BOTTOM;
-import static android.support.constraint.ConstraintSet.END;
 import static android.support.constraint.ConstraintSet.GONE;
-import static android.support.constraint.ConstraintSet.START;
-import static android.support.constraint.ConstraintSet.TOP;
 import static android.support.constraint.ConstraintSet.VISIBLE;
-import static java.security.AccessController.getContext;
 
 public class LessonHangulAssembly extends AppCompatActivity {
 

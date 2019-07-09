@@ -1,4 +1,4 @@
-package net.awesomekorean.baguni.lesson;
+package net.awesomekorean.baguni.lessonHangul;
 
 class LessonHangulBatchim {
 

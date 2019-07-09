@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".lesson.LessonWord">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:src="@drawable/sampleimage"
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <TextView
+        android:id="@+id/wordInKorean"
+        android:layout_gravity="center"
+        android:text="선생님"
+        android:textSize="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/wordInEnglish"
+        android:layout_gravity="center"
+        android:text="teacher"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:src="@drawable/sampleicon"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+</LinearLayout>

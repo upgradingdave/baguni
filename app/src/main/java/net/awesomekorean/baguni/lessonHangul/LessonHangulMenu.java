@@ -1,16 +1,11 @@
-package net.awesomekorean.baguni.lesson;
+package net.awesomekorean.baguni.lessonHangul;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import net.awesomekorean.baguni.R;
-import net.awesomekorean.baguni.lesson.LessonHangul;
-import net.awesomekorean.baguni.lesson.LessonHangulConsonant;
-
-import java.io.Serializable;
 
 public class LessonHangulMenu extends AppCompatActivity {
 
