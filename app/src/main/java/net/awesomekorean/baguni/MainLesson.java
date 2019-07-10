@@ -15,6 +15,8 @@ import net.awesomekorean.baguni.lessonHangul.LessonHangulMenu;
 
 public class MainLesson extends Fragment implements Button.OnClickListener {
 
+    public static int lessonUnit = 0;
+
     View view;
 
     @Nullable
@@ -23,9 +25,9 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        Button hangul = (Button) view.findViewById(R.id.btn_hangul);
+        Button hangul = view.findViewById(R.id.btn_hangul);
         hangul.setOnClickListener(this);
-        Button lesson1 = (Button) view.findViewById(R.id.btn_lesson1);
+        Button lesson1 = view.findViewById(R.id.btn_lesson1);
         lesson1.setOnClickListener(this);
 
         return view;
@@ -38,15 +40,20 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
             case R.id.btn_hangul :
                 Intent intent = new Intent(getContext(), LessonHangulMenu.class);
                 startActivity(intent);
+                break;
         }
 
         switch (v.getId()) {
             case R.id.btn_lesson1 :
                 Intent intent = new Intent(getContext(), LessonFrame.class);
+                lessonUnit = 1;
                 startActivity(intent);
+                break;
         }
 
     }
+
+
 
 }
 

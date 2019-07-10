@@ -7,12 +7,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import net.awesomekorean.baguni.MainLesson;
 import net.awesomekorean.baguni.R;
 
-public class LessonWord extends Fragment {
+public class LessonWord extends Fragment implements Button.OnClickListener {
 
     View view;
+
+    Button btnAudio;
+    Button btnNext;
+
+    TextView textViewInKorean;
+    TextView textViewInEnglish;
+
+    int lessonCount = 0;
+    int lessonLength = 0;
+
+    String[] wordInKorean;
+    String[] wordInEnglish;
+
 
     @Nullable
     @Override
@@ -20,6 +36,60 @@ public class LessonWord extends Fragment {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
+
+        Button btn_previous = view.findViewById(R.id.btn_previous);
+        btn_previous.setOnClickListener(this);
+        Button btn_next = view.findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(this);
+
+
+        textViewInKorean = view.findViewById(R.id.textViewInKorean);
+        textViewInEnglish = view.findViewById(R.id.textViewInEnglish);
+
+        switch (MainLesson.lessonUnit) {
+
+            case 1:
+                wordInKorean = Lesson1.wordInKorean;
+                wordInEnglish = Lesson1.wordInEnglish;
+                lessonLength = Lesson1.wordInKorean.length;
+
+                displayWord();
+
+        }
+
         return view;
     }
+
+    public void displayWord() {
+
+        textViewInKorean.setText(wordInKorean[lessonCount]);
+        textViewInEnglish.setText(wordInEnglish[lessonCount]);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.btn_previous :
+                if(lessonCount != 0) {
+                    lessonCount--;
+                }
+                displayWord();
+                break;
+
+
+            case R.id.btn_next :
+                if(lessonCount != lessonLength-1) {
+                    lessonCount++;
+                }
+                displayWord();
+                break;
+
+
+        }
+
+    }
+
 }
