@@ -18,8 +18,8 @@ public class LessonFrame extends AppCompatActivity {
     FragmentTransaction ft;
     LessonWord lessonWord = new LessonWord();
 
-    ProgressBar progressBar;
 
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class LessonFrame extends AppCompatActivity {
         setContentView(R.layout.activity_lesson_frame);
 
         setFrag(lessonWord);
+
     }
 
     public void setFrag(Fragment page) {
@@ -35,4 +36,13 @@ public class LessonFrame extends AppCompatActivity {
         ft.replace(R.id.lessonFrame, page);
         ft.commit();
     }
+
+    public void replaceFragment(Fragment fragment) {
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        ft.replace(R.id.lessonFrame, fragment);
+        ft.commit();
+    }
+
 }
+
