@@ -14,13 +14,17 @@ import android.widget.TextView;
 import net.awesomekorean.baguni.R;
 import net.awesomekorean.baguni.lessonHangul.HangulUniCode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener {
 
     View view;
-
     String[] wordForQuiz;
+    String wordInIndex;
+    Button selectorButton;
+    TextView wordQuiz1Answer;
 
     public View.OnClickListener selectorButtonClick;
 
@@ -44,7 +48,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         wordForQuiz = LessonWord.wordInKorean;
 
-        TextView wordQuiz1Answer = view.findViewById(R.id.wordQuiz1Answer);
+        wordQuiz1Answer = view.findViewById(R.id.wordQuiz1Answer);
         LinearLayout wordQuiz1Selector = view.findViewById(R.id.wordQuiz1Selector);
 
 
@@ -53,38 +57,44 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
             @Override
             public void onClick(View view) {
 
+                if(wordQuiz1Answer.getText().length() == wordInIndex.length()) {
+                    wordQuiz1Answer.setText("");
+                }
 
+                Button selectedBtn = (Button) view;
+                String selectedButton = selectedBtn.getText().toString();
 
+                wordQuiz1Answer.append(selectedButton);
             }
         };
 
 
         // 각 레슨 단어 묶음을 wordForQuiz에 랜덤으로 반환하기
-        for(int i=0; i<wordForQuiz.length; i++ ) {
 
-            String temp = wordForQuiz[i];
-            wordForQuiz[i] = wordForQuiz[randomIndex(wordForQuiz)];
-            wordForQuiz[randomIndex(wordForQuiz)] = temp;
+        randomArray(wordForQuiz);
 
+        wordInIndex = wordForQuiz[0];
+
+        String[] selectorArray = new String[wordInIndex.length()];
+
+        for(int i=0; i<wordInIndex.length(); i++) {
+            selectorArray[i] = wordInIndex.substring(i, i+1);
         }
-        System.out.println("wordForQuiz : " + wordForQuiz);
-        System.out.println("wfirstcharacter : " + wordForQuiz[0]);
+
+        System.out.println("selectorArray1 : " + Arrays.toString(selectorArray));
+
+        randomArray(selectorArray);
+
+        System.out.println("selectorArray2 : " + Arrays.toString(selectorArray));
 
 
-        String eachCharacter = wordForQuiz[0];
+        for(int i=0; i<wordInIndex.length(); i++) {
 
-        for(int i=0; i<eachCharacter.length(); i++) {
-
-            wordQuiz1Answer.append("_ ");
-            
-            String splitCharacter = eachCharacter.substring(i, i+1);
-
-            Button selectorButton = new Button(getContext());
+            selectorButton = new Button(getContext());
 
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(50), dpToPx(50));
-
             selectorButton.setLayoutParams(params);
-            selectorButton.setText(splitCharacter);
+            selectorButton.setText(selectorArray[i]);
             selectorButton.setOnClickListener(selectorButtonClick);
 
             wordQuiz1Selector.addView(selectorButton);
@@ -94,13 +104,19 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     }
 
 
-    public int randomIndex(String[] strings) {
+    public void randomArray(String[] strings) {
 
-        Random random = new Random();
+        for (int i = 0; i < strings.length; i++) {
 
-        int rnum = random.nextInt(strings.length);
+            Random random = new Random();
+            int rnum = random.nextInt(strings.length);
 
-        return rnum;
+            String temp = strings[i];
+            strings[i] = strings[rnum];
+            strings[rnum] = temp;
+
+        }
+
     }
 
     public int dpToPx(int dp) {
