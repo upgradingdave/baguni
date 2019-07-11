@@ -27,8 +27,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     int lessonCount = 0;
     int lessonLength = 0;
 
-    String[] wordInKorean;
-    String[] wordInEnglish;
+    static String[] wordInKorean;
+    static String[] wordInEnglish;
 
     LessonWordQuiz1 lessonWordQuiz1 = new LessonWordQuiz1();
 
@@ -41,6 +41,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
+        MainLesson.lessonUnit = 1; // 빠른 테스트를 위해 추가함.
 
         Button btn_previous = view.findViewById(R.id.btn_previous);
         btn_previous.setOnClickListener(this);

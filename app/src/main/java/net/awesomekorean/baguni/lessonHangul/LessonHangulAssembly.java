@@ -329,7 +329,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
     }
 
 
-    private void getDisplayWidth() {
+    public void getDisplayWidth() {
 
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
 

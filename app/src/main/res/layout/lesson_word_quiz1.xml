@@ -20,26 +20,33 @@
         android:layout_marginTop="100dp"/>
 
     <LinearLayout
-        android:id="@+id/wordQuiz1Answer"
+        android:id="@+id/linearLayout"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/btn_audio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/wordQuiz1Answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/wordQuiz1Select"
+        android:id="@+id/wordQuiz1Selector"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/wordQuiz1Answer"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
