@@ -10,23 +10,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.awesomekorean.baguni.R;
-import net.awesomekorean.baguni.lessonHangul.HangulUniCode;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
-public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener {
+public class LessonWordQuiz1 extends Fragment {
 
     View view;
-    String[] wordForQuiz;
-    String wordInIndex;
-    Button selectorButton;
-    TextView wordQuiz1Answer;
-
-    public View.OnClickListener selectorButtonClick;
+    String[] wordsForQuiz; // 레슨의 단어 묶음을 퀴즈용으로 사용하기 위해 복사함
+    String word; // 퀴즈용 단어 묶음에 있는 각 단어
+    String[] syllables; // wordInIndex의 단어를 각 음절로 나눔
+    TextView wordQuiz1Answer; // 입력한 정답이 표시되는 텍스트뷰
+    LinearLayout wordQuiz1Selector; // 정답을 입력하는 버튼이 들어가는 layout
+    Button btnSelector; // 정답을 입력하기 위해 만들어진 한글 버튼
+    Button btnReset;
+    Button btnAnswer;
+    int quizNo = 0; // 단어퀴즈 순서
+    View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
 
 
     @Nullable
@@ -46,10 +45,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         view = inflater.inflate(R.layout.lesson_word_quiz1, container, false);
 
-        wordForQuiz = LessonWord.wordInKorean;
+        wordsForQuiz = LessonWord.wordInKorean;
 
         wordQuiz1Answer = view.findViewById(R.id.wordQuiz1Answer);
-        LinearLayout wordQuiz1Selector = view.findViewById(R.id.wordQuiz1Selector);
+        wordQuiz1Selector = view.findViewById(R.id.wordQuiz1Selector);
 
 
         selectorButtonClick = new View.OnClickListener() {
@@ -57,53 +56,76 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
             @Override
             public void onClick(View view) {
 
-                if(wordQuiz1Answer.getText().length() == wordInIndex.length()) {
+                if(wordQuiz1Answer.getText().length() == word.length()) {
+
+                    if(wordQuiz1Answer.getText().equals(word)) {
+                        quizNo++;
+                        nextQuiz(quizNo);
+                    }
+
                     wordQuiz1Answer.setText("");
                 }
 
                 Button selectedBtn = (Button) view;
                 String selectedButton = selectedBtn.getText().toString();
-
                 wordQuiz1Answer.append(selectedButton);
             }
         };
 
+        randomArray(wordsForQuiz);
 
-        // 각 레슨 단어 묶음을 wordForQuiz에 랜덤으로 반환하기
+        word = wordsForQuiz[0];
 
-        randomArray(wordForQuiz);
-
-        wordInIndex = wordForQuiz[0];
-
-        String[] selectorArray = new String[wordInIndex.length()];
-
-        for(int i=0; i<wordInIndex.length(); i++) {
-            selectorArray[i] = wordInIndex.substring(i, i+1);
-        }
-
-        System.out.println("selectorArray1 : " + Arrays.toString(selectorArray));
-
-        randomArray(selectorArray);
-
-        System.out.println("selectorArray2 : " + Arrays.toString(selectorArray));
+        makeSyllablesAndMixedButton();
 
 
-        for(int i=0; i<wordInIndex.length(); i++) {
+        // 리셋 버튼 함수
+        View.OnClickListener resetButtonClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wordQuiz1Answer.setText("");
+            }
+        };
 
-            selectorButton = new Button(getContext());
-
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(50), dpToPx(50));
-            selectorButton.setLayoutParams(params);
-            selectorButton.setText(selectorArray[i]);
-            selectorButton.setOnClickListener(selectorButtonClick);
-
-            wordQuiz1Selector.addView(selectorButton);
-        }
+        btnReset = view.findViewById(R.id.btnReset);
+        btnReset.setOnClickListener(resetButtonClick);
 
         return view;
     }
 
 
+    // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
+    public void makeSyllablesAndMixedButton() {
+
+        syllables = new String[word.length()];
+
+        for(int i=0; i<word.length(); i++) {
+            syllables[i] = word.substring(i, i+1);
+        }
+
+        randomArray(syllables);
+
+        for(int i=0; i<syllables.length; i++) {
+
+            btnSelector = new Button(getContext());
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(50), dpToPx(50));
+            btnSelector.setLayoutParams(params);
+            btnSelector.setText(syllables[i]);
+            btnSelector.setOnClickListener(selectorButtonClick);
+            wordQuiz1Selector.addView(btnSelector);
+        }
+    }
+
+
+    // 다음 문제로 넘어가기
+    public void nextQuiz(int quizNo) {
+
+
+
+    }
+
+
+    // 입력받은 array를 랜덤으로 섞어주는 함수
     public void randomArray(String[] strings) {
 
         for (int i = 0; i < strings.length; i++) {
@@ -114,21 +136,15 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
             String temp = strings[i];
             strings[i] = strings[rnum];
             strings[rnum] = temp;
-
         }
 
     }
 
+    // dp 단위를 입력하면 pixel 단위로 변환해줌
     public int dpToPx(int dp) {
+
         final float scale = getResources().getDisplayMetrics().density;
         int pixels = (int) (dp * scale + 0.5f);
-
         return pixels;
-    }
-
-
-    @Override
-    public void onClick(View view) {
-
     }
 }
