@@ -1,6 +1,7 @@
 package net.awesomekorean.baguni.lesson;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,12 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.awesomekorean.baguni.R;
 import java.util.Random;
 
-public class LessonWordQuiz1 extends Fragment {
+public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
 
     View view;
     String[] wordsForQuiz; // 레슨의 단어 묶음을 퀴즈용으로 사용하기 위해 복사함
@@ -23,9 +25,15 @@ public class LessonWordQuiz1 extends Fragment {
     LinearLayout wordQuiz1Selector; // 정답을 입력하는 버튼이 들어가는 layout
     Button btnSelector; // 정답을 입력하기 위해 만들어진 한글 버튼
     Button btnReset;
-    Button btnAnswer;
+    Button btnBackToWord;
     int quizNo = 0; // 단어퀴즈 순서
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
+    ImageView correctImage; // 정답 시 나오는 이미지
+
+    // fragment 간 전환을 위해 만듦
+    public static LessonWordQuiz1 newInstance() {
+        return new LessonWordQuiz1();
+    }
 
 
     @Nullable
@@ -50,52 +58,93 @@ public class LessonWordQuiz1 extends Fragment {
         wordQuiz1Answer = view.findViewById(R.id.wordQuiz1Answer);
         wordQuiz1Selector = view.findViewById(R.id.wordQuiz1Selector);
 
+        correctImage = view.findViewById(R.id.correctImage);
 
         selectorButtonClick = new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
+                Button selectedBtn = (Button) view;
+                String selectedButton = selectedBtn.getText().toString();
+                wordQuiz1Answer.append(selectedButton);
+
+                System.out.println("A : " + wordQuiz1Answer.getText());
+                System.out.println("B : " + word);
+                System.out.println("TRUE?? : " + wordQuiz1Answer.getText().toString().equals(word));
+
+
+
                 if(wordQuiz1Answer.getText().length() == word.length()) {
 
-                    if(wordQuiz1Answer.getText().equals(word)) {
+                    if(wordQuiz1Answer.getText().toString().equals(word)) {
+                        // 1. 정답소리 play 추가할 것
+                        correctImage.setVisibility(View.VISIBLE);
+
+                        // 1초 후에 정답 이미지 'GONE' 처리
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                correctImage.setVisibility(View.GONE);
+                            }
+                        }, 1000);
+
+                        wordQuiz1Selector.removeAllViews();
                         quizNo++;
-                        nextQuiz(quizNo);
+                        // 1. quizNo == wordForQuiz.length 이면 Quiz2로 프레그먼트 전환
+                        makeQuiz();
                     }
 
                     wordQuiz1Answer.setText("");
                 }
 
-                Button selectedBtn = (Button) view;
-                String selectedButton = selectedBtn.getText().toString();
-                wordQuiz1Answer.append(selectedButton);
             }
         };
+
 
         randomArray(wordsForQuiz);
 
-        word = wordsForQuiz[0];
-
-        makeSyllablesAndMixedButton();
-
-
-        // 리셋 버튼 함수
-        View.OnClickListener resetButtonClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wordQuiz1Answer.setText("");
-            }
-        };
+        makeQuiz();
 
         btnReset = view.findViewById(R.id.btnReset);
-        btnReset.setOnClickListener(resetButtonClick);
+        btnReset.setOnClickListener(this);
+        btnBackToWord = view.findViewById(R.id.btnBackToWord);
+        btnBackToWord.setOnClickListener(this);
+
+
 
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.btnReset :
+                wordQuiz1Answer.setText("");
+                break;
+
+            case R.id.btnBackToWord :
+                ((LessonFrame)getActivity()).replaceFragment(LessonWord.newInstance());
+                break;
+
+        }
+    }
+
+
 
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
-    public void makeSyllablesAndMixedButton() {
+    public void makeQuiz() {
+
+        if(quizNo == wordsForQuiz.length) {
+
+            // LessonWordQuiz2로 넘어감
+
+        }
+
+        word = wordsForQuiz[quizNo];
 
         syllables = new String[word.length()];
 
@@ -116,13 +165,6 @@ public class LessonWordQuiz1 extends Fragment {
         }
     }
 
-
-    // 다음 문제로 넘어가기
-    public void nextQuiz(int quizNo) {
-
-
-
-    }
 
 
     // 입력받은 array를 랜덤으로 섞어주는 함수
@@ -147,4 +189,6 @@ public class LessonWordQuiz1 extends Fragment {
         int pixels = (int) (dp * scale + 0.5f);
         return pixels;
     }
+
+
 }

@@ -102,7 +102,6 @@
                 android:id="@+id/btnConsonant"
                 android:layout_weight="1"
                 android:text="consonant"
-                android:onClick="btnConsonantClicked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -110,7 +109,6 @@
                 android:id="@+id/btnVowel"
                 android:layout_weight="1"
                 android:text="vowel"
-                android:onClick="btnVowelClicked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

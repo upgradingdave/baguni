@@ -26,15 +26,8 @@ public class LessonFrame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_frame);
 
-        setFrag(lessonWord);
+        replaceFragment(lessonWord);
 
-    }
-
-    public void setFrag(Fragment page) {
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft.replace(R.id.lessonFrame, page);
-        ft.commit();
     }
 
     public void replaceFragment(Fragment fragment) {

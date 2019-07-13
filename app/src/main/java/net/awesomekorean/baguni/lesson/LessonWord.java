@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.MainLesson;
 import net.awesomekorean.baguni.R;
 
@@ -30,10 +28,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] wordInKorean;
     static String[] wordInEnglish;
 
-    LessonWordQuiz1 lessonWordQuiz1 = new LessonWordQuiz1();
-
-
-
+    public static LessonWord newInstance() {
+        return new LessonWord();
+    }
 
     @Nullable
     @Override
@@ -91,7 +88,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 lessonCount++;
 
                 if(lessonCount == lessonLength) {
-                    ((LessonFrame)getActivity()).replaceFragment(lessonWordQuiz1);
+                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz1.newInstance());
                 } else {
                     displayWord();
                 }
