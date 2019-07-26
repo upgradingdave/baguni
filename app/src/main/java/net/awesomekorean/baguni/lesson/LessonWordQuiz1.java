@@ -18,7 +18,7 @@ import java.util.Random;
 public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
 
     View view;
-    String[] wordsForQuiz; // 레슨의 단어 묶음을 퀴즈용으로 사용하기 위해 복사함
+    static String[] wordsForQuiz; // 레슨의 단어 묶음을 퀴즈용으로 사용하기 위해 복사함
     String word; // 퀴즈용 단어 묶음에 있는 각 단어
     String[] syllables; // wordInIndex의 단어를 각 음절로 나눔
     TextView wordQuiz1Answer; // 입력한 정답이 표시되는 텍스트뷰
@@ -26,7 +26,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
     Button btnSelector; // 정답을 입력하기 위해 만들어진 한글 버튼
     Button btnReset;
     Button btnBackToWord;
-    int quizNo = 0; // 단어퀴즈 순서
+    int quizCount = 0; // 단어퀴즈 순서
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
     ImageView correctImage; // 정답 시 나오는 이미지
 
@@ -39,17 +39,6 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
-        // wordInKorean의 length-1 만큼 랜덤 숫자 추출. 이 때 숫자 중복 되면 안됨.
-        // 해당 index의 단어의 글자수를 파악
-        // 파악된 글자수만큼 wordQuizAnswer에 textView생성. 각 textView에 숫자로 id 부여. text에는 _ 표시
-        // 해당 단어의 글자를 분해해서 랜덤으로 버튼 만들기
-        // 버튼 선택하면 해당 텍스트가 순서대로 wordQuizAnswer의 textView에 입력
-        // reset 버튼 추가
-        // 글자 완성되면 자동으로 정답/오답 표기 후 다음 문제로 넘어감. 오답 시 정답 알려줌.
-        // 정답 시 progress bar 진행. 오답 시 wordQuiz 마지막에 다시 나옴. 맞출 때까지 나옴.
-        // 모든 문제가 정답으로 표시되면 lessonSentence로 넘어감.
 
         view = inflater.inflate(R.layout.lesson_word_quiz1, container, false);
 
@@ -69,31 +58,30 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
                 String selectedButton = selectedBtn.getText().toString();
                 wordQuiz1Answer.append(selectedButton);
 
-                System.out.println("A : " + wordQuiz1Answer.getText());
-                System.out.println("B : " + word);
-                System.out.println("TRUE?? : " + wordQuiz1Answer.getText().toString().equals(word));
-
-
-
                 if(wordQuiz1Answer.getText().length() == word.length()) {
 
                     if(wordQuiz1Answer.getText().toString().equals(word)) {
                         // 1. 정답소리 play 추가할 것
                         correctImage.setVisibility(View.VISIBLE);
 
-                        // 1초 후에 정답 이미지 'GONE' 처리
+                        // 1초 후에 정답이미지 GONE 하고 다음 문제 넘어감
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                correctImage.setVisibility(View.GONE);
+                                quizCount++;
+                                if(quizCount != wordsForQuiz.length) {
+                                    correctImage.setVisibility(View.GONE);
+                                    wordQuiz1Selector.removeAllViews();
+                                    makeQuiz();
+                                } else {
+                                    quizCount = 0;
+                                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
+                                }
                             }
                         }, 1000);
 
-                        wordQuiz1Selector.removeAllViews();
-                        quizNo++;
                         // 1. quizNo == wordForQuiz.length 이면 Quiz2로 프레그먼트 전환
-                        makeQuiz();
                     }
 
                     wordQuiz1Answer.setText("");
@@ -138,13 +126,13 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
     public void makeQuiz() {
 
-        if(quizNo == wordsForQuiz.length) {
+        if(quizCount == wordsForQuiz.length) {
 
             // LessonWordQuiz2로 넘어감
 
         }
 
-        word = wordsForQuiz[quizNo];
+        word = wordsForQuiz[quizCount];
 
         syllables = new String[word.length()];
 
@@ -168,7 +156,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
 
 
     // 입력받은 array를 랜덤으로 섞어주는 함수
-    public void randomArray(String[] strings) {
+    public static void randomArray(String[] strings) {
 
         for (int i = 0; i < strings.length; i++) {
 

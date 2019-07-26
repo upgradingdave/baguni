@@ -27,6 +27,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     static String[] wordInKorean;
     static String[] wordInEnglish;
+    static String[] confusingWord;
 
     public static LessonWord newInstance() {
         return new LessonWord();
@@ -52,8 +53,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (MainLesson.lessonUnit) {
 
             case 1:
+
                 wordInKorean = Lesson1.wordInKorean;
                 wordInEnglish = Lesson1.wordInEnglish;
+                confusingWord = Lesson1.confusingWord;
                 lessonLength = Lesson1.wordInKorean.length;
 
                 displayWord();
@@ -62,6 +65,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         return view;
     }
+
 
     public void displayWord() {
 
@@ -88,14 +92,12 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 lessonCount++;
 
                 if(lessonCount == lessonLength) {
-                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz1.newInstance());
+                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
                 } else {
                     displayWord();
                 }
 
                 break;
-
-
         }
 
     }
