@@ -92,7 +92,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 lessonCount++;
 
                 if(lessonCount == lessonLength) {
-                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
+                    ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
                 } else {
                     displayWord();
                 }
