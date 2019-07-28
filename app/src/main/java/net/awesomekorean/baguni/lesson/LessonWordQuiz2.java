@@ -87,13 +87,16 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
             public void run() {
                 ox.setVisibility(View.GONE);
 
+                LessonFrame.progressCount++;
+                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+
                 if(quizNo == quizQuantity-1) {
                     // 오답이 있을 경우, 해당 문제 다시 출력
                     if(wrongQuizList.size() > 0) {
                         makeWrongQuiz(wrongQuizList.get(0));
                     } else {
                         // Sentence Lesson
-                        System.out.println("SENTENCE LESSON START");
+                        ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
                     }
                 } else {
                     quizNo += 1;
@@ -131,6 +134,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
                     ox.setImageResource(R.drawable.samplecorrect);
                     ox.setVisibility(View.VISIBLE);
+
                     // 정답소리 출력할 것
 
                     makeNextQuiz();

@@ -26,6 +26,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     public static int lessonCount = 0;
     public static int lessonWordLength = 0;
     public static int lessonSentenceLength = 0;
+    public static int totalPageNo = 0;
 
     public static String[] wordInKorean;
     public static String[] wordInEnglish;
@@ -69,6 +70,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
                 lessonWordLength = Lesson1.wordInKorean.length;
                 lessonSentenceLength = Lesson1.sentenceInKorean.length;
+
+                totalPageNo = lessonWordLength*3 + lessonSentenceLength;
 
                 displayWord();
 

@@ -70,6 +70,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
                             @Override
                             public void run() {
                                 quizCount++;
+
+                                LessonFrame.progressCount++;
+                                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+
                                 if(quizCount != wordsForQuiz.length) {
                                     correctImage.setVisibility(View.GONE);
                                     wordQuiz1Selector.removeAllViews();

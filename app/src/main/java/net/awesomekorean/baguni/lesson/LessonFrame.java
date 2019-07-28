@@ -17,6 +17,8 @@ import net.awesomekorean.baguni.R;
 
 public class LessonFrame extends AppCompatActivity {
 
+    public static int progressCount = 0;
+
     private GestureDetectorCompat gestureDetectorCompat = null;
 
     public static String swipePage;
@@ -26,15 +28,21 @@ public class LessonFrame extends AppCompatActivity {
     LessonWord lessonWord = new LessonWord();
 
 
-    ProgressBar progressBar;
+    public static ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_frame);
 
-        replaceFragment(lessonWord);
+        progressBar = findViewById(R.id.progressBar);
+        setProgressNow(progressCount);
 
+        replaceFragment(lessonWord);
+    }
+
+    public static void setProgressNow(int count) {
+        progressBar.setProgress(count);
     }
 
     @Override

@@ -8,6 +8,7 @@ import net.awesomekorean.baguni.lesson.LessonEnd;
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.LessonSentence;
 import net.awesomekorean.baguni.lesson.LessonWord;
+import net.awesomekorean.baguni.lesson.LessonWordQuiz1;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -45,10 +46,11 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                 if(deltaX > 0) {
 
                     LessonWord.lessonCount++;
+                    LessonFrame.progressCount++;
 
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
+                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz1.newInstance());
                     } else {
                         LessonWord.displayWord();
                     }
@@ -56,9 +58,12 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
                     if(LessonWord.lessonCount != 0) {
                         LessonWord.lessonCount--;
+                        LessonFrame.progressCount--;
                     }
                     LessonWord.displayWord();
                 }
+
+                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
             }
 
             if(LessonFrame.swipePage == Strings.LESSONSENTENCE) {
@@ -66,6 +71,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                 if(deltaX > 0) {
 
                     LessonWord.lessonCount++;
+                    LessonFrame.progressCount++;
 
                     if(LessonWord.lessonCount == LessonWord.lessonSentenceLength) {
                         LessonWord.lessonCount = 0;
@@ -77,9 +83,13 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
                     if(LessonWord.lessonCount != 0) {
                         LessonWord.lessonCount--;
+                        LessonFrame.progressCount--;
                     }
                     LessonSentence.displaySentence();
                 }
+
+                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+
             }
 
 
