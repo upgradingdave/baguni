@@ -39,22 +39,50 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         //Only when swipe distance between minimal and maximal distance value. It's effective swipe
         if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
 
-            if(deltaX > 0) {
+            if(LessonFrame.swipePage == Strings.LESSONWORD) {
 
-                LessonWord.lessonCount++;
+                if(deltaX > 0) {
 
-                if(LessonWord.lessonCount == LessonWord.lessonLength) {
-                    ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
+                    LessonWord.lessonCount++;
+
+                    if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
+                        LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
+                        ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
+                    } else {
+                        LessonWord.displayWord();
+                    }
                 } else {
+
+                    if(LessonWord.lessonCount != 0) {
+                        LessonWord.lessonCount--;
+                    }
                     LessonWord.displayWord();
                 }
-            } else {
-
-                if(LessonWord.lessonCount != 0) {
-                    LessonWord.lessonCount--;
-                }
-                LessonWord.displayWord();
             }
+
+            if(LessonFrame.swipePage == Strings.LESSONSENTENCE) {
+
+                if(deltaX > 0) {
+
+                    LessonWord.lessonCount++;
+
+                    if(LessonWord.lessonCount == LessonWord.lessonSentenceLength) {
+                        LessonWord.lessonCount = 0;
+                        //((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
+                    } else {
+                        LessonSentence.displaySentence();
+                    }
+                } else {
+
+                    if(LessonWord.lessonCount != 0) {
+                        LessonWord.lessonCount--;
+                    }
+                    LessonSentence.displaySentence();
+                }
+            }
+
+
+
         }
 
         return true;

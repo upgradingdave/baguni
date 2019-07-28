@@ -12,23 +12,28 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import net.awesomekorean.baguni.MainLesson;
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.Strings;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
 
     View view;
 
-    Button btnAudio;
-    Button btnNext;
+    ImageButton btnAudio;
 
-    static TextView textViewInKorean;
-    static TextView textViewInEnglish;
+    static TextView textViewWordInKorean;
+    static TextView textViewWordInEnglish;
 
     public static int lessonCount = 0;
-    public static int lessonLength = 0;
+    public static int lessonWordLength = 0;
+    public static int lessonSentenceLength = 0;
 
     public static String[] wordInKorean;
     public static String[] wordInEnglish;
     static String[] confusingWord;
+    public static String[] sentenceInKorean;
+    public static String[] sentenceInEnglish;
+    public static String[] sentenceExplain;
+
 
     public static LessonWord newInstance() {
         return new LessonWord();
@@ -40,13 +45,15 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
+        LessonFrame.swipePage = Strings.LESSONWORD;
+
         MainLesson.lessonUnit = 1; // 빠른 테스트를 위해 추가함.
 
-        ImageButton btn_audio = view.findViewById(R.id.btn_audio);
-        btn_audio.setOnClickListener(this);
+        btnAudio = view.findViewById(R.id.btnAudio);
+        btnAudio.setOnClickListener(this);
 
-        textViewInKorean = view.findViewById(R.id.textViewInKorean);
-        textViewInEnglish = view.findViewById(R.id.textViewInEnglish);
+        textViewWordInKorean = view.findViewById(R.id.textViewWordInKorean);
+        textViewWordInEnglish = view.findViewById(R.id.textViewWordInEnglish);
 
         switch (MainLesson.lessonUnit) {
 
@@ -55,7 +62,13 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 wordInKorean = Lesson1.wordInKorean;
                 wordInEnglish = Lesson1.wordInEnglish;
                 confusingWord = Lesson1.confusingWord;
-                lessonLength = Lesson1.wordInKorean.length;
+
+                sentenceInKorean = Lesson1.sentenceInKorean;
+                sentenceInEnglish = Lesson1.sentenceInEnglish;
+                sentenceExplain = Lesson1.sentenceExplain;
+
+                lessonWordLength = Lesson1.wordInKorean.length;
+                lessonSentenceLength = Lesson1.sentenceInKorean.length;
 
                 displayWord();
 
@@ -67,8 +80,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     public static void displayWord() {
 
-        textViewInKorean.setText(wordInKorean[lessonCount]);
-        textViewInEnglish.setText(wordInEnglish[lessonCount]);
+        textViewWordInKorean.setText(wordInKorean[lessonCount]);
+        textViewWordInEnglish.setText(wordInEnglish[lessonCount]);
 
     }
 
@@ -77,7 +90,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.btn_audio :
+            case R.id.btnAudio :
                 break;
 
         }

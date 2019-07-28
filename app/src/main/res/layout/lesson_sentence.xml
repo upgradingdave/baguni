@@ -6,6 +6,7 @@
     android:layout_margin="20dp">
 
     <TextView
+        android:id="@+id/textViewSentenceInKorean"
         android:gravity="center"
         android:text="저는 선생님이에요."
         android:textSize="30dp"
@@ -14,6 +15,7 @@
         />
 
     <TextView
+        android:id="@+id/textViewSentenceInEnglish"
         android:gravity="center"
         android:text="I'm a teacher"
         android:textSize="20dp"
@@ -22,6 +24,7 @@
         />
 
     <TextView
+        android:id="@+id/textViewSentenceExplain"
         android:gravity="center_vertical"
         android:text="nhljkjhlkjlkjlkjlj;lk"
         android:textSize="20dp"
@@ -36,6 +39,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnAudio"
             android:text="audio"
             android:layout_weight="1"
             android:layout_margin="10dp"
@@ -43,6 +47,7 @@
             android:layout_height="100dp" />
 
         <Button
+            android:id="@+id/btnCollect"
             android:text="collect"
             android:layout_weight="1"
             android:layout_margin="10dp"
@@ -50,6 +55,7 @@
             android:layout_height="100dp" />
 
         <Button
+            android:id="@+id/btnQnA"
             android:text="Q/A"
             android:layout_weight="1"
             android:layout_margin="10dp"

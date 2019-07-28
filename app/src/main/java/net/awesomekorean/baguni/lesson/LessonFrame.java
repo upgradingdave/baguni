@@ -19,6 +19,8 @@ public class LessonFrame extends AppCompatActivity {
 
     private GestureDetectorCompat gestureDetectorCompat = null;
 
+    public static String swipePage;
+
     FragmentManager fm;
     FragmentTransaction ft;
     LessonWord lessonWord = new LessonWord();
@@ -44,17 +46,16 @@ public class LessonFrame extends AppCompatActivity {
 
     public void replaceFragment(Fragment fragment) {
 
-        if(fragment == lessonWord) {
+        System.out.println("FRAGMENT : " + fragment);
 
-            //Create a common gesture listener object
-            DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
+        //Create a common gesture listener object
+        DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
 
-            //Set activity in the listener
-            gestureListener.setActivity(this);
+        //Set activity in the listener
+        gestureListener.setActivity(this);
 
-            //Create the gesture detector with the gesture listener
-            gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
-        }
+        //Create the gesture detector with the gesture listener
+        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
