@@ -46,8 +46,6 @@ public class LessonFrame extends AppCompatActivity {
 
     public void replaceFragment(Fragment fragment) {
 
-        System.out.println("FRAGMENT : " + fragment);
-
         //Create a common gesture listener object
         DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
 

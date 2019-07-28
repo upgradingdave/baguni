@@ -4,6 +4,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import net.awesomekorean.baguni.lesson.LessonEnd;
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.LessonSentence;
 import net.awesomekorean.baguni.lesson.LessonWord;
@@ -68,7 +69,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
                     if(LessonWord.lessonCount == LessonWord.lessonSentenceLength) {
                         LessonWord.lessonCount = 0;
-                        //((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
+                        ((LessonFrame)getActivity()).replaceFragment(LessonEnd.newInstance());
                     } else {
                         LessonSentence.displaySentence();
                     }
