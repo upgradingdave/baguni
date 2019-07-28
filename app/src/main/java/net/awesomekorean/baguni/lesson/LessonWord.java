@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import net.awesomekorean.baguni.MainLesson;
 import net.awesomekorean.baguni.R;
@@ -19,14 +20,14 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     Button btnAudio;
     Button btnNext;
 
-    TextView textViewInKorean;
-    TextView textViewInEnglish;
+    static TextView textViewInKorean;
+    static TextView textViewInEnglish;
 
-    int lessonCount = 0;
-    int lessonLength = 0;
+    public static int lessonCount = 0;
+    public static int lessonLength = 0;
 
-    static String[] wordInKorean;
-    static String[] wordInEnglish;
+    public static String[] wordInKorean;
+    public static String[] wordInEnglish;
     static String[] confusingWord;
 
     public static LessonWord newInstance() {
@@ -41,11 +42,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         MainLesson.lessonUnit = 1; // 빠른 테스트를 위해 추가함.
 
-        Button btn_previous = view.findViewById(R.id.btn_previous);
-        btn_previous.setOnClickListener(this);
-        Button btn_next = view.findViewById(R.id.btn_next);
-        btn_next.setOnClickListener(this);
-
+        ImageButton btn_audio = view.findViewById(R.id.btn_audio);
+        btn_audio.setOnClickListener(this);
 
         textViewInKorean = view.findViewById(R.id.textViewInKorean);
         textViewInEnglish = view.findViewById(R.id.textViewInEnglish);
@@ -67,7 +65,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     }
 
 
-    public void displayWord() {
+    public static void displayWord() {
 
         textViewInKorean.setText(wordInKorean[lessonCount]);
         textViewInEnglish.setText(wordInEnglish[lessonCount]);
@@ -79,25 +77,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.btn_previous :
-                if(lessonCount != 0) {
-                    lessonCount--;
-                }
-                displayWord();
+            case R.id.btn_audio :
                 break;
 
-
-            case R.id.btn_next :
-
-                lessonCount++;
-
-                if(lessonCount == lessonLength) {
-                    ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
-                } else {
-                    displayWord();
-                }
-
-                break;
         }
 
     }
