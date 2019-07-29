@@ -82,13 +82,16 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
                                     quizCount = 0;
                                     ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
                                 }
+                                wordQuiz1Answer.setText("");
+
                             }
                         }, 1000);
 
                         // 1. quizNo == wordForQuiz.length 이면 Quiz2로 프레그먼트 전환
+                    } else {
+                        wordQuiz1Answer.setText("");
                     }
 
-                    wordQuiz1Answer.setText("");
                 }
 
             }
@@ -119,6 +122,8 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnBackToWord :
+                LessonFrame.progressCount = 0;
+                LessonFrame.setProgressNow(LessonFrame.progressCount);
                 ((LessonFrame)getActivity()).replaceFragment(LessonWord.newInstance());
                 break;
 
@@ -129,12 +134,6 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
 
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
     public void makeQuiz() {
-
-        if(quizCount == wordsForQuiz.length) {
-
-            // LessonWordQuiz2로 넘어감
-
-        }
 
         word = wordsForQuiz[quizCount];
 
