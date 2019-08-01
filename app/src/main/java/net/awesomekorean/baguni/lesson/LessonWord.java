@@ -18,6 +18,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     View view;
 
+    Lesson lesson;
+
     ImageButton btnAudio;
 
     static TextView textViewWordInKorean;
@@ -60,24 +62,32 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
             case 1:
 
-                wordInKorean = Lesson1.wordInKorean;
-                wordInEnglish = Lesson1.wordInEnglish;
-                confusingWord = Lesson1.confusingWord;
-
-                sentenceInKorean = Lesson1.sentenceInKorean;
-                sentenceInEnglish = Lesson1.sentenceInEnglish;
-                sentenceExplain = Lesson1.sentenceExplain;
-
-                lessonWordLength = Lesson1.wordInKorean.length;
-                lessonSentenceLength = Lesson1.sentenceInKorean.length;
-
-                totalPageNo = lessonWordLength*3 + lessonSentenceLength +1;
-
-                displayWord();
-
+                lesson = new Lesson1();
+                readyForLesson();
         }
 
         return view;
+    }
+
+    public void readyForLesson() {
+
+        wordInKorean = lesson.getWordInKorean();
+        wordInEnglish = lesson.getWordInEnglish();
+        confusingWord = lesson.getConfusingWord();
+
+        sentenceInKorean = lesson.getSentenceInKorean();
+        sentenceInEnglish = lesson.getSentenceInEnglish();
+        sentenceExplain = lesson.getSentenceExplain();
+
+        lessonWordLength = lesson.getWordInKorean().length;
+        lessonSentenceLength = lesson.getSentenceInKorean().length;
+
+        totalPageNo = lessonWordLength*3 + lessonSentenceLength +1;
+
+        System.out.println("HELLO : " + wordInKorean[0]);
+
+
+        displayWord();
     }
 
 

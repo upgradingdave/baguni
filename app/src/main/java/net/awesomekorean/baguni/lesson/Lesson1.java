@@ -1,6 +1,6 @@
 package net.awesomekorean.baguni.lesson;
 
-public class Lesson1 {
+public class Lesson1 implements Lesson{
 
     final static String[] wordInKorean = {"학생", "선생님", "회사원", "경찰", "의사"};
     final static String[] wordInEnglish = {"Student", "Teacher", "Office worker", "Police", "Doctor"};
@@ -32,4 +32,33 @@ public class Lesson1 {
             "저는 선생님이에요.' is blablablabla"
     };
 
+    @Override
+    public String[] getWordInKorean() {
+        return wordInKorean;
+    }
+
+    @Override
+    public String[] getWordInEnglish() {
+        return wordInEnglish;
+    }
+
+    @Override
+    public String[] getConfusingWord() {
+        return confusingWord;
+    }
+
+    @Override
+    public String[] getSentenceInKorean() {
+        return sentenceInKorean;
+    }
+
+    @Override
+    public String[] getSentenceInEnglish() {
+        return sentenceInEnglish;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
+    }
 }
