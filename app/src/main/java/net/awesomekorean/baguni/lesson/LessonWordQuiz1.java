@@ -15,7 +15,7 @@ import net.awesomekorean.baguni.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener {
+public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener {
 
     View view;
 
@@ -27,26 +27,26 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
 
     ImageView ox; // 정답, 오답 시 각각의 이미지 출력
 
-    String[] confusingWord = LessonWord.confusingWord;
+    String[] wordInEnglish = LessonWord.wordInEnglish;
     String[] quizNow = new String[4]; // 현재 퀴즈 array
 
+
     int quizQuantity; // 문제 개수
-    int quizNo = 0; // 문제 번호
+    int quizNo = 0;
     int regularQuizNo = 0; // 정규퀴즈 문제 번호
-    int confusingWordCopyIndex = 0; // confusingWord 복사 시작 index 위치, +4씩 증가함
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
 
-    public static LessonWordQuiz4 newInstance() {
-        return new LessonWordQuiz4();
+    public static LessonWordQuiz1 newInstance() {
+        return new LessonWordQuiz1();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_word_quiz4, container, false);
+        view = inflater.inflate(R.layout.lesson_word_quiz1, container, false);
 
-        quizQuantity = (confusingWord.length)/4;
+        quizQuantity = wordInEnglish.length;
         wrongQuizList = new ArrayList<>();
 
         btn1 = view.findViewById(R.id.btn1);
@@ -60,15 +60,25 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
 
         ox = view.findViewById(R.id.ox);
 
-        makeQuiz(confusingWordCopyIndex);
+        makeQuiz(quizNo);
 
 
         return view;
     }
 
-    public void makeQuiz(int confusingWordCopyIndex) {
+    public void makeQuiz(int quizNo) {
 
-        System.arraycopy(confusingWord, confusingWordCopyIndex, quizNow, 0, 4);
+        int j = 0;
+
+        for(int i=0; i<4; i++) {
+
+            if(quizNo + i >= wordInEnglish.length) {
+                quizNow[i] = wordInEnglish[j];
+                j++;
+            } else {
+                quizNow[i] = wordInEnglish[quizNo + i];
+            }
+        }
 
         LessonWordQuiz3.randomArray(quizNow);
 
@@ -99,20 +109,18 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
 
                     quizNo ++;
                     regularQuizNo ++;
-                    confusingWordCopyIndex += 4;
-                    makeQuiz(confusingWordCopyIndex);
+                    makeQuiz(quizNo);
                 }
             }
         }, 1000);
     }
 
 
-    public void makeWrongQuiz(int index) {
+    public void makeWrongQuiz(int wrongQuizNo) {
 
         wrongQuizList.remove(0);
-        confusingWordCopyIndex = index*4;
-        quizNo = index;
-        makeQuiz(confusingWordCopyIndex);
+        quizNo = wrongQuizNo;
+        makeQuiz(quizNo);
     }
 
 
@@ -129,7 +137,7 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
 
                 Button selectedBtn = (Button) view;
 
-                if(confusingWord[confusingWordCopyIndex].equals(selectedBtn.getText().toString())) {
+                if(wordInEnglish[quizNo].equals(selectedBtn.getText().toString())) {
 
                     ox.setImageResource(R.drawable.samplecorrect);
                     ox.setVisibility(View.VISIBLE);

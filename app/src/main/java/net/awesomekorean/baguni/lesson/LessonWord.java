@@ -82,10 +82,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         lessonWordLength = lesson.getWordInKorean().length;
         lessonSentenceLength = lesson.getSentenceInKorean().length;
 
-        totalPageNo = lessonWordLength*3 + lessonSentenceLength +1;
-
-        System.out.println("HELLO : " + wordInKorean[0]);
-
+        totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
 
         displayWord();
     }
