@@ -15,7 +15,7 @@ import android.widget.TextView;
 import net.awesomekorean.baguni.R;
 import java.util.Random;
 
-public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
+public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     View view;
     static String[] wordsForQuiz; // 레슨의 단어 묶음을 퀴즈용으로 사용하기 위해 복사함
@@ -31,8 +31,8 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
     ImageView correctImage; // 정답 시 나오는 이미지
 
     // fragment 간 전환을 위해 만듦
-    public static LessonWordQuiz1 newInstance() {
-        return new LessonWordQuiz1();
+    public static LessonWordQuiz3 newInstance() {
+        return new LessonWordQuiz3();
     }
 
 
@@ -40,7 +40,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_word_quiz1, container, false);
+        view = inflater.inflate(R.layout.lesson_word_quiz3, container, false);
 
         wordsForQuiz = LessonWord.wordInKorean;
 
@@ -80,7 +80,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener{
                                     makeQuiz();
                                 } else {
                                     quizCount = 0;
-                                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
+                                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz4.newInstance());
                                 }
                                 wordQuiz1Answer.setText("");
 

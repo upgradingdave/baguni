@@ -2,14 +2,12 @@ package net.awesomekorean.baguni;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import net.awesomekorean.baguni.lesson.LessonClause;
-import net.awesomekorean.baguni.lesson.LessonEnd;
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.LessonSentence;
 import net.awesomekorean.baguni.lesson.LessonWord;
-import net.awesomekorean.baguni.lesson.LessonWordQuiz1;
+import net.awesomekorean.baguni.lesson.LessonWordQuiz3;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -51,7 +49,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz1.newInstance());
+                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
                     } else {
                         LessonWord.displayWord();
                     }

@@ -208,7 +208,8 @@ public class LessonHangul extends AppCompatActivity {
 
         String string = "R.raw.con0";
 
-        Uri currentPlay = Uri.parse(string);
+        int currentPlay = getResources().getIdentifier(string, "raw", getPackageName());
+
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), currentPlay);
 

@@ -15,7 +15,7 @@ import net.awesomekorean.baguni.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener {
+public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener {
 
     View view;
 
@@ -36,15 +36,15 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
     int wrongQuizNo = 0; // 틀린 문제 복습을 위한 변수
 
-    public static LessonWordQuiz2 newInstance() {
-        return new LessonWordQuiz2();
+    public static LessonWordQuiz4 newInstance() {
+        return new LessonWordQuiz4();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_word_quiz2, container, false);
+        view = inflater.inflate(R.layout.lesson_word_quiz4, container, false);
 
         quizQuantity = (confusingWord.length)/4;
         wrongQuizList = new ArrayList<>();
@@ -70,7 +70,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         System.arraycopy(confusingWord, confusingWordCopyIndex, quizNow, 0, 4);
 
-        LessonWordQuiz1.randomArray(quizNow);
+        LessonWordQuiz3.randomArray(quizNow);
 
         btn1.setText(quizNow[0]);
         btn2.setText(quizNow[1]);
