@@ -103,7 +103,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                         makeWrongQuiz(wrongQuizList.get(0));
                     } else {
                         // Sentence Lesson
-                        ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
+                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
                     }
                 } else {
 

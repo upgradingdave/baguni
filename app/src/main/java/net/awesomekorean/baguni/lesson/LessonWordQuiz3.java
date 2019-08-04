@@ -124,7 +124,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             case R.id.btnBackToWord :
                 LessonFrame.progressCount = 0;
                 LessonFrame.setProgressNow(LessonFrame.progressCount);
-                ((LessonFrame)getActivity()).replaceFragment(LessonWord.newInstance());
+                ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz4.newInstance());
                 break;
 
         }

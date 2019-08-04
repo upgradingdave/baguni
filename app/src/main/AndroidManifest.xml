@@ -15,14 +15,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".lessonHangul.LessonHangulAssembly" />
         <activity android:name=".lessonHangul.LessonHangul" />
         <activity android:name=".lessonHangul.LessonHangulMenu" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

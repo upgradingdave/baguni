@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ToggleButton;
 
 import net.awesomekorean.baguni.R;
 
@@ -20,28 +22,20 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     View view;
 
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
-    Button btn5;
-    Button btn6;
-    Button btn7;
-    Button btn8;
-    Button btn9;
-    Button btn10;
+    LinearLayout layout1;
+    LinearLayout layout2;
 
-    Button selectedBtn;
+    ToggleButton selectedBtn;
+    ToggleButton selectedBtnFirst;
 
     String[] wordInKorean = LessonWord.wordInKorean;
     String[] wordInEnglish = LessonWord.wordInEnglish;
 
-    String[] quizNow = new String[10]; // 현재 퀴즈 array
+    String[] quizArray; // 한글과 영어 array 를 합친 것
 
-    int wordNo = wordInKorean.length;
-    int tempKorean;
-    int tempEnglish;
+    int[] checkAnswer = new int[2];
 
+    int wordNo = wordInKorean.length; // 단어 개수
 
     public static LessonWordQuiz2 newInstance() {
         return new LessonWordQuiz2();
@@ -53,30 +47,13 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         view = inflater.inflate(R.layout.lesson_word_quiz2, container, false);
 
-        btn1 = view.findViewById(R.id.btn1);
-        btn2 = view.findViewById(R.id.btn2);
-        btn3 = view.findViewById(R.id.btn3);
-        btn4 = view.findViewById(R.id.btn4);
-        btn5 = view.findViewById(R.id.btn5);
-        btn6 = view.findViewById(R.id.btn6);
-        btn7 = view.findViewById(R.id.btn7);
-        btn8 = view.findViewById(R.id.btn8);
-        btn9 = view.findViewById(R.id.btn9);
-        btn10 = view.findViewById(R.id.btn10);
+        quizArray = new String[wordNo*2];
 
-        btn1.setOnClickListener(this);
-        btn2.setOnClickListener(this);
-        btn3.setOnClickListener(this);
-        btn4.setOnClickListener(this);
-        btn5.setOnClickListener(this);
-        btn6.setOnClickListener(this);
-        btn7.setOnClickListener(this);
-        btn8.setOnClickListener(this);
-        btn9.setOnClickListener(this);
-        btn10.setOnClickListener(this);
+        layout1 = view.findViewById(R.id.layout1);
+        layout2 = view.findViewById(R.id.layout2);
 
 
-        //makeQuiz();
+        makeQuiz(); // 퀴즈 버튼 만들기
 
         return view;
     }
@@ -84,68 +61,126 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     public void makeQuiz() {
 
-        for(int i=0; i<10; i++) {
+        for(int i=0; i<wordNo; i++) {
 
-            quizNow[i] = wordInKorean[i];
-            quizNow[i+5] = wordInEnglish[i];
+            quizArray[i] = wordInKorean[i];
+            quizArray[i+wordNo] = wordInEnglish[i];
         }
 
-        LessonWordQuiz3.randomArray(quizNow);
+        LessonWordQuiz3.randomArray(quizArray);
 
-        btn1.setText(quizNow[0]);
-        btn2.setText(quizNow[1]);
-        btn3.setText(quizNow[2]);
-        btn4.setText(quizNow[3]);
-        btn5.setText(quizNow[4]);
-        btn6.setText(quizNow[5]);
-        btn7.setText(quizNow[6]);
-        btn8.setText(quizNow[7]);
-        btn9.setText(quizNow[8]);
-        btn10.setText(quizNow[9]);
+
+        for(int i=0; i<wordNo*2; i++) {
+
+            ToggleButton button = new ToggleButton(getContext());
+
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(150), dpToPx(100));
+
+            button.setLayoutParams(params);
+            button.setOnClickListener(this);
+            button.setTextOff(quizArray[i]);
+            button.setTextOn(quizArray[i]);
+            button.setTag("button"+i);
+            button.setChecked(false);
+
+            if(i < wordNo) {
+                layout1.addView(button);
+            } else {
+                layout2.addView(button);
+            }
+        }
 
     }
-
 
 
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()) {
+        selectedBtn = (ToggleButton) view;
 
-            default :
+        String selectedText = selectedBtn.getText().toString();
 
-                selectedBtn = (Button) view;
+        for(int i=0; i<wordNo; i++) {
 
-                selectedBtn.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        selectedBtn.setPressed(true);
-                        return true;
-                    }
-                });
+            if(wordInKorean[i].equals(selectedText)) {
 
-                String selectedText = selectedBtn.getText().toString();
-
-                for(int i=0; i<wordNo; i++) {
-
-                    if(wordInKorean[i].equals(selectedText)) {
-
-                        tempKorean = i;
-
-                    } else if(wordInEnglish[i].equals(selectedText)) {
-
-                        tempEnglish = i;
-                    }
-                }
-
-                if(tempKorean == tempEnglish ) {
+                checkAnswer[0] = i+1;
 
 
-                }
+            } else if(wordInEnglish[i].equals(selectedText)) {
 
+                checkAnswer[1] = i+1;
 
+            }
+        }
+
+        if(checkAnswer[0] !=0 && checkAnswer[1] !=0) {
+
+            if(checkAnswer[0] == checkAnswer[1]) {
+
+                // 딩동 소리 출력
+
+                selectedBtnFirst.setVisibility(View.INVISIBLE);
+                selectedBtn.setVisibility(View.INVISIBLE);
+
+                isCorrectAll();
+
+            } else {
+
+                // 땡 소리 출력
+            }
+
+            checkAnswer[0] = 0;
+            checkAnswer[1] = 0;
+
+            selectedBtnFirst.setChecked(false);
+            selectedBtn.setChecked(false);
+            selectedBtnFirst = null;
+
+        } else {
+
+            if(selectedBtnFirst != null) {  // 같은 언어의 버튼을 눌렀을 때
+
+                selectedBtnFirst.setChecked(false);
+            }
+
+            if(selectedBtn == selectedBtnFirst) { // 같은 버튼을 연속으로 눌렀을 때
+
+                checkAnswer[0] = 0;
+                checkAnswer[1] = 0;
+            }
+            selectedBtnFirst = selectedBtn;
         }
 
     }
+
+    public void isCorrectAll() {
+
+        int count = 0;
+
+        for(int i=0; i<wordNo; i++) {
+
+            if(layout1.findViewWithTag("button"+i).getVisibility()==View.INVISIBLE) {
+                count++;
+            }
+            if(layout2.findViewWithTag("button"+(i+wordNo)).getVisibility()==View.INVISIBLE) {
+                count++;
+            }
+        }
+
+        if(count == wordNo*2) {
+            LessonFrame.progressCount++;
+            LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+            ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
+        }
+    }
+
+    public int dpToPx(int dp) {
+        final float scale = getResources().getDisplayMetrics().density;
+        int pixels = (int) (dp * scale + 0.5f);
+
+        return pixels;
+    }
+
 
 }

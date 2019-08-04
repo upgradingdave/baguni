@@ -52,7 +52,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
+                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz1.newInstance());
                     } else {
                         LessonWord.displayWord();
                     }
