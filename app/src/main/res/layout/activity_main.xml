@@ -72,10 +72,10 @@
 
         <Button
             android:id="@+id/btnWriting"
-            android:text="Writing"
+            android:layout_width="106dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:text="Writing" />
 
         <Button
             android:id="@+id/btnCollection"
