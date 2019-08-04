@@ -1,54 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:weightSum="1"
+    android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_weight="0.1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:ignore="MissingConstraints" />
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/main_frame"
-            android:layout_width="417dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <Button
+                android:id="@+id/btnProfile"
+                android:text="Profile/Option"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnMessage"
+                android:text="Message"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mainFrame"
+        android:layout_weight="0.8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:background="@color/colorPrimary"
+        android:layout_weight="0.1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/btnLesson"
+            android:text="Lesson"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btnReading"
+            android:text="Reading"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btnWriting"
+            android:text="Writing"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btnCollection"
+            android:text="Collection"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
 
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer">
-
-    </android.support.design.widget.NavigationView>
+    </LinearLayout>
 
 
-</android.support.v4.widget.DrawerLayout>
+
+
+
+</LinearLayout>
 
 
 

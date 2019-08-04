@@ -12,14 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import net.awesomekorean.baguni.lesson.LessonFrame;
+
+public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
     FragmentManager fm;
     FragmentTransaction ft;
-    MainDashboard mainDashboard = new MainDashboard();
-    MainVocabulary mainVocabulary = new MainVocabulary();
     MainLesson mainLesson = new MainLesson();
     MainReading mainReading = new MainReading();
     MainWriting mainWriting = new MainWriting();
@@ -29,57 +31,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        setFrag(mainDashboard);
+        setFrag(mainLesson);
 
     }
 
     public void setFrag(Fragment page) {
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
-        ft.replace(R.id.main_frame, page);
+        ft.replace(R.id.mainFrame, page);
         ft.commit();
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public void onClick(View view) {
 
-        switch (menuItem.getItemId()) {
-            case R.id.menu_vocabulary:
-                setFrag(mainVocabulary);
-                break;
-            case R.id.menu_lesson:
+        switch (view.getId()) {
+
+            case R.id.btnProfile:
                 setFrag(mainLesson);
                 break;
-            case R.id.menu_reading:
-                setFrag(mainReading);
+
+            case R.id.btnMessage:
+                setFrag(mainLesson);
                 break;
-            case R.id.menu_writing:
-                setFrag(mainWriting);
+
+            case R.id.btnLesson:
+                setFrag(mainLesson);
                 break;
-            case R.id.menu_profile:
-                setFrag(mainVocabulary);
+
+            case R.id.btnReading:
+                setFrag(mainLesson);
                 break;
-            case R.id.menu_option:
-                Toast.makeText(getApplicationContext(),"option clicked", Toast.LENGTH_LONG).show();
+
+            case R.id.btnWriting:
+                setFrag(mainLesson);
+                break;
+
+            case R.id.btnCollection:
+                setFrag(mainLesson);
                 break;
         }
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
 }
