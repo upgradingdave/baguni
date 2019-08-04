@@ -18,26 +18,27 @@ public class LessonHangulMenu extends AppCompatActivity {
 
     public void btnMenuConsonant(View v) {
 
-        LessonHangulConsonant consonant = new LessonHangulConsonant();
-
         Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
         intent.putExtra("conVowBat", "consonant");
         startActivity(intent);
     }
 
     public void btnMenuVowel(View v) {
+
         Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
         intent.putExtra("conVowBat", "vowel");
         startActivity(intent);
     }
 
     public void btnMenuBatchim(View v) {
+
         Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
         intent.putExtra("conVowBat", "batchim");
         startActivity(intent);
     }
 
     public void btnMenuAssembly(View v) {
+
         Intent intent = new Intent(getApplicationContext(), LessonHangulAssembly.class);
         startActivity(intent);
     }

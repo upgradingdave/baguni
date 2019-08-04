@@ -13,7 +13,9 @@ import net.awesomekorean.baguni.R;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class LessonHangul extends AppCompatActivity {
+public class LessonHangul extends AppCompatActivity implements Button.OnClickListener{
+
+    Hangul thisHangul;
 
     TextView textViewHangul;
     TextView textViewHangulExplain;
@@ -47,144 +49,138 @@ public class LessonHangul extends AppCompatActivity {
 
             case "consonant" :
 
-                LessonHangulConsonant consonant = new LessonHangulConsonant();
-                conVowBat = "con";
-                hangul = consonant.hangul;
-                hangulExplain = consonant.hangulExplain;
-                hangulIntro = consonant.hangulIntro;
-                setInitial();
+                thisHangul = new LessonHangulConsonant();
+                getThisHangul("con");
                 break;
 
             case "vowel" :
 
-                LessonHangulVowel vowel = new LessonHangulVowel();
-                conVowBat = "vow";
-                hangul = vowel.hangul;
-                hangulExplain = vowel.hangulExplain;
-                hangulIntro = vowel.hangulIntro;
-                setInitial();
+                thisHangul = new LessonHangulVowel();
+                getThisHangul("vow");
                 break;
 
             case "batchim" :
 
-                LessonHangulBatchim batchim = new LessonHangulBatchim();
-                conVowBat = "bat";
-                hangul = batchim.hangul;
-                hangulExplain = batchim.hangulExplain;
-                hangulIntro = batchim.hangulIntro;
-                setInitial();
+                thisHangul = new LessonHangulBatchim();
+                getThisHangul("bat");
                 break;
-
-
         }
 
 //        audioPlay();
 
-        Button.OnClickListener onClickListener = new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
+        Button btnLeft = findViewById(R.id.btnLeft);
+        Button btnRight = findViewById(R.id.btnRight);
+        Button btnListening = findViewById(R.id.btnListening);
+        Button btnWriting = findViewById(R.id.btnWriting);
+        Button btnHint = findViewById(R.id.btnHint);
+        Button btnIntro = findViewById(R.id.btnIntro);
+        btnLeft.setOnClickListener(this);
+        btnRight.setOnClickListener(this);
+        btnListening.setOnClickListener(this);
+        btnWriting.setOnClickListener(this);
+        btnHint.setOnClickListener(this);
+        btnIntro.setOnClickListener(this);
 
-                switch (view.getId()) {
-                    case R.id.btnLeft :
-                        if(currentHangul == 0) {
-                            currentHangul = hangul.length-1;
-                        } else {
-                            currentHangul--;
-                        }
-                        setHangul(hangul, hangulExplain);
-                        if(imageViewHangul != null) {
-                            visible(VISIBLE, GONE);
-                        }
-                        break;
+    }
 
-                    case R.id.btnRight :
-                        if(currentHangul == hangul.length-1) {
-                            currentHangul = 0;
-                        } else {
-                            currentHangul++;
-                        }
-                        setHangul(hangul, hangulExplain);
-                        if(imageViewHangul != null) {
-                            visible(VISIBLE, GONE);
-                        }
-                        break;
+    @Override
+    public void onClick(View view) {
 
-                    case R.id.btnListening :
-                        System.out.println("Listening button clicked");
-                        break;
-
-                    case R.id.btnWriting :
-                        if(writingBtnClicked == 0) {
-
-                            String resName = "@drawable/w" + conVowBat + currentHangul;
-                            String packName = getApplicationContext().getPackageName();
-                            int resID = getResources().getIdentifier(resName, "drawable", packName);
-
-                            imageViewHangul = findViewById(R.id.imageViewHangul);
-                            imageViewHangul.setImageResource(resID);
-
-                            visible(GONE, VISIBLE);
-                            writingBtnClicked = 1;
-                            hintBtnClicked = 0;
-
-                        } else {
-                            visible(VISIBLE, GONE);
-                            writingBtnClicked = 0;
-                        }
-
-                        break;
-
-                    case R.id.btnHint :
-                        if(hintBtnClicked == 0) {
-
-                            String resName = "@drawable/h" + conVowBat + currentHangul;
-                            String packName = getApplicationContext().getPackageName();
-                            int resID = getResources().getIdentifier(resName, "drawable", packName);
-
-                            imageViewHangul = findViewById(R.id.imageViewHangul);
-                            imageViewHangul.setImageResource(resID);
-
-                            visible(GONE, VISIBLE);
-                            hintBtnClicked = 1;
-                            writingBtnClicked = 0;
-
-                        } else {
-                            visible(VISIBLE, GONE);
-                            hintBtnClicked = 0;
-                        }
-
-                        break;
-
-                    case R.id.btnIntro :
-
-                        textViewIntro.setText(hangulIntro);
-
-                        if(introVisible == 0) {
-                            textViewIntro.setVisibility(VISIBLE);
-                            introVisible = 1;
-                        } else {
-                            textViewIntro.setVisibility(GONE);
-                            introVisible = 0;
-                        }
-
-                        break;
+        switch (view.getId()) {
+            case R.id.btnLeft :
+                if(currentHangul == 0) {
+                    currentHangul = hangul.length-1;
+                } else {
+                    currentHangul--;
                 }
-            }
-        };
+                setHangul(hangul, hangulExplain);
+                if(imageViewHangul != null) {
+                    visible(VISIBLE, GONE);
+                }
+                break;
 
-        Button btnLeft = (Button) findViewById(R.id.btnLeft);
-        Button btnRight = (Button) findViewById(R.id.btnRight);
-        Button btnListening = (Button) findViewById(R.id.btnListening);
-        Button btnWriting = (Button) findViewById(R.id.btnWriting);
-        Button btnHint = (Button) findViewById(R.id.btnHint);
-        Button btnIntro = (Button) findViewById(R.id.btnIntro);
-        btnLeft.setOnClickListener(onClickListener);
-        btnRight.setOnClickListener(onClickListener);
-        btnListening.setOnClickListener(onClickListener);
-        btnWriting.setOnClickListener(onClickListener);
-        btnHint.setOnClickListener(onClickListener);
-        btnIntro.setOnClickListener(onClickListener);
+            case R.id.btnRight :
+                if(currentHangul == hangul.length-1) {
+                    currentHangul = 0;
+                } else {
+                    currentHangul++;
+                }
+                setHangul(hangul, hangulExplain);
+                if(imageViewHangul != null) {
+                    visible(VISIBLE, GONE);
+                }
+                break;
+
+            case R.id.btnListening :
+                System.out.println("Listening button clicked");
+                break;
+
+            case R.id.btnWriting :
+                if(writingBtnClicked == 0) {
+
+                    String resName = "@drawable/w" + conVowBat + currentHangul;
+                    String packName = getApplicationContext().getPackageName();
+                    int resID = getResources().getIdentifier(resName, "drawable", packName);
+
+                    imageViewHangul = findViewById(R.id.imageViewHangul);
+                    imageViewHangul.setImageResource(resID);
+
+                    visible(GONE, VISIBLE);
+                    writingBtnClicked = 1;
+                    hintBtnClicked = 0;
+
+                } else {
+                    visible(VISIBLE, GONE);
+                    writingBtnClicked = 0;
+                }
+
+                break;
+
+            case R.id.btnHint :
+                if(hintBtnClicked == 0) {
+
+                    String resName = "@drawable/h" + conVowBat + currentHangul;
+                    String packName = getApplicationContext().getPackageName();
+                    int resID = getResources().getIdentifier(resName, "drawable", packName);
+
+                    imageViewHangul = findViewById(R.id.imageViewHangul);
+                    imageViewHangul.setImageResource(resID);
+
+                    visible(GONE, VISIBLE);
+                    hintBtnClicked = 1;
+                    writingBtnClicked = 0;
+
+                } else {
+                    visible(VISIBLE, GONE);
+                    hintBtnClicked = 0;
+                }
+
+                break;
+
+            case R.id.btnIntro :
+
+                textViewIntro.setText(hangulIntro);
+
+                if(introVisible == 0) {
+                    textViewIntro.setVisibility(VISIBLE);
+                    introVisible = 1;
+                } else {
+                    textViewIntro.setVisibility(GONE);
+                    introVisible = 0;
+                }
+
+                break;
+        }
+    }
+
+    public void getThisHangul(String comVowBat) {
+
+        conVowBat = comVowBat;
+        hangul = thisHangul.getHangul();
+        hangulExplain = thisHangul.getHangulExplain();
+        hangulIntro = thisHangul.getHangulIntro();
+        setInitial();
 
     }
 
@@ -213,12 +209,7 @@ public class LessonHangul extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), currentPlay);
 
-        System.out.println("CunnrntPlay : " + currentPlay);
-        System.out.println("media!!! : " + mediaPlayer);
-
         mediaPlayer.start();
-
-
     }
 
 
@@ -228,7 +219,4 @@ public class LessonHangul extends AppCompatActivity {
         textViewHangulExplain.setText(conVowExplain[currentHangul]);
 
     }
-
-
-
 }

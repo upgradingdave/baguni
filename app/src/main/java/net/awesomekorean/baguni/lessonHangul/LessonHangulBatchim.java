@@ -1,6 +1,6 @@
 package net.awesomekorean.baguni.lessonHangul;
 
-class LessonHangulBatchim {
+class LessonHangulBatchim implements Hangul{
 
     String[] hangul = { "ㄱ", "역", "박", "ㄲ", "밖", "ㅋ", "읔", "밬", "ㄴ", "은", "안", "ㄷ", "귿", "낟", "ㅌ", "읕", "낱", "ㅅ", "옷", "낫", "ㅆ", "났", "ㅈ", "읒", "낮", "ㅊ", "읓", "낯", "ㅎ", "읗", "낳", "ㄹ", "을", "달", "ㅁ", "음", "잠", "ㅂ", "읍", "밥", "ㅍ", "읖", "앞", "ㅇ", "응", "강"};
 
@@ -63,5 +63,20 @@ class LessonHangulBatchim {
             "I want to say the Batchim is not a sound but the movement of our articulator like mouth, tongue, throat etc..." +
             "And I can also say we already finished learning Batchim when we learn consonants." +
             "Can you believe this?";
+
+    @Override
+    public String[] getHangul() {
+        return hangul;
+    }
+
+    @Override
+    public String[] getHangulExplain() {
+        return hangulExplain;
+    }
+
+    @Override
+    public String getHangulIntro() {
+        return hangulIntro;
+    }
 
 }
