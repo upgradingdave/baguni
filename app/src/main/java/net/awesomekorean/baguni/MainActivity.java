@@ -2,7 +2,9 @@ package net.awesomekorean.baguni;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,21 +12,18 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
-    FragmentManager fm;
-    FragmentTransaction ft;
+    FragmentPagerAdapter adapterViewPager;
 
-    MainLesson mainLesson = new MainLesson();
-    MainReading mainReading = new MainReading();
-    MainWriting mainWriting = new MainWriting();
-
-    Button btnReading;
-    Button btnWriting;
-    Button btnCollection;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        viewPager = findViewById(R.id.viewPager);
+        adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapterViewPager);
 
         Button btnLesson = findViewById(R.id.btnLesson);
         Button btnReading = findViewById(R.id.btnReading);
@@ -34,17 +33,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading.setOnClickListener(this);
         btnWriting.setOnClickListener(this);
         btnCollection.setOnClickListener(this);
-
-        setFrag(mainLesson);
-
     }
 
-    public void setFrag(Fragment page) {
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft.replace(R.id.mainFrame, page);
-        ft.commit();
-    }
 
     @Override
     public void onClick(View view) {
@@ -52,27 +42,25 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnProfile:
-                setFrag(mainLesson);
                 break;
 
             case R.id.btnMessage:
-                setFrag(mainLesson);
                 break;
 
             case R.id.btnLesson:
-                setFrag(mainLesson);
+                viewPager.setCurrentItem(0);
                 break;
 
             case R.id.btnReading:
-                setFrag(mainReading);
+                viewPager.setCurrentItem(1);
                 break;
 
             case R.id.btnWriting:
-                setFrag(mainWriting);
+                viewPager.setCurrentItem(2);
                 break;
 
             case R.id.btnCollection:
-                setFrag(mainLesson);
+                viewPager.setCurrentItem(3);
                 break;
         }
     }

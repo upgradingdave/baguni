@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.LessonWordQuiz1;
+import net.awesomekorean.baguni.lesson.LessonWordQuiz2;
 import net.awesomekorean.baguni.lessonHangul.LessonHangulMenu;
 
 public class MainLesson extends Fragment implements Button.OnClickListener {
@@ -19,6 +20,10 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
     public static int lessonUnit = 0;
 
     View view;
+
+    public static MainLesson newInstance() {
+        return new MainLesson();
+    }
 
 
     @Nullable

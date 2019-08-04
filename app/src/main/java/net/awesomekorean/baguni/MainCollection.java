@@ -8,19 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MainReading extends Fragment {
+public class MainCollection extends Fragment {
 
     View view;
 
-    public static MainReading newInstance() {
-        return new MainReading();
+    public static MainCollection newInstance() {
+        return new MainCollection();
     }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.main_reading, container, false);
+        view = inflater.inflate(R.layout.main_collection, container, false);
 
         return view;
     }

@@ -12,6 +12,11 @@ public class MainWriting extends Fragment {
 
     View view;
 
+    public static MainWriting newInstance() {
+        return new MainWriting();
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
