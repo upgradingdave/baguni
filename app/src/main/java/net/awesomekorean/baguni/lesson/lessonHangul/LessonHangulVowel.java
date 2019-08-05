@@ -1,4 +1,4 @@
-package net.awesomekorean.baguni.lessonHangul;
+package net.awesomekorean.baguni.lesson.lessonHangul;
 
 class LessonHangulVowel implements Hangul{
 

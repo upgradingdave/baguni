@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".lessonHangul.LessonHangulAssembly">
+    tools:context=".lesson.lessonHangul.LessonHangulAssembly">
 
     <LinearLayout
         android:orientation="vertical"

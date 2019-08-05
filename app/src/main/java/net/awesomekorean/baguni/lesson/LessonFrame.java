@@ -1,6 +1,5 @@
 package net.awesomekorean.baguni.lesson;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,10 +7,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import net.awesomekorean.baguni.DetectSwipeGestureListener;
 import net.awesomekorean.baguni.R;
 

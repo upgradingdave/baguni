@@ -1,4 +1,4 @@
-package net.awesomekorean.baguni.lessonHangul;
+package net.awesomekorean.baguni.lesson.lessonHangul;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

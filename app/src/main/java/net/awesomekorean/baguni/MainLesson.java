@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import net.awesomekorean.baguni.lesson.LessonFrame;
-import net.awesomekorean.baguni.lesson.LessonWordQuiz1;
-import net.awesomekorean.baguni.lesson.LessonWordQuiz2;
-import net.awesomekorean.baguni.lessonHangul.LessonHangulMenu;
+import net.awesomekorean.baguni.lesson.lessonHangul.LessonHangulMenu;
 
 public class MainLesson extends Fragment implements Button.OnClickListener {
 

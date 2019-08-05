@@ -1,8 +1,7 @@
-package net.awesomekorean.baguni.lessonHangul;
+package net.awesomekorean.baguni.lesson.lessonHangul;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
