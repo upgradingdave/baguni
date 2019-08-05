@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
+import net.awesomekorean.baguni.DpToPx;
 import net.awesomekorean.baguni.R;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
             ToggleButton button = new ToggleButton(getContext());
 
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(150), dpToPx(100));
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(DpToPx.getDpToPx(getResources(), 150), DpToPx.getDpToPx(getResources(), 100));
 
             button.setLayoutParams(params);
             button.setOnClickListener(this);
@@ -174,13 +175,4 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
             ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
         }
     }
-
-    public int dpToPx(int dp) {
-        final float scale = getResources().getDisplayMetrics().density;
-        int pixels = (int) (dp * scale + 0.5f);
-
-        return pixels;
-    }
-
-
 }

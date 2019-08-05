@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.awesomekorean.baguni.DpToPx;
 import net.awesomekorean.baguni.R;
 
 import static android.support.constraint.ConstraintSet.GONE;
@@ -309,7 +310,7 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
             Button hangulBoxBtn = new Button(this);
 
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(50), dpToPx(50));
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(DpToPx.getDpToPx(getResources(), 50), DpToPx.getDpToPx(getResources(), 50));
 
             hangulBoxBtn.setLayoutParams(params);
 
@@ -318,11 +319,13 @@ public class LessonHangulAssembly extends AppCompatActivity {
 
             numberOfBox++;
 
-            if (deviceWidth >= dpToPx(50 * numberOfBox)) {
+            int widthOfButtons = DpToPx.getDpToPx(getResources(), 50 * numberOfBox);
+
+            if (deviceWidth >= widthOfButtons) {
                 hangulBoxLayout1.addView(hangulBoxBtn);
-            } else if (deviceWidth < dpToPx(50 * numberOfBox) && deviceWidth * 2 >= dpToPx(50 * numberOfBox)) {
+            } else if (deviceWidth < widthOfButtons && deviceWidth * 2 >= widthOfButtons) {
                 hangulBoxLayout2.addView(hangulBoxBtn);
-            } else if (deviceWidth * 2 < dpToPx(50 * numberOfBox)) {
+            } else if (deviceWidth * 2 < widthOfButtons) {
                 hangulBoxLayout3.addView(hangulBoxBtn);
             }
         }
@@ -334,14 +337,6 @@ public class LessonHangulAssembly extends AppCompatActivity {
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
 
         deviceWidth = dm.widthPixels;
-    }
-
-
-    public int dpToPx(int dp) {
-        final float scale = getResources().getDisplayMetrics().density;
-        int pixels = (int) (dp * scale + 0.5f);
-
-        return pixels;
     }
 
 

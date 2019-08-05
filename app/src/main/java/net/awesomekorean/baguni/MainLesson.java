@@ -19,7 +19,11 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
 
     public static int lessonUnit = 0;
 
+    int lessonNumber = 2;
+
     View view;
+
+    Intent intent;
 
     public static MainLesson newInstance() {
         return new MainLesson();
@@ -45,18 +49,29 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
 
         switch (v.getId()) {
             case R.id.btn_hangul :
-                Intent intent = new Intent(getContext(), LessonHangulMenu.class);
+                intent = new Intent(getContext(), LessonHangulMenu.class);
                 startActivity(intent);
+                break;
+
+            case R.id.btn_lesson1 :
+                lessonUnit = 1;
+                setIntentForLesson();
                 break;
         }
 
-        switch (v.getId()) {
-            case R.id.btn_lesson1 :
-                Intent intent = new Intent(getContext(), LessonFrame.class);
-                lessonUnit = 1;
-                startActivity(intent);
-                break;
-        }
+    }
+
+    public void setIntentForLesson() {
+
+        intent = new Intent(getContext(), LessonFrame.class);
+        startActivity(intent);
+    }
+
+    public void makeLessonBtns() {
+
+        Button button = new Button(getContext());
+
+
 
     }
 

@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.awesomekorean.baguni.DpToPx;
 import net.awesomekorean.baguni.R;
 import java.util.Random;
 
@@ -148,7 +150,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         for(int i=0; i<syllables.length; i++) {
 
             btnSelector = new Button(getContext());
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(dpToPx(50), dpToPx(50));
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(DpToPx.getDpToPx(getResources(), 50), DpToPx.getDpToPx(getResources(), 50));
             btnSelector.setLayoutParams(params);
             btnSelector.setText(syllables[i]);
             btnSelector.setOnClickListener(selectorButtonClick);
@@ -172,14 +174,4 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         }
 
     }
-
-    // dp 단위를 입력하면 pixel 단위로 변환해줌
-    public int dpToPx(int dp) {
-
-        final float scale = getResources().getDisplayMetrics().density;
-        int pixels = (int) (dp * scale + 0.5f);
-        return pixels;
-    }
-
-
 }
