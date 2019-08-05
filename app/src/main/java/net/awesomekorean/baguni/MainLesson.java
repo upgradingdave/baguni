@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.LessonWordQuiz1;
@@ -20,6 +21,8 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
     public static int lessonUnit = 0;
 
     int lessonNumber = 2;
+
+    LinearLayout layout;
 
     View view;
 
@@ -36,10 +39,9 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        Button hangul = view.findViewById(R.id.btn_hangul);
-        hangul.setOnClickListener(this);
-        Button lesson1 = view.findViewById(R.id.btn_lesson1);
-        lesson1.setOnClickListener(this);
+        layout = view.findViewById(R.id.layoutLessonMain);
+
+        makeLessonBtns();
 
         return view;
     }
@@ -48,17 +50,17 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.btn_hangul :
+
+            case 0 :
                 intent = new Intent(getContext(), LessonHangulMenu.class);
                 startActivity(intent);
                 break;
 
-            case R.id.btn_lesson1 :
-                lessonUnit = 1;
+            default :
+                lessonUnit = v.getId();
                 setIntentForLesson();
                 break;
         }
-
     }
 
     public void setIntentForLesson() {
@@ -69,14 +71,20 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
 
     public void makeLessonBtns() {
 
-        Button button = new Button(getContext());
+        for(int i=0; i<lessonNumber; i++) {
 
+            Button button = new Button(getContext());
 
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DpToPx.getDpToPx(getResources(), 100));
 
+            button.setLayoutParams(params);
+            button.setOnClickListener(this);
+            button.setText("Lesson"+i);
+            button.setId(i);
+
+            layout.addView(button);
+        }
     }
-
-
-
 }
 
 

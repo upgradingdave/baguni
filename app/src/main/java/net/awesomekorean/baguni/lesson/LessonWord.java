@@ -50,8 +50,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         LessonFrame.swipePage = Strings.LESSONWORD;
 
-        MainLesson.lessonUnit = 1; // 빠른 테스트를 위해 추가함.
-
         btnAudio = view.findViewById(R.id.btnAudio);
         btnAudio.setOnClickListener(this);
 

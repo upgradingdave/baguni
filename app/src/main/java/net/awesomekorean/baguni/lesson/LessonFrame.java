@@ -18,6 +18,7 @@ import net.awesomekorean.baguni.R;
 public class LessonFrame extends AppCompatActivity {
 
     public static int progressCount = 0;
+    public static ProgressBar progressBar;
 
     private GestureDetectorCompat gestureDetectorCompat = null;
 
@@ -27,8 +28,6 @@ public class LessonFrame extends AppCompatActivity {
     FragmentTransaction ft;
     LessonWord lessonWord = new LessonWord();
 
-
-    public static ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +55,8 @@ public class LessonFrame extends AppCompatActivity {
 
         //Create a common gesture listener object
         DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
-
         //Set activity in the listener
         gestureListener.setActivity(this);
-
         //Create the gesture detector with the gesture listener
         gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 

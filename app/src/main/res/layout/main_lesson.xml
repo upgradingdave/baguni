@@ -7,28 +7,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
+        android:id="@+id/layoutLessonMain"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_hangul"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:text="Hangul"
-            android:textSize="20dp" />
-
-        <Button
-            android:id="@+id/btn_lesson1"
-            android:layout_margin="10dp"
-            android:text="Lesson1"
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            />
-
-
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
