@@ -75,45 +75,16 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/popUpLayout"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:weightSum="1"
+    <TextView
+        android:id="@+id/popUpTextView"
+        android:textSize="20dp"
         android:background="@android:color/holo_orange_light"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/popUpTextView"
-            android:layout_weight="0.8"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="0.2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <Button
-                android:text="Collect"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:text="Repeat"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+        app:layout_constraintStart_toStartOf="parent"
+    />
 
 </android.support.constraint.ConstraintLayout>

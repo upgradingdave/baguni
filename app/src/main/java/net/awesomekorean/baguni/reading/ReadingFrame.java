@@ -20,8 +20,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     TextView title; // reading 타이틀
     TextView article; // reading 본문
 
-    LinearLayout popUpLayout; // 단어 클릭 시 팝업 레이아웃
-    TextView popUpTextView;
+    TextView popUpTextView;  // 단어 클릭 시 팝업 텍스트뷰
 
     Reading reading;
 
@@ -33,7 +32,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
         title = findViewById(R.id.title);
         article = findViewById(R.id.article);
-        popUpLayout = findViewById(R.id.popUpLayout);
         popUpTextView = findViewById(R.id.popUpTextView);
 
 
@@ -61,11 +59,11 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                     popUpTextView.setText(reading.getPopUpText()[finalI]);
 
-                    if(popUpLayout.getVisibility()==View.GONE) {
-                        popUpLayout.setVisibility(View.VISIBLE);
+                    if(popUpTextView.getVisibility()==View.GONE) {
+                        popUpTextView.setVisibility(View.VISIBLE);
 
                     } else {
-                        popUpLayout.setVisibility(View.GONE);
+                        popUpTextView.setVisibility(View.GONE);
                     }
                 }
 
@@ -92,7 +90,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.article :
 
-                popUpLayout.setVisibility(View.GONE);
+                popUpTextView.setVisibility(View.GONE);
         }
     }
 }
