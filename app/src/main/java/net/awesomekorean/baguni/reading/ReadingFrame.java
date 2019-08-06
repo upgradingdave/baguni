@@ -9,12 +9,13 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.awesomekorean.baguni.MainReading;
 import net.awesomekorean.baguni.R;
 
-public class ReadingFrame extends AppCompatActivity {
+public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
     TextView title; // reading 타이틀
     TextView article; // reading 본문
@@ -36,7 +37,6 @@ public class ReadingFrame extends AppCompatActivity {
         popUpTextView = findViewById(R.id.popUpTextView);
 
 
-
         switch (MainReading.readingUnit) {
 
             case 0:
@@ -49,19 +49,24 @@ public class ReadingFrame extends AppCompatActivity {
 
         title.setText(reading.getTitle());
 
+
         SpannableStringBuilder span = new SpannableStringBuilder(reading.getArticle());
 
         for(int i=0; i<reading.getStart().length; i++) {
 
+            final int finalI = i;
             span.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(@NonNull View view) {  // 하이라이트 클릭 이벤트
 
-                    System.out.println("CLICKED: "+view.getTag());
+                    popUpTextView.setText(reading.getPopUpText()[finalI]);
 
-                    //popUpTextView.setText((Integer) view.getTag());
-                    popUpLayout.setVisibility(View.VISIBLE);
+                    if(popUpLayout.getVisibility()==View.GONE) {
+                        popUpLayout.setVisibility(View.VISIBLE);
 
+                    } else {
+                        popUpLayout.setVisibility(View.GONE);
+                    }
                 }
 
                 @Override
@@ -80,4 +85,14 @@ public class ReadingFrame extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.article :
+
+                popUpLayout.setVisibility(View.GONE);
+        }
+    }
 }
