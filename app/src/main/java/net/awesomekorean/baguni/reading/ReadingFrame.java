@@ -8,10 +8,10 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.awesomekorean.baguni.MainReading;
@@ -23,7 +23,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     TextView article; // reading 본문
 
     TextView popUpTextView;  // 단어 클릭 시 팝업 텍스트뷰
-
+    LinearLayout popUpLayout;
     ImageButton imageButton;
 
     Reading reading;
@@ -37,18 +37,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         title = findViewById(R.id.title);
         article = findViewById(R.id.article);
         popUpTextView = findViewById(R.id.popUpTextView);
-        imageButton = findViewById(R.id.imageBtn);
+        popUpLayout = findViewById(R.id.popUpLayout);
+        imageButton = findViewById(R.id.btnCollect);
 
-        article.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                imageButton.setRight((int) motionEvent.getX());
-                imageButton.setBottom((int) motionEvent.getY());
-
-                return false;
-            }
-        });
 
 
         switch (MainReading.readingUnit) {
@@ -75,11 +66,11 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                     popUpTextView.setText(reading.getPopUpText()[finalI]);
 
-                    if(popUpTextView.getVisibility()==View.GONE) {
-                        popUpTextView.setVisibility(View.VISIBLE);
+                    if(popUpLayout.getVisibility()==View.GONE) {
+                        popUpLayout.setVisibility(View.VISIBLE);
 
                     } else {
-                        popUpTextView.setVisibility(View.GONE);
+                        popUpLayout.setVisibility(View.GONE);
                     }
                 }
 
