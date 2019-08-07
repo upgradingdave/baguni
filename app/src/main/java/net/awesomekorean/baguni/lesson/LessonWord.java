@@ -59,9 +59,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (MainLesson.lessonUnit) {
 
             case 1:
-
                 lesson = new Lesson1();
                 readyForLesson();
+                break;
+
         }
 
         return view;

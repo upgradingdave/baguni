@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".reading.ReadingFrame"></activity>
-        <activity android:name=".lesson.LessonFrame"></activity>
+        <activity android:name=".reading.ReadingFrame" />
+        <activity android:name=".lesson.LessonFrame" />
         <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
         <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />

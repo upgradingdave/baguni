@@ -8,18 +8,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import net.awesomekorean.baguni.lesson.LessonFrame;
+import net.awesomekorean.baguni.lesson.lessonHangul.LessonHangulMenu;
 import net.awesomekorean.baguni.reading.ReadingFrame;
 
-public class MainReading extends Fragment implements Button.OnClickListener {
+public class MainReading extends Fragment {
 
     public static int readingUnit = 0;
 
-    int readingNumber = 2;
-
-    LinearLayout layout;
+    static final String[] readingList = {"Reading0", "Reading1"};
 
     View view;
 
@@ -30,48 +31,31 @@ public class MainReading extends Fragment implements Button.OnClickListener {
     }
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_reading, container, false);
 
-        layout = view.findViewById(R.id.layoutReadingMain);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, readingList);
 
-        makeReadingBtns();
+        ListView listView = view.findViewById(R.id.listViewReading);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                readingUnit = i;
+                intent = new Intent(getContext(), ReadingFrame.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-
-        readingUnit = v.getId();
-        setIntentForReading();
-    }
-
-    public void setIntentForReading() {
-
-        intent = new Intent(getContext(), ReadingFrame.class);
-        startActivity(intent);
-    }
-
-    public void makeReadingBtns() {
-
-        for(int i=0; i<readingNumber; i++) {
-
-            Button button = new Button(getContext());
-
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DpToPx.getDpToPx(getResources(), 100));
-
-            button.setLayoutParams(params);
-            button.setOnClickListener(this);
-            button.setText("Reading"+i);
-            button.setId(i);
-
-            layout.addView(button);
-        }
-    }
 }
 
 

@@ -8,19 +8,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.lessonHangul.LessonHangulMenu;
 
-public class MainLesson extends Fragment implements Button.OnClickListener {
+public class MainLesson extends Fragment {
 
     public static int lessonUnit = 0;
 
-    int lessonNumber = 2;
-
-    LinearLayout layout;
+    static final String[] lessonList = {"Hangul", "Lesson1", "Lesson2"};
 
     View view;
 
@@ -31,58 +32,40 @@ public class MainLesson extends Fragment implements Button.OnClickListener {
     }
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        layout = view.findViewById(R.id.layoutLessonMain);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, lessonList);
 
-        makeLessonBtns();
+        ListView listView = view.findViewById(R.id.listViewLesson);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                switch (i) {
+
+                    case 0 :
+                        intent = new Intent(getContext(), LessonHangulMenu.class);
+                        startActivity(intent);
+                        break;
+
+                    default :
+                        lessonUnit = i;
+                        intent = new Intent(getContext(), LessonFrame.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-
-            case 0 :
-                intent = new Intent(getContext(), LessonHangulMenu.class);
-                startActivity(intent);
-                break;
-
-            default :
-                lessonUnit = v.getId();
-                setIntentForLesson();
-                break;
-        }
-    }
-
-    public void setIntentForLesson() {
-
-        intent = new Intent(getContext(), LessonFrame.class);
-        startActivity(intent);
-    }
-
-    public void makeLessonBtns() {
-
-        for(int i=0; i<lessonNumber; i++) {
-
-            Button button = new Button(getContext());
-
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DpToPx.getDpToPx(getResources(), 100));
-
-            button.setLayoutParams(params);
-            button.setOnClickListener(this);
-            button.setText("Lesson"+i);
-            button.setId(i);
-
-            layout.addView(button);
-        }
-    }
 }
 
 

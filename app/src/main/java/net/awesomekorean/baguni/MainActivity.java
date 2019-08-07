@@ -8,13 +8,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
     FragmentPagerAdapter adapterViewPager;
 
     ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading.setOnClickListener(this);
         btnWriting.setOnClickListener(this);
         btnCollection.setOnClickListener(this);
+
     }
 
 
