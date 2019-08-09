@@ -19,15 +19,18 @@ import net.awesomekorean.baguni.R;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
+    Reading reading; // Reading 인스턴스
+
     TextView title; // reading 타이틀
     TextView article; // reading 본문
 
+    LinearLayout popUpLayout; // 단어 클릭 시 팝업 레이아웃
     TextView popUpTextView;  // 단어 클릭 시 팝업 텍스트뷰
-    LinearLayout popUpLayout;
-    ImageButton imageButton;
+    ImageButton btnCollect; // 단어 클릭 시 collect 버튼
+    ImageButton btnClose; // 단어 클릭 시 close 버튼
 
-    Reading reading;
-
+    Button finish;
+    Button btnPlayStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,12 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
         title = findViewById(R.id.title);
         article = findViewById(R.id.article);
-        popUpTextView = findViewById(R.id.popUpTextView);
         popUpLayout = findViewById(R.id.popUpLayout);
-        imageButton = findViewById(R.id.btnCollect);
+        popUpTextView = findViewById(R.id.popUpTextView);
+        btnCollect = findViewById(R.id.btnCollect);
+        btnCollect.setOnClickListener(this);
+        btnClose = findViewById(R.id.btnClose);
+        btnClose.setOnClickListener(this);
 
 
 
@@ -65,13 +71,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 public void onClick(@NonNull View view) {  // 하이라이트 클릭 이벤트
 
                     popUpTextView.setText(reading.getPopUpText()[finalI]);
+                    popUpLayout.setVisibility(View.VISIBLE);
 
-                    if(popUpLayout.getVisibility()==View.GONE) {
-                        popUpLayout.setVisibility(View.VISIBLE);
-
-                    } else {
-                        popUpLayout.setVisibility(View.GONE);
-                    }
                 }
 
                 @Override
@@ -95,9 +96,14 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
         switch (view.getId()) {
 
-            case R.id.article :
+            case R.id.btnCollect :
+                System.out.println("Collect button clicked");
+                break;
 
-                popUpTextView.setVisibility(View.GONE);
+            case R.id.btnClose :
+                popUpLayout.setVisibility(View.GONE);
+                break;
+
         }
     }
 }

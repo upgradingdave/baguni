@@ -33,36 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <LinearLayout
-            android:id="@+id/popUpLayout"
-            android:background="@android:color/holo_orange_light"
-            android:weightSum="1"
-            android:visibility="gone"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/popUpTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:textSize="20dp" />
-
-            <ImageButton
-                android:id="@+id/btnCollect"
-                android:layout_weight="0.1"
-                android:scaleType="fitCenter"
-                android:src="@drawable/samplecollect"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-
         <TextView
             android:id="@+id/title"
             android:padding="10dp"
@@ -77,7 +47,6 @@
             android:layout_height="0dp" />
 
         <ScrollView
-            android:id="@+id/scrollView2"
             android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -95,6 +64,43 @@
 
         </ScrollView>
 
+        <LinearLayout
+            android:id="@+id/popUpLayout"
+            android:background="@android:color/holo_orange_light"
+            android:weightSum="1"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/popUpTextView"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:textSize="20dp" />
+
+            <ImageButton
+                android:id="@+id/btnCollect"
+                android:layout_weight="0.1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/samplecollect"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <ImageButton
+                android:id="@+id/btnClose"
+                android:scaleType="fitCenter"
+                android:src="@drawable/samplewrong"
+                android:layout_weight="0.1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 
@@ -105,12 +111,14 @@
         android:layout_height="0dp">
 
         <Button
+            android:id="@+id/btnFinish"
             android:text="Finish"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
         <Button
+            android:id="@+id/btnPlayStop"
             android:text="Play/Stop"
             android:layout_weight="1"
             android:layout_width="wrap_content"
