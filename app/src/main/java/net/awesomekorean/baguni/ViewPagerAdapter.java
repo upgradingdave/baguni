@@ -27,6 +27,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return MainReading.newInstance();
 
             case 2 :
+                // 작성한 글이 있는지 파악 후 display 할 fragment 결정
                 return  MainWriting.newInstance();
 
             case 3 :
