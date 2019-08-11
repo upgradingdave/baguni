@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         viewPager = findViewById(R.id.viewPager);
         adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
+
+        //Intent intent = getIntent();
+        //if(intent != null) {
+        //    viewPager.setCurrentItem(intent.getExtras().getInt("viewPager"));
+        //}
 
         Button btnLesson = findViewById(R.id.btnLesson);
         Button btnReading = findViewById(R.id.btnReading);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import net.awesomekorean.baguni.collection.CollectionDb;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
 import net.awesomekorean.baguni.collection.CollectionListViewAdapter;
@@ -36,11 +38,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     Button btnStudy;
     Button btnDelete;
     Button btnRecord;
+    FloatingActionButton btnAdd;
 
     Intent intent;
 
-    String[] collectionListKorean = {"사과", "바나나", "망고"};
-    String[] collectionListEnglish = {"apple", "banana", "mango"};
+    //static String[] dbKorean = {"사과", "바나나", "망고"};
+    //static String[] dbEnglish = {"apple", "banana", "mango"};
+    CollectionDb db = new CollectionDb();
 
     public static MainCollection newInstance() {
         return new MainCollection();
@@ -58,12 +62,14 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         btnStudy = view.findViewById(R.id.btnStudy);
         btnDelete = view.findViewById(R.id.btnDelete);
         btnRecord = view.findViewById(R.id.btnRecord);
+        btnAdd = view.findViewById(R.id.btnAddCollection);
         selectAll.setOnClickListener(this);
         btnWord.setOnClickListener(this);
         btnSentence.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         btnRecord.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
         list = getCollection(false);
@@ -80,6 +86,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 intent = new Intent(getContext(), CollectionFlashCard.class);
                 intent.putExtra("Korean", item.getCollectionKorean());
                 intent.putExtra("English", item.getCollectionEnglish());
+                intent.putExtra("index", i);
+                intent.putExtra("Mode", "edit");
                 startActivity(intent);
             }
         });
@@ -115,12 +123,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         ArrayList<CollectionItems> list = new ArrayList<>();
 
-        for(int i=0; i<collectionListKorean.length; i++) {
+        for(int i=0; i<db.getCollectionKorean().length; i++) {
 
             CollectionItems items = new CollectionItems();
             items.setChecked(isChecked);
-            items.setCollectionKorean(collectionListKorean[i]);
-            items.setCollectionEnglish(collectionListEnglish[i]);
+            items.setCollectionKorean(db.getCollectionKorean()[i]);
+            items.setCollectionEnglish(db.getCollectionEnglish()[i]);
             list.add(items);
         }
         return list;
@@ -157,6 +165,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnAddCollection :
+                Intent intent = new Intent(getContext(), CollectionFlashCard.class);
+                intent.putExtra("Mode", "add");
+                startActivity(intent);
                 break;
         }
     }
