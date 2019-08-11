@@ -36,7 +36,7 @@ public class MainCollection extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_collection, container, false);
 
@@ -76,14 +76,29 @@ public class MainCollection extends Fragment {
             public void onClick(View view) {
 
                 if(selectAll.isChecked()) {
-                    list = getCollection(true);
+                    adapter.checkAll(true);
                 } else {
-                    list = getCollection(false);
+                    adapter.checkAll(false);
                 }
 
-                adapter = new CollectionListViewAdapter(getContext(), list);
-                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(selectAll.getVisibility()==View.INVISIBLE) {
+                    selectAll.setVisibility(View.VISIBLE);
+                    adapter.longClickOnOff("On");
+                } else {
+                    selectAll.setVisibility(View.INVISIBLE);
+                    adapter.longClickOnOff("Off");
+                }
+                adapter.notifyDataSetChanged();
+                return true;
             }
         });
 
@@ -95,7 +110,7 @@ public class MainCollection extends Fragment {
 
         ArrayList<CollectionItems> list = new ArrayList<>();
 
-        for(int i=0; i<3; i++) {
+        for(int i=0; i<collectionListKorean.length; i++) {
 
             CollectionItems items = new CollectionItems();
             items.setChecked(isChecked);

@@ -54,6 +54,7 @@ public class CollectionListViewAdapter extends BaseAdapter {
             holder.collectionKorean = view.findViewById(R.id.collectionKorean);
             holder.collectionEnglish = view.findViewById(R.id.collectionEnglish);
             view.setTag(holder);
+
         } else {
             holder = (ViewHolder) view.getTag();
         }
@@ -63,7 +64,8 @@ public class CollectionListViewAdapter extends BaseAdapter {
         holder.collectionKorean.setText(items.getCollectionKorean());
         holder.collectionEnglish.setText(items.getCollectionEnglish());
         holder.checkBox.setChecked(items.getChecked());
-        holder.checkBox.setTag(R.integer.btnplusview, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당 (ViewGroup 은 item 별로 구성된 view 묶음을 말하고, 이 ViewGroup 을 convert 한 것을 ListView 기준으로 View 라고 한다.)
+        holder.checkBox.setVisibility(items.getVisible());
+        holder.checkBox.setTag(R.integer.btnplusview, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당
         holder.checkBox.setTag(i);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +88,7 @@ public class CollectionListViewAdapter extends BaseAdapter {
                 }
             }
         });
+
         return view;
     }
 
@@ -94,5 +97,43 @@ public class CollectionListViewAdapter extends BaseAdapter {
         ImageButton btnRecord;
         TextView collectionKorean;
         TextView collectionEnglish;
+    }
+
+    public void checkAll(boolean b) {
+        CollectionItems items;
+        if(b == true) {
+            for(int i=0; i<getCount(); i++) {
+                items = list.get(i);
+                items.setChecked(true);
+            }
+        } else if(b == false) {
+            for(int i=0; i<getCount(); i++) {
+                items = list.get(i);
+                items.setChecked(false);
+            }
+        }
+    }
+
+
+
+    public void longClickOnOff(String onOff) { // listView를 길게 눌렀을 때 checkbox On/Off
+
+        CollectionItems items;
+
+        if(onOff == "On") {
+
+            for (int i = 0; i < getCount(); i++) {
+
+                items = list.get(i);
+                items.setVisible(0);
+            }
+        } else if(onOff == "Off") {
+
+            for (int i = 0; i < getCount(); i++) {
+
+                items = list.get(i);
+                items.setVisible(4);
+            }
+        }
     }
 }

@@ -7,6 +7,8 @@ public class CollectionItems {
 
     private boolean isChecked;
 
+    private int isVisible = 4 ;
+
     public void setCollectionKorean(String collection) {
         this.collectionKorean = collection;
     }
@@ -29,6 +31,14 @@ public class CollectionItems {
 
     public boolean getChecked() {
         return isChecked;
+    }
+
+    public void setVisible(int isVisible) {
+        this.isVisible = isVisible;
+    }
+
+    public int getVisible() {
+        return isVisible;
     }
 
 }

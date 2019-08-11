@@ -57,6 +57,7 @@
 
         <CheckBox
             android:id="@+id/checkBoxSelectAll"
+            android:visibility="invisible"
             android:layout_weight="0.1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
