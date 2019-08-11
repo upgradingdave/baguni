@@ -115,7 +115,6 @@ public class CollectionListViewAdapter extends BaseAdapter {
     }
 
 
-
     public void longClickOnOff(String onOff) { // listView를 길게 눌렀을 때 checkbox On/Off
 
         CollectionItems items;
