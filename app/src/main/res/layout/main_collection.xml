@@ -1,14 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:weightSum="1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="0.1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:gravity="left|bottom"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <Button
+                android:text="Word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="Sentence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:paddingLeft="10dp"
+                android:hint="Search"
+                android:layout_margin="10dp"
+                android:background="@drawable/border"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@android:color/holo_orange_light"
+        android:weightSum="1"
+        android:layout_weight="0.05"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <CheckBox
+            android:id="@+id/checkBoxSelectAll"
+            android:layout_weight="0.1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_weight="0.1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:gravity="center"
+            android:text="Side A"
+            android:textSize="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:layout_width="0dp" />
+
+        <TextView
+            android:gravity="center"
+            android:text="Side B"
+            android:textSize="10dp"
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_weight="0.75"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ListView
+            android:id="@+id/listViewCollection"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ListView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnAddCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/listViewCollection"
+            app:layout_constraintBottom_toBottomOf="@+id/listViewCollection"
+            app:backgroundTint="@android:color/holo_orange_light"
+            android:src="@drawable/plus"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
         android:gravity="center"
-        android:text="Collection Fragment"
-        android:textSize="20dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_weight="0.1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:text="Study"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp"
+    android:weightSum="1"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:visibility="visible"
+        android:layout_weight="0.1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <ImageButton
+        android:id="@+id/btnRecord"
+        android:src="@drawable/samplerecord"
+        android:scaleType="fitCenter"
+        android:layout_weight="0.1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/collectionKorean"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:text="사과"
+        android:textSize="20dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:layout_width="0dp" />
+
+    <TextView
+        android:id="@+id/collectionEnglish"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:text="apple"
+        android:textSize="20dp"
+        android:layout_weight="0.4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

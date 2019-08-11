@@ -30,7 +30,6 @@ public class WritingFrame extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
                 textCount.setText(i+i2+" 자");
-                System.out.println("I : " + i+ "I1 : "+i1+ "I2 : " +i2);
             }
 
             @Override
