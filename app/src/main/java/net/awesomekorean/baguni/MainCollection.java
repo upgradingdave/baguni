@@ -22,11 +22,17 @@ import net.awesomekorean.baguni.collection.CollectionDb;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
 import net.awesomekorean.baguni.collection.CollectionListViewAdapter;
-import net.awesomekorean.baguni.lesson.LessonFrame;
+import net.awesomekorean.baguni.collection.CollectionStudy;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 public class MainCollection extends Fragment implements Button.OnClickListener{
+    public static final int REQUEST_CODE = 100;
+    public static final String REQUEST_EDIT = "edit";
+    public static final String REQUEST_ADD = "add";
+
 
     View view;
 
@@ -109,6 +115,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         });
 
 
+        // 리스트의 아이템 클릭 이벤트
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -119,8 +126,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 intent.putExtra("Korean", item.getCollectionKorean());
                 intent.putExtra("English", item.getCollectionEnglish());
                 intent.putExtra("index", i);
-                intent.putExtra("Mode", "edit");
-                startActivity(intent);
+                intent.putExtra("request", REQUEST_EDIT);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -151,6 +158,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         return view;
     }
 
+
+    // Flash Card 수정/추가 후 결과 받기
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK) {
+            adapter.notifyDataSetChanged();
+
+        }
+    }
+
+
     // 검색 뷰에 입력한 내용을 list 와 비교해서 출력
     public void search(String text) {
 
@@ -174,6 +192,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     }
 
 
+    // 최초 activity 실행 시 DataBase 에서 collection 불러오기
     private ArrayList<CollectionItems> getCollection(boolean isChecked) {
 
         ArrayList<CollectionItems> list = new ArrayList<>();
@@ -188,6 +207,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         }
         return list;
     }
+
 
     @Override
     public void onClick(View view) {
@@ -211,6 +231,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnStudy :
+                intent = new Intent(getContext(), CollectionStudy.class);
+                startActivity(intent);
                 break;
 
             case R.id.btnDelete :
@@ -220,9 +242,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnAddCollection :
-                Intent intent = new Intent(getContext(), CollectionFlashCard.class);
-                intent.putExtra("Mode", "add");
-                startActivity(intent);
+                intent = new Intent(getContext(), CollectionFlashCard.class);
+                intent.putExtra("request", REQUEST_ADD);
+                startActivityForResult(intent,REQUEST_CODE);
                 break;
 
             case R.id.searchCancel :

@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import net.awesomekorean.baguni.R;
-import net.awesomekorean.baguni.Strings;
 
 import static net.awesomekorean.baguni.lesson.LessonWord.lessonCount;
 
@@ -35,7 +34,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
 
-        LessonFrame.swipePage = Strings.LESSONSENTENCE;
+        LessonFrame.swipePage = "lessonSentence";
 
         textViewSentenceInKorean = view.findViewById(R.id.textViewSentenceInKorean);
         textViewSentenceInEnglish = view.findViewById(R.id.textViewSentenceInEnglish);

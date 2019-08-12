@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">baguni</string>
 
-    <string name="menu_vocabulary">Vocabulary</string>
-    <string name="menu_lesson">Lesson</string>
-    <string name="menu_reading">Reading</string>
-    <string name="menu_writing">Writing</string>
-    <string name="menu_profile">Profile</string>
-    <string name="menu_option">Option</string>
+    <string name="MENU_LESSON">Lesson</string>
+    <string name="MENU_READING">Reading</string>
+    <string name="MENU_WRITING">Writing</string>
+    <string name="MENU_COLLECTION">Collection</string>
+    <string name="MENU_PROFILE_OPTION">Profile/Option</string>
+    <string name="MENU_MESSAGE">Message</string>
 
-    <string name="navigation_drawer_open">Open</string>
-    <string name="navigation_drawer_close">Close</string>
+    <string name="ANSWER">Answer</string>
+    <string name="NEXT">Next</string>
+
+
 </resources>

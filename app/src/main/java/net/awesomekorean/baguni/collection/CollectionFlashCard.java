@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import net.awesomekorean.baguni.MainActivity;
-import net.awesomekorean.baguni.MainCollection;
 import net.awesomekorean.baguni.R;
 
 public class CollectionFlashCard extends AppCompatActivity implements Button.OnClickListener {
+
+    public static final String REQUEST_EDIT = "edit";
+    public static final String REQUEST_ADD = "add";
 
     Intent intent;
 
@@ -21,7 +23,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
     EditText textFront;
     EditText textBack;
 
-    String mode;
+    String code;
 
     String textKorean;
     String textEnglish;
@@ -42,9 +44,9 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
         Intent intent = getIntent();
 
-        mode = intent.getExtras().getString("Mode");
+        code = intent.getExtras().getString("request");
 
-        if(mode.equals("edit")) {
+        if(code.equals(REQUEST_EDIT)) {
 
             textKorean = intent.getExtras().getString("Korean");
             textEnglish = intent.getExtras().getString("English");
@@ -61,21 +63,25 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
         switch (view.getId()) {
 
             case R.id.btnCancel :
+                finish();
                 break;
 
             case R.id.btnSave :
 
                 CollectionDb db = new CollectionDb();
 
-                if(mode.equals("edit")) {
+                if(code.equals(REQUEST_EDIT)) {
                     db.editCollection(index, textFront.getText().toString(), textBack.getText().toString());
+                    System.out.println("DB: "+db.getCollectionKorean()[0]);
+                    Toast.makeText(this, "Collection edited", Toast.LENGTH_LONG).show();
 
-                } else if (mode.equals("add")) {
+                } else if (code.equals(REQUEST_ADD)) {
                     db.addCollection(textFront.getText().toString(), textBack.getText().toString());
+                    Toast.makeText(this, "Collection added", Toast.LENGTH_LONG).show();
                 }
-                intent = new Intent(this, MainActivity.class);
-                //intent.putExtra("viewPager", 3);
-                startActivity(intent);
+                intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
                 break;
         }
     }

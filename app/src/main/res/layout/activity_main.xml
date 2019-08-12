@@ -21,7 +21,7 @@
 
             <Button
                 android:id="@+id/btnProfile"
-                android:text="Profile/Option"
+                android:text="@string/MENU_PROFILE_OPTION"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
@@ -35,7 +35,7 @@
 
             <Button
                 android:id="@+id/btnMessage"
-                android:text="Message"
+                android:text="@string/MENU_MESSAGE"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
@@ -59,14 +59,14 @@
 
         <Button
             android:id="@+id/btnLesson"
-            android:text="Lesson"
+            android:text="@string/MENU_LESSON"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btnReading"
-            android:text="Reading"
+            android:text="@string/MENU_READING"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -76,11 +76,12 @@
             android:layout_width="106dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Writing" />
+            android:text="@string/MENU_WRITING" />
+
 
         <Button
             android:id="@+id/btnCollection"
-            android:text="Collection"
+            android:text="@string/MENU_COLLECTION"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />

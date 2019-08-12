@@ -43,7 +43,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         //Only when swipe distance between minimal and maximal distance value. It's effective swipe
         if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
 
-            if(LessonFrame.swipePage == Strings.LESSONWORD) {
+            if(LessonFrame.swipePage == "lessonWord") {
 
                 if(deltaX > 0) {
 
@@ -68,7 +68,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                 LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
             }
 
-            if(LessonFrame.swipePage == Strings.LESSONSENTENCE) {
+            if(LessonFrame.swipePage == "lessonSentence") {
 
                 if(deltaX > 0) {
 

@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import net.awesomekorean.baguni.MainLesson;
 import net.awesomekorean.baguni.R;
-import net.awesomekorean.baguni.Strings;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
 
@@ -48,7 +47,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
-        LessonFrame.swipePage = Strings.LESSONWORD;
+        LessonFrame.swipePage = "lessonWord";
 
         btnAudio = view.findViewById(R.id.btnAudio);
         btnAudio.setOnClickListener(this);
