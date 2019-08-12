@@ -34,17 +34,31 @@
         </LinearLayout>
 
         <LinearLayout
+            android:background="@drawable/border"
+            android:weightSum="1"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent">
 
             <EditText
-                android:paddingLeft="10dp"
+                android:id="@+id/searchCollection"
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:hint="Search"
-                android:layout_margin="10dp"
-                android:background="@drawable/border"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:paddingLeft="10dp"/>
+
+            <ImageButton
+                android:id="@+id/searchCancel"
+                android:visibility="gone"
+                android:layout_weight="0.2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/samplewrong" />
+
+
 
         </LinearLayout>
 

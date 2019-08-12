@@ -41,4 +41,17 @@ public class CollectionItems {
         return isVisible;
     }
 
+
+    // 검색 기능을 위해 equals 재정의
+    @Override
+    public boolean equals(Object obj) {
+
+        boolean result = false;
+
+        if(this.collectionKorean.contains((CharSequence) obj) || this.collectionEnglish.contains((CharSequence) obj)) {
+            result = true;
+        }
+
+        return result;
+    }
 }

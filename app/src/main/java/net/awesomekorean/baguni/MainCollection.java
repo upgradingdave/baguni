@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -27,23 +30,25 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     View view;
 
-    CheckBox selectAll;
+    CheckBox selectAll; // 전체 선택/해제 체크박스
 
-    ListView listView;
-    ArrayList<CollectionItems> list;
-    CollectionListViewAdapter adapter;
+    ListView listView;  // 리스트뷰
+    ArrayList<CollectionItems> list;    // 리스트뷰 생성을 위한 arrayList
+    ArrayList<CollectionItems> listCopy;// 검색 기능을 위해 리스트뷰 복사함
+    CollectionListViewAdapter adapter;  // 리스트뷰 어뎁터
 
-    Button btnWord;
-    Button btnSentence;
-    Button btnStudy;
-    Button btnDelete;
-    Button btnRecord;
-    FloatingActionButton btnAdd;
+    Button btnWord; // 단어 컬렉션 선택 버튼
+    Button btnSentence; // 문장 컬렉션 선택 버튼
+    Button btnStudy;    // 컬렉션을 flash card 로 공부
+    Button btnDelete;   // 컬렉션 삭제 버튼
+    Button btnRecord;   // 녹음 요청 버튼
+    FloatingActionButton btnAdd;    // 컬렉션 추가용 floating 버튼
+
+    EditText searchEdit;    // 검색 입력
+    ImageButton searchCancel;   // 검색 취소
 
     Intent intent;
 
-    //static String[] dbKorean = {"사과", "바나나", "망고"};
-    //static String[] dbEnglish = {"apple", "banana", "mango"};
     CollectionDb db = new CollectionDb();
 
     public static MainCollection newInstance() {
@@ -63,6 +68,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         btnDelete = view.findViewById(R.id.btnDelete);
         btnRecord = view.findViewById(R.id.btnRecord);
         btnAdd = view.findViewById(R.id.btnAddCollection);
+        searchEdit = view.findViewById(R.id.searchCollection);
+        searchCancel = view.findViewById(R.id.searchCancel);
         selectAll.setOnClickListener(this);
         btnWord.setOnClickListener(this);
         btnSentence.setOnClickListener(this);
@@ -70,12 +77,37 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         btnDelete.setOnClickListener(this);
         btnRecord.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
+        searchCancel.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
-        list = getCollection(false);
-        adapter = new CollectionListViewAdapter(getContext(), list);
+        list = getCollection(false);    // 컬렉션 아이템 불러오기
 
+        listCopy = new ArrayList<>();
+        listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
+
+        adapter = new CollectionListViewAdapter(getContext(), list);
         listView.setAdapter(adapter);
+
+        // 검색 뷰에 입력을 하는지 확인하는 리스너
+        searchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                searchCancel.setVisibility(View.VISIBLE);
+                String text = searchEdit.getText().toString();  // 검색 뷰에 입력이 있을 때마다 실행
+                search(text);
+            }
+        });
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -118,6 +150,29 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         return view;
     }
+
+    // 검색 뷰에 입력한 내용을 list 와 비교해서 출력
+    public void search(String text) {
+
+        list.clear(); // 입력이 발생하면 리스트를 지움.
+
+        if(text.length() == 0) {
+            searchCancel.setVisibility(View.GONE);
+            list.addAll(listCopy); // 입력을 지우면 원래 리스트 출력
+
+        } else {
+
+            for(int i=0; i<listCopy.size(); i++) {
+
+                if(listCopy.get(i).equals(text)) { // 조건에 맞는 리스트만 출력
+                    list.add(listCopy.get(i));
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+    }
+
 
     private ArrayList<CollectionItems> getCollection(boolean isChecked) {
 
@@ -168,6 +223,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 Intent intent = new Intent(getContext(), CollectionFlashCard.class);
                 intent.putExtra("Mode", "add");
                 startActivity(intent);
+                break;
+
+            case R.id.searchCancel :
+                searchEdit.setText("");
                 break;
         }
     }
