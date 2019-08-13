@@ -3,8 +3,8 @@ package net.awesomekorean.baguni.collection;
 public class CollectionDb {
 
 
-    private static String[] oldCollectionKorean = {"사과", "바나나", "망고"};
-    private static String[] oldCollectionEnglish = {"apple", "banana", "mango"};
+    private static String[] oldCollectionKorean = {"사과", "바나나", "망고", "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ","사과", "바나나", "망고", "ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
+    private static String[] oldCollectionEnglish = {"apple", "banana", "mango", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n","apple", "banana", "mango", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"};
 
     private static String[] newCollectionKorean;
     private static String[] newCollectionEnglish;

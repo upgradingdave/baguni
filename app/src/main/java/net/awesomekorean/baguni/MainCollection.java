@@ -11,12 +11,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import net.awesomekorean.baguni.collection.CollectionDb;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
@@ -39,9 +41,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
-    ArrayList<CollectionItems> list;    // 리스트뷰 생성을 위한 arrayList
+    ArrayList<CollectionItems> list;    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
+    ArrayList<CollectionItems> listAllData; // 리스트뷰에 들어갈 모든 데이터를 불러옴
     ArrayList<CollectionItems> listCopy;// 검색 기능을 위해 리스트뷰 복사함
     CollectionListViewAdapter adapter;  // 리스트뷰 어뎁터
+
+    ProgressBar progressBar;
 
     Button btnWord; // 단어 컬렉션 선택 버튼
     Button btnSentence; // 문장 컬렉션 선택 버튼
@@ -86,13 +91,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         searchCancel.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
-        list = getCollection(false);    // 컬렉션 아이템 불러오기
+        setListViewFooter();
+
+        listAllData = getCollection();  // 컬렉션 아이템 불러오기
+        list = new ArrayList<>(listAllData.subList(0,10));
 
         listCopy = new ArrayList<>();
         listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
 
         adapter = new CollectionListViewAdapter(getContext(), list);
         listView.setAdapter(adapter);
+
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
         searchEdit.addTextChangedListener(new TextWatcher() {
@@ -115,6 +124,24 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         });
 
 
+        // 리스트뷰 스크롤 이벤트
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+
+                if(scrollState == SCROLL_STATE_IDLE && listView.getLastVisiblePosition() == list.size()) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    addMoreItems();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+            }
+        });
+
+
         // 리스트의 아이템 클릭 이벤트
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -132,6 +159,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         });
 
 
+        // 리스트뷰 아이템 롱 클릭 이벤트
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -158,13 +186,36 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         return view;
     }
 
+    // 리스트뷰 맨 마지막까지 스크롤 하면 아이템 더 불러옴
+    public void addMoreItems() {
+        int size = list.size();
+        for(int i=1;i<=10;i++){
+            if((size + i) < listAllData.size()){
+                list.add(listAllData.get(size + i));
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
+    }
+
+
+    // 리스트뷰 footer 로 progressbar 설정함
+    public void setListViewFooter() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.main_collection_footer, null);
+        progressBar = view.findViewById(R.id.progressBar);
+        listView.addFooterView(progressBar);
+    }
+
 
     // Flash Card 수정/추가 후 결과 받기
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
-            adapter.notifyDataSetChanged();
-
+            listAllData = getCollection();
+            list = new ArrayList<>(listAllData.subList(0,10));
+            adapter = new CollectionListViewAdapter(getContext(), list);
+            listView.setAdapter(adapter);
         }
     }
 
@@ -180,27 +231,25 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         } else {
 
-            for(int i=0; i<listCopy.size(); i++) {
+            for(int i=0; i<listAllData.size(); i++) {
 
-                if(listCopy.get(i).equals(text)) { // 조건에 맞는 리스트만 출력
-                    list.add(listCopy.get(i));
+                if(listAllData.get(i).equals(text)) { // 조건에 맞는 리스트만 출력
+                    list.add(listAllData.get(i));
                 }
             }
         }
-
         adapter.notifyDataSetChanged();
     }
 
 
     // 최초 activity 실행 시 DataBase 에서 collection 불러오기
-    private ArrayList<CollectionItems> getCollection(boolean isChecked) {
+    private ArrayList<CollectionItems> getCollection() {
 
         ArrayList<CollectionItems> list = new ArrayList<>();
 
         for(int i=0; i<db.getCollectionKorean().length; i++) {
 
             CollectionItems items = new CollectionItems();
-            items.setChecked(isChecked);
             items.setCollectionKorean(db.getCollectionKorean()[i]);
             items.setCollectionEnglish(db.getCollectionEnglish()[i]);
             list.add(items);
@@ -209,6 +258,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     }
 
 
+    // 버튼들 클릭 이벤트
     @Override
     public void onClick(View view) {
 
