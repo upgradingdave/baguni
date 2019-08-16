@@ -11,5 +11,11 @@
     <string name="ANSWER">Answer</string>
     <string name="NEXT">Next</string>
 
+    <string name="SIGNIN">Sign In</string>
+    <string name="SIGNUP">Sign Up</string>
+    <string name="GOOGLE">Sign In With Google</string>
+    <string name="FACEBOOK">Sign In With Facebook</string>
+    <string name="SELECTLANGUAGE">Select Language</string>
+
 
 </resources>
