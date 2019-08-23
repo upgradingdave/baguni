@@ -2,27 +2,27 @@ package net.awesomekorean.baguni.collection;
 
 public class CollectionItems {
 
-    private String collectionKorean;
-    private String collectionEnglish;
+    private String collectionFront;
+    private String collectionBack;
 
     private boolean isChecked;
 
     private int isVisible = 4 ;
 
-    public void setCollectionKorean(String collection) {
-        this.collectionKorean = collection;
+    public void setCollectionFront(String collection) {
+        this.collectionFront = collection;
     }
 
-    public void setCollectionEnglish(String collection) {
-        this.collectionEnglish = collection;
+    public void setCollectionBack(String collection) {
+        this.collectionBack = collection;
     }
 
-    public String getCollectionKorean() {
-        return this.collectionKorean;
+    public String getCollectionFront() {
+        return this.collectionFront;
     }
 
-    public String getCollectionEnglish() {
-        return this.collectionEnglish;
+    public String getCollectionBack() {
+        return this.collectionBack;
     }
 
     public void setChecked(boolean isChecked) {
@@ -48,7 +48,7 @@ public class CollectionItems {
 
         boolean result = false;
 
-        if(this.collectionKorean.contains((CharSequence) obj) || this.collectionEnglish.contains((CharSequence) obj)) {
+        if(this.collectionFront.contains((CharSequence) obj) || this.collectionBack.contains((CharSequence) obj)) {
             result = true;
         }
 

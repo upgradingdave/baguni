@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,8 +26,10 @@ import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
 import net.awesomekorean.baguni.collection.CollectionListViewAdapter;
 import net.awesomekorean.baguni.collection.CollectionStudy;
+import net.awesomekorean.baguni.collection.CollectionTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -60,7 +63,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     Intent intent;
 
-    CollectionDb db = new CollectionDb();
+    CollectionDb db;
 
     public static MainCollection newInstance() {
         return new MainCollection();
@@ -93,7 +96,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView = view.findViewById(R.id.listViewCollection);
         setListViewFooter();
 
-        listAllData = getCollection();  // 컬렉션 아이템 불러오기
+        db = Room.databaseBuilder(getContext(), CollectionDb.class, "collection-db").allowMainThreadQueries().build();
+
+        //listAllData = getCollection();  // 컬렉션 아이템 불러오기
         list = new ArrayList<>(listAllData.subList(0,10));
 
         listCopy = new ArrayList<>();
@@ -247,11 +252,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         ArrayList<CollectionItems> list = new ArrayList<>();
 
-        for(int i=0; i<db.getCollectionKorean().length; i++) {
+        int size = db.collectionDao().getAll().size();
+
+        for(int i=0; i<size; i++) {
 
             CollectionItems items = new CollectionItems();
-            items.setCollectionKorean(db.getCollectionKorean()[i]);
-            items.setCollectionEnglish(db.getCollectionEnglish()[i]);
+            items.setCollectionFront(db.collectionDao().getFrontById(i));
+            items.setCollectionBack(db.collectionDao().getBackById(i));
             list.add(items);
         }
         return list;
