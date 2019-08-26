@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni.login;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.reading.ReadingFrame;
 
 public class Login extends AppCompatActivity implements Button.OnClickListener {
 
@@ -21,6 +24,8 @@ public class Login extends AppCompatActivity implements Button.OnClickListener {
 
     ListView listView;
     LoginListViewAdapter adapter;
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,8 @@ public class Login extends AppCompatActivity implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnSignIn :
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.btnSingUp :

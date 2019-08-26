@@ -12,13 +12,22 @@ import java.util.List;
 public interface CollectionDao {
 
     @Query("SELECT * FROM CollectionTable")
-    List<CollectionTable> getAll();
+    List<CollectionTable> getAllCollections();
 
     @Query("SELECT front FROM CollectionTable WHERE id IN (:position)")
     String getFrontById(int position);
 
     @Query("SELECT back FROM CollectionTable WHERE id IN (:position)")
     String getBackById(int position);
+
+    @Query("SELECT id FROM CollectionTable ORDER BY id DESC LIMIT 1")
+    int getLastId();
+
+    @Query("DELETE FROM CollectionTable")
+    public void deleteAll();
+
+    //@Query("INSERT INTO CollectionTable VALUES (:front), (:back)")
+    //public void addNewCollection(String front, String back);
 
 
     @Insert

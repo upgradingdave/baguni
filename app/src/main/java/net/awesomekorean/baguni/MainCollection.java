@@ -37,6 +37,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     public static final int REQUEST_CODE = 100;
     public static final String REQUEST_EDIT = "edit";
     public static final String REQUEST_ADD = "add";
+    public static final String REQUEST = "request";
+    public static final String TEXT_FRONT = "front";
+    public static final String TEXT_BACK = "back";
+    public static final String TEXT_INDEX = "index";
 
 
     View view;
@@ -51,8 +55,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     ProgressBar progressBar;
 
-    Button btnWord; // 단어 컬렉션 선택 버튼
-    Button btnSentence; // 문장 컬렉션 선택 버튼
     Button btnStudy;    // 컬렉션을 flash card 로 공부
     Button btnDelete;   // 컬렉션 삭제 버튼
     Button btnRecord;   // 녹음 요청 버튼
@@ -76,8 +78,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         view = inflater.inflate(R.layout.main_collection, container, false);
 
         selectAll = view.findViewById(R.id.checkBoxSelectAll);
-        btnWord = view.findViewById(R.id.btnWord);
-        btnSentence = view.findViewById(R.id.btnSentence);
         btnStudy = view.findViewById(R.id.btnStudy);
         btnDelete = view.findViewById(R.id.btnDelete);
         btnRecord = view.findViewById(R.id.btnRecord);
@@ -85,8 +85,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         searchEdit = view.findViewById(R.id.searchCollection);
         searchCancel = view.findViewById(R.id.searchCancel);
         selectAll.setOnClickListener(this);
-        btnWord.setOnClickListener(this);
-        btnSentence.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         btnRecord.setOnClickListener(this);
@@ -94,15 +92,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         searchCancel.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
-        setListViewFooter();
+        //setListViewFooter();
 
         db = Room.databaseBuilder(getContext(), CollectionDb.class, "collection-db").allowMainThreadQueries().build();
+        db.collectionDao().deleteAll();
 
-        //listAllData = getCollection();  // 컬렉션 아이템 불러오기
-        list = new ArrayList<>(listAllData.subList(0,10));
 
-        listCopy = new ArrayList<>();
-        listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
+        list = getCollection();  // 컬렉션 아이템 불러오기
+        //list = new ArrayList<>(listAllData.subList(0,10));
+
+        //listCopy = new ArrayList<>();
+        //listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
 
         adapter = new CollectionListViewAdapter(getContext(), list);
         listView.setAdapter(adapter);
@@ -136,7 +136,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
                 if(scrollState == SCROLL_STATE_IDLE && listView.getLastVisiblePosition() == list.size()) {
                     progressBar.setVisibility(View.VISIBLE);
-                    addMoreItems();
+                    loadMoreItems();
                 }
             }
 
@@ -155,10 +155,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
                 CollectionItems item = (CollectionItems) adapterView.getItemAtPosition(i);
                 intent = new Intent(getContext(), CollectionFlashCard.class);
-                intent.putExtra("Korean", item.getCollectionKorean());
-                intent.putExtra("English", item.getCollectionEnglish());
-                intent.putExtra("index", i);
-                intent.putExtra("request", REQUEST_EDIT);
+                //intent.putExtra("Korean", item.getCollectionKorean());
+                //intent.putExtra("English", item.getCollectionEnglish());
+                intent.putExtra(TEXT_INDEX, i);
+                intent.putExtra(REQUEST, REQUEST_EDIT);
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
@@ -192,7 +192,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     }
 
     // 리스트뷰 맨 마지막까지 스크롤 하면 아이템 더 불러옴
-    public void addMoreItems() {
+    public void loadMoreItems() {
         int size = list.size();
         for(int i=1;i<=10;i++){
             if((size + i) < listAllData.size()){
@@ -217,16 +217,32 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
+
+            String front = data.getStringExtra(TEXT_FRONT);
+            String back = data.getStringExtra(TEXT_BACK);
+
+            db.collectionDao().insert(new CollectionTable(front, back));
+
+            System.out.println("FRONT0 : " + db.collectionDao().getFrontById(0));
+
+
+            list = getCollection();
+            adapter.notifyDataSetChanged();
+
+            /*
             listAllData = getCollection();
             list = new ArrayList<>(listAllData.subList(0,10));
             adapter = new CollectionListViewAdapter(getContext(), list);
             listView.setAdapter(adapter);
+            */
         }
     }
 
 
     // 검색 뷰에 입력한 내용을 list 와 비교해서 출력
     public void search(String text) {
+
+        /*
 
         list.clear(); // 입력이 발생하면 리스트를 지움.
 
@@ -244,15 +260,16 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             }
         }
         adapter.notifyDataSetChanged();
+        */
     }
 
 
     // 최초 activity 실행 시 DataBase 에서 collection 불러오기
-    private ArrayList<CollectionItems> getCollection() {
+    public ArrayList<CollectionItems> getCollection() {
 
         ArrayList<CollectionItems> list = new ArrayList<>();
 
-        int size = db.collectionDao().getAll().size();
+        int size = db.collectionDao().getLastId();
 
         for(int i=0; i<size; i++) {
 
@@ -281,12 +298,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 adapter.notifyDataSetChanged();
                 break;
 
-            case R.id.btnWord :
-                break;
-
-            case R.id.btnSentence :
-                break;
-
             case R.id.btnStudy :
                 intent = new Intent(getContext(), CollectionStudy.class);
                 startActivity(intent);
@@ -300,7 +311,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
             case R.id.btnAddCollection :
                 intent = new Intent(getContext(), CollectionFlashCard.class);
-                intent.putExtra("request", REQUEST_ADD);
+                intent.putExtra(REQUEST, REQUEST_ADD);
                 startActivityForResult(intent,REQUEST_CODE);
                 break;
 

@@ -14,28 +14,36 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
     public static final String REQUEST_EDIT = "edit";
     public static final String REQUEST_ADD = "add";
+    public static final String REQUEST = "request";
+    public static final String TEXT_FRONT = "front";
+    public static final String TEXT_BACK = "back";
+    public static final String TEXT_INDEX = "index";
+
+
 
     Intent intent;
 
     Button btnCancel;
     Button btnSave;
 
-    EditText textFront;
-    EditText textBack;
+    EditText editFront;
+    EditText editBack;
 
     String code;
 
-    String textKorean;
-    String textEnglish;
+    String textFront;
+    String textBack;
     int index;
+
+    CollectionDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_flash_card);
 
-        textFront = findViewById(R.id.textFront);
-        textBack = findViewById(R.id.textBack);
+        editFront = findViewById(R.id.textFront);
+        editBack = findViewById(R.id.textBack);
 
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
@@ -44,17 +52,16 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
         Intent intent = getIntent();
 
-        code = intent.getExtras().getString("request");
+        code = intent.getExtras().getString(REQUEST);
 
         if(code.equals(REQUEST_EDIT)) {
 
-            textKorean = intent.getExtras().getString("Korean");
-            textEnglish = intent.getExtras().getString("English");
-            index = intent.getExtras().getInt("index");
-            textFront.setText(textKorean);
-            textBack.setText(textEnglish);
+            textFront = intent.getExtras().getString(TEXT_FRONT);
+            textBack = intent.getExtras().getString(TEXT_BACK);
+            index = intent.getExtras().getInt(TEXT_INDEX);
+            editFront.setText(textFront);
+            editBack.setText(textBack);
         }
-
     }
 
     @Override
@@ -68,6 +75,10 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
             case R.id.btnSave :
 
+
+
+                /*
+
                 CollectionDb db = new CollectionDb();
 
                 if(code.equals(REQUEST_EDIT)) {
@@ -79,9 +90,14 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
                     db.addCollection(textFront.getText().toString(), textBack.getText().toString());
                     Toast.makeText(this, "Collection added", Toast.LENGTH_LONG).show();
                 }
+                */
+
                 intent = new Intent();
+                intent.putExtra(TEXT_FRONT, editFront.getText().toString());
+                intent.putExtra(TEXT_BACK, editBack.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
+
                 break;
         }
     }

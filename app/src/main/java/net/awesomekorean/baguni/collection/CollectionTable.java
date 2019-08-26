@@ -41,4 +41,13 @@ public class CollectionTable {
     public void setBack(String back) {
         this.back = back;
     }
+
+    @Override
+    public String toString() {
+        return "CollectionTable{" +
+                "id=" + id +
+                ", front='" + front + '\'' +
+                ", back='" + back + '\'' +
+                '}';
+    }
 }

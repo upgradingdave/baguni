@@ -61,8 +61,8 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
         CollectionItems items = list.get(i);
 
-        holder.collectionKorean.setText(items.getCollectionKorean());
-        holder.collectionEnglish.setText(items.getCollectionEnglish());
+        holder.collectionKorean.setText(items.getCollectionFront());
+        holder.collectionEnglish.setText(items.getCollectionBack());
         holder.checkBox.setChecked(items.getChecked());
         holder.checkBox.setVisibility(items.getVisible());
         holder.checkBox.setTag(R.integer.btnplusview, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당
