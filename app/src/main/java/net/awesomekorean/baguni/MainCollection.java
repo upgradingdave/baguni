@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni;
 
+import android.arch.lifecycle.Observer;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +21,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.ToggleButton;
 
 import net.awesomekorean.baguni.collection.CollectionDb;
+import net.awesomekorean.baguni.collection.CollectionEntity;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
 import net.awesomekorean.baguni.collection.CollectionListViewAdapter;
+import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.collection.CollectionStudy;
-import net.awesomekorean.baguni.collection.CollectionTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
     public static final int REQUEST_CODE = 100;
+
     public static final String REQUEST_EDIT = "edit";
     public static final String REQUEST_ADD = "add";
     public static final String REQUEST = "request";
@@ -67,6 +71,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     CollectionDb db;
 
+    CollectionRepository repository;
+
     public static MainCollection newInstance() {
         return new MainCollection();
     }
@@ -94,18 +100,26 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView = view.findViewById(R.id.listViewCollection);
         //setListViewFooter();
 
-        db = Room.databaseBuilder(getContext(), CollectionDb.class, "collection-db").allowMainThreadQueries().build();
-        db.collectionDao().deleteAll();
+        //repository = new CollectionRepository(getContext());
+        //String front = "front";
+        //String back = "back";
+        //repository.insert(front, back);
+
+        db = Room.databaseBuilder(getContext(), CollectionDb.class, "collection-db").build();
 
 
         list = getCollection();  // 컬렉션 아이템 불러오기
+
+
         //list = new ArrayList<>(listAllData.subList(0,10));
 
         //listCopy = new ArrayList<>();
         //listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
 
-        adapter = new CollectionListViewAdapter(getContext(), list);
-        listView.setAdapter(adapter);
+        if(list != null) {
+            adapter = new CollectionListViewAdapter(getContext(), list);
+            listView.setAdapter(adapter);
+        }
 
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
@@ -221,13 +235,16 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             String front = data.getStringExtra(TEXT_FRONT);
             String back = data.getStringExtra(TEXT_BACK);
 
-            db.collectionDao().insert(new CollectionTable(front, back));
+            db.collectionDao().insert(new CollectionEntity(front, back));
 
             System.out.println("FRONT0 : " + db.collectionDao().getFrontById(0));
+            System.out.println("FRONT1 : " + db.collectionDao().getFrontById(1));
+            System.out.println("FRONT2 : " + db.collectionDao().getFrontById(2));
 
 
             list = getCollection();
-            adapter.notifyDataSetChanged();
+            adapter = new CollectionListViewAdapter(getContext(), list);
+            listView.setAdapter(adapter);
 
             /*
             listAllData = getCollection();
@@ -267,11 +284,31 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     // 최초 activity 실행 시 DataBase 에서 collection 불러오기
     public ArrayList<CollectionItems> getCollection() {
 
+        final ArrayList<CollectionItems> list = new ArrayList<>();
+        final CollectionItems items = new CollectionItems();
+
+        repository.getAll().observe(this, new Observer<List<CollectionEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
+                for(CollectionEntity collections : collectionEntities) {
+                    items.setCollectionFront(collections.getFront());
+                    items.setCollectionBack(collections.getBack());
+                    System.out.println("FRONT: " +collections.getFront());
+                    System.out.println("BACK: " +collections.getBack());
+                    list.add(items);
+                }
+            }
+        });
+
+        return list;
+
+        /*
+
         ArrayList<CollectionItems> list = new ArrayList<>();
 
-        int size = db.collectionDao().getLastId();
+        int count = db.collectionDao().getCount();
 
-        for(int i=0; i<size; i++) {
+        for(int i=0; i<count; i++) {
 
             CollectionItems items = new CollectionItems();
             items.setCollectionFront(db.collectionDao().getFrontById(i));
@@ -279,6 +316,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             list.add(items);
         }
         return list;
+        */
     }
 
 

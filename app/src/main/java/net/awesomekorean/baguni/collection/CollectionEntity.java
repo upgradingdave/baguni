@@ -3,8 +3,10 @@ package net.awesomekorean.baguni.collection;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class CollectionTable {
+public class CollectionEntity implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -12,7 +14,7 @@ public class CollectionTable {
     private String front;
     private String back;
 
-    public CollectionTable(String front, String back) {
+    public CollectionEntity(String front, String back) {
 
         this.front = front;
         this.back = back;
@@ -42,12 +44,4 @@ public class CollectionTable {
         this.back = back;
     }
 
-    @Override
-    public String toString() {
-        return "CollectionTable{" +
-                "id=" + id +
-                ", front='" + front + '\'' +
-                ", back='" + back + '\'' +
-                '}';
-    }
 }
