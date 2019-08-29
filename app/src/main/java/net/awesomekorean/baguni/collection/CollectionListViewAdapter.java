@@ -22,6 +22,10 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
         this.context = context;
         this.list = list;
+
+        for(CollectionItems items : list) {
+            System.out.println("IDDD :" + items.getId());
+        }
     }
 
     @Override

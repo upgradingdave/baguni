@@ -101,6 +101,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         String selectedText = selectedBtn.getText().toString();
 
+        System.out.println("SELECTEDTEXT : " + selectedText);
+
         for(int i=0; i<wordNo; i++) {
 
             if(wordInKorean[i].equals(selectedText)) {

@@ -109,10 +109,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             @Override
             public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
 
+                list = new ArrayList<>();
+
                 for (CollectionEntity entity : collectionEntities) {
 
+                    items = new CollectionItems();
                     items.setCollectionFront(entity.getFront());
                     items.setCollectionBack(entity.getBack());
+                    items.setId(entity.getId());
+                    System.out.println("ID: " +entity.getId());
                     System.out.println("FRONT: " +entity.getFront());
                     list.add(items);
                 }

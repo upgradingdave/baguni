@@ -2,6 +2,8 @@ package net.awesomekorean.baguni.collection;
 
 public class CollectionItems {
 
+    private int id;
+
     private String collectionFront;
     private String collectionBack;
 
@@ -41,6 +43,13 @@ public class CollectionItems {
         return isVisible;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // 검색 기능을 위해 equals 재정의
     @Override
