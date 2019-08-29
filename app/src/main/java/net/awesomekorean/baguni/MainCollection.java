@@ -52,7 +52,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
-    ArrayList<CollectionItems> list;    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
+    CollectionItems items = new CollectionItems();
+    ArrayList<CollectionItems> list = new ArrayList<>();    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
     ArrayList<CollectionItems> listAllData; // 리스트뷰에 들어갈 모든 데이터를 불러옴
     ArrayList<CollectionItems> listCopy;// 검색 기능을 위해 리스트뷰 복사함
     CollectionListViewAdapter adapter;  // 리스트뷰 어뎁터
@@ -100,15 +101,31 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView = view.findViewById(R.id.listViewCollection);
         //setListViewFooter();
 
-        //repository = new CollectionRepository(getContext());
-        //String front = "front";
-        //String back = "back";
+        repository = new CollectionRepository(getContext());
+
+        repository.deleteAll();
+
+        repository.getAll().observe(this, new Observer<List<CollectionEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
+
+                for (CollectionEntity entity : collectionEntities) {
+
+                    items.setCollectionFront(entity.getFront());
+                    items.setCollectionBack(entity.getBack());
+                    System.out.println("FRONT: " +entity.getFront());
+                    list.add(items);
+                }
+                adapter = new CollectionListViewAdapter(getContext(), list);
+                listView.setAdapter(adapter);
+
+            }
+        });
+
+
+        //String front = "22";
+        //String back = "22";
         //repository.insert(front, back);
-
-        db = Room.databaseBuilder(getContext(), CollectionDb.class, "collection-db").build();
-
-
-        list = getCollection();  // 컬렉션 아이템 불러오기
 
 
         //list = new ArrayList<>(listAllData.subList(0,10));
@@ -116,10 +133,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         //listCopy = new ArrayList<>();
         //listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
 
-        if(list != null) {
-            adapter = new CollectionListViewAdapter(getContext(), list);
-            listView.setAdapter(adapter);
-        }
 
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
@@ -149,8 +162,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
 
                 if(scrollState == SCROLL_STATE_IDLE && listView.getLastVisiblePosition() == list.size()) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    loadMoreItems();
+                    //progressBar.setVisibility(View.VISIBLE);
+                    //loadMoreItems();
                 }
             }
 
@@ -235,16 +248,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             String front = data.getStringExtra(TEXT_FRONT);
             String back = data.getStringExtra(TEXT_BACK);
 
-            db.collectionDao().insert(new CollectionEntity(front, back));
-
-            System.out.println("FRONT0 : " + db.collectionDao().getFrontById(0));
-            System.out.println("FRONT1 : " + db.collectionDao().getFrontById(1));
-            System.out.println("FRONT2 : " + db.collectionDao().getFrontById(2));
+            repository.insert(front, back);
+            //db.collectionDao().insert(new CollectionEntity(front, back));
 
 
-            list = getCollection();
-            adapter = new CollectionListViewAdapter(getContext(), list);
-            listView.setAdapter(adapter);
+
+            //adapter = new CollectionListViewAdapter(getContext(), list);
+            //listView.setAdapter(adapter);
 
             /*
             listAllData = getCollection();
@@ -281,8 +291,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     }
 
 
-    // 최초 activity 실행 시 DataBase 에서 collection 불러오기
-    public ArrayList<CollectionItems> getCollection() {
+    // DataBase 에서 collection 불러오기
+    public ArrayList<CollectionItems> getCollectionsFromDb() {
 
         final ArrayList<CollectionItems> list = new ArrayList<>();
         final CollectionItems items = new CollectionItems();

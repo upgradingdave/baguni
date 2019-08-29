@@ -19,17 +19,28 @@ public class CollectionRepository {
 
     public void insert (String front, String back) {
 
-        CollectionEntity table = new CollectionEntity(front, back);
-        insert(table);
+        CollectionEntity entity = new CollectionEntity(front, back);
+        insert(entity);
     }
 
-    public void insert(final CollectionEntity table) {
+    public void insert(final CollectionEntity entity) {
 
         new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                db.collectionDao().insert(table);
+                db.collectionDao().insert(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void deleteAll() {
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.collectionDao().deleteAll();
                 return null;
             }
         }.execute();
