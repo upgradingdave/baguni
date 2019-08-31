@@ -23,7 +23,7 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/collectionKorean"
+        android:id="@+id/collectionFront"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center"
@@ -34,7 +34,7 @@
         android:layout_width="0dp" />
 
     <TextView
-        android:id="@+id/collectionEnglish"
+        android:id="@+id/collectionBack"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center"

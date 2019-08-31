@@ -13,7 +13,6 @@ import net.awesomekorean.baguni.R;
 public class CollectionFlashCard extends AppCompatActivity implements Button.OnClickListener {
 
     public static final String REQUEST_EDIT = "edit";
-    public static final String REQUEST_ADD = "add";
     public static final String REQUEST = "request";
     public static final String TEXT_FRONT = "front";
     public static final String TEXT_BACK = "back";

@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
@@ -37,8 +38,8 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
-    public static final int REQUEST_CODE = 100;
-
+    public static final int REQUEST_CODE_ADD = 100;
+    public static final int REQUEST_CODE_EDIT = 200;
     public static final String REQUEST_EDIT = "edit";
     public static final String REQUEST_ADD = "add";
     public static final String REQUEST = "request";
@@ -52,7 +53,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
-    CollectionItems items = new CollectionItems();
     ArrayList<CollectionItems> list = new ArrayList<>();    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
     ArrayList<CollectionItems> listAllData; // 리스트뷰에 들어갈 모든 데이터를 불러옴
     ArrayList<CollectionItems> listCopy;// 검색 기능을 위해 리스트뷰 복사함
@@ -70,9 +70,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     Intent intent;
 
-    CollectionDb db;
-
     CollectionRepository repository;
+
+    int index;  // 클릭 한 리스트 뷰의 인덱스
 
     public static MainCollection newInstance() {
         return new MainCollection();
@@ -99,45 +99,38 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         searchCancel.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
-        //setListViewFooter();
 
         repository = new CollectionRepository(getContext());
+        //repository.deleteAll();
 
-        repository.deleteAll();
+        setListViewFooter();
 
+
+        // DB의 플래쉬 카드를 listview로 가져오기
         repository.getAll().observe(this, new Observer<List<CollectionEntity>>() {
             @Override
             public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
 
-                list = new ArrayList<>();
+                listAllData = new ArrayList<>();
 
                 for (CollectionEntity entity : collectionEntities) {
 
-                    items = new CollectionItems();
+                    CollectionItems items = new CollectionItems();
                     items.setCollectionFront(entity.getFront());
                     items.setCollectionBack(entity.getBack());
                     items.setId(entity.getId());
-                    System.out.println("ID: " +entity.getId());
-                    System.out.println("FRONT: " +entity.getFront());
-                    list.add(items);
+                    listAllData.add(items);
                 }
+
+                list = new ArrayList<>(listAllData.subList(0,10));
+
                 adapter = new CollectionListViewAdapter(getContext(), list);
                 listView.setAdapter(adapter);
 
+                listCopy = new ArrayList<>();
+                listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
             }
         });
-
-
-        //String front = "22";
-        //String back = "22";
-        //repository.insert(front, back);
-
-
-        //list = new ArrayList<>(listAllData.subList(0,10));
-
-        //listCopy = new ArrayList<>();
-        //listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
-
 
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
@@ -167,8 +160,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
 
                 if(scrollState == SCROLL_STATE_IDLE && listView.getLastVisiblePosition() == list.size()) {
-                    //progressBar.setVisibility(View.VISIBLE);
-                    //loadMoreItems();
+                    progressBar.setVisibility(View.VISIBLE);
+                    loadMoreItems();
                 }
             }
 
@@ -187,11 +180,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
                 CollectionItems item = (CollectionItems) adapterView.getItemAtPosition(i);
                 intent = new Intent(getContext(), CollectionFlashCard.class);
-                //intent.putExtra("Korean", item.getCollectionKorean());
-                //intent.putExtra("English", item.getCollectionEnglish());
-                intent.putExtra(TEXT_INDEX, i);
+                intent.putExtra(TEXT_FRONT, item.getCollectionFront());
+                intent.putExtra("ITEM", item.getId());
+                intent.putExtra(TEXT_BACK, item.getCollectionBack());
+                //intent.putExtra(TEXT_INDEX, i);
                 intent.putExtra(REQUEST, REQUEST_EDIT);
-                startActivityForResult(intent, REQUEST_CODE);
+                index = item.getId();
+                startActivityForResult(intent, REQUEST_CODE_EDIT);
             }
         });
 
@@ -218,10 +213,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 return true;
             }
         });
-
-
         return view;
     }
+
 
     // 리스트뷰 맨 마지막까지 스크롤 하면 아이템 더 불러옴
     public void loadMoreItems() {
@@ -248,33 +242,31 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     // Flash Card 수정/추가 후 결과 받기
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK) {
 
-            String front = data.getStringExtra(TEXT_FRONT);
-            String back = data.getStringExtra(TEXT_BACK);
+        final String front = data.getStringExtra(TEXT_FRONT);
+        final String back = data.getStringExtra(TEXT_BACK);
+
+        if(requestCode == REQUEST_CODE_ADD) {
 
             repository.insert(front, back);
-            //db.collectionDao().insert(new CollectionEntity(front, back));
 
+        } else if(requestCode == REQUEST_CODE_EDIT) {
 
-
-            //adapter = new CollectionListViewAdapter(getContext(), list);
-            //listView.setAdapter(adapter);
-
-            /*
-            listAllData = getCollection();
-            list = new ArrayList<>(listAllData.subList(0,10));
-            adapter = new CollectionListViewAdapter(getContext(), list);
-            listView.setAdapter(adapter);
-            */
+            LiveData<CollectionEntity> entity = repository.getById(index);
+            entity.observe(this, new Observer<CollectionEntity>() {
+                @Override
+                public void onChanged(@Nullable CollectionEntity entity) {
+                    entity.setFront(front);
+                    entity.setBack(back);
+                    repository.update(entity);
+                }
+            });
         }
     }
 
 
-    // 검색 뷰에 입력한 내용을 list 와 비교해서 출력
+    // 검색 뷰에 입력한 내용을 listAllData 와 비교해서 출력
     public void search(String text) {
-
-        /*
 
         list.clear(); // 입력이 발생하면 리스트를 지움.
 
@@ -292,46 +284,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             }
         }
         adapter.notifyDataSetChanged();
-        */
-    }
-
-
-    // DataBase 에서 collection 불러오기
-    public ArrayList<CollectionItems> getCollectionsFromDb() {
-
-        final ArrayList<CollectionItems> list = new ArrayList<>();
-        final CollectionItems items = new CollectionItems();
-
-        repository.getAll().observe(this, new Observer<List<CollectionEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
-                for(CollectionEntity collections : collectionEntities) {
-                    items.setCollectionFront(collections.getFront());
-                    items.setCollectionBack(collections.getBack());
-                    System.out.println("FRONT: " +collections.getFront());
-                    System.out.println("BACK: " +collections.getBack());
-                    list.add(items);
-                }
-            }
-        });
-
-        return list;
-
-        /*
-
-        ArrayList<CollectionItems> list = new ArrayList<>();
-
-        int count = db.collectionDao().getCount();
-
-        for(int i=0; i<count; i++) {
-
-            CollectionItems items = new CollectionItems();
-            items.setCollectionFront(db.collectionDao().getFrontById(i));
-            items.setCollectionBack(db.collectionDao().getBackById(i));
-            list.add(items);
-        }
-        return list;
-        */
     }
 
 
@@ -357,6 +309,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnDelete :
+
                 break;
 
             case R.id.btnRecord :
@@ -365,7 +318,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             case R.id.btnAddCollection :
                 intent = new Intent(getContext(), CollectionFlashCard.class);
                 intent.putExtra(REQUEST, REQUEST_ADD);
-                startActivityForResult(intent,REQUEST_CODE);
+                startActivityForResult(intent,REQUEST_CODE_ADD);
                 break;
 
             case R.id.searchCancel :

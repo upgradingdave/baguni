@@ -22,10 +22,6 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
         this.context = context;
         this.list = list;
-
-        for(CollectionItems items : list) {
-            System.out.println("IDDD :" + items.getId());
-        }
     }
 
     @Override
@@ -48,6 +44,7 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
         final ViewHolder holder;
 
+        // 맨 처음에 리스트뷰를 생성해줌
         if(view==null) {
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -55,8 +52,8 @@ public class CollectionListViewAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.checkBox = view.findViewById(R.id.checkBox);
             holder.btnRecord = view.findViewById(R.id.btnRecord);
-            holder.collectionKorean = view.findViewById(R.id.collectionKorean);
-            holder.collectionEnglish = view.findViewById(R.id.collectionEnglish);
+            holder.collectionFront = view.findViewById(R.id.collectionFront);
+            holder.collectionBack = view.findViewById(R.id.collectionBack);
             view.setTag(holder);
 
         } else {
@@ -65,8 +62,8 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
         CollectionItems items = list.get(i);
 
-        holder.collectionKorean.setText(items.getCollectionFront());
-        holder.collectionEnglish.setText(items.getCollectionBack());
+        holder.collectionFront.setText(items.getCollectionFront());
+        holder.collectionBack.setText(items.getCollectionBack());
         holder.checkBox.setChecked(items.getChecked());
         holder.checkBox.setVisibility(items.getVisible());
         holder.checkBox.setTag(R.integer.btnplusview, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당
@@ -75,11 +72,12 @@ public class CollectionListViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
+                // 체크박스 클릭 했을 때 동작
                 View tempView = (View) holder.checkBox.getTag(R.integer.btnplusview); // 해당 checkbox 가 포함된 뷰를 가져옴
-                TextView collectionKorean = tempView.findViewById(R.id.collectionKorean);
-                TextView collectionEnglish = tempView.findViewById(R.id.collectionEnglish);
+                TextView collectionFront = tempView.findViewById(R.id.collectionFront);
+                TextView collectionBack = tempView.findViewById(R.id.collectionBack);
                 Integer position = (Integer) holder.checkBox.getTag();
-                System.out.println("Checkbox "+ position + "Clicked. CK is " + collectionKorean + "CE is "+ collectionEnglish);
+                System.out.println("Checkbox "+ position + "Clicked. CK is " + collectionFront + "CE is "+ collectionBack);
 
                 CollectionItems items = list.get(position);
 
@@ -96,11 +94,12 @@ public class CollectionListViewAdapter extends BaseAdapter {
         return view;
     }
 
+    // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용
     static class ViewHolder {
         CheckBox checkBox;
         ImageButton btnRecord;
-        TextView collectionKorean;
-        TextView collectionEnglish;
+        TextView collectionFront;
+        TextView collectionBack;
     }
 
     public void checkAll(boolean b) {
@@ -119,7 +118,8 @@ public class CollectionListViewAdapter extends BaseAdapter {
     }
 
 
-    public void longClickOnOff(String onOff) { // listView를 길게 눌렀을 때 checkbox On/Off
+    // 리스트뷰를 길게 눌렀을 때 체크박스 on/off
+    public void longClickOnOff(String onOff) {
 
         CollectionItems items;
 
