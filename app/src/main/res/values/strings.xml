@@ -19,5 +19,8 @@
     <string name="FACEBOOK">Sign In With Facebook</string>
     <string name="SELECTLANGUAGE">Select Language</string>
 
+    <string name="SAVE_RESULT">Collection is saved</string>
+
+
 
 </resources>

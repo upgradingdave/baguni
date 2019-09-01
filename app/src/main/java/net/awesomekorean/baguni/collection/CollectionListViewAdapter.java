@@ -15,6 +15,11 @@ import java.util.ArrayList;
 
 public class CollectionListViewAdapter extends BaseAdapter {
 
+    public static final String TEXT_ON = "On";
+    public static final String TEXT_OFF = "Off";
+    public static final int VISIBLE_ON = 0;
+    public static final int VISIBLE_OFF = 4;
+
     private Context context;
     public static ArrayList<CollectionItems> list;
 
@@ -123,19 +128,18 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
         CollectionItems items;
 
-        if(onOff == "On") {
-
+        if(onOff == TEXT_ON) {
             for (int i = 0; i < getCount(); i++) {
-
                 items = list.get(i);
-                items.setVisible(0);
+                items.setVisible(VISIBLE_ON);
             }
-        } else if(onOff == "Off") {
+        } else if(onOff == TEXT_OFF) {
 
             for (int i = 0; i < getCount(); i++) {
 
                 items = list.get(i);
-                items.setVisible(4);
+                items.setChecked(false);
+                items.setVisible(VISIBLE_OFF);
             }
         }
     }

@@ -45,7 +45,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     public static final String REQUEST = "request";
     public static final String TEXT_FRONT = "front";
     public static final String TEXT_BACK = "back";
-    public static final String TEXT_INDEX = "index";
+    public static final String TEXT_ON = "On";
+    public static final String TEXT_OFF = "Off";
 
 
     View view;
@@ -68,9 +69,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     EditText searchEdit;    // 검색 입력
     ImageButton searchCancel;   // 검색 취소
 
+    Boolean longItemClicked = false;
+
     Intent intent;
 
     CollectionRepository repository;
+
+    Observer<List<CollectionEntity>> observer;
 
     int index;  // 클릭 한 리스트 뷰의 인덱스
 
@@ -105,12 +110,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         setListViewFooter();
 
-
-        // DB의 플래쉬 카드를 listview로 가져오기
-        repository.getAll().observe(this, new Observer<List<CollectionEntity>>() {
+        // DB 의 getAll() 에 변화가 감지되면 listView 로 값들을 가져옴
+        observer = new Observer<List<CollectionEntity>>() {
             @Override
             public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
-
                 listAllData = new ArrayList<>();
 
                 for (CollectionEntity entity : collectionEntities) {
@@ -130,7 +133,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 listCopy = new ArrayList<>();
                 listCopy.addAll(list);  //  검색 기능을 위해 list 내용 복사
             }
-        });
+        };
+
+        // DB의 플래쉬 카드를 listView 로 가져오기
+        repository.getAll().observe(this, observer);
 
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
@@ -179,14 +185,25 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 CollectionItems item = (CollectionItems) adapterView.getItemAtPosition(i);
-                intent = new Intent(getContext(), CollectionFlashCard.class);
-                intent.putExtra(TEXT_FRONT, item.getCollectionFront());
-                intent.putExtra("ITEM", item.getId());
-                intent.putExtra(TEXT_BACK, item.getCollectionBack());
-                //intent.putExtra(TEXT_INDEX, i);
-                intent.putExtra(REQUEST, REQUEST_EDIT);
-                index = item.getId();
-                startActivityForResult(intent, REQUEST_CODE_EDIT);
+
+                if(longItemClicked == true) {
+                    if(item.getChecked()){
+                        item.setChecked(false);
+                    } else {
+                        item.setChecked(true);
+                    }
+                    adapter.notifyDataSetChanged();
+                } else {
+                    intent = new Intent(getContext(), CollectionFlashCard.class);
+                    intent.putExtra(TEXT_FRONT, item.getCollectionFront());
+                    //intent.putExtra("ITEM", item.getId());
+                    intent.putExtra(TEXT_BACK, item.getCollectionBack());
+                    //intent.putExtra(TEXT_INDEX, i);
+                    intent.putExtra(REQUEST, REQUEST_EDIT);
+                    index = item.getId();
+                    startActivityForResult(intent, REQUEST_CODE_EDIT);
+                }
+
             }
         });
 
@@ -197,23 +214,27 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(selectAll.getVisibility()==View.INVISIBLE) {
-                    selectAll.setVisibility(View.VISIBLE);
-                    adapter.longClickOnOff("On");
-                    btnStudy.setVisibility(View.GONE);
-                    btnDelete.setVisibility(View.VISIBLE);
-                    btnRecord.setVisibility(View.VISIBLE);
+                    ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
+                    adapter.longClickOnOff(TEXT_ON);
+
                 } else {
-                    selectAll.setVisibility(View.INVISIBLE);
-                    adapter.longClickOnOff("Off");
-                    btnStudy.setVisibility(View.VISIBLE);
-                    btnDelete.setVisibility(View.GONE);
-                    btnRecord.setVisibility(View.GONE);
+                    ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
+                    adapter.longClickOnOff(TEXT_OFF);
                 }
+
                 adapter.notifyDataSetChanged();
                 return true;
             }
         });
         return view;
+    }
+
+    public void ItemLongClicked(boolean b, int setSelectAll, int setStudy, int setBtns) {
+        longItemClicked = b;
+        selectAll.setVisibility(setSelectAll);
+        btnStudy.setVisibility(setStudy);
+        btnDelete.setVisibility(setBtns);
+        btnRecord.setVisibility(setBtns);
     }
 
 
@@ -225,7 +246,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 list.add(listAllData.get(size + i));
             }
         }
-
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.GONE);
     }
@@ -244,15 +264,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(resultCode == RESULT_OK) {
-            final String front = data.getStringExtra(TEXT_FRONT);
-            final String back = data.getStringExtra(TEXT_BACK);
 
+            // 추가 된 플래시 카드를 리스트뷰에 반영
             if(requestCode == REQUEST_CODE_ADD) {
+                repository.getAll().observe(this, observer);
 
-                repository.insert(front, back);
-
-            } else if(requestCode == REQUEST_CODE_EDIT) {
-
+            // 수정 된 플래시 카드를 리스트뷰에 반영
+            } else {
+                final String front = data.getStringExtra(TEXT_FRONT);
+                final String back = data.getStringExtra(TEXT_BACK);
                 repository.editById(index, front, back);
             }
         }
@@ -307,19 +327,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 ArrayList<Integer> checkedList = new ArrayList<>();
 
                 for(CollectionItems entity : listAllData) {
-                    System.out.println("ID : " + entity.getId());
-                    System.out.println("CHECKED : " + entity.getChecked());
                     if(entity.getChecked()) {
                         checkedList.add(entity.getId());
                     }
                 }
-
                 if(checkedList != null) {
                     for(int id : checkedList) {
 
                         repository.deleteById(id);
                     }
                 }
+                ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
                 break;
 
             case R.id.btnRecord :
