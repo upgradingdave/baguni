@@ -243,24 +243,18 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        final String front = data.getStringExtra(TEXT_FRONT);
-        final String back = data.getStringExtra(TEXT_BACK);
+        if(resultCode == RESULT_OK) {
+            final String front = data.getStringExtra(TEXT_FRONT);
+            final String back = data.getStringExtra(TEXT_BACK);
 
-        if(requestCode == REQUEST_CODE_ADD) {
+            if(requestCode == REQUEST_CODE_ADD) {
 
-            repository.insert(front, back);
+                repository.insert(front, back);
 
-        } else if(requestCode == REQUEST_CODE_EDIT) {
+            } else if(requestCode == REQUEST_CODE_EDIT) {
 
-            LiveData<CollectionEntity> entity = repository.getById(index);
-            entity.observe(this, new Observer<CollectionEntity>() {
-                @Override
-                public void onChanged(@Nullable CollectionEntity entity) {
-                    entity.setFront(front);
-                    entity.setBack(back);
-                    repository.update(entity);
-                }
-            });
+                repository.editById(index, front, back);
+            }
         }
     }
 
@@ -310,6 +304,22 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
             case R.id.btnDelete :
 
+                ArrayList<Integer> checkedList = new ArrayList<>();
+
+                for(CollectionItems entity : listAllData) {
+                    System.out.println("ID : " + entity.getId());
+                    System.out.println("CHECKED : " + entity.getChecked());
+                    if(entity.getChecked()) {
+                        checkedList.add(entity.getId());
+                    }
+                }
+
+                if(checkedList != null) {
+                    for(int id : checkedList) {
+
+                        repository.deleteById(id);
+                    }
+                }
                 break;
 
             case R.id.btnRecord :

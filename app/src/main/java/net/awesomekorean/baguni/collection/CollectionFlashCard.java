@@ -74,29 +74,11 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
             case R.id.btnSave :
 
-
-
-                /*
-
-                CollectionDb db = new CollectionDb();
-
-                if(code.equals(REQUEST_EDIT)) {
-                    db.editCollection(index, textFront.getText().toString(), textBack.getText().toString());
-                    System.out.println("DB: "+db.getCollectionKorean()[0]);
-                    Toast.makeText(this, "Collection edited", Toast.LENGTH_LONG).show();
-
-                } else if (code.equals(REQUEST_ADD)) {
-                    db.addCollection(textFront.getText().toString(), textBack.getText().toString());
-                    Toast.makeText(this, "Collection added", Toast.LENGTH_LONG).show();
-                }
-                */
-
                 intent = new Intent();
                 intent.putExtra(TEXT_FRONT, editFront.getText().toString());
                 intent.putExtra(TEXT_BACK, editBack.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
-
                 break;
         }
     }

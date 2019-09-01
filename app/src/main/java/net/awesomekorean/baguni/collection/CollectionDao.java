@@ -16,7 +16,7 @@ public interface CollectionDao {
     LiveData<List<CollectionEntity>> getAll();
 
     @Query("SELECT * FROM COLLECTIONENTITY WHERE id = :index")
-    LiveData<CollectionEntity> getById(int index);
+    CollectionEntity getById(int index);
 
     //@Query("SELECT * FROM COLLECTIONENTITY LIMIT 20 OFFSET 0")
 

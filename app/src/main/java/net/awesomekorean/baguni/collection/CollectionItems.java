@@ -7,7 +7,7 @@ public class CollectionItems {
     private String collectionFront;
     private String collectionBack;
 
-    private boolean isChecked;
+    private boolean isChecked = false;
 
     private int isVisible = 4 ;
 

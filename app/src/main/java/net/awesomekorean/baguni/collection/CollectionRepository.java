@@ -19,17 +19,13 @@ public class CollectionRepository {
 
     public void insert (String front, String back) {
 
-        CollectionEntity entity = new CollectionEntity(front, back);
-        insert(entity);
-    }
+        final CollectionEntity entity = new CollectionEntity(front, back);
 
-    public void insert(final CollectionEntity entity) {
-
-        new AsyncTask<Void, Void, Void>() {
-
+        new AsyncTask<Void, Void,Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 db.collectionDao().insert(entity);
+
                 return null;
             }
         }.execute();
@@ -57,29 +53,46 @@ public class CollectionRepository {
         }.execute();
     }
 
-    public void deleteById(int index) {
+    public void deleteById(final int index) {
 
-        final LiveData<CollectionEntity> entity = getById(index);
-        if(entity != null) {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    db.collectionDao().delete(entity.getValue());
-                    return null;
-                }
-            }.execute();
-        }
-
+        new AsyncTask<Void, Void,Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.collectionDao().delete(db.collectionDao().getById(index));
+                return null;
+            }
+        }.execute();
     }
+
+    public void editById(final int index, final String front, final String back) {
+
+        new AsyncTask<Void, Void, CollectionEntity>() {
+            @Override
+            protected CollectionEntity doInBackground(Void... voids) {
+                CollectionEntity entity = db.collectionDao().getById(index);
+                return entity;
+            }
+
+            @Override
+            protected void onPostExecute(CollectionEntity entity) {
+                entity.setFront(front);
+                entity.setBack(back);
+                update(entity);
+            }
+        }.execute();
+    }
+
 
     public LiveData<List<CollectionEntity>> getAll() {
 
         return db.collectionDao().getAll();
     }
 
+
+/*
     public LiveData<CollectionEntity> getById(int index) {
 
         return db.collectionDao().getById(index);
     }
-
+*/
 }
