@@ -9,6 +9,8 @@
     <string name="MENU_MESSAGE">Message</string>
 
     <string name="BTN_COLLECTION">Collection</string>
+    <string name="BTN_YES">Yes</string>
+    <string name="BTN_NO">No</string>
 
     <string name="ANSWER">Answer</string>
     <string name="NEXT">Next</string>
@@ -19,7 +21,8 @@
     <string name="FACEBOOK">Sign In With Facebook</string>
     <string name="SELECTLANGUAGE">Select Language</string>
 
-    <string name="SAVE_RESULT">Collection is saved</string>
+    <string name="MSG_COLLECT">Collection is saved</string>
+    <string name="MSG_DELETE">Do you really want to delete?</string>
 
 
 

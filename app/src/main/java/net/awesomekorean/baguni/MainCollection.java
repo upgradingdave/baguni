@@ -1,8 +1,6 @@
 package net.awesomekorean.baguni;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,11 +18,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.ToggleButton;
-
-import net.awesomekorean.baguni.collection.CollectionDb;
 import net.awesomekorean.baguni.collection.CollectionEntity;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
@@ -62,8 +58,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     ProgressBar progressBar;
 
     Button btnStudy;    // 컬렉션을 flash card 로 공부
-    Button btnDelete;   // 컬렉션 삭제 버튼
-    Button btnRecord;   // 녹음 요청 버튼
+    static Button btnDelete;   // 컬렉션 삭제 버튼
+    static Button btnRecord;   // 녹음 요청 버튼
     FloatingActionButton btnAdd;    // 컬렉션 추가용 floating 버튼
 
     EditText searchEdit;    // 검색 입력
@@ -76,6 +72,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     CollectionRepository repository;
 
     Observer<List<CollectionEntity>> observer;
+
+    LinearLayout msgDelete;
+    Button btnYes;
+    Button btnNo;
 
     int index;  // 클릭 한 리스트 뷰의 인덱스
 
@@ -96,12 +96,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         btnAdd = view.findViewById(R.id.btnAddCollection);
         searchEdit = view.findViewById(R.id.searchCollection);
         searchCancel = view.findViewById(R.id.searchCancel);
+        msgDelete = view.findViewById(R.id.msgDelete);
+        btnYes = view.findViewById(R.id.btnYes);
+        btnNo = view.findViewById(R.id.btnNo);
         selectAll.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         btnRecord.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
         searchCancel.setOnClickListener(this);
+        btnYes.setOnClickListener(this);
+        btnNo.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
 
@@ -124,8 +129,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     items.setId(entity.getId());
                     listAllData.add(items);
                 }
-
-                list = new ArrayList<>(listAllData.subList(0,10));
+                if(listAllData.size()>10) {
+                    list = new ArrayList<>(listAllData.subList(0,10));
+                } else {
+                    list = listAllData;
+                    progressBar.setVisibility(View.GONE);
+                }
 
                 adapter = new CollectionListViewAdapter(getContext(), list);
                 listView.setAdapter(adapter);
@@ -189,7 +198,20 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 if(longItemClicked == true) {
                     if(item.getChecked()){
                         item.setChecked(false);
+
+                        int check = 0;
+                        for(int j=0; j<list.size(); j++) {
+                            CollectionItems items = list.get(j);
+                            if (items.getChecked()) {
+                                check++;
+                            }
+                        }
+                        if(check == 0) { // 체크된 아이템이 하나도 없을 때
+                            btnEnabled(false);
+                        }
+
                     } else {
+                        btnEnabled(true);
                         item.setChecked(true);
                     }
                     adapter.notifyDataSetChanged();
@@ -219,6 +241,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
                 } else {
                     ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
+                    btnEnabled(false);
                     adapter.longClickOnOff(TEXT_OFF);
                 }
 
@@ -227,6 +250,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             }
         });
         return view;
+    }
+
+    // Delete, Record 버튼 켜기/끄기
+    public static void btnEnabled(boolean b) {
+        btnDelete.setEnabled(b);
+        btnRecord.setEnabled(b);
     }
 
     public void ItemLongClicked(boolean b, int setSelectAll, int setStudy, int setBtns) {
@@ -323,21 +352,30 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnDelete :
+                msgDelete.setVisibility(View.VISIBLE);
+                break;
 
+            case R.id.btnYes :
                 ArrayList<Integer> checkedList = new ArrayList<>();
 
-                for(CollectionItems entity : listAllData) {
-                    if(entity.getChecked()) {
-                        checkedList.add(entity.getId());
+                for(CollectionItems items : listAllData) {
+                    if(items.getChecked()) {
+                        checkedList.add(items.getId());
                     }
                 }
                 if(checkedList != null) {
+
                     for(int id : checkedList) {
 
                         repository.deleteById(id);
                     }
                 }
                 ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
+                msgDelete.setVisibility(View.GONE);
+                break;
+
+            case R.id.btnNo :
+                msgDelete.setVisibility(View.GONE);
                 break;
 
             case R.id.btnRecord :

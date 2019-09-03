@@ -113,7 +113,7 @@
         android:visibility="gone"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="@string/SAVE_RESULT"
+        android:text="@string/MSG_COLLECT"
         android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import net.awesomekorean.baguni.MainCollection;
 import net.awesomekorean.baguni.R;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class CollectionListViewAdapter extends BaseAdapter {
     public static final String TEXT_OFF = "Off";
     public static final int VISIBLE_ON = 0;
     public static final int VISIBLE_OFF = 4;
+    public static final int TAG_KEY = 1;
+
 
     private Context context;
     public static ArrayList<CollectionItems> list;
@@ -71,27 +74,27 @@ public class CollectionListViewAdapter extends BaseAdapter {
         holder.collectionBack.setText(items.getCollectionBack());
         holder.checkBox.setChecked(items.getChecked());
         holder.checkBox.setVisibility(items.getVisible());
-        holder.checkBox.setTag(R.integer.btnplusview, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당
+        //holder.checkBox.setTag(TAG_KEY, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당
         holder.checkBox.setTag(i);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+
+
                 // 체크박스 클릭 했을 때 동작
-                View tempView = (View) holder.checkBox.getTag(R.integer.btnplusview); // 해당 checkbox 가 포함된 뷰를 가져옴
-                TextView collectionFront = tempView.findViewById(R.id.collectionFront);
-                TextView collectionBack = tempView.findViewById(R.id.collectionBack);
+                //View tempView = (View) holder.checkBox.getTag(TAG_KEY); // 해당 checkbox 가 포함된 뷰를 가져옴
+                //TextView collectionFront = tempView.findViewById(R.id.collectionFront);
+                //TextView collectionBack = tempView.findViewById(R.id.collectionBack);
                 Integer position = (Integer) holder.checkBox.getTag();
-                System.out.println("Checkbox "+ position + "Clicked. CK is " + collectionFront + "CE is "+ collectionBack);
 
                 CollectionItems items = list.get(position);
 
                 if(items.getChecked()) {
                     items.setChecked(false);
-                    System.out.println("HI:"+position+items.getChecked());
                 } else {
                     items.setChecked(true);
-                    System.out.println("BYE:"+position+items.getChecked());
+                    MainCollection.btnEnabled(true);
                 }
             }
         });
@@ -140,6 +143,7 @@ public class CollectionListViewAdapter extends BaseAdapter {
                 items = list.get(i);
                 items.setChecked(false);
                 items.setVisible(VISIBLE_OFF);
+
             }
         }
     }
