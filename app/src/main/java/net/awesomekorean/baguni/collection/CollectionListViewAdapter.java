@@ -92,9 +92,14 @@ public class CollectionListViewAdapter extends BaseAdapter {
 
                 if(items.getChecked()) {
                     items.setChecked(false);
+                    MainCollection.isChecked--;
+                    if(MainCollection.isChecked == 0) {
+                        MainCollection.btnEnabled(false);
+                    }
                 } else {
                     items.setChecked(true);
                     MainCollection.btnEnabled(true);
+                    MainCollection.isChecked++;
                 }
             }
         });

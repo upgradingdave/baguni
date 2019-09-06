@@ -78,6 +78,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     Button btnNo;
 
     int index;  // 클릭 한 리스트 뷰의 인덱스
+    public static int isChecked = 0;
 
     public static MainCollection newInstance() {
         return new MainCollection();
@@ -198,21 +199,16 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 if(longItemClicked == true) {
                     if(item.getChecked()){
                         item.setChecked(false);
+                        isChecked--;
 
-                        int check = 0;
-                        for(int j=0; j<list.size(); j++) {
-                            CollectionItems items = list.get(j);
-                            if (items.getChecked()) {
-                                check++;
-                            }
-                        }
-                        if(check == 0) { // 체크된 아이템이 하나도 없을 때
+                        if(isChecked == 0) { // 체크된 아이템이 하나도 없을 때
                             btnEnabled(false);
                         }
 
                     } else {
                         btnEnabled(true);
                         item.setChecked(true);
+                        isChecked++;
                     }
                     adapter.notifyDataSetChanged();
                 } else {
@@ -238,6 +234,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 if(selectAll.getVisibility()==View.INVISIBLE) {
                     ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
                     adapter.longClickOnOff(TEXT_ON);
+                    isChecked = 0;
+                    btnEnabled(false);
 
                 } else {
                     ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
