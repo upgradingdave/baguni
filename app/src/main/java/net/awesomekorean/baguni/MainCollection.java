@@ -47,7 +47,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     View view;
 
-    CheckBox selectAll; // 전체 선택/해제 체크박스
+    public static CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
     ArrayList<CollectionItems> list = new ArrayList<>();    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
@@ -78,7 +78,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     Button btnNo;
 
     int index;  // 클릭 한 리스트 뷰의 인덱스
-    public static int isChecked = 0;
+    public static int isChecked = 0; // 클릭된 아이템이 있는지 확인하기 위한 변수
 
     public static MainCollection newInstance() {
         return new MainCollection();
@@ -200,6 +200,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     if(item.getChecked()){
                         item.setChecked(false);
                         isChecked--;
+                        selectAll.setChecked(false);
 
                         if(isChecked == 0) { // 체크된 아이템이 하나도 없을 때
                             btnEnabled(false);
@@ -337,8 +338,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             case R.id.checkBoxSelectAll :
                 if(selectAll.isChecked()) {
                     adapter.checkAll(true);
+                    isChecked = list.size();
+                    btnEnabled(true);
                 } else {
                     adapter.checkAll(false);
+                    isChecked = 0;
+                    btnEnabled(false);
                 }
 
                 adapter.notifyDataSetChanged();

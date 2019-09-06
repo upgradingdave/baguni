@@ -74,18 +74,12 @@ public class CollectionListViewAdapter extends BaseAdapter {
         holder.collectionBack.setText(items.getCollectionBack());
         holder.checkBox.setChecked(items.getChecked());
         holder.checkBox.setVisibility(items.getVisible());
-        //holder.checkBox.setTag(TAG_KEY, view); // 해당 checkbox 가 있는 뷰를 Tag Key 1번으로 할당
         holder.checkBox.setTag(i);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-
                 // 체크박스 클릭 했을 때 동작
-                //View tempView = (View) holder.checkBox.getTag(TAG_KEY); // 해당 checkbox 가 포함된 뷰를 가져옴
-                //TextView collectionFront = tempView.findViewById(R.id.collectionFront);
-                //TextView collectionBack = tempView.findViewById(R.id.collectionBack);
                 Integer position = (Integer) holder.checkBox.getTag();
 
                 CollectionItems items = list.get(position);
@@ -93,6 +87,7 @@ public class CollectionListViewAdapter extends BaseAdapter {
                 if(items.getChecked()) {
                     items.setChecked(false);
                     MainCollection.isChecked--;
+                    MainCollection.selectAll.setChecked(false);
                     if(MainCollection.isChecked == 0) {
                         MainCollection.btnEnabled(false);
                     }
