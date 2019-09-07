@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni.lesson;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,38 +12,41 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
 
-public class LessonEnd extends Fragment implements Button.OnClickListener {
+public class LessonFinish extends Fragment implements Button.OnClickListener {
 
-    ImageView imageView;
     TextView textView;
 
     ImageButton imageBtn1;
     ImageButton imageBtn2;
     ImageButton imageBtn3;
+    ImageButton imageBtn4;
 
     View view;
 
-    public static LessonEnd newInstance() {
-        return new LessonEnd();
+    public static LessonFinish newInstance() {
+        return new LessonFinish();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_end, container, false);
+        view = inflater.inflate(R.layout.lesson_finish, container, false);
 
-        imageView = view.findViewById(R.id.imageView);
         textView = view.findViewById(R.id.textView);
 
         imageBtn1 = view.findViewById(R.id.imageBtn1);
         imageBtn2 = view.findViewById(R.id.imageBtn2);
         imageBtn3 = view.findViewById(R.id.imageBtn3);
+        imageBtn4 = view.findViewById(R.id.imageBtn4);
+
         imageBtn1.setOnClickListener(this);
         imageBtn2.setOnClickListener(this);
         imageBtn3.setOnClickListener(this);
+        imageBtn4.setOnClickListener(this);
 
         return view;
     }
@@ -63,12 +67,17 @@ public class LessonEnd extends Fragment implements Button.OnClickListener {
             case R.id.imageBtn3 :
                 bonusBtnClicked();
                 break;
+
+            case R.id.imageBtn4 :
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+                break;
         }
 
     }
 
     public void bonusBtnClicked() {
-        imageView.setVisibility(View.VISIBLE);
+        imageBtn4.setVisibility(View.VISIBLE);
         textView.setVisibility(View.VISIBLE);
     }
 }

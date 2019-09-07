@@ -1,68 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="20dp">
 
-    <TextView
-        android:id="@+id/textViewSentenceFront"
-        android:gravity="center"
-        android:text="저는 선생님이에요."
-        android:textSize="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        />
-
-    <TextView
-        android:id="@+id/textViewSentenceBack"
-        android:gravity="center"
-        android:text="I'm a teacher"
-        android:textSize="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        />
-
-    <TextView
-        android:id="@+id/textViewSentenceExplain"
-        android:gravity="center_vertical"
-        android:text="nhljkjhlkjlkjlkjlj;lk"
-        android:textSize="20dp"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btnAudio"
-            android:text="audio"
+        <TextView
+            android:id="@+id/textViewSentenceFront"
+            android:gravity="center"
+            android:text="저는 선생님이에요."
+            android:textSize="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewSentenceBack"
+            android:gravity="center"
+            android:text="I'm a teacher"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewSentenceExplain"
+            android:gravity="center_vertical"
+            android:text="nhljkjhlkjlkjlkjlj;lk"
+            android:textSize="20dp"
             android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
 
-        <Button
-            android:id="@+id/btnCollect"
-            android:text="collect"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnQnA"
-            android:text="Q/A"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            <Button
+                android:id="@+id/btnAudio"
+                android:text="audio"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
+            <Button
+                android:id="@+id/btnCollect"
+                android:text="collect"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
 
+            <Button
+                android:id="@+id/btnQnA"
+                android:text="Q/A"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/collectResult"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/MSG_COLLECT"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

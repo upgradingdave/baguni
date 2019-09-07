@@ -75,7 +75,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
                 LessonFrame.progressCount++;
                 LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
-                ((LessonFrame)getActivity()).replaceFragment(LessonEnd.newInstance());
+                ((LessonFrame)getActivity()).replaceFragment(LessonFinish.newInstance());
 
                 break;
         }

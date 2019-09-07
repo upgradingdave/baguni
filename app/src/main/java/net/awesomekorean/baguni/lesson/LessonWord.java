@@ -24,6 +24,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     ImageButton btnAudio;
     Button btnCollect;
 
+    TextView collectResult;
+
     static TextView textViewWordFront;
     static TextView textViewWordBack;
 
@@ -54,6 +56,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
+        collectResult = view.findViewById(R.id.collectResult);
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
@@ -108,6 +111,21 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnCollect :
+                String front = wordFront[lessonCount];
+                String back = wordBack[lessonCount];
+
+                CollectionRepository repository = new CollectionRepository(getContext());
+                repository.insert(front, back);
+
+                collectResult.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        collectResult.setVisibility(View.GONE);
+                    }
+                }, 1000);
+
                 break;
 
         }

@@ -41,8 +41,8 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/imageBtn4"
         android:visibility="gone"
         android:src="@drawable/sampleimage"
         android:scaleType="fitCenter"
