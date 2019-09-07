@@ -34,7 +34,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
         linearLayout = view.findViewById(R.id.linearLayout);
 
-        setTextView(LessonWord.sentenceInKorean);
+        setTextView(LessonWord.sentenceFront);
 
         btnReturn = view.findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(this);
@@ -46,9 +46,9 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         return view;
     }
 
-    public void setTextView(String[] sentenceInKorean) {
+    public void setTextView(String[] sentenceFront) {
 
-        for(String sentence : sentenceInKorean) {
+        for(String sentence : sentenceFront) {
 
             TextView textView = new TextView(getContext());
             textView.setText(sentence);

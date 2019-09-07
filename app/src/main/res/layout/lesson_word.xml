@@ -20,7 +20,7 @@
         android:layout_marginTop="100dp"/>
 
     <TextView
-        android:id="@+id/textViewWordInKorean"
+        android:id="@+id/textViewWordFront"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -32,7 +32,7 @@
         android:layout_marginTop="100dp"/>
 
     <TextView
-        android:id="@+id/textViewWordInEnglish"
+        android:id="@+id/textViewWordBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -41,11 +41,12 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWordInKorean" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewWordFront" />
 
     <Button
-        android:text="@string/BTN_COLLECTION"
-        app:layout_constraintTop_toBottomOf="@+id/textViewWordInEnglish"
+        android:id="@+id/btnCollect"
+        android:text="@string/BTN_COLLECT"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWordBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

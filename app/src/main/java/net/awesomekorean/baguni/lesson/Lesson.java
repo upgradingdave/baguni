@@ -2,15 +2,15 @@ package net.awesomekorean.baguni.lesson;
 
 public interface Lesson {
 
-    String[] getWordInKorean();
+    String[] getWordFront();
 
-    String[] getWordInEnglish();
+    String[] getWordBack();
 
     String[] getConfusingWord();
 
-    String[] getSentenceInKorean();
+    String[] getSentenceFront();
 
-    String[] getSentenceInEnglish();
+    String[] getSentenceBack();
 
     String[] getSentenceExplain();
 

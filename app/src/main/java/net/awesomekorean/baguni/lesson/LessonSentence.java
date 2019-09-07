@@ -17,8 +17,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
     View view;
 
-    static TextView textViewSentenceInKorean;
-    static TextView textViewSentenceInEnglish;
+    static TextView textViewSentenceFront;
+    static TextView textViewSentenceBack;
     static TextView textViewSentenceExplain;
 
 
@@ -36,8 +36,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
         LessonFrame.swipePage = "lessonSentence";
 
-        textViewSentenceInKorean = view.findViewById(R.id.textViewSentenceInKorean);
-        textViewSentenceInEnglish = view.findViewById(R.id.textViewSentenceInEnglish);
+        textViewSentenceFront = view.findViewById(R.id.textViewSentenceFront);
+        textViewSentenceBack = view.findViewById(R.id.textViewSentenceBack);
         textViewSentenceExplain = view.findViewById(R.id.textViewSentenceExplain);
 
         displaySentence();
@@ -48,8 +48,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
     public static void displaySentence() {
 
-        textViewSentenceInKorean.setText(LessonWord.sentenceInKorean[lessonCount]);
-        textViewSentenceInEnglish.setText(LessonWord.sentenceInEnglish[lessonCount]);
+        textViewSentenceFront.setText(LessonWord.sentenceFront[lessonCount]);
+        textViewSentenceBack.setText(LessonWord.sentenceBack[lessonCount]);
         textViewSentenceExplain.setText(LessonWord.sentenceExplain[lessonCount]);
 
     }

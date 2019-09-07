@@ -27,7 +27,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
     ImageView ox; // 정답, 오답 시 각각의 이미지 출력
 
-    String[] wordInEnglish = LessonWord.wordInEnglish;
+    String[] wordBack = LessonWord.wordBack;
     String[] quizNow = new String[4]; // 현재 퀴즈 array
 
 
@@ -46,7 +46,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         view = inflater.inflate(R.layout.lesson_word_quiz1, container, false);
 
-        quizQuantity = wordInEnglish.length;
+        quizQuantity = wordBack.length;
         wrongQuizList = new ArrayList<>();
 
         btn1 = view.findViewById(R.id.btn1);
@@ -72,11 +72,11 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         for(int i=0; i<4; i++) {
 
-            if(quizNo + i >= wordInEnglish.length) {
-                quizNow[i] = wordInEnglish[j];
+            if(quizNo + i >= wordBack.length) {
+                quizNow[i] = wordBack[j];
                 j++;
             } else {
-                quizNow[i] = wordInEnglish[quizNo + i];
+                quizNow[i] = wordBack[quizNo + i];
             }
         }
 
@@ -137,7 +137,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
                 Button selectedBtn = (Button) view;
 
-                if(wordInEnglish[quizNo].equals(selectedBtn.getText().toString())) {
+                if(wordBack[quizNo].equals(selectedBtn.getText().toString())) {
 
                     ox.setImageResource(R.drawable.samplecorrect);
                     ox.setVisibility(View.VISIBLE);

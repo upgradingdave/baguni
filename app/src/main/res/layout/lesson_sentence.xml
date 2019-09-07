@@ -6,7 +6,7 @@
     android:layout_margin="20dp">
 
     <TextView
-        android:id="@+id/textViewSentenceInKorean"
+        android:id="@+id/textViewSentenceFront"
         android:gravity="center"
         android:text="저는 선생님이에요."
         android:textSize="30dp"
@@ -15,7 +15,7 @@
         />
 
     <TextView
-        android:id="@+id/textViewSentenceInEnglish"
+        android:id="@+id/textViewSentenceBack"
         android:gravity="center"
         android:text="I'm a teacher"
         android:textSize="20dp"

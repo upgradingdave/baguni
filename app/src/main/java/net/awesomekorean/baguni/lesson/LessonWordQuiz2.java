@@ -29,14 +29,14 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     ToggleButton selectedBtn;
     ToggleButton selectedBtnFirst;
 
-    String[] wordInKorean = LessonWord.wordInKorean;
-    String[] wordInEnglish = LessonWord.wordInEnglish;
+    String[] wordFront = LessonWord.wordFront;
+    String[] wordBack = LessonWord.wordBack;
 
     String[] quizArray; // 한글과 영어 array 를 합친 것
 
     int[] checkAnswer = new int[2];
 
-    int wordNo = wordInKorean.length; // 단어 개수
+    int wordNo = wordFront.length; // 단어 개수
 
     public static LessonWordQuiz2 newInstance() {
         return new LessonWordQuiz2();
@@ -64,8 +64,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         for(int i=0; i<wordNo; i++) {
 
-            quizArray[i] = wordInKorean[i];
-            quizArray[i+wordNo] = wordInEnglish[i];
+            quizArray[i] = wordFront[i];
+            quizArray[i+wordNo] = wordBack[i];
         }
 
         LessonWordQuiz3.randomArray(quizArray);
@@ -105,12 +105,12 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         for(int i=0; i<wordNo; i++) {
 
-            if(wordInKorean[i].equals(selectedText)) {
+            if(wordFront[i].equals(selectedText)) {
 
                 checkAnswer[0] = i+1;
 
 
-            } else if(wordInEnglish[i].equals(selectedText)) {
+            } else if(wordBack[i].equals(selectedText)) {
 
                 checkAnswer[1] = i+1;
 

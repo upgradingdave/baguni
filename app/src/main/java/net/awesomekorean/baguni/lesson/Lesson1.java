@@ -2,8 +2,8 @@ package net.awesomekorean.baguni.lesson;
 
 public class Lesson1 implements Lesson{
 
-    final static String[] wordInKorean = {"학생", "선생님", "회사원", "경찰", "의사"};
-    final static String[] wordInEnglish = {"Student", "Teacher", "Office worker", "Police", "Doctor"};
+    final static String[] wordFront = {"학생", "선생님", "회사원", "경찰", "의사"};
+    final static String[] wordBack = {"Student", "Teacher", "Office worker", "Police", "Doctor"};
 
     final static String[] confusingWord =  {
             "학생", "학상", "학셍", "학샌",
@@ -12,13 +12,13 @@ public class Lesson1 implements Lesson{
             "경찰", "견찰", "겅찰", "건찰",
             "의사", "위사", "의자", "의샤"};
 
-    final static String[] sentenceInKorean = {
+    final static String[] sentenceFront = {
             "안녕하세요?",
             "제 이름은 데니예요.",
             "만나서 반가워요.",
             "저는 선생님이에요."};
 
-    final static String[] sentenceInEnglish = {
+    final static String[] sentenceBack = {
             "Hello.",
             "My name is Danny.",
             "Nice to meet you.",
@@ -33,13 +33,13 @@ public class Lesson1 implements Lesson{
     };
 
     @Override
-    public String[] getWordInKorean() {
-        return wordInKorean;
+    public String[] getWordFront() {
+        return wordFront;
     }
 
     @Override
-    public String[] getWordInEnglish() {
-        return wordInEnglish;
+    public String[] getWordBack() {
+        return wordBack;
     }
 
     @Override
@@ -48,13 +48,13 @@ public class Lesson1 implements Lesson{
     }
 
     @Override
-    public String[] getSentenceInKorean() {
-        return sentenceInKorean;
+    public String[] getSentenceFront() {
+        return sentenceFront;
     }
 
     @Override
-    public String[] getSentenceInEnglish() {
-        return sentenceInEnglish;
+    public String[] getSentenceBack() {
+        return sentenceBack;
     }
 
     @Override

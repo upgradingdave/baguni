@@ -44,7 +44,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
         view = inflater.inflate(R.layout.lesson_word_quiz3, container, false);
 
-        wordsForQuiz = LessonWord.wordInKorean;
+        wordsForQuiz = LessonWord.wordFront;
 
         wordQuiz1Answer = view.findViewById(R.id.wordQuiz1Answer);
         wordQuiz1Selector = view.findViewById(R.id.wordQuiz1Selector);
