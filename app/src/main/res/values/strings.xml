@@ -14,6 +14,7 @@
 
     <string name="ANSWER">Answer</string>
     <string name="NEXT">Next</string>
+    <string name="DELETE">Delete</string>
 
     <string name="SIGNIN">Sign In</string>
     <string name="SIGNUP">Sign Up</string>
