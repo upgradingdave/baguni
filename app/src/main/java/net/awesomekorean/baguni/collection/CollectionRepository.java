@@ -12,9 +12,36 @@ public class CollectionRepository {
     private String DB_NAME = "collection_db";
     private CollectionDb db;
 
+    private String front; // 플래시 카드 앞면
+    private String back; // 플래시 카드 뒷면
+
     public CollectionRepository(Context context) {
 
         db = Room.databaseBuilder(context, CollectionDb.class, DB_NAME).build();
+    }
+
+    public String getFront() {
+        return front;
+    }
+
+    public String getBack() {
+        return back;
+    }
+
+    // 컬렉션 스터디에서 최신 단어부터 공부할 때 전체 카드 수를 얻기 위해 사용
+    public void getCount() {
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                int size = db.collectionDao().getCount();
+                return size;
+            }
+
+            @Override
+            protected void onPostExecute(Integer integer) {
+                CollectionStudy.size = integer;
+            }
+        }.execute();
     }
 
     public void insert (String front, String back) {
@@ -82,17 +109,48 @@ public class CollectionRepository {
         }.execute();
     }
 
+    // 컬렉션 스터디에서 랜덤 플래시 카드 불러오기
+    public void getRandomForStudy() {
+        new AsyncTask<Void, Void, CollectionEntity>() {
+            @Override
+            protected CollectionEntity doInBackground(Void... voids) {
+                CollectionEntity entity = db.collectionDao().getRandom();
+                front = entity.getFront();
+                back = entity.getBack();
+                return entity;
+            }
+
+            @Override
+            protected void onPostExecute(CollectionEntity entity) {
+                // 오디오 출력 추가할 것
+                CollectionStudy.studyFront.setText(front);
+                CollectionStudy.studyBack.setText(back);
+            }
+        }.execute();
+    }
+
+    // 컬렉션 스터디에서 최신 컬렉션 순으로 불러오기
+    public void getDescForStudy() {
+        new AsyncTask<Void, Void, List<CollectionEntity>>() {
+            @Override
+            protected List<CollectionEntity> doInBackground(Void... voids) {
+                List<CollectionEntity> entity = db.collectionDao().getDesc();
+                front = entity.get(index).getFront();
+                back = entity.get(index).getBack();
+                return entity;
+            }
+
+            @Override
+            protected void onPostExecute(List<CollectionEntity> entities) {
+                // 오디오 출력 추가할 것
+                CollectionStudy.studyFront.setText(front);
+                CollectionStudy.studyBack.setText(back);
+            }
+        }.execute();
+    }
 
     public LiveData<List<CollectionEntity>> getAll() {
 
         return db.collectionDao().getAll();
     }
-
-
-/*
-    public LiveData<CollectionEntity> getById(int index) {
-
-        return db.collectionDao().getById(index);
-    }
-*/
 }

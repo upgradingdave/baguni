@@ -15,9 +15,30 @@
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:text="@string/MODE_RANDOM"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radio2"
+            android:text="@string/MODE_NEWWORD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
     <LinearLayout
         android:weightSum="1"
-        android:layout_weight="0.4"
+        android:layout_weight="0.35"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -31,8 +52,8 @@
             android:layout_height="80dp" />
         
         <TextView
+            android:id="@+id/studyFront"
             android:gravity="center"
-            android:text="사과"
             android:textSize="50dp"
             android:layout_weight="0.8"
             android:layout_width="0dp"
@@ -41,14 +62,16 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/studyBack"
+        android:visibility="invisible"
         android:gravity="center"
-        android:text="apple"
         android:textSize="50dp"
-        android:layout_weight="0.4"
+        android:layout_weight="0.35"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
     <Button
+        android:id="@+id/btnNext"
         android:text="@string/NEXT"
         android:layout_weight="0.1"
         android:layout_width="match_parent"

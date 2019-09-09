@@ -24,6 +24,9 @@
     <string name="MSG_COLLECT">Collection is saved</string>
     <string name="MSG_DELETE">Do you really want to delete?</string>
 
+    <string name="MODE_RANDOM">Random</string>
+    <string name="MODE_NEWWORD">New collection first</string>
+
 
 
 </resources>
