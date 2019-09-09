@@ -25,7 +25,6 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
     public static TextView studyBack;
 
     public static int size; //  컬렉션 개수
-    public static List<CollectionEntity> entityDesc;
 
     Button btnNext;
 
@@ -43,15 +42,17 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
         btnNext.setOnClickListener(this);
 
         repository = new CollectionRepository(getApplicationContext());
-        repository.getRandomForStudy();
-        repository.getCount();
+        repository.getRandomForStudy(); // 디폴트로 랜덤모드 실행
+        repository.getCount(); // 컬렉션 개수 가져오기
 
         radioGroup = findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                studyBack.setVisibility(View.INVISIBLE);
                 if(i==R.id.radio1) {
                     radioBtnNo = 0;
+                    index = 0;
                     randomStudy();
                 } else {
                     radioBtnNo = 1;
@@ -61,17 +62,21 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
         });
     }
 
+    // 랜덤 학습 모드
     public void randomStudy() {
         repository.getRandomForStudy();
     }
 
+    // 최신부터 학습 모드
     public void newCollectionFirstStudy() {
+        System.out.println("INDEX : " + index);
         if(index < size) {
             repository.getDescForStudy(index);
             index++;
         } else {
-            index = 0;
-            repository.getDescForStudy(index);
+            System.out.println("HERE");
+            repository.getDescForStudy(0);
+            index = 1;
         }
     }
 
@@ -90,6 +95,9 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
                         newCollectionFirstStudy();
                     }
                 }
+
+            case R.id.btnAudio :
+                break;
         }
     }
 }

@@ -30,16 +30,12 @@ public class CollectionRepository {
 
     // 컬렉션 스터디에서 최신 단어부터 공부할 때 전체 카드 수를 얻기 위해 사용
     public void getCount() {
-        new AsyncTask<Void, Void, Integer>() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Integer doInBackground(Void... voids) {
+            protected Void doInBackground(Void... voids) {
                 int size = db.collectionDao().getCount();
-                return size;
-            }
-
-            @Override
-            protected void onPostExecute(Integer integer) {
-                CollectionStudy.size = integer;
+                CollectionStudy.size = size;
+                return null;
             }
         }.execute();
     }
@@ -130,18 +126,18 @@ public class CollectionRepository {
     }
 
     // 컬렉션 스터디에서 최신 컬렉션 순으로 불러오기
-    public void getDescForStudy() {
-        new AsyncTask<Void, Void, List<CollectionEntity>>() {
+    public void getDescForStudy(final int index) {
+        new AsyncTask<Void, Void, CollectionEntity>() {
             @Override
-            protected List<CollectionEntity> doInBackground(Void... voids) {
-                List<CollectionEntity> entity = db.collectionDao().getDesc();
-                front = entity.get(index).getFront();
-                back = entity.get(index).getBack();
+            protected CollectionEntity doInBackground(Void... voids) {
+                CollectionEntity entity = db.collectionDao().getDesc(index);
+                front = entity.getFront();
+                back = entity.getBack();
                 return entity;
             }
 
             @Override
-            protected void onPostExecute(List<CollectionEntity> entities) {
+            protected void onPostExecute(CollectionEntity entity) {
                 // 오디오 출력 추가할 것
                 CollectionStudy.studyFront.setText(front);
                 CollectionStudy.studyBack.setText(back);

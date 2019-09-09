@@ -22,8 +22,8 @@ public interface CollectionDao {
     @Query("SELECT * FROM COLLECTIONENTITY ORDER BY RANDOM() LIMIT 1")
     CollectionEntity getRandom();
 
-    @Query("SELECT * FROM COLLECTIONENTITY ORDER BY id DESC")
-    List<CollectionEntity> getDesc();
+    @Query("SELECT * FROM COLLECTIONENTITY ORDER BY id DESC LIMIT 1 OFFSET :index")
+    CollectionEntity getDesc(int index);
 
     //@Query("SELECT * FROM COLLECTIONENTITY LIMIT 20 OFFSET 0")
 
