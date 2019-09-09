@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import net.awesomekorean.baguni.MainCollection;
 import net.awesomekorean.baguni.R;
 
 import java.util.List;
@@ -23,8 +24,6 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
     public static TextView studyFront;
     public static TextView studyBack;
-
-    public static int size; //  컬렉션 개수
 
     Button btnNext;
 
@@ -69,12 +68,10 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
     // 최신부터 학습 모드
     public void newCollectionFirstStudy() {
-        System.out.println("INDEX : " + index);
-        if(index < size) {
+        if(index < MainCollection.size) {
             repository.getDescForStudy(index);
             index++;
         } else {
-            System.out.println("HERE");
             repository.getDescForStudy(0);
             index = 1;
         }

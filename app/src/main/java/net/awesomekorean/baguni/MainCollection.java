@@ -21,6 +21,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import net.awesomekorean.baguni.collection.CollectionEntity;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
@@ -77,8 +79,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     Button btnYes;
     Button btnNo;
 
+    public static TextView collectionNo;
+
     int index;  // 클릭 한 리스트 뷰의 인덱스
     public static int isChecked = 0; // 클릭된 아이템이 있는지 확인하기 위한 변수
+    public static int size; //  컬렉션 개수
+
 
     public static MainCollection newInstance() {
         return new MainCollection();
@@ -100,6 +106,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         msgDelete = view.findViewById(R.id.msgDelete);
         btnYes = view.findViewById(R.id.btnYes);
         btnNo = view.findViewById(R.id.btnNo);
+        collectionNo = view.findViewById(R.id.collectionNo);
         selectAll.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -120,6 +127,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         observer = new Observer<List<CollectionEntity>>() {
             @Override
             public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
+
+                repository.getCount();
                 listAllData = new ArrayList<>();
 
                 for (CollectionEntity entity : collectionEntities) {

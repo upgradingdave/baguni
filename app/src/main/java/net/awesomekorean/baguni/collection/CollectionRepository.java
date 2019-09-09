@@ -3,7 +3,10 @@ package net.awesomekorean.baguni.collection;
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+
+import net.awesomekorean.baguni.MainCollection;
 
 import java.util.List;
 
@@ -28,14 +31,19 @@ public class CollectionRepository {
         return back;
     }
 
-    // 컬렉션 스터디에서 최신 단어부터 공부할 때 전체 카드 수를 얻기 위해 사용
+
     public void getCount() {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, Integer>() {
             @Override
-            protected Void doInBackground(Void... voids) {
+            protected Integer doInBackground(Void... voids) {
                 int size = db.collectionDao().getCount();
-                CollectionStudy.size = size;
-                return null;
+                MainCollection.size = size;
+                return size;
+            }
+
+            @Override
+            protected void onPostExecute(Integer integer) {
+                MainCollection.collectionNo.setText(integer + " Collected");
             }
         }.execute();
     }
