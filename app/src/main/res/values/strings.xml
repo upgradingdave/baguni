@@ -27,6 +27,7 @@
     <string name="MODE_RANDOM">Random</string>
     <string name="MODE_NEWWORD">New collection first</string>
 
-
+    <string name="NO_WRITTING">There is no writing</string>
+    <string name="NO_COLLECTION">There is no collection</string>
 
 </resources>

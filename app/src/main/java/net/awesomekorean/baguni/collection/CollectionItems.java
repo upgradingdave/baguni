@@ -9,7 +9,7 @@ public class CollectionItems {
 
     private boolean isChecked = false;
 
-    private int isVisible = 4 ;
+    private int isVisible = 4 ; // 체크박스 on/off, 4:off, 0:on
 
     public void setCollectionFront(String collection) {
         this.collectionFront = collection;

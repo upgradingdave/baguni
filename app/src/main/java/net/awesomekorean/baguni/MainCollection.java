@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ import static android.app.Activity.RESULT_OK;
 public class MainCollection extends Fragment implements Button.OnClickListener{
     public static final int REQUEST_CODE_ADD = 100;
     public static final int REQUEST_CODE_EDIT = 200;
+    public static final int VISIBLE_ON = 0;
     public static final String REQUEST_EDIT = "edit";
     public static final String REQUEST_ADD = "add";
     public static final String REQUEST = "request";
@@ -79,6 +81,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     Button btnYes;
     Button btnNo;
 
+    TextView msgNoCollection;
+
     public static TextView collectionNo;
 
     int index;  // 클릭 한 리스트 뷰의 인덱스
@@ -107,6 +111,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         btnYes = view.findViewById(R.id.btnYes);
         btnNo = view.findViewById(R.id.btnNo);
         collectionNo = view.findViewById(R.id.collectionNo);
+        msgNoCollection = view.findViewById(R.id.msgNoCollection);
         selectAll.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -131,6 +136,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 repository.getCount();
                 listAllData = new ArrayList<>();
 
+                if(collectionEntities.size() == 0) {
+                    msgNoCollection.setVisibility(View.VISIBLE);
+                }else{
+                    msgNoCollection.setVisibility(View.GONE);
+                }
+
                 for (CollectionEntity entity : collectionEntities) {
 
                     CollectionItems items = new CollectionItems();
@@ -139,7 +150,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     items.setId(entity.getId());
                     listAllData.add(items);
                 }
-                if(listAllData.size()>10) {
+                if(collectionEntities.size()>10) {
                     list = new ArrayList<>(listAllData.subList(0,10));
                 } else {
                     list = listAllData;
@@ -240,24 +251,27 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if(selectAll.getVisibility()==View.INVISIBLE) {
-                    ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
-                    adapter.longClickOnOff(TEXT_ON);
-                    isChecked = 0;
-                    btnEnabled(false);
-
-                } else {
-                    ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
-                    btnEnabled(false);
-                    adapter.longClickOnOff(TEXT_OFF);
-                }
-
-                adapter.notifyDataSetChanged();
+                checkBoxOnOff();
                 return true;
             }
         });
         return view;
+    }
+
+    public void checkBoxOnOff() {
+        if(selectAll.getVisibility()==View.INVISIBLE) {
+            ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
+            adapter.longClickOnOff(TEXT_ON);
+            isChecked = 0;
+            selectAll.setChecked(false);
+            btnEnabled(false);
+
+        } else {
+            ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
+            adapter.longClickOnOff(TEXT_OFF);
+        }
+
+        adapter.notifyDataSetChanged();
     }
 
     // Delete, Record 버튼 켜기/끄기
@@ -278,9 +292,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     // 리스트뷰 맨 마지막까지 스크롤 하면 아이템 더 불러옴
     public void loadMoreItems() {
         int size = list.size();
-        for(int i=1;i<=10;i++){
-            if((size + i) < listAllData.size()){
+
+        for(int i=0;i<10;i++){
+            if((size + i+1) <= listAllData.size()){
                 list.add(listAllData.get(size + i));
+                if(selectAll.getVisibility() == View.VISIBLE) { // 체크박스 on 상태에서 아이템을 더 불러올 경우
+                    CollectionItems items;
+                    items = list.get(list.size()-1);
+                    items.setVisible(VISIBLE_ON);
+                }
+            } else {
+                break;
             }
         }
         adapter.notifyDataSetChanged();
