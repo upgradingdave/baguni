@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -27,7 +26,7 @@ import android.widget.TextView;
 import net.awesomekorean.baguni.collection.CollectionEntity;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
-import net.awesomekorean.baguni.collection.CollectionListViewAdapter;
+import net.awesomekorean.baguni.collection.CollectionAdapter;
 import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.collection.CollectionStudy;
 
@@ -57,7 +56,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     ArrayList<CollectionItems> list = new ArrayList<>();    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
     ArrayList<CollectionItems> listAllData; // 리스트뷰에 들어갈 모든 데이터를 불러옴
     ArrayList<CollectionItems> listCopy;// 검색 기능을 위해 리스트뷰 복사함
-    CollectionListViewAdapter adapter;  // 리스트뷰 어뎁터
+    CollectionAdapter adapter;  // 리스트뷰 어뎁터
 
     ProgressBar progressBar;
 
@@ -157,7 +156,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     progressBar.setVisibility(View.GONE);
                 }
 
-                adapter = new CollectionListViewAdapter(getContext(), list);
+                adapter = new CollectionAdapter(getContext(), list);
                 listView.setAdapter(adapter);
 
                 listCopy = new ArrayList<>();

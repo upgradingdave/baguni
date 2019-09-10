@@ -9,17 +9,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.WrapperListAdapter;
 
-import net.awesomekorean.baguni.reading.ReadingFrame;
 import net.awesomekorean.baguni.writing.WritingFrame;
 import net.awesomekorean.baguni.writing.WritingItems;
-import net.awesomekorean.baguni.writing.WritingListViewAdapter;
+import net.awesomekorean.baguni.writing.WritingAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainWriting extends Fragment {
 
@@ -27,7 +23,7 @@ public class MainWriting extends Fragment {
 
     ListView listView;
     ArrayList<WritingItems> list;
-    WritingListViewAdapter adapter;
+    WritingAdapter adapter;
 
     FloatingActionButton btnAddWriting; // 플로팅 버튼
 
@@ -42,10 +38,7 @@ public class MainWriting extends Fragment {
 
         view = inflater.inflate(R.layout.main_writing, container, false);
 
-        list = new ArrayList<>();
-        adapter = new WritingListViewAdapter(getContext(), list);
-        listView.setAdapter(adapter);
-
+        listView = view.findViewById(R.id.listViewWriting);
         btnAddWriting = view.findViewById(R.id.btnAddWriting);
         btnAddWriting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +48,13 @@ public class MainWriting extends Fragment {
                 startActivity(intent);
             }
         });
+
+
+        list = new ArrayList<>();
+        WritingItems item = new WritingItems();
+        adapter = new WritingAdapter(getContext(), list);
+        listView.setAdapter(adapter);
+
 
         return view;
     }

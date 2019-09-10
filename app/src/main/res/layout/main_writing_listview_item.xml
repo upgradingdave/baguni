@@ -17,7 +17,6 @@
 
         <TextView
             android:id="@+id/date"
-            android:text="2019.08.19"
             android:textSize="20dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -25,7 +24,6 @@
 
         <TextView
             android:id="@+id/letters"
-            android:text="152 letters"
             android:textSize="20dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -35,7 +33,6 @@
     <TextView
         android:id="@+id/article"
         android:background="@drawable/border"
-        android:text="가는 않는 투명하되 작고 원대하고, 것은 고동을 인생을 봄바람이다. 위하여, 풍부하게 못할 봄날의 이것이야말로 오직 원대하고, 운다. 청춘 봄바람을 갑 무한한 뜨거운지라, 쓸쓸하랴? 찾아다녀도, 천고에 설산에서 우리 약동하다. 공자는 속에서 얼마나 사막이다. 심장의 용감하고 대중을 있을 것은 이상 충분히 그들에게 끓는다. 작고 기관과 고동을 풀밭에 이는 인간은 같이, 철환하였는가? 속에서 없으면, 보내는 청춘을 역사를 못하다 것이다. 우는 청춘 별과 청춘 교향악이다."
         android:textSize="20dp"
         android:padding="10dp"
         android:maxLines="3"

@@ -14,7 +14,7 @@ import net.awesomekorean.baguni.R;
 
 import java.util.ArrayList;
 
-public class CollectionListViewAdapter extends BaseAdapter {
+public class CollectionAdapter extends BaseAdapter {
 
     public static final String TEXT_ON = "On";
     public static final String TEXT_OFF = "Off";
@@ -26,7 +26,7 @@ public class CollectionListViewAdapter extends BaseAdapter {
     private Context context;
     public static ArrayList<CollectionItems> list;
 
-    public CollectionListViewAdapter(Context context, ArrayList<CollectionItems> list) {
+    public CollectionAdapter(Context context, ArrayList<CollectionItems> list) {
 
         this.context = context;
         this.list = list;

@@ -12,12 +12,12 @@ import net.awesomekorean.baguni.R;
 
 import java.util.ArrayList;
 
-public class WritingListViewAdapter extends BaseAdapter {
+public class WritingAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<WritingItems> list;
 
-    public WritingListViewAdapter(Context context, ArrayList<WritingItems> list) {
+    public WritingAdapter(Context context, ArrayList<WritingItems> list) {
 
         this.context = context;
         this.list = list;
@@ -63,7 +63,7 @@ public class WritingListViewAdapter extends BaseAdapter {
         WritingItems items = list.get(i);
 
         holder.date.setText(items.getDate());
-        holder.letters.setText(items.getLetters());
+        holder.letters.setText(items.getLetters()+" letters");
         holder.article.setText(items.getArticle());
         holder.isCorrected.setVisibility(items.getIsCorrected());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
