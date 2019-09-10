@@ -28,7 +28,6 @@ public class WritingFrame extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 textCount.setText(i+i2+" 자");
             }
 

@@ -5,7 +5,7 @@ public class WritingItems {
     private String date;
     private int letters;
     private String article;
-    private int isCorrected = 4; // 교정여부 표시 on/off, 4:off, 0:on
+    private Boolean isCorrected; // 교정여부 표시 on/off, 4:off, 0:on
 
     public String getDate() {
         return date;
@@ -31,11 +31,11 @@ public class WritingItems {
         this.article = article;
     }
 
-    public int getIsCorrected() {
+    public Boolean getIsCorrected() {
         return isCorrected;
     }
 
-    public void setIsCorrected(int corrected) {
-        isCorrected = corrected;
+    public void setIsCorrected(Boolean b) {
+        isCorrected = b;
     }
 }

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/msgNoWriting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:backgroundTint="@android:color/holo_orange_light"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/plus"
         />
 

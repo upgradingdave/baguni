@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class WritingAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<WritingItems> list;
+    public ArrayList<WritingItems> list;
 
     public WritingAdapter(Context context, ArrayList<WritingItems> list) {
 
@@ -65,7 +65,8 @@ public class WritingAdapter extends BaseAdapter {
         holder.date.setText(items.getDate());
         holder.letters.setText(items.getLetters()+" letters");
         holder.article.setText(items.getArticle());
-        holder.isCorrected.setVisibility(items.getIsCorrected());
+        if(items.getIsCorrected()) {holder.isCorrected.setVisibility(View.VISIBLE);
+        } else { holder.isCorrected.setVisibility(View.GONE);}
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -31,4 +31,6 @@
     <string name="NO_WRITTING">There is no writing</string>
     <string name="NO_COLLECTION">There is no collection</string>
 
+    <string name="LETTERS">Letters</string>
+
 </resources>

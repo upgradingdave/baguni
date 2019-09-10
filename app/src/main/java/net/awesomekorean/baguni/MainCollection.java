@@ -311,7 +311,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     // 리스트뷰 footer 로 progressbar 설정함
     public void setListViewFooter() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.main_collection_footer, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.main_footer, null);
         progressBar = view.findViewById(R.id.progressBar);
         listView.addFooterView(progressBar);
     }
