@@ -11,6 +11,9 @@
     <string name="BTN_COLLECT">Collect</string>
     <string name="BTN_YES">Yes</string>
     <string name="BTN_NO">No</string>
+    <string name="BTN_SAVE">Save</string>
+    <string name="BTN_CORRECTION">Correction</string>
+    <string name="BTN_CANCEL">Cancel</string>
 
     <string name="ANSWER">Answer</string>
     <string name="NEXT">Next</string>
@@ -23,6 +26,7 @@
     <string name="SELECTLANGUAGE">Select Language</string>
 
     <string name="MSG_COLLECT">Collection is saved</string>
+    <string name="MSG_WRITING">Writing is saved</string>
     <string name="MSG_DELETE">Do you really want to delete?</string>
 
     <string name="MODE_RANDOM">Random</string>
@@ -31,6 +35,19 @@
     <string name="NO_WRITTING">There is no writing</string>
     <string name="NO_COLLECTION">There is no collection</string>
 
-    <string name="LETTERS">Letters</string>
+    <string name="TEXT_LETTERS"> Letters</string>
+
+
+    // 번역 필요 없는 부분
+
+    <string name="REQUEST">request</string>
+    <string name="REQUEST_ADD">add</string>
+    <string name="REQUEST_EDIT">edit</string>
+    <string name="EXTRA_ARTICLE">article</string>
+    <string name="EXTRA_LETTERS">letters</string>
+    <string name="EXTRA_ID">id</string>
+
+
+
 
 </resources>

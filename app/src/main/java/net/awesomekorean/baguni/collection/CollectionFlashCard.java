@@ -94,17 +94,6 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
                     CollectionRepository repository = new CollectionRepository(this);
                     repository.insert(front, back);
 
-                    saveResult.setVisibility(View.VISIBLE);
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            saveResult.setVisibility(View.GONE);
-                            editFront.setText("");
-                            editBack.setText("");
-                        }
-                    }, 1000);
-
                 // EDIT 일 때, 수정 된 front, back 값을 collection 으로 넘긴다.
                 } else {
                     intent = new Intent();
@@ -113,6 +102,16 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
                     setResult(RESULT_OK, intent);
                     finish();
                 }
+                saveResult.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        saveResult.setVisibility(View.GONE);
+                        editFront.setText("");
+                        editBack.setText("");
+                    }
+                }, 1000);
                 break;
         }
     }

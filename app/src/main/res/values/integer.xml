@@ -2,4 +2,8 @@
 <resources>
     <integer name="btnplusview">1</integer>
     <integer name="btnpluspos">2</integer>
+
+    <integer name="REQUEST_CODE_ADD">100</integer>
+    <integer name="REQUEST_CODE_EDIT">200</integer>
+
 </resources>

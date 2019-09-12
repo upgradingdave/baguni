@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface CollectionDao {
 
-    @Query("SELECT * FROM CollectionEntity")
+    @Query("SELECT * FROM CollectionEntity ORDER BY id DESC")
     LiveData<List<CollectionEntity>> getAll();
 
     @Query("SELECT * FROM COLLECTIONENTITY WHERE id = :index")

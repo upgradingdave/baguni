@@ -23,14 +23,6 @@ public class CollectionRepository {
         db = Room.databaseBuilder(context, CollectionDb.class, DB_NAME).build();
     }
 
-    public String getFront() {
-        return front;
-    }
-
-    public String getBack() {
-        return back;
-    }
-
 
     public void getCount() {
         new AsyncTask<Void, Void, Integer>() {
@@ -62,28 +54,6 @@ public class CollectionRepository {
         }.execute();
     }
 
-    public void update(final CollectionEntity entity) {
-
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                db.collectionDao().update(entity);
-                return null;
-            }
-        }.execute();
-    }
-
-    public void deleteAll() {
-
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                db.collectionDao().deleteAll();
-                return null;
-            }
-        }.execute();
-    }
-
     public void deleteById(final int index) {
 
         new AsyncTask<Void, Void,Void>() {
@@ -101,14 +71,10 @@ public class CollectionRepository {
             @Override
             protected CollectionEntity doInBackground(Void... voids) {
                 CollectionEntity entity = db.collectionDao().getById(index);
-                return entity;
-            }
-
-            @Override
-            protected void onPostExecute(CollectionEntity entity) {
                 entity.setFront(front);
                 entity.setBack(back);
-                update(entity);
+                db.collectionDao().update(entity);
+                return entity;
             }
         }.execute();
     }

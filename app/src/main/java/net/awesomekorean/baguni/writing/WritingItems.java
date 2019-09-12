@@ -2,24 +2,42 @@ package net.awesomekorean.baguni.writing;
 
 public class WritingItems {
 
-    private String date;
-    private int letters;
+    private int id;
+    private String firstDate;
+    private String lastDate;
+    private String letters;
     private String article;
     private Boolean isCorrected; // 교정여부 표시 on/off, 4:off, 0:on
 
-    public String getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getLetters() {
+    public String getFirstDate() {
+        return firstDate;
+    }
+
+    public void setFirstDate(String date) {
+        this.firstDate = date;
+    }
+
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(String lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public String getLetters() {
         return letters;
     }
 
-    public void setLetters(int letters) {
+    public void setLetters(String letters) {
         this.letters = letters;
     }
 

@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
     android:layout_margin="20dp"
     tools:context=".writing.WritingFrame">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_weight="0.9"
+    <LinearLayout
+        android:weightSum="1"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideLine"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
         <TextView
+            android:layout_gravity="end"
             android:id="@+id/textCount"
-            android:text="0 자"
+            android:layout_weight="0.05"
             android:textSize="20dp"
             android:layout_marginBottom="5dp"
-            app:layout_constraintEnd_toEndOf="@+id/editText"
-            app:layout_constraintBottom_toTopOf="@+id/guideLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/editText"
+            android:layout_weight="0.85"
             android:gravity="left|top"
             android:padding="10dp"
             android:hint="  이 곳에 글을 작성하세요"
@@ -45,28 +38,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="0.1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_weight="0.1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+            <Button
+                android:id="@+id/btnSave"
+                android:text="@string/BTN_SAVE"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
 
-        <Button
-            android:text="Save"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:text="Correction"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-
+            <Button
+                android:id="@+id/btnCorrection"
+                android:text="@string/BTN_CORRECTION"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/saveResult"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/MSG_WRITING"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

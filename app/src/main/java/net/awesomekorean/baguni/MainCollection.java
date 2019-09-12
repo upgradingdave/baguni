@@ -241,7 +241,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     index = item.getId();
                     startActivityForResult(intent, REQUEST_CODE_EDIT);
                 }
-
             }
         });
 
@@ -257,6 +256,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         return view;
     }
 
+
+    // 체크박스 켜고 끄기
     public void checkBoxOnOff() {
         if(selectAll.getVisibility()==View.INVISIBLE) {
             ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
@@ -273,12 +274,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         adapter.notifyDataSetChanged();
     }
 
+
     // Delete, Record 버튼 켜기/끄기
     public static void btnEnabled(boolean b) {
         btnDelete.setEnabled(b);
         btnRecord.setEnabled(b);
     }
 
+
+    // 아이템을 롱 클릭 했을 때
     public void ItemLongClicked(boolean b, int setSelectAll, int setStudy, int setBtns) {
         longItemClicked = b;
         selectAll.setVisibility(setSelectAll);
