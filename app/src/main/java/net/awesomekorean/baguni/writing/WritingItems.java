@@ -7,7 +7,7 @@ public class WritingItems {
     private String lastDate;
     private String letters;
     private String article;
-    private Boolean isCorrected; // 교정여부 표시 on/off, 4:off, 0:on
+    private boolean isCorrected;
 
     public int getId() {
         return id;
@@ -49,11 +49,11 @@ public class WritingItems {
         this.article = article;
     }
 
-    public Boolean getIsCorrected() {
+    public boolean getIsCorrected() {
         return isCorrected;
     }
 
-    public void setIsCorrected(Boolean b) {
+    public void setIsCorrected(boolean b) {
         isCorrected = b;
     }
 }

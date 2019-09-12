@@ -14,17 +14,6 @@ import net.awesomekorean.baguni.R;
 
 public class CollectionFlashCard extends AppCompatActivity implements Button.OnClickListener {
 
-    public static final String REQUEST_EDIT = "edit";
-    public static final String REQUEST_ADD = "add";
-    public static final String REQUEST = "request";
-    public static final String TEXT_FRONT = "front";
-    public static final String TEXT_BACK = "back";
-    public static final String TEXT_INDEX = "index";
-
-
-
-    Intent intent;
-
     Button btnCancel;
     Button btnSave;
 
@@ -38,8 +27,6 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
     String textFront;
     String textBack;
     int index;
-
-    CollectionDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +44,14 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
         Intent intent = getIntent();
 
-        code = intent.getExtras().getString(REQUEST);
+        code = intent.getExtras().getString(getString(R.string.REQUEST));
 
         // EDIT 때, 기존의 front, back 값을 받아서 출력
-        if(code.equals(REQUEST_EDIT)) {
+        if(code.equals(getString(R.string.REQUEST_EDIT))) {
 
-            textFront = intent.getExtras().getString(TEXT_FRONT);
-            textBack = intent.getExtras().getString(TEXT_BACK);
-            index = intent.getExtras().getInt(TEXT_INDEX);
+            textFront = intent.getExtras().getString(getString(R.string.EXTRA_FRONT));
+            textBack = intent.getExtras().getString(getString(R.string.EXTRA_BACk));
+            index = intent.getExtras().getInt(getString(R.string.EXTRA_ID));
             editFront.setText(textFront);
             editBack.setText(textBack);
         }
@@ -77,8 +64,8 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
             case R.id.btnCancel :
                 // ADD 일 때는 result 값을 주고, EDIT 일 때는 그냥 activity 만 종료함.
-                if(code.equals(REQUEST_ADD)) {
-                    intent = new Intent();
+                if(code.equals(getString(R.string.REQUEST_ADD))) {
+                    Intent intent = new Intent();
                     setResult(RESULT_OK, intent);
                 }
                 finish();
@@ -89,18 +76,15 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
                 String front = editFront.getText().toString();
                 String back = editBack.getText().toString();
 
+                CollectionRepository repository = new CollectionRepository(this);
+
                 // ADD 일 때, save 를 눌러도 collection 으로 전환되지 않고 계속 단어를 추가 할 수 있다
-                if(code.equals(REQUEST_ADD)) {
-                    CollectionRepository repository = new CollectionRepository(this);
+                if(code.equals(getString(R.string.REQUEST_ADD))) {
                     repository.insert(front, back);
 
-                // EDIT 일 때, 수정 된 front, back 값을 collection 으로 넘긴다.
+                // EDIT 일 때
                 } else {
-                    intent = new Intent();
-                    intent.putExtra(TEXT_FRONT, front);
-                    intent.putExtra(TEXT_BACK, back);
-                    setResult(RESULT_OK, intent);
-                    finish();
+                    repository.editById(index, front, back);
                 }
                 saveResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();
@@ -108,8 +92,13 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
                     @Override
                     public void run() {
                         saveResult.setVisibility(View.GONE);
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK, intent);
                         editFront.setText("");
                         editBack.setText("");
+                        if(code.equals(getString(R.string.REQUEST_EDIT))) {
+                            finish();
+                        }
                     }
                 }, 1000);
                 break;

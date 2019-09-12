@@ -46,6 +46,10 @@
     <string name="EXTRA_ARTICLE">article</string>
     <string name="EXTRA_LETTERS">letters</string>
     <string name="EXTRA_ID">id</string>
+    <string name="EXTRA_FRONT">front</string>
+    <string name="EXTRA_BACk">back</string>
+    <string name="LONGCLICK_ON">on</string>
+    <string name="LONGCLICK_OFF">off</string>
 
 
 

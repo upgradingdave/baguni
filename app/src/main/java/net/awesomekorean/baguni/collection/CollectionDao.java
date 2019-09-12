@@ -6,8 +6,6 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
-
-import java.security.cert.LDAPCertStoreParameters;
 import java.util.List;
 
 @Dao
@@ -26,15 +24,6 @@ public interface CollectionDao {
     CollectionEntity getDesc(int index);
 
     //@Query("SELECT * FROM COLLECTIONENTITY LIMIT 20 OFFSET 0")
-
-    @Query("SELECT front FROM CollectionEntity WHERE id = :position")
-    String getFrontById(int position);
-
-    @Query("SELECT back FROM CollectionEntity WHERE id = :position")
-    String getBackById(int position);
-
-    @Query("DELETE FROM CollectionEntity")
-    public void deleteAll();
 
     @Query("SELECT COUNT(*) FROM CollectionEntity")
     int getCount();

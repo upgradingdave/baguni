@@ -9,7 +9,7 @@ public class CollectionItems {
 
     private boolean isChecked = false;
 
-    private int isVisible = 4 ; // 체크박스 on/off, 4:off, 0:on
+    private boolean isVisible = false;
 
     public void setCollectionFront(String collection) {
         this.collectionFront = collection;
@@ -35,11 +35,11 @@ public class CollectionItems {
         return isChecked;
     }
 
-    public void setVisible(int isVisible) {
+    public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
     }
 
-    public int getVisible() {
+    public boolean getVisible() {
         return isVisible;
     }
 
@@ -50,6 +50,7 @@ public class CollectionItems {
     public void setId(int id) {
         this.id = id;
     }
+
 
     // 검색 기능을 위해 equals 재정의
     @Override

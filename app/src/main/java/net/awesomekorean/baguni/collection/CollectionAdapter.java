@@ -16,13 +16,6 @@ import java.util.ArrayList;
 
 public class CollectionAdapter extends BaseAdapter {
 
-    public static final String TEXT_ON = "On";
-    public static final String TEXT_OFF = "Off";
-    public static final int VISIBLE_ON = 0;
-    public static final int VISIBLE_OFF = 4;
-    public static final int TAG_KEY = 1;
-
-
     private Context context;
     public static ArrayList<CollectionItems> list;
 
@@ -52,6 +45,7 @@ public class CollectionAdapter extends BaseAdapter {
 
         final ViewHolder holder;
 
+
         // 맨 처음에 리스트뷰를 생성해줌
         if(view==null) {
 
@@ -73,7 +67,8 @@ public class CollectionAdapter extends BaseAdapter {
         holder.collectionFront.setText(items.getCollectionFront());
         holder.collectionBack.setText(items.getCollectionBack());
         holder.checkBox.setChecked(items.getChecked());
-        holder.checkBox.setVisibility(items.getVisible());
+        if(items.getVisible()) { holder.checkBox.setVisibility(View.VISIBLE);
+        } else{holder.checkBox.setVisibility(View.INVISIBLE);}
         holder.checkBox.setTag(i);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,9 +93,9 @@ public class CollectionAdapter extends BaseAdapter {
                 }
             }
         });
-
         return view;
     }
+
 
     // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용
     static class ViewHolder {
@@ -131,19 +126,17 @@ public class CollectionAdapter extends BaseAdapter {
 
         CollectionItems items;
 
-        if(onOff == TEXT_ON) {
+        if(onOff.equals("on")) {
             for (int i = 0; i < getCount(); i++) {
                 items = list.get(i);
-                items.setVisible(VISIBLE_ON);
+                items.setVisible(true);
             }
-        } else if(onOff == TEXT_OFF) {
 
+        } else if(onOff.equals("off")) {
             for (int i = 0; i < getCount(); i++) {
-
                 items = list.get(i);
                 items.setChecked(false);
-                items.setVisible(VISIBLE_OFF);
-
+                items.setVisible(false);
             }
         }
     }

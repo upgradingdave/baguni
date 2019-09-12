@@ -22,31 +22,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.awesomekorean.baguni.collection.CollectionEntity;
 import net.awesomekorean.baguni.collection.CollectionFlashCard;
 import net.awesomekorean.baguni.collection.CollectionItems;
 import net.awesomekorean.baguni.collection.CollectionAdapter;
 import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.collection.CollectionStudy;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static android.app.Activity.RESULT_OK;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
-    public static final int REQUEST_CODE_ADD = 100;
-    public static final int REQUEST_CODE_EDIT = 200;
-    public static final int VISIBLE_ON = 0;
-    public static final String REQUEST_EDIT = "edit";
-    public static final String REQUEST_ADD = "add";
-    public static final String REQUEST = "request";
-    public static final String TEXT_FRONT = "front";
-    public static final String TEXT_BACK = "back";
-    public static final String TEXT_ON = "On";
-    public static final String TEXT_OFF = "Off";
-
 
     View view;
 
@@ -123,7 +109,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView = view.findViewById(R.id.listViewCollection);
 
         repository = new CollectionRepository(getContext());
-        //repository.deleteAll();
 
         setListViewFooter();
 
@@ -233,13 +218,11 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     adapter.notifyDataSetChanged();
                 } else {
                     intent = new Intent(getContext(), CollectionFlashCard.class);
-                    intent.putExtra(TEXT_FRONT, item.getCollectionFront());
-                    //intent.putExtra("ITEM", item.getId());
-                    intent.putExtra(TEXT_BACK, item.getCollectionBack());
-                    //intent.putExtra(TEXT_INDEX, i);
-                    intent.putExtra(REQUEST, REQUEST_EDIT);
-                    index = item.getId();
-                    startActivityForResult(intent, REQUEST_CODE_EDIT);
+                    intent.putExtra(getString(R.string.EXTRA_ID), item.getId());
+                    intent.putExtra(getString(R.string.EXTRA_FRONT), item.getCollectionFront());
+                    intent.putExtra(getString(R.string.EXTRA_BACk), item.getCollectionBack());
+                    intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
+                    startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
                 }
             }
         });
@@ -249,29 +232,23 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                checkBoxOnOff();
+                if(selectAll.getVisibility()==View.INVISIBLE) {
+                    ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
+                    adapter.longClickOnOff(getString(R.string.LONGCLICK_ON));
+                    isChecked = 0;
+                    selectAll.setChecked(false);
+                    btnEnabled(false);
+
+                } else {
+                    ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
+                    adapter.longClickOnOff(getString(R.string.LONGCLICK_OFF));
+                }
+
+                adapter.notifyDataSetChanged();
                 return true;
             }
         });
         return view;
-    }
-
-
-    // 체크박스 켜고 끄기
-    public void checkBoxOnOff() {
-        if(selectAll.getVisibility()==View.INVISIBLE) {
-            ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
-            adapter.longClickOnOff(TEXT_ON);
-            isChecked = 0;
-            selectAll.setChecked(false);
-            btnEnabled(false);
-
-        } else {
-            ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
-            adapter.longClickOnOff(TEXT_OFF);
-        }
-
-        adapter.notifyDataSetChanged();
     }
 
 
@@ -302,7 +279,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 if(selectAll.getVisibility() == View.VISIBLE) { // 체크박스 on 상태에서 아이템을 더 불러올 경우
                     CollectionItems items;
                     items = list.get(list.size()-1);
-                    items.setVisible(VISIBLE_ON);
+                    items.setVisible(true);
                 }
             } else {
                 break;
@@ -324,19 +301,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     // Flash Card 수정/추가 후 결과 받기
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if(resultCode == RESULT_OK) {
-
-            // 추가 된 플래시 카드를 리스트뷰에 반영
-            if(requestCode == REQUEST_CODE_ADD) {
-                repository.getAll().observe(this, observer);
-
-            // 수정 된 플래시 카드를 리스트뷰에 반영
-            } else {
-                final String front = data.getStringExtra(TEXT_FRONT);
-                final String back = data.getStringExtra(TEXT_BACK);
-                repository.editById(index, front, back);
-            }
+            repository.getAll().observe(this, observer);
+            ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
         }
     }
 
@@ -420,8 +387,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
             case R.id.btnAddCollection :
                 intent = new Intent(getContext(), CollectionFlashCard.class);
-                intent.putExtra(REQUEST, REQUEST_ADD);
-                startActivityForResult(intent,REQUEST_CODE_ADD);
+                intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_ADD));
+                startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_ADD));
                 break;
 
             case R.id.searchCancel :

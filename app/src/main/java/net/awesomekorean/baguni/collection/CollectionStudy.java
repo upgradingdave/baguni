@@ -1,9 +1,5 @@
 package net.awesomekorean.baguni.collection;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +9,6 @@ import android.widget.TextView;
 
 import net.awesomekorean.baguni.MainCollection;
 import net.awesomekorean.baguni.R;
-
-import java.util.List;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {
 
@@ -65,6 +59,7 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
     public void randomStudy() {
         repository.getRandomForStudy();
     }
+
 
     // 최신부터 학습 모드
     public void newCollectionFirstStudy() {
