@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.teachers.Teachers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -101,6 +102,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnCorrection :
+                Intent intent = new Intent(this, Teachers.class);
+                startActivity(intent);
                 break;
         }
     }
