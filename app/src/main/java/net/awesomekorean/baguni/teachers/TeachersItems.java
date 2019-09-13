@@ -1,12 +1,23 @@
 package net.awesomekorean.baguni.teachers;
 
 
+import android.graphics.drawable.Drawable;
+
 public class TeachersItems {
 
-    // 이미지랑 오디오는 어떻게 해야할까?
-    String isAvailable;
-    String name;
-    String tag;
+    // 오디오는 어떻게 해야할까?
+    private Drawable picture;
+    private String isAvailable;
+    private String name;
+    private String tag;
+
+    public Drawable getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Drawable picture) {
+        this.picture = picture;
+    }
 
     public String getIsAvailable() {
         return isAvailable;

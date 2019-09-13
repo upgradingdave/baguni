@@ -1,5 +1,7 @@
 package net.awesomekorean.baguni.teachers;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 
 public class Teachers extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,21 +22,24 @@ public class Teachers extends AppCompatActivity {
         ArrayList<TeachersItems> list = new ArrayList<>();
 
         TeachersItems teacher1 = new TeachersItems();
-        teacher1.isAvailable = "Available";
-        teacher1.name = "Danny";
-        teacher1.tag = "#male #KoreanTeacher";
+        teacher1.setPicture(getDrawable(R.drawable.sampleimage));
+        teacher1.setIsAvailable("available");
+        teacher1.setName("Danny");
+        teacher1.setTag("#male #KoreanTeacher");
         list.add(teacher1);
 
         TeachersItems teacher2 = new TeachersItems();
-        teacher2.isAvailable = "Vacation";
-        teacher2.name = "Lyla";
-        teacher2.tag = "#female #dialect";
+        teacher2.setPicture(getDrawable(R.drawable.sampleimage));
+        teacher2.setIsAvailable("available");
+        teacher2.setName("Danny");
+        teacher2.setTag("#male #KoreanTeacher");
         list.add(teacher2);
 
         TeachersItems teacher3 = new TeachersItems();
-        teacher3.isAvailable = "Vacation";
-        teacher3.name = "Dave";
-        teacher3.tag = "#female #dialect";
+        teacher3.setPicture(getDrawable(R.drawable.sampleimage));
+        teacher3.setIsAvailable("available");
+        teacher3.setName("Danny");
+        teacher3.setTag("#male #KoreanTeacher");
         list.add(teacher3);
 
 

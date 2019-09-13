@@ -13,7 +13,11 @@ import java.util.ArrayList;
 
 public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHolder> {
 
-    private ArrayList<TeachersItems> list = null;
+    private ArrayList<TeachersItems> list;
+
+    public TeachersAdapter(ArrayList<TeachersItems> list) {
+        this.list = list;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,12 +35,20 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
             voice = itemView.findViewById(R.id.voice);
             name = itemView.findViewById(R.id.name);
             tag = itemView.findViewById(R.id.tag);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION) {
+                        TeachersItems item = list.get(position);
+                        // 아이템 클릭 이벤트트
+                    }
+               }
+            });
         }
     }
 
-    public TeachersAdapter(ArrayList<TeachersItems> list) {
-        this.list = list;
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,13 +61,11 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String isAvailable = list.get(position).getIsAvailable();
-        String name = list.get(position).getName();
-        String tag = list.get(position).getTag();
+        TeachersItems item = list.get(position);
 
-        holder.isAvailable.setText(isAvailable);
-        holder.name.setText(name);
-        holder.tag.setText(tag);
+        holder.isAvailable.setText(item.getIsAvailable());
+        holder.name.setText(item.getName());
+        holder.tag.setText(item.getTag());
     }
 
     @Override
