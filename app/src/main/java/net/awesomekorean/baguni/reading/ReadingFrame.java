@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,7 +28,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     LinearLayout popUpLayout; // 단어 클릭 시 팝업 레이아웃
     TextView popUpTextView;  // 단어 클릭 시 팝업 텍스트뷰
     ImageButton btnCollect; // 단어 클릭 시 collect 버튼
-    ImageButton btnClose; // 단어 클릭 시 close 버튼
 
     Button finish;
     Button btnPlayStop;
@@ -43,9 +43,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         popUpTextView = findViewById(R.id.popUpTextView);
         btnCollect = findViewById(R.id.btnCollect);
         btnCollect.setOnClickListener(this);
-        btnClose = findViewById(R.id.btnClose);
-        btnClose.setOnClickListener(this);
-
 
 
         switch (MainReading.readingUnit) {
@@ -88,6 +85,15 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             article.setText(span);
             article.setMovementMethod(LinkMovementMethod.getInstance());
         }
+        article.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(popUpLayout.getVisibility()==View.VISIBLE) {
+                    popUpLayout.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -98,10 +104,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnCollect :
                 System.out.println("Collect button clicked");
-                break;
-
-            case R.id.btnClose :
-                popUpLayout.setVisibility(View.GONE);
                 break;
 
         }

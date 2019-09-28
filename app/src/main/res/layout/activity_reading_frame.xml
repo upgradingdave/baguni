@@ -86,17 +86,9 @@
 
             <ImageButton
                 android:id="@+id/btnCollect"
-                android:layout_weight="0.1"
+                android:layout_weight="0.2"
                 android:scaleType="fitCenter"
                 android:src="@drawable/samplecollect"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-            <ImageButton
-                android:id="@+id/btnClose"
-                android:scaleType="fitCenter"
-                android:src="@drawable/samplewrong"
-                android:layout_weight="0.1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
 
