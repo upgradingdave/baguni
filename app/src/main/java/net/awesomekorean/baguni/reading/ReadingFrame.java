@@ -1,6 +1,7 @@
 package net.awesomekorean.baguni.reading;
 
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import net.awesomekorean.baguni.MainReading;
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.collection.CollectionRepository;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
@@ -32,6 +34,12 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     Button finish;
     Button btnPlayStop;
 
+    // 단어를 클릭하면 컬렉션 할 때 들어갈 문자열 저장
+    String front;
+    String back;
+
+    TextView collectResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,14 +50,17 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         popUpLayout = findViewById(R.id.popUpLayout);
         popUpTextView = findViewById(R.id.popUpTextView);
         btnCollect = findViewById(R.id.btnCollect);
+        collectResult = findViewById(R.id.collectResult);
         btnCollect.setOnClickListener(this);
 
 
         switch (MainReading.readingUnit) {
 
-            case 0:
+            case 0 :
                 reading = new Reading0();
                 readyForReading();
+                break;
+
         }
     }
 
@@ -66,7 +77,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             span.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(@NonNull View view) {  // 하이라이트 클릭 이벤트
-
+                    front = reading.getArticle().substring(reading.getStart()[finalI], reading.getEnd()[finalI]);
+                    back = reading.getPopUpText()[finalI];
                     popUpTextView.setText(reading.getPopUpText()[finalI]);
                     popUpLayout.setVisibility(View.VISIBLE);
 
@@ -103,7 +115,18 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnCollect :
-                System.out.println("Collect button clicked");
+
+                CollectionRepository repository = new CollectionRepository(this);
+                repository.insert(front, back);
+
+                collectResult.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        collectResult.setVisibility(View.GONE);
+                    }
+                }, 1000);
                 break;
 
         }

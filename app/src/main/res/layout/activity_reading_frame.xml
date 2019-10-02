@@ -1,121 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
     tools:context=".reading.ReadingFrame">
 
     <LinearLayout
-        android:gravity="right"
-        android:layout_weight="0.1"
-        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:weightSum="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <Button
-            android:text="Slow"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:text="Fast"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_weight="0.8"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:padding="10dp"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_weight="0.1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <ScrollView
-            android:padding="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
-
-            <TextView
-                android:id="@+id/article"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="20dp" />
-
-        </ScrollView>
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/popUpLayout"
-            android:background="@android:color/holo_orange_light"
-            android:weightSum="1"
-            android:visibility="gone"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="right"
+            android:layout_weight="0.1"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp">
 
-            <TextView
-                android:id="@+id/popUpTextView"
-                android:layout_marginLeft="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:textSize="20dp" />
+            <Button
+                android:text="Slow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
 
-            <ImageButton
-                android:id="@+id/btnCollect"
-                android:layout_weight="0.2"
-                android:scaleType="fitCenter"
-                android:src="@drawable/samplecollect"
-                android:layout_width="0dp"
+            <Button
+                android:text="Fast"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_weight="0.8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
-    <LinearLayout
-        android:layout_weight="0.1"
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+            <TextView
+                android:id="@+id/title"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_weight="0.1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
 
-        <Button
-            android:id="@+id/btnFinish"
-            android:text="Finish"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            <ScrollView
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title">
 
-        <Button
-            android:id="@+id/btnPlayStop"
-            android:text="Play/Stop"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/article"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="20dp" />
 
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/popUpLayout"
+                android:background="@android:color/holo_orange_light"
+                android:weightSum="1"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/popUpTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/btnCollect"
+                    android:layout_weight="0.2"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/samplecollect"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_weight="0.1"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/btnFinish"
+                android:text="Finish"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btnPlayStop"
+                android:text="Play/Stop"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/collectResult"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/MSG_COLLECT"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
