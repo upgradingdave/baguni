@@ -109,11 +109,9 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
                 checkAnswer[0] = i+1;
 
-
             } else if(wordBack[i].equals(selectedText)) {
 
                 checkAnswer[1] = i+1;
-
             }
         }
 
@@ -173,7 +171,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         if(count == wordNo*2) {
             LessonFrame.progressCount++;
-            LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+            LessonFrame.progressCount();
             ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
         }
     }

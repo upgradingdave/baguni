@@ -85,6 +85,9 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                LessonFrame.progressCount++;
+                LessonFrame.progressCount();
+
                 ox.setVisibility(View.GONE);
 
                 if(regularQuizNo == quizQuantity-1) {
@@ -134,13 +137,9 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
                     ox.setImageResource(R.drawable.samplecorrect);
                     ox.setVisibility(View.VISIBLE);
 
-                    LessonFrame.progressCount++;
-                    LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
-
                     // 정답소리 출력할 것
 
                     makeNextQuiz();
-
 
                 } else {
 
@@ -151,11 +150,7 @@ public class LessonWordQuiz4 extends Fragment implements Button.OnClickListener 
                     wrongQuizList.add(quizNo);
 
                     makeNextQuiz();
-
                 }
-
         }
-
     }
-
 }

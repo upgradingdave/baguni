@@ -29,10 +29,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static TextView textViewWordFront;
     static TextView textViewWordBack;
 
-    public static int lessonCount = 0;
+    public static int lessonCount;
     public static int lessonWordLength = 0;
     public static int lessonSentenceLength = 0;
-    public static int totalPageNo = 0;
 
     public static String[] wordFront;
     public static String[] wordBack;
@@ -52,14 +51,14 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
-        LessonFrame.swipePage = "lessonWord";
+        LessonFrame.swipePage = getString(R.string.LESSONWORD);
+        lessonCount = 0; // 레슨진도초기화 -> 저장하고 exit 했을 때는 lessonCount 를 DB에 저장해야함
 
         btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
         collectResult = view.findViewById(R.id.collectResult);
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
-
 
         textViewWordFront = view.findViewById(R.id.textViewWordFront);
         textViewWordBack = view.findViewById(R.id.textViewWordBack);
@@ -89,17 +88,16 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
 
-        totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
+        LessonFrame.totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
 
         displayWord();
     }
 
 
     public static void displayWord() {
-
+        LessonFrame.progressCount();
         textViewWordFront.setText(wordFront[lessonCount]);
         textViewWordBack.setText(wordBack[lessonCount]);
-
     }
 
     @Override

@@ -28,6 +28,7 @@
     <string name="MSG_COLLECT">Collection is saved</string>
     <string name="MSG_WRITING">Writing is saved</string>
     <string name="MSG_DELETE">Do you really want to delete?</string>
+    <string name="MSG_SAVE">Do you want to save?</string>
 
     <string name="MODE_RANDOM">Random</string>
     <string name="MODE_NEWWORD">New collection first</string>
@@ -50,6 +51,7 @@
     <string name="EXTRA_BACk">back</string>
     <string name="LONGCLICK_ON">on</string>
     <string name="LONGCLICK_OFF">off</string>
-
+    <string name="LESSONWORD">lessonWord</string>
+    <string name="LESSONSENTENCE">lessonSentence</string>
 
 </resources>

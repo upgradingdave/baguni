@@ -27,7 +27,6 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
     LinearLayout wordQuiz1Selector; // 정답을 입력하는 버튼이 들어가는 layout
     Button btnSelector; // 정답을 입력하기 위해 만들어진 한글 버튼
     Button btnReset;
-    Button btnBackToWord;
     int quizCount = 0; // 단어퀴즈 순서
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
     ImageView correctImage; // 정답 시 나오는 이미지
@@ -74,7 +73,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                                 quizCount++;
 
                                 LessonFrame.progressCount++;
-                                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+                                LessonFrame.progressCount();
 
                                 if(quizCount != wordsForQuiz.length) {
                                     correctImage.setVisibility(View.GONE);
@@ -93,9 +92,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                     } else {
                         wordQuiz1Answer.setText("");
                     }
-
                 }
-
             }
         };
 
@@ -106,10 +103,6 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
         btnReset = view.findViewById(R.id.btnReset);
         btnReset.setOnClickListener(this);
-        btnBackToWord = view.findViewById(R.id.btnBackToWord);
-        btnBackToWord.setOnClickListener(this);
-
-
 
         return view;
     }
@@ -122,13 +115,6 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             case R.id.btnReset :
                 wordQuiz1Answer.setText("");
                 break;
-
-            case R.id.btnBackToWord :
-                LessonFrame.progressCount = 0;
-                LessonFrame.setProgressNow(LessonFrame.progressCount);
-                ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz4.newInstance());
-                break;
-
         }
     }
 

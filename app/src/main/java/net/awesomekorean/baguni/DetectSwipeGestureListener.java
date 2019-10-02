@@ -1,5 +1,6 @@
 package net.awesomekorean.baguni;
 
+import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -43,21 +44,29 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
         //Only when swipe distance between minimal and maximal distance value. It's effective swipe
         if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
 
-            if(LessonFrame.swipePage == "lessonWord") {
+            Context context = getActivity();
+            // 현재페이지가 LessonWord 일 때 동작
+            if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONWORD))) {
 
+                // 왼쪽으로 스와이프 할 때
                 if(deltaX > 0) {
 
                     LessonWord.lessonCount++;
                     LessonFrame.progressCount++;
 
+                    // 마지막 단어이면 LessonWordQuiz1 로 넘어감
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz1.newInstance());
+                        ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
+
+                    // 마지막 단어 아니면 다음 단어 표시
                     } else {
                         LessonWord.displayWord();
                     }
-                } else {
 
+                // 오른쪽으로 스와이프 할 떄
+                } else {
+                    // 맨 처음 단어가 아니면 이전 단어를 표시
                     if(LessonWord.lessonCount != 0) {
                         LessonWord.lessonCount--;
                         LessonFrame.progressCount--;
@@ -65,10 +74,11 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                     LessonWord.displayWord();
                 }
 
-                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
+                // 스와이프가 발생할 때마다 프로그레스바 상태 계산
+                LessonFrame.progressCount();
             }
 
-            if(LessonFrame.swipePage == "lessonSentence") {
+            if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONSENTENCE))) {
 
                 if(deltaX > 0) {
 
@@ -77,7 +87,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
 
                     if(LessonWord.lessonCount == LessonWord.lessonSentenceLength) {
                         LessonWord.lessonCount = 0;
-                        ((LessonFrame)getActivity()).replaceFragment(LessonClause.newInstance());
+                        ((LessonFrame)context).replaceFragment(LessonClause.newInstance());
                     } else {
                         LessonSentence.displaySentence();
                     }
@@ -90,14 +100,9 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                     LessonSentence.displaySentence();
                 }
 
-                LessonFrame.setProgressNow(LessonFrame.progressCount*100/LessonWord.totalPageNo);
-
+                LessonFrame.progressCount();
             }
-
-
-
         }
-
         return true;
     }
 }
