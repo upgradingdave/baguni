@@ -61,7 +61,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                textCount.setText(i+i2+ getString(R.string.TEXT_LETTERS));
+                String input = editText.getText().toString();
+                textCount.setText(input.length() + getString(R.string.TEXT_LETTERS));
             }
 
             @Override
