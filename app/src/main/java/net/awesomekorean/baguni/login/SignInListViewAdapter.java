@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import net.awesomekorean.baguni.R;
 
-public class LoginListViewAdapter extends BaseAdapter {
+public class SignInListViewAdapter extends BaseAdapter {
 
     private String[] items = {"Korean", "English", "Chinese", "Japanese", "Thai"};
 
@@ -35,7 +35,7 @@ public class LoginListViewAdapter extends BaseAdapter {
         final Context context = viewGroup.getContext();
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.activity_login_listview_item, viewGroup, false);
+        view = inflater.inflate(R.layout.activity_sign_in_listview_item, viewGroup, false);
 
         TextView language = view.findViewById(R.id.textLanguage);
 

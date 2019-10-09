@@ -5,16 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
-import net.awesomekorean.baguni.reading.ReadingFrame;
 
-public class Login extends AppCompatActivity implements Button.OnClickListener {
+public class SignIn extends AppCompatActivity implements Button.OnClickListener {
+
+    EditText email;
+    EditText password;
 
     Button btnSignIn;
     Button btnSignUp;
@@ -23,15 +24,17 @@ public class Login extends AppCompatActivity implements Button.OnClickListener {
     Button btnSelectLanguage;
 
     ListView listView;
-    LoginListViewAdapter adapter;
+    SignInListViewAdapter adapter;
 
     Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_in);
 
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSingUp);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
@@ -44,7 +47,7 @@ public class Login extends AppCompatActivity implements Button.OnClickListener {
         btnSignInFacebook.setOnClickListener(this);
         btnSelectLanguage.setOnClickListener(this);
 
-        adapter = new LoginListViewAdapter();
+        adapter = new SignInListViewAdapter();
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,18 +61,23 @@ public class Login extends AppCompatActivity implements Button.OnClickListener {
                 switch (i) {    // 선택한 언어에 따라 메뉴 언어 변경
 
                     case 0 :
+                        // 한국어
                         break;
 
                     case 1 :
+                        // 영어
                         break;
 
                     case 2 :
+                        // 중국어
                         break;
 
                     case 3 :
+                        // 일본어
                         break;
 
                     case 4 :
+                        // 태국어
                         break;
                 }
             }
@@ -82,11 +90,16 @@ public class Login extends AppCompatActivity implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnSignIn :
+                String userEmail = email.getText().toString();
+                String userPass = password.getText().toString();
+
                 intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.btnSingUp :
+                intent = new Intent(this, SignUp.class);
+                startActivity(intent);
                 break;
 
             case R.id.btnSignInGoogle :

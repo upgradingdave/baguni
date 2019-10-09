@@ -30,6 +30,9 @@ import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.collection.CollectionStudy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static android.app.Activity.RESULT_OK;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
@@ -320,8 +323,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         } else {
 
             for(int i=0; i<listAllData.size(); i++) {
-
-                if(listAllData.get(i).equals(text)) { // 조건에 맞는 리스트만 출력
+                String front = listAllData.get(i).getCollectionFront();
+                String back = listAllData.get(i).getCollectionBack();
+                Pattern pattern = Pattern.compile("^"+text, Pattern.CASE_INSENSITIVE);
+                Matcher matcherFront = pattern.matcher(front);
+                Matcher matcherBack = pattern.matcher(back);
+                if(matcherFront.find() || matcherBack.find()) {
                     list.add(listAllData.get(i));
                 }
             }
