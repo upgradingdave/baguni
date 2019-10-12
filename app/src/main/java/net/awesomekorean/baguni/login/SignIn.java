@@ -11,6 +11,12 @@ import android.widget.ListView;
 
 import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.webService.RetrofitConnection;
+import net.awesomekorean.baguni.webService.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity implements Button.OnClickListener {
 
@@ -92,6 +98,25 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
             case R.id.btnSignIn :
                 String userEmail = email.getText().toString();
                 String userPass = password.getText().toString();
+
+                RetrofitConnection retrofitConnection = new RetrofitConnection();
+                Call<User> call = retrofitConnection.service().getByEmail(userEmail);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if(response.isSuccessful()) {
+                            System.out.println("Succeed " + response);
+                        }else {
+                            System.out.println("FAILED!");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        System.out.println("Failed to connect");
+                    }
+                });
+
 
                 intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

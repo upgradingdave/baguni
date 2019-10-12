@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.webService.RetrofitConnection;
+import net.awesomekorean.baguni.webService.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
@@ -60,6 +66,27 @@ public class SignUp extends AppCompatActivity {
                 userName = name.getText().toString();
                 userEmail = email.getText().toString();
                 userPass = password.getText().toString();
+
+                User newUser = new User(userName, userEmail, userPass);
+
+                RetrofitConnection retrofitConnection = new RetrofitConnection();
+                Call<User> call = retrofitConnection.service().createUser(newUser);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if(response.isSuccessful()) {
+                            System.out.println("Sign up succeed!!");
+                        }else {
+                            System.out.println("Sign up fail!!");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        System.out.println("Failed to connect the server!!");
+                        System.out.println(t);
+                    }
+                });
             }
         });
 
