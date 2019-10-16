@@ -8,11 +8,22 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,15 +110,24 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 String userEmail = email.getText().toString();
                 String userPass = password.getText().toString();
 
+                // 서버에 로그인 입력정보 보내기
                 RetrofitConnection retrofitConnection = new RetrofitConnection();
-                Call<User> call = retrofitConnection.service().getByEmail(userEmail);
+                Call<User> call = retrofitConnection.service().logInCheck(userEmail, userPass);
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
+                        // 로그인 결과 받기
                         if(response.isSuccessful()) {
-                            System.out.println("Succeed " + response);
+                            System.out.println("LOGIN SUCCEED");
+
+                            User user = response.body();
+
+                            Toast.makeText(getApplicationContext(), "Hello, "+user.getName(), Toast.LENGTH_LONG).show();
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+
                         }else {
-                            System.out.println("FAILED!");
+                            System.out.println("LOGIN FAILED!");
                         }
                     }
 
@@ -117,9 +137,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     }
                 });
 
-
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
                 break;
 
             case R.id.btnSingUp :
