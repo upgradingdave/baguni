@@ -34,7 +34,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
         linearLayout = view.findViewById(R.id.linearLayout);
 
-        setTextView(LessonWord.sentenceFront);
+        setTextView(LessonWord.sentenceClause);
 
         btnReturn = view.findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(this);
@@ -46,12 +46,12 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         return view;
     }
 
-    public void setTextView(String[] sentenceFront) {
+    public void setTextView(String[] sentenceClauses) {
 
-        for(String sentence : sentenceFront) {
+        for(String sentenceClause : sentenceClauses) {
 
             TextView textView = new TextView(getContext());
-            textView.setText(sentence);
+            textView.setText(sentenceClause);
             textView.setTextSize(30);
             textView.setPadding(30,30,30,30);
 

@@ -35,10 +35,11 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     public static String[] wordFront;
     public static String[] wordBack;
-    static String[] confusingWord;
     public static String[] sentenceFront;
     public static String[] sentenceBack;
     public static String[] sentenceExplain;
+    public static String[] sentenceClause;
+
 
 
     public static LessonWord newInstance() {
@@ -67,7 +68,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
             case 1:
                 lesson = new Lesson1();
-                readyForLesson();
+                readyForLesson(R.array.L1_WORD, R.array.L1_SENTENCE, R.array.L1_SENTENCEEXPLAIN);
                 break;
 
         }
@@ -75,15 +76,20 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         return view;
     }
 
-    public void readyForLesson() {
+    public void readyForLesson(int word, int sentence, int sentenceEx) {
+
+        lesson.setWordBack(getResources().getStringArray(word));
+        lesson.setSentenceBack(getResources().getStringArray(sentence));
+        lesson.setSentenceExplain(getResources().getStringArray(sentenceEx));
 
         wordFront = lesson.getWordFront();
         wordBack = lesson.getWordBack();
-        confusingWord = lesson.getConfusingWord();
 
         sentenceFront = lesson.getSentenceFront();
-        sentenceBack = lesson.getSentenceFront();
+        sentenceBack = lesson.getSentenceBack();
         sentenceExplain = lesson.getSentenceExplain();
+        sentenceClause = lesson.getSentenceClause();
+
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;

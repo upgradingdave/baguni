@@ -9,9 +9,6 @@ import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.LessonSentence;
 import net.awesomekorean.baguni.lesson.LessonWord;
 import net.awesomekorean.baguni.lesson.LessonWordQuiz1;
-import net.awesomekorean.baguni.lesson.LessonWordQuiz2;
-import net.awesomekorean.baguni.lesson.LessonWordQuiz3;
-import net.awesomekorean.baguni.lesson.LessonWordQuiz4;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 

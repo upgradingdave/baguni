@@ -6,12 +6,18 @@ public interface Lesson {
 
     String[] getWordBack();
 
-    String[] getConfusingWord();
+    void setWordBack(String[] strings);
 
     String[] getSentenceFront();
 
     String[] getSentenceBack();
 
+    void setSentenceBack(String[] strings);
+
     String[] getSentenceExplain();
+
+    void setSentenceExplain(String[] strings);
+
+    String[] getSentenceClause();
 
 }

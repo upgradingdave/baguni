@@ -81,7 +81,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                                     makeQuiz();
                                 } else {
                                     quizCount = 0;
-                                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz4.newInstance());
+                                    ((LessonFrame)getActivity()).replaceFragment(LessonSentence.newInstance());
                                 }
                                 wordQuiz1Answer.setText("");
 

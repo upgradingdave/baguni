@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="L1_WORD">
+        <item>Hello</item>
+        <item>next</item>
+        <item>again</item>
+        <item>to see / to watch</item>
+        <item>to go</item>
+    </string-array>
+
+    <string-array name="L1_SENTENCE">
+        <item>Hello!</item>
+        <item>Nice to meet you.</item>
+        <item>Long time no see.</item>
+        <item>How\'s it going?</item>
+        <item>See you next time.</item>
+        <item>Good bye.</item>
+    </string-array>
+
+    <string-array name="L1_SENTENCEEXPLAIN">
+        <item>Hello! balala</item>
+        <item>Nice to meet you. ballal</item>
+        <item>Long time no see. blabla</item>
+        <item>How\'s it going? blabla</item>
+        <item>See you next time. blabla</item>
+        <item>Good bye. blabla</item>
+    </string-array>
+
+
+
+</resources>
