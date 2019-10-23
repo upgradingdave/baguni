@@ -1,7 +1,7 @@
 package net.awesomekorean.baguni.login;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.opengl.ETC1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,7 +10,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
@@ -75,9 +77,13 @@ public class SignUp extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if(response.isSuccessful()) {
-                            System.out.println("Sign up succeed!!");
+                            System.out.println(getString(R.string.SIGNUP_SUCCEED));
+                            Toast.makeText(getApplicationContext(), R.string.SIGNUP_SUCCEED, Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
                         }else {
-                            System.out.println("Sign up fail!!");
+                            System.out.println(getString(R.string.SIGNUP_FAILED));
+                            Toast.makeText(getApplicationContext(), R.string.SIGNUP_FAILED, Toast.LENGTH_LONG).show();
                         }
                     }
 

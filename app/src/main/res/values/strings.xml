@@ -57,5 +57,8 @@
     <string name="LONGCLICK_OFF">off</string>
     <string name="LESSONWORD">lessonWord</string>
     <string name="LESSONSENTENCE">lessonSentence</string>
+    <string name="SIGNUP_SUCCEED">Sign up succeed!</string>
+    <string name="SIGNUP_FAILED">Sign up failed!</string>
+
 
 </resources>

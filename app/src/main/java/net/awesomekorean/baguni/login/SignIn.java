@@ -10,20 +10,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-
 import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.Arrays;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,16 +108,18 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     public void onResponse(Call<User> call, Response<User> response) {
                         // 로그인 결과 받기
                         if(response.isSuccessful()) {
-                            System.out.println("LOGIN SUCCEED");
 
                             User user = response.body();
+                            String msgFromServer = user.getMsgFromServer();
+                            System.out.println(msgFromServer);
 
-                            Toast.makeText(getApplicationContext(), "Hello, "+user.getName(), Toast.LENGTH_LONG).show();
-                            intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-
-                        }else {
-                            System.out.println("LOGIN FAILED!");
+                            if(!msgFromServer.contains("ERROR")) {
+                                Toast.makeText(getApplicationContext(), "Hello, "+ user.getName(), Toast.LENGTH_LONG).show();
+                                intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), msgFromServer, Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
 
