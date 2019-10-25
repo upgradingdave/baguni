@@ -23,36 +23,34 @@ import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
 
-    EditText name;
     EditText email;
     EditText password;
     EditText passwordConfirm;
+    Button btnDuplicateCheck;
     Button btnSignUp;
 
-    String userName;
     String userEmail;
     String userPass;
     String userPassConfirm;
 
     Boolean condition = false;
-    Boolean userNameOk = false;
     Boolean userEmailOk = false;
+    Boolean userEmailDuplicateOk = false;
     Boolean userPassOk = false;
 
     int focused;
 
+    RetrofitConnection retrofitConnection;
+    Call<User> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         passwordConfirm = findViewById(R.id.passwordConfirm);
-        name.addTextChangedListener(textWatcher);
-        name.setOnFocusChangeListener(focusChangeListener);
         email.addTextChangedListener(textWatcher);
         email.setOnFocusChangeListener(focusChangeListener);
         password.addTextChangedListener(textWatcher);
@@ -60,19 +58,49 @@ public class SignUp extends AppCompatActivity {
         passwordConfirm.addTextChangedListener(textWatcher);
         passwordConfirm.setOnFocusChangeListener(focusChangeListener);
 
+        btnDuplicateCheck = findViewById(R.id.btnDuplicateCheck);
+        btnDuplicateCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userEmail = email.getText().toString();
+
+                retrofitConnection = new RetrofitConnection();
+                call = retrofitConnection.service().getUserByEmail(userEmail);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        System.out.println("CODE :" +response.code());
+                        if(response.code()==404) {
+                            userEmailDuplicateOk = true;
+                            System.out.println(getString(R.string.DUPLICATE_FALSE));
+
+                        } else {
+                            userEmailDuplicateOk = false;
+                            System.out.println(getString(R.string.DUPLICATE_TRUE));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        System.out.println("FAIL");
+                    }
+                });
+            }
+        });
+
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                userName = name.getText().toString();
                 userEmail = email.getText().toString();
                 userPass = password.getText().toString();
 
-                User newUser = new User(userName, userEmail, userPass);
+                User newUser = new User(userEmail, userPass);
+                System.out.println("USERNAME : " + newUser.getName());
 
-                RetrofitConnection retrofitConnection = new RetrofitConnection();
-                Call<User> call = retrofitConnection.service().createUser(newUser);
+                retrofitConnection = new RetrofitConnection();
+                call = retrofitConnection.service().createUser(newUser);
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
@@ -118,12 +146,6 @@ public class SignUp extends AppCompatActivity {
 
             switch (focused) {
 
-                case R.id.name :
-                    userName = name.getText().toString();
-                    condition = userName.length() > 1;
-                    userNameOk = conditionCheck(condition, name);
-                    break;
-
                 case R.id.email :
                     userEmail = email.getText().toString();
                     condition = Patterns.EMAIL_ADDRESS.matcher(userEmail).matches();
@@ -143,10 +165,10 @@ public class SignUp extends AppCompatActivity {
                     break;
             }
 
-            System.out.println("NAME : " +userNameOk);
             System.out.println("EMAIL : " + userEmailOk);
+            System.out.println("EMAIL CHECK: " + userEmailDuplicateOk);
             System.out.println("PASS : " + userPassOk);
-            if(userNameOk.equals(true) && userEmailOk.equals(true) && userPassOk.equals(true)) {
+            if(userEmailOk.equals(true) && userEmailDuplicateOk.equals(true) && userPassOk.equals(true)) {
                 btnSignUp.setEnabled(true);
             }else {
                 btnSignUp.setEnabled(false);

@@ -9,8 +9,8 @@ public class User {
     private String dateSignIn;
     private String msgFromServer;
 
-    public User(String name, String email, String password) {
-        this.name = name;
+    public User(String email, String password) {
+        this.name = email.substring(0, email.lastIndexOf("@")); // 이메일의 @ 앞부분을 이름으로 자동 설정
         this.email = email;
         this.password = password;
         this.dateSignUp = "NOW()";

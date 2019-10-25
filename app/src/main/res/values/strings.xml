@@ -21,13 +21,16 @@
 
     <string name="SIGNIN">Sign In</string>
     <string name="SIGNUP">Sign Up</string>
+    <string name="DUPLICATE_CHECK">Duplicate Check</string>
+    <string name="DUPLICATE_TRUE">This email already exists.</string>
+    <string name="DUPLICATE_FALSE">This email is available.</string>
     <string name="GOOGLE">Sign In With Google</string>
     <string name="FACEBOOK">Sign In With Facebook</string>
     <string name="SELECTLANGUAGE">Select Language</string>
     <string name="USER_NAME">Name</string>
     <string name="USER_EMAIL">Email</string>
     <string name="USER_PASSWORD">Password</string>
-    <string name="USER_PASSWORD_CONFIRM">Confirn Password</string>
+    <string name="USER_PASSWORD_CONFIRM">Confirm Password</string>
 
     <string name="MSG_COLLECT">Collection is saved</string>
     <string name="MSG_WRITING">Writing is saved</string>
