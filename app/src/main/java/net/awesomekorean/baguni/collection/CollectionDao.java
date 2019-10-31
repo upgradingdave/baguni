@@ -11,22 +11,46 @@ import java.util.List;
 @Dao
 public interface CollectionDao {
 
-    @Query("SELECT * FROM CollectionEntity ORDER BY id DESC")
+    @Query("SELECT * FROM COLLECTION ORDER BY dateNew DESC")
     LiveData<List<CollectionEntity>> getAll();
 
-    @Query("SELECT * FROM COLLECTIONENTITY WHERE id = :index")
-    CollectionEntity getById(int index);
+    @Query("SELECT * FROM COLLECTION")
+    List<CollectionEntity> getAllForSync();
 
-    @Query("SELECT * FROM COLLECTIONENTITY ORDER BY RANDOM() LIMIT 1")
+    @Query("SELECT * FROM COLLECTION WHERE guid = :guid")
+    CollectionEntity getByGuid(String guid);
+
+    @Query("SELECT * FROM COLLECTION ORDER BY RANDOM() LIMIT 1")
     CollectionEntity getRandom();
 
-    @Query("SELECT * FROM COLLECTIONENTITY ORDER BY id DESC LIMIT 1 OFFSET :index")
+    @Query("SELECT * FROM COLLECTION ORDER BY dateNew DESC LIMIT 1 OFFSET :index")
     CollectionEntity getDesc(int index);
 
     //@Query("SELECT * FROM COLLECTIONENTITY LIMIT 20 OFFSET 0")
 
-    @Query("SELECT COUNT(*) FROM CollectionEntity")
+    @Query("SELECT COUNT(*) FROM COLLECTION")
     int getCount();
+
+
+    // << 동기화 부분 >>
+
+    // 신규 추가된 아이템들 가져오기
+    @Query("SELECT * FROM COLLECTION WHERE dateSync is null")
+    List<CollectionEntity> getNewItems();
+
+    // 마지막 동기화 날짜 가져오기
+    @Query("SELECT dateLastSync FROM DATE_LASTSYNC")
+    String getDateLastSync();
+
+    @Insert
+    void initLastSync(DateLastSyncEntity dateLastSyncEntity);
+
+    @Update
+    void updateLastSync(DateLastSyncEntity dateLastSyncEntity);
+
+
+    @Query("DELETE FROM COLLECTION")
+    public void deleteAll();
 
 
     @Insert

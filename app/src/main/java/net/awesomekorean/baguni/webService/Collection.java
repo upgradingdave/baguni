@@ -1,46 +1,23 @@
-package net.awesomekorean.baguni.collection;
+package net.awesomekorean.baguni.webService;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+public class Collection {
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
-@Entity(tableName = "COLLECTION")
-public class CollectionEntity {
-
-    @PrimaryKey(autoGenerate = true)
-    private int itemId;
+    private int userId;
     private String guid;
     private String front;
     private String back;
-    private String audio = "file path"; // 임의로 오디오 경로 설정
+    private String audio;
     private String dateNew;
-    private String dateEdit = null;
-    private String dateSync = null;
+    private String dateEdit;
+    private String dateSync;
+    private String msgFromServer;
 
-    public CollectionEntity() {
-
+    public int getUserId() {
+        return userId;
     }
 
-    public CollectionEntity(String front, String back) {
-
-        this.front = front;
-        this.back = back;
-
-        // GUID 생성하기
-        this.guid = UUID.randomUUID().toString();
-
-    }
-
-    public int getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getGuid() {
@@ -97,5 +74,13 @@ public class CollectionEntity {
 
     public void setDateSync(String dateSync) {
         this.dateSync = dateSync;
+    }
+
+    public String getMsgFromServer() {
+        return msgFromServer;
+    }
+
+    public void setMsgFromServer(String msgFromServer) {
+        this.msgFromServer = msgFromServer;
     }
 }

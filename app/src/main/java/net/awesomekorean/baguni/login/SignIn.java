@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.awesomekorean.baguni.MainActivity;
+import net.awesomekorean.baguni.MainCollection;
 import net.awesomekorean.baguni.R;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
@@ -115,6 +116,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                             if(!msgFromServer.contains("ERROR")) {
                                 Toast.makeText(getApplicationContext(), "Hello, "+ user.getName(), Toast.LENGTH_LONG).show();
+                                MainCollection.userId = user.getId(); // MainCollection 에서 동기화를 위해 userId 입력
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             } else {

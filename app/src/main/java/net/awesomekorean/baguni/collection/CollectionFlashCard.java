@@ -26,7 +26,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
     String textFront;
     String textBack;
-    int index;
+    String guid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
             textFront = intent.getExtras().getString(getString(R.string.EXTRA_FRONT));
             textBack = intent.getExtras().getString(getString(R.string.EXTRA_BACk));
-            index = intent.getExtras().getInt(getString(R.string.EXTRA_ID));
+            guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
             editFront.setText(textFront);
             editBack.setText(textBack);
         }
@@ -84,7 +84,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
                 // EDIT 일 때
                 } else {
-                    repository.editById(index, front, back);
+                    repository.editByGuid(guid, front, back);
                 }
                 saveResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();

@@ -2,6 +2,7 @@ package net.awesomekorean.baguni.webService;
 
 public class User {
 
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -15,6 +16,10 @@ public class User {
         this.password = password;
         this.dateSignUp = "NOW()";
         this.dateSignIn = "NOW()";
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

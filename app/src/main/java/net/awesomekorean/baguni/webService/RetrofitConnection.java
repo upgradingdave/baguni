@@ -11,7 +11,7 @@ public class RetrofitConnection {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public UserService service() {
-        return retrofit.create(UserService.class);
+    public WebService service() {
+        return retrofit.create(WebService.class);
     }
 }

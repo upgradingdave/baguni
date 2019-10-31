@@ -2,7 +2,7 @@ package net.awesomekorean.baguni.collection;
 
 public class CollectionItems {
 
-    private int id;
+    private String guid;
 
     private String collectionFront;
     private String collectionBack;
@@ -43,13 +43,15 @@ public class CollectionItems {
         return isVisible;
     }
 
-    public int getId() {
-        return id;
+    public String getGuid() {
+        return guid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGuid(String id) {
+        this.guid = id;
     }
+
+
 
 
     // 검색 기능을 위해 equals 재정의

@@ -39,6 +39,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     View view;
 
+    public static int userId = 22; // 임시로 설정 danny@gmail.com
+
     public static CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
@@ -49,6 +51,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     ProgressBar progressBar;
 
+    Button btnSync; // DB와 동기화 버튼
     Button btnStudy;    // 컬렉션을 flash card 로 공부
     static Button btnDelete;   // 컬렉션 삭제 버튼
     static Button btnRecord;   // 녹음 요청 버튼
@@ -100,6 +103,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         btnNo = view.findViewById(R.id.btnNo);
         collectionNo = view.findViewById(R.id.collectionNo);
         msgNoCollection = view.findViewById(R.id.msgNoCollection);
+        btnSync = view.findViewById(R.id.btnSync);
         selectAll.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -108,10 +112,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         searchCancel.setOnClickListener(this);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
+        btnSync.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
 
         repository = new CollectionRepository(getContext());
+
+        //repository.deleteAll();
 
         setListViewFooter();
 
@@ -123,6 +130,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 repository.getCount();
                 listAllData = new ArrayList<>();
 
+                // 컬렉션이 하나도 없을 때 메시지 표시
                 if(collectionEntities.size() == 0) {
                     msgNoCollection.setVisibility(View.VISIBLE);
                 }else{
@@ -130,11 +138,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 }
 
                 for (CollectionEntity entity : collectionEntities) {
-
                     CollectionItems items = new CollectionItems();
                     items.setCollectionFront(entity.getFront());
                     items.setCollectionBack(entity.getBack());
-                    items.setId(entity.getId());
+                    items.setGuid(entity.getGuid());
                     listAllData.add(items);
                 }
                 if(collectionEntities.size()>10) {
@@ -221,7 +228,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     adapter.notifyDataSetChanged();
                 } else {
                     intent = new Intent(getContext(), CollectionFlashCard.class);
-                    intent.putExtra(getString(R.string.EXTRA_ID), item.getId());
+                    intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
                     intent.putExtra(getString(R.string.EXTRA_FRONT), item.getCollectionFront());
                     intent.putExtra(getString(R.string.EXTRA_BACk), item.getCollectionBack());
                     intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
@@ -367,18 +374,18 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnYes :
-                ArrayList<Integer> checkedList = new ArrayList<>();
+                ArrayList<String> checkedList = new ArrayList<>();
 
                 for(CollectionItems items : listAllData) {
                     if(items.getChecked()) {
-                        checkedList.add(items.getId());
+                        checkedList.add(items.getGuid());
                     }
                 }
                 if(checkedList != null) {
 
-                    for(int id : checkedList) {
+                    for(String guid : checkedList) {
 
-                        repository.deleteById(id);
+                        repository.deleteByGuid(guid);
                     }
                 }
                 ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
@@ -400,6 +407,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
             case R.id.searchCancel :
                 searchEdit.setText("");
+                break;
+
+            case R.id.btnSync :
+                repository.syncCollections(userId);
                 break;
         }
     }

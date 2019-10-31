@@ -56,10 +56,12 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/samplewrong" />
-
-
-
             </LinearLayout>
+            <Button
+                android:id="@+id/btnSync"
+                android:text="sync"
+                android:layout_width="80dp"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
