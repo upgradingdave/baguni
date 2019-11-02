@@ -14,9 +14,6 @@ public interface CollectionDao {
     @Query("SELECT * FROM COLLECTION ORDER BY dateNew DESC")
     LiveData<List<CollectionEntity>> getAll();
 
-    @Query("SELECT * FROM COLLECTION")
-    List<CollectionEntity> getAllForSync();
-
     @Query("SELECT * FROM COLLECTION WHERE guid = :guid")
     CollectionEntity getByGuid(String guid);
 
@@ -32,6 +29,7 @@ public interface CollectionDao {
     int getCount();
 
 
+
     // << 동기화 부분 >>
 
     // 신규 추가된 아이템들 가져오기
@@ -42,6 +40,11 @@ public interface CollectionDao {
     @Query("SELECT dateLastSync FROM DATE_LASTSYNC")
     String getDateLastSync();
 
+    // 수정된 아이템들 가져오기
+    @Query("SELECT * FROM COLLECTION WHERE isEdit = 1")
+    List<CollectionEntity> getUpdateItems();
+
+
     @Insert
     void initLastSync(DateLastSyncEntity dateLastSyncEntity);
 
@@ -50,7 +53,7 @@ public interface CollectionDao {
 
 
     @Query("DELETE FROM COLLECTION")
-    public void deleteAll();
+    void deleteAll();
 
 
     @Insert
@@ -61,4 +64,9 @@ public interface CollectionDao {
 
     @Delete
     void delete(CollectionEntity collectionEntity);
+
+    // 개발용으로 만듦. 개발 끝나면 삭제할 것
+   @Query("DELETE FROM DATE_LASTSYNC")
+    void deleteDateLastSync();
+
 }

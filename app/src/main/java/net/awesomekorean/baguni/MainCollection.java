@@ -29,6 +29,8 @@ import net.awesomekorean.baguni.collection.CollectionAdapter;
 import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.collection.CollectionStudy;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -119,6 +121,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         repository = new CollectionRepository(getContext());
 
         //repository.deleteAll();
+        //repository.deleteDateLastSync();
 
         setListViewFooter();
 
@@ -137,13 +140,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     msgNoCollection.setVisibility(View.GONE);
                 }
 
+                DescendingObj descendingObj = new DescendingObj();
+                Collections.sort(collectionEntities, descendingObj);
+
                 for (CollectionEntity entity : collectionEntities) {
                     CollectionItems items = new CollectionItems();
-                    items.setCollectionFront(entity.getFront());
-                    items.setCollectionBack(entity.getBack());
+                    items.setFront(entity.getFront());
+                    items.setBack(entity.getBack());
                     items.setGuid(entity.getGuid());
                     listAllData.add(items);
                 }
+
                 if(collectionEntities.size()>10) {
                     list = new ArrayList<>(listAllData.subList(0,10));
                 } else {
@@ -229,8 +236,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 } else {
                     intent = new Intent(getContext(), CollectionFlashCard.class);
                     intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
-                    intent.putExtra(getString(R.string.EXTRA_FRONT), item.getCollectionFront());
-                    intent.putExtra(getString(R.string.EXTRA_BACk), item.getCollectionBack());
+                    intent.putExtra(getString(R.string.EXTRA_FRONT), item.getFront());
+                    intent.putExtra(getString(R.string.EXTRA_BACk), item.getBack());
                     intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
                     startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
                 }
@@ -330,8 +337,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         } else {
 
             for(int i=0; i<listAllData.size(); i++) {
-                String front = listAllData.get(i).getCollectionFront();
-                String back = listAllData.get(i).getCollectionBack();
+                String front = listAllData.get(i).getFront();
+                String back = listAllData.get(i).getBack();
                 Pattern pattern = Pattern.compile("^"+text, Pattern.CASE_INSENSITIVE);
                 Matcher matcherFront = pattern.matcher(front);
                 Matcher matcherBack = pattern.matcher(back);
@@ -415,3 +422,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         }
     }
 }
+
+// 컬렉션 리스트를 내림차순으로 정렬하기
+class DescendingObj implements Comparator<CollectionEntity> {
+    @Override
+    public int compare(CollectionEntity c1, CollectionEntity c2) {
+        return c2.getDateNew().compareTo(c1.getDateNew());
+    }
+}
+

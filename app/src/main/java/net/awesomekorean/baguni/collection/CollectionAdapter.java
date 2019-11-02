@@ -64,8 +64,8 @@ public class CollectionAdapter extends BaseAdapter {
 
         CollectionItems items = list.get(i);
 
-        holder.collectionFront.setText(items.getCollectionFront());
-        holder.collectionBack.setText(items.getCollectionBack());
+        holder.collectionFront.setText(items.getFront());
+        holder.collectionBack.setText(items.getBack());
         holder.checkBox.setChecked(items.getChecked());
         if(items.getVisible()) { holder.checkBox.setVisibility(View.VISIBLE);
         } else{holder.checkBox.setVisibility(View.INVISIBLE);}

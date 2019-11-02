@@ -3,6 +3,7 @@ package net.awesomekorean.baguni.webService;
 public class Collection {
 
     private int userId;
+    private int itemId;
     private String guid;
     private String front;
     private String back;
@@ -18,6 +19,14 @@ public class Collection {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     public String getGuid() {

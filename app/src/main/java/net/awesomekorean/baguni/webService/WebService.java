@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface WebService {
@@ -29,5 +30,9 @@ public interface WebService {
 
     @GET("collections/{dateLastSync}")
     Call<List<CollectionEntity>> sendSyncDates(@Path("dateLastSync") String dateLastSync);
+
+    @PUT("collections")
+    Call<List<Collection>> updateItems(@Body List<Collection> collections);
+
 
 }

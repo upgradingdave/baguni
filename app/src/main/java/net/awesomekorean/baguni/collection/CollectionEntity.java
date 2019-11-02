@@ -18,8 +18,8 @@ public class CollectionEntity {
     private String back;
     private String audio = "file path"; // 임의로 오디오 경로 설정
     private String dateNew;
-    private String dateEdit = null;
     private String dateSync = null;
+    private int isEdit = 0; // 0=false, 1=true
 
     public CollectionEntity() {
 
@@ -83,19 +83,19 @@ public class CollectionEntity {
         this.dateNew = dateNew;
     }
 
-    public String getDateEdit() {
-        return dateEdit;
-    }
-
-    public void setDateEdit(String dateEdit) {
-        this.dateEdit = dateEdit;
-    }
-
     public String getDateSync() {
         return dateSync;
     }
 
     public void setDateSync(String dateSync) {
         this.dateSync = dateSync;
+    }
+
+    public int getIsEdit() {
+        return isEdit;
+    }
+
+    public void setIsEdit(int isEdit) {
+        this.isEdit = isEdit;
     }
 }

@@ -4,27 +4,29 @@ public class CollectionItems {
 
     private String guid;
 
-    private String collectionFront;
-    private String collectionBack;
+    private String front;
+    private String back;
 
     private boolean isChecked = false;
 
     private boolean isVisible = false;
 
-    public void setCollectionFront(String collection) {
-        this.collectionFront = collection;
+
+
+    public void setFront(String collection) {
+        this.front = collection;
     }
 
-    public void setCollectionBack(String collection) {
-        this.collectionBack = collection;
+    public void setBack(String collection) {
+        this.back = collection;
     }
 
-    public String getCollectionFront() {
-        return this.collectionFront;
+    public String getFront() {
+        return this.front;
     }
 
-    public String getCollectionBack() {
-        return this.collectionBack;
+    public String getBack() {
+        return this.back;
     }
 
     public void setChecked(boolean isChecked) {
@@ -52,15 +54,13 @@ public class CollectionItems {
     }
 
 
-
-
     // 검색 기능을 위해 equals 재정의
     @Override
     public boolean equals(Object obj) {
 
         boolean result = false;
 
-        if(this.collectionFront.contains((CharSequence) obj) || this.collectionBack.contains((CharSequence) obj)) {
+        if(this.front.contains((CharSequence) obj) || this.back.contains((CharSequence) obj)) {
             result = true;
         }
 
