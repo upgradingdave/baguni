@@ -26,13 +26,13 @@ public interface WebService {
     Call<Integer> getItem(@Path("userId") int userId, @Path("itemId") String itemId);
 
     @POST("collections")
-    Call<List<Collection>> uploadItems(@Body List<Collection> collections);
+    Call<List<CollectionEntity>> uploadItems(@Body List<CollectionEntity> collections);
 
-    @GET("collections/{dateLastSync}")
-    Call<List<CollectionEntity>> sendSyncDates(@Path("dateLastSync") String dateLastSync);
+    @GET("collections/{dateSync}")
+    Call<List<CollectionEntity>> sendDateSync(@Path("dateSync") String dateSync);
 
     @PUT("collections")
-    Call<List<Collection>> updateItems(@Body List<Collection> collections);
+    Call<List<CollectionEntity>> updateItems(@Body List<CollectionEntity> collections);
 
 
 }

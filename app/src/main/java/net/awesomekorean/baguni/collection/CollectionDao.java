@@ -25,31 +25,28 @@ public interface CollectionDao {
 
     //@Query("SELECT * FROM COLLECTIONENTITY LIMIT 20 OFFSET 0")
 
-    @Query("SELECT COUNT(*) FROM COLLECTION")
+    @Query("SELECT COUNT(*) FROM COLLECTION WHERE deleted != 1")
     int getCount();
-
 
 
     // << 동기화 부분 >>
 
     // 신규 추가된 아이템들 가져오기
-    @Query("SELECT * FROM COLLECTION WHERE dateSync is null")
-    List<CollectionEntity> getNewItems();
+    @Query("SELECT * FROM COLLECTION WHERE dateEdit > :dateSync")
+    List<CollectionEntity> getUploadItems(String dateSync);
 
     // 마지막 동기화 날짜 가져오기
-    @Query("SELECT dateLastSync FROM DATE_LASTSYNC")
-    String getDateLastSync();
+    @Query("SELECT dateSync FROM DATE_SYNC")
+    String getDateSync();
 
-    // 수정된 아이템들 가져오기
-    @Query("SELECT * FROM COLLECTION WHERE isEdit = 1")
-    List<CollectionEntity> getUpdateItems();
+    // 마지막 동기화 날짜 업데이트하기
+    @Update
+    void updateDateSync(DateSyncEntity dateSyncEntity);
+
 
 
     @Insert
-    void initLastSync(DateLastSyncEntity dateLastSyncEntity);
-
-    @Update
-    void updateLastSync(DateLastSyncEntity dateLastSyncEntity);
+    void initDateSync(DateSyncEntity dateSyncEntity);
 
 
     @Query("DELETE FROM COLLECTION")
@@ -66,7 +63,7 @@ public interface CollectionDao {
     void delete(CollectionEntity collectionEntity);
 
     // 개발용으로 만듦. 개발 끝나면 삭제할 것
-   @Query("DELETE FROM DATE_LASTSYNC")
-    void deleteDateLastSync();
-
+    @Query("DELETE FROM DATE_SYNC")
+    void deleteDateSync();
 }
+

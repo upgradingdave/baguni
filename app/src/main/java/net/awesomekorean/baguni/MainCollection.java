@@ -41,8 +41,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     View view;
 
-    public static int userId = 22; // 임시로 설정 danny@gmail.com
-
     public static CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
@@ -120,8 +118,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         repository = new CollectionRepository(getContext());
 
-        //repository.deleteAll();
-        //repository.deleteDateLastSync();
+        repository.deleteAll();
+        repository.deleteDateLastSync();
 
         setListViewFooter();
 
@@ -144,11 +142,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 Collections.sort(collectionEntities, descendingObj);
 
                 for (CollectionEntity entity : collectionEntities) {
-                    CollectionItems items = new CollectionItems();
-                    items.setFront(entity.getFront());
-                    items.setBack(entity.getBack());
-                    items.setGuid(entity.getGuid());
-                    listAllData.add(items);
+                    if(entity.getDeleted()!=1) {
+                        CollectionItems items = new CollectionItems();
+                        items.setFront(entity.getFront());
+                        items.setBack(entity.getBack());
+                        items.setGuid(entity.getGuid());
+                        listAllData.add(items);
+                    }
                 }
 
                 if(collectionEntities.size()>10) {
@@ -392,7 +392,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
                     for(String guid : checkedList) {
 
-                        repository.deleteByGuid(guid);
+                        repository.setDeletedByGuid(guid);
                     }
                 }
                 ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
@@ -417,7 +417,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnSync :
-                repository.syncCollections(userId);
+                repository.syncCollections();
                 break;
         }
     }

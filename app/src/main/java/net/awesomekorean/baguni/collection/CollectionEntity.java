@@ -13,13 +13,14 @@ public class CollectionEntity {
 
     @PrimaryKey(autoGenerate = true)
     private int itemId;
+    private int userId;
     private String guid;
     private String front;
     private String back;
     private String audio = "file path"; // 임의로 오디오 경로 설정
     private String dateNew;
-    private String dateSync = null;
-    private int isEdit = 0; // 0=false, 1=true
+    private String dateEdit;
+    private int deleted = 0; // 0=false, 1=true
 
     public CollectionEntity() {
 
@@ -33,6 +34,14 @@ public class CollectionEntity {
         // GUID 생성하기
         this.guid = UUID.randomUUID().toString();
 
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getItemId() {
@@ -83,19 +92,19 @@ public class CollectionEntity {
         this.dateNew = dateNew;
     }
 
-    public String getDateSync() {
-        return dateSync;
+    public String getDateEdit() {
+        return dateEdit;
     }
 
-    public void setDateSync(String dateSync) {
-        this.dateSync = dateSync;
+    public void setDateEdit(String dateEdit) {
+        this.dateEdit = dateEdit;
     }
 
-    public int getIsEdit() {
-        return isEdit;
+    public int getDeleted() {
+        return deleted;
     }
 
-    public void setIsEdit(int isEdit) {
-        this.isEdit = isEdit;
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 }
