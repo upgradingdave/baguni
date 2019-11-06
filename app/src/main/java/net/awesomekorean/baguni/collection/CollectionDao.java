@@ -41,6 +41,7 @@ public interface CollectionDao {
 
     // 마지막 동기화 날짜 업데이트하기
     @Update
+
     void updateDateSync(DateSyncEntity dateSyncEntity);
 
 

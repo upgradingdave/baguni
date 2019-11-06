@@ -19,6 +19,21 @@
     <string name="NEXT">Next</string>
     <string name="DELETE">Delete</string>
 
+    <string name="LOGIN_WELCOME"> Welcome to Podo</string>
+    <string name="LOGIN_EMAIL"> Email</string>
+    <string name="LOGIN_PASSWORD"> Password</string>
+    <string name="LOGIN_WRONGEMAIL"> Wrong email!!</string>
+    <string name="LOGIN_WRONGPASS"> Wrong password!!</string>
+    <string name="LOGIN_FORGOT"> Forgot Password?</string>
+    <string name="LOGIN"> Log In</string>
+    <string name="LOGIN_WITH"> or login with</string>
+    <string name="LOGIN_FACEBOOK"> Facebook</string>
+    <string name="LOGIN_GOOGLE"> Google</string>
+    <string name="LOGIN_WECHAT"> Wechat</string>
+    <string name="LOGIN_NOACCOUNT"> Don\'t have an account?</string>
+    <string name="LOGIN_SIGNUP"> Sign up</string>
+    <string name="LOGIN_EN">EN</string>
+
     <string name="SIGNIN">Sign In</string>
     <string name="SIGNUP">Sign Up</string>
     <string name="DUPLICATE_CHECK">Duplicate Check</string>

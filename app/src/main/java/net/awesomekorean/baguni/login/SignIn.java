@@ -1,22 +1,25 @@
 package net.awesomekorean.baguni.login;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import net.awesomekorean.baguni.MainActivity;
-import net.awesomekorean.baguni.MainCollection;
 import net.awesomekorean.baguni.R;
-import net.awesomekorean.baguni.collection.CollectionEntity;
 import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,16 +31,14 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     EditText password;
 
     Button btnSignIn;
-    Button btnSignUp;
+    TextView btnSignUp;
     Button btnSignInGoogle;
     Button btnSignInFacebook;
-    Button btnSelectLanguage;
-
-    ListView listView;
-    SignInListViewAdapter adapter;
+    LinearLayout selectLanguage;
 
     Intent intent;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,54 +47,56 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         btnSignIn = findViewById(R.id.btnSignIn);
-        btnSignUp = findViewById(R.id.btnSingUp);
+        btnSignUp = findViewById(R.id.btnSignUp);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
         btnSignInFacebook = findViewById(R.id.btnSignInFacebook);
-        btnSelectLanguage = findViewById(R.id.btnSelectLanguage);
-        listView = findViewById(R.id.listView);
+        selectLanguage = findViewById(R.id.selectLanguage);
         btnSignIn.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
         btnSignInGoogle.setOnClickListener(this);
         btnSignInFacebook.setOnClickListener(this);
-        btnSelectLanguage.setOnClickListener(this);
+        selectLanguage.setOnClickListener(this);
 
-        adapter = new SignInListViewAdapter();
-        listView.setAdapter(adapter);
+        ArrayList<SelectLanguageItem> list = new ArrayList<>();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        SelectLanguageItem english = new SelectLanguageItem();
+        english.setFlag(getDrawable(R.drawable.english));
+        english.setNation("English");
+        english.setChecked(getDrawable(R.drawable.check));
+        list.add(english);
 
-                String language = (String) adapterView.getItemAtPosition(i);
-                btnSelectLanguage.setText(language);
-                listView.setVisibility(View.GONE);
+        SelectLanguageItem chinese = new SelectLanguageItem();
+        chinese.setFlag(getDrawable(R.drawable.chinese));
+        chinese.setNation("Chinese");
+        chinese.setChecked(getDrawable(R.drawable.check));
+        list.add(chinese);
 
-                switch (i) {    // 선택한 언어에 따라 메뉴 언어 변경
+        SelectLanguageItem japanese = new SelectLanguageItem();
+        japanese.setFlag(getDrawable(R.drawable.japanese));
+        japanese.setNation("Japanese");
+        japanese.setChecked(getDrawable(R.drawable.check));
+        list.add(japanese);
 
-                    case 0 :
-                        // 한국어
-                        break;
+        SelectLanguageItem thai = new SelectLanguageItem();
+        thai.setFlag(getDrawable(R.drawable.thai));
+        thai.setNation("Thai");
+        thai.setChecked(getDrawable(R.drawable.check));
+        list.add(thai);
 
-                    case 1 :
-                        // 영어
-                        break;
+        SelectLanguageItem korean = new SelectLanguageItem();
+        korean.setFlag(getDrawable(R.drawable.korean));
+        korean.setNation("Korean");
+        korean.setChecked(getDrawable(R.drawable.check));
+        list.add(korean);
 
-                    case 2 :
-                        // 중국어
-                        break;
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-                    case 3 :
-                        // 일본어
-                        break;
+        SelectLanguageAdapter adapter = new SelectLanguageAdapter(list);
+        recyclerView.setAdapter(adapter);
 
-                    case 4 :
-                        // 태국어
-                        break;
-                }
-            }
-        });
+
     }
-
     @Override
     public void onClick(View view) {
 
@@ -135,20 +138,12 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                 break;
 
-            case R.id.btnSingUp :
-                intent = new Intent(this, SignUp.class);
-                startActivity(intent);
-                break;
-
             case R.id.btnSignInGoogle :
                 break;
 
             case R.id.btnSignInFacebook :
                 break;
 
-            case R.id.btnSelectLanguage :
-                listView.setVisibility(View.VISIBLE);
-                break;
         }
 
     }

@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:padding="5dp"
+    android:background="@drawable/bg_round_all"
+    >
 
-    <TextView
-        android:id="@+id/textLanguage"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="English"
-        android:textSize="20dp"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/flag"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.2"
+        android:src="@drawable/english"
+        android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/nation"
+        android:layout_marginLeft="25dp"
+        android:layout_weight="0.6"
+        android:gravity="center"
+        android:text="English"
+        android:textColor="#4A4A4A"
+        android:fontFamily=""
+        android:textSize="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/checked"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.2"
+        android:src="@drawable/check"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
