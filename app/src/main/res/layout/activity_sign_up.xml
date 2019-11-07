@@ -46,7 +46,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="86dp"
-        android:text="@string/LOGIN_SIGNUP"
+        android:text="@string/SIGNUP"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="#2E294E"
@@ -86,7 +86,7 @@
                     android:gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_NAME"
+                    android:text="@string/NAME"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -96,7 +96,7 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_WRONGEMAIL"
+                    android:text="@string/WRONGEMAIL"
                     android:textColor="#FD5585"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
@@ -110,6 +110,7 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
         </LinearLayout>
@@ -136,7 +137,7 @@
                     android:gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_EMAIL"
+                    android:text="@string/EMAIL"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -146,7 +147,7 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_WRONGPASS"
+                    android:text="@string/WRONGPASS"
                     android:textColor="#FD5585"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
@@ -159,6 +160,7 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
+                android:paddingLeft="20dp"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
@@ -186,7 +188,7 @@
                     android:gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_PASSWORD"
+                    android:text="@string/PASSWORD"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -196,7 +198,7 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_WRONGPASS"
+                    android:text="@string/WRONGPASS"
                     android:textColor="#FD5585"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
@@ -209,6 +211,7 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
+                android:paddingLeft="20dp"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
@@ -236,7 +239,7 @@
                     android:gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_CONFIRM"
+                    android:text="@string/CONFIRM"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -246,7 +249,7 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_WRONGPASS"
+                    android:text="@string/WRONGPASS"
                     android:textColor="#FD5585"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
@@ -259,6 +262,7 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
+                android:paddingLeft="20dp"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
@@ -269,7 +273,7 @@
         <Button
             android:id="@+id/btnSignUp"
             android:layout_weight="0.12"
-            android:text="@string/LOGIN_SIGNUP"
+            android:text="@string/SIGNUP"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_01"
             android:layout_marginTop="10dp"
@@ -300,7 +304,7 @@
 
         <TextView
             android:layout_weight="1"
-            android:text="@string/LOGIN_HAVEACCOUNT"
+            android:text="@string/HAVEACCOUNT"
             android:textSize="15dp"
             android:gravity="right"
             android:layout_width="wrap_content"

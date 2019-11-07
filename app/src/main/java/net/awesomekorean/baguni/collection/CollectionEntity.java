@@ -1,6 +1,7 @@
 package net.awesomekorean.baguni.collection;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class CollectionEntity {
     private String dateEdit;
     private int deleted = 0; // 0=false, 1=true
 
+    @Ignore
     public CollectionEntity() {
 
     }

@@ -46,8 +46,9 @@
         <TextView
             android:id="@+id/nation"
             android:layout_gravity="center"
-            android:text="@string/LOGIN_ENGLISH"
+            android:text="@string/ENGLISH"
             android:textSize="15dp"
+            android:textColor="#4C4BF6"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -61,7 +62,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="86dp"
-        android:text="@string/LOGIN_WELCOME"
+        android:text="@string/WELCOME"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="#2E294E"
@@ -82,7 +83,7 @@
         <LinearLayout
             android:id="@+id/layoutEmail"
             android:weightSum="1"
-            android:layout_weight="0.125"
+            android:layout_weight="0.154"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_marginTop="30dp"
@@ -101,7 +102,7 @@
                     android:gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_EMAIL"
+                    android:text="@string/EMAIL"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -111,7 +112,7 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_WRONGEMAIL"
+                    android:text="@string/WRONGEMAIL"
                     android:textColor="#FD5585"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
@@ -125,6 +126,7 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
+                android:paddingLeft="20dp"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
@@ -132,7 +134,7 @@
 
         <LinearLayout
             android:id="@+id/layoutPassword"
-            android:layout_weight="0.125"
+            android:layout_weight="0.154"
             android:weightSum="1"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -152,7 +154,7 @@
                     android:gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_PASSWORD"
+                    android:text="@string/PASSWORD"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -162,7 +164,7 @@
                     android:gravity="right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/LOGIN_WRONGPASS"
+                    android:text="@string/WRONGPASS"
                     android:textColor="#FD5585"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
@@ -175,29 +177,29 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
+                android:paddingLeft="20dp"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/forget"
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_weight="0.062"
-            android:text="@string/LOGIN_FORGOT"
-            android:textColor="#4C4BF6"
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp" />
+            android:layout_weight="0.062"
+            android:text="@string/FORGOT"
+            android:textColor="#4C4BF6" />
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_weight="0.12"
+            android:layout_weight="0.1"
             android:text="@string/LOGIN"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_01"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_width="match_parent"
@@ -205,18 +207,18 @@
 
         <TextView
             android:id="@+id/with"
-            android:layout_weight="0.1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/LOGIN_WITH"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:text="@string/WITH" />
 
         <Button
             android:id="@+id/btnSignInFacebook"
             android:paddingLeft="20dp"
-            android:layout_weight="0.12"
-            android:text="@string/LOGIN_FACEBOOK"
+            android:layout_weight="0.1"
+            android:text="@string/FACEBOOK"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_02"
             android:drawableLeft="@drawable/logo_facebook"
@@ -228,8 +230,8 @@
 
         <Button
             android:id="@+id/btnSignInWechat"
-            android:layout_weight="0.12"
-            android:text="@string/LOGIN_WECHAT"
+            android:layout_weight="0.1"
+            android:text="@string/WECHAT"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_03"
             android:layout_marginTop="20dp"
@@ -240,8 +242,8 @@
 
         <Button
             android:id="@+id/btnSignInGoogle"
-            android:layout_weight="0.12"
-            android:text="@string/LOGIN_GOOGLE"
+            android:layout_weight="0.1"
+            android:text="@string/GOOGLE"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_04"
             android:layout_marginTop="20dp"
@@ -252,7 +254,7 @@
 
 
         <LinearLayout
-            android:layout_weight="0.125"
+            android:layout_weight="0.12"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
@@ -261,7 +263,7 @@
 
             <TextView
                 android:layout_weight="1"
-                android:text="@string/LOGIN_NOACCOUNT"
+                android:text="@string/NOACCOUNT"
                 android:textSize="15dp"
                 android:gravity="right"
                 android:layout_width="wrap_content"
@@ -270,7 +272,7 @@
             <TextView
                 android:id="@+id/btnSignUp"
                 android:layout_weight="1"
-                android:text="@string/LOGIN_SIGNUP"
+                android:text="@string/SIGNUP"
                 android:textSize="15dp"
                 android:textColor="#7D8699"
                 android:gravity="left"
@@ -312,7 +314,7 @@
             <TextView
                 android:layout_marginLeft="25dp"
                 android:layout_weight="0.6"
-                android:text="@string/LOGIN_ENGLISH"
+                android:text="@string/ENGLISH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -332,7 +334,7 @@
             <TextView
                 android:layout_marginLeft="25dp"
                 android:layout_weight="0.6"
-                android:text="@string/LOGIN_CHINESE"
+                android:text="@string/CHINESE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -352,7 +354,7 @@
             <TextView
                 android:layout_marginLeft="25dp"
                 android:layout_weight="0.6"
-                android:text="@string/LOGIN_JAPANESE"
+                android:text="@string/JAPANESE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -372,7 +374,7 @@
             <TextView
                 android:layout_marginLeft="25dp"
                 android:layout_weight="0.6"
-                android:text="@string/LOGIN_THAI"
+                android:text="@string/THAI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -392,7 +394,7 @@
             <TextView
                 android:layout_marginLeft="25dp"
                 android:layout_weight="0.6"
-                android:text="@string/LOGIN_KOREAN"
+                android:text="@string/KOREAN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -402,25 +404,67 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/findPasswordBg"
         android:visibility="gone"
-        android:background="@drawable/bg_cloudy"
+        android:background="#65000000"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <LinearLayout
+        android:id="@+id/findPassword"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideLine20"
-        android:background="@drawable/bg_round_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:background="@drawable/bg_round_all"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="30dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="30dp"
+        android:weightSum="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideLine20">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:src="@drawable/icon_key" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="@string/INPUT_EMAIL"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/sendEmail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/bg_round_all"
+            android:hint="podo@gmail.com"
+            android:paddingLeft="20dp" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/btn_01"
+            android:text="@string/SEND"
+            android:textColor="#FFFFFF" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

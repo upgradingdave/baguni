@@ -37,12 +37,18 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
     EditText email;
     EditText password;
-    TextView forget;
+    TextView forgotPassword;
 
     Button btnSignIn;
     TextView btnSignUp;
     Button btnSignInGoogle;
     Button btnSignInFacebook;
+
+    LinearLayout findPassword;
+    View findPasswordBg;
+    EditText sendEmail;
+    Button btnSend;
+
 
     Intent intent;
 
@@ -54,10 +60,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
         SettingStatusBar.setStatusBar(this);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        }
-//
         selectLanguage = findViewById(R.id.selectLanguage);
         flag = findViewById(R.id.flag);
         nation = findViewById(R.id.nation);
@@ -80,14 +82,22 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         password = findViewById(R.id.password);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
-        forget = findViewById(R.id.forget);
+        forgotPassword = findViewById(R.id.forgotPassword);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
         btnSignInFacebook = findViewById(R.id.btnSignInFacebook);
         btnSignIn.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
-        forget.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
         btnSignInGoogle.setOnClickListener(this);
         btnSignInFacebook.setOnClickListener(this);
+
+        findPasswordBg = findViewById(R.id.findPasswordBg);
+        findPassword = findViewById(R.id.findPassword);
+        sendEmail = findViewById(R.id.sendEmail);
+        btnSend = findViewById(R.id.btnSend);
+        findPasswordBg.setOnClickListener(this);
+        btnSend.setOnClickListener(this);
+
 
     }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -106,31 +116,31 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
             case R.id.selectEnglish :
                 flag.setImageDrawable(getDrawable(R.drawable.flag_america));
-                nation.setText(R.string.LOGIN_ENGLISH);
+                nation.setText(R.string.ENGLISH);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectChinese :
                 flag.setImageDrawable(getDrawable(R.drawable.flag_china));
-                nation.setText(R.string.LOGIN_CHINESE);
+                nation.setText(R.string.CHINESE);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectJapanese :
                 flag.setImageDrawable(getDrawable(R.drawable.flag_japan));
-                nation.setText(R.string.LOGIN_JAPANESE);
+                nation.setText(R.string.JAPANESE);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectThai :
                 flag.setImageDrawable(getDrawable(R.drawable.flag_thailand));
-                nation.setText(R.string.LOGIN_THAI);
+                nation.setText(R.string.THAI);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectKorean :
                 flag.setImageDrawable(getDrawable(R.drawable.flag_korea));
-                nation.setText(R.string.LOGIN_KOREAN);
+                nation.setText(R.string.KOREAN);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
@@ -170,8 +180,17 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 });
                 break;
 
-            case R.id.forget :
+            case R.id.forgotPassword :
+                findPasswordBg.setVisibility(View.VISIBLE);
+                findPassword.setVisibility(View.VISIBLE);
+                break;
 
+            case R.id.findPasswordBg :
+                findPasswordBg.setVisibility(View.GONE);
+                findPassword.setVisibility(View.GONE);
+                break;
+
+            case R.id.btnSend :
                 break;
 
             case R.id.btnSignInGoogle :

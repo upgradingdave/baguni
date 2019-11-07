@@ -1,4 +1,7 @@
 <resources>
+
+    <!--스프레드 시트에 정리할 것-->
+
     <string name="app_name">baguni</string>
 
     <string name="MENU_LESSON">Lesson</string>
@@ -19,34 +22,34 @@
     <string name="NEXT">Next</string>
     <string name="DELETE">Delete</string>
 
-    <string name="LOGIN_WELCOME"> Welcome to Podo</string>
-    <string name="LOGIN_EMAIL"> Email</string>
-    <string name="LOGIN_PASSWORD"> Password</string>
-    <string name="LOGIN_WRONGEMAIL"> Wrong email!!</string>
-    <string name="LOGIN_WRONGPASS"> Wrong password!!</string>
-    <string name="LOGIN_FORGOT"> Forgot Password?</string>
+    <!--Login -->
+    <string name="WELCOME"> Welcome to Podo</string>
+    <string name="EMAIL"> Email</string>
+    <string name="PASSWORD"> Password</string>
+    <string name="WRONGEMAIL"> Wrong email!!</string>
+    <string name="WRONGPASS"> Wrong password!!</string>
+    <string name="FORGOT"> Forgot Password?</string>
     <string name="LOGIN"> Sign In</string>
-    <string name="LOGIN_WITH"> or login with</string>
-    <string name="LOGIN_FACEBOOK"> Facebook</string>
-    <string name="LOGIN_GOOGLE"> Google</string>
-    <string name="LOGIN_WECHAT"> Wechat</string>
-    <string name="LOGIN_NOACCOUNT"> Don\'t have an account?</string>
-    <string name="LOGIN_SIGNUP"> Sign up</string>
-    <string name="LOGIN_NAME">Name</string>
-    <string name="LOGIN_CONFIRM">Confirm Password</string>
-    <string name="LOGIN_HAVEACCOUNT"> Already have an account?</string>
-
-    <string name="LOGIN_ENGLISH">English</string>
-    <string name="LOGIN_THAI">Thai</string>
-    <string name="LOGIN_JAPANESE">Japanese</string>
-    <string name="LOGIN_CHINESE">Chinese</string>
-    <string name="LOGIN_KOREAN">Korean</string>
+    <string name="WITH"> or login with</string>
+    <string name="FACEBOOK"> Facebook</string>
+    <string name="GOOGLE"> Google</string>
+    <string name="WECHAT"> Wechat</string>
+    <string name="NOACCOUNT"> Don\'t have an account?</string>
+    <string name="SIGNUP"> Sign up</string>
+    <string name="NAME">Name</string>
+    <string name="CONFIRM">Confirm Password</string>
+    <string name="HAVEACCOUNT"> Already have an account?</string>
+    <string name="ENGLISH">English</string>
+    <string name="THAI">Thai</string>
+    <string name="JAPANESE">Japanese</string>
+    <string name="CHINESE">Chinese</string>
+    <string name="KOREAN">Korean</string>
+    <string name="INPUT_EMAIL">Enter your email</string>
+    <string name="SEND">Send</string>
 
     <string name="DUPLICATE_CHECK">Duplicate Check</string>
     <string name="DUPLICATE_TRUE">This email already exists.</string>
     <string name="DUPLICATE_FALSE">This email is available.</string>
-    <string name="GOOGLE">Sign In With Google</string>
-    <string name="FACEBOOK">Sign In With Facebook</string>
     <string name="SELECTLANGUAGE">Select Language</string>
     <string name="USER_NAME">Name</string>
     <string name="USER_EMAIL">Email</string>
@@ -57,6 +60,8 @@
     <string name="MSG_WRITING">Writing is saved</string>
     <string name="MSG_DELETE">Do you really want to delete?</string>
     <string name="MSG_SAVE">Do you want to save?</string>
+
+
 
     <string name="MODE_RANDOM">Random</string>
     <string name="MODE_NEWWORD">New collection first</string>
