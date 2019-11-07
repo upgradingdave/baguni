@@ -42,7 +42,7 @@
 
             <ImageButton
                 android:id="@+id/cvH"
-                android:src="@drawable/cv_h"
+                android:src="@drawable/icon_back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -52,7 +52,7 @@
 
             <ImageButton
                 android:id="@+id/cvV"
-                android:src="@drawable/cv_v"
+                android:src="@drawable/icon_back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -62,7 +62,7 @@
 
             <ImageButton
                 android:id="@+id/cvcH"
-                android:src="@drawable/cvc_h"
+                android:src="@drawable/icon_back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -72,7 +72,7 @@
 
             <ImageButton
                 android:id="@+id/cvcV"
-                android:src="@drawable/cvc_v"
+                android:src="@drawable/icon_back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -87,7 +87,7 @@
             android:id="@+id/assemblyTextView"
             android:text=""
             android:textSize="150dp"
-            android:background="@drawable/border"
+            android:background="@drawable/bg_round_all"
             android:layout_margin="10dp"
             android:gravity="center"
             android:layout_width="match_parent"

@@ -33,7 +33,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:background="@drawable/border"
+                android:background="@drawable/bg_round_all"
                 android:weightSum="1"
                 android:orientation="horizontal"
                 android:layout_weight="1"
@@ -55,7 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/samplewrong" />
+                    android:src="@drawable/icon_back" />
             </LinearLayout>
             <Button
                 android:id="@+id/btnSync"
@@ -125,7 +125,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/listViewCollection"
                 app:layout_constraintBottom_toBottomOf="@+id/listViewCollection"
                 app:backgroundTint="@android:color/holo_orange_light"
-                android:src="@drawable/plus"
+                android:src="@drawable/icon_back"
                 />
 
         </android.support.constraint.ConstraintLayout>

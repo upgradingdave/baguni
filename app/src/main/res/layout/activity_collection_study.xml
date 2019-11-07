@@ -47,7 +47,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.2"
             android:scaleType="fitCenter"
-            android:src="@drawable/samplerecord"
+            android:src="@drawable/icon_back"
             android:layout_width="0dp"
             android:layout_height="80dp" />
         

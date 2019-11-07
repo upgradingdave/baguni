@@ -46,7 +46,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter"
-                android:src="@drawable/sampleicon"/>
+                android:src="@drawable/icon_back"/>
 
         </LinearLayout>
 
@@ -75,7 +75,7 @@
 
     <ImageView
         android:id="@+id/ox"
-        android:src="@drawable/samplecorrect"
+        android:src="@drawable/icon_back"
         android:visibility="gone"
         android:scaleType="center"
         android:background="@android:color/white"

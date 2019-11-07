@@ -18,7 +18,7 @@
         <ImageButton
             android:id="@+id/imageBtn1"
             android:layout_weight="1"
-            android:src="@drawable/sampleimage"
+            android:src="@drawable/icon_back"
             android:scaleType="fitCenter"
             android:layout_width="100dp"
             android:layout_height="100dp" />
@@ -26,7 +26,7 @@
         <ImageButton
             android:id="@+id/imageBtn2"
             android:layout_weight="1"
-            android:src="@drawable/sampleimage"
+            android:src="@drawable/icon_back"
             android:scaleType="fitCenter"
             android:layout_width="100dp"
             android:layout_height="100dp" />
@@ -34,7 +34,7 @@
         <ImageButton
             android:id="@+id/imageBtn3"
             android:layout_weight="1"
-            android:src="@drawable/sampleimage"
+            android:src="@drawable/icon_back"
             android:scaleType="fitCenter"
             android:layout_width="100dp"
             android:layout_height="100dp" />
@@ -44,7 +44,7 @@
     <ImageButton
         android:id="@+id/imageBtn4"
         android:visibility="gone"
-        android:src="@drawable/sampleimage"
+        android:src="@drawable/icon_back"
         android:scaleType="fitCenter"
         android:layout_weight="1"
         android:layout_width="match_parent"

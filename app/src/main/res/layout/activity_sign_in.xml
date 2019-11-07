@@ -10,10 +10,10 @@
 
     <android.support.constraint.Guideline
         android:id="@+id/guideLine20"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="146dp" />
 
 
     <View
@@ -32,19 +32,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/welcome"
         android:layout_marginLeft="25dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/english"
+            android:id="@+id/flag"
+            android:src="@drawable/flag_america"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/nation"
             android:layout_gravity="center"
-            android:text="@string/LOGIN_EN"
-            android:textSize="20dp"
+            android:text="@string/LOGIN_ENGLISH"
+            android:textSize="15dp"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -120,7 +123,7 @@
             <EditText
                 android:id="@+id/email"
                 android:layout_weight="0.6"
-                android:background="@drawable/border"
+                android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
@@ -170,7 +173,7 @@
             <EditText
                 android:id="@+id/password"
                 android:layout_weight="0.6"
-                android:background="@drawable/border"
+                android:background="@drawable/bg_round_all"
                 android:textSize="15dp"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
@@ -193,7 +196,7 @@
             android:layout_weight="0.12"
             android:text="@string/LOGIN"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button01"
+            android:background="@drawable/btn_01"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
@@ -215,7 +218,7 @@
             android:layout_weight="0.12"
             android:text="@string/LOGIN_FACEBOOK"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button02"
+            android:background="@drawable/btn_02"
             android:drawableLeft="@drawable/logo_facebook"
             android:drawablePadding="-40dp"
             android:layout_marginLeft="25dp"
@@ -228,7 +231,7 @@
             android:layout_weight="0.12"
             android:text="@string/LOGIN_WECHAT"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button03"
+            android:background="@drawable/btn_03"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
@@ -240,7 +243,7 @@
             android:layout_weight="0.12"
             android:text="@string/LOGIN_GOOGLE"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button04"
+            android:background="@drawable/btn_04"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
@@ -267,7 +270,7 @@
             <TextView
                 android:id="@+id/btnSignUp"
                 android:layout_weight="1"
-                android:text="@string/SIGNUP"
+                android:text="@string/LOGIN_SIGNUP"
                 android:textSize="15dp"
                 android:textColor="#7D8699"
                 android:gravity="left"
@@ -279,14 +282,145 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_marginTop="5dp"
+    <LinearLayout
+        android:id="@+id/selectLanguageList"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@drawable/bg_round_all"
+        android:elevation="20dp"
         app:layout_constraintTop_toBottomOf="@+id/selectLanguage"
         app:layout_constraintStart_toStartOf="@+id/selectLanguage"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="15dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
 
+        <LinearLayout
+            android:id="@+id/selectEnglish"
+            android:padding="15dp"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="0.2"
+                android:src="@drawable/flag_america"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_weight="0.6"
+                android:text="@string/LOGIN_ENGLISH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selectChinese"
+            android:padding="15dp"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="0.2"
+                android:src="@drawable/flag_china"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_weight="0.6"
+                android:text="@string/LOGIN_CHINESE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selectJapanese"
+            android:padding="15dp"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="0.2"
+                android:src="@drawable/flag_japan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_weight="0.6"
+                android:text="@string/LOGIN_JAPANESE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selectThai"
+            android:padding="15dp"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="0.2"
+                android:src="@drawable/flag_thailand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_weight="0.6"
+                android:text="@string/LOGIN_THAI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/selectKorean"
+            android:padding="15dp"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="0.2"
+                android:src="@drawable/flag_korea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="25dp"
+                android:layout_weight="0.6"
+                android:text="@string/LOGIN_KOREAN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:visibility="gone"
+        android:background="@drawable/bg_cloudy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideLine20"
+        android:background="@drawable/bg_round_all"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

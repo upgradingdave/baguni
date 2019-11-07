@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_margin="10dp"
     android:weightSum="1"
-    android:background="@drawable/border"
+    android:background="@drawable/bg_round_all"
     android:descendantFocusability="blocksDescendants"
     >
 
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/article"
-        android:background="@drawable/border"
+        android:background="@drawable/bg_round_all"
         android:textSize="20dp"
         android:padding="10dp"
         android:maxLines="3"
@@ -63,7 +63,7 @@
         <ImageView
             android:id="@+id/isCorrected"
             android:layout_weight="1"
-            android:src="@drawable/samplecorrect"
+            android:src="@drawable/icon_back"
             android:scaleType="fitCenter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />

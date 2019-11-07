@@ -25,17 +25,23 @@
     <string name="LOGIN_WRONGEMAIL"> Wrong email!!</string>
     <string name="LOGIN_WRONGPASS"> Wrong password!!</string>
     <string name="LOGIN_FORGOT"> Forgot Password?</string>
-    <string name="LOGIN"> Log In</string>
+    <string name="LOGIN"> Sign In</string>
     <string name="LOGIN_WITH"> or login with</string>
     <string name="LOGIN_FACEBOOK"> Facebook</string>
     <string name="LOGIN_GOOGLE"> Google</string>
     <string name="LOGIN_WECHAT"> Wechat</string>
     <string name="LOGIN_NOACCOUNT"> Don\'t have an account?</string>
     <string name="LOGIN_SIGNUP"> Sign up</string>
-    <string name="LOGIN_EN">EN</string>
+    <string name="LOGIN_NAME">Name</string>
+    <string name="LOGIN_CONFIRM">Confirm Password</string>
+    <string name="LOGIN_HAVEACCOUNT"> Already have an account?</string>
 
-    <string name="SIGNIN">Sign In</string>
-    <string name="SIGNUP">Sign Up</string>
+    <string name="LOGIN_ENGLISH">English</string>
+    <string name="LOGIN_THAI">Thai</string>
+    <string name="LOGIN_JAPANESE">Japanese</string>
+    <string name="LOGIN_CHINESE">Chinese</string>
+    <string name="LOGIN_KOREAN">Korean</string>
+
     <string name="DUPLICATE_CHECK">Duplicate Check</string>
     <string name="DUPLICATE_TRUE">This email already exists.</string>
     <string name="DUPLICATE_FALSE">This email is available.</string>
@@ -59,6 +65,8 @@
     <string name="NO_COLLECTION">There is no collection</string>
 
     <string name="TEXT_LETTERS"> Letters</string>
+
+
 
 
     // 번역 필요 없는 부분

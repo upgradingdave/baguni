@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:src="@drawable/sampleicon"
+        android:src="@drawable/icon_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/wordQuiz1Answer"
-            android:background="@drawable/border"
+            android:background="@drawable/bg_round_all"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:textSize="50dp"
@@ -79,7 +79,7 @@
 
     <ImageView
         android:id="@+id/correctImage"
-        android:src="@drawable/samplecorrect"
+        android:src="@drawable/icon_back"
         android:background="@android:color/white"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"

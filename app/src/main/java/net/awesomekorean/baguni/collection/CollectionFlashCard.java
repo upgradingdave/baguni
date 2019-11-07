@@ -46,7 +46,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
         code = intent.getExtras().getString(getString(R.string.REQUEST));
 
-        // EDIT 때, 기존의 front, back 값을 받아서 출력
+        // EDIT 때, 기존의 front, icon_back 값을 받아서 출력
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
 
             textFront = intent.getExtras().getString(getString(R.string.EXTRA_FRONT));

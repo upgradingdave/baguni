@@ -143,7 +143,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
                 if(wordBack[quizNo].equals(selectedBtn.getText().toString())) {
 
-                    ox.setImageResource(R.drawable.samplecorrect);
+                    ox.setImageResource(R.drawable.icon_back);
                     ox.setVisibility(View.VISIBLE);
 
                     // 정답소리 출력할 것
@@ -153,7 +153,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
                 } else {
 
-                    ox.setImageResource(R.drawable.samplewrong);
+                    ox.setImageResource(R.drawable.icon_back);
                     ox.setVisibility(View.VISIBLE);
                     // 오답소리 출력할 것
 

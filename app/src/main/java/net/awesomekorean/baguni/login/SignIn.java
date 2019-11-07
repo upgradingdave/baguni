@@ -5,36 +5,44 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.SettingStatusBar;
 import net.awesomekorean.baguni.collection.CollectionRepository;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
-
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity implements Button.OnClickListener {
 
+    LinearLayout selectLanguage;
+    ImageView flag;
+    TextView nation;
+
+    LinearLayout selectLanguageList;
+    LinearLayout selectEnglish;
+    LinearLayout selectChinese;
+    LinearLayout selectJapanese;
+    LinearLayout selectThai;
+    LinearLayout selectKorean;
+
     EditText email;
     EditText password;
+    TextView forget;
 
     Button btnSignIn;
     TextView btnSignUp;
     Button btnSignInGoogle;
     Button btnSignInFacebook;
-    LinearLayout selectLanguage;
 
     Intent intent;
 
@@ -44,63 +52,88 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        SettingStatusBar.setStatusBar(this);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        }
+//
+        selectLanguage = findViewById(R.id.selectLanguage);
+        flag = findViewById(R.id.flag);
+        nation = findViewById(R.id.nation);
+
+        selectLanguageList = findViewById(R.id.selectLanguageList);
+        selectEnglish = findViewById(R.id.selectEnglish);
+        selectChinese = findViewById(R.id.selectChinese);
+        selectJapanese = findViewById(R.id.selectJapanese);
+        selectThai = findViewById(R.id.selectThai);
+        selectKorean = findViewById(R.id.selectKorean);
+
+        selectLanguage.setOnClickListener(this);
+        selectEnglish.setOnClickListener(this);
+        selectChinese.setOnClickListener(this);
+        selectJapanese.setOnClickListener(this);
+        selectThai.setOnClickListener(this);
+        selectKorean.setOnClickListener(this);
+
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
+        forget = findViewById(R.id.forget);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
         btnSignInFacebook = findViewById(R.id.btnSignInFacebook);
-        selectLanguage = findViewById(R.id.selectLanguage);
         btnSignIn.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
+        forget.setOnClickListener(this);
         btnSignInGoogle.setOnClickListener(this);
         btnSignInFacebook.setOnClickListener(this);
-        selectLanguage.setOnClickListener(this);
-
-        ArrayList<SelectLanguageItem> list = new ArrayList<>();
-
-        SelectLanguageItem english = new SelectLanguageItem();
-        english.setFlag(getDrawable(R.drawable.english));
-        english.setNation("English");
-        english.setChecked(getDrawable(R.drawable.check));
-        list.add(english);
-
-        SelectLanguageItem chinese = new SelectLanguageItem();
-        chinese.setFlag(getDrawable(R.drawable.chinese));
-        chinese.setNation("Chinese");
-        chinese.setChecked(getDrawable(R.drawable.check));
-        list.add(chinese);
-
-        SelectLanguageItem japanese = new SelectLanguageItem();
-        japanese.setFlag(getDrawable(R.drawable.japanese));
-        japanese.setNation("Japanese");
-        japanese.setChecked(getDrawable(R.drawable.check));
-        list.add(japanese);
-
-        SelectLanguageItem thai = new SelectLanguageItem();
-        thai.setFlag(getDrawable(R.drawable.thai));
-        thai.setNation("Thai");
-        thai.setChecked(getDrawable(R.drawable.check));
-        list.add(thai);
-
-        SelectLanguageItem korean = new SelectLanguageItem();
-        korean.setFlag(getDrawable(R.drawable.korean));
-        korean.setNation("Korean");
-        korean.setChecked(getDrawable(R.drawable.check));
-        list.add(korean);
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        SelectLanguageAdapter adapter = new SelectLanguageAdapter(list);
-        recyclerView.setAdapter(adapter);
-
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
+
+            case R.id.selectLanguage :
+                if(selectLanguageList.getVisibility() == View.GONE) {
+                    selectLanguageList.setVisibility(View.VISIBLE);
+                } else {
+                    selectLanguageList.setVisibility(View.GONE);
+                }
+                break;
+
+            case R.id.selectEnglish :
+                flag.setImageDrawable(getDrawable(R.drawable.flag_america));
+                nation.setText(R.string.LOGIN_ENGLISH);
+                selectLanguageList.setVisibility(View.GONE);
+                break;
+
+            case R.id.selectChinese :
+                flag.setImageDrawable(getDrawable(R.drawable.flag_china));
+                nation.setText(R.string.LOGIN_CHINESE);
+                selectLanguageList.setVisibility(View.GONE);
+                break;
+
+            case R.id.selectJapanese :
+                flag.setImageDrawable(getDrawable(R.drawable.flag_japan));
+                nation.setText(R.string.LOGIN_JAPANESE);
+                selectLanguageList.setVisibility(View.GONE);
+                break;
+
+            case R.id.selectThai :
+                flag.setImageDrawable(getDrawable(R.drawable.flag_thailand));
+                nation.setText(R.string.LOGIN_THAI);
+                selectLanguageList.setVisibility(View.GONE);
+                break;
+
+            case R.id.selectKorean :
+                flag.setImageDrawable(getDrawable(R.drawable.flag_korea));
+                nation.setText(R.string.LOGIN_KOREAN);
+                selectLanguageList.setVisibility(View.GONE);
+                break;
+
 
             case R.id.btnSignIn :
                 String userEmail = email.getText().toString();
@@ -135,6 +168,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         System.out.println("Failed to connect");
                     }
                 });
+                break;
+
+            case R.id.forget :
 
                 break;
 
@@ -142,6 +178,14 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.btnSignInFacebook :
+                break;
+
+            case R.id.btnSignInWechat :
+                break;
+
+            case R.id.btnSignUp :
+                intent = new Intent(this, SignUp.class);
+                startActivity(intent);
                 break;
 
         }

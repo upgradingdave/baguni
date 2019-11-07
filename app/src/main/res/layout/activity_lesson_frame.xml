@@ -18,7 +18,7 @@
 
         <ImageButton
             android:id="@+id/btnExit1"
-            android:src="@drawable/samplewrong"
+            android:src="@drawable/icon_back"
             android:scaleType="fitCenter"
             android:layout_width="50dp"
             android:layout_height="match_parent" />
@@ -61,7 +61,7 @@
     <LinearLayout
         android:id="@+id/saveLayout"
         android:visibility="gone"
-        android:background="@drawable/border"
+        android:background="@drawable/bg_round_all"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="@+id/guideLine40"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
 
             <ImageButton
                 android:id="@+id/btnExit2"
-                android:src="@drawable/samplewrong"
+                android:src="@drawable/icon_back"
                 android:scaleType="fitCenter"
                 android:layout_width="50dp"
                 android:layout_height="match_parent" />

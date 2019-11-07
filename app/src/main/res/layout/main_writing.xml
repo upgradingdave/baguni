@@ -30,7 +30,7 @@
         app:backgroundTint="@android:color/holo_orange_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/plus"
+        android:src="@drawable/icon_back"
         />
 
     <LinearLayout

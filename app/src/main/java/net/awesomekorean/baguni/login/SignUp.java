@@ -10,10 +10,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.awesomekorean.baguni.MainActivity;
 import net.awesomekorean.baguni.R;
+import net.awesomekorean.baguni.SettingStatusBar;
 import net.awesomekorean.baguni.webService.RetrofitConnection;
 import net.awesomekorean.baguni.webService.User;
 
@@ -38,6 +40,8 @@ public class SignUp extends AppCompatActivity {
     Boolean userEmailDuplicateOk = false;
     Boolean userPassOk = false;
 
+    TextView btnSignIn;
+
     int focused;
 
     RetrofitConnection retrofitConnection;
@@ -47,6 +51,8 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        SettingStatusBar.setStatusBar(this);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -124,6 +130,14 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+        btnSignIn = findViewById(R.id.btnSignIn);
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignIn.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

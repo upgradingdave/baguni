@@ -16,7 +16,7 @@
             android:padding="20dp"
             android:orientation="vertical"
             android:weightSum="1"
-            android:background="@drawable/border"
+            android:background="@drawable/bg_round_all"
             android:layout_weight="0.9"
             android:layout_width="match_parent"
             android:layout_height="0dp">
@@ -43,7 +43,7 @@
 
                     <ImageButton
                         android:scaleType="fitCenter"
-                        android:src="@drawable/samplerecord"
+                        android:src="@drawable/icon_back"
                         android:layout_weight="0.2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
@@ -55,7 +55,7 @@
                     android:layout_marginTop="10dp"
                     android:hint="Korean"
                     android:textSize="30dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/bg_round_all"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -78,7 +78,7 @@
                     android:layout_marginTop="10dp"
                     android:hint="English"
                     android:textSize="30dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/bg_round_all"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
