@@ -46,6 +46,7 @@
     <string name="KOREAN">Korean</string>
     <string name="INPUT_EMAIL">Enter your email</string>
     <string name="SEND">Send</string>
+    <string name="MSG_CHECK_EMAIL">Please check your email</string>
 
     <string name="DUPLICATE_CHECK">Duplicate Check</string>
     <string name="DUPLICATE_TRUE">This email already exists.</string>
@@ -62,7 +63,6 @@
     <string name="MSG_SAVE">Do you want to save?</string>
 
 
-
     <string name="MODE_RANDOM">Random</string>
     <string name="MODE_NEWWORD">New collection first</string>
 
@@ -70,8 +70,6 @@
     <string name="NO_COLLECTION">There is no collection</string>
 
     <string name="TEXT_LETTERS"> Letters</string>
-
-
 
 
     // 번역 필요 없는 부분

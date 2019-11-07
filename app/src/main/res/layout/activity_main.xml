@@ -8,38 +8,33 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:background="@color/colorPrimary"
+        android:padding="10dp"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <LinearLayout
-            android:layout_weight="1"
-            android:gravity="left"
+        <ImageView
+            android:id="@+id/btnProfile"
+            android:src="@drawable/pic_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:text="Lesson"
+            android:textSize="20dp"
+            android:textColor="#242833"
+            android:gravity="center"
+            android:layout_weight="2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <Button
-                android:id="@+id/btnProfile"
-                android:text="@string/MENU_PROFILE_OPTION"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/btnMessage"
+            android:src="@drawable/icon_message"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="right"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnMessage"
-                android:text="@string/MENU_MESSAGE"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
@@ -52,39 +47,55 @@
     </android.support.v4.view.ViewPager>
 
     <LinearLayout
-        android:background="@color/colorPrimary"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <Button
+        <ImageView
             android:id="@+id/btnLesson"
-            android:text="@string/MENU_LESSON"
+            android:src="@drawable/menu_lesson"
+            android:padding="20dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnReading"
-            android:text="@string/MENU_READING"
+            android:src="@drawable/menu_reading"
+            android:padding="20dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnWriting"
-            android:layout_width="106dp"
+            android:src="@drawable/menu_writing"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/MENU_WRITING" />
 
 
-        <Button
+        <ImageView
             android:id="@+id/btnCollection"
-            android:text="@string/MENU_COLLECTION"
+            android:src="@drawable/menu_collection"
+            android:padding="20dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/btnQnA"
+            android:src="@drawable/menu_qna"
+            android:padding="20dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
 
 
 

@@ -11,16 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.SignUp"></activity>
+        <activity android:name=".MainQnA"></activity>
+        <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
-        <activity android:name=".login.SignIn">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+        <activity android:name=".login.SignIn"></activity>
         <activity android:name=".collection.CollectionStudy" />
         <activity android:name=".collection.CollectionFlashCard" />
         <activity android:name=".writing.WritingFrame" />
@@ -29,7 +23,13 @@
         <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
         <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

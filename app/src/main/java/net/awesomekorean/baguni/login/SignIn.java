@@ -191,6 +191,10 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.btnSend :
+                // 서버에서 비밀번호 랜덤으로 바꾸고 이메일 보내기
+                findPasswordBg.setVisibility(View.GONE);
+                findPassword.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), R.string.MSG_CHECK_EMAIL, Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.btnSignInGoogle :
