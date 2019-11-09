@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:weightSum="1"
     android:orientation="vertical">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -16,6 +18,7 @@
         <ImageView
             android:id="@+id/btnProfile"
             android:src="@drawable/pic_profile"
+            android:layout_marginLeft="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp" />
 
@@ -24,15 +27,15 @@
             android:textSize="20dp"
             android:textColor="#242833"
             android:gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/btnMessage"
             android:src="@drawable/icon_message"
+            android:layout_marginRight="25dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -49,7 +52,7 @@
     <LinearLayout
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -57,7 +60,7 @@
         <ImageView
             android:id="@+id/btnLesson"
             android:src="@drawable/menu_lesson"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -65,7 +68,7 @@
         <ImageView
             android:id="@+id/btnReading"
             android:src="@drawable/menu_reading"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -73,7 +76,7 @@
         <ImageView
             android:id="@+id/btnWriting"
             android:src="@drawable/menu_writing"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -83,7 +86,7 @@
         <ImageView
             android:id="@+id/btnCollection"
             android:src="@drawable/menu_collection"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -91,7 +94,7 @@
         <ImageView
             android:id="@+id/btnQnA"
             android:src="@drawable/menu_qna"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />

@@ -33,7 +33,7 @@ public class MainQnA extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.main_reading, container, false);
+        view = inflater.inflate(R.layout.main_qna, container, false);
 
         ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, readingList);
 

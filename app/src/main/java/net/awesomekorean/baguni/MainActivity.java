@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         SettingStatusBar.setStatusBar(this);
 
+
         viewPager = findViewById(R.id.viewPager);
         adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
