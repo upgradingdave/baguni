@@ -14,8 +14,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import net.awesomekorean.baguni.lesson.LessonAdapter;
 import net.awesomekorean.baguni.lesson.LessonFrame;
+import net.awesomekorean.baguni.lesson.LessonItems;
 import net.awesomekorean.baguni.lesson.lessonHangul.LessonHangulMenu;
+
+import java.util.ArrayList;
 
 public class MainLesson extends Fragment {
 
@@ -39,7 +43,18 @@ public class MainLesson extends Fragment {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, lessonList);
+        ArrayList<LessonItems> list = new ArrayList<>();
+
+        LessonItems item = new LessonItems();
+        item.setTitle("Sample title");
+        item.setSubTitle("Sample subtitle");
+        item.setLessonImage(R.drawable.illustration_lesson_sample);
+        item.setIsCompleted(true);
+        item.setIsLock(true);
+        item.setIsCompleted(true);
+        list.add(item);
+        list.add(item);
+        LessonAdapter adapter = new LessonAdapter(getContext(), list);
 
         ListView listView = view.findViewById(R.id.listViewLesson);
         listView.setAdapter(adapter);

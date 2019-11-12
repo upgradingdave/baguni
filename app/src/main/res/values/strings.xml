@@ -72,7 +72,7 @@
     <string name="TEXT_LETTERS"> Letters</string>
 
 
-    // 번역 필요 없는 부분
+    <!--번역 필요 없는 부분-->
 
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>
@@ -89,6 +89,9 @@
     <string name="LESSONSENTENCE">lessonSentence</string>
     <string name="SIGNUP_SUCCEED">Sign up succeed!</string>
     <string name="SIGNUP_FAILED">Sign up failed!</string>
+
+    <string name="SPECIAL_LESSON">Special lesson</string>
+    <string name="COMPLETED">Completed</string>
 
 
 </resources>
