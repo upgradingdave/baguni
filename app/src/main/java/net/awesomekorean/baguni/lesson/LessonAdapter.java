@@ -1,69 +1,70 @@
 package net.awesomekorean.baguni.lesson;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.awesomekorean.baguni.R;
 
 import java.util.ArrayList;
 
-public class LessonAdapter extends BaseAdapter {
+public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
 
-    private Context context;
-    public static ArrayList<LessonItems> list;
+    private ArrayList<LessonItems> list;
 
-    public LessonAdapter(Context context, ArrayList<LessonItems> list) {
-
-        this.context = context;
+    public LessonAdapter(ArrayList<LessonItems> list) {
         this.list = list;
     }
 
-    @Override
-    public int getCount() {
-        return list.size();
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
+        TextView title;
+        TextView subTitle;
+        ImageView lessonImage;
+        TextView textSpecial;
+        ImageView iconLock;
+        LinearLayout layoutCompleted;
 
-    @Override
-    public Object getItem(int i) {
-        return list.get(i);
-    }
+        ViewHolder(View itemView) {
+            super(itemView);
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+            title = itemView.findViewById(R.id.title);
+            subTitle = itemView.findViewById(R.id.subTitle);
+            lessonImage = itemView.findViewById(R.id.lessonImage);
+            textSpecial = itemView.findViewById(R.id.textSpecial);
+            iconLock = itemView.findViewById(R.id.iconLock);
+            layoutCompleted = itemView.findViewById(R.id.layoutCompleted);
 
-        final ViewHolder holder;
-
-
-        // 맨 처음에 리스트뷰를 생성해줌
-        if(view==null) {
-
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.main_lesson_listview_item, viewGroup, false);
-            holder = new ViewHolder();
-            holder.title = view.findViewById(R.id.title);
-            holder.subTitle = view.findViewById(R.id.subTitle);
-            holder.lessonImage = view.findViewById(R.id.lessonImage);
-            holder.textSpecial = view.findViewById(R.id.textSpecial);
-            holder.iconLock = view.findViewById(R.id.iconLock);
-            holder.layoutCompleted = view.findViewById(R.id.layoutCompleted);
-            view.setTag(holder);
-
-        } else {
-            holder = (ViewHolder) view.getTag();
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION) {
+                        LessonItems item = list.get(position);
+                        // 아이템 클릭 이벤트트
+                    }
+                }
+            });
         }
+    }
 
-        LessonItems items = list.get(i);
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.main_lesson_listview_item, parent, false);
+        LessonAdapter.ViewHolder holder = new LessonAdapter.ViewHolder(view);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        LessonItems items = list.get(position);
 
         holder.title.setText(items.getTitle());
         holder.subTitle.setText(items.getSubTitle());
@@ -74,18 +75,10 @@ public class LessonAdapter extends BaseAdapter {
         } else{holder.iconLock.setVisibility(View.INVISIBLE);}
         if(items.getIsCompleted()) { holder.layoutCompleted.setVisibility(View.VISIBLE);
         } else{holder.layoutCompleted.setVisibility(View.INVISIBLE);}
-
-        return view;
     }
 
-
-    // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용
-    static class ViewHolder {
-        TextView title;
-        TextView subTitle;
-        ImageView lessonImage;
-        TextView textSpecial;
-        ImageView iconLock;
-        LinearLayout layoutCompleted;
+    @Override
+    public int getItemCount() {
+        return list.size();
     }
 }

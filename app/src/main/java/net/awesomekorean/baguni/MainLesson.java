@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,30 +56,23 @@ public class MainLesson extends Fragment {
         item.setIsCompleted(true);
         list.add(item);
         list.add(item);
-        LessonAdapter adapter = new LessonAdapter(getContext(), list);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
 
-        ListView listView = view.findViewById(R.id.listViewLesson);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                switch (i) {
+        LessonAdapter adapter = new LessonAdapter(list);
+        recyclerView.setAdapter(adapter);
 
-                    case 0 :
-                        intent = new Intent(getContext(), LessonHangulMenu.class);
-                        startActivity(intent);
-                        break;
 
-                    default :
-                        lessonUnit = i;
-                        intent = new Intent(getContext(), LessonFrame.class);
-                        startActivity(intent);
-                        break;
-                }
-            }
-        });
         return view;
     }
 
