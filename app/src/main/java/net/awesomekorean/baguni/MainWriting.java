@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -44,13 +45,13 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
     TextView msgNoWriting; // 아직 작성한 글이 없습니다.
 
-    FloatingActionButton btnAddWriting; // 플로팅 버튼
+    ImageButton btnAddWriting; // 플로팅 버튼
 
     public static LinearLayout msgDelete; // 삭제 확인 메시지 창
     Button btnYes;
     Button btnNo;
 
-   public static MainWriting newInstance() {
+    public static MainWriting newInstance() {
         return new MainWriting();
     }
 
@@ -178,34 +179,34 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-       if(resultCode == RESULT_OK) {
-           repository.getAll().observe(this, observer);
-       }
+        if(resultCode == RESULT_OK) {
+            repository.getAll().observe(this, observer);
+        }
     }
 
     @Override
     public void onClick(View view) {
 
-       switch (view.getId()) {
+        switch (view.getId()) {
 
-           case R.id.btnAddWriting :
-               Intent intent = new Intent(getContext(), WritingFrame.class);
-               intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_ADD));
-               startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_ADD));
-               break;
+            case R.id.btnAddWriting :
+                Intent intent = new Intent(getContext(), WritingFrame.class);
+                intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_ADD));
+                startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_ADD));
+                break;
 
-           case R.id.btnYes :
-               int id = WritingAdapter.id;
-               WritingRepository repository = new WritingRepository(getContext());
-               repository.deleteById(id);
-               repository.getAll();
-               repository.getAll().observe(this, observer);
-               msgDelete.setVisibility(View.GONE);
-               break;
+            case R.id.btnYes :
+                int id = WritingAdapter.id;
+                WritingRepository repository = new WritingRepository(getContext());
+                repository.deleteById(id);
+                repository.getAll();
+                repository.getAll().observe(this, observer);
+                msgDelete.setVisibility(View.GONE);
+                break;
 
-           case R.id.btnNo :
-               msgDelete.setVisibility(View.GONE);
-               break;
-       }
+            case R.id.btnNo :
+                msgDelete.setVisibility(View.GONE);
+                break;
+        }
     }
 }

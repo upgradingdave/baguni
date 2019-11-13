@@ -22,7 +22,7 @@ public class WritingEntity implements Serializable {
         this.lastDate = lastDate;
         this.letters = letters;
         this.article = article;
-        this.isCorrected = false;
+        this.isCorrected = true; // 개발 완료하면 false 로 바꿀것
     }
 
     public int getId() {

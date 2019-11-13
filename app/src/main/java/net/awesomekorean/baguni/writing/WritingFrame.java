@@ -9,6 +9,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.awesomekorean.baguni.R;
@@ -21,8 +23,9 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
     TextView textCount; // 글자 수 표시
     EditText editText; // 쓰기 입력
-    TextView saveResult; //저장 메시지
+    LinearLayout saveResult; //저장 메시지
 
+    ImageView btnBack;
     Button btnSave;
     Button btnCorrection;
 
@@ -40,6 +43,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         btnSave = findViewById(R.id.btnSave);
         btnCorrection = findViewById(R.id.btnCorrection);
         saveResult = findViewById(R.id.saveResult);
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnCorrection.setOnClickListener(this);
 
@@ -62,7 +67,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String input = editText.getText().toString();
-                textCount.setText(input.length() + getString(R.string.TEXT_LETTERS));
+                textCount.setText(input.length() + getString(R.string.LETTERS));
             }
 
             @Override
@@ -105,6 +110,10 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             case R.id.btnCorrection :
                 Intent intent = new Intent(this, Teachers.class);
                 startActivity(intent);
+                break;
+
+            case R.id.btnBack :
+                finish();
                 break;
         }
     }

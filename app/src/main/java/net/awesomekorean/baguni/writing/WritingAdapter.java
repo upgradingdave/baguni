@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.awesomekorean.baguni.MainWriting;
@@ -89,7 +90,7 @@ public class WritingAdapter extends BaseAdapter {
         TextView lastDate;
         TextView letters;
         TextView article;
-        ImageView isCorrected;
-        Button btnDelete;
+        LinearLayout isCorrected;
+        ImageView btnDelete;
     }
 }
