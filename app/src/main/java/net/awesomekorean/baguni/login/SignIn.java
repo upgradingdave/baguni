@@ -115,31 +115,31 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.selectEnglish :
-                flag.setImageDrawable(getDrawable(R.drawable.flag_america));
+                flag.setImageDrawable(getDrawable(R.drawable.en));
                 nation.setText(R.string.ENGLISH);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectChinese :
-                flag.setImageDrawable(getDrawable(R.drawable.flag_china));
+                flag.setImageDrawable(getDrawable(R.drawable.cn));
                 nation.setText(R.string.CHINESE);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectJapanese :
-                flag.setImageDrawable(getDrawable(R.drawable.flag_japan));
+                flag.setImageDrawable(getDrawable(R.drawable.jp));
                 nation.setText(R.string.JAPANESE);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectThai :
-                flag.setImageDrawable(getDrawable(R.drawable.flag_thailand));
+                flag.setImageDrawable(getDrawable(R.drawable.th));
                 nation.setText(R.string.THAI);
                 selectLanguageList.setVisibility(View.GONE);
                 break;
 
             case R.id.selectKorean :
-                flag.setImageDrawable(getDrawable(R.drawable.flag_korea));
+                flag.setImageDrawable(getDrawable(R.drawable.kr));
                 nation.setText(R.string.KOREAN);
                 selectLanguageList.setVisibility(View.GONE);
                 break;

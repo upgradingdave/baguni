@@ -64,6 +64,7 @@ public class SignUp extends AppCompatActivity {
         passwordConfirm.addTextChangedListener(textWatcher);
         passwordConfirm.setOnFocusChangeListener(focusChangeListener);
 
+        /*
         btnDuplicateCheck = findViewById(R.id.btnDuplicateCheck);
         btnDuplicateCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +94,7 @@ public class SignUp extends AppCompatActivity {
                 });
             }
         });
-
+*/
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

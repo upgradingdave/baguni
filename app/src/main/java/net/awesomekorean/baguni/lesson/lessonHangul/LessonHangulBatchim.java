@@ -5,7 +5,7 @@ class LessonHangulBatchim implements Hangul{
     String[] hangul = { "ㄱ", "역", "박", "ㄲ", "밖", "ㅋ", "읔", "밬", "ㄴ", "은", "안", "ㄷ", "귿", "낟", "ㅌ", "읕", "낱", "ㅅ", "옷", "낫", "ㅆ", "났", "ㅈ", "읒", "낮", "ㅊ", "읓", "낯", "ㅎ", "읗", "낳", "ㄹ", "을", "달", "ㅁ", "음", "잠", "ㅂ", "읍", "밥", "ㅍ", "읖", "앞", "ㅇ", "응", "강"};
 
     String[] hangulExplain = {
-            "We can find how our articulator moves when we read each name of consonants slowly.",
+            "We can find how our articulator moves when we reading each name of consonants slowly.",
             "Can you feel your throat closed when you pronounce Batchim 'ㄱ'? (I'll leave 'Batchim' out from now.)",
             "Let's practice another character with 'ㄱ'.",
             "'ㄲ' is same with 'ㄱ'.",
@@ -50,7 +50,7 @@ class LessonHangulBatchim implements Hangul{
             "That's right.",
             "Finally, this is the last one.",
             "Your mouth opened and the air getting out through your nose.",
-            "Perfect! Now you can read all of Hangul. Repeat the lesson several times and practice in the next stage."
+            "Perfect! Now you can reading all of Hangul. Repeat the lesson several times and practice in the next stage."
     };
 
     String hangulIntro =

@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/btnBack"
-        android:src="@drawable/icon_back"
+        android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/title"
         android:layout_marginLeft="25dp"
@@ -159,6 +159,8 @@
                 android:id="@+id/email"
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
+                android:drawableRight="@drawable/successgrey"
+                android:paddingRight="15dp"
                 android:textSize="15dp"
                 android:paddingLeft="20dp"
                 android:inputType="textEmailAddress"
@@ -261,6 +263,8 @@
                 android:id="@+id/passwordConfirm"
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_round_all"
+                android:drawableRight="@drawable/successgrey"
+                android:paddingRight="15dp"
                 android:textSize="15dp"
                 android:paddingLeft="20dp"
                 android:inputType="textPassword"
@@ -281,13 +285,6 @@
             android:layout_marginRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
-
-        <Button
-            android:id="@+id/btnDuplicateCheck"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
 
     </LinearLayout>
 

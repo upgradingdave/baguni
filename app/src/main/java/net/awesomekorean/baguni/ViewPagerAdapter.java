@@ -34,7 +34,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return MainCollection.newInstance();
 
             case 4 :
-                return MainQnA.newInstance();
+                return null;
 
             default :
                 return null;

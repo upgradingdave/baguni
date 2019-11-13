@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/btnProfile"
-            android:src="@drawable/pic_profile"
+            android:src="@drawable/profile"
             android:layout_marginLeft="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp" />
@@ -33,7 +33,7 @@
 
         <ImageView
             android:id="@+id/btnMessage"
-            android:src="@drawable/icon_message"
+            android:src="@drawable/notification"
             android:layout_marginRight="25dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
 
         <ImageView
             android:id="@+id/btnLesson"
-            android:src="@drawable/menu_lesson"
+            android:src="@drawable/lesson"
             android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
 
         <ImageView
             android:id="@+id/btnReading"
-            android:src="@drawable/menu_reading"
+            android:src="@drawable/reading"
             android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
 
         <ImageView
             android:id="@+id/btnWriting"
-            android:src="@drawable/menu_writing"
+            android:src="@drawable/writting"
             android:padding="15dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -85,7 +85,7 @@
 
         <ImageView
             android:id="@+id/btnCollection"
-            android:src="@drawable/menu_collection"
+            android:src="@drawable/collection"
             android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
 
         <ImageView
             android:id="@+id/btnQnA"
-            android:src="@drawable/menu_qna"
+            android:src="@drawable/qna"
             android:padding="15dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"

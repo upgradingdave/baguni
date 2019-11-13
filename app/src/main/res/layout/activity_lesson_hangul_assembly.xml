@@ -42,7 +42,7 @@
 
             <ImageButton
                 android:id="@+id/cvH"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -52,7 +52,7 @@
 
             <ImageButton
                 android:id="@+id/cvV"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -62,7 +62,7 @@
 
             <ImageButton
                 android:id="@+id/cvcH"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"
@@ -72,7 +72,7 @@
 
             <ImageButton
                 android:id="@+id/cvcV"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/back"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:scaleType="fitCenter"

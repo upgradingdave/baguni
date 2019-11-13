@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +14,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.awesomekorean.baguni.lesson.LessonAdapter;
 import net.awesomekorean.baguni.lesson.LessonFrame;
 import net.awesomekorean.baguni.lesson.lessonHangul.LessonHangulMenu;
+import net.awesomekorean.baguni.reading.ReadingAdapter;
 import net.awesomekorean.baguni.reading.ReadingFrame;
+import net.awesomekorean.baguni.reading.ReadingItems;
+
+import java.util.ArrayList;
 
 public class MainReading extends Fragment {
 
     public static int readingUnit = 0;
-
-    static final String[] readingList = {"Reading0", "Reading1"};
 
     View view;
 
@@ -38,20 +43,24 @@ public class MainReading extends Fragment {
 
         view = inflater.inflate(R.layout.main_reading, container, false);
 
-        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, readingList);
+        ArrayList<ReadingItems> list = new ArrayList<>();
 
-        ListView listView = view.findViewById(R.id.listViewReading);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ReadingItems item = new ReadingItems();
+        item.setTitle("Sample title");
+        item.setSubTitle("Sample subtitle");
+        item.setReadingImage(R.drawable.hangul);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
+        list.add(item);
 
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                readingUnit = i;
-                intent = new Intent(getContext(), ReadingFrame.class);
-                startActivity(intent);
-            }
-        });
+        ReadingAdapter adapter = new ReadingAdapter(list);
+        recyclerView.setAdapter(adapter);
 
         return view;
     }

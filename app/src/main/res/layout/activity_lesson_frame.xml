@@ -18,7 +18,7 @@
 
         <ImageButton
             android:id="@+id/btnExit1"
-            android:src="@drawable/icon_back"
+            android:src="@drawable/back"
             android:scaleType="fitCenter"
             android:layout_width="50dp"
             android:layout_height="match_parent" />
@@ -84,7 +84,7 @@
 
             <ImageButton
                 android:id="@+id/btnExit2"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/back"
                 android:scaleType="fitCenter"
                 android:layout_width="50dp"
                 android:layout_height="match_parent" />

@@ -39,7 +39,7 @@
 
         <ImageView
             android:id="@+id/flag"
-            android:src="@drawable/flag_america"
+            android:src="@drawable/en"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -216,13 +216,13 @@
 
         <Button
             android:id="@+id/btnSignInFacebook"
-            android:paddingLeft="20dp"
             android:layout_weight="0.1"
             android:text="@string/FACEBOOK"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_02"
-            android:drawableLeft="@drawable/logo_facebook"
+            android:drawableLeft="@drawable/facebook"
             android:drawablePadding="-40dp"
+            android:paddingLeft="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_width="match_parent"
@@ -234,6 +234,9 @@
             android:text="@string/WECHAT"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_03"
+            android:drawableLeft="@drawable/wechat"
+            android:drawablePadding="-40dp"
+            android:paddingLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
@@ -246,6 +249,9 @@
             android:text="@string/GOOGLE"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_04"
+            android:drawableLeft="@drawable/google"
+            android:drawablePadding="-40dp"
+            android:paddingLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
@@ -308,7 +314,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/flag_america"
+                android:src="@drawable/en"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -328,7 +334,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/flag_china"
+                android:src="@drawable/cn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -348,7 +354,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/flag_japan"
+                android:src="@drawable/jp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -368,7 +374,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/flag_thailand"
+                android:src="@drawable/th"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -388,7 +394,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/flag_korea"
+                android:src="@drawable/kr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -432,7 +438,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.3"
-            android:src="@drawable/icon_key" />
+            android:src="@drawable/forgotpassword" />
 
         <TextView
             android:layout_width="match_parent"

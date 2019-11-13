@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/picture"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/back"
                 android:layout_weight="0.2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent" />
@@ -54,7 +54,7 @@
                     <ImageButton
                         android:id="@+id/voice"
                         android:layout_weight="1"
-                        android:src="@drawable/icon_back"
+                        android:src="@drawable/back"
                         android:scaleType="fitCenter"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />

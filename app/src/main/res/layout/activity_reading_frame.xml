@@ -96,7 +96,7 @@
                     android:id="@+id/btnCollect"
                     android:layout_weight="0.2"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_back"
+                    android:src="@drawable/back"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
 

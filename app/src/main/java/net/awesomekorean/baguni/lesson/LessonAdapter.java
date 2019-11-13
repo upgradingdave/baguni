@@ -45,6 +45,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION) {
                         LessonItems item = list.get(position);
+                        System.out.println("CLICKED : " + position);
                         // 아이템 클릭 이벤트트
                     }
                 }
@@ -57,6 +58,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         View view = inflater.inflate(R.layout.main_lesson_listview_item, parent, false);
         LessonAdapter.ViewHolder holder = new LessonAdapter.ViewHolder(view);
         return holder;

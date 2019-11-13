@@ -27,8 +27,6 @@ public class MainLesson extends Fragment {
 
     public static int lessonUnit = 0;
 
-    static final String[] lessonList = {"Hangul", "Lesson1", "Lesson2"};
-
     View view;
 
     Intent intent;
@@ -50,7 +48,7 @@ public class MainLesson extends Fragment {
         LessonItems item = new LessonItems();
         item.setTitle("Sample title");
         item.setSubTitle("Sample subtitle");
-        item.setLessonImage(R.drawable.illustration_lesson_sample);
+        item.setLessonImage(R.drawable.hangul);
         item.setIsCompleted(true);
         item.setIsLock(true);
         item.setIsCompleted(true);

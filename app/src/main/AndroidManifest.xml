@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainQnA"></activity>
-        <activity android:name=".login.SignUp" />
+        <activity android:name=".login.SignUp" >
+        </activity>
         <activity android:name=".teachers.Teachers" >
         </activity>
         <activity android:name=".login.SignIn"></activity>
