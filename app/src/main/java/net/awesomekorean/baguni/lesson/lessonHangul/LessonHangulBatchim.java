@@ -35,15 +35,15 @@ class LessonHangulBatchim implements Hangul{
             "Great!",
             "Same one more.",
             "Now we can have a question. Why we should use different character even there are lots of same movement? It seems more simple if we use only one Batchim.",
-            "However, every languages have some words that have same pronunciation but different meaning. It will help flag_america to reduce the number of sound that we should make. Even though it has same sound, we can know enough its different meanings with spelling and the situation.",
+            "However, every languages have some words that have same pronunciation but different meaning. It will help flag_america to reduce the number of audio_small that we should make. Even though it has same audio_small, we can know enough its different meanings with spelling and the situation.",
             "After a long time, it's different movement.",
             "It has also similar tongue position with 'ㄴ'. But the air is getting out through mouth.",
-            "Some Korean learners who are native English speaker, tends to roll up their tongue like [r] sound. But the correct position is behind of upper teeth.",
+            "Some Korean learners who are native English speaker, tends to roll up their tongue like [r] audio_small. But the correct position is behind of upper teeth.",
             "Your lips closed.",
-            "And you can feel the sound trembled in your mouth.",
+            "And you can feel the audio_small trembled in your mouth.",
             "And the air is getting out through your nose.",
             "Your lips closed like 'ㅁ'.",
-            "But the sound not trembled.",
+            "But the audio_small not trembled.",
             "It's easy.",
             "This is same with 'ㅂ'.",
             "Totally same.",
@@ -57,10 +57,10 @@ class LessonHangulBatchim implements Hangul{
             "We call last consonant to 'Batchim'." +
             "It's the consonant that is placed in under part of Hangul." +
             "When I teach Korean I could find a lot of students who feel difficult in Batchim." +
-            "Especially the students who studied Batchim as a sound like" +
+            "Especially the students who studied Batchim as a audio_small like" +
             "'ㄱ' = [k], 'ㄴ' = [n]..." +
-            "It because they think the sound of consonant is different when they are Batchim." +
-            "I want to say the Batchim is not a sound but the movement of our articulator like mouth, tongue, throat etc..." +
+            "It because they think the audio_small of consonant is different when they are Batchim." +
+            "I want to say the Batchim is not a audio_small but the movement of our articulator like mouth, tongue, throat etc..." +
             "And I can also say we already finished learning Batchim when we learn consonants." +
             "Can you believe this?";
 

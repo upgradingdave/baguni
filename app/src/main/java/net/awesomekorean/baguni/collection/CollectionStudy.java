@@ -12,7 +12,6 @@ import net.awesomekorean.baguni.R;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {
 
-    RadioGroup radioGroup;
 
     CollectionRepository repository;
 
@@ -38,21 +37,6 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
         repository.getRandomForStudy(); // 디폴트로 랜덤모드 실행
         repository.getCount(); // 컬렉션 개수 가져오기
 
-        radioGroup = findViewById(R.id.radioGroup);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                studyBack.setVisibility(View.INVISIBLE);
-                if(i==R.id.radio1) {
-                    radioBtnNo = 0;
-                    index = 0;
-                    randomStudy();
-                } else {
-                    radioBtnNo = 1;
-                    newCollectionFirstStudy();
-                }
-            }
-        });
     }
 
     // 랜덤 학습 모드

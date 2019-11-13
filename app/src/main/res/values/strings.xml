@@ -17,6 +17,12 @@
     <string name="BTN_SAVE">Save</string>
     <string name="BTN_CORRECTION">Correction</string>
     <string name="BTN_CANCEL">Cancel</string>
+    <string name="BTN_ANSWER">Answer</string>
+    <string name="BTN_NEXT">Next</string>
+
+    <string name="BTN_STUDY">Study</string>
+    <string name="BTN_DELETE">Delete</string>
+    <string name="BTN_RECORD">Record</string>
 
     <string name="ANSWER">Answer</string>
     <string name="NEXT">Next</string>
@@ -63,8 +69,8 @@
     <string name="MSG_SAVE">Do you want to save?</string>
 
 
-    <string name="MODE_RANDOM">Random</string>
-    <string name="MODE_NEWWORD">New collection first</string>
+    <string name="RANDOM">Random</string>
+    <string name="RECENT_WORD">Recent word</string>
 
     <string name="NO_WRITTING">There is no writing</string>
     <string name="NO_COLLECTION">There is no collection</string>
@@ -76,6 +82,9 @@
     <string name="WRITE_HERE">Write here</string>
 
     <string name="REVIEWED">Reviewed</string>
+
+    <string name="FRONT">Front</string>
+    <string name="BACK">Back</string>
 
 
     <!--번역 필요 없는 부분-->

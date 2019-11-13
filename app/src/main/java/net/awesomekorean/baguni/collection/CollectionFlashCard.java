@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +15,7 @@ import net.awesomekorean.baguni.R;
 
 public class CollectionFlashCard extends AppCompatActivity implements Button.OnClickListener {
 
-    Button btnCancel;
+    ImageView btnBack;
     Button btnSave;
 
     TextView saveResult;
@@ -37,9 +38,9 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
         editBack = findViewById(R.id.textBack);
         saveResult = findViewById(R.id.saveResult);
 
-        btnCancel = findViewById(R.id.btnCancel);
+        btnBack = findViewById(R.id.btnBack);
         btnSave = findViewById(R.id.btnSave);
-        btnCancel.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
         btnSave.setOnClickListener(this);
 
         Intent intent = getIntent();
@@ -62,7 +63,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
         switch (view.getId()) {
 
-            case R.id.btnCancel :
+            case R.id.btnBack :
                 // ADD 일 때는 result 값을 주고, EDIT 일 때는 그냥 activity 만 종료함.
                 if(code.equals(getString(R.string.REQUEST_ADD))) {
                     Intent intent = new Intent();

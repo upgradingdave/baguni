@@ -2,111 +2,98 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="50dp"
+    android:background="#EBEBEB"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:weightSum="1"
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:text="@string/MENU_COLLECTION"
+        android:textSize="18dp"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:padding="20dp"
-            android:orientation="vertical"
-            android:weightSum="1"
+    <ImageView
+        android:id="@+id/btnBack"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:background="@drawable/bg_round_all_small"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@+id/btnSave"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:text="@string/FRONT"
+            android:textSize="15dp"
+            android:fontFamily="@font/avenir_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/textFront"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:paddingLeft="15dp"
             android:background="@drawable/bg_round_all"
-            android:layout_weight="0.9"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="0.5"
-                android:layout_width="match_parent"
+        <TextView
+            android:layout_marginTop="30dp"
+            android:text="@string/BACK"
+            android:textSize="15dp"
+            android:fontFamily="@font/avenir_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-                android:layout_height="0dp">
-
-                <LinearLayout
-                    android:weightSum="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="Front"
-                        android:textSize="20dp"
-                        android:layout_weight="0.8"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageButton
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/back"
-                        android:layout_weight="0.2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/textFront"
-                    android:layout_marginTop="10dp"
-                    android:hint="Korean"
-                    android:textSize="30dp"
-                    android:background="@drawable/bg_round_all"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="0.5"
-                android:layout_width="match_parent"
-
-                android:layout_height="0dp">
-
-                <TextView
-                    android:text="Back"
-                    android:textSize="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:id="@+id/textBack"
-                    android:layout_marginTop="10dp"
-                    android:hint="English"
-                    android:textSize="30dp"
-                    android:background="@drawable/bg_round_all"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="0.1"
+        <EditText
+            android:id="@+id/textBack"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="30dp"
+            android:background="@drawable/bg_round_all"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btnCancel"
-                android:text="@string/BTN_CANCEL"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:id="@+id/btnSave"
-                android:text="@string/BTN_SAVE"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSave"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/BTN_SAVE"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_purple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/saveResult"

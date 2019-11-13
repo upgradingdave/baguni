@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal"
+    android:paddingRight="30dp"
     android:layout_marginBottom="10dp"
     android:weightSum="1"
     android:descendantFocusability="blocksDescendants"
@@ -12,36 +13,38 @@
         android:id="@+id/checkBox"
         android:layout_weight="0.1"
         android:layout_width="0dp"
-        android:layout_height="match_parent" />
-
-    <ImageButton
-        android:id="@+id/btnRecord"
-        android:src="@drawable/back"
-        android:scaleType="fitCenter"
-        android:layout_weight="0.1"
-        android:layout_width="0dp"
+        android:layout_marginRight="15dp"
         android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/collectionFront"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:text="사과"
-        android:textSize="20dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.4"
-        android:layout_width="0dp" />
+        android:ellipsize="end"
+        android:gravity="left|center_vertical"
+        android:maxLines="1"
+        android:fontFamily="@font/avenir_light"
+        android:text="사과"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/collectionBack"
         android:maxLines="1"
         android:ellipsize="end"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:text="apple"
         android:textSize="20dp"
+        android:fontFamily="@font/avenir_light"
         android:layout_weight="0.4"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 
+    <ImageView
+        android:id="@+id/btnAudio"
+        android:src="@drawable/audio_small"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
 </LinearLayout>

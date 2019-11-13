@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -51,14 +52,14 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     ProgressBar progressBar;
 
-    Button btnSync; // DB와 동기화 버튼
+    ImageView btnSync; // DB와 동기화 버튼
     Button btnStudy;    // 컬렉션을 flash card 로 공부
     static Button btnDelete;   // 컬렉션 삭제 버튼
     static Button btnRecord;   // 녹음 요청 버튼
-    FloatingActionButton btnAdd;    // 컬렉션 추가용 floating 버튼
+    ImageView btnAdd;    // 컬렉션 추가용 floating 버튼
 
     EditText searchEdit;    // 검색 입력
-    ImageButton searchCancel;   // 검색 취소
+    ImageView searchCancel;   // 검색 취소
 
     Boolean longItemClicked = false;
 
@@ -118,8 +119,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         repository = new CollectionRepository(getContext());
 
-        repository.deleteAll();
-        repository.deleteDateLastSync();
+        //repository.deleteAll();
+        //repository.deleteDateLastSync();
 
         setListViewFooter();
 

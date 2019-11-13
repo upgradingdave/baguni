@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.awesomekorean.baguni.MainCollection;
@@ -53,7 +54,7 @@ public class CollectionAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.main_collection_listview_item, viewGroup, false);
             holder = new ViewHolder();
             holder.checkBox = view.findViewById(R.id.checkBox);
-            holder.btnRecord = view.findViewById(R.id.btnRecord);
+            holder.btnAudio = view.findViewById(R.id.btnAudio);
             holder.collectionFront = view.findViewById(R.id.collectionFront);
             holder.collectionBack = view.findViewById(R.id.collectionBack);
             view.setTag(holder);
@@ -100,7 +101,7 @@ public class CollectionAdapter extends BaseAdapter {
     // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용
     static class ViewHolder {
         CheckBox checkBox;
-        ImageButton btnRecord;
+        ImageView btnAudio;
         TextView collectionFront;
         TextView collectionBack;
     }

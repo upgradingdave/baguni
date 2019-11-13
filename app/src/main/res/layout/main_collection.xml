@@ -7,100 +7,80 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:weightSum="1"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_weight="0.1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <LinearLayout
-                android:gravity="left|bottom"
                 android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/collectionNo"
-                    android:textSize="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:padding="15dp"
                 android:background="@drawable/bg_round_all"
-                android:weightSum="1"
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/searchCollection"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Search"
+                    android:textSize="15dp"
                     android:paddingLeft="10dp"/>
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/searchCancel"
-                    android:visibility="gone"
-                    android:layout_weight="0.2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/back" />
-            </LinearLayout>
-            <Button
-                android:id="@+id/btnSync"
-                android:text="sync"
-                android:layout_width="80dp"
-                android:layout_height="match_parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/close_red" />
 
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnSync"
+                android:src="@drawable/sync"
+                android:text="sync"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
-            android:background="@android:color/holo_orange_light"
-            android:weightSum="1"
             android:layout_weight="0.05"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <CheckBox
                 android:id="@+id/checkBoxSelectAll"
                 android:visibility="invisible"
-                android:layout_weight="0.1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_weight="0.1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:gravity="center"
-                android:text="Side A"
-                android:textSize="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:layout_width="0dp" />
-
-            <TextView
-                android:gravity="center"
-                android:text="Side B"
-                android:textSize="10dp"
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
+                android:id="@+id/collectionNo"
+                android:gravity="center_vertical"
+                android:text="TEST"
+                android:textSize="15dp"
+                android:fontFamily="@font/avenir_bold"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
 
         <android.support.constraint.ConstraintLayout
             android:layout_weight="0.75"
@@ -109,61 +89,76 @@
 
             <ListView
                 android:id="@+id/listViewCollection"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:divider="#00000000"
+                android:dividerHeight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ListView>
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageView
                 android:id="@+id/btnAddCollection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/listViewCollection"
                 app:layout_constraintBottom_toBottomOf="@+id/listViewCollection"
-                app:backgroundTint="@android:color/holo_orange_light"
-                android:src="@drawable/back"
+                android:src="@drawable/add"
                 />
 
         </android.support.constraint.ConstraintLayout>
 
-        <LinearLayout
-            android:gravity="center"
-            android:layout_weight="0.1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
 
-            <Button
-                android:id="@+id/btnStudy"
-                android:text="Study"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:enabled="false"
-                android:visibility="gone"
-                android:text="Delete"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <Button
-                android:id="@+id/btnRecord"
-                android:enabled="false"
-                android:visibility="gone"
-                android:text="Record"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btns"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/btnStudy"
+            android:background="@drawable/btn_01"
+            android:text="@string/BTN_STUDY"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:visibility="gone"
+            android:enabled="false"
+            android:background="@drawable/btn_red_stroke"
+            android:text="@string/DELETE"
+            android:textColor="#F77466"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btnRecord"
+            android:visibility="gone"
+            android:enabled="false"
+            android:text="@string/BTN_RECORD"
+            android:textColor="#FFF"
+            android:background="@drawable/btn_01"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
 
     <android.support.constraint.Guideline
         android:id="@+id/guideLine40"
@@ -229,5 +224,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
+
 
 </android.support.constraint.ConstraintLayout>
