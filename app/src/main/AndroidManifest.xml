@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.awesomekorean.baguni">
+    package="net.awesomekorean.podo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,28 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.SignUp" >
-        </activity>
-        <activity android:name=".teachers.Teachers" >
-        </activity>
-        <activity android:name=".login.SignIn"></activity>
-        <activity android:name=".collection.CollectionStudy" />
-        <activity android:name=".collection.CollectionFlashCard" />
-        <activity android:name=".writing.WritingFrame" >
-        </activity>
-        <activity android:name=".reading.ReadingFrame" />
-        <activity android:name=".lesson.LessonFrame" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
-        <activity android:name=".lesson.lessonHangul.LessonHangul" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainQna"></activity>
+        <activity android:name=".login.SignUp"></activity>
+        <activity android:name=".teachers.Teachers"></activity>
+        <activity android:name=".login.SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".collection.CollectionStudy" />
+        <activity android:name=".collection.CollectionFlashCard" />
+        <activity android:name=".writing.WritingFrame"></activity>
+        <activity android:name=".reading.ReadingFrame" />
+        <activity android:name=".lesson.LessonFrame" />
+        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
+        <activity android:name=".lesson.lessonHangul.LessonHangul" />
+        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

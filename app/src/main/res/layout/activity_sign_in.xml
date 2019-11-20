@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +8,7 @@
     android:background="#196A69EF"
     tools:context=".login.SignIn">
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLine20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
         <LinearLayout
             android:id="@+id/layoutEmail"
             android:weightSum="1"
-            android:layout_weight="0.154"
+            android:layout_weight="0.2"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_marginTop="30dp"
@@ -134,7 +134,7 @@
 
         <LinearLayout
             android:id="@+id/layoutPassword"
-            android:layout_weight="0.154"
+            android:layout_weight="0.2"
             android:weightSum="1"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -215,48 +215,34 @@
             android:text="@string/WITH" />
 
         <Button
-            android:id="@+id/btnSignInFacebook"
-            android:layout_weight="0.1"
-            android:text="@string/FACEBOOK"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_02"
-            android:drawableLeft="@drawable/facebook"
-            android:drawablePadding="-40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <Button
-            android:id="@+id/btnSignInWechat"
-            android:layout_weight="0.1"
-            android:text="@string/WECHAT"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/btn_03"
-            android:drawableLeft="@drawable/wechat"
-            android:drawablePadding="-40dp"
-            android:paddingLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <Button
             android:id="@+id/btnSignInGoogle"
-            android:layout_weight="0.1"
+            android:layout_weight="0.104"
             android:text="@string/GOOGLE"
             android:textColor="#FFFFFF"
             android:background="@drawable/btn_04"
             android:drawableLeft="@drawable/google"
             android:drawablePadding="-40dp"
             android:paddingLeft="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/btnSignInFacebook"
+            android:layout_weight="0.104"
+            android:text="@string/FACEBOOK"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_02"
+            android:drawableLeft="@drawable/facebook"
+            android:drawablePadding="-40dp"
+            android:paddingLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
+
 
 
         <LinearLayout
@@ -473,4 +459,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

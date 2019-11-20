@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "19763591697",
+    "firebase_url": "https://podo-705c6.firebaseio.com",
+    "project_id": "podo-705c6",
+    "storage_bucket": "podo-705c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19763591697:android:2862a5a36e951e866d4fb0",
+        "android_client_info": {
+          "package_name": "net.awesomekorean.podo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19763591697-pqa6j9mgp1lo366b014921s5nuovl16j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.awesomekorean.podo",
+            "certificate_hash": "ea34e43aeece64ac84ae4f6765a5e5756f3d18b7"
+          }
+        },
+        {
+          "client_id": "19763591697-da964299m6aop0iio3fbtul085puri73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqQ-TZyW_u4WO6I0_QKMpmUBZY6Q2PldI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19763591697-da964299m6aop0iio3fbtul085puri73.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
