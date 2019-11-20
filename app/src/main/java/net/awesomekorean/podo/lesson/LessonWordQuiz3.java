@@ -63,7 +63,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 if(wordQuiz1Answer.getText().length() == word.length()) {
 
                     if(wordQuiz1Answer.getText().toString().equals(word)) {
-                        // 1. 정답소리 play 추가할 것
+                        // people1. 정답소리 play 추가할 것
                         correctImage.setVisibility(View.VISIBLE);
 
                         // 1초 후에 정답이미지 GONE 하고 다음 문제 넘어감
@@ -89,7 +89,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                             }
                         }, 1000);
 
-                        // 1. quizNo == wordForQuiz.length 이면 Quiz2로 프레그먼트 전환
+                        // people1. quizNo == wordForQuiz.length 이면 Quiz2로 프레그먼트 전환
                     } else {
                         wordQuiz1Answer.setText("");
                     }

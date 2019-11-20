@@ -21,7 +21,7 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
     Button btnNext;
 
     int index = 0; // 최신 플래시 카드부터 공부할 때의 인덱스
-    int radioBtnNo = 0; // 라디오버튼 번호, 0: Random, 1: New word first
+    int radioBtnNo = 0; // 라디오버튼 번호, 0: Random, people1: New word first
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -35,7 +35,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     View view;
 
     ListView listView;
-    ArrayList<WritingItems> list = new ArrayList<>(); // 리스트뷰에 표시될 아이템들 10 개씩 끊음
+    ArrayList<WritingItems> list = new ArrayList<>(); // 리스트뷰에 표시될 아이템들 people10 개씩 끊음
     ArrayList<WritingItems> listAllData;
     WritingAdapter adapter;
 

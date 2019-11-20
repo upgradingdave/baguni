@@ -18,7 +18,7 @@ public class CollectionEntity {
     private String audio = "file path"; // 임의로 오디오 경로 설정
     private String dateNew;
     private String dateEdit;
-    private int deleted = 0; // 0=false, 1=true
+    private int deleted = 0; // 0=false, people1=true
 
     @Ignore
     public CollectionEntity() {

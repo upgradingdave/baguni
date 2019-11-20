@@ -13,7 +13,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return MainCollection.newInstance();
 
             case 4 :
-                return null;
+                return MainQna.newInstance();
 
             default :
                 return null;

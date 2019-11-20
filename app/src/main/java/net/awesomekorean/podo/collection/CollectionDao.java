@@ -24,7 +24,7 @@ public interface CollectionDao {
     @Query("SELECT * FROM COLLECTION ORDER BY dateNew DESC LIMIT 1 OFFSET :index")
     CollectionEntity getDesc(int index);
 
-    //@Query("SELECT * FROM COLLECTIONENTITY LIMIT 20 OFFSET 0")
+    //@Query("SELECT * FROM COLLECTIONENTITY LIMIT people20 OFFSET 0")
 
     @Query("SELECT COUNT(*) FROM COLLECTION WHERE deleted != 1")
     int getCount();

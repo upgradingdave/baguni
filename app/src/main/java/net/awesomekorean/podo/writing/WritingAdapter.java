@@ -51,7 +51,7 @@ public class WritingAdapter extends BaseAdapter {
         if(view==null) {
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.main_writing_listview_item, viewGroup, false);
+            view = inflater.inflate(R.layout.main_writing_list_item, viewGroup, false);
             holder = new ViewHolder();
             holder.firstDate = view.findViewById(R.id.firstDate);
             holder.lastDate = view.findViewById(R.id.lastDate);

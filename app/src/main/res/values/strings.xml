@@ -86,6 +86,13 @@
     <string name="FRONT">Front</string>
     <string name="BACK">Back</string>
 
+    <string name="FAQ">FAQ</string>
+    <string name="MY_QUESTIONS">MY QUESTIONS</string>
+    <string name="ASK">Ask a question</string>
+    <string name="RECENT_FAQ">Recent FAQ</string>
+    <string name="CATEGORY">Category</string>
+
+
 
     <!--번역 필요 없는 부분-->
 
