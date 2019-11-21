@@ -1,4 +1,4 @@
-package net.awesomekorean.podo.faq;
+package net.awesomekorean.podo.qna;
 
 
 public class FaqItems {

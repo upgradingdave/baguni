@@ -1,4 +1,4 @@
-package net.awesomekorean.podo.faq;
+package net.awesomekorean.podo.qna;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -56,7 +56,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.main_faq_list_item, parent, false);
+        View view = inflater.inflate(R.layout.main_qna_faq_item, parent, false);
         FaqAdapter.ViewHolder holder = new FaqAdapter.ViewHolder(view);
         return holder;
     }

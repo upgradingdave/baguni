@@ -50,7 +50,7 @@ public class CollectionAdapter extends BaseAdapter {
         if(view==null) {
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.main_collection_listview_item, viewGroup, false);
+            view = inflater.inflate(R.layout.main_collection_item, viewGroup, false);
             holder = new ViewHolder();
             holder.checkBox = view.findViewById(R.id.checkBox);
             holder.btnAudio = view.findViewById(R.id.btnAudio);

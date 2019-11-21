@@ -11,36 +11,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_weight="0.1"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_underline"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <TextView
-                android:id="@+id/faq"
-                android:text="@string/FAQ"
-                android:textSize="15dp"
-                android:textColor="#6A69EF"
-                android:gravity="center|bottom"
-                android:paddingBottom="15dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-            <TextView
-                android:id="@+id/myQuestions"
-                android:text="@string/MY_QUESTIONS"
-                android:textSize="15dp"
-                android:gravity="center|bottom"
-                android:paddingBottom="15dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <LinearLayout
             android:background="#F8F8FF"
             android:layout_weight="0.9"
             android:orientation="vertical"
@@ -109,22 +79,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:text="@string/ASK"
-        android:textColor="#FFF"
-        android:background="@drawable/btn_01"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="15dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Button>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -134,23 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideLine50"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 
-    <View
-        app:layout_constraintTop_toBottomOf="@+id/guideLine10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/guideLine50"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="#6A69EF"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

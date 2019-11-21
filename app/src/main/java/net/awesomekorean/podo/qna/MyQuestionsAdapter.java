@@ -1,25 +1,23 @@
-package net.awesomekorean.podo.myquestions;
+package net.awesomekorean.podo.qna;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.faq.FaqItems;
 
 import java.util.ArrayList;
 
-public class MyquestionsAdapter extends RecyclerView.Adapter<MyquestionsAdapter.ViewHolder> {
+public class MyQuestionsAdapter extends RecyclerView.Adapter<MyQuestionsAdapter.ViewHolder> {
 
-    private ArrayList<MyquestionsItems> list;
+    private ArrayList<MyQuestionsItems> list;
 
-    public MyquestionsAdapter(ArrayList<MyquestionsItems> list) {
+    public MyQuestionsAdapter(ArrayList<MyQuestionsItems> list) {
         this.list = list;
     }
 
@@ -46,7 +44,7 @@ public class MyquestionsAdapter extends RecyclerView.Adapter<MyquestionsAdapter.
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION) {
-                        MyquestionsItems item = list.get(position);
+                        MyQuestionsItems item = list.get(position);
                         System.out.println("CLICKED : " + position);
                         // 아이템 클릭 이벤트트
                     }
@@ -61,14 +59,14 @@ public class MyquestionsAdapter extends RecyclerView.Adapter<MyquestionsAdapter.
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.main_myquestions_list_item, parent, false);
-        MyquestionsAdapter.ViewHolder holder = new MyquestionsAdapter.ViewHolder(view);
+        View view = inflater.inflate(R.layout.main_qna_myquestions_item, parent, false);
+        MyQuestionsAdapter.ViewHolder holder = new MyQuestionsAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MyquestionsItems items = list.get(position);
+        MyQuestionsItems items = list.get(position);
 
         holder.category.setText(items.getCategory());
         holder.summary.setText((items.getSummary()));

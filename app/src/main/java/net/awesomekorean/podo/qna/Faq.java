@@ -1,38 +1,34 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.qna;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import net.awesomekorean.podo.faq.FaqAdapter;
-import net.awesomekorean.podo.faq.FaqItems;
-
+import net.awesomekorean.podo.R;
 import java.util.ArrayList;
 
-public class MainFaq extends Fragment {
+public class Faq extends Fragment {
 
     View view;
     Intent intent;
 
 
 
-    public static MainFaq newInstance() {
-        return new MainFaq();
+    public static Faq newInstance() {
+        return new Faq();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.main_faq, container, false);
+        view = inflater.inflate(R.layout.main_qna_faq, container, false);
 
         ArrayList<FaqItems> list = new ArrayList<>();
 

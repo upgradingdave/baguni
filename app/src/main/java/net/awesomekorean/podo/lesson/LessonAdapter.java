@@ -61,7 +61,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.main_lesson_list_item, parent, false);
+        View view = inflater.inflate(R.layout.main_lesson_item, parent, false);
         LessonAdapter.ViewHolder holder = new LessonAdapter.ViewHolder(view);
         return holder;
     }

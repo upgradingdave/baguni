@@ -1,6 +1,6 @@
-package net.awesomekorean.podo.myquestions;
+package net.awesomekorean.podo.qna;
 
-public class MyquestionsItems {
+public class MyQuestionsItems {
 
     private String category;
     private String summary;

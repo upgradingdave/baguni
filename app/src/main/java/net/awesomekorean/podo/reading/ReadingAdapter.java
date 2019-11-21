@@ -57,7 +57,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.main_reading_list_item, parent, false);
+        View view = inflater.inflate(R.layout.main_reading_item, parent, false);
         ReadingAdapter.ViewHolder holder = new ReadingAdapter.ViewHolder(view);
         return holder;
     }
