@@ -17,11 +17,6 @@
         <activity android:name="net.awesomekorean.podo.teachers.Teachers" >
         </activity>
         <activity android:name="net.awesomekorean.podo.login.SignIn">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name="net.awesomekorean.podo.collection.CollectionStudy" />
@@ -34,6 +29,11 @@
         <activity android:name="net.awesomekorean.podo.lesson.lessonHangul.LessonHangul" />
         <activity android:name="net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu" />
         <activity android:name="net.awesomekorean.podo.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>

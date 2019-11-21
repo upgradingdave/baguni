@@ -90,7 +90,12 @@
     <string name="MY_QUESTIONS">MY QUESTIONS</string>
     <string name="ASK">Ask a question</string>
     <string name="RECENT_FAQ">Recent FAQ</string>
+
     <string name="CATEGORY">Category</string>
+    <string name="GRAMMAR">Grammar</string>
+
+    <string name="CONFIRMED">Confirmed</string>
+    <string name="REJECTED">Rejected</string>
 
 
 

@@ -47,11 +47,40 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewCategory"
+            <LinearLayout
+                android:id="@+id/categoryLayout"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_round_all"
+                android:gravity="center_vertical"
                 android:layout_margin="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/category"
+                    android:text="@string/CATEGORY"
+                    android:textColor="#2E374D"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/down_arrow" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <TextView
                 android:text="@string/RECENT_FAQ"
@@ -64,7 +93,7 @@
                 android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewFaq"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
@@ -87,7 +116,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="10dp"
         android:paddingTop="15dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"

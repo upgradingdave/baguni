@@ -29,6 +29,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/userName"
             android:layout_weight="1"
             android:text="Danny"
             android:textSize="15dp"
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/uploadDate"
             android:text="2 days ago"
             android:textSize="12dp"
             android:textColor="#6C7A8B"
@@ -46,6 +48,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/summary"
         android:layout_marginTop="15dp"
         android:text="question...blabla"
         android:textSize="15dp"
