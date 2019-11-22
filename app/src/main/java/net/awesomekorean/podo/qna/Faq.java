@@ -48,7 +48,7 @@ public class Faq extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        FaqAdapter adapter = new FaqAdapter(list);
+        FaqAdapter adapter = new FaqAdapter(getContext(), list);
         recyclerView.setAdapter(adapter);
 
 

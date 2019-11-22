@@ -97,6 +97,13 @@
     <string name="CONFIRMED">Confirmed</string>
     <string name="REJECTED">Rejected</string>
 
+    <string name="QUESTION">Question</string>
+    <string name="ASK_YOUR_QUESTION">Ask your question here</string>
+    <string name="MSG_SEND">Your question has been sent. We\'ll let you know if your question have been selected.</string>
+    <string name="QNA">Q&amp;A</string>
+
+    <string name="NO_QUESTIONS">You didn\'t ask a question yet</string>
+    <string name="TIPS_QUESTION">Please ask a good question about Korean learning or Korean culture. The question which is selected will be shared to every learners and rewarded with 0 points.</string>
 
     <!--번역 필요 없는 부분-->
 

@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import net.awesomekorean.podo.login.SignUp;
+import net.awesomekorean.podo.qna.AskQuestion;
 import net.awesomekorean.podo.qna.Faq;
 import net.awesomekorean.podo.qna.MyQuestions;
 
@@ -27,6 +29,8 @@ public class MainQna extends Fragment implements View.OnClickListener{
 
     View underBarFaq;
     View underBarMyQ;
+
+    Button btnAsk;
 
     Fragment fragment;
 
@@ -55,6 +59,8 @@ public class MainQna extends Fragment implements View.OnClickListener{
         myQuestions.setOnClickListener(this);
         underBarFaq = view.findViewById(R.id.underBarFaq);
         underBarMyQ = view.findViewById(R.id.underBarMyQuestions);
+        btnAsk = view.findViewById(R.id.btnAsk);
+        btnAsk.setOnClickListener(this);
 
         return view;
     }
@@ -81,6 +87,11 @@ public class MainQna extends Fragment implements View.OnClickListener{
                 myQuestions.setTextColor(Color.parseColor("#6A69EF"));
                 underBarFaq.setVisibility(View.INVISIBLE);
                 underBarMyQ.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.btnAsk :
+                intent = new Intent(getContext(), AskQuestion.class);
+                startActivity(intent);
                 break;
         }
     }

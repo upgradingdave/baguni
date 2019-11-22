@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ public class MyQuestions extends Fragment {
     View view;
     Intent intent;
 
+    LinearLayout noQuestion;
 
 
     public static MyQuestions newInstance() {
@@ -32,6 +34,8 @@ public class MyQuestions extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_qna_myquestions, container, false);
+
+        noQuestion = view.findViewById(R.id.noQuestion);
 
         ArrayList<MyQuestionsItems> list = new ArrayList<>();
 
@@ -58,6 +62,12 @@ public class MyQuestions extends Fragment {
         list.add(item1);
         list.add(item2);
         list.add(item3);
+
+        if(list.size() == 0) {
+            noQuestion.setVisibility(View.VISIBLE);
+        }else {
+            noQuestion.setVisibility(View.GONE);
+        }
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);

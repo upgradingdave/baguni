@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.qna;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
 
+
 import java.util.ArrayList;
 
 public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
 
+    private Context context;
     private ArrayList<FaqItems> list;
 
-    public FaqAdapter(ArrayList<FaqItems> list) {
+    public FaqAdapter(Context context, ArrayList<FaqItems> list) {
+        this.context = context;
         this.list = list;
     }
 
@@ -44,6 +48,9 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
                         FaqItems item = list.get(position);
                         System.out.println("CLICKED : " + position);
                         // 아이템 클릭 이벤트트
+                        Intent intent = new Intent(context, QnaDetail.class);
+                        context.startActivity(intent);
+
                     }
                 }
             });

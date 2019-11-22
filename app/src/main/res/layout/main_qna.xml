@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:background="@drawable/bg_underline"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="30dp">
 
         <TextView
             android:id="@+id/faq"
@@ -82,6 +82,7 @@
 
 
     <Button
+        android:id="@+id/btnAsk"
         android:text="@string/ASK"
         android:textColor="#FFF"
         android:background="@drawable/btn_01"
