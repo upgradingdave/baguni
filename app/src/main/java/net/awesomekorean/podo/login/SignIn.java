@@ -11,16 +11,34 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
+import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.webService.RetrofitConnection;
+import net.awesomekorean.podo.webService.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity implements Button.OnClickListener {
 
@@ -51,9 +69,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
     Intent intent;
 
-    private static final int RC_SITN_IN = 100;
-    private FirebaseAuth firebaseAuth;
-    private GoogleApiClient googleApiClient;
+    static final int RC_SIGN_IN = 100;
+    FirebaseAuth firebaseAuth;
+    GoogleSignInClient googleSignInClient;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,12 +80,14 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         setContentView(R.layout.activity_sign_in);
 
         // Firebase 구글, 페이스북 로그인 연동
+        firebaseAuth = FirebaseAuth.getInstance();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
         SettingStatusBar.setStatusBar(this);
@@ -112,6 +132,47 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 구글로그인 버튼 응답
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // 구글 로그인 성공
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+
+            }
+        }
+    }
+
+    // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
+    // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증합니다.
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // 로그인 성공
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Google login succeed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // 로그인 실패
+                            Toast.makeText(getApplicationContext(), "Google login failed", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View view) {
@@ -158,9 +219,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
 
             case R.id.btnSignIn :
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                /*
+
                 String userEmail = email.getText().toString();
                 String userPass = password.getText().toString();
 
@@ -193,7 +252,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         System.out.println("Failed to connect");
                     }
                 });
-                */
+
                 break;
 
             case R.id.forgotPassword :
@@ -214,7 +273,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.btnSignInGoogle :
-
+                intent = googleSignInClient.getSignInIntent();
+                startActivityForResult(intent, RC_SIGN_IN);
                 break;
 
             case R.id.btnSignInFacebook :
@@ -222,6 +282,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
             case R.id.btnSignUp :
                 intent = new Intent(this, SignUp.class);
+                // 인텐트 플레그 설정하기!!!!!!!!
                 startActivity(intent);
                 break;
 
