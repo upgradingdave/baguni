@@ -10,5 +10,7 @@ public interface Reading {
 
     int[] getEnd();
 
-    String[] getPopUpText();
+    String[] getPopUpFront();
+
+    String[] getPopUpBack();
 }

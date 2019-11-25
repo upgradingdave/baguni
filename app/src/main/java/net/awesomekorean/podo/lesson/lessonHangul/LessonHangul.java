@@ -203,7 +203,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         mediaPlayer = new MediaPlayer();
 
-        String string = "R.raw.con0";
+        String string = "R.raw.sample";
 
         int currentPlay = getResources().getIdentifier(string, "raw", getPackageName());
 

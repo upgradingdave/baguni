@@ -21,7 +21,8 @@ public class Reading0 implements Reading {
     final int[] start = {27, 38, 49};
     final int[] end = {29, 40, 51};
 
-    final String[] popUpText = {"뜻a", "뜻b", "뜻c"};
+    final String[] popUpFront = {"단어1", "단어2", "단어3"};
+    final String[] popUpBack = {"뜻a", "뜻b", "뜻c"};
 
     @Override
     public String getTitle() {
@@ -44,7 +45,12 @@ public class Reading0 implements Reading {
     }
 
     @Override
-    public String[] getPopUpText() {
-        return popUpText;
+    public String[] getPopUpFront() {
+        return popUpFront;
+    }
+
+    @Override
+    public String[] getPopUpBack() {
+        return popUpBack;
     }
 }

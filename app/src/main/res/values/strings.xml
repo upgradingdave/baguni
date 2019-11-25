@@ -105,6 +105,15 @@
     <string name="NO_QUESTIONS">You didn\'t ask a question yet</string>
     <string name="TIPS_QUESTION">Please ask a good question about Korean learning or Korean culture. The question which is selected will be shared to every learners and rewarded with 0 points.</string>
 
+    <string name="FINISH_READING">Finish Reading</string>
+
+    <string name="NORMAL">Normal</string>
+    <string name="SPEED">Speed x0.8</string>
+
+    <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
+
+
+
     <!--번역 필요 없는 부분-->
 
     <string name="REQUEST">request</string>
