@@ -22,6 +22,12 @@
         <activity android:name=".collection.CollectionFlashCard" />
         <activity android:name=".writing.WritingFrame" />
         <activity android:name=".reading.ReadingFrame" >
+
+        </activity>
+        <activity android:name=".lesson.LessonFrame" />
+        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
+        <activity android:name=".lesson.lessonHangul.LessonHangul" />
+        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +35,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".lesson.LessonFrame" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
-        <activity android:name=".lesson.lessonHangul.LessonHangul" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
         <activity android:name=".MainActivity" />
     </application>
 

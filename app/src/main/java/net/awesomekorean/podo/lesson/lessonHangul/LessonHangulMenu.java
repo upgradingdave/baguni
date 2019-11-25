@@ -3,48 +3,68 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import net.awesomekorean.podo.R;
 
-public class LessonHangulMenu extends AppCompatActivity {
+public class LessonHangulMenu extends AppCompatActivity implements View.OnClickListener {
 
+    LinearLayout consonant;
+    LinearLayout vowel;
+    LinearLayout batchim;
+    LinearLayout assembly;
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul_menu);
+
+        consonant = findViewById(R.id.consonant);
+        vowel = findViewById(R.id.vowel);
+        batchim = findViewById(R.id.batchim);
+        assembly = findViewById(R.id.assembly);
+        consonant.setOnClickListener(this);
+        vowel.setOnClickListener(this);
+        batchim.setOnClickListener(this);
+        assembly.setOnClickListener(this);
     }
 
-    public void btnMenuConsonant(View v) {
+    @Override
+    public void onClick(View v) {
 
-        Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
-        intent.putExtra("conVowBat", "consonant");
-        startActivity(intent);
+        switch (v.getId()) {
+
+            case R.id.consonant :
+                intent = new Intent(getApplicationContext(), LessonHangul.class);
+                intent.putExtra("conVowBat", "consonant");
+                startActivity(intent);
+                break;
+
+            case R.id.vowel :
+                intent = new Intent(getApplicationContext(), LessonHangul.class);
+                intent.putExtra("conVowBat", "vowel");
+                startActivity(intent);
+                break;
+
+            case R.id.batchim :
+                intent = new Intent(getApplicationContext(), LessonHangul.class);
+                intent.putExtra("conVowBat", "batchim");
+                startActivity(intent);
+                break;
+
+            case R.id.assembly :
+                intent = new Intent(getApplicationContext(), LessonHangulAssembly.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnBack :
+                finish();
+                break;
+        }
     }
-
-    public void btnMenuVowel(View v) {
-
-        Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
-        intent.putExtra("conVowBat", "vowel");
-        startActivity(intent);
-    }
-
-    public void btnMenuBatchim(View v) {
-
-        Intent intent = new Intent(getApplicationContext(), LessonHangul.class);
-        intent.putExtra("conVowBat", "batchim");
-        startActivity(intent);
-    }
-
-    public void btnMenuAssembly(View v) {
-
-        Intent intent = new Intent(getApplicationContext(), LessonHangulAssembly.class);
-        startActivity(intent);
-    }
-
-
-
 
 }

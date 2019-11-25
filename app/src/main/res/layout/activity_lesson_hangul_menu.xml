@@ -2,52 +2,133 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#EBEBEB"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".lesson.lessonHangul.LessonHangulMenu">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:text="@string/HANGUL"
+        android:textSize="18dp"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_height="0dp">
 
-        <Button
-            android:id="@+id/btnMenuConsonant"
+        <LinearLayout
+            android:id="@+id/consonant"
+            android:background="@drawable/bg_round_all_small"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:onClick="btnMenuConsonant"
-            android:text="Consonant"
-            android:textSize="20dp" />
+            android:layout_height="100dp">
 
-        <Button
-            android:id="@+id/btnMenuVowel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:onClick="btnMenuVowel"
-            android:text="Vowel"
-            android:textSize="20dp" />
+            <ImageView
+                android:src="@drawable/hangul_menu_consonant"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/btnMenuBatchim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:onClick="btnMenuBatchim"
-            android:text="Batchim"
-            android:textSize="20dp" />
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/CONSONANT"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnMenuAssembly"
+        <LinearLayout
+            android:id="@+id/vowel"
+            android:background="@drawable/bg_round_all_small"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:onClick="btnMenuAssembly"
-            android:text="Assembly"
-            android:textSize="20dp" />
+            android:layout_height="100dp">
+
+            <ImageView
+                android:src="@drawable/hangul_menu_vowel"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/VOWEL"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/batchim"
+            android:background="@drawable/bg_round_all_small"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:src="@drawable/hangul_menu_batchim"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/BATCHIM"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/assembly"
+            android:background="@drawable/bg_round_all_small"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:src="@drawable/hangul_menu_assembly"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/ASSEMBLY"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 

@@ -112,6 +112,12 @@
 
     <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
 
+    <string name="HANGUL">Hangul</string>
+    <string name="CONSONANT">Consonant</string>
+    <string name="VOWEL">Vowel</string>
+    <string name="BATCHIM">Batchim</string>
+    <string name="ASSEMBLY">Assembly</string>
+
 
 
     <!--번역 필요 없는 부분-->
