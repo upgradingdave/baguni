@@ -20,7 +20,7 @@
             <LinearLayout
                 android:id="@+id/categoryLayout"
                 android:orientation="horizontal"
-                android:background="@drawable/bg_round_all"
+                android:background="@drawable/bg_white_25_stroke_grey"
                 android:gravity="center_vertical"
                 android:layout_margin="20dp"
                 android:layout_width="match_parent"

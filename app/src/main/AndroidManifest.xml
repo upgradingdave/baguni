@@ -25,9 +25,14 @@
 
         </activity>
         <activity android:name=".lesson.LessonFrame" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
+        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" >
+
+        </activity>
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
         <activity android:name=".lesson.lessonHangul.LessonHangulMenu" >
+
+        </activity>
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +40,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

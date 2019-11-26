@@ -1,4 +1,4 @@
-<!-- drawable/bg_round_top.xmltop.xml -->
+<!-- drawable/bg_white_32_top.xmltop.xml -->
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">

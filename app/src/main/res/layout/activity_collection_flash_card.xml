@@ -31,7 +31,7 @@
     <LinearLayout
         android:layout_margin="20dp"
         android:padding="20dp"
-        android:background="@drawable/bg_round_all_small"
+        android:background="@drawable/bg_white_10_stroke_grey"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintBottom_toTopOf="@+id/btnSave"
         android:orientation="vertical"
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:textSize="30dp"
             android:paddingLeft="15dp"
-            android:background="@drawable/bg_round_all"
+            android:background="@drawable/bg_white_25_stroke_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -69,7 +69,7 @@
             android:paddingLeft="15dp"
             android:layout_marginTop="10dp"
             android:textSize="30dp"
-            android:background="@drawable/bg_round_all"
+            android:background="@drawable/bg_white_25_stroke_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -91,7 +91,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_purple"
+        android:background="@drawable/bg_purple_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

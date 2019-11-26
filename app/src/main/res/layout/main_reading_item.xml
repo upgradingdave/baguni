@@ -11,7 +11,7 @@
     android:paddingBottom="5dp"
     android:orientation="horizontal"
     android:weightSum="1"
-    android:background="@drawable/bg_round_all_small"
+    android:background="@drawable/bg_white_10_stroke_grey"
     android:elevation="1dp"
     android:descendantFocusability="blocksDescendants"
     >

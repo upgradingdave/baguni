@@ -22,7 +22,7 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:background="@drawable/bg_round_all"
+                android:background="@drawable/bg_white_25_stroke_grey"
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
@@ -127,7 +127,7 @@
 
         <Button
             android:id="@+id/btnStudy"
-            android:background="@drawable/btn_01"
+            android:background="@drawable/bg_purple_25"
             android:text="@string/BTN_STUDY"
             android:textColor="#FFFFFF"
             android:layout_weight="1"
@@ -138,7 +138,7 @@
             android:id="@+id/btnDelete"
             android:visibility="gone"
             android:enabled="false"
-            android:background="@drawable/btn_red_stroke"
+            android:background="@drawable/bg_white_30_stroke_red"
             android:text="@string/DELETE"
             android:textColor="#F77466"
             android:layout_weight="1"
@@ -152,7 +152,7 @@
             android:enabled="false"
             android:text="@string/BTN_RECORD"
             android:textColor="#FFF"
-            android:background="@drawable/btn_01"
+            android:background="@drawable/bg_purple_25"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:layout_width="match_parent"

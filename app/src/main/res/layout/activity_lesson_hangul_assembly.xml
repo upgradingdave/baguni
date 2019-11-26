@@ -3,208 +3,307 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#EBEBEB"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".lesson.lessonHangul.LessonHangulAssembly">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:text="@string/ASSEMBLY"
+        android:textSize="18dp"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnIntro"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="right"
+        android:text="@string/INTRO"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_purple_30"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/btnsAssembly"
+        app:layout_constraintTop_toBottomOf="@id/btnIntro"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:gravity="right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/cvH"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/cvV"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/cvcH"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/cvcV"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-            <Button
-                android:id="@+id/btnIntro"
-                android:layout_margin="10dp"
-                android:text="intro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-            <Button
-                android:id="@+id/btnRepeat"
-                android:layout_margin="10dp"
-                android:text="repeat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-            <ImageButton
-                android:id="@+id/cvH"
-                android:src="@drawable/back"
-                android:layout_margin="10dp"
-                android:background="@android:color/white"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageButton
-                android:id="@+id/cvV"
-                android:src="@drawable/back"
-                android:layout_margin="10dp"
-                android:background="@android:color/white"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageButton
-                android:id="@+id/cvcH"
-                android:src="@drawable/back"
-                android:layout_margin="10dp"
-                android:background="@android:color/white"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageButton
-                android:id="@+id/cvcV"
-                android:src="@drawable/back"
-                android:layout_margin="10dp"
-                android:background="@android:color/white"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/assemblyTextView"
-            android:text=""
-            android:textSize="150dp"
-            android:background="@drawable/bg_round_all"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnConsonant"
-                android:layout_weight="1"
-                android:text="consonant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnVowel"
-                android:layout_weight="1"
-                android:text="vowel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnBatchim"
-                android:layout_weight="1"
-                android:text="batchim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hangulBox"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/consonantBox1"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/consonantBox2"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/consonantBox3"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/vowelBox1"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:id="@+id/vowelBox2"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:id="@+id/vowelBox3"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:id="@+id/batchimBox1"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:id="@+id/batchimBox2"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:id="@+id/batchimBox3"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-
-        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewIntro"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutHangul"
+        android:elevation="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnsAssembly"
+        app:layout_constraintBottom_toTopOf="@id/btns"
+        android:background="@drawable/bg_white_25_stroke_grey"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:id="@+id/btnAudio"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/audio_big"
+            android:layout_margin="15dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/assemblyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ㄱ"
+            android:textSize="70dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/btns"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/hangulBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:padding="20dp"
-        android:textSize="20dp"
-        android:background="@android:color/background_light"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnConsonant"
+            android:text="@string/CONSONANT"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:background="@drawable/bg_purple_10"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnVowel"
+            android:text="@string/VOWEL"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_white_10"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnBatchim"
+            android:text="@string/BATCHIM"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_white_10"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hangulBox"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/consonantBox1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/consonantBox2"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/consonantBox3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/vowelBox1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/vowelBox2"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/vowelBox3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/batchimBox1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/batchimBox2"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/batchimBox3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewHangul"
+        android:elevation="1dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/layoutHangul"
+        app:layout_constraintBottom_toBottomOf="@id/layoutHangul"
+        app:layout_constraintStart_toStartOf="@id/layoutHangul"
+        app:layout_constraintEnd_toEndOf="@id/layoutHangul"
+        android:background="@drawable/bg_white_25_stroke_grey"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutIntro"
+        android:visibility="gone"
+        android:background="#65000000"
+        android:elevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            app:layout_constraintBottom_toTopOf="@+id/layout"
+            app:layout_constraintStart_toStartOf="@+id/layout"
+            android:src="@drawable/close_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="25dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_32_top"
+            android:layout_marginTop="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/INTRO"
+                android:textSize="25dp"
+                android:textColor="#6A69EF"
+                android:fontFamily="@font/avenir_bold"
+                />
+
+            <TextView
+                android:id="@+id/textViewIntro"
+                android:textColor="#7E8494"
+                android:textSize="18dp"
+                android:fontFamily="@font/avenir_light"
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

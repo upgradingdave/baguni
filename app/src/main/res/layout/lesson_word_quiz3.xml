@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/wordQuiz1Answer"
-            android:background="@drawable/bg_round_all"
+            android:background="@drawable/bg_white_25_stroke_grey"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:textSize="50dp"

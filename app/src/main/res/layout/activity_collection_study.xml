@@ -46,7 +46,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:background="@drawable/btn_purple_left"
+            android:background="@drawable/bg_purple_20_left"
             android:layout_width="140dp"
             android:layout_height="wrap_content" />
 
@@ -57,7 +57,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:background="@drawable/btn_purple_stroke_right"
+            android:background="@drawable/bg_white_20_right_stroke_purple"
             android:layout_width="140dp"
             android:layout_height="wrap_content" />
 
@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@id/studyCount"
         app:layout_constraintBottom_toTopOf="@id/btnAnswer"
         android:layout_margin="25dp"
-        android:background="@drawable/bg_round_all"
+        android:background="@drawable/bg_white_25_stroke_grey"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -116,7 +116,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_purple"
+        android:background="@drawable/bg_purple_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -131,7 +131,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_purple"
+        android:background="@drawable/bg_purple_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

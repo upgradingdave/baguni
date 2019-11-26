@@ -85,7 +85,7 @@
         android:id="@+id/btnAsk"
         android:text="@string/ASK"
         android:textColor="#FFF"
-        android:background="@drawable/btn_01"
+        android:background="@drawable/bg_purple_25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

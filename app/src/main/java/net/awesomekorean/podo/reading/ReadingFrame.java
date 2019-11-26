@@ -1,10 +1,7 @@
 package net.awesomekorean.podo.reading;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Handler;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -14,7 +11,6 @@ import android.text.style.ClickableSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -238,14 +234,14 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnNormal :
-                btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_round_all_20_purple_outline));
-                btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_round_all_20_purple));
+                btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
+                btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
                 mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1f));
                 break;
 
             case R.id.btnSlow :
-                btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_round_all_20_purple));
-                btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_round_all_20_purple_outline));
+                btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
+                btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
 
                 mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(0.8f));
             break;

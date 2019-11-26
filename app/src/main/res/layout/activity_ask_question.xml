@@ -30,7 +30,7 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:background="@drawable/bg_round_all_small"
+        android:background="@drawable/bg_white_10_stroke_grey"
         android:layout_margin="20dp"
         android:elevation="3dp"
         app:layout_constraintTop_toBottomOf="@+id/title"
@@ -65,7 +65,7 @@
         android:textSize="15dp"
         android:textColor="#FFFFFF"
         android:textAllCaps="false"
-        android:background="@drawable/btn_purple"
+        android:background="@drawable/bg_purple_30"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
             android:orientation="vertical"
             android:layout_margin="40dp"
             android:padding="30dp"
-            android:background="@drawable/bg_round_all_small"
+            android:background="@drawable/bg_white_10_stroke_grey"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

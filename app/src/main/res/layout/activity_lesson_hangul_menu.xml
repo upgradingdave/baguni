@@ -37,7 +37,7 @@
 
         <LinearLayout
             android:id="@+id/consonant"
-            android:background="@drawable/bg_round_all_small"
+            android:background="@drawable/bg_white_10_stroke_grey"
             android:padding="25dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="10dp"
@@ -60,7 +60,7 @@
 
         <LinearLayout
             android:id="@+id/vowel"
-            android:background="@drawable/bg_round_all_small"
+            android:background="@drawable/bg_white_10_stroke_grey"
             android:padding="25dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="10dp"
@@ -83,7 +83,7 @@
 
         <LinearLayout
             android:id="@+id/batchim"
-            android:background="@drawable/bg_round_all_small"
+            android:background="@drawable/bg_white_10_stroke_grey"
             android:padding="25dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="10dp"
@@ -106,7 +106,7 @@
 
         <LinearLayout
             android:id="@+id/assembly"
-            android:background="@drawable/bg_round_all_small"
+            android:background="@drawable/bg_white_10_stroke_grey"
             android:padding="25dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="15dp"

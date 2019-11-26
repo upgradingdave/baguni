@@ -62,7 +62,7 @@
     <LinearLayout
         android:id="@+id/saveLayout"
         android:visibility="gone"
-        android:background="@drawable/bg_round_all"
+        android:background="@drawable/bg_white_25_stroke_grey"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="@+id/guideLine40"
         app:layout_constraintStart_toStartOf="parent"
