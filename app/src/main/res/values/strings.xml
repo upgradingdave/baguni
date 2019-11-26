@@ -118,6 +118,10 @@
     <string name="BATCHIM">Batchim</string>
     <string name="ASSEMBLY">Assembly</string>
 
+    <string name="INTRO">Intro</string>
+    <string name="WRITING">Writing</string>
+    <string name="HINT">Hint</string>
+
 
 
     <!--번역 필요 없는 부분-->

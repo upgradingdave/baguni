@@ -1,26 +1,37 @@
 package net.awesomekorean.podo.lesson.lessonHangul;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GestureDetectorCompat;
 
 import net.awesomekorean.podo.R;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class LessonHangul extends AppCompatActivity implements Button.OnClickListener{
+public class LessonHangul extends AppCompatActivity implements Button.OnClickListener {
 
     Hangul thisHangul;
 
+    LinearLayout layoutHangul;
     TextView textViewHangul;
     TextView textViewHangulExplain;
-    TextView textViewIntro;
+    ConstraintLayout layoutIntro; // 인트로 버튼 눌렀을 때 뷰
+    TextView textViewIntro; // 인트로 텍스트
+    ImageView btnClose; // 인트로뷰 닫기 버튼
+
     ImageView imageViewHangul;
 
     MediaPlayer mediaPlayer;
@@ -31,18 +42,38 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     String conVowBat;
 
     int currentHangul = 0;
-    int introVisible = 0;
     int writingBtnClicked = 0;
     int hintBtnClicked = 0;
+
+    ImageView btnAudio;
+    LinearLayout btnWriting;
+    LinearLayout btnHint;
+    Button btnIntro;
+    ImageView btnBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul);
 
+        layoutHangul = findViewById(R.id.layoutHangul);
         textViewHangul = findViewById(R.id.textViewHangul);
         textViewHangulExplain = findViewById(R.id.textViewHangulExplain);
+        layoutIntro = findViewById(R.id.layoutIntro);
         textViewIntro = findViewById(R.id.textViewIntro);
+        btnClose = findViewById(R.id.btnClose);
+        btnAudio = findViewById(R.id.btnAudio);
+        btnWriting = findViewById(R.id.btnWriting);
+        btnHint = findViewById(R.id.btnHint);
+        btnIntro = findViewById(R.id.btnIntro);
+        btnBack = findViewById(R.id.btnBack);
+        btnAudio.setOnClickListener(this);
+        btnWriting.setOnClickListener(this);
+        btnHint.setOnClickListener(this);
+        btnIntro.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
 
         Intent intent = getIntent();
 
@@ -67,29 +98,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 break;
         }
 
-//        audioPlay();
-
-
-        Button btnLeft = findViewById(R.id.btnLeft);
-        Button btnRight = findViewById(R.id.btnRight);
-        Button btnListening = findViewById(R.id.btnListening);
-        Button btnWriting = findViewById(R.id.btnWriting);
-        Button btnHint = findViewById(R.id.btnHint);
-        Button btnIntro = findViewById(R.id.btnIntro);
-        btnLeft.setOnClickListener(this);
-        btnRight.setOnClickListener(this);
-        btnListening.setOnClickListener(this);
-        btnWriting.setOnClickListener(this);
-        btnHint.setOnClickListener(this);
-        btnIntro.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.btnLeft :
+        layoutHangul.setOnTouchListener(new OnSwipeTouchListener(this) {
+            public void onSwipeRight() {
                 if(currentHangul == 0) {
                     currentHangul = hangul.length-1;
                 } else {
@@ -99,9 +109,9 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 if(imageViewHangul != null) {
                     visible(VISIBLE, GONE);
                 }
-                break;
+            }
 
-            case R.id.btnRight :
+            public void onSwipeLeft() {
                 if(currentHangul == hangul.length-1) {
                     currentHangul = 0;
                 } else {
@@ -111,9 +121,19 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 if(imageViewHangul != null) {
                     visible(VISIBLE, GONE);
                 }
-                break;
+            }
+        });
 
-            case R.id.btnListening :
+//        audioPlay();
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.btnAudio :
                 System.out.println("Listening button clicked");
                 break;
 
@@ -160,17 +180,15 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnIntro :
+                layoutIntro.setVisibility(VISIBLE);
+                break;
 
-                textViewIntro.setText(hangulIntro);
+            case R.id.btnClose :
+                layoutIntro.setVisibility(GONE);
+                break;
 
-                if(introVisible == 0) {
-                    textViewIntro.setVisibility(VISIBLE);
-                    introVisible = 1;
-                } else {
-                    textViewIntro.setVisibility(GONE);
-                    introVisible = 0;
-                }
-
+            case R.id.btnBack :
+                finish();
                 break;
         }
     }
@@ -181,6 +199,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         hangul = thisHangul.getHangul();
         hangulExplain = thisHangul.getHangulExplain();
         hangulIntro = thisHangul.getHangulIntro();
+        textViewIntro.setText(hangulIntro);
         setInitial();
 
     }
