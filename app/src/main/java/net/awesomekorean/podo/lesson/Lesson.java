@@ -8,6 +8,14 @@ public interface Lesson {
 
     void setWordBack(String[] strings);
 
+    String[] getWordPronunciation();
+
+    String[] getWordSynonyms();
+
+    String[] getWordAntonyms();
+
+    String[] getWordApplication();
+
     String[] getSentenceFront();
 
     String[] getSentenceBack();

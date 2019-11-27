@@ -42,7 +42,7 @@
 
     <ImageView
         android:id="@+id/btnAudio"
-        android:src="@drawable/audio_small"
+        android:src="@drawable/audio_small_blue"
         android:layout_gravity="center_vertical"
         android:layout_weight="0.1"
         android:layout_width="0dp"

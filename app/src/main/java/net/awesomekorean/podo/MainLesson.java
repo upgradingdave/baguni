@@ -1,5 +1,6 @@
 package net.awesomekorean.podo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,13 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.lesson.LessonAdapter;
+import net.awesomekorean.podo.lesson.LessonFrame;
 import net.awesomekorean.podo.lesson.LessonItems;
 
 import java.util.ArrayList;
 
 public class MainLesson extends Fragment {
 
-    public static int lessonUnit = 0;
+    int lessonUnit = 0;
+
+    Context context;
 
     View view;
 
@@ -62,12 +66,31 @@ public class MainLesson extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         LessonAdapter adapter = new LessonAdapter(list);
+        adapter.setOnItemClickListener(new LessonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+
+                lessonUnit = pos;
+
+                switch (pos) {
+
+                    case 0 :
+                        break;
+
+                    default :
+                        intent = new Intent(context, LessonFrame.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
+
         recyclerView.setAdapter(adapter);
 
+        context = getContext();
 
         return view;
     }
-
 }
 
 

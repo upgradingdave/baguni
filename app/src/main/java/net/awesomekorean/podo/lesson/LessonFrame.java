@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,11 +29,9 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
 
     public static ProgressBar progressBar;
     public static TextView progressTextView;
-    ImageButton btnExit1;
-    ImageButton btnExit2;
-    Button btnYes;
-    Button btnNo;
-    LinearLayout saveLayout;
+
+    ImageView btnClose;
+
     Intent intent;
 
     private GestureDetectorCompat gestureDetectorCompat = null;
@@ -52,15 +51,8 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
         progressCount = 1;
         progressBar = findViewById(R.id.progressBar);
         progressTextView = findViewById(R.id.progressTextView);
-        btnExit1 = findViewById(R.id.btnExit1);
-        btnExit2 = findViewById(R.id.btnExit2);
-        btnYes = findViewById(R.id.btnYes);
-        btnNo = findViewById(R.id.btnNo);
-        saveLayout = findViewById(R.id.saveLayout);
-        btnExit1.setOnClickListener(this);
-        btnExit2.setOnClickListener(this);
-        btnYes.setOnClickListener(this);
-        btnNo.setOnClickListener(this);
+        btnClose = findViewById(R.id.btnClose);
+        btnClose.setOnClickListener(this);
 
         replaceFragment(lessonWord);
     }
@@ -74,11 +66,8 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
 
     public void replaceFragment(Fragment fragment) {
 
-        //Create a common gesture listener object
         DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
-        //Set activity in the listener
         gestureListener.setActivity(this);
-        //Create the gesture detector with the gesture listener
         gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 
         fm = getSupportFragmentManager();
@@ -98,23 +87,8 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
 
         switch (view.getId()) {
 
-            case R.id.btnExit1 :
-                saveLayout.setVisibility(View.VISIBLE);
-                break;
-
-            case R.id.btnExit2 :
-                saveLayout.setVisibility(View.GONE);
-                break;
-
-            case R.id.btnYes :
-                // DB 에 현재 위치 저장하기
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                break;
-
-            case R.id.btnNo :
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+            case R.id.btnClose :
+                // 저장여부 묻는 창 띄우기
                 break;
         }
     }

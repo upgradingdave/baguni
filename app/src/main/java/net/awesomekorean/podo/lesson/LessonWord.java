@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.awesomekorean.podo.MainLesson;
 import net.awesomekorean.podo.R;
@@ -23,13 +26,17 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     Lesson lesson;
 
-    ImageButton btnAudio;
+    ImageView btnAudio;
     Button btnCollect;
 
-    TextView collectResult;
+    LinearLayout collectResult;
 
-    static TextView textViewWordFront;
-    static TextView textViewWordBack;
+    static TextView tvWordFront;
+    static TextView tvWordBack;
+    static TextView tvWordPronunciation;
+    static TextView tvWordSynonyms;
+    static TextView tvWordAntonyms;
+    static TextView tvWordApplication;
 
     public static int lessonCount;
     public static int lessonWordLength = 0;
@@ -37,11 +44,16 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     public static String[] wordFront;
     public static String[] wordBack;
+    public static String[] wordPronunciation;
+    public static String[] wordAntonyms;
+    public static String[] wordSynonyms;
+    public static String[] wordApplication;
     public static String[] sentenceFront;
     public static String[] sentenceBack;
     public static String[] sentenceExplain;
     public static String[] sentenceClause;
 
+    Intent intent;
 
 
     public static LessonWord newInstance() {
@@ -60,22 +72,31 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
         collectResult = view.findViewById(R.id.collectResult);
+        tvWordFront = view.findViewById(R.id.tvWordFront);
+        tvWordBack = view.findViewById(R.id.tvWordBack);
+        tvWordPronunciation = view.findViewById(R.id.tvWordPronunciation);
+        tvWordSynonyms = view.findViewById(R.id.tvWordSynonyms);
+        tvWordAntonyms = view.findViewById(R.id.tvWordAntonyms);
+        tvWordApplication = view.findViewById(R.id.tvWordApplication);
+
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
-        textViewWordFront = view.findViewById(R.id.textViewWordFront);
-        textViewWordBack = view.findViewById(R.id.textViewWordBack);
 
-        switch (MainLesson.lessonUnit) {
+        return view;
+    }
+
+    public void getFromAdapter(int position) {
+
+        switch (position) {
 
             case 1:
                 lesson = new Lesson1();
                 readyForLesson(R.array.L1_WORD, R.array.L1_SENTENCE, R.array.L1_SENTENCEEXPLAIN);
+                intent = new Intent(getContext(), LessonFrame.class);
+                startActivity(intent);
                 break;
-
         }
-
-        return view;
     }
 
     public void readyForLesson(int word, int sentence, int sentenceEx) {
@@ -86,12 +107,15 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         wordFront = lesson.getWordFront();
         wordBack = lesson.getWordBack();
+        wordPronunciation = lesson.getWordPronunciation();
+        wordSynonyms = lesson.getWordSynonyms();
+        wordAntonyms = lesson.getWordAntonyms();
+        wordApplication = lesson.getWordApplication();
 
         sentenceFront = lesson.getSentenceFront();
         sentenceBack = lesson.getSentenceBack();
         sentenceExplain = lesson.getSentenceExplain();
         sentenceClause = lesson.getSentenceClause();
-
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
@@ -104,8 +128,12 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     public static void displayWord() {
         LessonFrame.progressCount();
-        textViewWordFront.setText(wordFront[lessonCount]);
-        textViewWordBack.setText(wordBack[lessonCount]);
+        tvWordFront.setText(wordFront[lessonCount]);
+        tvWordBack.setText(wordBack[lessonCount]);
+        tvWordPronunciation.setText(wordPronunciation[lessonCount]);
+        tvWordSynonyms.setText(wordSynonyms[lessonCount]);
+        tvWordAntonyms.setText(wordAntonyms[lessonCount]);
+        tvWordApplication.setText(wordApplication[lessonCount]);
     }
 
     @Override
@@ -133,9 +161,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 }, 1000);
 
                 break;
-
         }
-
     }
-
 }

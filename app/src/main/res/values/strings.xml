@@ -124,6 +124,12 @@
 
     <string name="COLLECTION_SAVED">Collection is saved</string>
 
+    <string name="PRONUNCIATION">Pronunciation: </string>
+    <string name="ANTONYMS">Antonyms: </string>
+    <string name="SYNONYMS">Synonyms: </string>
+    <string name="USES_IN_SENTENCE">Uses in sentence: </string>
+    <string name="ADD_COLLECTION">Add Collection</string>
+
 
 
     <!--번역 필요 없는 부분-->

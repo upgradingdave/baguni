@@ -5,6 +5,15 @@ public class Lesson1 implements Lesson{
     final static String[] wordFront = {"안녕", "다음", "또", "보다", "가다"};
     String[] wordBack = {};
 
+    final static String[] wordPronunciation = {"안녕", "다음", "또", "보다", "가다"};
+
+    final static String[] wordSynonyms = {"안녕", "다음", "또", "보다", "가다"};
+
+    final static String[] wordAntonyms = {"안녕", "다음", "또", "보다", "가다"};
+
+    final static String[] wordApplication = {"안녕", "다음", "또", "보다", "가다"};
+
+
     final static String[] sentenceFront = {
             "안녕하세요?",
             "반가워요.",
@@ -33,6 +42,26 @@ public class Lesson1 implements Lesson{
     @Override
     public String[] getWordBack() {
         return wordBack;
+    }
+
+    @Override
+    public String[] getWordPronunciation() {
+        return wordPronunciation;
+    }
+
+    @Override
+    public String[] getWordSynonyms() {
+        return wordSynonyms;
+    }
+
+    @Override
+    public String[] getWordAntonyms() {
+        return wordAntonyms;
+    }
+
+    @Override
+    public String[] getWordApplication() {
+        return wordApplication;
     }
 
     @Override
