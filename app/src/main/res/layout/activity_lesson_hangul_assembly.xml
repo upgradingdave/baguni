@@ -39,12 +39,13 @@
         android:textAllCaps="false"
         android:background="@drawable/bg_purple_30"
         android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="80dp"
+        android:layout_height="40dp"/>
 
     <LinearLayout
         android:id="@+id/btnsAssembly"
         app:layout_constraintTop_toBottomOf="@id/btnIntro"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -160,7 +161,10 @@
 
     <LinearLayout
         android:id="@+id/hangulBox"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -169,75 +173,81 @@
 
         <LinearLayout
             android:id="@+id/consonantBox1"
-            android:gravity="center"
+            android:gravity="left"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="45dp">
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/consonantBox2"
-            android:gravity="center"
+            android:gravity="left"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="45dp">
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/consonantBox3"
-            android:gravity="center"
+            android:gravity="left"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="45dp">
         </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/vowelBox1"
-            android:gravity="center"
+            android:gravity="left"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/vowelBox2"
-            android:gravity="center"
+            android:gravity="left"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/vowelBox3"
-            android:gravity="center"
+            android:gravity="left"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/batchimBox1"
-            android:gravity="center"
+            android:gravity="left"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/batchimBox2"
-            android:gravity="center"
+            android:gravity="left"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/batchimBox3"
-            android:gravity="center"
+            android:gravity="left"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:visibility="gone"/>
 
     </LinearLayout>
@@ -297,6 +307,7 @@
                 android:id="@+id/textViewIntro"
                 android:textColor="#7E8494"
                 android:textSize="18dp"
+                android:scrollbars="vertical"
                 android:fontFamily="@font/avenir_light"
                 android:layout_marginTop="25dp"
                 android:layout_width="wrap_content"

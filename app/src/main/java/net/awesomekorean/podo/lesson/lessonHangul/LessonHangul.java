@@ -200,6 +200,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         hangulExplain = thisHangul.getHangulExplain();
         hangulIntro = thisHangul.getHangulIntro();
         textViewIntro.setText(hangulIntro);
+        textViewIntro.setMovementMethod(new ScrollingMovementMethod());
         setInitial();
 
     }

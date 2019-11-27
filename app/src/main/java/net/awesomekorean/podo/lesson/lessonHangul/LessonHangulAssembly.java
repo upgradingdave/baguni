@@ -1,13 +1,10 @@
 package net.awesomekorean.podo.lesson.lessonHangul;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,8 +23,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     TextView textViewIntro;
     TextView assemblyTextView;
 
-    int deviceWidth;
-
     int introVisible = 0;
 
     ImageView cvH;
@@ -43,6 +38,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     ImageView btnClose;
     ImageView btnBack;
 
+    LinearLayout hangulBox;
     LinearLayout consonantBoxLayout1;
     LinearLayout consonantBoxLayout2;
     LinearLayout consonantBoxLayout3;
@@ -68,7 +64,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     String[] consonant = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
     String[] vowel = {};
-    String[] batchim = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㅆ"};
+    String[] batchim = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
     String assemblyIntro = "We have finished learning every Hangul!\n" +
                     "Now let's make every character by yourself.\n" +
                     "We have people4 ways to make characters.\n" +
@@ -88,6 +84,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul_assembly);
 
+        hangulBox = findViewById(R.id.hangulBox);
         consonantBoxLayout1 = findViewById(R.id.consonantBox1);
         consonantBoxLayout2 = findViewById(R.id.consonantBox2);
         consonantBoxLayout3 = findViewById(R.id.consonantBox3);
@@ -165,7 +162,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             case R.id.cvH :
 
-                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"};
+                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ"};
 
                 initialization();
 
@@ -200,7 +197,9 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             case R.id.cvcH :
 
-                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ"};
+                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ"};
+                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ"};
+
 
                 initialization();
 
@@ -257,19 +256,10 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.btnIntro :
-
                 textViewIntro = findViewById(R.id.textViewIntro);
-
                 textViewIntro.setText(assemblyIntro);
-
-                if(introVisible == 0) {
-                    textViewIntro.setVisibility(VISIBLE);
-                    introVisible = 1;
-                } else {
-                    textViewIntro.setVisibility(GONE);
-                    introVisible = 0;
-                }
-
+                textViewIntro.setMovementMethod(new ScrollingMovementMethod());
+                layoutIntro.setVisibility(VISIBLE);
                 break;
 
             case R.id.btnClose :
@@ -344,8 +334,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     public void makeHangulBox(String[] consonant, String[] vowel, String[] batchim) {
 
-        getDisplayWidth();
-
         removeAllView();
 
         makeHangulBoxIterate(consonant, consonantBoxLayout1, consonantBoxLayout2, consonantBoxLayout3);
@@ -374,10 +362,10 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             Button hangulBoxBtn = new Button(this);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DpToPx.getDpToPx(getResources(), 40), DpToPx.getDpToPx(getResources(), 40));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, DpToPx.getDpToPx(getResources(), 40));
 
-            params.rightMargin = DpToPx.getDpToPx(getResources(),5);
-            params.bottomMargin = DpToPx.getDpToPx(getResources(),5);
+            params.rightMargin = DpToPx.getDpToPx(getResources(),10);
+            params.weight = 1;
             hangulBoxBtn.setLayoutParams(params);
             hangulBoxBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_10));
             hangulBoxBtn.setText(addHangul);
@@ -385,24 +373,16 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             numberOfBox++;
 
-            int widthOfButtons = DpToPx.getDpToPx(getResources(), 45 * numberOfBox);
-
-            if (deviceWidth >= widthOfButtons) {
+            if (numberOfBox <= 7) {
                 hangulBoxLayout1.addView(hangulBoxBtn);
-            } else if (deviceWidth < widthOfButtons && deviceWidth * 2 >= widthOfButtons) {
+
+            } else if (numberOfBox <= 14) {
                 hangulBoxLayout2.addView(hangulBoxBtn);
-            } else if (deviceWidth * 2 < widthOfButtons) {
+
+            } else if (numberOfBox <= 21) {
                 hangulBoxLayout3.addView(hangulBoxBtn);
             }
         }
-    }
-
-
-    public void getDisplayWidth() {
-
-        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-
-        deviceWidth = dm.widthPixels;
     }
 
 

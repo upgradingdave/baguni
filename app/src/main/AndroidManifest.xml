@@ -30,14 +30,14 @@
         </activity>
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
         <activity android:name=".lesson.lessonHangul.LessonHangulMenu" >
-
-        </activity>
-        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".MainActivity" >
 
         </activity>
     </application>
