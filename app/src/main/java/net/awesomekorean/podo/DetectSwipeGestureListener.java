@@ -9,6 +9,8 @@ import net.awesomekorean.podo.lesson.LessonFrame;
 import net.awesomekorean.podo.lesson.LessonSentence;
 import net.awesomekorean.podo.lesson.LessonWord;
 import net.awesomekorean.podo.lesson.LessonWordQuiz1;
+import net.awesomekorean.podo.lesson.LessonWordQuiz2;
+import net.awesomekorean.podo.lesson.LessonWordQuiz3;
 
 public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -54,7 +56,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                     // 마지막 단어이면 LessonWordQuiz1 로 넘어감
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
+                        ((LessonFrame) context).replaceFragment(LessonWordQuiz3.newInstance());
 
                     // 마지막 단어 아니면 다음 단어 표시
                     } else {
