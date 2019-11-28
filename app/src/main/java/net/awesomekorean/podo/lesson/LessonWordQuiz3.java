@@ -98,7 +98,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         };
 
 
-        randomArray(wordsForQuiz);
+        RandomArray.randomArray(wordsForQuiz);
 
         makeQuiz();
 
@@ -132,7 +132,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             syllables[i] = word.substring(i, i+1);
         }
 
-        randomArray(syllables);
+        RandomArray.randomArray(syllables);
 
         for(int i=0; i<syllables.length; i++) {
 
@@ -143,22 +143,5 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             btnSelector.setOnClickListener(selectorButtonClick);
             wordQuiz1Selector.addView(btnSelector);
         }
-    }
-
-
-
-    // 입력받은 array를 랜덤으로 섞어주는 함수
-    public static void randomArray(String[] strings) {
-
-        for (int i = 0; i < strings.length; i++) {
-
-            Random random = new Random();
-            int rnum = random.nextInt(strings.length);
-
-            String temp = strings[i];
-            strings[i] = strings[rnum];
-            strings[rnum] = temp;
-        }
-
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import net.awesomekorean.podo.MainLesson;
 import net.awesomekorean.podo.R;
@@ -82,22 +83,19 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
+        switch (MainLesson.lessonUnit) {
 
-        return view;
-    }
-
-    public void getFromAdapter(int position) {
-
-        switch (position) {
 
             case 1:
                 lesson = new Lesson1();
                 readyForLesson(R.array.L1_WORD, R.array.L1_SENTENCE, R.array.L1_SENTENCEEXPLAIN);
-                intent = new Intent(getContext(), LessonFrame.class);
-                startActivity(intent);
                 break;
         }
+
+
+        return view;
     }
+
 
     public void readyForLesson(int word, int sentence, int sentenceEx) {
 

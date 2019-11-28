@@ -1,5 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -7,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.awesomekorean.podo.R;
@@ -20,22 +24,25 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
     View view;
 
+    TextView answer;
     Button btn1;
     Button btn2;
     Button btn3;
     Button btn4;
-    Button btnAudio;
+    ImageView btnAudio;
 
-    ImageView ox; // 정답, 오답 시 각각의 이미지 출력
 
+    String[] wordFront = LessonWord.wordFront;
     String[] wordBack = LessonWord.wordBack;
-    String[] quizNow = new String[4]; // 현재 퀴즈 array
+    String[] answerArray = new String[4]; // 현재 퀴즈 array
 
 
     int quizQuantity; // 문제 개수
-    int quizNo = 0;
-    int regularQuizNo = 0; // 정규퀴즈 문제 번호
+    int quizNoNow = 0;
+    Boolean solveWrongQuizAgain = false;
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
+
+    MediaPlayer mediaPlayer;
 
     public static LessonWordQuiz1 newInstance() {
         return new LessonWordQuiz1();
@@ -50,59 +57,65 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         quizQuantity = wordBack.length;
         wrongQuizList = new ArrayList<>();
 
+        answer = view.findViewById(R.id.answer);
         btn1 = view.findViewById(R.id.btn1);
         btn2 = view.findViewById(R.id.btn2);
         btn3 = view.findViewById(R.id.btn3);
         btn4 = view.findViewById(R.id.btn4);
+        btnAudio = view.findViewById(R.id.btnAudio);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
+        btnAudio.setOnClickListener(this);
 
-        ox = view.findViewById(R.id.ox);
-
-        makeQuiz(quizNo);
+        makeQuiz(quizNoNow);
 
 
         return view;
     }
 
-    public void makeQuiz(int quizNo) {
+    public void makeQuiz(int quizNoNow) {
 
+
+        answer.setText(wordFront[quizNoNow]);
         int j = 0;
 
         for(int i=0; i<4; i++) {
 
-            if(quizNo + i >= wordBack.length) {
-                quizNow[i] = wordBack[j];
+            // 단어 array 이에서 현재 단어포함해서 순서대로 4개의 단어를 보기로 제시함.
+            if(quizNoNow + i >= wordBack.length) {
+                answerArray[i] = wordBack[j];
                 j++;
             } else {
-                quizNow[i] = wordBack[quizNo + i];
+                answerArray[i] = wordBack[quizNoNow + i];
             }
         }
 
-        LessonWordQuiz3.randomArray(quizNow);
+        RandomArray.randomArray(answerArray);
 
-        btn1.setText(quizNow[0]);
-        btn2.setText(quizNow[1]);
-        btn3.setText(quizNow[2]);
-        btn4.setText(quizNow[3]);
+        btn1.setText(answerArray[0]);
+        btn2.setText(answerArray[1]);
+        btn3.setText(answerArray[2]);
+        btn4.setText(answerArray[3]);
     }
 
 
-    public void makeNextQuiz() {
+    public void makeNextQuiz(final Button selectedBtn) {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+                selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                answer.setVisibility(View.GONE);
+                btnAudio.setVisibility(View.VISIBLE);
+
                 LessonFrame.progressCount++;
                 LessonFrame.progressCount();
 
-                ox.setVisibility(View.GONE);
-
-                if(regularQuizNo == quizQuantity-1) {
+                if(solveWrongQuizAgain) {
                     // 오답이 있을 경우, 해당 문제 다시 출력
                     if(wrongQuizList.size() > 0) {
                         makeWrongQuiz(wrongQuizList.get(0));
@@ -112,20 +125,22 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                     }
                 } else {
 
-                    quizNo ++;
-                    regularQuizNo ++;
-                    makeQuiz(quizNo);
+                    quizNoNow ++;
+                    if(quizNoNow == quizQuantity-1) {
+                        solveWrongQuizAgain = true;
+                    }
+                    makeQuiz(quizNoNow);
                 }
             }
-        }, 1000);
+        }, 2000);
     }
 
 
     public void makeWrongQuiz(int wrongQuizNo) {
 
         wrongQuizList.remove(0);
-        quizNo = wrongQuizNo;
-        makeQuiz(quizNo);
+        quizNoNow = wrongQuizNo;
+        makeQuiz(quizNoNow);
     }
 
 
@@ -142,30 +157,29 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
                 Button selectedBtn = (Button) view;
 
-                if(wordBack[quizNo].equals(selectedBtn.getText().toString())) {
+                if(wordBack[quizNoNow].equals(selectedBtn.getText().toString())) {
 
-                    ox.setImageResource(R.drawable.back);
-                    ox.setVisibility(View.VISIBLE);
-
-                    // 정답소리 출력할 것
-
-                    makeNextQuiz();
+                    // 정답소리 출력하고 선택박스에 파란색 테두리
+                    answered(selectedBtn, R.raw.correct, R.drawable.bg_white_10_stroke_purple);
 
 
                 } else {
 
-                    ox.setImageResource(R.drawable.back);
-                    ox.setVisibility(View.VISIBLE);
-                    // 오답소리 출력할 것
-
-                    wrongQuizList.add(quizNo);
-
-                    makeNextQuiz();
-
+                    // 오답소리 출력하고 선택박스에 빨간색 테두리
+                    wrongQuizList.add(quizNoNow);
+                    answered(selectedBtn, R.raw.wrong, R.drawable.bg_white_10_stroke_red);
                 }
-
         }
-
     }
 
+    private void answered(Button selectedBtn, int sound, int outline) {
+
+        mediaPlayer = MediaPlayer.create(getContext(), sound);
+        mediaPlayer.start();
+        selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        answer.setVisibility(View.VISIBLE);
+        btnAudio.setVisibility(View.GONE);
+
+        makeNextQuiz(selectedBtn);
+    }
 }

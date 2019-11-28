@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class MainLesson extends Fragment {
 
-    int lessonUnit = 0;
+    public static int lessonUnit = 0;
 
     Context context;
 

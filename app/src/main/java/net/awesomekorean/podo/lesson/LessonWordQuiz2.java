@@ -63,7 +63,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
             quizArray[i+wordNo] = wordBack[i];
         }
 
-        LessonWordQuiz3.randomArray(quizArray);
+        RandomArray.randomArray(quizArray);
 
 
         for(int i=0; i<wordNo*2; i++) {
