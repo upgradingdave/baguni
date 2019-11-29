@@ -2,10 +2,13 @@ package net.awesomekorean.podo.lesson;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -20,13 +23,14 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
     View view;
 
+    ImageView btnAudio;
     Button btnCollect;
 
-    static TextView textViewSentenceFront;
-    static TextView textViewSentenceBack;
-    static TextView textViewSentenceExplain;
+    static TextView tvSentenceFront;
+    static TextView tvSentenceBack;
+    static TextView tvSentenceExplain;
 
-    TextView collectResult;
+    LinearLayout collectResult;
 
 
         // fragment 간 전환을 위해 만듦
@@ -41,13 +45,16 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
 
-        LessonFrame.swipePage = "lessonSentence";
+        LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
-        textViewSentenceFront = view.findViewById(R.id.textViewSentenceFront);
-        textViewSentenceBack = view.findViewById(R.id.textViewSentenceBack);
-        textViewSentenceExplain = view.findViewById(R.id.textViewSentenceExplain);
+        tvSentenceFront = view.findViewById(R.id.tvSentenceFront);
+        tvSentenceBack = view.findViewById(R.id.tvSentenceBack);
+        tvSentenceExplain = view.findViewById(R.id.tvSentenceExplain);
+        tvSentenceExplain.setMovementMethod(new ScrollingMovementMethod());
         collectResult = view.findViewById(R.id.collectResult);
+        btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
+        btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
         displaySentence();
@@ -58,11 +65,11 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
     public static void displaySentence() {
 
-        textViewSentenceFront.setText(LessonWord.sentenceFront[lessonCount]);
-        textViewSentenceBack.setText(LessonWord.sentenceBack[lessonCount]);
-        textViewSentenceExplain.setText(LessonWord.sentenceExplain[lessonCount]);
-
+        tvSentenceFront.setText(LessonWord.sentenceFront[lessonCount]);
+        tvSentenceBack.setText(LessonWord.sentenceBack[lessonCount]);
+        tvSentenceExplain.setText(LessonWord.sentenceExplain[lessonCount]);
     }
+
 
     @Override
     public void onClick(View view) {
@@ -86,9 +93,6 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
                         collectResult.setVisibility(View.GONE);
                     }
                 }, 1000);
-                break;
-
-            case R.id.btnQnA :
                 break;
         }
 

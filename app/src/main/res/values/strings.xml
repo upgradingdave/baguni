@@ -155,5 +155,7 @@
     <string name="SPECIAL_LESSON">Special lesson</string>
     <string name="COMPLETED">Completed</string>
 
+    <string name="LESSON_SENTENCE">lessonSentence</string>
+
 
 </resources>

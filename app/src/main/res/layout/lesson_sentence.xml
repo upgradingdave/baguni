@@ -1,88 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp">
+    android:background="#EBEBEB"
+    tools:context=".lesson.LessonWord">
 
     <LinearLayout
+        android:background="@drawable/bg_white_10_stroke_grey"
+        android:layout_margin="20dp"
+        android:elevation="3dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnCollect"
         android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btnAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@drawable/audio_big" />
+
+        <TextView
+            android:id="@+id/tvSentenceFront"
+            android:gravity="center"
+            android:text="친구랑 한국 식당에\n 갈 거예요"
+            android:textSize="30dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:lineSpacingExtra="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvSentenceBack"
+            android:gravity="center"
+            android:text="student"
+            android:textSize="20dp"
+            android:textColor="#7E8494"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvSentenceExplain"
+            android:text="친구랑 한국 식당에 갈 거예요는 블라블라블라...동해물과백두산이 마르고 닳도록. "
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:scrollbars="vertical"
+            android:lineSpacingExtra="5dp"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnCollect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_purple_30"
+        android:drawableLeft="@drawable/star_white"
+        android:drawablePadding="-110dp"
+        android:paddingLeft="110dp"
+        android:text="@string/ADD_COLLECTION"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/collectResult"
+        android:visibility="gone"
+        android:background="#65000000"
+        android:elevation="5dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textViewSentenceFront"
-            android:gravity="center"
-            android:text="저는 선생님이에요."
-            android:textSize="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            />
-
-        <TextView
-            android:id="@+id/textViewSentenceBack"
-            android:gravity="center"
-            android:text="I'm a teacher"
-            android:textSize="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            />
-
-        <TextView
-            android:id="@+id/textViewSentenceExplain"
-            android:gravity="center_vertical"
-            android:text="nhljkjhlkjlkjlkjlj;lk"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="40dp"
+            android:padding="30dp"
+            android:background="@drawable/bg_white_10_stroke_grey"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/btnAudio"
-                android:text="audio"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
-
-            <Button
-                android:id="@+id/btnCollect"
-                android:text="collect"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
-
-            <Button
-                android:id="@+id/btnQnA"
-                android:text="Q/A"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
-
+            <ImageView
+                android:src="@drawable/popup_podo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/COLLECTION_SAVED"
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/avenir_bold"
+                android:layout_marginTop="50dp"
+                />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/collectResult"
-        android:visibility="gone"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="@string/MSG_COLLECT"
-        android:textSize="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
