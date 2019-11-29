@@ -1,83 +1,68 @@
 package net.awesomekorean.podo.lesson;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.MainLesson;
 import net.awesomekorean.podo.R;
 
-public class LessonFinish extends Fragment implements Button.OnClickListener {
+public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
-    TextView textView;
+    LinearLayout selectBox;
+    ConstraintLayout selectResult;
 
-    ImageButton imageBtn1;
-    ImageButton imageBtn2;
-    ImageButton imageBtn3;
-    ImageButton imageBtn4;
+    ImageView box1;
+    ImageView box2;
+    ImageView box3;
 
-    View view;
+    TextView tvPoints;
 
-    public static LessonFinish newInstance() {
-        return new LessonFinish();
-    }
+    Button btnGetPoint;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lesson_finish);
 
-        view = inflater.inflate(R.layout.lesson_finish, container, false);
-
-        textView = view.findViewById(R.id.textView);
-
-        imageBtn1 = view.findViewById(R.id.imageBtn1);
-        imageBtn2 = view.findViewById(R.id.imageBtn2);
-        imageBtn3 = view.findViewById(R.id.imageBtn3);
-        imageBtn4 = view.findViewById(R.id.imageBtn4);
-
-        imageBtn1.setOnClickListener(this);
-        imageBtn2.setOnClickListener(this);
-        imageBtn3.setOnClickListener(this);
-        imageBtn4.setOnClickListener(this);
-
-        return view;
+        selectBox = findViewById(R.id.selectBox);
+        selectResult = findViewById(R.id.selectResult);
+        box1 = findViewById(R.id.box1);
+        box2 = findViewById(R.id.box2);
+        box3 = findViewById(R.id.box3);
+        tvPoints = findViewById(R.id.tvPoints);
+        btnGetPoint = findViewById(R.id.btnGetPoint);
+        box1.setOnClickListener(this);
+        box2.setOnClickListener(this);
+        box3.setOnClickListener(this);
+        btnGetPoint.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
 
-        switch (view.getId()) {
+        switch (v.getId()) {
 
-            case R.id.imageBtn1 :
-                bonusBtnClicked();
-                break;
-
-            case R.id.imageBtn2 :
-                bonusBtnClicked();
-                break;
-
-            case R.id.imageBtn3 :
-                bonusBtnClicked();
-                break;
-
-            case R.id.imageBtn4 :
-                Intent intent = new Intent(getContext(), MainActivity.class);
+            case R.id.btnGetPoint :
+                // Room 에 포인트 합산하기, 레슨 완료 표시하기
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
+
+            default:
+                // 포인트 랜덤으로 가져오기
+                tvPoints.setText("100");
+                selectBox.setVisibility(View.GONE);
+                selectResult.setVisibility(View.VISIBLE);
+                break;
         }
-
-    }
-
-    public void bonusBtnClicked() {
-        imageBtn4.setVisibility(View.VISIBLE);
-        textView.setVisibility(View.VISIBLE);
     }
 }

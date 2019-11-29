@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
@@ -130,9 +131,8 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnFinish :
-                LessonFrame.progressCount++;
-                LessonFrame.progressCount();
-                ((LessonFrame)getActivity()).replaceFragment(LessonFinish.newInstance());
+                Intent intent = new Intent(getContext(), LessonFinish.class);
+                startActivity(intent);
                 break;
         }
     }

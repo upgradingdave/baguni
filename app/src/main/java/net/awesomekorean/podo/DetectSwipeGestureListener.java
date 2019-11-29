@@ -56,7 +56,7 @@ public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureL
                     // 마지막 단어이면 LessonWordQuiz1 로 넘어감
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame) context).replaceFragment(LessonClause.newInstance());
+                        ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
 
                     // 마지막 단어 아니면 다음 단어 표시
                     } else {
