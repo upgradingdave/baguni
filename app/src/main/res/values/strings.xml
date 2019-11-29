@@ -133,6 +133,10 @@
     <string name="CHOOSE_CORRECT_WORD">Choose the correct word</string>
     <string name="LISTEN_AND_ANSWER">Listen &amp; Answer</string>
 
+    <string name="RETURN">Return</string>
+    <string name="PLAY">Play</string>
+    <string name="FINISH">Finish</string>
+
 
     <!--번역 필요 없는 부분-->
 

@@ -1,27 +1,37 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
+
+import java.util.ArrayList;
 
 public class LessonClause extends Fragment implements Button.OnClickListener {
 
     View view;
 
-    Button btnReturn;
-    Button btnPlay;
-    Button btnFinish;
+    RecyclerView recyclerView;
 
-    LinearLayout linearLayout;
+    ImageView btnReturn;
+    ImageView btnPlay;
+    ImageView btnFinish;
+
+    ArrayList<LessonClauseItems> list = new ArrayList<>();
 
     public static LessonClause newInstance() {
         return new LessonClause();
@@ -33,9 +43,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_clause, container, false);
 
-        linearLayout = view.findViewById(R.id.linearLayout);
-
-        setTextView(LessonWord.sentenceClause);
+        String[] clauses =  LessonWord.sentenceClause;
 
         btnReturn = view.findViewById(R.id.btnReturn);
         btnReturn.setOnClickListener(this);
@@ -44,21 +52,50 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         btnFinish = view.findViewById(R.id.btnFinish);
         btnFinish.setOnClickListener(this);
 
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        LessonClauseItems item = new LessonClauseItems();
+        item.setPeopleImage(R.drawable.people5);
+        item.setClause("안녕하세요");
+        item.setAOrB(0);
+        list.add(item);
+
+        LessonClauseItems item1 = new LessonClauseItems();
+        item1.setPeopleImage(R.drawable.people5);
+        item1.setClause("빠이");
+        item1.setAOrB(0);
+        list.add(item1);
+
+        LessonClauseItems item2 = new LessonClauseItems();
+        item2.setPeopleImage(R.drawable.people6);
+        item2.setClause("안녕하세요");
+        item2.setAOrB(1);
+        list.add(item2);
+
+        LessonClauseItems item3 = new LessonClauseItems();
+        item3.setPeopleImage(R.drawable.people6);
+        item3.setClause("빠이");
+        item3.setAOrB(1);
+        list.add(item3);
+
+
+        LessonClauseAdapter adapter = new LessonClauseAdapter(list);
+        adapter.setOnItemClickListener(new LessonClauseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+
+                v.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_purple_20_transparent_stroke_purple));
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+
+
+
+
         return view;
-    }
-
-    public void setTextView(String[] sentenceClauses) {
-
-        for(String sentenceClause : sentenceClauses) {
-
-            TextView textView = new TextView(getContext());
-            textView.setText(sentenceClause);
-            textView.setTextSize(30);
-            textView.setPadding(30,30,30,30);
-
-            linearLayout.addView(textView);
-
-        }
     }
 
     @Override
@@ -76,9 +113,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
                 LessonFrame.progressCount++;
                 LessonFrame.progressCount();
                 ((LessonFrame)getActivity()).replaceFragment(LessonFinish.newInstance());
-
                 break;
         }
-
     }
 }
