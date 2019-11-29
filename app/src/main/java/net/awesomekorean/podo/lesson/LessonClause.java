@@ -2,6 +2,7 @@ package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -30,6 +32,8 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
     ImageView btnReturn;
     ImageView btnPlay;
     ImageView btnFinish;
+
+    MediaPlayer mediaPlayer;
 
     ArrayList<LessonClauseItems> list = new ArrayList<>();
 
@@ -79,6 +83,17 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         item3.setClause("빠이");
         item3.setAOrB(1);
         list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
+        list.add(item3);
 
 
         LessonClauseAdapter adapter = new LessonClauseAdapter(list);
@@ -86,14 +101,19 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
             @Override
             public void onItemClick(View v, int pos) {
 
-                v.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_purple_20_transparent_stroke_purple));
+                final ToggleButton button = (ToggleButton) v;
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct);
+                mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        button.setChecked(false);
+                    }
+                });
             }
         });
 
         recyclerView.setAdapter(adapter);
-
-
-
 
         return view;
     }

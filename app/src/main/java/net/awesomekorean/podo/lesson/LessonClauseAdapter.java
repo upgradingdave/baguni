@@ -1,11 +1,14 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import net.awesomekorean.podo.R;
@@ -25,6 +28,7 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
     }
 
 
+    MediaPlayer mediaPlayer;
 
     private ArrayList<LessonClauseItems> list;
 
@@ -35,22 +39,21 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView peopleImage;
-        TextView tvClause;
+        ToggleButton tbClause;
 
         ViewHolder(final View itemView) {
             super(itemView);
 
             peopleImage = itemView.findViewById(R.id.peopleImage);
-            tvClause = itemView.findViewById(R.id.tvClause);
+            tbClause = itemView.findViewById(R.id.tbClause);
 
-            tvClause.setOnClickListener(new View.OnClickListener() {
+            tbClause.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION) {
                         System.out.println("CLICKED : " + position);
 
-                        // 아이템 클릭 이벤트
                         if(listener != null) {
                             listener.onItemClick(view, position);
                         }
@@ -93,7 +96,9 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
         LessonClauseItems items = list.get(position);
 
         holder.peopleImage.setImageResource(items.getPeopleImage());
-        holder.tvClause.setText(items.getClause());
+        holder.tbClause.setText(items.getClause());
+        holder.tbClause.setTextOn(items.getClause());
+        holder.tbClause.setTextOff(items.getClause());
     }
 
     @Override
