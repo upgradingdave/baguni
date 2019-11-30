@@ -166,10 +166,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
                 initialization();
 
-                cvH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly1_active));
-                cvV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly2));
-                cvcH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly3));
-                cvcV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly4));
+                setAssemblyBtns(cvH, R.drawable.assembly1_active);
 
                 btnBatchim.setVisibility(GONE);
 
@@ -183,11 +180,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
                 initialization();
 
-                cvH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly1));
-                cvV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly2_active));
-                cvcH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly3));
-                cvcV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly4));
-
+                setAssemblyBtns(cvV, R.drawable.assembly2_active);
 
                 btnBatchim.setVisibility(GONE);
 
@@ -203,10 +196,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
                 initialization();
 
-                cvH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly1));
-                cvV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly2));
-                cvcH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly3_active));
-                cvcV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly4));
+                setAssemblyBtns(cvcH, R.drawable.assembly3_active);
 
                 btnBatchim.setVisibility(VISIBLE);
 
@@ -220,10 +210,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
                 initialization();
 
-                cvH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly1));
-                cvV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly2));
-                cvcH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly3));
-                cvcV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly4_active));
+                setAssemblyBtns(cvcV, R.drawable.assembly4_active);
 
                 btnBatchim.setVisibility(VISIBLE);
 
@@ -272,6 +259,14 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         }
     }
 
+    private void setAssemblyBtns(ImageView assembly, int active) {
+        cvH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly1));
+        cvV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly2));
+        cvcH.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly3));
+        cvcV.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.assembly4));
+        assembly.setBackground(ContextCompat.getDrawable(getApplicationContext(), active));
+    }
+
     public void initialization() {
 
         assemblyTextView.setText("");
@@ -283,32 +278,29 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     public void conVowBtnClicked(boolean con, boolean vow, boolean bat) {
         if(con==true) {
-            btnConsonant.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_10));
-            btnVowel.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
-            btnBatchim.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
-            btnConsonant.setTextColor(Color.parseColor("#FFFFFF"));
-            btnVowel.setTextColor(Color.parseColor("#000000"));
-            btnBatchim.setTextColor(Color.parseColor("#000000"));
+            setConVowBtns(btnConsonant);
 
         } else if(vow==true) {
-            btnConsonant.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
-            btnVowel.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_10));
-            btnBatchim.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
-            btnConsonant.setTextColor(Color.parseColor("#000000"));
-            btnVowel.setTextColor(Color.parseColor("#FFFFFF"));
-            btnBatchim.setTextColor(Color.parseColor("#000000"));
+            setConVowBtns(btnVowel);
 
         } else if(bat==true) {
-            btnConsonant.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
-            btnVowel.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
-            btnBatchim.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_10));
-            btnConsonant.setTextColor(Color.parseColor("#000000"));
-            btnVowel.setTextColor(Color.parseColor("#000000"));
-            btnBatchim.setTextColor(Color.parseColor("#FFFFFF"));
+            setConVowBtns(btnBatchim);
         }
         consonantBtnClicked = con;
         vowelBtnClicked = vow;
         batBtnClicked = bat;
+    }
+
+    private void setConVowBtns(Button conVow) {
+        btnConsonant.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
+        btnVowel.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
+        btnBatchim.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
+        btnConsonant.setTextColor(Color.BLACK);
+        btnVowel.setTextColor(Color.BLACK);
+        btnBatchim.setTextColor(Color.BLACK);
+
+        conVow.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_10));
+        conVow.setTextColor(Color.WHITE);
     }
 
     public void displayHangul(String selectedHangul, String[] conVow) {

@@ -24,15 +24,17 @@
         <activity android:name=".writing.WritingFrame" />
         <activity android:name=".reading.ReadingFrame" />
         <activity android:name=".lesson.LessonFrame" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
-        <activity android:name=".lesson.lessonHangul.LessonHangul" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".lesson.lessonHangul.LessonHangul" />
+        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 
