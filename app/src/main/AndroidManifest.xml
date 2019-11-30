@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lesson.LessonFinish"></activity>
+        <activity android:name=".Message"></activity>
+        <activity android:name=".lesson.LessonFinish" />
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />
         <activity android:name=".Logo" />

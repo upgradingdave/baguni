@@ -1,5 +1,6 @@
 package net.awesomekorean.podo;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ShapeDrawable;
@@ -17,6 +18,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import net.awesomekorean.podo.lesson.LessonFrame;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnMessage:
+                Intent intent = new Intent(this, Message.class);
+                startActivity(intent);
                 break;
 
             case R.id.btnLesson:
