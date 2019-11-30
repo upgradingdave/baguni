@@ -32,10 +32,10 @@
 
         <LinearLayout
             android:id="@+id/layoutCompleted"
-            android:layout_weight="1"
             android:gravity="center_vertical|right"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:src="@drawable/complete"
@@ -62,7 +62,7 @@
         <TextView
             android:id="@+id/subTitle"
             android:layout_weight="1"
-            android:gravity="center_vertical"
+            android:gravity="top"
             android:text="sub title"
             android:textSize="15dp"
             android:layout_width="match_parent"
