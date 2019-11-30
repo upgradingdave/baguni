@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.awesomekorean.podo.lesson.LessonFrame;
 
@@ -26,6 +27,16 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     FragmentPagerAdapter adapterViewPager;
 
     ViewPager viewPager;
+
+    TextView tvTitle;
+
+    ImageView btnProfile;
+    ImageView btnMessage;
+    public static ImageView btnLesson;
+    public static ImageView btnReading;
+    public static ImageView btnWriting;
+    public static ImageView btnCollection;
+    public static ImageView btnQnA;
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -41,13 +52,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 
-        ImageView btnProfile = findViewById(R.id.btnProfile);
-        ImageView btnMessage = findViewById(R.id.btnMessage);
-        ImageView btnLesson = findViewById(R.id.btnLesson);
-        ImageView btnReading = findViewById(R.id.btnReading);
-        ImageView btnWriting = findViewById(R.id.btnWriting);
-        ImageView btnCollection = findViewById(R.id.btnCollection);
-        ImageView btnQnA = findViewById(R.id.btnQnA);
+        tvTitle = findViewById(R.id.tvTitle);
+        btnProfile = findViewById(R.id.btnProfile);
+        btnMessage = findViewById(R.id.btnMessage);
+        btnLesson = findViewById(R.id.btnLesson);
+        btnReading = findViewById(R.id.btnReading);
+        btnWriting = findViewById(R.id.btnWriting);
+        btnCollection = findViewById(R.id.btnCollection);
+        btnQnA = findViewById(R.id.btnQnA);
         btnProfile.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
         btnLesson.setOnClickListener(this);
@@ -78,40 +90,44 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnLesson:
+                setMainBtns(btnLesson, R.drawable.lesson_active, R.string.LESSON);
                 viewPager.setCurrentItem(0);
                 break;
 
             case R.id.btnReading:
+                setMainBtns(btnReading, R.drawable.reading_active, R.string.READING);
                 viewPager.setCurrentItem(1);
                 break;
 
             case R.id.btnWriting:
+                setMainBtns(btnWriting, R.drawable.writting_active, R.string.WRITING);
                 viewPager.setCurrentItem(2);
                 break;
 
             case R.id.btnCollection:
+                setMainBtns(btnCollection, R.drawable.collection_active, R.string.COLLECTION);
                 viewPager.setCurrentItem(3);
                 break;
 
             case R.id.btnQnA:
+                setMainBtns(btnQnA, R.drawable.qna_active, R.string.QNA);
                 viewPager.setCurrentItem(4);
                 break;
 
         }
     }
 
-    private Bitmap getMaskedBitmap(int _srcResId, float _roundInPixel)
-    {
-        Bitmap srcBitmap = BitmapFactory.decodeResource( getResources(), _srcResId);
+    public void setMainBtns(ImageView btn, int active, int title) {
+        btnLesson.setImageResource(R.drawable.lesson);
+        btnReading.setImageResource(R.drawable.reading);
+        btnWriting.setImageResource(R.drawable.writting);
+        btnCollection.setImageResource(R.drawable.collection);
+        btnQnA.setImageResource(R.drawable.qna);
 
-        RoundedBitmapDrawable roundedDrawable =
-                RoundedBitmapDrawableFactory.create(getResources(), srcBitmap);
-
-        roundedDrawable.setCornerRadius( _roundInPixel );
-        roundedDrawable.setAntiAlias(true);
-
-        return roundedDrawable.getBitmap();
+        btn.setImageResource(active);
+        tvTitle.setText(getString(title));
     }
 }
+
 
 

@@ -4,12 +4,12 @@
 
     <string name="app_name">baguni</string>
 
-    <string name="MENU_LESSON">Lesson</string>
-    <string name="MENU_READING">Reading</string>
-    <string name="MENU_WRITING">Writing</string>
-    <string name="MENU_COLLECTION">Collection</string>
-    <string name="MENU_PROFILE_OPTION">Profile/Option</string>
-    <string name="MENU_MESSAGE">Message</string>
+    <string name="LESSON">Lesson</string>
+    <string name="READING">Reading</string>
+    <string name="WRITING">Writing</string>
+    <string name="COLLECTION">Collection</string>
+    <string name="PROFILE_OPTION">Profile/Option</string>
+    <string name="MESSAGE">Message</string>
 
     <string name="BTN_COLLECT">Collect</string>
     <string name="BTN_YES">Yes</string>
@@ -119,7 +119,6 @@
     <string name="ASSEMBLY">Assembly</string>
 
     <string name="INTRO">Intro</string>
-    <string name="WRITING">Writing</string>
     <string name="HINT">Hint</string>
 
     <string name="COLLECTION_SAVED">Collection is saved</string>
@@ -140,8 +139,6 @@
     <string name="SELECT_BOX">Select a box to get the points</string>
     <string name="CONGRATULATION">Congratulation</string>
     <string name="GET_POINT">Get the point</string>
-
-    <string name="MESSAGE">Message</string>
 
 
     <!--번역 필요 없는 부분-->

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
     ImageView btnBack;
     Button btnSave;
 
-    TextView saveResult;
+    LinearLayout saveResult;
 
     EditText editFront;
     EditText editBack;

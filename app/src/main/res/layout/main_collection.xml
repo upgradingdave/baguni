@@ -34,6 +34,7 @@
 
                 <EditText
                     android:id="@+id/searchCollection"
+                    android:background="@drawable/bg_transparent"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
