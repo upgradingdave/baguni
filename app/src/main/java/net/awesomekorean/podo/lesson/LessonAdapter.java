@@ -7,10 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
 
@@ -69,28 +72,49 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+
+        if(list.get(position).getIsSpecial()) { // 스페셜 레슨
+            return 0;
+        } else {  // 일반 레슨
+            return 1;
+        }
+    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.main_lesson_item, parent, false);
+        View view;
+
+        if(viewType == 0) {
+            view = inflater.inflate(R.layout.main_lesson_item_a, parent, false);
+        } else {
+            view = inflater.inflate(R.layout.main_lesson_item_b, parent, false);
+        }
+
         LessonAdapter.ViewHolder holder = new LessonAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LessonItems items = list.get(position);
+        int viewType = holder.getItemViewType();
+
+        if(viewType==0) {
+            if(items.getIsSpecial()) { holder.textSpecial.setVisibility(View.VISIBLE);
+            } else{holder.textSpecial.setVisibility(View.INVISIBLE);}
+            if(items.getIsLock()) { holder.iconLock.setVisibility(View.VISIBLE);
+            } else{holder.iconLock.setVisibility(View.INVISIBLE);}
+        }
 
         holder.title.setText(items.getTitle());
         holder.subTitle.setText(items.getSubTitle());
         holder.lessonImage.setImageResource(items.getLessonImage());
-        if(items.getIsSpecial()) { holder.textSpecial.setVisibility(View.VISIBLE);
-        } else{holder.textSpecial.setVisibility(View.INVISIBLE);}
-        if(items.getIsLock()) { holder.iconLock.setVisibility(View.VISIBLE);
-        } else{holder.iconLock.setVisibility(View.INVISIBLE);}
         if(items.getIsCompleted()) { holder.layoutCompleted.setVisibility(View.VISIBLE);
         } else{holder.layoutCompleted.setVisibility(View.INVISIBLE);}
     }

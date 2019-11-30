@@ -51,7 +51,17 @@ public class MainLesson extends Fragment {
         item.setIsLock(true);
         item.setIsCompleted(true);
         list.add(item);
+        LessonItems items = new LessonItems();
+        items.setTitle("Normal lesson title");
+        items.setSubTitle("Normal lesson sub title");
+        items.setLessonImage(R.drawable.hangul);
+        items.setIsCompleted(true);
+        items.setIsLock(true);
+        items.setIsCompleted(true);
+        items.setIsSpecial(true);
+        list.add(items);
         list.add(item);
+        list.add(items);
         list.add(item);
         list.add(item);
         list.add(item);

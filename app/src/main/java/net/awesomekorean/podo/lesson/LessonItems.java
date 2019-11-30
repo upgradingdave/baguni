@@ -5,7 +5,7 @@ public class LessonItems {
     private String title;
     private String subTitle;
     private int lessonImage;
-    private Boolean isSpecial = true;
+    private Boolean isSpecial = false;
     private Boolean isLock = true;
     private Boolean isCompleted = true;
 
