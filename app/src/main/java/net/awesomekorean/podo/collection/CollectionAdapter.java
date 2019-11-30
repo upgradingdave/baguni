@@ -93,6 +93,13 @@ public class CollectionAdapter extends BaseAdapter {
                 }
             }
         });
+
+        holder.btnAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Audio button clicked");
+            }
+        });
         return view;
     }
 

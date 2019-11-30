@@ -164,5 +164,7 @@
 
     <string name="LESSON_SENTENCE">lessonSentence</string>
 
+    <string name="DELETE_WRITING">Are you sure to delete writing?</string>
+
 
 </resources>

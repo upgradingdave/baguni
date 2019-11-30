@@ -69,6 +69,7 @@
             <CheckBox
                 android:id="@+id/checkBoxSelectAll"
                 android:visibility="invisible"
+                android:buttonTint="#6A69EF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -160,69 +161,73 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideLine40"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <LinearLayout
         android:id="@+id/msgDelete"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/guideLine40"
-        android:background="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical"
+        android:layout_margin="40dp"
+        android:padding="30dp"
+        android:background="@drawable/bg_white_10_stroke_grey"
+        android:elevation="10dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:src="@drawable/popup_podo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <TextView
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/MSG_DELETE"
+            android:text="@string/DELETE_WRITING"
             android:textSize="20dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/avenir_bold"
+            android:layout_marginTop="50dp"
             />
 
         <LinearLayout
+            android:layout_marginTop="100dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnYes"
-                android:layout_weight="1"
-                android:text="@string/BTN_YES"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/btnNo"
-                android:layout_weight="1"
                 android:text="@string/BTN_NO"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:background="@drawable/bg_white_30_stroke_purple"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_marginLeft="15dp"
+                android:text="@string/BTN_YES"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_purple_30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideLine50"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <TextView
         android:id="@+id/msgNoCollection"
-        android:visibility="gone"
+        android:visibility="visible"
         android:gravity="center"
         android:text="@string/NO_COLLECTION"
         android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/guideLine50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
