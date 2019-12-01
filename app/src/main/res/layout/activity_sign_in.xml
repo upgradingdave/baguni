@@ -39,7 +39,7 @@
 
         <ImageView
             android:id="@+id/flag"
-            android:src="@drawable/en"
+            android:src="@drawable/en_outline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -300,7 +300,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/en"
+                android:src="@drawable/en_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -320,7 +320,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/cn"
+                android:src="@drawable/cn_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -340,7 +340,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/jp"
+                android:src="@drawable/jp_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -360,7 +360,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/th"
+                android:src="@drawable/th_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -380,7 +380,7 @@
 
             <ImageView
                 android:layout_weight="0.2"
-                android:src="@drawable/kr"
+                android:src="@drawable/kr_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView

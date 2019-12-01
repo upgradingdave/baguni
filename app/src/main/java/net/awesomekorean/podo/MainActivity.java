@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static ImageView btnCollection;
     public static ImageView btnQnA;
 
+    Intent intent;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -82,10 +83,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnProfile:
+                intent = new Intent(this, Profile.class);
+                startActivity(intent);
                 break;
 
             case R.id.btnMessage:
-                Intent intent = new Intent(this, Message.class);
+                intent = new Intent(this, Message.class);
                 startActivity(intent);
                 break;
 

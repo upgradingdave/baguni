@@ -11,7 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Message"></activity>
+        <activity android:name=".Profile">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".Message" />
         <activity android:name=".lesson.LessonFinish" />
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />
@@ -24,18 +32,12 @@
         <activity android:name=".writing.WritingFrame" />
         <activity android:name=".reading.ReadingFrame" />
         <activity android:name=".lesson.LessonFrame" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" >
-        </activity>
+        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly"></activity>
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
         <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
-        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
     </application>
 

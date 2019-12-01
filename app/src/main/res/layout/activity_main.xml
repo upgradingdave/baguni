@@ -11,7 +11,7 @@
         android:id="@+id/btnProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/profile"
+        android:src="@drawable/profile_sample"
         android:layout_marginLeft="10dp"
         android:layout_width="50dp"
         android:layout_height="50dp" />

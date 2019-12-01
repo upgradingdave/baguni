@@ -46,7 +46,7 @@
                         android:id="@+id/arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/down_arrow" />
+                        android:src="@drawable/arrow_down_purple" />
 
                 </LinearLayout>
 
