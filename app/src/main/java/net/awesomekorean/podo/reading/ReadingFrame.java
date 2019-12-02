@@ -28,6 +28,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     Reading reading; // Reading 인스턴스
 
+    ImageView btnBack;
     TextView readingTitle; // reading 타이틀
     TextView readingArticle; // reading 본문
 
@@ -75,6 +76,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading_frame);
 
+        btnBack = findViewById(R.id.btnBack);
         readingTitle = findViewById(R.id.readingTitle);
         readingArticle = findViewById(R.id.readingArticle);
         popUpLayout = findViewById(R.id.popUpLayout);
@@ -91,6 +93,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         confirmFinish = findViewById(R.id.confirmFinish);
         finishYes = findViewById(R.id.finishYes);
         finishNo = findViewById(R.id.finishNo);
+        btnBack.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
         btnNormal.setOnClickListener(this);
         btnPlay.setOnClickListener(this);
@@ -186,6 +189,10 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     public void onClick(View view) {
 
         switch (view.getId()) {
+
+            case R.id.btnBack :
+                finish();
+                break;
 
             case R.id.btnCollect:
                 CollectionRepository repository = new CollectionRepository(this);

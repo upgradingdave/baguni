@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.awesomekorean.podo.lesson.LessonAdapter;
 import net.awesomekorean.podo.lesson.LessonFrame;
 import net.awesomekorean.podo.lesson.LessonItems;
+import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
 
 import java.util.ArrayList;
 
@@ -85,6 +86,8 @@ public class MainLesson extends Fragment {
                 switch (pos) {
 
                     case 0 :
+                        intent = new Intent(context, LessonHangulMenu.class);
+                        startActivity(intent);
                         break;
 
                     default :

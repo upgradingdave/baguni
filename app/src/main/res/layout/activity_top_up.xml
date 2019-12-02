@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".purchase.Subscribe">
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/FOGGY">
+
+        <TextView
+            android:text="@string/GET_PODO_POINTS"
+            android:textSize="20dp"
+            android:textColor="@color/NAVY"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:src="@drawable/no_ads"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="@string/GET_PODO_POINTS_DETAIL"
+            android:textSize="15dp"
+            android:textColor="@color/GREY_TEXT"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:src="@drawable/close_grey"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/price"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/btnGetPoint"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/pointA"
+            android:background="@drawable/bg_grey_10"
+            android:layout_marginTop="40dp"
+            android:padding="20dp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/FOGGY"
+                android:text="@string/POINT_OPTION_A"
+                android:textColor="@color/GREY_TEXT" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/POINT_OPTION_A_PRICE"
+                android:textStyle="bold"
+                android:textColor="@color/BLACK"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/checkPointA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_blue"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pointB"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/bg_grey_10_stroke_navy"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:background="@drawable/bg_navy_10_top"
+                android:text="@string/BEST_VALUE"
+                android:textColor="@color/WHITE"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:background="@color/FOGGY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/GREY_TEXT"
+                android:text="@string/POINT_OPTION_B" />
+            <TextView
+                android:text="@string/POINT_OPTION_B_PRICE"
+                android:textColor="@color/BLACK"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/checkPointB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pointC"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_grey_10"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/FOGGY"
+                android:text="@string/POINT_OPTION_C"
+                android:textColor="@color/GREY_TEXT" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/POINT_OPTION_C_PRICE"
+                android:textColor="@color/BLACK"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/checkPointC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_blue"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGetPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_purple_10"
+        android:text="@string/PURCHASE_POINTS"
+        android:textAllCaps="false"
+        android:textColor="@color/WHITE"
+        app:layout_constraintBottom_toTopOf="@id/policy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/policy"
+        android:layout_margin="20dp"
+        android:text="@string/POINT_POLICY"
+        android:textSize="15dp"
+        android:textColor="@color/GREY_TEXT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

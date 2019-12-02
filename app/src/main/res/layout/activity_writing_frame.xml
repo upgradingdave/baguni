@@ -94,11 +94,12 @@
                 android:gravity="right"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/btnClose"
-                    android:src="@drawable/close_black"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/close_black" />
             </LinearLayout>
         </LinearLayout>
 

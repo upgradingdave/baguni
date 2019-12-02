@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PurchasePremium">
+    tools:context=".purchase.Subscribe">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/purchaseMonthly"
+            android:id="@+id/subscribeA"
             android:background="@drawable/bg_grey_10"
             android:layout_marginTop="40dp"
             android:padding="20dp"
@@ -64,20 +64,20 @@
                 android:layout_height="wrap_content"
                 android:background="@color/FOGGY"
                 android:textColor="@color/GREY_TEXT"
-                android:text="@string/MONTHLY" />
+                android:text="@string/SUBSCRIBE_OPTION_A" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/MONTHLY_PRICE"
+                android:text="@string/SUBSCRIBE_OPTION_A_PRICE"
                 android:textStyle="bold"
                 android:textColor="@color/BLACK"
                 android:textSize="20dp" />
 
             <ImageView
-                android:id="@+id/checkMonthly"
+                android:id="@+id/checkSubscribeA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/check_blue"
@@ -85,7 +85,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/purchaseYearly"
+            android:id="@+id/subscribeB"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:paddingBottom="20dp"
@@ -111,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/GREY_TEXT"
-                android:text="@string/YEARLY" />
+                android:text="@string/SUBSCRIBE_OPTION_B" />
             <TextView
-                android:text="@string/YEARLY_PRICE"
+                android:text="@string/SUBSCRIBE_OPTION_B_PRICE"
                 android:textColor="@color/BLACK"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -123,14 +123,14 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:id="@+id/checkYearly"
+                android:id="@+id/checkSubscribeB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/check_blue" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/purchaseLifetime"
+            android:id="@+id/subscribeC"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
@@ -145,20 +145,20 @@
                 android:layout_height="wrap_content"
                 android:background="@color/FOGGY"
                 android:textColor="@color/GREY_TEXT"
-                android:text="@string/LIFETIME" />
+                android:text="@string/SUBSCRIBE_OPTION_C" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/LIFETIME_PRICE"
+                android:text="@string/SUBSCRIBE_OPTION_C_PRICE"
                 android:textColor="@color/BLACK"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/checkLifetime"
+                android:id="@+id/checkSubscribeC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/check_blue"
@@ -184,7 +184,7 @@
     <TextView
         android:id="@+id/policy"
         android:layout_margin="20dp"
-        android:text="@string/POLICY"
+        android:text="@string/PREMIUM_POLICY"
         android:textSize="15dp"
         android:textColor="@color/GREY_TEXT"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.awesomekorean.podo.lesson.LessonFrame;
+import net.awesomekorean.podo.purchase.Subscribe;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
@@ -165,7 +165,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.purchase :
-                intent = new Intent(this, PurchasePremium.class);
+                intent = new Intent(this, Subscribe.class);
                 startActivity(intent);
                 break;
 

@@ -7,9 +7,10 @@ public class TeachersItems {
 
     // 오디오는 어떻게 해야할까?
     private Drawable picture;
-    private String isAvailable;
+    private Boolean isAvailable;
     private String name;
     private String tag;
+    private Boolean isChecked = false;
 
     public Drawable getPicture() {
         return picture;
@@ -19,11 +20,11 @@ public class TeachersItems {
         this.picture = picture;
     }
 
-    public String getIsAvailable() {
+    public Boolean getIsAvailable() {
         return isAvailable;
     }
 
-    public void setIsAvailable(String isAvailable) {
+    public void setIsAvailable(Boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
 
@@ -41,5 +42,13 @@ public class TeachersItems {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public Boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(Boolean checked) {
+        isChecked = checked;
     }
 }

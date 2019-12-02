@@ -1,85 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
+    android:id="@+id/itemLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp"
-    android:background="@drawable/bg_white_25_stroke_grey"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_white_10_stroke_grey"
+    android:elevation="1dp"
+    android:descendantFocusability="blocksDescendants"
+    >
 
     <LinearLayout
-        android:weightSum="1"
-        android:orientation="vertical"
+        android:id="@+id/teacherCondition"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:weightSum="1"
-            android:layout_weight="0.8"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <ImageView
-                android:id="@+id/picture"
-                android:src="@drawable/back"
-                android:layout_weight="0.2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:weightSum="1"
-                android:layout_weight="0.8"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="0.2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-
-                    <TextView
-                        android:id="@+id/isAvailable"
-                        android:gravity="center"
-                        android:text="available"
-                        android:textSize="20dp"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <ImageButton
-                        android:id="@+id/voice"
-                        android:layout_weight="1"
-                        android:src="@drawable/back"
-                        android:scaleType="fitCenter"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/name"
-                    android:gravity="center"
-                    android:layout_weight="0.8"
-                    android:text="Danny Park"
-                    android:textSize="40dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp" />
-            </LinearLayout>
-        </LinearLayout>
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tag"
-            android:text="#male #KoreanTeacher #FromSeoul"
-            android:textSize="20dp"
-            android:layout_weight="0.2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:id="@+id/available"
+            android:gravity="center"
+            android:text="@string/NOW_AVAILABLE"
+            android:textColor="@color/WHITE"
+            android:background="@drawable/bg_green_15"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/vacation"
+            android:gravity="center"
+            android:text="@string/ON_VACATION"
+            android:textColor="@color/WHITE"
+            android:background="@drawable/bg_red_15"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btnAudio"
+            android:src="@drawable/audio_small_blue"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/teacherImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/people7" />
+
+        <TextView
+            android:id="@+id/teacherName"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="Danny Park"
+            android:textSize="20dp"
+            android:textColor="@color/BLACK"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/teacherCheck"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/check_blue" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/teacherTag"
+        android:text="#male #From Seoul"
+        android:textColor="@color/BLACK"
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

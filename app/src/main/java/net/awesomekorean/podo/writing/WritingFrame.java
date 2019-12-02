@@ -30,6 +30,9 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     Button btnSave;
     Button btnCorrection;
 
+    LinearLayout tips;
+    ImageView btnClose;
+
     String code; // add 인지 edit 인지를 판별
 
     Intent intent;
@@ -45,9 +48,12 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         btnCorrection = findViewById(R.id.btnCorrection);
         saveResult = findViewById(R.id.saveResult);
         btnBack = findViewById(R.id.btnBack);
+        tips = findViewById(R.id.tips);
+        btnClose = findViewById(R.id.btnClose);
         btnBack.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnCorrection.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
 
         intent = getIntent();
         code = intent.getExtras().getString(getString(R.string.REQUEST));
@@ -115,6 +121,10 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnBack :
                 finish();
+                break;
+
+            case R.id.btnClose :
+                tips.setVisibility(View.GONE);
                 break;
         }
     }

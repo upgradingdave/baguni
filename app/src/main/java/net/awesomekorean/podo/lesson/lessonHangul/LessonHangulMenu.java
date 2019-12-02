@@ -3,6 +3,7 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import net.awesomekorean.podo.R;
 
 public class LessonHangulMenu extends AppCompatActivity implements View.OnClickListener {
+
+    ImageView btnBack;
 
     LinearLayout consonant;
     LinearLayout vowel;
@@ -23,10 +26,12 @@ public class LessonHangulMenu extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul_menu);
 
+        btnBack = findViewById(R.id.btnBack);
         consonant = findViewById(R.id.consonant);
         vowel = findViewById(R.id.vowel);
         batchim = findViewById(R.id.batchim);
         assembly = findViewById(R.id.assembly);
+        btnBack.setOnClickListener(this);
         consonant.setOnClickListener(this);
         vowel.setOnClickListener(this);
         batchim.setOnClickListener(this);

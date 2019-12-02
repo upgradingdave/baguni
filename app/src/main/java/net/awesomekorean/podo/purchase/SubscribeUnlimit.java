@@ -1,4 +1,4 @@
-package net.awesomekorean.podo.purchasePremium;
+package net.awesomekorean.podo.purchase;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,19 +11,19 @@ import androidx.fragment.app.Fragment;
 
 import net.awesomekorean.podo.R;
 
-public class PurchasePremiumUnlock extends Fragment {
+public class SubscribeUnlimit extends Fragment {
 
     View view;
 
-    public static PurchasePremiumUnlock newInstance() {
-        return new PurchasePremiumUnlock();
+    public static SubscribeUnlimit newInstance() {
+        return new SubscribeUnlimit();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.activity_purchase_premium_unlock, container, false);
+        view = inflater.inflate(R.layout.activity_subscribe_unlimit, container, false);
 
         return view;
     }

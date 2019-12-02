@@ -154,18 +154,18 @@
     <string name="LOG_OUT">Log out</string>
 
     <string name="GO_PREMIUM">Go Premium</string>
-    <string name="POLICY">Your Google account will be charged at confirmation of purchase.
+    <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
         Subscription will be automatically renewed as soon as your subscription expires.
         If you don\'t want to renew your subscription, you can manage it from Google account settings.
         Subscription that have already been paid is not refundable.
     </string>
 
-    <string name="MONTHLY">Monthly</string>
-    <string name="YEARLY">Yearly</string>
-    <string name="LIFETIME">Lifetime</string>
-    <string name="MONTHLY_PRICE">$3</string>
-    <string name="YEARLY_PRICE">$20</string>
-    <string name="LIFETIME_PRICE">$80</string>
+    <string name="SUBSCRIBE_OPTION_A">Monthly</string>
+    <string name="SUBSCRIBE_OPTION_B">Yearly</string>
+    <string name="SUBSCRIBE_OPTION_C">Lifetime</string>
+    <string name="SUBSCRIBE_OPTION_A_PRICE">$3</string>
+    <string name="SUBSCRIBE_OPTION_B_PRICE">$20</string>
+    <string name="SUBSCRIBE_OPTION_C_PRICE">$80</string>
     <string name="BEST_VALUE">Best Value</string>
     <string name="GET_PODO_PREMIUM">Get podo premium</string>
     <string name="NO_ADS">No Ads</string>
@@ -174,6 +174,33 @@
     <string name="UNLOCKED_LESSONS_DETAIL">Every special lessons and readings will be unlocked.</string>
     <string name="UNLIMITED_COLLECTIONS">Unlimited Collections</string>
     <string name="UNLIMITED_COLLECTIONS_DETAIL">You can collect unlimited flash cards.</string>
+
+    <string name="NOW_AVAILABLE">Now available</string>
+    <string name="ON_VACATION">On vacation</string>
+
+    <string name="REQUIRE">Require: </string>
+    <string name="YOU_HAVE">You have: </string>
+    <string name="TOPUP">Top Up</string>
+    <string name="SUBMITE">Submit</string>
+    <string name="TEACHERS">Teachers</string>
+
+    <string name="GET_PODO_POINTS">Get podo Points</string>
+    <string name="GET_PODO_POINTS_DETAIL">
+        You can use the points to ask native Korean teachers to record for your flash cards
+        or to correct for your Korean writing.
+        If you are not a premium user, you can also use it to unlock the special lessons or readings.
+    </string>
+    <string name="PURCHASE_POINTS">Purchase Points</string>
+    <string name="POINT_OPTION_A">100 points</string>
+    <string name="POINT_OPTION_B">500 points</string>
+    <string name="POINT_OPTION_C">1,000 points</string>
+    <string name="POINT_OPTION_A_PRICE">$3</string>
+    <string name="POINT_OPTION_B_PRICE">$20</string>
+    <string name="POINT_OPTION_C_PRICE">$80</string>
+    <string name="POINT_POLICY">Your Google account will be charged at confirmation of purchase.
+        This purchase is one-time purchase. Points that have already been paid are not refundable.
+    </string>
+
 
 
     <!--번역 필요 없는 부분-->

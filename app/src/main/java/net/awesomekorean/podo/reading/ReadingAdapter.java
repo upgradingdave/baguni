@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.reading;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,24 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.LessonFrame;
 
 import java.util.ArrayList;
 
 public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHolder> {
+
+    // 아이템 클릭 이벤트를 MainLesson 에서 처리하기 위한 인터페이스
+    public interface OnItemClickListener {
+        void onItemClick(View v, int pos);
+    }
+
+    private OnItemClickListener listener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
 
     private ArrayList<ReadingItems> list;
 
@@ -43,8 +58,11 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION) {
                         ReadingItems item = list.get(position);
-                        System.out.println("CLICKED : " + position);
-                        // 아이템 클릭 이벤트트
+
+                        // 아이템 클릭 이벤트
+                        if(listener != null) {
+                            listener.onItemClick(view, position);
+                        }
                     }
                 }
             });
