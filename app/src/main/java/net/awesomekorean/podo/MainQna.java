@@ -74,8 +74,8 @@ public class MainQna extends Fragment implements View.OnClickListener{
             case R.id.faq :
                 fragment = Faq.newInstance();
                 setChildFragment(fragment);
-                faq.setTextColor(Color.parseColor("#6A69EF"));
-                myQuestions.setTextColor(Color.parseColor("#7E8494"));
+                faq.setTextColor(Color.parseColor("#5453E8"));
+                myQuestions.setTextColor(Color.parseColor("#E6E6E6"));
                 underBarFaq.setVisibility(View.VISIBLE);
                 underBarMyQ.setVisibility(View.INVISIBLE);
                 break;
@@ -83,8 +83,8 @@ public class MainQna extends Fragment implements View.OnClickListener{
             case R.id.myQuestions :
                 fragment = MyQuestions.newInstance();
                 setChildFragment(fragment);
-                faq.setTextColor(Color.parseColor("#7E8494"));
-                myQuestions.setTextColor(Color.parseColor("#6A69EF"));
+                faq.setTextColor(Color.parseColor("#E6E6E6"));
+                myQuestions.setTextColor(Color.parseColor("#5453E8"));
                 underBarFaq.setVisibility(View.INVISIBLE);
                 underBarMyQ.setVisibility(View.VISIBLE);
                 break;

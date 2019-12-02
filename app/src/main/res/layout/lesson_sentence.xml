@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEB"
+    android:background="@color/FOGGY"
     tools:context=".lesson.LessonWord">
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="친구랑 한국 식당에\n 갈 거예요"
             android:textSize="30dp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:textStyle="bold"
             android:lineSpacingExtra="10dp"
             android:layout_marginTop="20dp"
@@ -47,7 +47,7 @@
             android:gravity="center"
             android:text="student"
             android:textSize="20dp"
-            android:textColor="#7E8494"
+            android:textColor="@color/GREY_TEXT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -55,7 +55,7 @@
             android:id="@+id/tvSentenceExplain"
             android:text="친구랑 한국 식당에 갈 거예요는 블라블라블라...동해물과백두산이 마르고 닳도록. "
             android:textSize="15dp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:scrollbars="vertical"
             android:lineSpacingExtra="5dp"
             android:layout_marginTop="50dp"
@@ -77,7 +77,7 @@
         android:paddingLeft="110dp"
         android:text="@string/ADD_COLLECTION"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/WHITE"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
     <LinearLayout
         android:id="@+id/collectResult"
         android:visibility="gone"
-        android:background="#65000000"
+        android:background="@color/BLACK_TRANSPARENT"
         android:elevation="5dp"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/COLLECTION_SAVED"
                 android:textSize="25dp"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:fontFamily="@font/avenir_bold"
                 android:layout_marginTop="50dp"
                 />

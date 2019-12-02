@@ -69,7 +69,7 @@
             <CheckBox
                 android:id="@+id/checkBoxSelectAll"
                 android:visibility="invisible"
-                android:buttonTint="#6A69EF"
+                android:buttonTint="@color/PURPLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:divider="#00000000"
+                android:divider="@color/TRANSPARENT"
                 android:dividerHeight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
             android:id="@+id/btnStudy"
             android:background="@drawable/bg_purple_25"
             android:text="@string/BTN_STUDY"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/WHITE"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -142,7 +142,7 @@
             android:enabled="false"
             android:background="@drawable/bg_white_30_stroke_red"
             android:text="@string/DELETE"
-            android:textColor="#F77466"
+            android:textColor="@color/RED"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
             android:layout_width="match_parent"
@@ -153,7 +153,7 @@
             android:visibility="gone"
             android:enabled="false"
             android:text="@string/BTN_RECORD"
-            android:textColor="#FFF"
+            android:textColor="@color/WHITE"
             android:background="@drawable/bg_purple_25"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:text="@string/DELETE_WRITING"
             android:textSize="20dp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:fontFamily="@font/avenir_bold"
             android:layout_marginTop="50dp"
             />
@@ -213,7 +213,7 @@
                 android:text="@string/BTN_YES"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/WHITE"
                 android:background="@drawable/bg_purple_30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

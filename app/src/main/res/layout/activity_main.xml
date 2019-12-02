@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toStartOf="@id/btnMessage"
         android:text="Lesson"
         android:textSize="20dp"
-        android:textColor="#242833"
+        android:textColor="@color/BLACK"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/title"
-        android:background="#FFFFFF"
+        android:background="@color/WHITE"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_vertical"
         android:padding="20dp"

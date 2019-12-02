@@ -91,7 +91,7 @@
 
             <TextView
                 android:text="@string/REVIEWED"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/WHITE"
                 android:textSize="12dp"
                 android:layout_marginRight="5dp"
                 android:fontFamily="@font/avenir_bold"

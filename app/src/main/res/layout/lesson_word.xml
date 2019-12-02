@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEB"
+    android:background="@color/FOGGY"
     tools:context=".lesson.LessonWord">
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="학생"
             android:textSize="50dp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:text="student"
             android:textSize="20dp"
-            android:textColor="#7E8494"
+            android:textColor="@color/GREY_TEXT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -59,7 +59,7 @@
             <TextView
                 android:text="@string/PRONUNCIATION"
                 android:textSize="15dp"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:textStyle=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -69,7 +69,7 @@
                 android:text="hello"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
-                android:textColor="#7E8494"
+                android:textColor="@color/GREY_TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -84,7 +84,7 @@
             <TextView
                 android:text="@string/SYNONYMS"
                 android:textSize="15dp"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -93,7 +93,7 @@
                 android:text="hello"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
-                android:textColor="#7E8494"
+                android:textColor="@color/GREY_TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -108,7 +108,7 @@
             <TextView
                 android:text="@string/ANTONYMS"
                 android:textSize="15dp"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -117,7 +117,7 @@
                 android:text="hello"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
-                android:textColor="#7E8494"
+                android:textColor="@color/GREY_TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -132,7 +132,7 @@
             <TextView
                 android:text="@string/USES_IN_SENTENCE"
                 android:textSize="15dp"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -142,7 +142,7 @@
                 android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:textColor="#7E8494"
+                android:textColor="@color/GREY_TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -154,7 +154,7 @@
         android:id="@+id/btnCollect"
         android:text="@string/ADD_COLLECTION"
         android:textSize="15dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/WHITE"
         android:textAllCaps="false"
         android:background="@drawable/bg_purple_30"
         android:layout_margin="20dp"
@@ -169,7 +169,7 @@
     <LinearLayout
         android:id="@+id/collectResult"
         android:visibility="gone"
-        android:background="#65000000"
+        android:background="@color/BLACK_TRANSPARENT"
         android:elevation="5dp"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -194,7 +194,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/COLLECTION_SAVED"
                 android:textSize="25dp"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:fontFamily="@font/avenir_bold"
                 android:layout_marginTop="50dp"
                 />

@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:text="Danny"
             android:textSize="15dp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -42,7 +42,7 @@
             android:id="@+id/uploadDate"
             android:text="2 days ago"
             android:textSize="12dp"
-            android:textColor="#6C7A8B"
+            android:textColor="@color/GREY_TEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp"
         android:text="question...blabla"
         android:textSize="15dp"
-        android:textColor="#000000"
+        android:textColor="@color/BLACK"
         android:maxLines="2"
         android:ellipsize="end"
         android:layout_width="match_parent"

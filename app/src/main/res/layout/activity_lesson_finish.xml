@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEB"
+    android:background="@color/FOGGY"
     tools:context=".lesson.LessonFinish">
 
     <ImageView
@@ -36,7 +36,7 @@
         <TextView
             android:text="@string/SELECT_BOX"
             android:textSize="20dp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -91,7 +91,7 @@
             android:id="@+id/textView"
             android:text="@string/CONGRATULATION"
             android:textSize="25dp"
-            android:textColor="#F5A623"
+            android:textColor="@color/YELLOW"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="@id/selectResult"
             app:layout_constraintStart_toStartOf="@+id/selectResult"
@@ -128,7 +128,7 @@
             <TextView
                 android:id="@+id/tvPoints"
                 android:textSize="40dp"
-                android:textColor="#5453E8"
+                android:textColor="@color/PURPLE"
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -140,7 +140,7 @@
             android:id="@+id/btnGetPoint"
             app:layout_constraintBottom_toBottomOf="@id/selectResult"
             android:text="@string/GET_POINT"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/WHITE"
             android:textAllCaps="false"
             android:layout_marginTop="40dp"
             android:background="@drawable/bg_purple_30"

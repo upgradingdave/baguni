@@ -8,7 +8,7 @@
     tools:context=".Logo">
 
     <ImageView
-        android:background="#FFFFFF"
+        android:background="@color/WHITE"
         android:src="@drawable/logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

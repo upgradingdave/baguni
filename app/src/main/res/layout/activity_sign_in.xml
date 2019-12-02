@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#196A69EF"
+    android:background="@color/PURPLE_TRANSPARENT"
     tools:context=".login.SignIn">
 
     <androidx.constraintlayout.widget.Guideline
@@ -48,7 +48,7 @@
             android:layout_gravity="center"
             android:text="@string/ENGLISH"
             android:textSize="15dp"
-            android:textColor="#4C4BF6"
+            android:textColor="@color/PURPLE"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -65,7 +65,7 @@
         android:text="@string/WELCOME"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#2E294E"
+        android:textColor="@color/BLACK"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bg"
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/WRONGEMAIL"
-                    android:textColor="#FD5585"
+                    android:textColor="@color/RED"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/WRONGPASS"
-                    android:textColor="#FD5585"
+                    android:textColor="@color/RED"
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
@@ -192,13 +192,13 @@
             android:layout_marginRight="25dp"
             android:layout_weight="0.062"
             android:text="@string/FORGOT"
-            android:textColor="#4C4BF6" />
+            android:textColor="@color/PURPLE" />
 
         <Button
             android:id="@+id/btnSignIn"
             android:layout_weight="0.1"
             android:text="@string/LOGIN"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/WHITE"
             android:background="@drawable/bg_purple_25"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
@@ -218,7 +218,7 @@
             android:id="@+id/btnSignInGoogle"
             android:layout_weight="0.104"
             android:text="@string/GOOGLE"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/WHITE"
             android:background="@drawable/bg_blue_25"
             android:drawableLeft="@drawable/google"
             android:drawablePadding="-40dp"
@@ -232,7 +232,7 @@
             android:id="@+id/btnSignInFacebook"
             android:layout_weight="0.104"
             android:text="@string/FACEBOOK"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/WHITE"
             android:background="@drawable/bg_navy_25"
             android:drawableLeft="@drawable/facebook"
             android:drawablePadding="-40dp"
@@ -266,7 +266,7 @@
                 android:layout_weight="1"
                 android:text="@string/SIGNUP"
                 android:textSize="15dp"
-                android:textColor="#7D8699"
+                android:textColor="@color/GREY_TEXT"
                 android:gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
@@ -398,7 +398,7 @@
     <View
         android:id="@+id/findPasswordBg"
         android:visibility="gone"
-        android:background="#65000000"
+        android:background="@color/BLACK_TRANSPARENT"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -433,7 +433,7 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:text="@string/INPUT_EMAIL"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:textSize="20dp" />
 
         <EditText
@@ -454,7 +454,7 @@
             android:layout_weight="0.25"
             android:background="@drawable/bg_purple_25"
             android:text="@string/SEND"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/WHITE" />
 
 
     </LinearLayout>

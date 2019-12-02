@@ -32,7 +32,7 @@
 
             <TextView
                 android:text="@string/CATEGORY"
-                android:textColor="#6C7A8B"
+                android:textColor="@color/GREY_TEXT"
                 android:textSize="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/category"
                 android:text="@string/GRAMMAR"
-                android:textColor="#000000"
+                android:textColor="@color/BLACK"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
 
             <TextView
                 android:text="@string/CONFIRMED"
-                android:textColor="#FFF"
+                android:textColor="@color/WHITE"
                 android:textSize="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -93,7 +93,7 @@
 
             <TextView
                 android:text="@string/REJECTED"
-                android:textColor="#FFF"
+                android:textColor="@color/WHITE"
                 android:textSize="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -109,7 +109,7 @@
         android:layout_marginTop="15dp"
         android:text="question...blabla"
         android:textSize="15dp"
-        android:textColor="#000000"
+        android:textColor="@color/BLACK"
         android:maxLines="2"
         android:ellipsize="end"
         android:layout_width="match_parent"
@@ -122,7 +122,7 @@
         android:layout_marginTop="15dp"
         android:layout_weight="0.2"
         android:text="2 days ago"
-        android:textColor="#6C7A8B"
+        android:textColor="@color/GREY_TEXT"
         android:textSize="12dp" />
 
 

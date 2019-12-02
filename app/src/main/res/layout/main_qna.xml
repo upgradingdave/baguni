@@ -18,7 +18,7 @@
             android:id="@+id/faq"
             android:text="@string/FAQ"
             android:textSize="15dp"
-            android:textColor="#6A69EF"
+            android:textColor="@color/PURPLE"
             android:gravity="center|bottom"
             android:paddingBottom="10dp"
             android:layout_weight="1"
@@ -33,7 +33,7 @@
             android:gravity="center|bottom"
             android:paddingBottom="10dp"
             android:text="@string/MY_QUESTIONS"
-            android:textColor="#7E8494"
+            android:textColor="@color/GREY_TEXT"
             android:textSize="15dp" />
 
     </LinearLayout>
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="@+id/guideLine50"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="#6A69EF"
+        android:background="@color/PURPLE"
         android:layout_width="0dp"
         android:layout_height="1dp"
         />
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="#6A69EF"
+        android:background="@color/PURPLE"
         android:layout_width="0dp"
         android:layout_height="1dp"
         />
@@ -84,7 +84,7 @@
     <Button
         android:id="@+id/btnAsk"
         android:text="@string/ASK"
-        android:textColor="#FFF"
+        android:textColor="@color/WHITE"
         android:background="@drawable/bg_purple_25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

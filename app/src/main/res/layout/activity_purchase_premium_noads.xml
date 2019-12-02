@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="250dp"
     android:paddingTop="50dp"
-    android:background="#F6F7F7">
+    android:background="@color/FOGGY">
 
     <TextView
         android:text="@string/GET_PODO_PREMIUM"
         android:textSize="20dp"
-        android:textColor="#0A2459"
+        android:textColor="@color/NAVY"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
     <TextView
         android:text="@string/NO_ADS"
         android:textSize="20dp"
-        android:textColor="#0A2459"
+        android:textColor="@color/NAVY"
         android:textStyle="bold"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
     <TextView
         android:text="@string/NO_ADS_DETAIL"
         android:textSize="15dp"
-        android:textColor="#BCBCBC"
+        android:textColor="@color/GREY_TEXT"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

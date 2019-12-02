@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:background="#F8F8FF"
+            android:background="@color/FOGGY"
             android:layout_weight="0.9"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 <TextView
                     android:id="@+id/category"
                     android:text="@string/CATEGORY"
-                    android:textColor="#2E374D"
+                    android:textColor="@color/GREY_TEXT"
                     android:textSize="15dp"
                     android:layout_marginLeft="30dp"
                     android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             <TextView
                 android:text="@string/RECENT_FAQ"
                 android:textSize="15dp"
-                android:textColor="#000"
+                android:textColor="@color/BLACK"
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="20dp"
