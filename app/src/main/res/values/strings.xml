@@ -153,6 +153,28 @@
     <string name="RECOMMEND">Recommend this app</string>
     <string name="LOG_OUT">Log out</string>
 
+    <string name="GO_PREMIUM">Go Premium</string>
+    <string name="POLICY">Your Google account will be charged at confirmation of purchase.
+        Subscription will be automatically renewed as soon as your subscription expires.
+        If you don\'t want to renew your subscription, you can manage it from Google account settings.
+        Subscription that have already been paid is not refundable.
+    </string>
+
+    <string name="MONTHLY">Monthly</string>
+    <string name="YEARLY">Yearly</string>
+    <string name="LIFETIME">Lifetime</string>
+    <string name="MONTHLY_PRICE">$3</string>
+    <string name="YEARLY_PRICE">$20</string>
+    <string name="LIFETIME_PRICE">$80</string>
+    <string name="BEST_VALUE">Best Value</string>
+    <string name="GET_PODO_PREMIUM">Get podo premium</string>
+    <string name="NO_ADS">No Ads</string>
+    <string name="NO_ADS_DETAIL">You can focus on learning without advertising.</string>
+    <string name="UNLOCKED_LESSONS">Unlocked Lessons</string>
+    <string name="UNLOCKED_LESSONS_DETAIL">Every special lessons and readings will be unlocked.</string>
+    <string name="UNLIMITED_COLLECTIONS">Unlimited Collections</string>
+    <string name="UNLIMITED_COLLECTIONS_DETAIL">You can collect unlimited flash cards.</string>
+
 
     <!--번역 필요 없는 부분-->
 

@@ -2,6 +2,7 @@ package net.awesomekorean.podo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.awesomekorean.podo.lesson.LessonFrame;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
@@ -65,6 +68,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     LinearLayout recommend;
     LinearLayout logout;
 
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +130,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         btnBack.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
+        editProfile.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         purchase.setOnClickListener(this);
         layoutLanguage.setOnClickListener(this);
@@ -151,10 +156,17 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnGetPoint :
                 break;
 
+            case R.id.editProfile :
+                editProfileOpen.setVisibility(View.VISIBLE);
+                break;
+
             case R.id.btnSave :
+                editProfileOpen.setVisibility(View.GONE);
                 break;
 
             case R.id.purchase :
+                intent = new Intent(this, PurchasePremium.class);
+                startActivity(intent);
                 break;
 
             case R.id.layoutLanguage :
