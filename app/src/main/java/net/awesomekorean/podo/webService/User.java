@@ -1,25 +1,25 @@
 package net.awesomekorean.podo.webService;
 
+import com.google.firebase.Timestamp;
+
+import java.util.Date;
+
 public class User {
 
-    private int id;
     private String name;
     private String email;
     private String password;
-    private String dateSignUp;
-    private String dateSignIn;
-    private String msgFromServer;
+    private Timestamp dateSignUp;
+    private Timestamp dateSignIn;
+
+    public User() {}
 
     public User(String email, String password) {
         this.name = email.substring(0, email.lastIndexOf("@")); // 이메일의 @ 앞부분을 이름으로 자동 설정
         this.email = email;
         this.password = password;
-        this.dateSignUp = "NOW()";
-        this.dateSignIn = "NOW()";
-    }
-
-    public int getId() {
-        return id;
+        this.dateSignUp = new Timestamp(new Date());
+        this.dateSignIn = new Timestamp(new Date());
     }
 
     public String getName() {
@@ -46,19 +46,11 @@ public class User {
         this.password = password;
     }
 
-    public String getDateSignUp() {
+    public Timestamp getDateSignUp() {
         return dateSignUp;
     }
 
-    public String getDateSignIn() {
+    public Timestamp getDateSignIn() {
         return dateSignIn;
-    }
-
-    public String getMsgFromServer() {
-        return msgFromServer;
-    }
-
-    public void setMsgFromServer(String msgFromServer) {
-        this.msgFromServer = msgFromServer;
     }
 }

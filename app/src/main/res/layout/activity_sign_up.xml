@@ -64,56 +64,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <LinearLayout
-            android:id="@+id/layoutName"
-            android:weightSum="1"
-            android:layout_weight="0.18"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_height="0dp">
-
-            <LinearLayout
-                android:layout_weight="0.4"
-                android:layout_marginBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/NAME"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="15dp"
-                    />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/WRONGEMAIL"
-                    android:textColor="@color/RED"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_weight="0.6"
-                android:background="@drawable/bg_white_25_stroke_grey"
-                android:textSize="15dp"
-                android:paddingLeft="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutEmail"
@@ -141,24 +91,12 @@
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/WRONGPASS"
-                    android:textColor="@color/RED"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="15dp"
-                    />
-
             </LinearLayout>
 
             <EditText
                 android:id="@+id/email"
                 android:layout_weight="0.6"
-                android:background="@drawable/bg_white_25_stroke_grey"
+                android:background="@drawable/bg_white_30_stroke_grey"
                 android:drawableRight="@drawable/successgrey"
                 android:paddingRight="15dp"
                 android:textSize="15dp"
@@ -194,24 +132,12 @@
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/WRONGPASS"
-                    android:textColor="@color/RED"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="15dp"
-                    />
-
             </LinearLayout>
 
             <EditText
                 android:id="@+id/password"
                 android:layout_weight="0.6"
-                android:background="@drawable/bg_white_25_stroke_grey"
+                android:background="@drawable/bg_white_30_stroke_grey"
                 android:textSize="15dp"
                 android:paddingLeft="20dp"
                 android:inputType="textPassword"
@@ -245,24 +171,12 @@
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/WRONGPASS"
-                    android:textColor="@color/RED"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="15dp"
-                    />
-
             </LinearLayout>
 
             <EditText
                 android:id="@+id/passwordConfirm"
                 android:layout_weight="0.6"
-                android:background="@drawable/bg_white_25_stroke_grey"
+                android:background="@drawable/bg_white_30_stroke_grey"
                 android:drawableRight="@drawable/successgrey"
                 android:paddingRight="15dp"
                 android:textSize="15dp"
@@ -279,6 +193,7 @@
             android:layout_weight="0.1"
             android:text="@string/SIGNUP"
             android:textColor="@color/WHITE"
+            android:enabled="true"
             android:background="@drawable/bg_purple_25"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="25dp"

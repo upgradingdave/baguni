@@ -3,6 +3,10 @@
     package="net.awesomekorean.podo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
 
     <application
         android:allowBackup="true"
@@ -19,9 +23,18 @@
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />
         <activity android:name=".Logo" />
-        <activity android:name=".login.SignUp" />
+        <activity android:name=".login.SignUp" >
+
+        </activity>
         <activity android:name=".teachers.Teachers" />
-        <activity android:name=".login.SignIn" />
+        <activity android:name=".login.SignIn" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".collection.CollectionStudy" />
         <activity android:name=".collection.CollectionFlashCard" />
         <activity android:name=".writing.WritingFrame" />

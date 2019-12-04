@@ -3,6 +3,8 @@ package net.awesomekorean.podo.login;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,11 +24,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -41,6 +49,8 @@ import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity implements Button.OnClickListener {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     LinearLayout selectLanguage;
     ImageView flag;
     TextView nation;
@@ -54,6 +64,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
     EditText email;
     EditText password;
+    TextView wrongEmail;
+    TextView wrongPassword;
     TextView forgotPassword;
 
     Button btnSignIn;
@@ -67,6 +79,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     Button btnSend;
 
     Intent intent;
+
+    int focused;
 
     static final int RC_SIGN_IN = 100;
     FirebaseAuth firebaseAuth;
@@ -87,7 +101,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 .build();
 
         googleSignInClient = GoogleSignIn.getClient(this, gso);
-
 
         SettingStatusBar.setStatusBar(this);
 
@@ -111,11 +124,15 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        wrongEmail = findViewById(R.id.wrongEmail);
+        wrongPassword = findViewById(R.id.wrongPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
         forgotPassword = findViewById(R.id.forgotPassword);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
         btnSignInFacebook = findViewById(R.id.btnSignInFacebook);
+        email.setOnFocusChangeListener(focusChangeListener);
+        password.setOnFocusChangeListener(focusChangeListener);
         btnSignIn.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
@@ -128,9 +145,15 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         btnSend = findViewById(R.id.btnSend);
         findPasswordBg.setOnClickListener(this);
         btnSend.setOnClickListener(this);
-
-
     }
+
+    View.OnFocusChangeListener focusChangeListener = (new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            wrongEmail.setVisibility(View.GONE);
+            wrongPassword.setVisibility(View.GONE);
+        }
+    });
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -160,13 +183,13 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         if (task.isSuccessful()) {
                             // 로그인 성공
                             intent = new Intent(getApplicationContext(), MainActivity.class);
+                            finish();
                             startActivity(intent);
                             Toast.makeText(getApplicationContext(), "Google login succeed", Toast.LENGTH_SHORT).show();
                         } else {
                             // 로그인 실패
                             Toast.makeText(getApplicationContext(), "Google login failed", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
     }
@@ -219,39 +242,36 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
             case R.id.btnSignIn :
 
-                String userEmail = email.getText().toString();
-                String userPass = password.getText().toString();
+                final String userEmail = email.getText().toString();
+                final String userPass = password.getText().toString();
 
-                // 서버에 로그인 입력정보 보내기
-                RetrofitConnection retrofitConnection = new RetrofitConnection();
-                Call<User> call = retrofitConnection.service().logInCheck(userEmail, userPass);
-                call.enqueue(new Callback<User>() {
+                DocumentReference docRef = db.collection("android/podo/users").document(userEmail);
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        // 로그인 결과 받기
-                        if(response.isSuccessful()) {
-
-                            User user = response.body();
-                            String msgFromServer = user.getMsgFromServer();
-                            System.out.println(msgFromServer);
-
-                            if(!msgFromServer.contains("ERROR")) {
-                                Toast.makeText(getApplicationContext(), "Hello, "+ user.getName(), Toast.LENGTH_LONG).show();
-                                CollectionRepository.userId = user.getId(); // MainCollection 에서 동기화를 위해 userId 입력
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        // 일치하는 이메일 찾음
+                        if(documentSnapshot.exists()) {
+                            User user = documentSnapshot.toObject(User.class);
+                            // 비밀번호 일치함 -> 로그인 성공
+                            if(userPass.equals(user.getPassword())) {
+                                DocumentReference dateSignInUpdate = db.collection("android/podo/users").document(userEmail);
+                                dateSignInUpdate.update("dateSignIn", FieldValue.serverTimestamp());
+                                Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
+                                finish();
                                 startActivity(intent);
+
+                                // 비밀번호 틀림
                             } else {
-                                Toast.makeText(getApplicationContext(), msgFromServer, Toast.LENGTH_LONG).show();
+                                wrongPassword.setVisibility(View.VISIBLE);
                             }
+
+                            // 일치하는 이메일 없음
+                        } else {
+                            wrongEmail.setVisibility(View.VISIBLE);
                         }
                     }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        System.out.println("Failed to connect");
-                    }
                 });
-
                 break;
 
             case R.id.forgotPassword :
@@ -281,7 +301,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
             case R.id.btnSignUp :
                 intent = new Intent(this, SignUp.class);
-                // 인텐트 플레그 설정하기!!!!!!!!
                 startActivity(intent);
                 break;
 

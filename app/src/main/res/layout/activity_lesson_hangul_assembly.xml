@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnsAssembly"
         app:layout_constraintBottom_toTopOf="@id/btns"
-        android:background="@drawable/bg_white_25_stroke_grey"
+        android:background="@drawable/bg_white_30_stroke_grey"
         android:layout_width="0dp"
         android:layout_height="0dp">
 
@@ -260,7 +260,7 @@
         app:layout_constraintBottom_toBottomOf="@id/layoutHangul"
         app:layout_constraintStart_toStartOf="@id/layoutHangul"
         app:layout_constraintEnd_toEndOf="@id/layoutHangul"
-        android:background="@drawable/bg_white_25_stroke_grey"
+        android:background="@drawable/bg_white_30_stroke_grey"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
 

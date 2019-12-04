@@ -254,7 +254,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             break;
 
             case R.id.btnFinish :
-                mediaPlayer.pause();
+                if(mediaPlayer!=null) {
+                    mediaPlayer.pause();
+                }
                 confirmFinish.setVisibility(View.VISIBLE);
                 break;
 

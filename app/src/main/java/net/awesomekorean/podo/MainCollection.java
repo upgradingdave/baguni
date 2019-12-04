@@ -1,6 +1,7 @@
 package net.awesomekorean.podo;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,12 +24,21 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import net.awesomekorean.podo.collection.CollectionEntity;
 import net.awesomekorean.podo.collection.CollectionFlashCard;
 import net.awesomekorean.podo.collection.CollectionItems;
 import net.awesomekorean.podo.collection.CollectionAdapter;
 import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.collection.CollectionStudy;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,6 +49,8 @@ import java.util.regex.Pattern;
 import static android.app.Activity.RESULT_OK;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     View view;
 
@@ -418,7 +430,27 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnSync :
-                repository.syncCollections();
+                StorageReference storageReference = storage.getReference();
+
+                Uri file = Uri.fromFile(new File("/2.png"));
+                StorageReference uploadRef = storageReference.child("collections/audio/"+file.getLastPathSegment());
+                UploadTask uploadTask = uploadRef.putFile(file);
+
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("UPLOAD FAILED");
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        System.out.println("UPLOAD SUCCEED");
+                        System.out.println("METADATA : " + taskSnapshot.getMetadata());
+                    }
+                });
+
+
+                //repository.syncCollections();
                 break;
         }
     }

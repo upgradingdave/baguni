@@ -22,7 +22,7 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:background="@drawable/bg_white_25_stroke_grey"
+                android:background="@drawable/bg_white_30_stroke_grey"
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">

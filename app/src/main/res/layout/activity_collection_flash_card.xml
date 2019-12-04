@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:textSize="30dp"
             android:paddingLeft="15dp"
-            android:background="@drawable/bg_white_25_stroke_grey"
+            android:background="@drawable/bg_white_30_stroke_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -69,11 +69,12 @@
             android:paddingLeft="15dp"
             android:layout_marginTop="10dp"
             android:textSize="30dp"
-            android:background="@drawable/bg_white_25_stroke_grey"
+            android:background="@drawable/bg_white_30_stroke_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:id="@+id/btnRecord"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:src="@drawable/record"

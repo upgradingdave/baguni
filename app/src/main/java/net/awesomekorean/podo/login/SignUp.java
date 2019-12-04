@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,7 +13,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -20,11 +31,16 @@ import net.awesomekorean.podo.SettingStatusBar;
 import net.awesomekorean.podo.webService.RetrofitConnection;
 import net.awesomekorean.podo.webService.User;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Date;
+
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     EditText email;
     EditText password;
@@ -38,7 +54,7 @@ public class SignUp extends AppCompatActivity {
 
     Boolean condition = false;
     Boolean userEmailOk = false;
-    Boolean userEmailDuplicateOk = false;
+    Boolean userEmailDuplicateOk = true;
     Boolean userPassOk = false;
 
     TextView btnSignIn;
@@ -104,29 +120,30 @@ public class SignUp extends AppCompatActivity {
                 userEmail = email.getText().toString();
                 userPass = password.getText().toString();
 
-                User newUser = new User(userEmail, userPass);
-                System.out.println("USERNAME : " + newUser.getName());
-
-                retrofitConnection = new RetrofitConnection();
-                call = retrofitConnection.service().createUser(newUser);
-                call.enqueue(new Callback<User>() {
+                // 중복 이메일 체크
+                DocumentReference doRef = db.collection("android/podo/users").document(userEmail);
+                doRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful()) {
-                            System.out.println(getString(R.string.SIGNUP_SUCCEED));
-                            Toast.makeText(getApplicationContext(), R.string.SIGNUP_SUCCEED, Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                        }else {
-                            System.out.println(getString(R.string.SIGNUP_FAILED));
-                            Toast.makeText(getApplicationContext(), R.string.SIGNUP_FAILED, Toast.LENGTH_LONG).show();
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        // 중복 이메일 있음
+                        if (documentSnapshot.exists()) {
+                            Toast.makeText(getApplicationContext(), R.string.EMAIL_EXIST, Toast.LENGTH_LONG).show();
+
+                            // 중복 이메일 없음 -> 회원등록 성공
+                        } else {
+                            final User user = new User(userEmail, userPass);
+
+                            CollectionReference users = db.collection("android/podo/users");
+                            users.document(userEmail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    finish();
+                                    startActivity(intent);
+                                }
+                            });
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        System.out.println("Failed to connect the server!!");
-                        System.out.println(t);
                     }
                 });
             }
@@ -166,6 +183,11 @@ public class SignUp extends AppCompatActivity {
                     userEmail = email.getText().toString();
                     condition = Patterns.EMAIL_ADDRESS.matcher(userEmail).matches();
                     userEmailOk = conditionCheck(condition, email);
+                    if(userEmailOk) {
+                        email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgreen, 0);
+                    }else {
+                        email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgrey, 0);
+                    }
                     break;
 
                 case R.id.password :
@@ -178,6 +200,11 @@ public class SignUp extends AppCompatActivity {
                     userPassConfirm = passwordConfirm.getText().toString();
                     condition = userPassConfirm.equals(userPass);
                     userPassOk = conditionCheck(condition, passwordConfirm);
+                    if(userPassOk) {
+                        passwordConfirm.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgreen, 0);
+                    }else {
+                        passwordConfirm.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgrey, 0);
+                    }
                     break;
             }
 
@@ -200,10 +227,10 @@ public class SignUp extends AppCompatActivity {
     public Boolean conditionCheck(Boolean condition, EditText editText) {
 
         if(condition) {
-            editText.setBackgroundColor(Color.WHITE);
+            editText.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_30_stroke_grey));
             return true;
         } else {
-            editText.setBackgroundColor(Color.RED);
+            editText.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_30_stroke_red));
             return false;
         }
     }

@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnIntro"
         app:layout_constraintBottom_toTopOf="@id/btnAudio"
-        android:background="@drawable/bg_white_25_stroke_grey"
+        android:background="@drawable/bg_white_30_stroke_grey"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="0dp">
@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="40dp"
         android:elevation="2dp"
-        android:background="@drawable/bg_white_25_stroke_grey"
+        android:background="@drawable/bg_white_30_stroke_grey"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginLeft="30dp"
@@ -194,7 +194,7 @@
         app:layout_constraintBottom_toBottomOf="@id/layoutHangul"
         app:layout_constraintStart_toStartOf="@id/layoutHangul"
         app:layout_constraintEnd_toEndOf="@id/layoutHangul"
-        android:background="@drawable/bg_white_25_stroke_grey"
+        android:background="@drawable/bg_white_30_stroke_grey"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
 

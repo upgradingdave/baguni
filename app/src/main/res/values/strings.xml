@@ -32,8 +32,9 @@
     <string name="WELCOME"> Welcome to Podo</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
-    <string name="WRONGEMAIL"> Wrong email!!</string>
-    <string name="WRONGPASS"> Wrong password!!</string>
+    <string name="WRONG_EMAIL"> Wrong email!!</string>
+    <string name="WRONG_PASS"> Wrong password!!</string>
+    <string name="EMAIL_EXIST">This email is already registered</string>
     <string name="FORGOT"> Forgot Password?</string>
     <string name="LOGIN"> Sign In</string>
     <string name="WITH"> or login with</string>
