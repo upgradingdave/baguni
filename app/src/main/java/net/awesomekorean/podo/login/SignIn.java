@@ -258,6 +258,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                 dateSignInUpdate.update("dateSignIn", FieldValue.serverTimestamp());
                                 Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
+                                MainActivity.userEmail = userEmail;
                                 finish();
                                 startActivity(intent);
 

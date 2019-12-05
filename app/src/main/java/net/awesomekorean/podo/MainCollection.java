@@ -27,6 +27,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,6 +44,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,7 +53,9 @@ import static android.app.Activity.RESULT_OK;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+    //FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     View view;
 
@@ -131,8 +136,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         repository = new CollectionRepository(getContext());
 
-        //repository.deleteAll();
-        //repository.deleteDateLastSync();
+        repository.deleteAll();
+        repository.deleteDateLastSync();
 
         setListViewFooter();
 
@@ -430,6 +435,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnSync :
+                /*
                 StorageReference storageReference = storage.getReference();
 
                 Uri file = Uri.fromFile(new File("/2.png"));
@@ -449,8 +455,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     }
                 });
 
-
-                //repository.syncCollections();
+*/
+                repository.syncCollections();
                 break;
         }
     }

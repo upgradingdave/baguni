@@ -53,46 +53,6 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_flash_card);
 
-        // 유저한테 위험권한(녹음) 허가를 요청
-        int permissionCheck = ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO);
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-
-            Toast.makeText(this,"Authorization is required",Toast.LENGTH_LONG).show();
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.RECORD_AUDIO)) {
-                Toast.makeText(this,"1",Toast.LENGTH_LONG).show();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        100);
-                Toast.makeText(this,"2",Toast.LENGTH_LONG).show();
-
-
-            }
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 100: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Toast.makeText(this,"승인이 허가되어 있습니다.",Toast.LENGTH_LONG).show();
-
-                } else {
-                    Toast.makeText(this,"아직 승인받지 않았습니다.",Toast.LENGTH_LONG).show();
-                }
-                return;
-            }
-
-        }
-
-
         editFront = findViewById(R.id.textFront);
         editBack = findViewById(R.id.textBack);
         saveResult = findViewById(R.id.saveResult);

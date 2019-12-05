@@ -139,6 +139,7 @@ public class SignUp extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    MainActivity.userEmail = userEmail;
                                     finish();
                                     startActivity(intent);
                                 }
