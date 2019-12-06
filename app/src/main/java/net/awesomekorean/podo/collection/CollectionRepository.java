@@ -9,6 +9,7 @@ import androidx.room.Room;
 import net.awesomekorean.podo.MainCollection;
 import net.awesomekorean.podo.webService.RetrofitConnection;
 
+import java.security.cert.LDAPCertStoreParameters;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -24,7 +25,6 @@ public class CollectionRepository {
     private String DB_NAME = "collection_db";
     private CollectionDb db;
 
-    public static int userId = 22;  // 임시로 설정 danny@gmail.com
     private String front; // 플래시 카드 앞면
     private String back; // 플래시 카드 뒷면
 
@@ -36,6 +36,10 @@ public class CollectionRepository {
     public LiveData<List<CollectionEntity>> getAll() {
 
         return db.collectionDao().getAll();
+    }
+
+    public LiveData<String> getDateSync() {
+        return db.collectionDao().getDateSync();
     }
 
     public void getCount() {
@@ -76,7 +80,17 @@ public class CollectionRepository {
                 String dateNow = getDateNow();
                 entity.setDateNew(dateNow);
                 entity.setDateEdit(dateNow);
-                entity.setUserId(userId);
+                System.out.println("TIMENOW : " + dateNow);
+                db.collectionDao().insert(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void insertDownloadItem (final CollectionEntity entity) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
                 db.collectionDao().insert(entity);
                 return null;
             }
@@ -197,6 +211,17 @@ public class CollectionRepository {
         }.execute();
     }
 
+    public void initDateLasySync() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DateSyncEntity lastSync = new DateSyncEntity();
+                db.collectionDao().initDateSync(lastSync);
+                return null;
+            }
+        }.execute();
+    }
+/*
     public void downloadItemsFromDb(final CollectionEntity entityInDB) {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -230,6 +255,7 @@ public class CollectionRepository {
             }
         }.execute();
     }
+
 
     // 동기화 작업 시작
     public void syncCollections() {
@@ -306,7 +332,7 @@ public class CollectionRepository {
         }.execute();
     }
 
-
+*/
     public String getDateNow() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date time = new Date();

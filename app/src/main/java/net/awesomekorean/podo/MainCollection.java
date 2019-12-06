@@ -26,15 +26,22 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,11 +52,14 @@ import net.awesomekorean.podo.collection.CollectionItems;
 import net.awesomekorean.podo.collection.CollectionAdapter;
 import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.collection.CollectionStudy;
+import net.awesomekorean.podo.collection.DateSyncEntity;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -61,7 +71,7 @@ import java.util.regex.Pattern;
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class MainCollection extends Fragment implements Button.OnClickListener{
+public class MainCollection extends Fragment implements Button.OnClickListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -102,7 +112,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     TextView msgNoCollection;
 
-    List<CollectionEntity> itemsInRoom; // 동기화를 위해
+    List<CollectionEntity> copyListAllData = new ArrayList<>(); // 동기화를 위해 아이템 목록 복사
+    String copyDateLastSync = new String(); // 동기화를 위해 마지막 동기화 날짜 가져옴
 
     public static TextView collectionNo;
 
@@ -122,7 +133,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_collection, container, false);
-
 
 
         userEmail = MainActivity.userEmail;
@@ -165,13 +175,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             @Override
             public void onChanged(@Nullable List<CollectionEntity> collectionEntities) {
 
+                copyListAllData = collectionEntities;
+
                 repository.getCount();
                 listAllData = new ArrayList<>();
 
                 // 컬렉션이 하나도 없을 때 메시지 표시
-                if(collectionEntities.size() == 0) {
+                if (collectionEntities.size() == 0) {
                     msgNoCollection.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     msgNoCollection.setVisibility(View.GONE);
                 }
 
@@ -179,7 +191,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 Collections.sort(collectionEntities, descendingObj);
 
                 for (CollectionEntity entity : collectionEntities) {
-                    if(entity.getDeleted()!=1) {
+                    if (entity.getDeleted() != 1) {
                         CollectionItems items = new CollectionItems();
                         items.setFront(entity.getFront());
                         items.setBack(entity.getBack());
@@ -188,8 +200,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     }
                 }
 
-                if(collectionEntities.size()>10) {
-                    list = new ArrayList<>(listAllData.subList(0,10));
+                if (collectionEntities.size() > 10) {
+                    list = new ArrayList<>(listAllData.subList(0, 10));
                 } else {
                     list = listAllData;
                     progressBar.setVisibility(View.GONE);
@@ -205,6 +217,17 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         // DB의 플래쉬 카드를 listView 로 가져오기
         repository.getAll().observe(this, observer);
+
+        repository.getDateSync().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s == null) {
+                    repository.initDateLasySync();
+                }
+                copyDateLastSync = s;
+                System.out.println("LASTDATE : " + copyDateLastSync);
+            }
+        });
 
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
@@ -233,7 +256,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
 
-                if(scrollState == SCROLL_STATE_IDLE && listView.getLastVisiblePosition() == list.size()) {
+                if (scrollState == SCROLL_STATE_IDLE && listView.getLastVisiblePosition() == list.size()) {
                     progressBar.setVisibility(View.VISIBLE);
                     loadMoreItems();
                 }
@@ -254,13 +277,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
                 CollectionItems item = (CollectionItems) adapterView.getItemAtPosition(i);
 
-                if(longItemClicked == true) {
-                    if(item.getChecked()){
+                if (longItemClicked == true) {
+                    if (item.getChecked()) {
                         item.setChecked(false);
                         isChecked--;
                         selectAll.setChecked(false);
 
-                        if(isChecked == 0) { // 체크된 아이템이 하나도 없을 때
+                        if (isChecked == 0) { // 체크된 아이템이 하나도 없을 때
                             btnEnabled(false);
                         }
 
@@ -286,7 +309,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(selectAll.getVisibility()==View.INVISIBLE) {
+                if (selectAll.getVisibility() == View.INVISIBLE) {
                     ItemLongClicked(true, View.VISIBLE, View.GONE, View.VISIBLE);
                     adapter.longClickOnOff(getString(R.string.LONGCLICK_ON));
                     isChecked = 0;
@@ -327,12 +350,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     public void loadMoreItems() {
         int size = list.size();
 
-        for(int i=0;i<10;i++){
-            if((size + i+1) <= listAllData.size()){
+        for (int i = 0; i < 10; i++) {
+            if ((size + i + 1) <= listAllData.size()) {
                 list.add(listAllData.get(size + i));
-                if(selectAll.getVisibility() == View.VISIBLE) { // 체크박스 on 상태에서 아이템을 더 불러올 경우
+                if (selectAll.getVisibility() == View.VISIBLE) { // 체크박스 on 상태에서 아이템을 더 불러올 경우
                     CollectionItems items;
-                    items = list.get(list.size()-1);
+                    items = list.get(list.size() - 1);
                     items.setVisible(true);
                 }
             } else {
@@ -355,7 +378,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     // Flash Card 수정/추가 후 결과 받기
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             repository.getAll().observe(this, observer);
             ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
         }
@@ -367,19 +390,19 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         list.clear(); // 입력이 발생하면 리스트를 지움.
 
-        if(text.length() == 0) {
+        if (text.length() == 0) {
             searchCancel.setVisibility(View.GONE);
             list.addAll(listCopy); // 입력을 지우면 원래 리스트 출력
 
         } else {
 
-            for(int i=0; i<listAllData.size(); i++) {
+            for (int i = 0; i < listAllData.size(); i++) {
                 String front = listAllData.get(i).getFront();
                 String back = listAllData.get(i).getBack();
-                Pattern pattern = Pattern.compile("^"+text, Pattern.CASE_INSENSITIVE);
+                Pattern pattern = Pattern.compile("^" + text, Pattern.CASE_INSENSITIVE);
                 Matcher matcherFront = pattern.matcher(front);
                 Matcher matcherBack = pattern.matcher(back);
-                if(matcherFront.find() || matcherBack.find()) {
+                if (matcherFront.find() || matcherBack.find()) {
                     list.add(listAllData.get(i));
                 }
             }
@@ -394,8 +417,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
         switch (view.getId()) {
 
-            case R.id.checkBoxSelectAll :
-                if(selectAll.isChecked()) {
+            case R.id.checkBoxSelectAll:
+                if (selectAll.isChecked()) {
                     adapter.checkAll(true);
                     isChecked = list.size();
                     btnEnabled(true);
@@ -408,26 +431,26 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 adapter.notifyDataSetChanged();
                 break;
 
-            case R.id.btnStudy :
+            case R.id.btnStudy:
                 intent = new Intent(getContext(), CollectionStudy.class);
                 startActivity(intent);
                 break;
 
-            case R.id.btnDelete :
+            case R.id.btnDelete:
                 msgDelete.setVisibility(View.VISIBLE);
                 break;
 
-            case R.id.btnYes :
+            case R.id.btnYes:
                 ArrayList<String> checkedList = new ArrayList<>();
 
-                for(CollectionItems items : listAllData) {
-                    if(items.getChecked()) {
+                for (CollectionItems items : listAllData) {
+                    if (items.getChecked()) {
                         checkedList.add(items.getGuid());
                     }
                 }
-                if(checkedList != null) {
+                if (checkedList != null) {
 
-                    for(String guid : checkedList) {
+                    for (String guid : checkedList) {
 
                         repository.setDeletedByGuid(guid);
                     }
@@ -436,31 +459,73 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 msgDelete.setVisibility(View.GONE);
                 break;
 
-            case R.id.btnNo :
+            case R.id.btnNo:
                 msgDelete.setVisibility(View.GONE);
                 break;
 
-            case R.id.btnRecord :
+            case R.id.btnRecord:
                 break;
 
-            case R.id.btnAddCollection :
+            case R.id.btnAddCollection:
                 intent = new Intent(getContext(), CollectionFlashCard.class);
                 intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_ADD));
                 startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_ADD));
                 break;
 
-            case R.id.searchCancel :
+            case R.id.searchCancel:
                 searchEdit.setText("");
                 break;
 
-            case R.id.btnSync :
+            case R.id.btnSync:
 
-                List<CollectionEntity> uploadItems = new ArrayList<>();
-                //uploadItems = listAllData;
+                // Room 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 가져오기
+                final List<CollectionEntity> itemsToUpload = new ArrayList<>();
 
+                for (CollectionEntity entity : copyListAllData) {
+                    if (entity.getDateEdit().compareTo(copyDateLastSync) > 0) {
+                        itemsToUpload.add(entity);
+                        System.out.println("업로드 할 아이템을 찾았습니다: " + entity.getFront());
+                    }
+                }
+                if(itemsToUpload.isEmpty()) {
+                    System.out.println("업로드 할 아이템이 없습니다");
+                }
 
-                //listenToDocumentLocal();
-                //transactions();
+                // DB 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 다운로드
+                db.collection("android/podo/collections")
+                        .whereGreaterThan("dateEdit", copyDateLastSync)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    if(!task.getResult().isEmpty()) {
+                                        System.out.println("다운로드 할 아이템을 찾았습니다");
+                                        for(QueryDocumentSnapshot snapshot : task.getResult()) {
+                                            CollectionEntity download = snapshot.toObject(CollectionEntity.class);
+                                            repository.insertDownloadItem(download);
+                                            System.out.println("아이템을 다운로드 했습니다 : "+ download.getFront());
+                                        }
+                                    }else {
+                                        System.out.println("다운로드 할 아이템이 없습니다.");
+                                    }
+
+                                    // 업로드
+                                    for (CollectionEntity upload : itemsToUpload) {
+                                        db.collection("android/podo/collections").document().set(upload);
+                                        System.out.println("아이템을 업로드 했습니다: " + upload.getFront());
+                                    }
+                                }
+                            }
+                        });
+
+                // 동기화 날짜 업데이트
+                String now = getDateNow();
+                DateSyncEntity dateSyncEntity = new DateSyncEntity();
+                dateSyncEntity.setDateSync(now);
+                repository.updateLastSync(dateSyncEntity);
+                break;
+        }
 
 /*
                 StorageReference storageReference = storage.getReference();
@@ -490,70 +555,21 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
  */
         }
+
+    public String getDateNow() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date time = new Date();
+        String dateNow = format.format(time);
+
+        return dateNow;
     }
 
-    public void transactions() {
-        final DocumentReference sfDocRef = db.collection("android/podo/collections").document(userEmail);
-
-        db.runTransaction(new Transaction.Function<Void>() {
-            @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(sfDocRef);
-
-                // Note: this could be done without a transaction
-                //       by updating the population using FieldValue.increment()
-                double newPopulation = snapshot.getDouble("population") + 1;
-                transaction.update(sfDocRef, "population", newPopulation);
-
-                // Success
-                return null;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "Transaction success!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Transaction failure.", e);
-                    }
-                });
-        // [END transactions]
-    }
-
-    public void listenToDocumentLocal() {
-        // [START listen_document_local]
-        final DocumentReference docRef = db.collection("android/podo/collecions").document(userEmail);
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
-                        ? "Local" : "Server";
-
-                if (snapshot != null && snapshot.exists()) {
-                    Log.d(TAG, source + " data: " + snapshot.getData());
-                } else {
-                    Log.d(TAG, source + " data: null");
-                }
-            }
-        });
-        // [END listen_document_local]
-    }
-}
-
-// 컬렉션 리스트를 내림차순으로 정렬하기
-class DescendingObj implements Comparator<CollectionEntity> {
-    @Override
-    public int compare(CollectionEntity c1, CollectionEntity c2) {
-        return c2.getDateNew().compareTo(c1.getDateNew());
+    // 컬렉션 리스트를 내림차순으로 정렬하기
+    class DescendingObj implements Comparator<CollectionEntity> {
+        @Override
+        public int compare(CollectionEntity c1, CollectionEntity c2) {
+            return c2.getDateNew().compareTo(c1.getDateNew());
+        }
     }
 }
 

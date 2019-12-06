@@ -1,18 +1,21 @@
 package net.awesomekorean.podo.collection;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import net.awesomekorean.podo.MainActivity;
 
 import java.util.UUID;
 
 @Entity(tableName = "COLLECTION")
 public class CollectionEntity {
 
-    @PrimaryKey(autoGenerate = true)
-    private int itemId;
-    private int userId;
+    @PrimaryKey
+    @NonNull
     private String guid;
+    private String userEmail;
     private String front;
     private String back;
     private String audio = "file path"; // 임의로 오디오 경로 설정
@@ -27,6 +30,7 @@ public class CollectionEntity {
 
     public CollectionEntity(String front, String back) {
 
+        this.userEmail = MainActivity.userEmail;
         this.front = front;
         this.back = back;
 
@@ -35,20 +39,12 @@ public class CollectionEntity {
 
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getGuid() {

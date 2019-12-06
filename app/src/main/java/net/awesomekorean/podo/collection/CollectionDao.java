@@ -38,7 +38,7 @@ public interface CollectionDao {
 
     // 마지막 동기화 날짜 가져오기
     @Query("SELECT dateSync FROM DATE_SYNC")
-    String getDateSync();
+    LiveData<String> getDateSync();
 
     // 마지막 동기화 날짜 업데이트하기
     @Update

@@ -2,6 +2,8 @@ package net.awesomekorean.podo;
 
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,7 +13,11 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void test() {
+       Date time1 = new Date();
+       Date time2 = new Date();
+       System.out.println(time1);
+        System.out.println(time2);
+
     }
 }
