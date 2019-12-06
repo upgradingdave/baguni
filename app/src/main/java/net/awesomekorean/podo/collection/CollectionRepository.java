@@ -231,7 +231,6 @@ public class CollectionRepository {
         }.execute();
     }
 
-
     // 동기화 작업 시작
     public void syncCollections() {
         new AsyncTask<Void, Void, List<Collection>>() {

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,12 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -41,6 +47,9 @@ import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.collection.CollectionStudy;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,10 +59,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MainCollection extends Fragment implements Button.OnClickListener{
 
-    //FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -92,11 +102,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
 
     TextView msgNoCollection;
 
+    List<CollectionEntity> itemsInRoom; // 동기화를 위해
+
     public static TextView collectionNo;
 
     int index;  // 클릭 한 리스트 뷰의 인덱스
     public static int isChecked = 0; // 클릭된 아이템이 있는지 확인하기 위한 변수
     public static int size; //  컬렉션 개수
+
+    String userEmail;
 
 
     public static MainCollection newInstance() {
@@ -108,6 +122,11 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_collection, container, false);
+
+
+
+        userEmail = MainActivity.userEmail;
+        //listenToDocumentLocal();
 
         selectAll = view.findViewById(R.id.checkBoxSelectAll);
         btnStudy = view.findViewById(R.id.btnStudy);
@@ -435,10 +454,21 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnSync :
-                /*
+
+                List<CollectionEntity> uploadItems = new ArrayList<>();
+                //uploadItems = listAllData;
+
+
+                //listenToDocumentLocal();
+                //transactions();
+
+/*
                 StorageReference storageReference = storage.getReference();
 
-                Uri file = Uri.fromFile(new File("/2.png"));
+                URL resource = Thread.currentThread().getContextClassLoader().getResource("/res/raw/correct.mp3");
+                //URL resource = Thread.currentThread().getContextClassLoader().getResource(".");
+                File files = new File(resource.getFile());
+                Uri file = Uri.fromFile(files);
                 StorageReference uploadRef = storageReference.child("collections/audio/"+file.getLastPathSegment());
                 UploadTask uploadTask = uploadRef.putFile(file);
 
@@ -455,10 +485,67 @@ public class MainCollection extends Fragment implements Button.OnClickListener{
                     }
                 });
 
-*/
-                repository.syncCollections();
+                //repository.syncCollections();
                 break;
+
+ */
         }
+    }
+
+    public void transactions() {
+        final DocumentReference sfDocRef = db.collection("android/podo/collections").document(userEmail);
+
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(sfDocRef);
+
+                // Note: this could be done without a transaction
+                //       by updating the population using FieldValue.increment()
+                double newPopulation = snapshot.getDouble("population") + 1;
+                transaction.update(sfDocRef, "population", newPopulation);
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Transaction success!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Transaction failure.", e);
+                    }
+                });
+        // [END transactions]
+    }
+
+    public void listenToDocumentLocal() {
+        // [START listen_document_local]
+        final DocumentReference docRef = db.collection("android/podo/collecions").document(userEmail);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
+        // [END listen_document_local]
     }
 }
 
