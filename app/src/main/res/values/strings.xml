@@ -84,7 +84,8 @@
     <string name="TIPS_CORRECTION"> You can ask for correction from native Korean teacher by using 30 points</string>
     <string name="WRITE_HERE">Write here</string>
 
-    <string name="REVIEWED">Reviewed</string>
+    <string name="CORRECTED">Corrected</string>
+    <string name="ON_CORRECTING">On Correcting</string>
 
     <string name="FRONT">Front</string>
     <string name="BACK">Back</string>
@@ -231,5 +232,9 @@
     <string name="LESSON_SENTENCE">lessonSentence</string>
 
     <string name="DELETE_WRITING">Are you sure to delete writing?</string>
+
+    <string name="DB_USERS">android/podo/users</string>
+    <string name="DB_COLLECTIONS">android/podo/collections</string>
+    <string name="DB_WRITINGS">android/podo/writings</string>
 
 </resources>

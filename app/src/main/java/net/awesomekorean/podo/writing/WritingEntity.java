@@ -1,35 +1,123 @@
 package net.awesomekorean.podo.writing;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import net.awesomekorean.podo.MainActivity;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 @Entity
 public class WritingEntity implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
+    @PrimaryKey
+    @NonNull
+    private String guid;
+    private String userEmail;
+    private String userName;
+    private String article;
+    private String letters;
     private String firstDate;
     private String lastDate;
-    private String letters;
-    private String article;
-    private Boolean isCorrected = false;
+    private int isCorrected = 0; // 0:교정요청없음, 1:교정중, 2:교정됨
 
-    public WritingEntity(String firstDate, String lastDate, String letters, String article) {
-        this.firstDate = firstDate;
-        this.lastDate = lastDate;
-        this.letters = letters;
+    private String teacherName;
+    private String dateRequest;
+
+    private String correction;
+    private String teacherFeedback;
+    private String dateCorrection;
+
+    private String studentFeedback;
+
+    @Ignore
+    public WritingEntity() {}
+
+    public WritingEntity(String article, String letters, String firstDate) {
+        this.guid = UUID.randomUUID().toString();
+        this.userEmail = MainActivity.userEmail;
+        this.userName = MainActivity.userName;
         this.article = article;
+        this.letters = letters;
+        this.firstDate = firstDate;
     }
 
-    public int getId() {
-        return id;
+
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getDateRequest() {
+        return dateRequest;
+    }
+
+    public void setDateRequest(String dateRequest) {
+        this.dateRequest = dateRequest;
+    }
+
+    public String getCorrection() {
+        return correction;
+    }
+
+    public void setCorrection(String correction) {
+        this.correction = correction;
+    }
+
+    public String getTeacherFeedback() {
+        return teacherFeedback;
+    }
+
+    public void setTeacherFeedback(String teacherFeedback) {
+        this.teacherFeedback = teacherFeedback;
+    }
+
+    public String getDateCorrection() {
+        return dateCorrection;
+    }
+
+    public void setDateCorrection(String dateCorrection) {
+        this.dateCorrection = dateCorrection;
+    }
+
+    public String getStudentFeedback() {
+        return studentFeedback;
+    }
+
+    public void setStudentFeedback(String studentFeedback) {
+        this.studentFeedback = studentFeedback;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstDate() {
@@ -64,11 +152,11 @@ public class WritingEntity implements Serializable {
         this.article = article;
     }
 
-    public Boolean getIsCorrected() {
+    public int getIsCorrected() {
         return isCorrected;
     }
 
-    public void setIsCorrected(Boolean corrected) {
+    public void setIsCorrected(int corrected) {
         isCorrected = corrected;
     }
 }

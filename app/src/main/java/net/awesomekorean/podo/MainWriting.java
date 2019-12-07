@@ -1,5 +1,6 @@
 package net.awesomekorean.podo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -27,9 +28,9 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import net.awesomekorean.podo.collection.CollectionEntity;
 import net.awesomekorean.podo.writing.WritingEntity;
 import net.awesomekorean.podo.writing.WritingFrame;
-import net.awesomekorean.podo.writing.WritingItems;
 import net.awesomekorean.podo.writing.WritingAdapter;
 import net.awesomekorean.podo.writing.WritingRepository;
 
@@ -46,8 +47,8 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     View view;
 
     ListView listView;
-    ArrayList<WritingItems> list = new ArrayList<>(); // 리스트뷰에 표시될 아이템들 people10 개씩 끊음
-    ArrayList<WritingItems> listAllData;
+    ArrayList<WritingEntity> list = new ArrayList<>(); // 리스트뷰에 표시될 아이템들 people10 개씩 끊음
+    ArrayList<WritingEntity> listAllData;
     WritingAdapter adapter;
 
     WritingRepository repository;
@@ -62,8 +63,6 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     public static LinearLayout msgDelete; // 삭제 확인 메시지 창
     Button btnYes;
     Button btnNo;
-
-    public static String writingOnCorrecting;
 
     public static MainWriting newInstance() {
         return new MainWriting();
@@ -104,14 +103,42 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                 }
 
                 for(WritingEntity entity : entities) {
-                    WritingItems items = new WritingItems();
-                    items.setId(entity.getId());
+                    WritingEntity items = new WritingEntity();
+                    items.setGuid(entity.getGuid());
                     items.setFirstDate(entity.getFirstDate());
                     items.setLastDate(entity.getLastDate());
                     items.setLetters(entity.getLetters());
                     items.setArticle(entity.getArticle());
                     items.setIsCorrected(entity.getIsCorrected());
                     listAllData.add(items);
+
+                    // 교정 중인 writing 이 있으면, 실시간 리스너 설정
+                    System.out.println("ISCORRECTED:"+items.getIsCorrected());
+                    if(items.getIsCorrected() == 1) {
+                        final DocumentReference docRef = db.collection(getString(R.string.DB_WRITINGS)).document(items.getGuid());
+                        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                                @Nullable FirebaseFirestoreException e) {
+                                if (e != null) {
+                                    Log.w(TAG, "Listen failed.", e);
+                                    return;
+                                }
+
+                                if (snapshot != null && snapshot.exists()) {
+                                    WritingEntity download = snapshot.toObject(WritingEntity.class);
+                                    System.out.println("글쓰기 교정 중입니다.");
+
+                                    if(download.getIsCorrected()==2) {
+                                        System.out.println("글쓰기 교정이 완료되었습니다");
+                                        WritingRepository repository = new WritingRepository(getContext());
+                                        repository.update(download);
+                                        repository.getAll().observe(getViewLifecycleOwner(), observer);
+                                    }
+                                }
+                            }
+                        });
+                    }
                 }
 
                 if(entities.size()>10) {
@@ -129,35 +156,16 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
         repository.getAll().observe(this, observer);
 
-        // 교정 요청한 writing 이 있으면, 실시간 리스너 설정
-        if(writingOnCorrecting != null) {
-            final DocumentReference docRef = db.collection("android/podo/writing").document(writingOnCorrecting);
-            docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                    @Nullable FirebaseFirestoreException e) {
-                    if (e != null) {
-                        Log.w(TAG, "Listen failed.", e);
-                        return;
-                    }
-
-                    if (snapshot != null && snapshot.exists()) {
-                        System.out.println("글쓰기 교정이 완료되었습니다");
-                    } else {
-                        System.out.println("글쓰기 교정이 진행중입니다");
-                    }
-                }
-            });        }
 
         // 리스트의 아이템 클릭 이벤트
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                WritingItems item = (WritingItems) adapterView.getItemAtPosition(i);
+                WritingEntity item = (WritingEntity) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(getContext(), WritingFrame.class);
-                intent.putExtra(getString(R.string.EXTRA_ID), item.getId());
-                intent.putExtra(getString(R.string.EXTRA_LETTERS), item.getLetters());
+                intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
                 intent.putExtra(getString(R.string.EXTRA_ARTICLE), item.getArticle());
+                intent.putExtra(getString(R.string.EXTRA_LETTERS), item.getLetters());
                 intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
                 startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
             }
@@ -229,9 +237,9 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnYes :
-                int id = WritingAdapter.id;
+                String guid = WritingAdapter.guid;
                 WritingRepository repository = new WritingRepository(getContext());
-                repository.deleteById(id);
+                repository.deleteByGuid(guid);
                 repository.getAll();
                 repository.getAll().observe(this, observer);
                 msgDelete.setVisibility(View.GONE);

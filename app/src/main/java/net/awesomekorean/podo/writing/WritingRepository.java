@@ -17,10 +17,7 @@ public class WritingRepository {
         db = Room.databaseBuilder(context, WritingDb.class, DB_NAME).build();
     }
 
-    public void insert (String firstDate, String letters, String article) {
-
-        final WritingEntity entity = new WritingEntity(firstDate, "", letters, article);
-
+    public void insert(final WritingEntity entity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -30,27 +27,38 @@ public class WritingRepository {
         }.execute();
     }
 
-    public void editById(final int index, final String lastDate, final String letters, final String article) {
-
-        new AsyncTask<Void, Void, WritingEntity>() {
+    public void update(final WritingEntity entity) {
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            protected WritingEntity doInBackground(Void... voids) {
-                WritingEntity entity = db.writingDao().getById(index);
-                entity.setLastDate(lastDate);
-                entity.setLetters(letters);
-                entity.setArticle(article);
+            protected Void doInBackground(Void... voids) {
                 db.writingDao().update(entity);
                 return null;
             }
         }.execute();
     }
 
-    public void deleteById(final int index) {
+
+    public void editByGuid(final String guid, final String article, final String letters, final String lastDate) {
+
+        new AsyncTask<Void, Void, WritingEntity>() {
+            @Override
+            protected WritingEntity doInBackground(Void... voids) {
+                WritingEntity entity = db.writingDao().getByGuid(guid);
+                entity.setArticle(article);
+                entity.setLetters(letters);
+                entity.setLastDate(lastDate);
+                db.writingDao().update(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void deleteByGuid(final String guid) {
 
         new AsyncTask<Void, Void,Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                db.writingDao().delete(db.writingDao().getById(index));
+                db.writingDao().delete(db.writingDao().getByGuid(guid));
                 return null;
             }
         }.execute();

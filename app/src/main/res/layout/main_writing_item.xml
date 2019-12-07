@@ -15,12 +15,13 @@
         android:paddingRight="15dp"
         android:orientation="horizontal"
         android:background="@drawable/bg_underline"
-        android:layout_weight="0.25"
+        android:layout_weight="0.3"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
         <LinearLayout
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
@@ -66,7 +67,7 @@
         android:paddingRight="15dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_weight="0.25"
+        android:layout_weight="0.20"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
@@ -74,8 +75,8 @@
             android:id="@+id/isCorrected"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:background="@drawable/bg_green_15"
@@ -90,7 +91,7 @@
                 android:layout_height="match_parent" />
 
             <TextView
-                android:text="@string/REVIEWED"
+                android:text="@string/CORRECTED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp"
                 android:layout_marginRight="5dp"
@@ -99,6 +100,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/onCorrecting"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/bg_red_15"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_bold"
+                android:text="@string/ON_CORRECTING"
+                android:textColor="@color/WHITE"
+                android:textSize="12dp" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_weight="1"

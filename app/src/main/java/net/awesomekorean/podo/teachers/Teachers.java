@@ -23,8 +23,14 @@ import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.MainWriting;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.purchase.TopUp;
+import net.awesomekorean.podo.writing.WritingAdapter;
+import net.awesomekorean.podo.writing.WritingEntity;
+import net.awesomekorean.podo.writing.WritingFrame;
+import net.awesomekorean.podo.writing.WritingRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Teachers extends AppCompatActivity implements View.OnClickListener {
 
@@ -119,11 +125,23 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.btnSubmit :
                 String article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
-                RequestWriting requestWriting = new RequestWriting(article, teacherName);
+                String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+
+                WritingEntity requestWriting = new WritingEntity();
+
+                requestWriting.setGuid(WritingFrame.guid);
+                requestWriting.setUserEmail(MainActivity.userEmail);
+                requestWriting.setUserName(MainActivity.userName);
+                requestWriting.setArticle(article);
+                requestWriting.setTeacherName(teacherName);
+                requestWriting.setDateRequest(date);
+                requestWriting.setIsCorrected(1);
+
+                WritingRepository repository = new WritingRepository(this);
+                repository.update(requestWriting);
 
                 // 교정요청 DB 에 저장하기
-                MainWriting.writingOnCorrecting = requestWriting.getGuid();
-                db.collection("android/podo/writing").document(requestWriting.getGuid())
+                db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
                         .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -136,7 +154,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                                 Intent intent = new Intent(getApplication(), MainActivity.class);
                                 startActivity(intent);
                             }
-                        }, 1000);
+                        }, 3000);
                     }
                 });
                 break;

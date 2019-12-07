@@ -13,11 +13,11 @@ import java.util.List;
 @Dao
 public interface WritingDao {
 
-    @Query("SELECT * FROM WRITINGENTITY ORDER BY id DESC")
+    @Query("SELECT * FROM WRITINGENTITY ORDER BY firstDate DESC")
     LiveData<List<WritingEntity>> getAll();
 
-    @Query("SELECT * FROM WRITINGENTITY WHERE id = :index")
-    WritingEntity getById(int index);
+    @Query("SELECT * FROM WRITINGENTITY WHERE guid = :guid")
+    WritingEntity getByGuid(String guid);
 
     @Insert
     void insert(WritingEntity writingEntity);

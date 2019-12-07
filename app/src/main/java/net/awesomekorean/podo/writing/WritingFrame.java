@@ -28,7 +28,9 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     EditText editText; // 쓰기 입력
     LinearLayout saveResult; //저장 메시지
 
+    public static String guid;
     String article;
+    String letters;
 
     ImageView btnBack;
     Button btnSave;
@@ -38,6 +40,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     ImageView btnClose;
 
     String code; // add 인지 edit 인지를 판별
+
+    WritingRepository repository;
 
     Intent intent;
 
@@ -64,8 +68,9 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
         // EDIT 일 때, 기존의 글을 출력
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
+            guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
             article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
-            String letters = intent.getExtras().getString(getString(R.string.EXTRA_LETTERS));
+            letters = intent.getExtras().getString(getString(R.string.EXTRA_LETTERS));
             editText.setText(article);
             textCount.setText(letters);
         }
@@ -143,17 +148,20 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     }
 
     private void saveWriting() {
-        String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
-        String letters = textCount.getText().toString();
         article = editText.getText().toString();
-        int id = intent.getExtras().getInt(getString(R.string.EXTRA_ID));
-
-        WritingRepository repository = new WritingRepository(this);
+        letters = textCount.getText().toString();
+        String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
 
         if(code.equals(getString(R.string.REQUEST_ADD))) {
-            repository.insert(date, letters, article);
+            WritingEntity entity = new WritingEntity(article, letters, date);
+            System.out.println("ENTITY:"+entity.getFirstDate());
+            guid = entity.getGuid();
+            repository = new WritingRepository(this);
+            repository.insert(entity);
+
         }else{
-            repository.editById(id, date, letters, article);
+            repository = new WritingRepository(this);
+            repository.editByGuid(guid, article, letters, date);
         }
     }
 }

@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class WritingAdapter extends BaseAdapter {
 
     private Context context;
-    public ArrayList<WritingItems> list;
+    public ArrayList<WritingEntity> list;
 
-    public static int id; // 삭제 버튼 눌렀을 때 해당 아이템의 id
+    public static String guid; // 삭제 버튼 눌렀을 때 해당 아이템의 guid
 
-    public WritingAdapter(Context context, ArrayList<WritingItems> list) {
+    public WritingAdapter(Context context, ArrayList<WritingEntity> list) {
 
         this.context = context;
         this.list = list;
@@ -58,6 +58,7 @@ public class WritingAdapter extends BaseAdapter {
             holder.letters = view.findViewById(R.id.letters);
             holder.article = view.findViewById(R.id.article);
             holder.isCorrected = view.findViewById(R.id.isCorrected);
+            holder.onCorrecting = view.findViewById(R.id.onCorrecting);
             holder.btnDelete = view.findViewById(R.id.btnDelete);
             view.setTag(holder);
 
@@ -65,18 +66,26 @@ public class WritingAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        final WritingItems items = list.get(i);
+        final WritingEntity items = list.get(i);
 
         holder.firstDate.setText(items.getFirstDate());
         holder.lastDate.setText(items.getLastDate());
         holder.letters.setText(items.getLetters());
         holder.article.setText(items.getArticle());
-        if(items.getIsCorrected()) {holder.isCorrected.setVisibility(View.VISIBLE);
-        } else { holder.isCorrected.setVisibility(View.INVISIBLE);}
+        if(items.getIsCorrected() == 0) {
+            holder.isCorrected.setVisibility(View.GONE);
+            holder.onCorrecting.setVisibility(View.GONE);
+        } else if(items.getIsCorrected() == 1) {
+            holder.isCorrected.setVisibility(View.GONE);
+            holder.onCorrecting.setVisibility(View.VISIBLE);
+        } else if(items.getIsCorrected() == 2) {
+            holder.isCorrected.setVisibility(View.VISIBLE);
+            holder.onCorrecting.setVisibility(View.GONE);
+        }
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                id = items.getId();
+                guid = items.getGuid();
                 MainWriting.msgDelete.setVisibility(View.VISIBLE);
             }
         });
@@ -90,6 +99,7 @@ public class WritingAdapter extends BaseAdapter {
         TextView letters;
         TextView article;
         LinearLayout isCorrected;
+        LinearLayout onCorrecting;
         ImageView btnDelete;
     }
 }
