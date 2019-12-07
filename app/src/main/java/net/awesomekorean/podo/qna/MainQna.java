@@ -1,4 +1,4 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.qna;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,10 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import net.awesomekorean.podo.login.SignUp;
-import net.awesomekorean.podo.qna.AskQuestion;
-import net.awesomekorean.podo.qna.Faq;
-import net.awesomekorean.podo.qna.MyQuestions;
+import net.awesomekorean.podo.R;
 
 public class MainQna extends Fragment implements View.OnClickListener{
 

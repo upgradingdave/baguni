@@ -1,6 +1,5 @@
 package net.awesomekorean.podo.lesson;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
@@ -20,10 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.flexbox.FlexboxLayout;
 
-import net.awesomekorean.podo.DpToPx;
+import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
-
-import java.util.ArrayList;
 
 public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener {
 

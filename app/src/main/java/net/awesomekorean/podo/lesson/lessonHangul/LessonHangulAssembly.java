@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
-import net.awesomekorean.podo.DpToPx;
 import net.awesomekorean.podo.R;
 
 import static android.view.View.GONE;

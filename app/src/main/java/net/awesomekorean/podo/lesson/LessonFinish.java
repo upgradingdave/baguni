@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.awesomekorean.podo.MainActivity;
-import net.awesomekorean.podo.MainLesson;
 import net.awesomekorean.podo.R;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {

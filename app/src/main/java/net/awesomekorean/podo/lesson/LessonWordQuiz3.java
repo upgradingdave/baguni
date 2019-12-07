@@ -18,9 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.flexbox.FlexboxLayout;
 
-import net.awesomekorean.podo.DpToPx;
+import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
-import java.util.Random;
 
 public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 

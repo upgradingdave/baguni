@@ -1,9 +1,10 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.LessonClause;
 import net.awesomekorean.podo.lesson.LessonFrame;
 import net.awesomekorean.podo.lesson.LessonSentence;

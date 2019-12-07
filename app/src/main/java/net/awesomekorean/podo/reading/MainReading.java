@@ -1,4 +1,4 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.reading;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import net.awesomekorean.podo.reading.ReadingAdapter;
-import net.awesomekorean.podo.reading.ReadingFrame;
-import net.awesomekorean.podo.reading.ReadingItems;
+
+import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
 

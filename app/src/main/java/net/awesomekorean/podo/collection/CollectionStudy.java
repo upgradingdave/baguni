@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.awesomekorean.podo.MainCollection;
 import net.awesomekorean.podo.R;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {

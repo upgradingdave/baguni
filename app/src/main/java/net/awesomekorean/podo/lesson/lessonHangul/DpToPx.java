@@ -1,4 +1,4 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.lesson.lessonHangul;
 
 import android.content.res.Resources;
 

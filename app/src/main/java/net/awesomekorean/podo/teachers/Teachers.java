@@ -20,10 +20,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
-import net.awesomekorean.podo.MainWriting;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.purchase.TopUp;
-import net.awesomekorean.podo.writing.WritingAdapter;
 import net.awesomekorean.podo.writing.WritingEntity;
 import net.awesomekorean.podo.writing.WritingFrame;
 import net.awesomekorean.podo.writing.WritingRepository;

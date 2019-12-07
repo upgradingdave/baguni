@@ -6,19 +6,10 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
-import net.awesomekorean.podo.MainCollection;
-import net.awesomekorean.podo.webService.RetrofitConnection;
-
-import java.security.cert.LDAPCertStoreParameters;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CollectionRepository {
 

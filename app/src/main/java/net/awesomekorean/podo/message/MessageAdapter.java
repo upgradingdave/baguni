@@ -1,16 +1,15 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.message;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.awesomekorean.podo.reading.ReadingItems;
+import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
 

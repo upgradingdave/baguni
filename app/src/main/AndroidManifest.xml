@@ -18,7 +18,7 @@
         <activity android:name=".purchase.TopUp"></activity>
         <activity android:name=".purchase.Subscribe" />
         <activity android:name=".Profile"></activity>
-        <activity android:name=".Message" />
+        <activity android:name=".message.Message" />
         <activity android:name=".lesson.LessonFinish" />
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />

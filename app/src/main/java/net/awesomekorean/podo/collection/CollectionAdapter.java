@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.awesomekorean.podo.MainCollection;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;

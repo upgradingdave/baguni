@@ -1,4 +1,4 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.awesomekorean.podo.lesson.LessonAdapter;
-import net.awesomekorean.podo.lesson.LessonFrame;
-import net.awesomekorean.podo.lesson.LessonItems;
+import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
 
 import java.util.ArrayList;

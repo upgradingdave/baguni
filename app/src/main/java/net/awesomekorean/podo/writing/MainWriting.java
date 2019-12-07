@@ -1,6 +1,5 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.writing;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,11 +27,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import net.awesomekorean.podo.collection.CollectionEntity;
-import net.awesomekorean.podo.writing.WritingEntity;
-import net.awesomekorean.podo.writing.WritingFrame;
-import net.awesomekorean.podo.writing.WritingAdapter;
-import net.awesomekorean.podo.writing.WritingRepository;
+import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
 import java.util.List;
