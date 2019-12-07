@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     Intent intent;
 
     public static String userEmail = "danny@gmail.com"; // 개발용
+    public static String userName = "danny";
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override

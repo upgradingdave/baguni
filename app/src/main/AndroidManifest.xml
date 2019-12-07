@@ -32,7 +32,7 @@
         </activity>
         <activity android:name=".collection.CollectionStudy" />
         <activity android:name=".collection.CollectionFlashCard" />
-        <activity android:name=".writing.WritingFrame" />
+        <activity android:name=".writing.WritingFrame" android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".reading.ReadingFrame" />
         <activity android:name=".lesson.LessonFrame" />
         <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />

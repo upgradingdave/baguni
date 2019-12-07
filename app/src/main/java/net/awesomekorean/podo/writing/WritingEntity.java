@@ -15,14 +15,13 @@ public class WritingEntity implements Serializable {
     private String lastDate;
     private String letters;
     private String article;
-    private Boolean isCorrected;
+    private Boolean isCorrected = false;
 
     public WritingEntity(String firstDate, String lastDate, String letters, String article) {
         this.firstDate = firstDate;
         this.lastDate = lastDate;
         this.letters = letters;
         this.article = article;
-        this.isCorrected = true; // 개발 완료하면 false 로 바꿀것
     }
 
     public int getId() {

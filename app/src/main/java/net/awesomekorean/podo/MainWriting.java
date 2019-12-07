@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
 import net.awesomekorean.podo.writing.WritingEntity;
 import net.awesomekorean.podo.writing.WritingFrame;
 import net.awesomekorean.podo.writing.WritingItems;
@@ -29,8 +37,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MainWriting extends Fragment implements View.OnClickListener {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     View view;
 
@@ -51,6 +62,8 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     public static LinearLayout msgDelete; // 삭제 확인 메시지 창
     Button btnYes;
     Button btnNo;
+
+    public static String writingOnCorrecting;
 
     public static MainWriting newInstance() {
         return new MainWriting();
@@ -116,11 +129,30 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
         repository.getAll().observe(this, observer);
 
+        // 교정 요청한 writing 이 있으면, 실시간 리스너 설정
+        if(writingOnCorrecting != null) {
+            final DocumentReference docRef = db.collection("android/podo/writing").document(writingOnCorrecting);
+            docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                    @Nullable FirebaseFirestoreException e) {
+                    if (e != null) {
+                        Log.w(TAG, "Listen failed.", e);
+                        return;
+                    }
+
+                    if (snapshot != null && snapshot.exists()) {
+                        System.out.println("글쓰기 교정이 완료되었습니다");
+                    } else {
+                        System.out.println("글쓰기 교정이 진행중입니다");
+                    }
+                }
+            });        }
+
         // 리스트의 아이템 클릭 이벤트
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("Hello");
                 WritingItems item = (WritingItems) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(getContext(), WritingFrame.class);
                 intent.putExtra(getString(R.string.EXTRA_ID), item.getId());

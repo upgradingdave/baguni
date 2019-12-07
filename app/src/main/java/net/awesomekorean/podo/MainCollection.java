@@ -73,7 +73,6 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MainCollection extends Fragment implements Button.OnClickListener {
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -487,7 +486,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                         System.out.println("업로드 할 아이템을 찾았습니다: " + entity.getFront());
                     }
                 }
-                if(itemsToUpload.isEmpty()) {
+                if (itemsToUpload.isEmpty()) {
                     System.out.println("업로드 할 아이템이 없습니다");
                 }
 
@@ -498,15 +497,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()) {
-                                    if(!task.getResult().isEmpty()) {
+                                if (task.isSuccessful()) {
+                                    if (!task.getResult().isEmpty()) {
                                         System.out.println("다운로드 할 아이템을 찾았습니다");
-                                        for(QueryDocumentSnapshot snapshot : task.getResult()) {
+                                        for (QueryDocumentSnapshot snapshot : task.getResult()) {
                                             CollectionEntity download = snapshot.toObject(CollectionEntity.class);
                                             repository.insertDownloadItem(download);
-                                            System.out.println("아이템을 다운로드 했습니다 : "+ download.getFront());
+                                            System.out.println("아이템을 다운로드 했습니다 : " + download.getFront());
                                         }
-                                    }else {
+                                    } else {
                                         System.out.println("다운로드 할 아이템이 없습니다.");
                                     }
 
@@ -526,35 +525,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 repository.updateLastSync(dateSyncEntity);
                 break;
         }
-
-/*
-                StorageReference storageReference = storage.getReference();
-
-                URL resource = Thread.currentThread().getContextClassLoader().getResource("/res/raw/correct.mp3");
-                //URL resource = Thread.currentThread().getContextClassLoader().getResource(".");
-                File files = new File(resource.getFile());
-                Uri file = Uri.fromFile(files);
-                StorageReference uploadRef = storageReference.child("collections/audio/"+file.getLastPathSegment());
-                UploadTask uploadTask = uploadRef.putFile(file);
-
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("UPLOAD FAILED");
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        System.out.println("UPLOAD SUCCEED");
-                        System.out.println("METADATA : " + taskSnapshot.getMetadata());
-                    }
-                });
-
-                //repository.syncCollections();
-                break;
-
- */
-        }
+    }
 
     public String getDateNow() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

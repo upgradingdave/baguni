@@ -67,7 +67,7 @@
     <string name="USER_PASSWORD_CONFIRM">Confirm Password</string>
 
     <string name="MSG_COLLECT">Collection is saved</string>
-    <string name="MSG_SAVED">Writing is saved</string>
+    <string name="WRITING_SAVED">Writing is saved</string>
     <string name="MSG_DELETE">Do you really want to delete?</string>
     <string name="MSG_SAVE">Do you want to save?</string>
 
@@ -78,7 +78,7 @@
     <string name="NO_WRITTING">There is no writing</string>
     <string name="NO_COLLECTION">There is no collection</string>
 
-    <string name="LETTERS"> letters</string>
+    <string name="LETTERS">letters</string>
 
     <string name="TIPS">Tips</string>
     <string name="TIPS_CORRECTION"> You can ask for correction from native Korean teacher by using 30 points</string>
@@ -125,6 +125,7 @@
     <string name="HINT">Hint</string>
 
     <string name="COLLECTION_SAVED">Collection is saved</string>
+    <string name="REQUEST_RESULT">Request is submitted. You\'ll get the feedback in 2days.</string>
 
     <string name="PRONUNCIATION">Pronunciation: </string>
     <string name="ANTONYMS">Antonyms: </string>
@@ -204,6 +205,8 @@
 
 
 
+
+
     <!--번역 필요 없는 부분-->
 
     <string name="REQUEST">request</string>
@@ -228,6 +231,5 @@
     <string name="LESSON_SENTENCE">lessonSentence</string>
 
     <string name="DELETE_WRITING">Are you sure to delete writing?</string>
-
 
 </resources>

@@ -56,7 +56,10 @@
             android:background="@android:color/transparent"
             android:hint="@string/WRITE_HERE"
             android:textSize="20dp"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideInset"
             android:layout_width="match_parent"
+            android:overScrollMode="always"
             android:layout_height="0dp" />
     </LinearLayout>
 
@@ -170,7 +173,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/MSG_SAVED"
+                android:text="@string/WRITING_SAVED"
                 android:textSize="30dp"
                 android:textColor="@color/BLACK"
                 android:fontFamily="@font/avenir_bold"

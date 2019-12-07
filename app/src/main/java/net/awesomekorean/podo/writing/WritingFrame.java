@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     TextView textCount; // 글자 수 표시
     EditText editText; // 쓰기 입력
     LinearLayout saveResult; //저장 메시지
+
+    String article;
 
     ImageView btnBack;
     Button btnSave;
@@ -60,7 +64,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
         // EDIT 일 때, 기존의 글을 출력
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
-            String article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
+            article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
             String letters = intent.getExtras().getString(getString(R.string.EXTRA_LETTERS));
             editText.setText(article);
             textCount.setText(letters);
@@ -74,11 +78,28 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String input = editText.getText().toString();
-                textCount.setText(input.length() + getString(R.string.LETTERS));
+                textCount.setText(input.length() + " " + getString(R.string.LETTERS));
             }
 
             @Override
             public void afterTextChanged(Editable editable) {}
+        });
+
+        // 에디트텍스트뷰 스크롤 가능하게 해줌
+        editText = (EditText) findViewById(R.id.editText);
+        editText.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.editText) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
         });
     }
 
@@ -88,19 +109,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
 
             case R.id.btnSave :
-                String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
-                String letters = textCount.getText().toString();
-                String article = editText.getText().toString();
-                int id = intent.getExtras().getInt(getString(R.string.EXTRA_ID));
-
-                WritingRepository repository = new WritingRepository(this);
-
-                if(code.equals(getString(R.string.REQUEST_ADD))) {
-                    repository.insert(date, letters, article);
-                }else{
-                    repository.editById(id, date, letters, article);
-                }
-
+                saveWriting();
                 saveResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -115,7 +124,11 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnCorrection :
+                saveWriting();
+                Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SAVED), Toast.LENGTH_LONG).show();
+                article = editText.getText().toString();
                 Intent intent = new Intent(this, Teachers.class);
+                intent.putExtra(getString(R.string.EXTRA_ARTICLE), article);
                 startActivity(intent);
                 break;
 
@@ -126,6 +139,21 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             case R.id.btnClose :
                 tips.setVisibility(View.GONE);
                 break;
+        }
+    }
+
+    private void saveWriting() {
+        String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+        String letters = textCount.getText().toString();
+        article = editText.getText().toString();
+        int id = intent.getExtras().getInt(getString(R.string.EXTRA_ID));
+
+        WritingRepository repository = new WritingRepository(this);
+
+        if(code.equals(getString(R.string.REQUEST_ADD))) {
+            repository.insert(date, letters, article);
+        }else{
+            repository.editById(id, date, letters, article);
         }
     }
 }
