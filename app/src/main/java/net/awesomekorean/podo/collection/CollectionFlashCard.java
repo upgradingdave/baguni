@@ -31,7 +31,6 @@ import java.io.IOException;
 public class CollectionFlashCard extends AppCompatActivity implements Button.OnClickListener {
 
     ImageView btnBack;
-    ImageView btnRecord;
     Button btnSave;
 
     LinearLayout saveResult;
@@ -45,9 +44,6 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
     String textBack;
     String guid;
 
-    MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +54,8 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
         saveResult = findViewById(R.id.saveResult);
 
         btnBack = findViewById(R.id.btnBack);
-        btnRecord = findViewById(R.id.btnRecord);
         btnSave = findViewById(R.id.btnSave);
         btnBack.setOnClickListener(this);
-        btnRecord.setOnClickListener(this);
         btnSave.setOnClickListener(this);
 
         Intent intent = getIntent();
@@ -123,28 +117,6 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
                         }
                     }
                 }, 1000);
-                break;
-
-            case R.id.btnRecord :
-
-                if(mediaRecorder != null) {
-                    mediaRecorder.stop();
-                    mediaRecorder.release();
-                    mediaRecorder = null;
-                }
-                mediaRecorder = new MediaRecorder();
-
-                mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-                mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-                mediaRecorder.setOutputFile("/collection/guid.mp4");
-
-                try {
-                    mediaRecorder.prepare();
-                    mediaRecorder.start();
-                } catch (Exception ex) {
-                    System.out.println("EXCEPTION : " + ex);
-                }
                 break;
         }
     }

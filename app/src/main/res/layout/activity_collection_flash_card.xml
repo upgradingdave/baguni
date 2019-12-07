@@ -29,6 +29,7 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_margin="20dp"
         android:padding="20dp"
         android:background="@drawable/bg_white_10_stroke_grey"
@@ -71,14 +72,6 @@
             android:textSize="30dp"
             android:background="@drawable/bg_white_30_stroke_grey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/btnRecord"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/record"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -130,6 +123,5 @@
                 />
         </LinearLayout>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
