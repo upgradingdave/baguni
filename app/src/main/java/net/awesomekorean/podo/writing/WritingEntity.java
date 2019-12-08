@@ -22,8 +22,7 @@ public class WritingEntity implements Serializable {
     private String userName;
     private String article;
     private String letters;
-    private String firstDate;
-    private String lastDate;
+    private String writingDate;
     private int isCorrected = 0; // 0:교정요청없음, 1:교정중, 2:교정됨
 
     private String teacherName;
@@ -38,13 +37,13 @@ public class WritingEntity implements Serializable {
     @Ignore
     public WritingEntity() {}
 
-    public WritingEntity(String article, String letters, String firstDate) {
+    public WritingEntity(String article, String letters, String writingDate) {
         this.guid = UUID.randomUUID().toString();
         this.userEmail = MainActivity.userEmail;
         this.userName = MainActivity.userName;
         this.article = article;
         this.letters = letters;
-        this.firstDate = firstDate;
+        this.writingDate = writingDate;
     }
 
 
@@ -120,20 +119,12 @@ public class WritingEntity implements Serializable {
         this.userName = userName;
     }
 
-    public String getFirstDate() {
-        return firstDate;
+    public String getWritingDate() {
+        return writingDate;
     }
 
-    public void setFirstDate(String date) {
-        this.firstDate = date;
-    }
-
-    public String getLastDate() {
-        return lastDate;
-    }
-
-    public void setLastDate(String lastDate) {
-        this.lastDate = lastDate;
+    public void setWritingDate(String date) {
+        this.writingDate = date;
     }
 
     public String getLetters() {

@@ -52,8 +52,7 @@ public class WritingAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.main_writing_item, viewGroup, false);
             holder = new ViewHolder();
-            holder.firstDate = view.findViewById(R.id.firstDate);
-            holder.lastDate = view.findViewById(R.id.lastDate);
+            holder.writingDate = view.findViewById(R.id.writingDate);
             holder.letters = view.findViewById(R.id.letters);
             holder.article = view.findViewById(R.id.article);
             holder.isCorrected = view.findViewById(R.id.isCorrected);
@@ -67,8 +66,7 @@ public class WritingAdapter extends BaseAdapter {
 
         final WritingEntity items = list.get(i);
 
-        holder.firstDate.setText(items.getFirstDate());
-        holder.lastDate.setText(items.getLastDate());
+        holder.writingDate.setText(items.getWritingDate());
         holder.letters.setText(items.getLetters());
         holder.article.setText(items.getArticle());
         if(items.getIsCorrected() == 0) {
@@ -93,8 +91,7 @@ public class WritingAdapter extends BaseAdapter {
 
     // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용
     static class ViewHolder {
-        TextView firstDate;
-        TextView lastDate;
+        TextView writingDate;
         TextView letters;
         TextView article;
         LinearLayout isCorrected;

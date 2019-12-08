@@ -100,15 +100,14 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                 for(WritingEntity entity : entities) {
                     WritingEntity items = new WritingEntity();
                     items.setGuid(entity.getGuid());
-                    items.setFirstDate(entity.getFirstDate());
-                    items.setLastDate(entity.getLastDate());
+                    items.setWritingDate(entity.getWritingDate());
                     items.setLetters(entity.getLetters());
                     items.setArticle(entity.getArticle());
                     items.setIsCorrected(entity.getIsCorrected());
+                    items.setStudentFeedback(entity.getStudentFeedback());
                     listAllData.add(items);
 
                     // 교정 중인 writing 이 있으면, 실시간 리스너 설정
-                    System.out.println("ISCORRECTED:"+items.getIsCorrected());
                     if(items.getIsCorrected() == 1) {
                         final DocumentReference docRef = db.collection(getString(R.string.DB_WRITINGS)).document(items.getGuid());
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -157,12 +156,26 @@ public class MainWriting extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 WritingEntity item = (WritingEntity) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(getContext(), WritingFrame.class);
-                intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
-                intent.putExtra(getString(R.string.EXTRA_ARTICLE), item.getArticle());
-                intent.putExtra(getString(R.string.EXTRA_LETTERS), item.getLetters());
-                intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
-                startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
+
+                // 교정완료 된 아이템
+                if(item.getIsCorrected()==2) {
+                    Intent intent = new Intent(getContext(), WritingCorrected.class);
+                    intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
+                    intent.putExtra(getString(R.string.EXTRA_ARTICLE), item.getArticle());
+                    intent.putExtra(getString(R.string.EXTRA_CORRECTION), item.getCorrection());
+                    intent.putExtra(getString(R.string.EXTRA_TEACHER_FEEDBACK), item.getTeacherFeedback());
+                    intent.putExtra(getString(R.string.EXTRA_STUDENT_FEEDBACK), item.getStudentFeedback());
+                    startActivityForResult(intent, 300);
+
+
+                } else {
+                    Intent intent = new Intent(getContext(), WritingFrame.class);
+                    intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
+                    intent.putExtra(getString(R.string.EXTRA_ARTICLE), item.getArticle());
+                    intent.putExtra(getString(R.string.EXTRA_LETTERS), item.getLetters());
+                    intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
+                    startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
+                }
             }
         });
 

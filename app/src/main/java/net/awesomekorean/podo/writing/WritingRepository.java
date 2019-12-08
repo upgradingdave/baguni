@@ -6,6 +6,10 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
+import net.awesomekorean.podo.MainActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class WritingRepository {
@@ -37,8 +41,40 @@ public class WritingRepository {
         }.execute();
     }
 
+    public void updateBeforeRequestCorrection(final String guid, final String teacherName) {
 
-    public void editByGuid(final String guid, final String article, final String letters, final String lastDate) {
+        new AsyncTask<Void, Void, WritingEntity>() {
+            @Override
+            protected WritingEntity doInBackground(Void... voids) {
+                String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+                WritingEntity entity = db.writingDao().getByGuid(guid);
+                entity.setUserEmail(MainActivity.userEmail);
+                entity.setUserName(MainActivity.userName);
+                entity.setTeacherName(teacherName);
+                entity.setIsCorrected(1);
+                entity.setDateRequest(date);
+                db.writingDao().update(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+
+
+    public void updateStudentFeedbackByGuid(final String guid, final String feedback) {
+
+        new AsyncTask<Void, Void, WritingEntity>() {
+            @Override
+            protected WritingEntity doInBackground(Void... voids) {
+                WritingEntity entity = db.writingDao().getByGuid(guid);
+                entity.setStudentFeedback(feedback);
+                db.writingDao().update(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void editByGuid(final String guid, final String article, final String letters) {
 
         new AsyncTask<Void, Void, WritingEntity>() {
             @Override
@@ -46,12 +82,12 @@ public class WritingRepository {
                 WritingEntity entity = db.writingDao().getByGuid(guid);
                 entity.setArticle(article);
                 entity.setLetters(letters);
-                entity.setLastDate(lastDate);
                 db.writingDao().update(entity);
                 return null;
             }
         }.execute();
     }
+
 
     public void deleteByGuid(final String guid) {
 

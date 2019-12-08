@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="180dp"
     android:orientation="vertical"
     android:weightSum="1"
     android:background="@drawable/bg_white_15_stroke_grey"
@@ -15,7 +15,7 @@
         android:paddingRight="15dp"
         android:orientation="horizontal"
         android:background="@drawable/bg_underline"
-        android:layout_weight="0.3"
+        android:layout_weight="0.2"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
@@ -27,18 +27,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/firstDate"
+                android:id="@+id/writingDate"
                 android:text="2019.11.13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/lastDate"
-                android:text="2019.11.15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
         </LinearLayout>
 
         <TextView
@@ -56,9 +48,9 @@
         android:textSize="15dp"
         android:background="@drawable/bg_underline"
         android:padding="10dp"
-        android:maxLines="3"
+        android:maxLines="4"
         android:ellipsize="end"
-        android:layout_weight="0.5"
+        android:layout_weight="0.6"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
@@ -67,7 +59,7 @@
         android:paddingRight="15dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_weight="0.20"
+        android:layout_weight="0.2"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
@@ -114,6 +106,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"

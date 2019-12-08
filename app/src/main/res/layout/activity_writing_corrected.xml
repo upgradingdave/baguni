@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#EBEBEB"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WHITE"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/WRITING"
+        android:textColor="@color/BLACK"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:background="@drawable/bg_white_10_stroke_grey"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@+id/btnGiveUsFeedback"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/avenir_bold"
+            android:text="@string/ORIGINAL_WRITING"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/writingOriginal"
+            android:layout_marginTop="10dp"
+            android:text="@string/SAMPLE_TEXT"
+            android:textSize="15dp"
+            android:lineSpacingExtra="7dp"
+            android:padding="15dp"
+            android:scrollbars="vertical"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="@string/CORRECTED_WRITING"
+            android:textSize="15dp"
+            android:fontFamily="@font/avenir_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/writingCorrected"
+            android:layout_marginTop="10dp"
+            android:text="@string/SAMPLE_TEXT"
+            android:textSize="15dp"
+            android:lineSpacingExtra="7dp"
+            android:padding="15dp"
+            android:scrollbars="vertical"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="@string/FEEDBACK"
+            android:textSize="15dp"
+            android:fontFamily="@font/avenir_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/feedbackTeacher"
+            android:layout_marginTop="10dp"
+            android:text="@string/SAMPLE_TEXT"
+            android:textSize="15dp"
+            android:lineSpacingExtra="7dp"
+            android:padding="15dp"
+            android:scrollbars="vertical"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGiveUsFeedback"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/GIVE_US_FEEDBACK"
+        android:textColor="@color/WHITE"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_purple_30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/sendFeedback"
+        android:visibility="gone"
+        android:background="@color/BLACK_TRANSPARENT"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="40dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/feedbackStudent"
+                android:padding="10dp"
+                android:hint="@string/GIVE_US_FEEDBACK"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="insideInset"
+                android:overScrollMode="always"
+                android:textSize="15dp" />
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_marginTop="20dp"
+                android:text="@string/SEND"
+                android:textColor="@color/WHITE"
+                android:textSize="15dp"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_purple_30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/sendFeedbackResult"
+        android:visibility="gone"
+        android:background="@color/BLACK_TRANSPARENT"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:orientation="vertical"
+            android:layout_margin="40dp"
+            android:padding="30dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/popup_podo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/THANKYOU_FEEDBACK"
+                android:textSize="25dp"
+                android:textColor="@color/BLACK"
+                android:fontFamily="@font/avenir_bold"
+                android:layout_marginTop="50dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

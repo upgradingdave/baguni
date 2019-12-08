@@ -21,6 +21,7 @@ import net.awesomekorean.podo.teachers.Teachers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class WritingFrame extends AppCompatActivity implements View.OnClickListener {
 
@@ -91,7 +92,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         });
 
         // 에디트텍스트뷰 스크롤 가능하게 해줌
-        editText = (EditText) findViewById(R.id.editText);
+        editText = findViewById(R.id.editText);
         editText.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
                 // TODO Auto-generated method stub
@@ -121,7 +122,6 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         saveResult.setVisibility(View.GONE);
-                        Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();
                     }
@@ -129,12 +129,12 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnCorrection :
-                saveWriting();
+                WritingEntity entity = saveWriting();
                 Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SAVED), Toast.LENGTH_LONG).show();
-                article = editText.getText().toString();
                 Intent intent = new Intent(this, Teachers.class);
-                intent.putExtra(getString(R.string.EXTRA_ARTICLE), article);
+                intent.putExtra("ENTITY", entity);
                 startActivity(intent);
+                finish();
                 break;
 
             case R.id.btnBack :
@@ -147,21 +147,25 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void saveWriting() {
+    private WritingEntity saveWriting() {
         article = editText.getText().toString();
         letters = textCount.getText().toString();
         String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
 
         if(code.equals(getString(R.string.REQUEST_ADD))) {
             WritingEntity entity = new WritingEntity(article, letters, date);
-            System.out.println("ENTITY:"+entity.getFirstDate());
             guid = entity.getGuid();
+            System.out.println("DATE : " + entity.getWritingDate());
             repository = new WritingRepository(this);
             repository.insert(entity);
 
+            return entity;
+
+
         }else{
             repository = new WritingRepository(this);
-            repository.editByGuid(guid, article, letters, date);
+            repository.editByGuid(guid, article, letters);
+            return null;
         }
     }
 }

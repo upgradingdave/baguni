@@ -122,15 +122,14 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btnSubmit :
-                String article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
+
+                Intent intent = getIntent();
+                WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra("ENTITY");
+
                 String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
 
-                WritingEntity requestWriting = new WritingEntity();
-
-                requestWriting.setGuid(WritingFrame.guid);
                 requestWriting.setUserEmail(MainActivity.userEmail);
                 requestWriting.setUserName(MainActivity.userName);
-                requestWriting.setArticle(article);
                 requestWriting.setTeacherName(teacherName);
                 requestWriting.setDateRequest(date);
                 requestWriting.setIsCorrected(1);

@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface WritingDao {
 
-    @Query("SELECT * FROM WRITINGENTITY ORDER BY firstDate DESC")
+    @Query("SELECT * FROM WRITINGENTITY ORDER BY writingDate DESC")
     LiveData<List<WritingEntity>> getAll();
 
     @Query("SELECT * FROM WRITINGENTITY WHERE guid = :guid")
