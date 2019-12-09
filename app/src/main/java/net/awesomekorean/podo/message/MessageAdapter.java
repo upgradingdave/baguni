@@ -12,18 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
-    private ArrayList<MessageItems> list;
+    private List<MessageItems> list;
 
-    public MessageAdapter(ArrayList<MessageItems> list) {
+    public MessageAdapter(List<MessageItems> list) {
         this.list = list;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView peopleImage;
+        ImageView senderImage;
         TextView message;
         TextView messageDate;
         ImageView isNew;
@@ -31,7 +32,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         ViewHolder(View itemView) {
             super(itemView);
 
-            peopleImage = itemView.findViewById(R.id.peopleImage);
+            senderImage = itemView.findViewById(R.id.senderImage);
             message = itemView.findViewById(R.id.tvMessage);
             messageDate = itemView.findViewById(R.id.messageDate);
             isNew = itemView.findViewById(R.id.isNew);
@@ -54,7 +55,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         MessageItems items = list.get(position);
 
-        holder.peopleImage.setImageResource(items.getPeopleImage());
+        if(items.getSenderImage() != 0) {
+            holder.senderImage.setImageResource(items.getSenderImage());
+        }
         holder.message.setText(items.getMessage());
         holder.messageDate.setText(items.getMessageDate());
         if(items.getIsNew()) { holder.isNew.setVisibility(View.VISIBLE);

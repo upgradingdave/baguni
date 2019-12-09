@@ -1,18 +1,38 @@
 package net.awesomekorean.podo.message;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class MessageItems {
 
-    private int peopleImage;
+    @PrimaryKey(autoGenerate = true)
+    int id;
+    private String userEmail;
     private String message;
     private String messageDate;
-    private Boolean isNew;
 
-    public int getPeopleImage() {
-        return peopleImage;
+    private int senderImage;
+    private boolean isNew;
+
+    @Ignore
+    public void MessageItems(){}
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setPeopleImage(int peopleImage) {
-        this.peopleImage = peopleImage;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public int getSenderImage() {
+        return senderImage;
+    }
+
+    public void setSenderImage(int senderImage) {
+        this.senderImage = senderImage;
     }
 
     public String getMessage() {
@@ -31,11 +51,11 @@ public class MessageItems {
         this.messageDate = messageDate;
     }
 
-    public Boolean getIsNew() {
+    public boolean getIsNew() {
         return isNew;
     }
 
-    public void setIsNew(Boolean aNew) {
+    public void setIsNew(boolean aNew) {
         isNew = aNew;
     }
 }
