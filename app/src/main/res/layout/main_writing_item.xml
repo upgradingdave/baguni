@@ -64,7 +64,7 @@
         android:layout_height="0dp">
 
         <LinearLayout
-            android:id="@+id/isCorrected"
+            android:id="@+id/corrected"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginTop="8dp"
@@ -76,25 +76,48 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/check_white"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:src="@drawable/check_white" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_bold"
                 android:text="@string/CORRECTED"
                 android:textColor="@color/WHITE"
-                android:textSize="12dp"
-                android:layout_marginRight="5dp"
-                android:fontFamily="@font/avenir_bold"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/onCorrecting"
+            android:id="@+id/reviewing"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/bg_blue_15"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/avenir_bold"
+                android:text="@string/REVIEWING"
+                android:textColor="@color/WHITE"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rejected"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginTop="8dp"
@@ -106,16 +129,16 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/avenir_bold"
-                android:text="@string/ON_CORRECTING"
+                android:gravity="center_vertical"
+                android:text="@string/REJECTED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />
         </LinearLayout>
+
 
 
         <LinearLayout

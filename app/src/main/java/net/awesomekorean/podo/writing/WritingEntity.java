@@ -23,7 +23,7 @@ public class WritingEntity implements Serializable {
     private String article;
     private String letters;
     private String writingDate;
-    private int isCorrected = 0; // 0:교정요청없음, 1:교정중, 2:교정됨
+    private int isCorrected = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
 
     private String teacherName;
     private String dateRequest;

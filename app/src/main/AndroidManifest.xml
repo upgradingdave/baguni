@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".writing.WritingCorrected"></activity>
+        <activity android:name=".writing.WritingCorrection"></activity>
         <activity android:name=".purchase.TopUp" />
         <activity android:name=".purchase.Subscribe" />
         <activity android:name=".Profile" />

@@ -55,8 +55,9 @@ public class WritingAdapter extends BaseAdapter {
             holder.writingDate = view.findViewById(R.id.writingDate);
             holder.letters = view.findViewById(R.id.letters);
             holder.article = view.findViewById(R.id.article);
-            holder.isCorrected = view.findViewById(R.id.isCorrected);
-            holder.onCorrecting = view.findViewById(R.id.onCorrecting);
+            holder.corrected = view.findViewById(R.id.corrected);
+            holder.reviewing = view.findViewById(R.id.reviewing);
+            holder.rejected = view.findViewById(R.id.rejected);
             holder.btnDelete = view.findViewById(R.id.btnDelete);
             view.setTag(holder);
 
@@ -69,16 +70,17 @@ public class WritingAdapter extends BaseAdapter {
         holder.writingDate.setText(items.getWritingDate());
         holder.letters.setText(items.getLetters());
         holder.article.setText(items.getArticle());
+
         if(items.getIsCorrected() == 0) {
-            holder.isCorrected.setVisibility(View.GONE);
-            holder.onCorrecting.setVisibility(View.GONE);
+            setVisibility(holder, View.GONE, View.GONE, View.GONE);
         } else if(items.getIsCorrected() == 1) {
-            holder.isCorrected.setVisibility(View.GONE);
-            holder.onCorrecting.setVisibility(View.VISIBLE);
+            setVisibility(holder, View.VISIBLE, View.GONE, View.GONE);
         } else if(items.getIsCorrected() == 2) {
-            holder.isCorrected.setVisibility(View.VISIBLE);
-            holder.onCorrecting.setVisibility(View.GONE);
+            setVisibility(holder, View.GONE, View.VISIBLE, View.GONE);
+        } else if(items.getIsCorrected() == 99) {
+            setVisibility(holder, View.GONE, View.GONE, View.VISIBLE);
         }
+
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,13 +91,21 @@ public class WritingAdapter extends BaseAdapter {
         return view;
     }
 
+    private void setVisibility(ViewHolder holder, int reviewing, int corrected, int rejected) {
+        holder.reviewing.setVisibility(reviewing);
+        holder.corrected.setVisibility(corrected);
+        holder.rejected.setVisibility(rejected);
+    }
+
+
     // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용
     static class ViewHolder {
         TextView writingDate;
         TextView letters;
         TextView article;
-        LinearLayout isCorrected;
-        LinearLayout onCorrecting;
+        LinearLayout corrected;
+        LinearLayout reviewing;
+        LinearLayout rejected;
         ImageView btnDelete;
     }
 }

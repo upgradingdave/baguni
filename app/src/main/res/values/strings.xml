@@ -80,11 +80,15 @@
     <string name="LETTERS">letters</string>
 
     <string name="TIPS">Tips</string>
-    <string name="TIPS_CORRECTION"> You can ask for correction from native Korean teacher by using 30 points</string>
+    <string name="TIPS_CORRECTION">
+        You can ask for correction from native Korean teacher by using 30 points. See a sample.
+        (Inappropriate writing such as abusive language may be rejected)
+    </string>
     <string name="WRITE_HERE">Write here</string>
 
     <string name="CORRECTED">Corrected</string>
-    <string name="ON_CORRECTING">On Correcting</string>
+    <string name="REVIEWING">Reviewing</string>
+
 
     <string name="FRONT">Front</string>
     <string name="BACK">Back</string>

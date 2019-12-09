@@ -159,7 +159,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
                 // 교정완료 된 아이템
                 if(item.getIsCorrected()==2) {
-                    Intent intent = new Intent(getContext(), WritingCorrected.class);
+                    Intent intent = new Intent(getContext(), WritingCorrection.class);
                     intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
                     intent.putExtra(getString(R.string.EXTRA_ARTICLE), item.getArticle());
                     intent.putExtra(getString(R.string.EXTRA_CORRECTION), item.getCorrection());

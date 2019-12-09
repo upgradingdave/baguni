@@ -3,7 +3,6 @@ package net.awesomekorean.podo.writing;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,10 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class WritingCorrected extends AppCompatActivity implements View.OnClickListener {
+public class WritingCorrection extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -51,7 +47,7 @@ public class WritingCorrected extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_writing_corrected);
+        setContentView(R.layout.activity_writing_correction);
 
         writingOriginal = findViewById(R.id.writingOriginal);
         writingCorrected = findViewById(R.id.writingCorrected);
