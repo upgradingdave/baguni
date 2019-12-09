@@ -18,10 +18,10 @@ public class CollectionEntity {
     private String userEmail;
     private String front;
     private String back;
-    private String audio = "file path"; // 임의로 오디오 경로 설정
+    private String audio;
     private String dateNew;
     private String dateEdit;
-    private int deleted = 0; // 0=false, people1=true
+    private int deleted = 0; // 0=false, 1=true
 
     @Ignore
     public CollectionEntity() {
@@ -36,7 +36,6 @@ public class CollectionEntity {
 
         // GUID 생성하기
         this.guid = UUID.randomUUID().toString();
-
     }
 
     public String getUserEmail() {

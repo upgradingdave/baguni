@@ -61,7 +61,7 @@ public class CollectionRepository {
     }
 
     // 앱에서 생성한 컬렉션을 INSERT (생성날짜 도장 찍고 넣기)
-    public void insert (String front, String back) {
+    public void insert (String front, String back, final String audio) {
 
         final CollectionEntity entity = new CollectionEntity(front, back);
 
@@ -69,9 +69,9 @@ public class CollectionRepository {
             @Override
             protected Void doInBackground(Void... voids) {
                 String dateNow = getDateNow();
+                entity.setAudio(audio);
                 entity.setDateNew(dateNow);
                 entity.setDateEdit(dateNow);
-                System.out.println("TIMENOW : " + dateNow);
                 db.collectionDao().insert(entity);
                 return null;
             }

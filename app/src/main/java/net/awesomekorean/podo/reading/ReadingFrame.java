@@ -195,7 +195,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnCollect:
                 CollectionRepository repository = new CollectionRepository(this);
-                repository.insert(front, back);
+                repository.insert(front, back, null);
 
                 collectResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();

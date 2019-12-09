@@ -1,6 +1,8 @@
 package net.awesomekorean.podo.collection;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ public class CollectionAdapter extends BaseAdapter {
 
     private Context context;
     public static ArrayList<CollectionItems> list;
+
+    MediaPlayer mp;
 
     public CollectionAdapter(Context context, ArrayList<CollectionItems> list) {
 
@@ -61,13 +65,16 @@ public class CollectionAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        CollectionItems items = list.get(i);
+        final CollectionItems items = list.get(i);
 
         holder.collectionFront.setText(items.getFront());
         holder.collectionBack.setText(items.getBack());
         holder.checkBox.setChecked(items.getChecked());
         if(items.getVisible()) { holder.checkBox.setVisibility(View.VISIBLE);
         } else{holder.checkBox.setVisibility(View.INVISIBLE);}
+        if(items.getAudio() == null) { holder.btnAudio.setVisibility(View.INVISIBLE);
+        } else{holder.btnAudio.setVisibility(View.VISIBLE);}
+
         holder.checkBox.setTag(i);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,10 +104,25 @@ public class CollectionAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 System.out.println("Audio button clicked");
+                String audioFile = items.getAudio();
+                playAudio(audioFile);
             }
         });
         return view;
     }
+
+    // 오디오 재생 메소드
+    public void playAudio(String audioFile) {
+        System.out.println("PATH:"+ audioFile);
+        String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audioFile;
+        Uri uri = Uri.parse(uriPath);
+        mp = MediaPlayer.create(context, uri);
+        try {
+            mp.start();
+        }
+        catch (Exception e) {}
+    }
+
 
 
     // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용

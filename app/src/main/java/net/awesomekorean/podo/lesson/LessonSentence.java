@@ -82,8 +82,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
             case R.id.btnCollect :
                 String front = LessonWord.sentenceFront[lessonCount];
                 String back = LessonWord.sentenceBack[lessonCount];
+                String audio = LessonWord.sentenceAudio[lessonCount];
                 CollectionRepository repository = new CollectionRepository(getContext());
-                repository.insert(front, back);
+                repository.insert(front, back, audio);
 
                 collectResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();

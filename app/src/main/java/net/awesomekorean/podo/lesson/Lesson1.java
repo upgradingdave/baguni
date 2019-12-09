@@ -13,6 +13,9 @@ public class Lesson1 implements Lesson{
 
     final static String[] wordApplication = {"안녕", "다음", "또", "보다", "가다"};
 
+    final static String[] wordAudio = {"word_1_1", "word_1_2", "word_1_3", "word_1_4", "word_1_5"};
+
+
 
     final static String[] sentenceFront = {
             "안녕하세요?",
@@ -33,6 +36,7 @@ public class Lesson1 implements Lesson{
             "잘 지냈어요?",
             "다음에 또 봐요.",
             "안녕히 가세요."};
+
 
     @Override
     public String[] getWordFront() {
@@ -62,6 +66,11 @@ public class Lesson1 implements Lesson{
     @Override
     public String[] getWordApplication() {
         return wordApplication;
+    }
+
+    @Override
+    public String[] getWordAudio() {
+        return wordAudio;
     }
 
     @Override

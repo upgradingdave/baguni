@@ -137,8 +137,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
         repository = new CollectionRepository(getContext());
 
-        repository.deleteAll();
-        repository.deleteDateLastSync();
+        //repository.deleteAll();
+        //repository.deleteDateLastSync();
 
         setListViewFooter();
 
@@ -167,6 +167,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                         CollectionItems items = new CollectionItems();
                         items.setFront(entity.getFront());
                         items.setBack(entity.getBack());
+                        items.setAudio(entity.getAudio());
                         items.setGuid(entity.getGuid());
                         listAllData.add(items);
                     }

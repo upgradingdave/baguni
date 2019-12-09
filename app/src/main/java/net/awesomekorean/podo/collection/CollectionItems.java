@@ -6,12 +6,18 @@ public class CollectionItems {
 
     private String front;
     private String back;
+    private String audio;
 
     private boolean isChecked = false;
-
     private boolean isVisible = false;
 
+    public String getAudio() {
+        return audio;
+    }
 
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
 
     public void setFront(String collection) {
         this.front = collection;

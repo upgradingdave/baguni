@@ -1,6 +1,8 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -18,6 +20,12 @@ import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
 
@@ -47,13 +55,16 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     public static String[] wordAntonyms;
     public static String[] wordSynonyms;
     public static String[] wordApplication;
+    public static String[] wordAudio;
     public static String[] sentenceFront;
     public static String[] sentenceBack;
     public static String[] sentenceExplain;
     public static String[] sentenceClause;
+    public static String[] sentenceAudio;
 
     Intent intent;
 
+    static MediaPlayer mp;
 
     public static LessonWord newInstance() {
         return new LessonWord();
@@ -91,6 +102,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         }
 
 
+        String audioFile = "word_1_1";
+        playAudio(audioFile);
+
         return view;
     }
 
@@ -107,6 +121,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         wordSynonyms = lesson.getWordSynonyms();
         wordAntonyms = lesson.getWordAntonyms();
         wordApplication = lesson.getWordApplication();
+        wordAudio = lesson.getWordAudio();
 
         sentenceFront = lesson.getSentenceFront();
         sentenceBack = lesson.getSentenceBack();
@@ -132,6 +147,19 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordApplication.setText(wordApplication[lessonCount]);
     }
 
+    // 오디오 재생 메소드
+    public void playAudio(String audioFile) {
+        String uriPath = "android.resource://" + getContext().getPackageName() + "/raw/" + audioFile;
+        System.out.println("URIPATH:"+uriPath);
+        Uri uri = Uri.parse(uriPath);
+        mp = MediaPlayer.create(getContext(), uri);
+        try {
+            mp.start();
+        }
+        catch (Exception e) {}
+    }
+
+
     @Override
     public void onClick(View v) {
 
@@ -143,9 +171,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
             case R.id.btnCollect :
                 String front = wordFront[lessonCount];
                 String back = wordBack[lessonCount];
+                String audio = wordAudio[lessonCount];
 
                 CollectionRepository repository = new CollectionRepository(getContext());
-                repository.insert(front, back);
+                repository.insert(front, back, audio);
 
                 collectResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();

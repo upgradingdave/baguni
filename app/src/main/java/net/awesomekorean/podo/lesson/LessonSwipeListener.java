@@ -1,6 +1,8 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -13,7 +15,7 @@ import net.awesomekorean.podo.lesson.LessonWordQuiz1;
 import net.awesomekorean.podo.lesson.LessonWordQuiz2;
 import net.awesomekorean.podo.lesson.LessonWordQuiz3;
 
-public class DetectSwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
+public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener {
 
     //Minimal x and y axis swipe distance
     private static int MIN_SWIPE_DISTANCE_X = 100;

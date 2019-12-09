@@ -96,7 +96,7 @@ public class CollectionFlashCard extends AppCompatActivity implements Button.OnC
 
                 // ADD 일 때, save 를 눌러도 collection 으로 전환되지 않고 계속 단어를 추가 할 수 있다
                 if(code.equals(getString(R.string.REQUEST_ADD))) {
-                    repository.insert(front, back);
+                    repository.insert(front, back, null);
 
                 // EDIT 일 때
                 } else {

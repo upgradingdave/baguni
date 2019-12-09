@@ -62,7 +62,7 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
 
     public void replaceFragment(Fragment fragment) {
 
-        DetectSwipeGestureListener gestureListener = new DetectSwipeGestureListener();
+        LessonSwipeListener gestureListener = new LessonSwipeListener();
         gestureListener.setActivity(this);
         gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 
