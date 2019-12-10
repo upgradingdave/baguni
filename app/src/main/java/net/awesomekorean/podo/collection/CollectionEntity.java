@@ -16,12 +16,24 @@ public class CollectionEntity {
     @NonNull
     private String guid;
     private String userEmail;
+    private String userName;
     private String front;
     private String back;
     private String audio;
     private String dateNew;
     private String dateEdit;
     private int deleted = 0; // 0=false, 1=true
+
+    private int isRecorded = 0; // 0:녹음요청없음, 1:검토중, 2:녹음됨, 99:거부됨
+
+    private String teacherName;
+    private String dateRequest;
+    private String dateRecord;
+
+    private boolean isChecked = false;
+    private boolean isVisible = false;
+
+
 
     @Ignore
     public CollectionEntity() {
@@ -31,11 +43,68 @@ public class CollectionEntity {
     public CollectionEntity(String front, String back) {
 
         this.userEmail = MainActivity.userEmail;
+        this.userName = MainActivity.userName;
         this.front = front;
         this.back = back;
 
         // GUID 생성하기
         this.guid = UUID.randomUUID().toString();
+    }
+
+    public boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public boolean getIsVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getIsRecorded() {
+        return isRecorded;
+    }
+
+    public void setIsRecorded(int isRecorded) {
+        this.isRecorded = isRecorded;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getDateRequest() {
+        return dateRequest;
+    }
+
+    public void setDateRequest(String dateRequest) {
+        this.dateRequest = dateRequest;
+    }
+
+    public String getDateRecord() {
+        return dateRecord;
+    }
+
+    public void setDateRecord(String dateRecord) {
+        this.dateRecord = dateRecord;
     }
 
     public String getUserEmail() {

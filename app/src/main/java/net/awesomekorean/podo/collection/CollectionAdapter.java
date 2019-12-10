@@ -14,15 +14,16 @@ import android.widget.TextView;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionAdapter extends BaseAdapter {
 
     private Context context;
-    public static ArrayList<CollectionItems> list;
+    public static List<CollectionEntity> list;
 
     MediaPlayer mp;
 
-    public CollectionAdapter(Context context, ArrayList<CollectionItems> list) {
+    public CollectionAdapter(Context context, List<CollectionEntity> list) {
 
         this.context = context;
         this.list = list;

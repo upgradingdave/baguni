@@ -32,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.teachers.Teachers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,9 +55,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
     public static CheckBox selectAll; // 전체 선택/해제 체크박스
 
     ListView listView;  // 리스트뷰
-    ArrayList<CollectionItems> list = new ArrayList<>();    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
-    ArrayList<CollectionItems> listAllData; // 리스트뷰에 들어갈 모든 데이터를 불러옴
-    ArrayList<CollectionItems> listCopy;// 검색 기능을 위해 리스트뷰 복사함
+    List<CollectionEntity> list = new ArrayList<>();    // 리스트뷰 생성을 위한 arrayList (20개 씩 끊어서 로드함)
+    List<CollectionEntity> listAllData; // 리스트뷰에 들어갈 모든 데이터를 불러옴
+    List<CollectionEntity> listCopy;// 검색 기능을 위해 리스트뷰 복사함
     CollectionAdapter adapter;  // 리스트뷰 어뎁터
 
     ProgressBar progressBar;
@@ -94,6 +95,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
     public static int size; //  컬렉션 개수
 
     String userEmail;
+
+    ArrayList<CollectionEntity> checkedList;
 
 
     public static MainCollection newInstance() {
@@ -164,8 +167,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                 for (CollectionEntity entity : collectionEntities) {
                     if (entity.getDeleted() != 1) {
-                        CollectionItems items = new CollectionItems();
-                        items.setFront(entity.getFront());
+                        entity.setFront(entity.getFront());
                         items.setBack(entity.getBack());
                         items.setAudio(entity.getAudio());
                         items.setGuid(entity.getGuid());
@@ -414,17 +416,19 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnYes:
-                ArrayList<String> checkedList = new ArrayList<>();
+                checkedList = new ArrayList<>();
 
-                for (CollectionItems items : listAllData) {
-                    if (items.getChecked()) {
-                        checkedList.add(items.getGuid());
+                for (CollectionItems item : listAllData) {
+                    if (item.getChecked()) {
+                        CollectionEntity itemToEntity = new CollectionEntity();
+                        itemToEntity.setGuid(item.getGuid());
+                        itemToEntity.
                     }
                 }
                 if (checkedList != null) {
 
-                    for (String guid : checkedList) {
-
+                    for (CollectionItems item : checkedList) {
+                        String guid = item.getGuid();
                         repository.setDeletedByGuid(guid);
                     }
                 }
@@ -437,6 +441,22 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnRecord:
+                checkedList = new ArrayList<>();
+
+                for (CollectionItems items : listAllData) {
+                    if (items.getChecked()) {
+                        checkedList.add(items);
+                    }
+                }
+                if (checkedList != null) {
+
+                    Intent intent = new Intent(getContext(), Teachers.class);
+                    intent.putExtra("code", "record");
+                    for (CollectionItems item : checkedList) {
+                        intent.putExtra("checkedList", checkedList);
+                    }
+                    startActivity(intent);
+                }
                 break;
 
             case R.id.btnAddCollection:

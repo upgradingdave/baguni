@@ -21,9 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.collection.CollectionEntity;
+import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.purchase.TopUp;
 import net.awesomekorean.podo.writing.WritingEntity;
-import net.awesomekorean.podo.writing.WritingFrame;
 import net.awesomekorean.podo.writing.WritingRepository;
 
 import java.text.SimpleDateFormat;
@@ -62,9 +63,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         btnBack.setOnClickListener(this);
         btnTopUp.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
-
-        intent = getIntent();
-
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();
@@ -123,37 +121,75 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.btnSubmit :
 
-                Intent intent = getIntent();
-                WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra("ENTITY");
+                String code = getIntent().getStringExtra("code");
 
-                String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+                // 교정요청일 때
+                if(code.equals("correction")) {
+                    WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra("ENTITY");
 
-                requestWriting.setUserEmail(MainActivity.userEmail);
-                requestWriting.setUserName(MainActivity.userName);
-                requestWriting.setTeacherName(teacherName);
-                requestWriting.setDateRequest(date);
-                requestWriting.setIsCorrected(1);
+                    String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
 
-                WritingRepository repository = new WritingRepository(this);
-                repository.update(requestWriting);
+                    requestWriting.setUserEmail(MainActivity.userEmail);
+                    requestWriting.setUserName(MainActivity.userName);
+                    requestWriting.setTeacherName(teacherName);
+                    requestWriting.setDateRequest(date);
+                    requestWriting.setIsCorrected(1);
 
-                // 교정요청 DB 에 저장하기
-                db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
-                        .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        requestResult.setVisibility(View.VISIBLE);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                requestResult.setVisibility(View.GONE);
-                                Intent intent = new Intent(getApplication(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                        }, 3000);
-                    }
-                });
+                    WritingRepository repository = new WritingRepository(this);
+                    repository.update(requestWriting);
+
+                    // 교정요청 DB 에 저장하기
+                    db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
+                            .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            requestResult.setVisibility(View.VISIBLE);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    requestResult.setVisibility(View.GONE);
+                                    Intent intent = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }, 3000);
+                        }
+                    });
+
+                    // 녹음요청일 떄
+                } else if(code.equals("record")) {
+                    ArrayList<CollectionEntity>
+                    CollectionEntity requestRecording = (CollectionEntity) intent.getSerializableExtra("ENTITY");
+
+                    String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+
+                    requestRecording.setUserEmail(MainActivity.userEmail);
+                    requestRecording.setUserName(MainActivity.userName);
+                    requestRecording.setTeacherName(teacherName);
+                    requestRecording.setDateRequest(date);
+                    requestRecording.setIsRecorded(1);
+
+                    CollectionRepository repository = new CollectionRepository(this);
+                    repository.update(requestRecording);
+
+                    // 녹음요청 DB 에 저장하기
+                    db.collection(getString(R.string.DB_COLLECTIONS)).document(requestRecording.getGuid())
+                            .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            requestResult.setVisibility(View.VISIBLE);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    requestResult.setVisibility(View.GONE);
+                                    Intent intent = new Intent(getApplication(), MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }, 3000);
+                        }
+                    });
+                }
                 break;
         }
     }
