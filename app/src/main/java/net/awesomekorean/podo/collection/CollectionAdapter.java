@@ -66,12 +66,12 @@ public class CollectionAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        final CollectionItems items = list.get(i);
+        final CollectionEntity items = list.get(i);
 
         holder.collectionFront.setText(items.getFront());
         holder.collectionBack.setText(items.getBack());
-        holder.checkBox.setChecked(items.getChecked());
-        if(items.getVisible()) { holder.checkBox.setVisibility(View.VISIBLE);
+        holder.checkBox.setChecked(items.getIsChecked());
+        if(items.getIsVisible()) { holder.checkBox.setVisibility(View.VISIBLE);
         } else{holder.checkBox.setVisibility(View.INVISIBLE);}
         if(items.getAudio() == null) { holder.btnAudio.setVisibility(View.INVISIBLE);
         } else{holder.btnAudio.setVisibility(View.VISIBLE);}
@@ -84,17 +84,17 @@ public class CollectionAdapter extends BaseAdapter {
                 // 체크박스 클릭 했을 때 동작
                 Integer position = (Integer) holder.checkBox.getTag();
 
-                CollectionItems items = list.get(position);
+                CollectionEntity items = list.get(position);
 
-                if(items.getChecked()) {
-                    items.setChecked(false);
+                if(items.getIsChecked()) {
+                    items.setIsChecked(false);
                     MainCollection.isChecked--;
                     MainCollection.selectAll.setChecked(false);
                     if(MainCollection.isChecked == 0) {
                         MainCollection.btnEnabled(false);
                     }
                 } else {
-                    items.setChecked(true);
+                    items.setIsChecked(true);
                     MainCollection.btnEnabled(true);
                     MainCollection.isChecked++;
                 }
@@ -135,16 +135,16 @@ public class CollectionAdapter extends BaseAdapter {
     }
 
     public void checkAll(boolean b) {
-        CollectionItems items;
+        CollectionEntity items;
         if(b == true) {
             for(int i=0; i<getCount(); i++) {
                 items = list.get(i);
-                items.setChecked(true);
+                items.setIsChecked(true);
             }
         } else if(b == false) {
             for(int i=0; i<getCount(); i++) {
                 items = list.get(i);
-                items.setChecked(false);
+                items.setIsChecked(false);
             }
         }
     }
@@ -153,19 +153,19 @@ public class CollectionAdapter extends BaseAdapter {
     // 리스트뷰를 길게 눌렀을 때 체크박스 on/off
     public void longClickOnOff(String onOff) {
 
-        CollectionItems items;
+        CollectionEntity items;
 
         if(onOff.equals("on")) {
             for (int i = 0; i < getCount(); i++) {
                 items = list.get(i);
-                items.setVisible(true);
+                items.setIsVisible(true);
             }
 
         } else if(onOff.equals("off")) {
             for (int i = 0; i < getCount(); i++) {
                 items = list.get(i);
-                items.setChecked(false);
-                items.setVisible(false);
+                items.setIsChecked(false);
+                items.setIsVisible(false);
             }
         }
     }

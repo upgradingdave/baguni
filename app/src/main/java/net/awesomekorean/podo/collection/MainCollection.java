@@ -167,11 +167,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                 for (CollectionEntity entity : collectionEntities) {
                     if (entity.getDeleted() != 1) {
-                        entity.setFront(entity.getFront());
-                        items.setBack(entity.getBack());
-                        items.setAudio(entity.getAudio());
-                        items.setGuid(entity.getGuid());
-                        listAllData.add(items);
+                        listAllData.add(entity);
                     }
                 }
 
@@ -190,7 +186,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             }
         };
 
-        // DB의 플래쉬 카드를 listView 로 가져오기
+        // Room 의 플래쉬 카드를 listView 로 가져오기
         repository.getAll().observe(this, observer);
 
         repository.getDateSync().observe(this, new Observer<String>() {
@@ -250,11 +246,11 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                CollectionItems item = (CollectionItems) adapterView.getItemAtPosition(i);
+                CollectionEntity entity = (CollectionEntity) adapterView.getItemAtPosition(i);
 
                 if (longItemClicked == true) {
-                    if (item.getChecked()) {
-                        item.setChecked(false);
+                    if (entity.getIsChecked()) {
+                        entity.setIsChecked(false);
                         isChecked--;
                         selectAll.setChecked(false);
 
@@ -264,15 +260,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                     } else {
                         btnEnabled(true);
-                        item.setChecked(true);
+                        entity.setIsChecked(true);
                         isChecked++;
                     }
                     adapter.notifyDataSetChanged();
                 } else {
                     intent = new Intent(getContext(), CollectionFlashCard.class);
-                    intent.putExtra(getString(R.string.EXTRA_GUID), item.getGuid());
-                    intent.putExtra(getString(R.string.EXTRA_FRONT), item.getFront());
-                    intent.putExtra(getString(R.string.EXTRA_BACk), item.getBack());
+                    intent.putExtra(getString(R.string.EXTRA_GUID), entity.getGuid());
+                    intent.putExtra(getString(R.string.EXTRA_FRONT), entity.getFront());
+                    intent.putExtra(getString(R.string.EXTRA_BACk), entity.getBack());
                     intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
                     startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
                 }
@@ -329,9 +325,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             if ((size + i + 1) <= listAllData.size()) {
                 list.add(listAllData.get(size + i));
                 if (selectAll.getVisibility() == View.VISIBLE) { // 체크박스 on 상태에서 아이템을 더 불러올 경우
-                    CollectionItems items;
-                    items = list.get(list.size() - 1);
-                    items.setVisible(true);
+                    CollectionEntity entity;
+                    entity = list.get(list.size() - 1);
+                    entity.setIsVisible(true);
                 }
             } else {
                 break;
@@ -418,16 +414,14 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             case R.id.btnYes:
                 checkedList = new ArrayList<>();
 
-                for (CollectionItems item : listAllData) {
-                    if (item.getChecked()) {
-                        CollectionEntity itemToEntity = new CollectionEntity();
-                        itemToEntity.setGuid(item.getGuid());
-                        itemToEntity.
+                for (CollectionEntity entity : listAllData) {
+                    if (entity.getIsChecked()) {
+                        checkedList.add(entity);
                     }
                 }
                 if (checkedList != null) {
 
-                    for (CollectionItems item : checkedList) {
+                    for (CollectionEntity item : checkedList) {
                         String guid = item.getGuid();
                         repository.setDeletedByGuid(guid);
                     }
@@ -443,18 +437,16 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             case R.id.btnRecord:
                 checkedList = new ArrayList<>();
 
-                for (CollectionItems items : listAllData) {
-                    if (items.getChecked()) {
-                        checkedList.add(items);
+                for (CollectionEntity entity : listAllData) {
+                    if (entity.getIsChecked()) {
+                        checkedList.add(entity);
                     }
                 }
                 if (checkedList != null) {
 
                     Intent intent = new Intent(getContext(), Teachers.class);
                     intent.putExtra("code", "record");
-                    for (CollectionItems item : checkedList) {
-                        intent.putExtra("checkedList", checkedList);
-                    }
+                    intent.putExtra("checkedList", checkedList);
                     startActivity(intent);
                 }
                 break;
@@ -485,7 +477,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 }
 
                 // DB 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 다운로드
-                db.collection("android/podo/collections")
+                db.collection(getString(R.string.DB_COLLECTIONS))
                         .whereGreaterThan("dateEdit", copyDateLastSync)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -505,7 +497,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                                     // 업로드
                                     for (CollectionEntity upload : itemsToUpload) {
-                                        db.collection("android/podo/collections").document().set(upload);
+                                        db.collection(getString(R.string.DB_COLLECTIONS)).document(upload.getGuid()).set(upload);
                                         System.out.println("아이템을 업로드 했습니다: " + upload.getFront());
                                     }
                                 }

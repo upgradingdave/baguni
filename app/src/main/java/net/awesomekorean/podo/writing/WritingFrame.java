@@ -151,7 +151,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     private WritingEntity saveWriting() {
         article = editText.getText().toString();
         letters = textCount.getText().toString();
-        String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+        String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
 
         if(code.equals(getString(R.string.REQUEST_ADD))) {
             WritingEntity entity = new WritingEntity(article, letters, date);

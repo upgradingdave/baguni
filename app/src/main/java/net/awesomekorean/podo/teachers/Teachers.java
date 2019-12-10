@@ -10,14 +10,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
+import com.google.firebase.firestore.WriteBatch;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -121,13 +130,14 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.btnSubmit :
 
-                String code = getIntent().getStringExtra("code");
+                Intent intent = getIntent();
+                String code = intent.getStringExtra("code");
+                final String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+
 
                 // 교정요청일 때
                 if(code.equals("correction")) {
                     WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra("ENTITY");
-
-                    String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
 
                     requestWriting.setUserEmail(MainActivity.userEmail);
                     requestWriting.setUserName(MainActivity.userName);
@@ -158,37 +168,47 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
                     // 녹음요청일 떄
                 } else if(code.equals("record")) {
-                    ArrayList<CollectionEntity>
-                    CollectionEntity requestRecording = (CollectionEntity) intent.getSerializableExtra("ENTITY");
+                    ArrayList<CollectionEntity> recordList = (ArrayList<CollectionEntity>) intent.getSerializableExtra("checkedList");
 
-                    String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
 
-                    requestRecording.setUserEmail(MainActivity.userEmail);
-                    requestRecording.setUserName(MainActivity.userName);
-                    requestRecording.setTeacherName(teacherName);
-                    requestRecording.setDateRequest(date);
-                    requestRecording.setIsRecorded(1);
+                    for (final CollectionEntity entity : recordList) {
+                        entity.setTeacherName(teacherName);
+                        entity.setDateRequest(date);
+                        entity.setIsRecorded(1);
 
-                    CollectionRepository repository = new CollectionRepository(this);
-                    repository.update(requestRecording);
+                        // 녹음요청 DB 에 저장하기
+                        final DocumentReference docRef = db.collection(getString(R.string.DB_COLLECTIONS)).document(entity.getGuid());
 
-                    // 녹음요청 DB 에 저장하기
-                    db.collection(getString(R.string.DB_COLLECTIONS)).document(requestRecording.getGuid())
-                            .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            requestResult.setVisibility(View.VISIBLE);
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    requestResult.setVisibility(View.GONE);
-                                    Intent intent = new Intent(getApplication(), MainActivity.class);
-                                    startActivity(intent);
+                        db.runTransaction(new Transaction.Function<Void>() {
+                            @Nullable
+                            @Override
+                            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                                DocumentSnapshot snapshot = transaction.get(docRef);
+                                if (snapshot.exists()) {
+                                    transaction.update(docRef, "teacherName", teacherName);
+                                    transaction.update(docRef, "dateRequest", date);
+                                    transaction.update(docRef, "isRecorded", 1);
+                                } else {
+                                    transaction.set(docRef, entity);
                                 }
-                            }, 3000);
-                        }
-                    });
+                                return null;
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                requestResult.setVisibility(View.VISIBLE);
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        requestResult.setVisibility(View.GONE);
+                                        Intent intent = new Intent(getApplication(), MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }, 3000);
+                            }
+                        });
+                    }
                 }
                 break;
         }

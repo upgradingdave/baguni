@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey;
 
 import net.awesomekorean.podo.MainActivity;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(tableName = "COLLECTION")
-public class CollectionEntity {
+public class CollectionEntity implements Serializable {
 
     @PrimaryKey
     @NonNull
@@ -23,15 +24,16 @@ public class CollectionEntity {
     private String dateNew;
     private String dateEdit;
     private int deleted = 0; // 0=false, 1=true
-
-    private int isRecorded = 0; // 0:녹음요청없음, 1:검토중, 2:녹음됨, 99:거부됨
-
-    private String teacherName;
-    private String dateRequest;
-    private String dateRecord;
-
     private boolean isChecked = false;
     private boolean isVisible = false;
+
+
+    // 녹음요청할 때 필요한 변수들
+    private int isRecorded = 0; // 0:녹음요청없음, 1:검토중, 2:녹음됨, 99:거부됨
+    private String teacherName;
+    private String dateRequest;
+    private String dateRecorded;
+
 
 
 
@@ -55,7 +57,7 @@ public class CollectionEntity {
         return isChecked;
     }
 
-    public void setChecked(boolean checked) {
+    public void setIsChecked(boolean checked) {
         isChecked = checked;
     }
 
@@ -63,7 +65,7 @@ public class CollectionEntity {
         return isVisible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setIsVisible(boolean visible) {
         isVisible = visible;
     }
 
@@ -99,12 +101,12 @@ public class CollectionEntity {
         this.dateRequest = dateRequest;
     }
 
-    public String getDateRecord() {
-        return dateRecord;
+    public String getDateRecorded() {
+        return dateRecorded;
     }
 
-    public void setDateRecord(String dateRecord) {
-        this.dateRecord = dateRecord;
+    public void setDateRecorded(String dateRecorded) {
+        this.dateRecorded = dateRecorded;
     }
 
     public String getUserEmail() {

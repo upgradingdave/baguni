@@ -121,7 +121,7 @@ public class SignUp extends AppCompatActivity {
                 userPass = password.getText().toString();
 
                 // 중복 이메일 체크
-                DocumentReference doRef = db.collection("android/podo/users").document(userEmail);
+                DocumentReference doRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
                 doRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -133,7 +133,7 @@ public class SignUp extends AppCompatActivity {
                         } else {
                             final User user = new User(userEmail, userPass);
 
-                            CollectionReference users = db.collection("android/podo/users");
+                            CollectionReference users = db.collection(getString(R.string.DB_USERS));
                             users.document(userEmail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

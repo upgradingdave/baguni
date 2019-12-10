@@ -245,7 +245,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 final String userEmail = email.getText().toString();
                 final String userPass = password.getText().toString();
 
-                DocumentReference docRef = db.collection("android/podo/users").document(userEmail);
+                DocumentReference docRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
                 docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -254,7 +254,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                             User user = documentSnapshot.toObject(User.class);
                             // 비밀번호 일치함 -> 로그인 성공
                             if(userPass.equals(user.getPassword())) {
-                                DocumentReference dateSignInUpdate = db.collection("android/podo/users").document(userEmail);
+                                DocumentReference dateSignInUpdate = db.collection(getString(R.string.DB_USERS)).document(userEmail);
                                 dateSignInUpdate.update("dateSignIn", FieldValue.serverTimestamp());
                                 Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
