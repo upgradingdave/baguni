@@ -88,6 +88,17 @@ public class CollectionRepository {
         }.execute();
     }
 
+    public void delete (final CollectionEntity entity) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.collectionDao().delete(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+
 
     public void update(final CollectionEntity entity) {
         new AsyncTask<Void, Void, Void>() {

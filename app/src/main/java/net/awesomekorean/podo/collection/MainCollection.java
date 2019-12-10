@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -26,9 +27,13 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -140,8 +145,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
         repository = new CollectionRepository(getContext());
 
-        //repository.deleteAll();
-        //repository.deleteDateLastSync();
+        repository.deleteAll();
+        repository.deleteDateLastSync();
 
         setListViewFooter();
 
@@ -465,16 +470,53 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                 // Room 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 가져오기
                 final List<CollectionEntity> itemsToUpload = new ArrayList<>();
+                final List<CollectionEntity> itemsToDelete = new ArrayList<>();
 
-                for (CollectionEntity entity : copyListAllData) {
+                for (final CollectionEntity entity : copyListAllData) {
                     if (entity.getDateEdit().compareTo(copyDateLastSync) > 0) {
-                        itemsToUpload.add(entity);
-                        System.out.println("업로드 할 아이템을 찾았습니다: " + entity.getFront());
+
+                        // 삭제된 아이템이 있는지 확인
+                        if(entity.getDeleted() == 1) {
+                            System.out.println("삭제 할 아이템을 찾았습니다: " + entity.getFront());
+                            itemsToDelete.add(entity);
+
+                        } else {
+                            itemsToUpload.add(entity);
+                            System.out.println("업로드 할 아이템을 찾았습니다: " + entity.getFront());
+                        }
                     }
                 }
                 if (itemsToUpload.isEmpty()) {
                     System.out.println("업로드 할 아이템이 없습니다");
                 }
+
+                // delete = 1 인 아이템 DB 이랑 Room 에서 지우기
+                for(final CollectionEntity itemToDelete : itemsToDelete) {
+                    final DocumentReference docRef = db.collection(getString(R.string.DB_COLLECTIONS)).document(itemToDelete.getGuid());
+                    db.runTransaction(new Transaction.Function<Void>() {
+                        @Nullable
+                        @Override
+                        public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                            DocumentSnapshot snapshot = transaction.get(docRef);
+                            System.out.println("삭제할 아이템이 DB에 있나요?");
+                            if (snapshot.exists()) {
+                                System.out.println("네!");
+                                transaction.delete(docRef);
+                                System.out.println("삭제된 아이템을 DB 에서 지웠습니다");
+                            } else {
+                                System.out.println("아니요!");
+                            }
+                            return null;
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            repository.delete(itemToDelete);
+                            System.out.println("삭제된 아이템을 Room 에서 지웠습니다");
+                        }
+                    });
+                }
+
 
                 // DB 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 다운로드
                 db.collection(getString(R.string.DB_COLLECTIONS))
