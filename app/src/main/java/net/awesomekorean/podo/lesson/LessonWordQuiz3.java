@@ -24,7 +24,8 @@ import net.awesomekorean.podo.R;
 public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     View view;
-    static String[] words; // 단어 front array
+    String[] words = LessonWord.wordFront; // 단어 front array
+    String[] wordAudio = LessonWord.wordAudio;
 
     String word; // 퀴즈용 단어 묶음에 있는 각 단어
 
@@ -43,7 +44,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     int quizCount = 0; // 단어퀴즈 순서
 
-    MediaPlayer mediaPlayer;
+    MediaPlayer mp;
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
 
@@ -86,14 +88,14 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                     if(tvAnswer.getText().toString().equals(word)) { // 정답
 
                         answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10_stroke_purple));
-                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct);
-                        mediaPlayer.start();
+                        mp = MediaPlayer.create(getContext(), R.raw.correct);
+                        mp.start();
 
 
                     } else {  // 오답
                         answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10_stroke_red));
-                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong);
-                        mediaPlayer.start();
+                        mp = MediaPlayer.create(getContext(), R.raw.wrong);
+                        mp.start();
                     }
 
                     Handler handler = new Handler();
@@ -124,8 +126,6 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 }
             }
         };
-
-        words = LessonWord.wordFront;
 
         makeQuiz();
 
@@ -162,6 +162,9 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             btnSelector.setOnClickListener(selectorButtonClick);
             flexboxLayout.addView(btnSelector);
         }
+
+        playAudioWithString.playAudio(getContext(), wordAudio[quizCount]);
+
     }
 
     @Override
@@ -175,6 +178,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnAudio :
+                playAudioWithString.playAudio(getContext(), wordAudio[quizCount]);
                 break;
         }
     }

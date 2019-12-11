@@ -1,5 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
+import net.awesomekorean.podo.R;
+
 public class Lesson1 implements Lesson{
 
     final static String[] wordFront = {"안녕", "다음", "또", "보다", "가다"};
@@ -14,7 +16,7 @@ public class Lesson1 implements Lesson{
     final static String[] wordApplication = {"안녕", "다음", "또", "보다", "가다"};
 
     final static String[] wordAudio = {"word_1_1", "word_1_2", "word_1_3", "word_1_4", "word_1_5"};
-
+    final static String[] sentenceAudio = {"sentence_1_1", "sentence_1_2", "sentence_1_3", "sentence_1_4", "sentence_1_5", "sentence_1_6"};
 
 
     final static String[] sentenceFront = {
@@ -36,6 +38,9 @@ public class Lesson1 implements Lesson{
             "잘 지냈어요?",
             "다음에 또 봐요.",
             "안녕히 가세요."};
+
+    final static int[] sentenceClauseAorB = {1,2,1,2,1,2};
+    final static int[] peopleImage = {R.drawable.people1, R.drawable.people2, R.drawable.people1, R.drawable.people2,R.drawable.people1, R.drawable.people2};
 
 
     @Override
@@ -106,5 +111,20 @@ public class Lesson1 implements Lesson{
     @Override
     public String[] getSentenceClause() {
         return sentenceClause;
+    }
+
+    @Override
+    public String[] getSentenceAudio() {
+        return sentenceAudio;
+    }
+
+    @Override
+    public int[] getSentenceClauseAorB() {
+        return sentenceClauseAorB;
+    }
+
+    @Override
+    public int[] getPeopleImage() {
+        return peopleImage;
     }
 }

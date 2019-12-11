@@ -142,6 +142,7 @@
 
     <string name="RETURN">Return</string>
     <string name="PLAY">Play</string>
+    <string name="STOP">Stop</string>
     <string name="FINISH">Finish</string>
 
     <string name="SELECT_BOX">Select a box to get the points</string>

@@ -22,6 +22,8 @@ public interface Lesson {
 
     String[] getSentenceBack();
 
+    String[] getSentenceAudio();
+
     void setSentenceBack(String[] strings);
 
     String[] getSentenceExplain();
@@ -29,5 +31,9 @@ public interface Lesson {
     void setSentenceExplain(String[] strings);
 
     String[] getSentenceClause();
+
+    int[] getSentenceClauseAorB();
+
+    int[] getPeopleImage();
 
 }

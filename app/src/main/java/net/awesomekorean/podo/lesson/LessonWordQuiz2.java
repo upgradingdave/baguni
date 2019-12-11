@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,11 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     String[] wordFront = LessonWord.wordFront;
     String[] wordBack = LessonWord.wordBack;
+    String[] wordAudio = LessonWord.wordAudio;
 
-    MediaPlayer mediaPlayer;
+    MediaPlayer mp;
+
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
     int[] checkAnswer = new int[2];
 
@@ -138,8 +142,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
             if(checkAnswer[0] == checkAnswer[1]) {  // 정답
 
-                mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct);
-                mediaPlayer.start();
+                mp = MediaPlayer.create(getContext(), R.raw.correct);
+                mp.start();
 
                 Drawable transparent = ContextCompat.getDrawable(getContext(), R.drawable.bg_transparent);
 
@@ -152,13 +156,15 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
+                playAudioWithString.playAudio(getContext(), wordAudio[checkAnswer[0]-1]);
+
 
                 isCorrectAll();
 
             } else {  // 오답
 
-                mediaPlayer = MediaPlayer.create(getContext(), R.raw.wrong);
-                mediaPlayer.start();
+                mp = MediaPlayer.create(getContext(), R.raw.wrong);
+                mp.start();
 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
@@ -199,9 +205,16 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
         correctCount++;
 
         if(correctCount == wordNo) {
-            LessonFrame.progressCount++;
-            LessonFrame.progressCount();
-            ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LessonFrame.progressCount++;
+                    LessonFrame.progressCount();
+                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
+                }
+            }, 1000);
+
         }
     }
 }

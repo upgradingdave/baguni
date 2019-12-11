@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
@@ -30,7 +31,16 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     static TextView tvSentenceBack;
     static TextView tvSentenceExplain;
 
+    static String[] sentenceFront = LessonWord.sentenceFront;
+    static String[] sentenceBack = LessonWord.sentenceBack;
+    static String[] sentenceExplain = LessonWord.sentenceExplain;
+    static String[] sentenceAudio = LessonWord.sentenceAudio;
+
+    static PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+
     LinearLayout collectResult;
+
+    Context context;
 
 
         // fragment 간 전환을 위해 만듦
@@ -44,6 +54,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
+        context = getContext();
 
         LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
@@ -57,17 +68,18 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
-        displaySentence();
+        displaySentence(context);
 
         return view;
 
     }
 
-    public static void displaySentence() {
+    public static void displaySentence(Context context) {
 
-        tvSentenceFront.setText(LessonWord.sentenceFront[lessonCount]);
-        tvSentenceBack.setText(LessonWord.sentenceBack[lessonCount]);
-        tvSentenceExplain.setText(LessonWord.sentenceExplain[lessonCount]);
+        tvSentenceFront.setText(sentenceFront[lessonCount]);
+        tvSentenceBack.setText(sentenceBack[lessonCount]);
+        tvSentenceExplain.setText(sentenceExplain[lessonCount]);
+        playAudioWithString.playAudio(context, sentenceAudio[lessonCount]);
     }
 
 
@@ -77,6 +89,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnAudio :
+                playAudioWithString.playAudio(context, sentenceAudio[lessonCount]);
                 break;
 
             case R.id.btnCollect :
@@ -96,6 +109,5 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
                 }, 1000);
                 break;
         }
-
     }
 }

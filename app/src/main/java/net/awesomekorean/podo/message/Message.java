@@ -40,6 +40,7 @@ public class Message extends AppCompatActivity {
         String userEmail = MainActivity.userEmail;
 
         list = new ArrayList<>();
+        oldMessages = new ArrayList<>();
 
         repository = new MessageRepository(this);
 

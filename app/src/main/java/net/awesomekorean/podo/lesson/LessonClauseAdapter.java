@@ -28,7 +28,7 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
     }
 
 
-    MediaPlayer mediaPlayer;
+    MediaPlayer mp;
 
     private ArrayList<LessonClauseItems> list;
 
@@ -66,7 +66,7 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
     @Override
     public int getItemViewType(int position) {
 
-        if(list.get(position).getAOrB() == 0) { // a타입
+        if(list.get(position).getAOrB() == 1) { // a타입
             return 0;
         } else {  // b타입
             return 1;

@@ -4,7 +4,7 @@ public class LessonClauseItems {
 
     private int peopleImage;
     private String clause;
-    private int clauseAudio;
+    private String clauseAudio;
     private int aOrB;
 
     public int getPeopleImage() {
@@ -23,11 +23,11 @@ public class LessonClauseItems {
         this.clause = clause;
     }
 
-    public int getClauseAudio() {
+    public String getClauseAudio() {
         return clauseAudio;
     }
 
-    public void setClauseAudio(int clauseAudio) {
+    public void setClauseAudio(String clauseAudio) {
         this.clauseAudio = clauseAudio;
     }
 

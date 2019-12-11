@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -33,7 +34,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     Lesson lesson;
 
-    ImageView btnAudio;
     Button btnCollect;
 
     LinearLayout collectResult;
@@ -44,27 +44,31 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static TextView tvWordSynonyms;
     static TextView tvWordAntonyms;
     static TextView tvWordApplication;
+    static ImageView btnAudio;
 
-    public static int lessonCount;
-    public static int lessonWordLength = 0;
-    public static int lessonSentenceLength = 0;
 
-    public static String[] wordFront;
-    public static String[] wordBack;
-    public static String[] wordPronunciation;
-    public static String[] wordAntonyms;
-    public static String[] wordSynonyms;
-    public static String[] wordApplication;
-    public static String[] wordAudio;
-    public static String[] sentenceFront;
-    public static String[] sentenceBack;
-    public static String[] sentenceExplain;
-    public static String[] sentenceClause;
-    public static String[] sentenceAudio;
+    static int lessonCount;
+    static int lessonWordLength = 0;
+    static int lessonSentenceLength = 0;
 
-    Intent intent;
+    static String[] wordFront;
+    static String[] wordBack;
+    static String[] wordPronunciation;
+    static String[] wordAntonyms;
+    static String[] wordSynonyms;
+    static String[] wordApplication;
+    static String[] wordAudio;
+    static String[] sentenceFront;
+    static String[] sentenceBack;
+    static String[] sentenceExplain;
+    static String[] sentenceAudio;
+    static String[] sentenceClause;
+    static int[] sentenceClauseAorB;
+    static int[] peopleImage;
 
-    static MediaPlayer mp;
+    Context context;
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+
 
     public static LessonWord newInstance() {
         return new LessonWord();
@@ -75,6 +79,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
+        context = getContext();
 
         LessonFrame.swipePage = getString(R.string.LESSONWORD);
         lessonCount = 0; // 레슨진도초기화 -> 저장하고 exit 했을 때는 lessonCount 를 DB에 저장해야함
@@ -101,10 +106,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 break;
         }
 
-
-        String audioFile = "word_1_1";
-        playAudio(audioFile);
-
         return view;
     }
 
@@ -126,18 +127,21 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         sentenceFront = lesson.getSentenceFront();
         sentenceBack = lesson.getSentenceBack();
         sentenceExplain = lesson.getSentenceExplain();
+        sentenceAudio = lesson.getSentenceAudio();
         sentenceClause = lesson.getSentenceClause();
+        sentenceClauseAorB = lesson.getSentenceClauseAorB();
+        peopleImage = lesson.getPeopleImage();
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
 
         LessonFrame.totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
 
-        displayWord();
+        displayWord(context);
     }
 
 
-    public static void displayWord() {
+    public void displayWord(Context context) {
         LessonFrame.progressCount();
         tvWordFront.setText(wordFront[lessonCount]);
         tvWordBack.setText(wordBack[lessonCount]);
@@ -145,18 +149,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordSynonyms.setText(wordSynonyms[lessonCount]);
         tvWordAntonyms.setText(wordAntonyms[lessonCount]);
         tvWordApplication.setText(wordApplication[lessonCount]);
-    }
-
-    // 오디오 재생 메소드
-    public void playAudio(String audioFile) {
-        String uriPath = "android.resource://" + getContext().getPackageName() + "/raw/" + audioFile;
-        System.out.println("URIPATH:"+uriPath);
-        Uri uri = Uri.parse(uriPath);
-        mp = MediaPlayer.create(getContext(), uri);
-        try {
-            mp.start();
-        }
-        catch (Exception e) {}
+        playAudioWithString.playAudio(context, wordAudio[lessonCount]);
     }
 
 
@@ -166,6 +159,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (v.getId()) {
 
             case R.id.btnAudio :
+                String audioFile = wordAudio[lessonCount];
+                playAudioWithString.playAudio(context, audioFile);
                 break;
 
             case R.id.btnCollect :

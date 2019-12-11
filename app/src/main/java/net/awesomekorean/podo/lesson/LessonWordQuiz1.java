@@ -2,6 +2,7 @@ package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
     String[] wordFront = LessonWord.wordFront;
     String[] wordBack = LessonWord.wordBack;
+    String[] wordAudio = LessonWord.wordAudio;
     String[] answerArray = new String[4]; // 현재 퀴즈 array
 
 
@@ -42,7 +44,9 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     Boolean solveWrongQuizAgain = false;
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
 
-    MediaPlayer mediaPlayer;
+    MediaPlayer mp;
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+
 
     public static LessonWordQuiz1 newInstance() {
         return new LessonWordQuiz1();
@@ -98,7 +102,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btn2.setText(answerArray[1]);
         btn3.setText(answerArray[2]);
         btn4.setText(answerArray[3]);
+
+        playAudioWithString.playAudio(getContext(), wordAudio[quizNoNow]);
     }
+
 
 
     public void makeNextQuiz(final Button selectedBtn) {
@@ -150,7 +157,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         switch (view.getId()) {
 
             case(R.id.btnAudio) :
-
+                playAudioWithString.playAudio(getContext(), wordAudio[quizNoNow]);
                 break;
 
             default :
@@ -174,8 +181,8 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
     private void answered(Button selectedBtn, int sound, int outline) {
 
-        mediaPlayer = MediaPlayer.create(getContext(), sound);
-        mediaPlayer.start();
+        mp = MediaPlayer.create(getContext(), sound);
+        mp.start();
         selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), outline));
         answer.setVisibility(View.VISIBLE);
         btnAudio.setVisibility(View.GONE);

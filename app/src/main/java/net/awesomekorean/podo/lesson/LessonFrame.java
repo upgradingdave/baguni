@@ -50,6 +50,7 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
         btnClose = findViewById(R.id.btnClose);
         btnClose.setOnClickListener(this);
 
+
         replaceFragment(lessonWord);
     }
 
