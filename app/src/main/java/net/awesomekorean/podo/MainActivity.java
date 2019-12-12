@@ -5,6 +5,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -25,11 +28,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.message.Message;
+import net.awesomekorean.podo.profile.AttendanceItem;
+import net.awesomekorean.podo.profile.Profile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
@@ -113,6 +118,56 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                         }
                     }
                 });
+
+        final Calendar cal = Calendar.getInstance();
+
+        final String today = "day"+cal.get(Calendar.DAY_OF_WEEK); // day1:일요일 ~ day7:토요일
+
+        // DB에서 출석체크 가져오고 업데이트하기
+        final DocumentReference sfDocRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(userEmail);
+
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(sfDocRef);
+                AttendanceItem attendanceItem = snapshot.toObject(AttendanceItem.class);
+
+                // 어제 출석 했는지 확인하기
+                String yesterday;
+                if(cal.get(Calendar.DAY_OF_WEEK) == 1) {
+                    yesterday = "day7";
+                } else {
+                    yesterday = "day" + cal.get(Calendar.DAY_OF_WEEK-1);
+                }
+
+                // 어제 출석 안했으면 출석부 초기화 (오늘만 출석표시)
+                if(!attendanceItem.getDay(yesterday)) {
+                    System.out.println("어제 출석하지 않았습니다");
+
+                    attendanceItem.resetDays(today);
+
+                    // 어제도 출석했으면 오늘 출석 표시
+                } else {
+                    System.out.println("어제도 출석했습니다");
+                    attendanceItem.setDay(today, true);
+                }
+
+                transaction.set(sfDocRef, attendanceItem);
+                System.out.println("DB에 출석부를 업데이트 했습니다");
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("출석부 업데이트를 성공했습니다");
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("출석부 업데이트를 실패했습니다:"+e);
+            }
+        });
     }
 
 

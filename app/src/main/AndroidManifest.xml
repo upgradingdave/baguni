@@ -17,7 +17,7 @@
         <activity android:name=".writing.WritingCorrection"></activity>
         <activity android:name=".purchase.TopUp" />
         <activity android:name=".purchase.Subscribe" />
-        <activity android:name=".Profile" />
+        <activity android:name=".profile.Profile" />
         <activity android:name=".message.Message" />
         <activity android:name=".lesson.LessonFinish" />
         <activity android:name=".qna.QnaDetail" />

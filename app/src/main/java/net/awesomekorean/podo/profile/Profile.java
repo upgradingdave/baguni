@@ -1,9 +1,11 @@
-package net.awesomekorean.podo;
+package net.awesomekorean.podo.profile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +13,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.purchase.Subscribe;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ImageView btnBack;
     ImageView userImage;
@@ -142,6 +154,34 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         evaluation.setOnClickListener(this);
         recommend.setOnClickListener(this);
         logout.setOnClickListener(this);
+
+        DocumentReference docRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(MainActivity.userEmail);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        AttendanceItem attendance = document.toObject(AttendanceItem.class);
+                        System.out.println("DB에서 출석부를 가져왔습니다");
+                        setAttendance(attendance);
+                    } else {
+                        System.out.println("출석부가 없습니다");
+                    }
+                } else {
+                    System.out.println("출석부 가져오기를 실패했습니다: "+task.getException());
+                }
+            }
+        });
+    }
+
+    private void setAttendance(AttendanceItem attendance) {
+
+        for(int i=1; i<8; i++) {
+            String dayOfWeek = "day"+i;
+            boolean b = attendance.getDay(dayOfWeek);
+            switch (dayOfWeek)
+        }
     }
 
     @Override

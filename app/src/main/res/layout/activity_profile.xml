@@ -102,13 +102,13 @@
 
             <TextView
                 android:id="@+id/tvMon"
-                android:text="M"
-                android:textColor="@color/WHITE"
-                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:text="M"
+                android:textColor="@color/WHITE"
+                android:textSize="15dp" />
 
             <ImageView
                 android:id="@+id/checkMon"

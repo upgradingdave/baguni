@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
+import net.awesomekorean.podo.profile.AttendanceItem;
 import net.awesomekorean.podo.webService.RetrofitConnection;
 import net.awesomekorean.podo.webService.User;
 
@@ -81,37 +82,6 @@ public class SignUp extends AppCompatActivity {
         passwordConfirm.addTextChangedListener(textWatcher);
         passwordConfirm.setOnFocusChangeListener(focusChangeListener);
 
-        /*
-        btnDuplicateCheck = findViewById(R.id.btnDuplicateCheck);
-        btnDuplicateCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userEmail = email.getText().toString();
-
-                retrofitConnection = new RetrofitConnection();
-                call = retrofitConnection.service().getUserByEmail(userEmail);
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        System.out.println("CODE :" +response.code());
-                        if(response.code()==404) {
-                            userEmailDuplicateOk = true;
-                            System.out.println(getString(R.string.DUPLICATE_FALSE));
-
-                        } else {
-                            userEmailDuplicateOk = false;
-                            System.out.println(getString(R.string.DUPLICATE_TRUE));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        System.out.println("FAIL");
-                    }
-                });
-            }
-        });
-*/
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +102,6 @@ public class SignUp extends AppCompatActivity {
                             // 중복 이메일 없음 -> 회원등록 성공
                         } else {
                             final User user = new User(userEmail, userPass);
-
                             CollectionReference users = db.collection(getString(R.string.DB_USERS));
                             users.document(userEmail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -142,6 +111,15 @@ public class SignUp extends AppCompatActivity {
                                     MainActivity.userEmail = userEmail;
                                     finish();
                                     startActivity(intent);
+                                }
+                            });
+
+                            final AttendanceItem attendanceItem = new AttendanceItem();
+                            CollectionReference attendance = db.collection(getString(R.string.DB_ATTENDANCE));
+                            attendance.document(userEmail).set(attendanceItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    System.out.println("출석체크 DB 를 만들었습니다");
                                 }
                             });
                         }
