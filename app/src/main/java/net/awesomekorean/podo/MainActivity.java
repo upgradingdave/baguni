@@ -5,20 +5,35 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import net.awesomekorean.podo.message.Message;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     FragmentPagerAdapter adapterViewPager;
 
@@ -28,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     ImageView btnProfile;
     ImageView btnMessage;
+    ImageView redDot;
+
     public static ImageView btnLesson;
     public static ImageView btnReading;
     public static ImageView btnWriting;
@@ -55,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
         btnMessage = findViewById(R.id.btnMessage);
+        redDot = findViewById(R.id.redDot);
         btnLesson = findViewById(R.id.btnLesson);
         btnReading = findViewById(R.id.btnReading);
         btnWriting = findViewById(R.id.btnWriting);
@@ -70,9 +88,31 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         // 프로필 이미지 동그랗게 만들기
         btnProfile.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= 21) {
             btnProfile.setClipToOutline(true);
         }
+
+
+        // 알림 메시지 실시간 리스너
+        db.collection(getString(R.string.DB_MESSAGES))
+                .whereEqualTo("userEmail", userEmail)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            System.out.println("Listening 실패: " + e);
+                            return;
+                        }
+
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc.get("isNew").equals(true)) {
+                                System.out.println("새로운 메시지가 있습니다");
+                                redDot.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                });
     }
 
 
@@ -87,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnMessage:
+                redDot.setVisibility(View.GONE);
                 intent = new Intent(this, Message.class);
                 startActivity(intent);
                 break;

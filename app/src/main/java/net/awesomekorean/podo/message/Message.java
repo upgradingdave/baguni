@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.message;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -9,6 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -27,87 +32,65 @@ public class Message extends AppCompatActivity {
 
     MessageAdapter adapter;
 
-    List<MessageItems> oldMessages;
-    List<MessageItems> newMessages;
+    String userEmail = MainActivity.userEmail;
+
     List<MessageItems> list;
-    MessageRepository repository;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        String userEmail = MainActivity.userEmail;
-
         list = new ArrayList<>();
-        oldMessages = new ArrayList<>();
 
-        repository = new MessageRepository(this);
-
-        // Room 에서 이전 메시지 불러오기
-        repository.getAll().observe(this, new Observer<List<MessageItems>>() {
-            @Override
-            public void onChanged(List<MessageItems> messageItems) {
-
-                for(MessageItems item : messageItems) {
-                    oldMessages.add(item);
-                }
-                // 리스트를 역순으로 변경
-                //Collections.reverse(oldMessages);
-
-                if(messageItems.size() > 10) {
-                    list = oldMessages.subList(0,10);
-                } else {
-                    list = oldMessages;
-                }
-
-            }
-        });
-        System.out.println("LIST: " + list);
-        // 새로운 메시지 체크하기
+        // DB 에서 일괄 불러오기
         db.collection(getString(R.string.DB_MESSAGES))
                 .whereEqualTo("userEmail", userEmail)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            System.out.println("Listen failed" + e);
-                            return;
-                        }
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                MessageItems item = doc.toObject(MessageItems.class);
+                                list.add(item);
+                                System.out.println("메시지를 불러왔습니다");
+                                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                                layoutManager.setReverseLayout(true);
+                                layoutManager.setStackFromEnd(true);
+                                recyclerView.setLayoutManager(layoutManager);
 
-                        newMessages = new ArrayList<>();
-                        for (QueryDocumentSnapshot doc : value) {
-                            MessageItems newMessage = doc.toObject(MessageItems.class);
-                            if (newMessage.getIsNew()) {
-                                System.out.println("새로운 메시지가 도착했습니다");
-                                newMessages.add(newMessage);
-                                //list.add(newMessage);
-                                adapter.notifyDataSetChanged();
+                                adapter = new MessageAdapter(list);
+                                recyclerView.setAdapter(adapter);
+
+                                if(item.getIsNew()) {
+                                    DocumentReference docRef = db.collection(getString(R.string.DB_MESSAGES)).document(doc.getId());
+
+                                    docRef.update("isNew", false)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    System.out.println("isNew를 업데이트 했습니다");
+                                                }
+                                            });
+                                }
+
                             }
                         }
                     }
                 });
 
 
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        adapter = new MessageAdapter(list);
-        recyclerView.setAdapter(adapter);
-
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 새로운 메시지를 읽음처리 하기
-                for(MessageItems item : newMessages) {
-                    item.setIsNew(false);
-                    repository = new MessageRepository(getApplicationContext());
-                    repository.insert(item);
-                }
                 finish();
             }
         });
     }
 }
+

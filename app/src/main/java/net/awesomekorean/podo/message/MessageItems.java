@@ -1,14 +1,7 @@
 package net.awesomekorean.podo.message;
 
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
-@Entity
 public class MessageItems {
 
-    @PrimaryKey(autoGenerate = true)
-    int id;
     private String userEmail;
     private String message;
     private String messageDate;
@@ -16,7 +9,6 @@ public class MessageItems {
     private int senderImage;
     private boolean isNew;
 
-    @Ignore
     public void MessageItems(){}
 
     public String getUserEmail() {

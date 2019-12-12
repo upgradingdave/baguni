@@ -41,7 +41,8 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/isNew"
+        android:id="@+id/redDot"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/btnMessage"
         app:layout_constraintEnd_toEndOf="@id/btnMessage"
         android:src="@drawable/red_dot"
