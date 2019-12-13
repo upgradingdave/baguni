@@ -168,6 +168,10 @@
         Subscription that have already been paid is not refundable.
     </string>
 
+    <string name="SIGN_OUT">Sign Out</string>
+    <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
+    <string name="CANCEL">Cancel</string>
+
     <string name="SUBSCRIBE_OPTION_A">Monthly</string>
     <string name="SUBSCRIBE_OPTION_B">Yearly</string>
     <string name="SUBSCRIBE_OPTION_C">Lifetime</string>

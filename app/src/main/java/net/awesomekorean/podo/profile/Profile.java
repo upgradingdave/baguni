@@ -1,10 +1,12 @@
 package net.awesomekorean.podo.profile;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.LessonFinish;
+import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.MessageAdapter;
 import net.awesomekorean.podo.purchase.Subscribe;
 
@@ -275,12 +278,35 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.evaluation :
+                // 다운로드 링크로 연결
                 break;
 
             case R.id.recommend :
+                intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String title = "앱 다운 링크"; // <-- 앱 다운 링크 넣기
+                intent.putExtra(Intent.EXTRA_TEXT, title);
+
+                Intent chooser = Intent.createChooser(intent, "친구에게 공유!");
+                startActivity(chooser);
                 break;
 
             case R.id.logout :
+                new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.SIGN_OUT)).setMessage(getString(R.string.SIGN_OUT_MESSAGE))
+                        .setPositiveButton(getString(R.string.SIGN_OUT), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                intent = new Intent(getApplicationContext(), SignIn.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.CANCEL), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+
+                            }
+                        })
+                        .show();
                 break;
         }
     }
@@ -303,6 +329,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         ivFlag.setImageResource(flag);
         tvLanguage.setText(getString(language));
         layoutLanguageOpen.setVisibility(View.GONE);
+        setExtendableButton(arrowLanguage, layoutLanguageOpen);
     }
 
 }
