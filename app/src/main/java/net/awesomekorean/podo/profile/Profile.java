@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -299,6 +300,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                 intent = new Intent(getApplicationContext(), SignIn.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(intent);
+                                FirebaseAuth.getInstance().signOut();
                             }
                         })
                         .setNegativeButton(getString(R.string.CANCEL), new DialogInterface.OnClickListener() {

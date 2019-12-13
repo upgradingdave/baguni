@@ -32,6 +32,7 @@
     <string name="WELCOME"> Welcome to Podo</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
+    <string name="PASSWORD_SIX_CHARACTERS_LONG">Should be at least 6 characters</string>
     <string name="WRONG_EMAIL"> Wrong email!!</string>
     <string name="WRONG_PASS"> Wrong password!!</string>
     <string name="EMAIL_EXIST">This email is already registered</string>
@@ -46,6 +47,16 @@
     <string name="NAME">Name</string>
     <string name="CONFIRM">Confirm Password</string>
     <string name="HAVEACCOUNT"> Already have an account?</string>
+
+    <string name="GOOGLE_SUCCEED">Google sign in succeed</string>
+    <string name="GOOGLE_FAILED">Google sign in failed</string>
+    <string name="FACEBOOK_SUCCEED">Facebook sign in succeed</string>
+    <string name="FACEBOOK_FAILED">Facebook sign in failed</string>
+    <string name="SIGNUP_SUCCEED">Sign up succeed!</string>
+    <string name="SIGNUP_FAILED">Sign up failed!</string>
+    <string name="SIGNIN_SUCCEED">Sign in succeed!</string>
+    <string name="SIGNIN_FAILED">Sign in failed!</string>
+
 
     <string name="ENGLISH">English</string>
     <string name="THAI">Thai</string>
@@ -223,6 +234,9 @@
 
 
     <!--번역 필요 없는 부분-->
+    <string name="facebook_app_id">1366274056887552</string>
+    <string name="fb_login_protocol_scheme">fb1366274056887552</string>
+
 
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>
@@ -241,8 +255,6 @@
     <string name="LONGCLICK_OFF">off</string>
     <string name="LESSONWORD">lessonWord</string>
     <string name="LESSONSENTENCE">lessonSentence</string>
-    <string name="SIGNUP_SUCCEED">Sign up succeed!</string>
-    <string name="SIGNUP_FAILED">Sign up failed!</string>
 
     <string name="SPECIAL_LESSON">Special lesson</string>
     <string name="COMPLETED">Completed</string>

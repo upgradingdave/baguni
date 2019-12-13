@@ -118,6 +118,7 @@
             android:layout_height="0dp">
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0.4"
                 android:layout_width="match_parent"
@@ -132,6 +133,20 @@
                     android:layout_marginLeft="15dp"
                     android:textSize="15dp"
                     />
+
+                <TextView
+                    android:id="@+id/warningPass"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/PASSWORD_SIX_CHARACTERS_LONG"
+                    android:textColor="@color/RED"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="15dp"
+                    />
+
             </LinearLayout>
 
             <EditText
@@ -139,6 +154,8 @@
                 android:layout_weight="0.6"
                 android:background="@drawable/bg_white_30_stroke_grey"
                 android:textSize="15dp"
+                android:drawableRight="@drawable/successgrey"
+                android:paddingRight="15dp"
                 android:paddingLeft="20dp"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"

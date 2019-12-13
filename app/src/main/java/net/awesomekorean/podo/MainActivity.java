@@ -3,6 +3,7 @@ package net.awesomekorean.podo;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,9 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -58,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     Intent intent;
 
-    public static String userEmail = "danny@gmail.com"; // 개발용
-    public static String userName = "danny";
+    public static String userEmail;
+    public static String userName;
+    Uri userImage;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -68,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         setContentView(R.layout.activity_main);
 
         SettingStatusBar.setStatusBar(this);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null) {
+            userEmail = user.getEmail();
+            userName = userEmail.substring(0, userEmail.lastIndexOf("@"));
+            userImage = user.getPhotoUrl();
+        }
 
 
         viewPager = findViewById(R.id.viewPager);

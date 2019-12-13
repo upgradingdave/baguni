@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,9 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -41,12 +47,14 @@ import retrofit2.Call;
 
 public class SignUp extends AppCompatActivity {
 
+    FirebaseAuth firebaseAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     EditText email;
     EditText password;
     EditText passwordConfirm;
-    Button btnDuplicateCheck;
+    TextView warningPass;
+
     Button btnSignUp;
 
     String userEmail;
@@ -62,19 +70,19 @@ public class SignUp extends AppCompatActivity {
 
     int focused;
 
-    RetrofitConnection retrofitConnection;
-    Call<User> call;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        
+        firebaseAuth = FirebaseAuth.getInstance();
 
         SettingStatusBar.setStatusBar(this);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         passwordConfirm = findViewById(R.id.passwordConfirm);
+        warningPass = findViewById(R.id.warningPass);
         email.addTextChangedListener(textWatcher);
         email.setOnFocusChangeListener(focusChangeListener);
         password.addTextChangedListener(textWatcher);
@@ -90,41 +98,36 @@ public class SignUp extends AppCompatActivity {
                 userEmail = email.getText().toString();
                 userPass = password.getText().toString();
 
-                // 중복 이메일 체크
-                DocumentReference doRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
-                doRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        // 중복 이메일 있음
-                        if (documentSnapshot.exists()) {
-                            Toast.makeText(getApplicationContext(), R.string.EMAIL_EXIST, Toast.LENGTH_LONG).show();
+                firebaseAuth.createUserWithEmailAndPassword(userEmail, userPass)
+                        .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    System.out.println("회원가입에 성공했습니다");
 
-                            // 중복 이메일 없음 -> 회원등록 성공
-                        } else {
-                            final User user = new User(userEmail, userPass);
-                            CollectionReference users = db.collection(getString(R.string.DB_USERS));
-                            users.document(userEmail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    MainActivity.userEmail = userEmail;
-                                    finish();
-                                    startActivity(intent);
-                                }
-                            });
+                                    final AttendanceItem attendanceItem = new AttendanceItem();
+                                    CollectionReference attendance = db.collection(getString(R.string.DB_ATTENDANCE));
+                                    attendance.document(userEmail).set(attendanceItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            System.out.println("출석체크 DB 를 만들었습니다");
+                                            Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            MainActivity.userEmail = userEmail;
+                                            finish();
+                                            startActivity(intent);
+                                        }
+                                    });
 
-                            final AttendanceItem attendanceItem = new AttendanceItem();
-                            CollectionReference attendance = db.collection(getString(R.string.DB_ATTENDANCE));
-                            attendance.document(userEmail).set(attendanceItem).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    System.out.println("출석체크 DB 를 만들었습니다");
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    System.out.println("회원가입에 실패했습니다");
+                                    Toast.makeText(getApplicationContext(), getString(R.string.EMAIL_EXIST),
+                                            Toast.LENGTH_SHORT).show();
                                 }
-                            });
-                        }
-                    }
-                });
+                            }
+                        });
             }
         });
 
@@ -139,6 +142,11 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
         @Override
@@ -170,9 +178,17 @@ public class SignUp extends AppCompatActivity {
                     break;
 
                 case R.id.password :
+                    warningPass.setVisibility(View.VISIBLE);
                     userPass = password.getText().toString();
-                    condition = userPass.equals(userPassConfirm);
-                    userPassOk = conditionCheck(condition, passwordConfirm);
+                    condition = userPass.length() >= 6;
+                    userPassOk = conditionCheck(condition, password);
+                    if(userPassOk) {
+                        warningPass.setVisibility(View.GONE);
+                        password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgreen, 0);
+                    } else {
+                        warningPass.setVisibility(View.VISIBLE);
+                        password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgrey, 0);
+                    }
                     break;
 
                 case R.id.passwordConfirm :

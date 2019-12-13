@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,7 +36,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -40,8 +50,11 @@ import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.profile.AttendanceItem;
 import net.awesomekorean.podo.webService.RetrofitConnection;
 import net.awesomekorean.podo.webService.User;
+
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,11 +93,12 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
     Intent intent;
 
-    int focused;
-
     static final int RC_SIGN_IN = 100;
     FirebaseAuth firebaseAuth;
     GoogleSignInClient googleSignInClient;
+
+    CallbackManager callbackManager;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -92,9 +106,13 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // Firebase 구글, 페이스북 로그인 연동
         firebaseAuth = FirebaseAuth.getInstance();
 
+        // 페이스북 로그인
+        callbackManager = CallbackManager.Factory.create();
+
+
+        // Firebase 구글 로그인 연동
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -147,6 +165,32 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         btnSend.setOnClickListener(this);
     }
 
+
+    // 페이스북 로그인 결과
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            System.out.println("성공");
+                            // 로그인 성공
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                            finish();
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_SUCCEED), Toast.LENGTH_SHORT).show();
+                        } else {
+                            System.out.println("실패");
+
+                            // 로그인 실패
+                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_FAILED), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     View.OnFocusChangeListener focusChangeListener = (new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -158,6 +202,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // 페이스북 콜백 등록
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
         // 구글로그인 버튼 응답
         if (requestCode == RC_SIGN_IN) {
@@ -174,21 +220,54 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
     // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
     // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증합니다.
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // 로그인 성공
-                            intent = new Intent(getApplicationContext(), MainActivity.class);
-                            finish();
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "Google login succeed", Toast.LENGTH_SHORT).show();
+
+                            // 로그인 성공, 출석부 있는지 확인
+                            final String userEmail = account.getEmail();
+                            DocumentReference docRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(userEmail);
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            System.out.println("출석부가 있습니다");
+                                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            finish();
+                                            startActivity(intent);
+                                            Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_SHORT).show();
+
+
+                                        } else {
+                                            System.out.println("출석부가 없습니다. 새로운 출석부를 만듭니다");
+                                            final AttendanceItem attendanceItem = new AttendanceItem();
+                                            CollectionReference attendance = db.collection(getString(R.string.DB_ATTENDANCE));
+                                            attendance.document(userEmail).set(attendanceItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    System.out.println("출석부를 만들었습니다");
+                                                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                    finish();
+                                                    startActivity(intent);
+                                                    Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        System.out.println("출석부 불러오기를 실패했습니다");
+                                    }
+                                }
+                            });
+
                         } else {
                             // 로그인 실패
-                            Toast.makeText(getApplicationContext(), "Google login failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_FAILED), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -245,34 +324,27 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 final String userEmail = email.getText().toString();
                 final String userPass = password.getText().toString();
 
-                DocumentReference docRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        // 일치하는 이메일 찾음
-                        if(documentSnapshot.exists()) {
-                            User user = documentSnapshot.toObject(User.class);
-                            // 비밀번호 일치함 -> 로그인 성공
-                            if(userPass.equals(user.getPassword())) {
-                                DocumentReference dateSignInUpdate = db.collection(getString(R.string.DB_USERS)).document(userEmail);
-                                dateSignInUpdate.update("dateSignIn", FieldValue.serverTimestamp());
-                                Toast.makeText(getApplicationContext(), "Welcome to podo, " + user.getName(), Toast.LENGTH_LONG).show();
-                                intent = new Intent(getApplicationContext(), MainActivity.class);
-                                MainActivity.userEmail = userEmail;
-                                finish();
-                                startActivity(intent);
-
-                                // 비밀번호 틀림
-                            } else {
-                                wrongPassword.setVisibility(View.VISIBLE);
+                firebaseAuth.signInWithEmailAndPassword(userEmail, userPass)
+                        .addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    System.out.println("로그인에 성공했습니다");
+                                    Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
+                                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    MainActivity.userEmail = userEmail;
+                                    finish();
+                                    startActivity(intent);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    System.out.println("로그인에 실패했습니다: "+task.getException());
+                                    Toast.makeText(getApplicationContext(), getString(R.string.SIGNUP_FAILED),
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
+                        });
 
-                            // 일치하는 이메일 없음
-                        } else {
-                            wrongEmail.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
                 break;
 
             case R.id.forgotPassword :
@@ -298,6 +370,25 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.btnSignInFacebook :
+                LoginManager loginManager = LoginManager.getInstance();
+                loginManager.logInWithReadPermissions(SignIn.this, Arrays.asList("public_profile", "email"));
+                loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        System.out.println("페이스북 로그인에 성공했습니다 : " + loginResult);
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        System.out.println("페이스북 로그인을 취소했습니다");
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        System.out.println("페이스북 로그인 중 에러가 발생했습니다");
+                    }
+                });
                 break;
 
             case R.id.btnSignUp :
