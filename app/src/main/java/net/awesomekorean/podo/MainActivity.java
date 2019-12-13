@@ -119,11 +119,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     }
                 });
 
-        final Calendar cal = Calendar.getInstance();
-
-        final String today = "day"+cal.get(Calendar.DAY_OF_WEEK); // day1:일요일 ~ day7:토요일
-
         // DB에서 출석체크 가져오고 업데이트하기
+        final Calendar cal = Calendar.getInstance();
+        final int todayNo = cal.get(Calendar.DAY_OF_WEEK);
+        final int yesterdayNo = todayNo - 1;
+        final String today = "day" + todayNo; // day1:일요일 ~ day7:토요일
+
         final DocumentReference sfDocRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(userEmail);
 
         db.runTransaction(new Transaction.Function<Void>() {
@@ -134,16 +135,15 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
                 // 어제 출석 했는지 확인하기
                 String yesterday;
-                if(cal.get(Calendar.DAY_OF_WEEK) == 1) {
+                if(todayNo == 1) {
                     yesterday = "day7";
                 } else {
-                    yesterday = "day" + cal.get(Calendar.DAY_OF_WEEK-1);
+                    yesterday = "day" + yesterdayNo;
                 }
 
                 // 어제 출석 안했으면 출석부 초기화 (오늘만 출석표시)
                 if(!attendanceItem.getDay(yesterday)) {
                     System.out.println("어제 출석하지 않았습니다");
-
                     attendanceItem.resetDays(today);
 
                     // 어제도 출석했으면 오늘 출석 표시

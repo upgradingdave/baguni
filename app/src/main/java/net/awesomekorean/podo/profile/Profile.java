@@ -2,6 +2,8 @@ package net.awesomekorean.podo.profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +23,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.LessonFinish;
+import net.awesomekorean.podo.message.MessageAdapter;
 import net.awesomekorean.podo.purchase.Subscribe;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,28 +39,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     ImageView userImage;
     TextView userName;
     TextView userPoint;
-
-    LinearLayout layoutMon;
-    TextView tvMon;
-    ImageView checkMon;
-    LinearLayout layoutTue;
-    TextView tvTue;
-    ImageView checkTue;
-    LinearLayout layoutWed;
-    TextView tvWed;
-    ImageView checkWed;
-    LinearLayout layoutThur;
-    TextView tvThur;
-    ImageView checkThur;
-    LinearLayout layoutFri;
-    TextView tvFri;
-    ImageView checkFri;
-    LinearLayout layoutSat;
-    TextView tvSat;
-    ImageView checkSat;
-    LinearLayout layoutSun;
-    TextView tvSun;
-    ImageView checkSun;
 
     LinearLayout btnGetPoint;
 
@@ -82,6 +68,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     Intent intent;
 
+    AttendanceAdapter adapter;
+    List<DayOfWeekItem> list = new ArrayList<>();
+
+    int attendanceCount = 0; // 출석체크 카운트 (연속출석 7번 했는지 확인)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,28 +82,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         userImage = findViewById(R.id.userImage);
         userName = findViewById(R.id.userName);
         userPoint = findViewById(R.id.userPoint);
-
-        layoutMon = findViewById(R.id.layoutMon);
-        tvMon = findViewById(R.id.tvMon);
-        checkMon = findViewById(R.id.checkMon);
-        layoutTue = findViewById(R.id.layoutTue);
-        tvTue = findViewById(R.id.tvTue);
-        checkTue = findViewById(R.id.checkTue);
-        layoutWed = findViewById(R.id.layoutWed);
-        tvWed = findViewById(R.id.tvWed);
-        checkWed = findViewById(R.id.checkWed);
-        layoutThur = findViewById(R.id.layoutThur);
-        tvThur = findViewById(R.id.tvThur);
-        checkThur = findViewById(R.id.checkThur);
-        layoutFri = findViewById(R.id.layoutFri);
-        tvFri = findViewById(R.id.tvFri);
-        checkFri = findViewById(R.id.checkFri);
-        layoutSat = findViewById(R.id.layoutSat);
-        tvSat = findViewById(R.id.tvSat);
-        checkSat = findViewById(R.id.checkSat);
-        layoutSun = findViewById(R.id.layoutSun);
-        tvSun = findViewById(R.id.tvSun);
-        checkSun = findViewById(R.id.checkSun);
 
         btnGetPoint = findViewById(R.id.btnGetPoint);
 
@@ -179,8 +148,52 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         for(int i=1; i<8; i++) {
             String dayOfWeek = "day"+i;
-            boolean b = attendance.getDay(dayOfWeek);
-            switch (dayOfWeek)
+            boolean isChecked = attendance.getDay(dayOfWeek);
+
+            DayOfWeekItem item = new DayOfWeekItem();
+            switch (dayOfWeek) {
+                case "day1" :
+                    setItems(item, "S", isChecked);
+                    break;
+                case "day2" :
+                    setItems(item, "M", isChecked);
+                    break;
+                case "day3" :
+                    setItems(item, "T", isChecked);
+                    break;
+                case "day4" :
+                    setItems(item, "W", isChecked);
+                    break;
+                case "day5" :
+                    setItems(item, "TH", isChecked);
+                    break;
+                case "day6" :
+                    setItems(item, "F", isChecked);
+                    break;
+                case "day7" :
+                    setItems(item, "S", isChecked);
+                    break;
+            }
+        }
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new AttendanceAdapter(list);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    private void setItems(DayOfWeekItem item, String day, boolean isChecked) {
+        item.setDay(day);
+        item.setChecked(isChecked);
+        list.add(item);
+        attendanceCount++;
+
+        // 일주일 출석 개근일 때
+        if(attendanceCount == 7) {
+            // Get 버튼 활성화
         }
     }
 
@@ -194,6 +207,16 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btnGetPoint :
+                // 일주일 모두 출석했으면 오늘 출석만 남기고 다 초기화
+                Calendar cal = Calendar.getInstance();
+                String today = "day" + cal.get(Calendar.DAY_OF_WEEK); // day1:일요일 ~ day7:토요일
+                AttendanceItem attendanceItem = new AttendanceItem();
+                attendanceItem.resetDays(today);
+                db.collection(getString(R.string.DB_ATTENDANCE)).document(MainActivity.userEmail).set(attendanceItem);
+                System.out.println("일주일 모두 출석! DB의 출석부를 초기화 했습니다");
+
+                intent = new Intent(this, LessonFinish.class);
+                startActivity(intent);
                 break;
 
             case R.id.editProfile :

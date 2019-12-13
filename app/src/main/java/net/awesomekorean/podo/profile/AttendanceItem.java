@@ -12,6 +12,7 @@ public class AttendanceItem {
 
     public void AttendanceItem() {}
 
+
     public boolean isDay1() {
         return day1;
     }
