@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,11 +44,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout btnGetPoint;
 
-    LinearLayout editProfile;
-    LinearLayout editProfileOpen;
+    LinearLayout layoutEditName;
+    LinearLayout layoutEditNameOpen;
     EditText editName;
-    EditText editEmail;
-    EditText editPassword;
     Button btnSave;
 
     LinearLayout purchase;
@@ -66,12 +66,17 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     LinearLayout recommend;
     LinearLayout logout;
 
+    ImageView arrowEditProfile;
+    ImageView arrowLanguage;
+
     Intent intent;
 
     AttendanceAdapter adapter;
     List<DayOfWeekItem> list = new ArrayList<>();
 
     int attendanceCount = 0; // 출석체크 카운트 (연속출석 7번 했는지 확인)
+
+    boolean btnExtendClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +90,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         btnGetPoint = findViewById(R.id.btnGetPoint);
 
-        editProfile = findViewById(R.id.editProfile);
-        editProfileOpen = findViewById(R.id.editProfileOpen);
+        layoutEditName = findViewById(R.id.layoutEditName);
+        layoutEditNameOpen = findViewById(R.id.layoutEditNameOpen);
         editName = findViewById(R.id.editName);
-        editEmail = findViewById(R.id.editEmail);
-        editPassword = findViewById(R.id.editPassword);
         btnSave = findViewById(R.id.btnSave);
 
         purchase = findViewById(R.id.purchase);
@@ -109,9 +112,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         recommend = findViewById(R.id.recommend);
         logout = findViewById(R.id.logout);
 
+        arrowEditProfile = findViewById(R.id.arrowEditProfile);
+        arrowLanguage = findViewById(R.id.arrowLanguage);
+
         btnBack.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
-        editProfile.setOnClickListener(this);
+        layoutEditName.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         purchase.setOnClickListener(this);
         layoutLanguage.setOnClickListener(this);
@@ -144,6 +150,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
+
+    // 출석체크 리사이클러뷰 세팅
     private void setAttendance(AttendanceItem attendance) {
 
         for(int i=1; i<8; i++) {
@@ -219,12 +227,22 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
                 break;
 
-            case R.id.editProfile :
-                editProfileOpen.setVisibility(View.VISIBLE);
+            case R.id.layoutEditName :
+                setExtendableButton(arrowEditProfile, layoutEditNameOpen);
                 break;
 
             case R.id.btnSave :
-                editProfileOpen.setVisibility(View.GONE);
+                String newName = editName.getText().toString();
+                DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail);
+                reference.update("name", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.SAVE_NEW_NAME), Toast.LENGTH_LONG).show();
+                        System.out.println("이름을 변경했습니다");
+                    }
+                });
+
+                setExtendableButton(arrowEditProfile, layoutEditNameOpen);
                 break;
 
             case R.id.purchase :
@@ -233,7 +251,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.layoutLanguage :
-                layoutLanguageOpen.setVisibility(View.VISIBLE);
+                setExtendableButton(arrowLanguage, layoutLanguageOpen);
                 break;
 
             case R.id.layoutEnglish :
@@ -267,6 +285,20 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    // editProfile 이랑 language 펼치기/접기 메소드
+    private void setExtendableButton(ImageView arrow, LinearLayout closedLayout) {
+        if(!btnExtendClicked) {
+            arrow.setImageResource(R.drawable.arrow_down_grey);
+            closedLayout.setVisibility(View.VISIBLE);
+            btnExtendClicked = true;
+        } else {
+            arrow.setImageResource(R.drawable.arrow_right_grey);
+            closedLayout.setVisibility(View.GONE);
+            btnExtendClicked = false;
+        }
+    }
+
+    // 언어 선택 메소드
     private void setLanguage(int flag, int language) {
         ivFlag.setImageResource(flag);
         tvLanguage.setText(getString(language));

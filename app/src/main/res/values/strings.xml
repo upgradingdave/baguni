@@ -154,11 +154,12 @@
 
     <string name="GET">Get</string>
 
-    <string name="EDIT_PROFILE">Edit Profile</string>
+    <string name="EDIT_NAME">Edit Name</string>
     <string name="PURCHASE_PACKAGE">Purchase package</string>
     <string name="EVALUATION_APP">Evaluation this app</string>
     <string name="RECOMMEND">Recommend this app</string>
     <string name="LOG_OUT">Log out</string>
+    <string name="SAVE_NEW_NAME">Saved new name</string>
 
     <string name="GO_PREMIUM">Go Premium</string>
     <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
