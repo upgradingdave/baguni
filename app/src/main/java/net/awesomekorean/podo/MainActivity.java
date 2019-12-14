@@ -1,6 +1,8 @@
 package net.awesomekorean.podo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
@@ -38,6 +40,11 @@ import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.AttendanceItem;
 import net.awesomekorean.podo.profile.Profile;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     public static String userEmail;
     public static String userName;
-    Uri userImage;
+    public static Uri userImage;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -73,14 +80,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         setContentView(R.layout.activity_main);
 
         SettingStatusBar.setStatusBar(this);
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
-            userEmail = user.getEmail();
-            userName = userEmail.substring(0, userEmail.lastIndexOf("@"));
-            userImage = user.getPhotoUrl();
-        }
-
 
         viewPager = findViewById(R.id.viewPager);
         adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager());
@@ -103,11 +102,21 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnCollection.setOnClickListener(this);
         btnQnA.setOnClickListener(this);
 
-        // 프로필 이미지 동그랗게 만들기
-        btnProfile.setBackground(new ShapeDrawable(new OvalShape()));
-        if (Build.VERSION.SDK_INT >= 21) {
-            btnProfile.setClipToOutline(true);
+
+        // 유저정보 가져오기
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null) {
+            userEmail = user.getEmail();
+            if(user.getDisplayName() != null) {
+                userName = user.getDisplayName();
+            }else {
+                userName = userEmail.substring(0, userEmail.lastIndexOf("@"));
+            }
+            userImage = user.getPhotoUrl();
+            System.out.println("userName:"+user.getDisplayName());
         }
+
 
 
         // 알림 메시지 실시간 리스너
