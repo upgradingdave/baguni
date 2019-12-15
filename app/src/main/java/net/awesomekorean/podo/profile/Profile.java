@@ -146,6 +146,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         logout.setOnClickListener(this);
 
         userName.setText(MainActivity.userName);
+        userPoint.setText(String.valueOf(MainActivity.userInformation.getPoints()));
 
         // 유저프로필사진 가져오기
         final Uri profileImage = MainActivity.userImage;
@@ -179,56 +180,37 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
         }
 
-
-        DocumentReference docRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(MainActivity.userEmail);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        AttendanceItem attendance = document.toObject(AttendanceItem.class);
-                        System.out.println("DB에서 출석부를 가져왔습니다");
-                        setAttendance(attendance);
-                    } else {
-                        System.out.println("출석부가 없습니다");
-                    }
-                } else {
-                    System.out.println("출석부 가져오기를 실패했습니다: "+task.getException());
-                }
-            }
-        });
+        setAttendance(MainActivity.userInformation.getAttendance());
     }
 
 
     // 출석체크 리사이클러뷰 세팅
-    private void setAttendance(AttendanceItem attendance) {
+    private void setAttendance(List<Boolean> attendance) {
 
-        for(int i=1; i<8; i++) {
-            String dayOfWeek = "day"+i;
-            boolean isChecked = attendance.getDay(dayOfWeek);
+        for(int i=0; i<7; i++) {
+            boolean isChecked = attendance.get(i);
 
             DayOfWeekItem item = new DayOfWeekItem();
-            switch (dayOfWeek) {
-                case "day1" :
+            switch (i) {
+                case 0 :
                     setItems(item, "S", isChecked);
                     break;
-                case "day2" :
+                case 1 :
                     setItems(item, "M", isChecked);
                     break;
-                case "day3" :
+                case 2 :
                     setItems(item, "T", isChecked);
                     break;
-                case "day4" :
+                case 3 :
                     setItems(item, "W", isChecked);
                     break;
-                case "day5" :
+                case 4 :
                     setItems(item, "TH", isChecked);
                     break;
-                case "day6" :
+                case 5 :
                     setItems(item, "F", isChecked);
                     break;
-                case "day7" :
+                case 6 :
                     setItems(item, "S", isChecked);
                     break;
             }
@@ -247,7 +229,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         item.setDay(day);
         item.setChecked(isChecked);
         list.add(item);
-        attendanceCount++;
+
+        if(isChecked){
+            attendanceCount++;
+        }
 
         // 일주일 출석 개근일 때
         if(attendanceCount == 7) {
@@ -267,10 +252,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnGetPoint :
                 // 일주일 모두 출석했으면 오늘 출석만 남기고 다 초기화
                 Calendar cal = Calendar.getInstance();
-                String today = "day" + cal.get(Calendar.DAY_OF_WEEK); // day1:일요일 ~ day7:토요일
-                AttendanceItem attendanceItem = new AttendanceItem();
-                attendanceItem.resetDays(today);
-                db.collection(getString(R.string.DB_ATTENDANCE)).document(MainActivity.userEmail).set(attendanceItem);
+                int today = cal.get(Calendar.DAY_OF_WEEK); // 1:일요일 ~ 7:토요일
+                MainActivity.userInformation.resetDays(today);
+                db.collection(getString(R.string.DB_USERINFO)).document(MainActivity.userEmail).set(MainActivity.userInformation);
                 System.out.println("일주일 모두 출석! DB의 출석부를 초기화 했습니다");
 
                 intent = new Intent(this, LessonFinish.class);

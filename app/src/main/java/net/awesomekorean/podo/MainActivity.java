@@ -1,10 +1,6 @@
 package net.awesomekorean.podo;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.os.Build;
 
@@ -16,7 +12,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +21,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -37,14 +31,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.message.Message;
-import net.awesomekorean.podo.profile.AttendanceItem;
 import net.awesomekorean.podo.profile.Profile;
+import net.awesomekorean.podo.profile.UserInformation;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
@@ -72,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static String userEmail;
     public static String userName;
     public static Uri userImage;
+
+    public static UserInformation userInformation;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -114,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 userName = userEmail.substring(0, userEmail.lastIndexOf("@"));
             }
             userImage = user.getPhotoUrl();
-            System.out.println("userName:"+user.getDisplayName());
         }
 
 
@@ -140,40 +130,39 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     }
                 });
 
-        // DB에서 출석체크 가져오고 업데이트하기
+        // DB에서 유저정보(출석부, 포인트, 레슨완료, 읽기완료, 스페셜레슨해제) 가져오고 업데이트하기
         final Calendar cal = Calendar.getInstance();
-        final int todayNo = cal.get(Calendar.DAY_OF_WEEK);
-        final int yesterdayNo = todayNo - 1;
-        final String today = "day" + todayNo; // day1:일요일 ~ day7:토요일
+        final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일
 
-        final DocumentReference sfDocRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(userEmail);
+        final DocumentReference sfDocRef = db.collection(getString(R.string.DB_USERINFO)).document(userEmail);
 
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
                 DocumentSnapshot snapshot = transaction.get(sfDocRef);
-                AttendanceItem attendanceItem = snapshot.toObject(AttendanceItem.class);
+                UserInformation userInformationFromDB = snapshot.toObject(UserInformation.class);
 
                 // 어제 출석 했는지 확인하기
-                String yesterday;
-                if(todayNo == 1) {
-                    yesterday = "day7";
+                int yesterday;
+                if(today == 0) {
+                    yesterday = 6;
                 } else {
-                    yesterday = "day" + yesterdayNo;
+                    yesterday = today - 1;
                 }
 
                 // 어제 출석 안했으면 출석부 초기화 (오늘만 출석표시)
-                if(!attendanceItem.getDay(yesterday)) {
+                if(!userInformationFromDB.getAttendance().get(yesterday)) {
                     System.out.println("어제 출석하지 않았습니다");
-                    attendanceItem.resetDays(today);
+                    userInformationFromDB.resetDays(today);
 
                     // 어제도 출석했으면 오늘 출석 표시
                 } else {
                     System.out.println("어제도 출석했습니다");
-                    attendanceItem.setDay(today, true);
+                    userInformationFromDB.setDay(today);
                 }
 
-                transaction.set(sfDocRef, attendanceItem);
+                transaction.set(sfDocRef, userInformationFromDB);
+                userInformation = userInformationFromDB;
                 System.out.println("DB에 출석부를 업데이트 했습니다");
                 return null;
             }

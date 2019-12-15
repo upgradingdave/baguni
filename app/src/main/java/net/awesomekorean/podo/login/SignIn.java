@@ -3,9 +3,6 @@ package net.awesomekorean.podo.login;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +22,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,27 +34,18 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
-import net.awesomekorean.podo.collection.CollectionRepository;
-import net.awesomekorean.podo.profile.AttendanceItem;
-import net.awesomekorean.podo.webService.RetrofitConnection;
-import net.awesomekorean.podo.webService.User;
+import net.awesomekorean.podo.profile.UserInformation;
 
 import java.util.Arrays;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity implements Button.OnClickListener {
 
@@ -230,14 +217,14 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                             // 로그인 성공, 출석부 있는지 확인
                             final String userEmail = account.getEmail();
-                            DocumentReference docRef = db.collection(getString(R.string.DB_ATTENDANCE)).document(userEmail);
+                            DocumentReference docRef = db.collection(getString(R.string.DB_USERINFO)).document(userEmail);
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.isSuccessful()) {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
-                                            System.out.println("출석부가 있습니다");
+                                            System.out.println("유저정보가 있습니다");
                                             intent = new Intent(getApplicationContext(), MainActivity.class);
                                             finish();
                                             startActivity(intent);
@@ -246,12 +233,12 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                                         } else {
                                             System.out.println("출석부가 없습니다. 새로운 출석부를 만듭니다");
-                                            final AttendanceItem attendanceItem = new AttendanceItem();
-                                            CollectionReference attendance = db.collection(getString(R.string.DB_ATTENDANCE));
-                                            attendance.document(userEmail).set(attendanceItem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            final UserInformation userInformation = new UserInformation();
+                                            CollectionReference reference = db.collection(getString(R.string.DB_USERINFO));
+                                            reference.document(userEmail).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    System.out.println("출석부를 만들었습니다");
+                                                    System.out.println("유저정보 DB를 만들었습니다");
                                                     intent = new Intent(getApplicationContext(), MainActivity.class);
                                                     finish();
                                                     startActivity(intent);
@@ -260,7 +247,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                             });
                                         }
                                     } else {
-                                        System.out.println("출석부 불러오기를 실패했습니다");
+                                        System.out.println("유저정보 불러오기를 실패했습니다");
                                     }
                                 }
                             });
