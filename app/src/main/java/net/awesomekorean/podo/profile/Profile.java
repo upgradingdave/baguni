@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -266,15 +267,27 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btnSave :
-                String newName = editName.getText().toString();
-                DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail);
-                reference.update("name", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), getString(R.string.SAVE_NEW_NAME), Toast.LENGTH_LONG).show();
-                        System.out.println("이름을 변경했습니다");
-                    }
-                });
+                final String newName = editName.getText().toString();
+
+                if(newName != null) {
+                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(newName)
+                            .build();
+
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        System.out.println("userName을 업데이트 했습니다");
+                                        Toast.makeText(getApplicationContext(), getString(R.string.UPDATE_USERNAME), Toast.LENGTH_SHORT).show();
+                                        MainActivity.userName = user.getDisplayName();
+                                        userName.setText(newName);
+                                    }
+                                }
+                            });
+                }
 
                 setExtendableButton(arrowEditProfile, layoutEditNameOpen);
                 break;

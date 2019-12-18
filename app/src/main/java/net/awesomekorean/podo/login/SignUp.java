@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.protobuf.EnumValue;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -33,6 +35,7 @@ public class SignUp extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    ImageView btnBack;
     EditText email;
     EditText password;
     EditText passwordConfirm;
@@ -62,6 +65,7 @@ public class SignUp extends AppCompatActivity {
 
         SettingStatusBar.setStatusBar(this);
 
+        btnBack = findViewById(R.id.btnBack);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         passwordConfirm = findViewById(R.id.passwordConfirm);
@@ -111,6 +115,13 @@ public class SignUp extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

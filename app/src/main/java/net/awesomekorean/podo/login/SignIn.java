@@ -28,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -154,6 +155,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
 
     // 페이스북 로그인 결과
+    // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
+    // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증합니다.
     private void handleFacebookAccessToken(AccessToken accessToken) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
@@ -205,8 +208,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         }
     }
 
-    // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
-    // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증합니다.
     private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
@@ -312,26 +313,29 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 final String userPass = password.getText().toString();
 
                 firebaseAuth.signInWithEmailAndPassword(userEmail, userPass)
-                        .addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
+                        .addOnSuccessListener(SignIn.this, new OnSuccessListener<AuthResult>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    System.out.println("로그인에 성공했습니다");
-                                    Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
-                                    intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    MainActivity.userEmail = userEmail;
-                                    finish();
-                                    startActivity(intent);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    System.out.println("로그인에 실패했습니다: "+task.getException());
-                                    Toast.makeText(getApplicationContext(), getString(R.string.SIGNUP_FAILED),
-                                            Toast.LENGTH_SHORT).show();
-                                }
+                            public void onSuccess(AuthResult authResult) {
+                                // Sign in success, update UI with the signed-in user's information
+                                System.out.println("로그인에 성공했습니다");
+                                Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
+                                intent = new Intent(getApplicationContext(), MainActivity.class);
+                                MainActivity.userEmail = userEmail;
+                                finish();
+                                startActivity(intent);
+
+                            }
+                        })
+
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                System.out.println("로그인에 실패했습니다" + e.getMessage());
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(getApplicationContext(), e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
                             }
                         });
-
                 break;
 
             case R.id.forgotPassword :

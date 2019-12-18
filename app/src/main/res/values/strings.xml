@@ -57,6 +57,8 @@
     <string name="SIGNIN_SUCCEED">Sign in succeed!</string>
     <string name="SIGNIN_FAILED">Sign in failed!</string>
 
+    <string name="UPDATE_USERNAME">Updated user name</string>
+
 
     <string name="ENGLISH">English</string>
     <string name="THAI">Thai</string>

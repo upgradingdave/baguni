@@ -121,7 +121,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
                                 if (snapshot != null && snapshot.exists()) {
                                     WritingEntity download = snapshot.toObject(WritingEntity.class);
-                                    System.out.println("글쓰기 교정 중입니다.");
+                                    System.out.println("완료된 글쓰기 교정이 없습니다.");
 
                                     if(download.getIsCorrected()==2) {
                                         System.out.println("글쓰기 교정이 완료되었습니다");
