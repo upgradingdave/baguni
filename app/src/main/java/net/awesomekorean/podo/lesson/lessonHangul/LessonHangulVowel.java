@@ -24,4 +24,11 @@ class LessonHangulVowel implements Hangul{
         return hangulIntro;
     }
 
+    @Override
+    public String getHangulAudio(int index) {
+        String vowel = "vowel_" + index;
+        return vowel;
+    }
+
+
 }

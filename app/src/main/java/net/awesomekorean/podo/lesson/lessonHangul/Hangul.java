@@ -8,4 +8,6 @@ public interface Hangul {
 
     String getHangulIntro();
 
+    String getHangulAudio(int index);
+
 }

@@ -79,4 +79,9 @@ class LessonHangulBatchim implements Hangul{
         return hangulIntro;
     }
 
+    @Override
+    public String getHangulAudio(int index) {
+        String batchim = "batchim_" + index;
+        return batchim;
+    }
 }

@@ -18,6 +18,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.PlayAudioWithString;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -34,8 +36,6 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     ImageView imageViewHangul;
 
-    MediaPlayer mediaPlayer;
-
     String[] hangul;
     String[] hangulExplain;
     String hangulIntro;
@@ -51,11 +51,17 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     Button btnIntro;
     ImageView btnBack;
 
+    PlayAudioWithString playAudioWithString =  new PlayAudioWithString();
+
+    Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul);
+
+        context = getApplicationContext();
 
         layoutHangul = findViewById(R.id.layoutHangul);
         textViewHangul = findViewById(R.id.textViewHangul);
@@ -124,7 +130,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
             }
         });
 
-//        audioPlay();
+        audioPlay();
 
     }
 
@@ -134,7 +140,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                System.out.println("Listening button clicked");
+                audioPlay();
                 break;
 
             case R.id.btnWriting :
@@ -221,16 +227,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     public void audioPlay() {
 
-        mediaPlayer = new MediaPlayer();
-
-        String string = "R.raw.sample";
-
-        int currentPlay = getResources().getIdentifier(string, "raw", getPackageName());
-
-
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), currentPlay);
-
-        mediaPlayer.start();
+        String audioFile = thisHangul.getHangulAudio(currentHangul);
+        playAudioWithString.playAudio(context, audioFile);
     }
 
 
@@ -238,6 +236,6 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         textViewHangul.setText(conVow[currentHangul]);
         textViewHangulExplain.setText(conVowExplain[currentHangul]);
-
+        audioPlay();
     }
 }

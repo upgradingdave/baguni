@@ -21,4 +21,10 @@ public class LessonHangulConsonant implements Hangul {
     public String getHangulIntro() {
         return hangulIntro;
     }
+
+    @Override
+    public String getHangulAudio(int index) {
+        String consonant = "consonant_" + index;
+        return consonant;
+    }
 }
