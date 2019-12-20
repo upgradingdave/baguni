@@ -131,6 +131,8 @@
     <string name="SPEED">Speed x0.8</string>
 
     <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
+    <string name="CONFIRM_QUIT">Do you want to go back to main? (progress will not be saved)</string>
+
 
     <string name="HANGUL">Hangul</string>
     <string name="CONSONANT">Consonant</string>

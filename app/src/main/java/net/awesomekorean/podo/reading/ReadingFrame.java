@@ -172,6 +172,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             readingArticle.setText(span);
             readingArticle.setMovementMethod(LinkMovementMethod.getInstance());
         }
+
         readingArticle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

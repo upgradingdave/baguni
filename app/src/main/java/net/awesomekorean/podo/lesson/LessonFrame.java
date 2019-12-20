@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,6 +28,9 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
     public static TextView progressTextView;
 
     ImageView btnClose;
+    LinearLayout confirmQuit;
+    Button btnNo;
+    Button btnYes;
 
     Intent intent;
 
@@ -47,9 +51,13 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
         progressCount = 1;
         progressBar = findViewById(R.id.progressBar);
         progressTextView = findViewById(R.id.progressTextView);
+        confirmQuit = findViewById(R.id.confirmQuit);
+        btnNo = findViewById(R.id.btnNo);
+        btnYes = findViewById(R.id.btnYes);
         btnClose = findViewById(R.id.btnClose);
         btnClose.setOnClickListener(this);
-
+        btnNo.setOnClickListener(this);
+        btnYes.setOnClickListener(this);
 
         replaceFragment(lessonWord);
     }
@@ -85,7 +93,15 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
         switch (view.getId()) {
 
             case R.id.btnClose :
-                // 저장여부 묻는 창 띄우기
+                confirmQuit.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.btnNo :
+                confirmQuit.setVisibility(View.GONE);
+                break;
+
+            case R.id.btnYes :
+                finish();
                 break;
         }
     }
