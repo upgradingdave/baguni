@@ -132,7 +132,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         arrowLanguage = findViewById(R.id.arrowLanguage);
 
         btnBack.setOnClickListener(this);
-        btnGetPoint.setOnClickListener(this);
         layoutEditName.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         purchase.setOnClickListener(this);
@@ -235,9 +234,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             attendanceCount++;
         }
 
-        // 일주일 출석 개근일 때
+        // 일주일 출석 개근일 때 Get 버튼 활성화
         if(attendanceCount == 7) {
-            // Get 버튼 활성화
+            btnGetPoint.setOnClickListener(this);
         }
     }
 

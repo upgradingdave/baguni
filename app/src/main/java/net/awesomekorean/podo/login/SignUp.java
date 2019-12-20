@@ -23,12 +23,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.protobuf.EnumValue;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
-import net.awesomekorean.podo.profile.UserInformation;
+import net.awesomekorean.podo.UserInformation;
 
 public class SignUp extends AppCompatActivity {
 

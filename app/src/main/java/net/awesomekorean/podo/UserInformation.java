@@ -1,4 +1,4 @@
-package net.awesomekorean.podo.profile;
+package net.awesomekorean.podo;
 
 import java.util.ArrayList;
 import java.util.List;

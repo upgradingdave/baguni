@@ -32,7 +32,6 @@ import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
-import net.awesomekorean.podo.profile.UserInformation;
 
 import java.util.Calendar;
 
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     Intent intent;
 
-    public static String userEmail;
+    public static String userEmail = "gabmanpark@gmail.com";
     public static String userName;
     public static Uri userImage;
 

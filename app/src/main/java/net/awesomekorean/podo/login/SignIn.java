@@ -44,7 +44,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
-import net.awesomekorean.podo.profile.UserInformation;
+import net.awesomekorean.podo.UserInformation;
 
 import java.util.Arrays;
 
