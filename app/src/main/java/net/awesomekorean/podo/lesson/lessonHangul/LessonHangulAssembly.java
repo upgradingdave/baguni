@@ -1,6 +1,9 @@
 package net.awesomekorean.podo.lesson.lessonHangul;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -12,12 +15,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import net.awesomekorean.podo.R;
+
+import java.io.IOException;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class LessonHangulAssembly extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     TextView textViewIntro;
     TextView assemblyTextView;
@@ -78,10 +89,16 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     public View.OnClickListener hangulBoxBtnSelected;
 
+    Context context;
+
+    String audioFile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul_assembly);
+
+        context = getApplicationContext();
 
         hangulBox = findViewById(R.id.hangulBox);
         consonantBoxLayout1 = findViewById(R.id.consonantBox1);
@@ -124,6 +141,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View view) {
 
+                audioFile = null;
                 Button selectedBtn = (Button) view;
                 String selectedHangul = selectedBtn.getText().toString();
 
@@ -137,9 +155,13 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
                 if(consonantSelected == true && vowelSelected == true && batchimSelected == false) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel);
+                    audioFile = hangul.getAudioFile();
+                    playAudio(audioFile);
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else if(consonantSelected == true && vowelSelected == true && batchimSelected == true) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel, selectedBatchim);
+                    audioFile = hangul.getAudioFile();
+                    playAudio(audioFile);
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else {
                     assemblyTextView.setText(selectedHangul);
@@ -151,12 +173,38 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         cvH.callOnClick();
     }
 
+
+    // 저장소에서 오디오 재생하기
+    public void playAudio(String audioFile) {
+        StorageReference storageRef = storage.getReference().child("assy").child(audioFile);
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                try {
+                    mediaPlayer.setDataSource(context, uri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaPlayer.start();
+            }
+        });
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.btnAudio :
-
+                if(audioFile != null) {
+                    playAudio(audioFile);
+                }
                 break;
 
             case R.id.cvH :

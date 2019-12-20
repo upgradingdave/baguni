@@ -1,6 +1,8 @@
 package net.awesomekorean.podo.lesson.lessonHangul;
 
+
 public class HangulUniCode {
+
 
     private final String[] cho = { "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ" ,"ㅆ", "ㅇ" ,"ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ" ,"ㅍ", "ㅎ" };
     private final String[] jung = { "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"};
@@ -12,6 +14,8 @@ public class HangulUniCode {
 
     private int assembledUniCode;
     private String assembledHangul;
+
+    private String audioFile;
 
 
     public HangulUniCode(String a, String b) {
@@ -25,6 +29,7 @@ public class HangulUniCode {
 
         assembledHangul = Character.toString(cv);
 
+        audioFile = "assy_" + indexCho+indexJung + ".mp3";
     }
 
 
@@ -39,6 +44,8 @@ public class HangulUniCode {
         char cvc = (char) assembledUniCode;
 
         assembledHangul = Character.toString(cvc);
+
+        audioFile = "assy_" + indexCho+indexJung+indexJong + ".mp3";
     }
 
 
@@ -54,6 +61,8 @@ public class HangulUniCode {
 
         return index;
     }
+
+    public String getAudioFile() {return audioFile;}
 
 
     public String getAssembledHangul() {
