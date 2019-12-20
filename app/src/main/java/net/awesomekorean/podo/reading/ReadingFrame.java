@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.reading.readings.Reading0;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 

@@ -30,9 +30,9 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
 
 
-    private ArrayList<LessonItems> list;
+    private ArrayList<LessonItem> list;
 
-    public LessonAdapter(ArrayList<LessonItems> list) {
+    public LessonAdapter(ArrayList<LessonItem> list) {
         this.list = list;
     }
 
@@ -102,7 +102,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        LessonItems items = list.get(position);
+        LessonItem items = list.get(position);
         int viewType = holder.getItemViewType();
 
         if(viewType==0) {

@@ -1,8 +1,17 @@
-package net.awesomekorean.podo.lesson;
+package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.Lesson;
+import net.awesomekorean.podo.lesson.LessonItem;
 
-public class Lesson1 implements Lesson{
+public class Lesson1 implements Lesson, LessonItem {
+
+    private String title = "인사";
+    private String subTitle = "여러가지 인사";
+    private int lessonImage = R.drawable.hangul;
+    private Boolean isSpecial = false;
+    private Boolean isLock = false;
+    private Boolean isCompleted = false;
 
     final static String[] wordFront = {"안녕", "다음", "또", "보다", "가다"};
     String[] wordBack = {};
@@ -126,5 +135,39 @@ public class Lesson1 implements Lesson{
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+
+    // 레슨어뎁터 아이템
+
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    @Override
+    public int getLessonImage() {
+        return lessonImage;
+    }
+
+    @Override
+    public boolean getIsSpecial() {
+        return isSpecial;
+    }
+
+    @Override
+    public boolean getIsLock() {
+        return isLock;
+    }
+
+    @Override
+    public boolean getIsCompleted() {
+        return isCompleted;
     }
 }

@@ -13,4 +13,11 @@ public interface Reading {
     String[] getPopUpFront();
 
     String[] getPopUpBack();
+
+
+    // 리딩어뎁터 아이템
+
+    int getReadingImage();
+
+    boolean getIsCompleted();
 }

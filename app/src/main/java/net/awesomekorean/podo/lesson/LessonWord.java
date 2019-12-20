@@ -1,9 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -21,12 +18,7 @@ import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import net.awesomekorean.podo.lesson.lessons.Lesson1;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
 

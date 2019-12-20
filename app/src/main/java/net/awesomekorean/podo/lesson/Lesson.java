@@ -35,5 +35,4 @@ public interface Lesson {
     int[] getSentenceClauseAorB();
 
     int[] getPeopleImage();
-
 }

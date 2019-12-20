@@ -31,16 +31,15 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
 
 
-    private ArrayList<ReadingItems> list;
+    private ArrayList<Reading> list;
 
-    public ReadingAdapter(ArrayList<ReadingItems> list) {
+    public ReadingAdapter(ArrayList<Reading> list) {
         this.list = list;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
-        TextView subTitle;
         ImageView readingImage;
         LinearLayout layoutCompleted;
 
@@ -48,7 +47,6 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
-            subTitle = itemView.findViewById(R.id.subTitle);
             readingImage = itemView.findViewById(R.id.readingImage);
             layoutCompleted = itemView.findViewById(R.id.layoutCompleted);
 
@@ -57,7 +55,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION) {
-                        ReadingItems item = list.get(position);
+                        Reading item = list.get(position);
 
                         // 아이템 클릭 이벤트
                         if(listener != null) {
@@ -82,10 +80,9 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ReadingItems items = list.get(position);
+        Reading items = list.get(position);
 
         holder.title.setText(items.getTitle());
-        holder.subTitle.setText(items.getSubTitle());
         holder.readingImage.setImageResource(items.getReadingImage());
         if(items.getIsCompleted()) { holder.layoutCompleted.setVisibility(View.VISIBLE);
         } else{holder.layoutCompleted.setVisibility(View.INVISIBLE);}

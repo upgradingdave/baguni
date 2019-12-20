@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
+import net.awesomekorean.podo.lesson.lessons.Lesson0;
+import net.awesomekorean.podo.lesson.lessons.Lesson1;
 
 import java.util.ArrayList;
 
@@ -40,35 +42,12 @@ public class MainLesson extends Fragment {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        ArrayList<LessonItems> list = new ArrayList<>();
+        ArrayList<LessonItem> list = new ArrayList<>();
 
-        LessonItems item = new LessonItems();
-        item.setTitle("Sample title");
-        item.setSubTitle("Sample subtitle");
-        item.setLessonImage(R.drawable.hangul);
-        item.setIsCompleted(true);
-        item.setIsLock(true);
-        item.setIsCompleted(true);
-        list.add(item);
-        LessonItems items = new LessonItems();
-        items.setTitle("Normal lesson title");
-        items.setSubTitle("Normal lesson sub title");
-        items.setLessonImage(R.drawable.hangul);
-        items.setIsCompleted(true);
-        items.setIsLock(true);
-        items.setIsCompleted(true);
-        items.setIsSpecial(true);
-        list.add(items);
-        list.add(item);
-        list.add(items);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
+        LessonItem item0 = new Lesson0();
+        LessonItem item1 = new Lesson1();
+        list.add(item0);
+        list.add(item1);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);

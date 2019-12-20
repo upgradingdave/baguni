@@ -1,10 +1,14 @@
-package net.awesomekorean.podo.reading;
+package net.awesomekorean.podo.reading.readings;
+
+import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.reading.Reading;
 
 public class Reading0 implements Reading {
 
     final String title = "화성, 지구에 가장 가까워지다";
 
-    final String article = "미국항공우주국(NASA)에 따르면 7월 31일에 화성이 15년 만에 지구에 가장 가깝게 접근한다고 한다.\n" +
+
+    final String article = "미국항공우주국(NASA)에 따르면 7월 31일에 화성이 15년 만에 지구에 가장 가깝게 접근한다고 한다." +
             "이 때 화성의 밝기는 평소의 3배나 되며 맨눈으로도 화성을 관찰할 수 있을 정도이다." +
             "화성이 지구에 가장 가까웠던 2003년만큼 관찰하기 좋을 것이라고 한다." +
             "화성을 가까이에서 관찰할 수 있는 다음 기회는 2035년 9월 15일이 될 것이라고 한다." +
@@ -23,6 +27,10 @@ public class Reading0 implements Reading {
 
     final String[] popUpFront = {"단어1", "단어2", "단어3"};
     final String[] popUpBack = {"뜻a", "뜻b", "뜻c"};
+
+    private int readingImage = R.drawable.hangul;
+    private boolean isCompleted = false;
+
 
     @Override
     public String getTitle() {
@@ -52,5 +60,16 @@ public class Reading0 implements Reading {
     @Override
     public String[] getPopUpBack() {
         return popUpBack;
+    }
+
+
+    @Override
+    public int getReadingImage() {
+        return this.readingImage;
+    }
+
+    @Override
+    public boolean getIsCompleted() {
+        return this.isCompleted;
     }
 }

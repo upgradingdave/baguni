@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.reading.readings.Reading0;
 
 import java.util.ArrayList;
 
@@ -38,18 +39,10 @@ public class MainReading extends Fragment {
 
         view = inflater.inflate(R.layout.main_reading, container, false);
 
-        ArrayList<ReadingItems> list = new ArrayList<>();
+        ArrayList<Reading> list = new ArrayList<>();
 
-        ReadingItems item = new ReadingItems();
-        item.setTitle("Sample title");
-        item.setSubTitle("Sample subtitle");
-        item.setReadingImage(R.drawable.hangul);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
-        list.add(item);
+        Reading item0 = new Reading0();
+        list.add(item0);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
