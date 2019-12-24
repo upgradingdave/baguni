@@ -58,7 +58,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static int[] sentenceExplain;
     static String[] sentenceAudio;
     static String[] sentenceClause;
-    static int[] sentenceClauseAorB;
     static int[] peopleImage;
 
 
@@ -152,7 +151,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         sentenceFront = lesson.getSentenceFront();
         sentenceClause = lesson.getSentenceClause();
-        sentenceClauseAorB = lesson.getSentenceClauseAorB();
         peopleImage = lesson.getPeopleImage();
 
 

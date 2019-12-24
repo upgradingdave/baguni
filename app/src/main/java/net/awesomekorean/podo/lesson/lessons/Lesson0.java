@@ -35,8 +35,7 @@ public class Lesson0 implements Lesson, LessonItem {
             "다음에 또 봐요.",
             "안녕히 가세요."};
 
-    final static int[] sentenceClauseAorB = {1,2,1,2,1,2};
-    final static int[] peopleImage = {R.drawable.people1, R.drawable.people2, R.drawable.people1, R.drawable.people2,R.drawable.people1, R.drawable.people2};
+    final static int[] peopleImage = {1,2};
 
 
     @Override
@@ -72,11 +71,6 @@ public class Lesson0 implements Lesson, LessonItem {
     @Override
     public String[] getSentenceClause() {
         return sentenceClause;
-    }
-
-    @Override
-    public int[] getSentenceClauseAorB() {
-        return sentenceClauseAorB;
     }
 
     @Override

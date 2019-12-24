@@ -37,8 +37,7 @@ public class Lesson1 implements Lesson, LessonItem {
             "어느 나라 사람이에요?",
             "한국 사람이에요."};
 
-    final static int[] sentenceClauseAorB = {1,2,1,2};
-    final static int[] peopleImage = {R.drawable.people3, R.drawable.people4, R.drawable.people3, R.drawable.people4};
+    final static int[] peopleImage = {3,4};
 
 
 
@@ -75,11 +74,6 @@ public class Lesson1 implements Lesson, LessonItem {
     @Override
     public String[] getSentenceClause() {
         return sentenceClause;
-    }
-
-    @Override
-    public int[] getSentenceClauseAorB() {
-        return sentenceClauseAorB;
     }
 
     @Override

@@ -40,8 +40,8 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
     String[] clauses =  LessonWord.sentenceClause;
     String[] clausesAudio = LessonWord.sentenceAudio;
-    int[] clausesAorB = LessonWord.sentenceClauseAorB;
-    int[] peopleImage = LessonWord.peopleImage;
+    int[] peopleImage = LessonWord.peopleImage; // 사람이미지 2개
+    int[] arrayPeopleImage; // 대화 개수에 맞게 사람이미지를 array 로 만듦
 
     ArrayList<LessonClauseItems> list = new ArrayList<>();
 
@@ -84,11 +84,17 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
         int clausesLength = LessonWord.lessonClauseLength;
 
+        getPeopleImage(peopleImage);
+
         for(int i=0; i<clausesLength; i++) {
             LessonClauseItems item = new LessonClauseItems();
-            item.setPeopleImage(peopleImage[i]);
+            item.setPeopleImage(arrayPeopleImage[i]);
             item.setClause(clauses[i]);
-            item.setAOrB(clausesAorB[i]);
+            if(i % 2 == 0) {
+                item.setAOrB(1);
+            }else {
+                item.setAOrB(0);
+            }
             item.setClauseAudio(clausesAudio[i]);
             list.add(item);
         }
@@ -110,6 +116,24 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    public void getPeopleImage(int[] peopleImage) {
+        String packageName = context.getPackageName();
+        arrayPeopleImage = new int[clauses.length];
+        int count = 0;
+        for(int i=0; i<clauses.length; i++) {
+            String stringPeopleImage;
+            if(count == 0) {
+                stringPeopleImage = "people" + peopleImage[0];
+                count = 1;
+            } else {
+                stringPeopleImage = "people" + peopleImage[1];
+                count = 0;
+            }
+            int intPeopleImage = getResources().getIdentifier(stringPeopleImage, "drawable", packageName);
+            arrayPeopleImage[i] = intPeopleImage;
+        }
     }
 
     // 오디오 재생 메소드

@@ -16,7 +16,5 @@ public interface Lesson {
 
     String[] getSentenceClause();
 
-    int[] getSentenceClauseAorB();
-
     int[] getPeopleImage();
 }
