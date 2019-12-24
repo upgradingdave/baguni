@@ -242,7 +242,36 @@
     <string name="L1_SENTENCE_EXPLAIN_8">-</string>
     <string name="L1_SENTENCE_EXPLAIN_9">당신의 나라가 한국어로 무엇인지 찾아서 문장으로 만들어 보세요.</string>
 
-
+    <string name="L2_TITLE">shopping</string>
+    <string name="L2_WORD_BACK_0">this one</string>
+    <string name="L2_WORD_BACK_1">that one</string>
+    <string name="L2_WORD_BACK_2">how much</string>
+    <string name="L2_WORD_BACK_3">sale</string>
+    <string name="L2_WORD_BACK_4">so / therefore</string>
+    <string name="L2_SENTENCE_BACK_0">how much</string>
+    <string name="L2_SENTENCE_BACK_1">How much is it?</string>
+    <string name="L2_SENTENCE_BACK_2">How much is this?</string>
+    <string name="L2_SENTENCE_BACK_3">It’s 10,000 won</string>
+    <string name="L2_SENTENCE_BACK_4">that one</string>
+    <string name="L2_SENTENCE_BACK_5">What about that one?</string>
+    <string name="L2_SENTENCE_BACK_6">sale</string>
+    <string name="L2_SENTENCE_BACK_7">It’s on sale</string>
+    <string name="L2_SENTENCE_BACK_8">It’s 50% off</string>
+    <string name="L2_SENTENCE_BACK_9">That’s 50% off.</string>
+    <string name="L2_SENTENCE_BACK_10">It’s 5,000 won</string>
+    <string name="L2_SENTENCE_BACK_11">So, it’s 5,000 won</string>
+    <string name="L2_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_2">‘이거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘이것’이라고 써야한다</string>
+    <string name="L2_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_4">‘저거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘저것’이라고 써야한다</string>
+    <string name="L2_SENTENCE_EXPLAIN_5">‘저거는 얼마예요?’를 줄여서 이렇게 말할 수 있다</string>
+    <string name="L2_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L2_SENTENCE_EXPLAIN_11">-</string>
 
 
 

@@ -20,6 +20,7 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.lesson.lessons.Lesson0;
 import net.awesomekorean.podo.lesson.lessons.Lesson1;
+import net.awesomekorean.podo.lesson.lessons.Lesson2;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
 
@@ -99,15 +100,19 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
             // 어뎁터에 연결된 일반 레슨의 position 번호임. 번호가 맞는지 확인할 것
             case 1:
                 lesson = new Lesson0();
-                generalLessonUnit = 0;
-                readyForLesson();
+                readyForLesson(0);
                 break;
 
             case 2:
                 lesson = new Lesson1();
-                generalLessonUnit = 1;
-                readyForLesson();
+                readyForLesson(1);
                 break;
+
+            case 3:
+                lesson = new Lesson2();
+                readyForLesson(2);
+                break;
+
 
         }
 
@@ -115,7 +120,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     }
 
 
-    public void readyForLesson() {
+    public void readyForLesson(int unit) {
+
+        generalLessonUnit = unit;
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
