@@ -23,7 +23,7 @@ public class Lesson1 implements Lesson, LessonItem {
             "뭐",
             "뭐예요?",
             "이름이 뭐예요?",
-            "데니예요. / 데니이에요.",
+            "데니예요. / 데닝이에요.",
             "나라",
             "어느 나라",
             "어느 나라 사람이에요?",

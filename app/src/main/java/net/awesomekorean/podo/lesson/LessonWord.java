@@ -156,7 +156,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
 
 
-        LessonFrame.totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
+        LessonFrame.totalPageNo = lessonWordLength * 3 + 1 + lessonSentenceLength + 2;
 
         wordAudio = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
