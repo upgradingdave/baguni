@@ -130,7 +130,7 @@
         <Button
             android:id="@+id/btnStudy"
             android:background="@drawable/bg_purple_25"
-            android:text="@string/BTN_STUDY"
+            android:text="@string/STUDY"
             android:textColor="@color/WHITE"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -152,7 +152,7 @@
             android:id="@+id/btnRecord"
             android:visibility="gone"
             android:enabled="false"
-            android:text="@string/BTN_RECORD"
+            android:text="@string/RECORD"
             android:textColor="@color/WHITE"
             android:background="@drawable/bg_purple_25"
             android:layout_weight="1"
@@ -185,7 +185,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/DELETE_WRITING"
+            android:text="@string/COLLECTION_DELETE"
             android:textSize="20dp"
             android:textColor="@color/BLACK"
             android:fontFamily="@font/avenir_bold"
@@ -200,7 +200,7 @@
 
             <Button
                 android:id="@+id/btnNo"
-                android:text="@string/BTN_NO"
+                android:text="@string/NO"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:background="@drawable/bg_white_30_stroke_purple"
@@ -210,7 +210,7 @@
             <Button
                 android:id="@+id/btnYes"
                 android:layout_marginLeft="15dp"
-                android:text="@string/BTN_YES"
+                android:text="@string/YES"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:textColor="@color/WHITE"

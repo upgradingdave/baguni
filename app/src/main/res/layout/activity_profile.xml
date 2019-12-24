@@ -209,7 +209,7 @@
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/btnSave"
-                        android:text="@string/BTN_SAVE"
+                        android:text="@string/SAVE"
                         android:textColor="@color/WHITE"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="15dp"

@@ -280,7 +280,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
                                         System.out.println("userName을 업데이트 했습니다");
-                                        Toast.makeText(getApplicationContext(), getString(R.string.UPDATE_USERNAME), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), getString(R.string.UPDATED_USERNAME), Toast.LENGTH_SHORT).show();
                                         MainActivity.userName = user.getDisplayName();
                                         userName.setText(newName);
                                     }

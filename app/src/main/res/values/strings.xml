@@ -1,53 +1,30 @@
 <resources>
 
-    <!--스프레드 시트에 정리할 것-->
+<!--    타이틀-->
+    <string name="app_name">podo</string>
 
-    <string name="app_name">baguni</string>
 
-    <string name="LESSON">Lesson</string>
-    <string name="READING">Reading</string>
-    <string name="WRITING">Writing</string>
-    <string name="COLLECTION">Collection</string>
-    <string name="PROFILE_OPTION">Profile/Option</string>
-    <string name="MESSAGE">Message</string>
-
-    <string name="BTN_COLLECT">Collect</string>
-    <string name="BTN_YES">Yes</string>
-    <string name="BTN_NO">No</string>
-    <string name="BTN_SAVE">Save</string>
-    <string name="BTN_CORRECTION">Correction</string>
-    <string name="BTN_CANCEL">Cancel</string>
-    <string name="BTN_ANSWER">Answer</string>
-    <string name="BTN_NEXT">Next</string>
-
-    <string name="BTN_STUDY">Study</string>
-    <string name="BTN_DELETE">Delete</string>
-    <string name="BTN_RECORD">Record</string>
-
-    <string name="ANSWER">Answer</string>
-    <string name="NEXT">Next</string>
-    <string name="DELETE">Delete</string>
-
-    <!--Login -->
+<!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
     <string name="PASSWORD_SIX_CHARACTERS_LONG">Should be at least 6 characters</string>
     <string name="WRONG_EMAIL"> Wrong email!!</string>
     <string name="WRONG_PASS"> Wrong password!!</string>
-    <string name="EMAIL_EXIST">This email is already registered</string>
-    <string name="FORGOT"> Forgot Password?</string>
-    <string name="LOGIN"> Sign In</string>
-    <string name="WITH"> or login with</string>
+    <string name="EMAIL_EXIST">This email is already exist</string>
+    <string name="FORGOT_PASS"> Forgot Password?</string>
+    <string name="INPUT_EMAIL">Input your email</string>
+    <string name="CHECK_YOUR_EMAIL">Please check your email</string>
+    <string name="SIGNIN"> Sign In</string>
+    <string name="SIGNIN_WITH"> or sign in with</string>
     <string name="FACEBOOK"> Facebook</string>
     <string name="GOOGLE"> Google</string>
     <string name="WECHAT"> Wechat</string>
-    <string name="NOACCOUNT"> Don\'t have an account?</string>
+    <string name="DONT_HAVE_ACCOUNT"> Don\'t have an account?</string>
     <string name="SIGNUP"> Sign up</string>
     <string name="NAME">Name</string>
-    <string name="CONFIRM">Confirm Password</string>
-    <string name="HAVEACCOUNT"> Already have an account?</string>
-
+    <string name="CONFIRM_PASS">Confirm Password</string>
+    <string name="ALREADY_HAVE_ACCOUNT"> Already have an account?</string>
     <string name="GOOGLE_SUCCEED">Google sign in succeed</string>
     <string name="GOOGLE_FAILED">Google sign in failed</string>
     <string name="FACEBOOK_SUCCEED">Facebook sign in succeed</string>
@@ -56,137 +33,123 @@
     <string name="SIGNUP_FAILED">Sign up failed!</string>
     <string name="SIGNIN_SUCCEED">Sign in succeed!</string>
     <string name="SIGNIN_FAILED">Sign in failed!</string>
-
-    <string name="UPDATE_USERNAME">Updated user name</string>
-
-
     <string name="ENGLISH">English</string>
     <string name="THAI">Thai</string>
     <string name="JAPANESE">Japanese</string>
     <string name="CHINESE">Chinese</string>
     <string name="KOREAN">Korean</string>
 
-    <string name="INPUT_EMAIL">Enter your email</string>
-    <string name="MSG_CHECK_EMAIL">Please check your email</string>
 
-    <string name="DUPLICATE_CHECK">Duplicate Check</string>
-    <string name="DUPLICATE_TRUE">This email already exists.</string>
-    <string name="DUPLICATE_FALSE">This email is available.</string>
-    <string name="SELECTLANGUAGE">Select Language</string>
-    <string name="USER_NAME">Name</string>
-    <string name="USER_EMAIL">Email</string>
-    <string name="USER_PASSWORD">Password</string>
-    <string name="USER_PASSWORD_CONFIRM">Confirm Password</string>
-
-    <string name="MSG_COLLECT">Collection is saved</string>
-    <string name="WRITING_SAVED">Writing is saved</string>
-    <string name="MSG_DELETE">Do you really want to delete?</string>
-    <string name="MSG_SAVE">Do you want to save?</string>
+<!--    메뉴-->
+    <string name="LESSON">Lesson</string>
+    <string name="READING">Reading</string>
+    <string name="WRITING">Writing</string>
+    <string name="COLLECTION">Collection</string>
+    <string name="PROFILE_OPTION">Profile/Option</string>
+    <string name="MESSAGE">Message</string>
 
 
-    <string name="RANDOM">Random</string>
-    <string name="RECENT_WORD">Recent word</string>
-
-    <string name="NO_WRITTING">There is no writing</string>
-    <string name="NO_COLLECTION">There is no collection</string>
-
-    <string name="LETTERS">letters</string>
-
-    <string name="TIPS">Tips</string>
-    <string name="TIPS_CORRECTION">
-        You can ask for correction from native Korean teacher by using 30 points. See a sample.
-        (Inappropriate writing such as abusive language may be rejected)
-    </string>
-    <string name="WRITE_HERE">Write here</string>
-
-    <string name="CORRECTED">Corrected</string>
-    <string name="REVIEWING">Reviewing</string>
+<!--    주요버튼-->
+    <string name="YES">Yes</string>
+    <string name="NO">No</string>
+    <string name="SAVE">Save</string>
+    <string name="CANCEL">Cancel</string>
 
 
-    <string name="FRONT">Front</string>
-    <string name="BACK">Back</string>
-
-    <string name="FAQ">FAQ</string>
-    <string name="MY_QUESTIONS">MY QUESTIONS</string>
-    <string name="ASK">Ask a question</string>
-    <string name="RECENT_FAQ">Recent FAQ</string>
-
-    <string name="CATEGORY">Category</string>
-    <string name="GRAMMAR">Grammar</string>
-
-    <string name="CONFIRMED">Confirmed</string>
-    <string name="REJECTED">Rejected</string>
-
-    <string name="QUESTION">Question</string>
-    <string name="ASK_YOUR_QUESTION">Ask your question here</string>
-    <string name="MSG_SEND">Your question has been sent. We\'ll let you know if your question have been selected.</string>
-    <string name="QNA">Q&amp;A</string>
-
-    <string name="NO_QUESTIONS">You didn\'t ask a question yet</string>
-    <string name="TIPS_QUESTION">Please ask a good question about Korean learning or Korean culture. The question which is selected will be shared to every learners and rewarded with 0 points.</string>
-
-    <string name="FINISH_READING">Finish Reading</string>
-
-    <string name="NORMAL">Normal</string>
-    <string name="SPEED">Speed x0.8</string>
-
-    <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
+<!--    레슨-->
     <string name="CONFIRM_QUIT">Do you want to go back to main? (progress will not be saved)</string>
-
-
     <string name="HANGUL">Hangul</string>
     <string name="CONSONANT">Consonant</string>
     <string name="VOWEL">Vowel</string>
     <string name="BATCHIM">Batchim</string>
     <string name="ASSEMBLY">Assembly</string>
-
     <string name="INTRO">Intro</string>
     <string name="HINT">Hint</string>
-
-    <string name="COLLECTION_SAVED">Collection is saved</string>
-    <string name="REQUEST_RESULT">Request is submitted. You\'ll get the feedback in 2days.</string>
-
+    <string name="SPECIAL_LESSON">Special lesson</string>
+    <string name="COMPLETED">Completed</string>
     <string name="PRONUNCIATION">Pronunciation: </string>
     <string name="ANTONYMS">Antonyms: </string>
     <string name="SYNONYMS">Synonyms: </string>
     <string name="USES_IN_SENTENCE">Uses in sentence: </string>
     <string name="ADD_COLLECTION">Add Collection</string>
-
     <string name="CHOOSE_CORRECT_WORD">Choose the correct word</string>
     <string name="LISTEN_AND_ANSWER">Listen &amp; Answer</string>
-
     <string name="RETURN">Return</string>
     <string name="PLAY">Play</string>
     <string name="STOP">Stop</string>
     <string name="FINISH">Finish</string>
-
     <string name="SELECT_BOX">Select a box to get the points</string>
     <string name="CONGRATULATION">Congratulation</string>
     <string name="GET_POINT">Get the point</string>
 
+
+<!--    읽기-->
+    <string name="NORMAL">Normal</string>
+    <string name="SPEED">Speed x0.8</string>
+    <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
+
+
+<!--    쓰기-->
+    <string name="CORRECTION">Correction</string>
+    <string name="WRITING_SAVED">Writing is saved</string>
+    <string name="WRITING_DELETE">Do you really want to delete writing?</string>
+    <string name="NO_WRITTING">There is no writing</string>
+    <string name="LETTERS">letters</string>
+    <string name="TIPS">Tips</string>
+    <string name="WRITE_HERE">Write here</string>
+    <string name="CORRECTED">Corrected</string>
+    <string name="REVIEWING">Reviewing</string>
+    <string name="REQUEST_RESULT">Request is submitted. You\'ll get the feedback in 2days.</string>
+    <string name="ORIGINAL_WRITING">Original Writing</string>
+    <string name="CORRECTED_WRITING">Corrected Writing</string>
+    <string name="FEEDBACK">Feedback</string>
+    <string name="STUDENT_FEEDBACK">Student\'s Feedback</string>
+    <string name="GIVE_US_FEEDBACK">Give us your feedback</string>
+    <string name="THANKYOU_FEEDBACK">Thank you for your feedback</string>
+    <string name="SEND">Send</string>
+
+
+<!--    컬렉션-->
+    <string name="ANSWER">Answer</string>
+    <string name="NEXT">Next</string>
+    <string name="STUDY">Study</string>
+    <string name="DELETE">Delete</string>
+    <string name="RECORD">Record</string>
+    <string name="COLLECTION_DELETE">Do you really want to delete collection?</string>
+    <string name="RANDOM">Random</string>
+    <string name="RECENT_WORD">Recent word</string>
+    <string name="NO_COLLECTION">There is no collection</string>
+    <string name="TIPS_CORRECTION">
+        You can ask for correction from native Korean teacher by using 30 points. See a sample.
+        (Inappropriate writing such as abusive language may be rejected)
+    </string>
+    <string name="FRONT">Front</string>
+    <string name="BACK">Back</string>
+    <string name="COLLECTION_SAVED">Collection is saved</string>
+
+
+<!--    프로필/옵션-->
     <string name="PROFILE">Profile / Option</string>
     <string name="ATTENDANCE">Attendance (sunday-saturday)</string>
-
     <string name="GET">Get</string>
-
     <string name="EDIT_NAME">Edit Name</string>
     <string name="PURCHASE_PACKAGE">Purchase package</string>
     <string name="EVALUATION_APP">Evaluation this app</string>
     <string name="RECOMMEND">Recommend this app</string>
     <string name="LOG_OUT">Log out</string>
     <string name="SAVE_NEW_NAME">Saved new name</string>
+    <string name="UPDATED_USERNAME">Updated user name</string>
+    <string name="SIGN_OUT">Sign Out</string>
+    <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
 
+
+<!--    구매-->
     <string name="GO_PREMIUM">Go Premium</string>
     <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
         Subscription will be automatically renewed as soon as your subscription expires.
         If you don\'t want to renew your subscription, you can manage it from Google account settings.
         Subscription that have already been paid is not refundable.
     </string>
-
-    <string name="SIGN_OUT">Sign Out</string>
-    <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
-    <string name="CANCEL">Cancel</string>
-
     <string name="SUBSCRIBE_OPTION_A">Monthly</string>
     <string name="SUBSCRIBE_OPTION_B">Yearly</string>
     <string name="SUBSCRIBE_OPTION_C">Lifetime</string>
@@ -201,16 +164,6 @@
     <string name="UNLOCKED_LESSONS_DETAIL">Every special lessons and readings will be unlocked.</string>
     <string name="UNLIMITED_COLLECTIONS">Unlimited Collections</string>
     <string name="UNLIMITED_COLLECTIONS_DETAIL">You can collect unlimited flash cards.</string>
-
-    <string name="NOW_AVAILABLE">Now available</string>
-    <string name="ON_VACATION">On vacation</string>
-
-    <string name="REQUIRE">Require: </string>
-    <string name="YOU_HAVE">You have: </string>
-    <string name="TOPUP">Top Up</string>
-    <string name="SUBMITE">Submit</string>
-    <string name="TEACHERS">Teachers</string>
-
     <string name="GET_PODO_POINTS">Get podo Points</string>
     <string name="GET_PODO_POINTS_DETAIL">
         You can use the points to ask native Korean teachers to record for your flash cards
@@ -227,21 +180,22 @@
     <string name="POINT_POLICY">Your Google account will be charged at confirmation of purchase.
         This purchase is one-time purchase. Points that have already been paid are not refundable.
     </string>
-    
-    <string name="ORIGINAL_WRITING">Original Writing</string>
-    <string name="CORRECTED_WRITING">Corrected Writing</string>
-    <string name="FEEDBACK">Feedback</string>
-    <string name="STUDENT_FEEDBACK">Student\'s Feedback</string>
-    <string name="GIVE_US_FEEDBACK">Give us your feedback</string>
-    <string name="THANKYOU_FEEDBACK">Thank you for your feedback</string>
-    <string name="SEND">Send</string>
+
+
+<!--    선생님페이지-->
+    <string name="NOW_AVAILABLE">Now available</string>
+    <string name="ON_VACATION">On vacation</string>
+    <string name="REQUIRE">Require: </string>
+    <string name="YOU_HAVE">You have: </string>
+    <string name="TOPUP">Top Up</string>
+    <string name="SUBMITE">Submit</string>
+    <string name="TEACHERS">Teachers</string>
+
 
 
     <!--번역 필요 없는 부분-->
     <string name="facebook_app_id">1366274056887552</string>
     <string name="fb_login_protocol_scheme">fb1366274056887552</string>
-
-
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>
     <string name="REQUEST_EDIT">edit</string>
@@ -249,7 +203,6 @@
     <string name="EXTRA_CORRECTION">correction</string>
     <string name="EXTRA_TEACHER_FEEDBACK">teacherFeedback</string>
     <string name="EXTRA_STUDENT_FEEDBACK">studentFeedback</string>
-
     <string name="EXTRA_LETTERS">letters</string>
     <string name="EXTRA_GUID">guid</string>
     <string name="EXTRA_ID">id</string>
@@ -259,14 +212,7 @@
     <string name="LONGCLICK_OFF">off</string>
     <string name="LESSONWORD">lessonWord</string>
     <string name="LESSONSENTENCE">lessonSentence</string>
-
-    <string name="SPECIAL_LESSON">Special lesson</string>
-    <string name="COMPLETED">Completed</string>
-
     <string name="LESSON_SENTENCE">lessonSentence</string>
-
-    <string name="DELETE_WRITING">Are you sure to delete writing?</string>
-
     <string name="DB_USERS">android/podo/users</string>
     <string name="DB_USERINFO">android/podo/userInfo</string>
     <string name="DB_COLLECTIONS">android/podo/collections</string>
@@ -274,12 +220,23 @@
     <string name="DB_MESSAGES">android/podo/messages</string>
 
 
-    <string name="SAMPLE_TEXT">1국회의원은 그 지위를 남용하여 국가·공공단체 또는 기업체와의 계약이나 그 처분에 의하여 재산상의 권리·이익 또는 직위를 취득하거나 타인을 위하여 그 취득을 알선할 수 없다. 대통령은 법률안의 일부에 대하여 또는 법률안을 수정하여 재의를 요구할 수 없다. 이 헌법공포 당시의 국회의원의 임기는 제1항에 의한 국회의 최초의 집회일 전일까지로 한다. 형사피해자는 법률이 정하는 바에 의하여 당해 사건의 재판절차에서 진술할 수 있다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다.
 
-재의의 요구가 있을 때에는 국회는 재의에 붙이고, 재적의원과반수의 출석과 출석의원 3분의 2 이상의 찬성으로 전과 같은 의결을 하면 그 법률안은 법률로서 확정된다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 법관이 중대한 심신상의 장해로 직무를 수행할 수 없을 때에는 법률이 정하는 바에 의하여 퇴직하게 할 수 있다. 일반사면을 명하려면 국회의 동의를 얻어야 한다. 국가안전보장에 관련되는 대외정책·군사정책과 국내정책의 수립에 관하여 국무회의의 심의에 앞서 대통령의 자문에 응하기 위하여 국가안전보장회의를 둔다. 국회는 국가의 예산안을 심의·확정한다.
 
-대통령은 조국의 평화적 통일을 위한 성실한 의무를 진다. 저작자·발명가·과학기술자와 예술가의 권리는 법률로써 보호한다. 모든 국민은 거주·이전의 자유를 가진다. 행정각부의 설치·조직과 직무범위는 법률로 정한다. 법률은 특별한 규정이 없는 한 공포한 날로부터 20일을 경과함으로써 효력을 발생한다. 국무위원은 국무총리의 제청으로 대통령이 임명한다. 국가는 재해를 예방하고 그 위험으로부터 국민을 보호하기 위하여 노력하여야 한다. 대통령은 제3항과 제4항의 사유를 지체없이 공포하여야 한다. 국회는 헌법개정안이 공고된 날로부터 60일 이내에 의결하여야 하며, 국회의 의결은 재적의원 3분의 2 이상의 찬성을 얻어야 한다.
-
-대통령·국무총리·국무위원·행정각부의 장·헌법재판소 재판관·법관·중앙선거관리위원회 위원·감사원장·감사위원 기타 법률이 정한 공무원이 그 직무집행에 있어서 헌법이나 법률을 위배한 때에는 국회는 탄핵의 소추를 의결할 수 있다. 대통령은 국가의 독립·영토의 보전·국가의 계속성과 헌법을 수호할 책무를 진다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다. 신체장애자 및 질병·노령 기타의 사유로 생활능력이 없는 국민은 법률이 정하는 바에 의하여 국가의 보호를 받는다.</string>
+    <!--지울것-->
+    <string name="FAQ">FAQ</string>
+    <string name="MY_QUESTIONS">MY QUESTIONS</string>
+    <string name="ASK">Ask a question</string>
+    <string name="RECENT_FAQ">Recent FAQ</string>
+    <string name="CATEGORY">Category</string>
+    <string name="GRAMMAR">Grammar</string>
+    <string name="CONFIRMED">Confirmed</string>
+    <string name="REJECTED">Rejected</string>
+    <string name="QUESTION">Question</string>
+    <string name="ASK_YOUR_QUESTION">Ask your question here</string>
+    <string name="MSG_SEND">Your question has been sent. We\'ll let you know if your question have been selected.</string>
+    <string name="QNA">Q&amp;A</string>
+    <string name="NO_QUESTIONS">You didn\'t ask a question yet</string>
+    <string name="TIPS_QUESTION">Please ask a good question about Korean learning or Korean culture. The question which is selected will be shared to every learners and rewarded with 0 points.</string>
+    <string name="FINISH_READING">Finish Reading</string>
 
 </resources>

@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnCollect"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <ImageView
             android:id="@+id/btnAudio"
@@ -53,7 +53,7 @@
 
         <TextView
             android:id="@+id/tvSentenceExplain"
-            android:text="친구랑 한국 식당에 갈 거예요는 블라블라블라...동해물과백두산이 마르고 닳도록. "
+            android:text="친구랑 한국 식당에 갈 거예요는 블라블라블라..."
             android:textSize="15dp"
             android:textColor="@color/BLACK"
             android:scrollbars="vertical"

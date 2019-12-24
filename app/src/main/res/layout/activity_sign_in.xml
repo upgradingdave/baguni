@@ -195,13 +195,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
             android:layout_weight="0.062"
-            android:text="@string/FORGOT"
+            android:text="@string/FORGOT_PASS"
             android:textColor="@color/PURPLE" />
 
         <Button
             android:id="@+id/btnSignIn"
             android:layout_weight="0.1"
-            android:text="@string/LOGIN"
+            android:text="@string/SIGNIN"
             android:textColor="@color/WHITE"
             android:background="@drawable/bg_purple_25"
             android:layout_marginLeft="25dp"
@@ -216,7 +216,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:text="@string/WITH" />
+            android:text="@string/SIGNIN_WITH" />
 
         <Button
             android:id="@+id/btnSignInGoogle"
@@ -257,7 +257,7 @@
 
             <TextView
                 android:layout_weight="1"
-                android:text="@string/NOACCOUNT"
+                android:text="@string/DONT_HAVE_ACCOUNT"
                 android:textSize="15dp"
                 android:gravity="right"
                 android:layout_width="wrap_content"

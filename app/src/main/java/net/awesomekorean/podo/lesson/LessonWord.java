@@ -106,7 +106,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         lesson.setWordBack(getResources().getStringArray(word));
         lesson.setSentenceBack(getResources().getStringArray(sentence));
-        lesson.setSentenceExplain(getResources().getStringArray(sentenceEx));
+        //lesson.setSentenceExplain(getResources().getStringArray(sentenceEx));
 
         wordFront = lesson.getWordFront();
         wordBack = lesson.getWordBack();
@@ -114,12 +114,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         wordSynonyms = lesson.getWordSynonyms();
         wordAntonyms = lesson.getWordAntonyms();
         wordApplication = lesson.getWordApplication();
-        wordAudio = lesson.getWordAudio();
 
         sentenceFront = lesson.getSentenceFront();
         sentenceBack = lesson.getSentenceBack();
         sentenceExplain = lesson.getSentenceExplain();
-        sentenceAudio = lesson.getSentenceAudio();
         sentenceClause = lesson.getSentenceClause();
         sentenceClauseAorB = lesson.getSentenceClauseAorB();
         peopleImage = lesson.getPeopleImage();
@@ -129,7 +127,17 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         LessonFrame.totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
 
-        displayWord(context);
+        wordAudio = new String[lessonWordLength];
+        for(int i=0; i<lessonWordLength; i++) {
+            wordAudio[i] = "word_" + MainLesson.lessonUnit + "_" + i;
+        }
+        sentenceAudio = new String[lessonSentenceLength];
+        for(int j=0; j<lessonSentenceLength; j++) {
+            sentenceAudio[j] = "sentence_" + MainLesson.lessonUnit + "_" + j;
+        }
+
+
+            displayWord(context);
     }
 
 

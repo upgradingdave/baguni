@@ -16,13 +16,9 @@ public interface Lesson {
 
     String[] getWordApplication();
 
-    String[] getWordAudio();
-
     String[] getSentenceFront();
 
     String[] getSentenceBack();
-
-    String[] getSentenceAudio();
 
     void setSentenceBack(String[] strings);
 

@@ -190,7 +190,7 @@
 
     <Button
         android:id="@+id/btnFinish"
-        android:text="@string/FINISH_READING"
+        android:text="@string/FINISH"
         android:textSize="15dp"
         android:textColor="@color/WHITE"
         android:textAllCaps="false"
@@ -227,7 +227,7 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/MSG_COLLECT"
+                android:text="@string/COLLECTION_SAVED"
                 android:textSize="20dp"
                 android:textColor="@color/BLACK"
                 android:fontFamily="@font/avenir_bold"
@@ -277,7 +277,7 @@
 
                 <Button
                     android:id="@+id/finishNo"
-                    android:text="@string/BTN_NO"
+                    android:text="@string/NO"
                     android:textAllCaps="false"
                     android:textColor="@color/PURPLE"
                     android:background="@drawable/bg_white_30_stroke_purple"
@@ -288,7 +288,7 @@
 
                 <Button
                     android:id="@+id/finishYes"
-                    android:text="@string/BTN_YES"
+                    android:text="@string/YES"
                     android:textAllCaps="false"
                     android:textColor="@color/WHITE"
                     android:background="@drawable/bg_purple_30"

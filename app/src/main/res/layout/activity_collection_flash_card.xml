@@ -78,7 +78,7 @@
     <Button
         android:id="@+id/btnSave"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/BTN_SAVE"
+        android:text="@string/SAVE"
         android:textColor="@color/WHITE"
         android:textSize="15dp"
         android:layout_marginLeft="20dp"

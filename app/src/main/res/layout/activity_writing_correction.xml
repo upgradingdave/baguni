@@ -51,7 +51,6 @@
         <TextView
             android:id="@+id/writingOriginal"
             android:layout_marginTop="10dp"
-            android:text="@string/SAMPLE_TEXT"
             android:textSize="15dp"
             android:lineSpacingExtra="7dp"
             android:padding="15dp"
@@ -70,7 +69,6 @@
         <TextView
             android:id="@+id/writingCorrected"
             android:layout_marginTop="10dp"
-            android:text="@string/SAMPLE_TEXT"
             android:textSize="15dp"
             android:lineSpacingExtra="7dp"
             android:padding="15dp"
@@ -89,7 +87,6 @@
         <TextView
             android:id="@+id/feedbackTeacher"
             android:layout_marginTop="10dp"
-            android:text="@string/SAMPLE_TEXT"
             android:textSize="15dp"
             android:lineSpacingExtra="7dp"
             android:padding="15dp"

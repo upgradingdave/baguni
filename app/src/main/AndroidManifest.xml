@@ -29,6 +29,11 @@
         <activity android:name=".login.SignUp"></activity>
         <activity android:name=".teachers.Teachers" />
         <activity android:name=".login.SignIn">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".collection.CollectionStudy" />
@@ -44,11 +49,6 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
     </application>

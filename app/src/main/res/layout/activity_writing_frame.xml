@@ -125,7 +125,7 @@
 
         <Button
             android:id="@+id/btnSave"
-            android:text="@string/BTN_SAVE"
+            android:text="@string/SAVE"
             android:textSize="15dp"
             android:textColor="@color/PURPLE"
             android:textAllCaps="false"
@@ -137,7 +137,7 @@
 
         <Button
             android:id="@+id/btnCorrection"
-            android:text="@string/BTN_CORRECTION"
+            android:text="@string/CORRECTION"
             android:textSize="15dp"
             android:textColor="@color/WHITE"
             android:textAllCaps="false"
