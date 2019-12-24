@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.lesson.lessons.Lesson0;
 import net.awesomekorean.podo.lesson.lessons.Lesson1;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
@@ -38,25 +39,29 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static TextView tvWordApplication;
     static ImageView btnAudio;
 
+    int generalLessonUnit;
 
     static int lessonCount;
     static int lessonWordLength = 0;
     static int lessonSentenceLength = 0;
+    static int lessonClauseLength = 0;
 
     static String[] wordFront;
-    static String[] wordBack;
+    static int[] wordBack;
     static String[] wordPronunciation;
     static String[] wordAntonyms;
     static String[] wordSynonyms;
     static String[] wordApplication;
     static String[] wordAudio;
     static String[] sentenceFront;
-    static String[] sentenceBack;
-    static String[] sentenceExplain;
+    static int[] sentenceBack;
+    static int[] sentenceExplain;
     static String[] sentenceAudio;
     static String[] sentenceClause;
     static int[] sentenceClauseAorB;
     static int[] peopleImage;
+
+
 
     Context context;
     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
@@ -92,38 +97,66 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (MainLesson.lessonUnit) {
 
 
+            // 어뎁터에 연결된 일반 레슨의 position 번호임. 번호가 맞는지 확인할 것
             case 1:
-                lesson = new Lesson1();
-                readyForLesson(R.array.L1_WORD, R.array.L1_SENTENCE, R.array.L1_SENTENCEEXPLAIN);
+                lesson = new Lesson0();
+                generalLessonUnit = 0;
+                readyForLesson();
                 break;
+
+            case 2:
+                lesson = new Lesson1();
+                generalLessonUnit = 1;
+                readyForLesson();
+                break;
+
         }
 
         return view;
     }
 
 
-    public void readyForLesson(int word, int sentence, int sentenceEx) {
+    public void readyForLesson() {
 
-        lesson.setWordBack(getResources().getStringArray(word));
-        lesson.setSentenceBack(getResources().getStringArray(sentence));
-        //lesson.setSentenceExplain(getResources().getStringArray(sentenceEx));
+        lessonWordLength = lesson.getWordFront().length;
+        lessonSentenceLength = lesson.getSentenceFront().length;
+        lessonClauseLength = lesson.getSentenceClause().length;
+
+        String packageName = context.getPackageName();
+        wordBack = new int[lessonWordLength];
+        for(int i=0; i<lessonWordLength; i++) {
+            String stringWordBack = "L" + generalLessonUnit + "_WORD_BACK_" + i;
+            int intWordBack = getResources().getIdentifier(stringWordBack, "string", packageName);
+            wordBack[i] = intWordBack;
+        }
+
+        sentenceBack = new int[lessonSentenceLength];
+        for(int i=0; i<lessonSentenceLength; i++) {
+            String stringSentenceBack = "L" + generalLessonUnit + "_SENTENCE_BACK_" + i;
+            int intSentenceBack = getResources().getIdentifier(stringSentenceBack, "string", packageName);
+            sentenceBack[i] = intSentenceBack;
+        }
+
+        sentenceExplain = new int[lessonSentenceLength];
+        for(int i=0; i<lessonSentenceLength; i++) {
+            String stringSentenceExplain = "L" + generalLessonUnit + "_SENTENCE_EXPLAIN_" + i;
+            int intSentenceExplain = getResources().getIdentifier(stringSentenceExplain, "string", packageName);
+            sentenceExplain[i] = intSentenceExplain;
+        }
 
         wordFront = lesson.getWordFront();
-        wordBack = lesson.getWordBack();
         wordPronunciation = lesson.getWordPronunciation();
         wordSynonyms = lesson.getWordSynonyms();
         wordAntonyms = lesson.getWordAntonyms();
         wordApplication = lesson.getWordApplication();
 
         sentenceFront = lesson.getSentenceFront();
-        sentenceBack = lesson.getSentenceBack();
-        sentenceExplain = lesson.getSentenceExplain();
         sentenceClause = lesson.getSentenceClause();
         sentenceClauseAorB = lesson.getSentenceClauseAorB();
         peopleImage = lesson.getPeopleImage();
 
-        lessonWordLength = lesson.getWordFront().length;
-        lessonSentenceLength = lesson.getSentenceFront().length;
+
+
 
         LessonFrame.totalPageNo = lessonWordLength*4 + lessonSentenceLength +2;
 
@@ -165,7 +198,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
             case R.id.btnCollect :
                 String front = wordFront[lessonCount];
-                String back = wordBack[lessonCount];
+                String back = getString(wordBack[lessonCount]);
                 String audio = wordAudio[lessonCount];
 
                 CollectionRepository repository = new CollectionRepository(getContext());

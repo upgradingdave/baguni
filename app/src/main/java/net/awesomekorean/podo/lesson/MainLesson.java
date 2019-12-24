@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
-import net.awesomekorean.podo.lesson.lessons.Lesson0;
 import net.awesomekorean.podo.lesson.lessons.Lesson1;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson0;
+import net.awesomekorean.podo.lesson.lessons.Lesson0;
 
 import java.util.ArrayList;
 
@@ -44,11 +45,13 @@ public class MainLesson extends Fragment {
 
         ArrayList<LessonItem> list = new ArrayList<>();
 
-        LessonItem item0 = new Lesson0();
-        LessonItem item1 = new Lesson1();
+        LessonItem item0 = new S_Lesson0();
+        LessonItem item1 = new Lesson0();
+        LessonItem item2 = new Lesson1();
+
         list.add(item0);
         list.add(item1);
-
+        list.add(item2);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -62,6 +65,7 @@ public class MainLesson extends Fragment {
 
                 switch (pos) {
 
+                    // 스페셜 레슨만 case 분리해서 설정할 것
                     case 0 :
                         intent = new Intent(context, LessonHangulMenu.class);
                         startActivity(intent);

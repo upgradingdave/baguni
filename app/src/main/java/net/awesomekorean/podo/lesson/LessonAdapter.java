@@ -106,6 +106,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         int viewType = holder.getItemViewType();
 
         if(viewType==0) {
+            holder.title.setText(items.getTitle());
             if(items.getIsSpecial()) { holder.textSpecial.setVisibility(View.VISIBLE);
             } else{holder.textSpecial.setVisibility(View.INVISIBLE);}
             if(items.getIsLock()) { holder.iconLock.setVisibility(View.VISIBLE);

@@ -34,7 +34,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
 
     String[] wordFront = LessonWord.wordFront;
-    String[] wordBack = LessonWord.wordBack;
+    int[] wordBack = LessonWord.wordBack;
     String[] wordAudio = LessonWord.wordAudio;
     String[] answerArray = new String[4]; // 현재 퀴즈 array
 
@@ -89,10 +89,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
             // 단어 array 이에서 현재 단어포함해서 순서대로 4개의 단어를 보기로 제시함.
             if(quizNoNow + i >= wordBack.length) {
-                answerArray[i] = wordBack[j];
+                answerArray[i] = getString(wordBack[j]);
                 j++;
             } else {
-                answerArray[i] = wordBack[quizNoNow + i];
+                answerArray[i] = getString(wordBack[quizNoNow + i]);
             }
         }
 
@@ -164,7 +164,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
                 Button selectedBtn = (Button) view;
 
-                if(wordBack[quizNoNow].equals(selectedBtn.getText().toString())) {
+                if(getString(wordBack[quizNoNow]).equals(selectedBtn.getText().toString())) {
 
                     // 정답소리 출력하고 선택박스에 파란색 테두리
                     answered(selectedBtn, R.raw.correct, R.drawable.bg_white_10_stroke_purple);

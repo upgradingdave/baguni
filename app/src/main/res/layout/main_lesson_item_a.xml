@@ -73,6 +73,8 @@
 
         <ImageView
             android:id="@+id/lessonImage"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/hangul" />
@@ -80,7 +82,6 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
-            android:layout_marginLeft="15dp"
             android:paddingLeft="20dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">

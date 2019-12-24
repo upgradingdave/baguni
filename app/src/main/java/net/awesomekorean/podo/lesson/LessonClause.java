@@ -82,7 +82,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        int clausesLength = LessonWord.lessonSentenceLength;
+        int clausesLength = LessonWord.lessonClauseLength;
 
         for(int i=0; i<clausesLength; i++) {
             LessonClauseItems item = new LessonClauseItems();

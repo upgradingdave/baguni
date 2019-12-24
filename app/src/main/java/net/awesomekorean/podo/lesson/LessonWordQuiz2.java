@@ -33,7 +33,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     ToggleButton justSelectedBtn;
 
     String[] wordFront = LessonWord.wordFront;
-    String[] wordBack = LessonWord.wordBack;
+    int[] wordBack = LessonWord.wordBack;
     String[] wordAudio = LessonWord.wordAudio;
 
     MediaPlayer mp;
@@ -73,7 +73,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         for(int i=0; i<wordNo; i++) {
             mixedFront[i] = wordFront[i];
-            mixedBack[i] = wordBack[i];
+            mixedBack[i] = getString(wordBack[i]);
         }
 
         RandomArray.randomArray(mixedFront);
@@ -131,7 +131,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
                 checkAnswer[0] = i+1;
 
-            } else if(wordBack[i].equals(selectedText)) {
+            } else if(getString(wordBack[i]).equals(selectedText)) {
 
                 checkAnswer[1] = i+1;
             }
