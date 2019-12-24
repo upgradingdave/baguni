@@ -31,6 +31,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     String[] syllables; // wordInIndex의 단어를 각 음절로 나눔
 
+    TextView answer;
     LinearLayout answerLayout;
 
     TextView tvAnswer; // 입력한 정답이 표시되는 텍스트뷰
@@ -62,6 +63,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
         view = inflater.inflate(R.layout.lesson_word_quiz3, container, false);
 
+        answer = view.findViewById(R.id.answer);
         answerLayout = view.findViewById(R.id.answerLayout);
         tvAnswer = view.findViewById(R.id.tvAnswer);
         flexboxLayout = view.findViewById(R.id.flexboxLayout);
@@ -87,6 +89,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
                     if(tvAnswer.getText().toString().equals(word)) { // 정답
 
+                        answer.setText(LessonWord.wordBack[quizCount]);
                         answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10_stroke_purple));
                         mp = MediaPlayer.create(getContext(), R.raw.correct);
                         mp.start();
@@ -118,6 +121,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                                     ((LessonFrame) getActivity()).replaceFragment(LessonSentence.newInstance());
                                 }
                             }
+                            answer.setText("");
                             tvAnswer.setText("");
                             btnReset.setVisibility(View.GONE);
                             answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));

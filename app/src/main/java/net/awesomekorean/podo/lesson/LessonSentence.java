@@ -32,8 +32,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     static TextView tvSentenceExplain;
 
     static String[] sentenceFront = LessonWord.sentenceFront;
-    static int[] sentenceBack = LessonWord.sentenceBack;
-    static int[] sentenceExplain = LessonWord.sentenceExplain;
+    static String[] sentenceBack = LessonWord.sentenceBack;
+    static String[] sentenceExplain = LessonWord.sentenceExplain;
     static String[] sentenceAudio = LessonWord.sentenceAudio;
 
     static PlayAudioWithString playAudioWithString = new PlayAudioWithString();
@@ -94,7 +94,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
             case R.id.btnCollect :
                 String front = LessonWord.sentenceFront[lessonCount];
-                String back = getString(LessonWord.sentenceBack[lessonCount]);
+                String back = LessonWord.sentenceBack[lessonCount];
                 String audio = LessonWord.sentenceAudio[lessonCount];
                 CollectionRepository repository = new CollectionRepository(getContext());
                 repository.insert(front, back, audio);

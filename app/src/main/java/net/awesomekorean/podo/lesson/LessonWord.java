@@ -47,15 +47,15 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static int lessonClauseLength = 0;
 
     static String[] wordFront;
-    static int[] wordBack;
+    static String[] wordBack;
     static String[] wordPronunciation;
     static String[] wordAntonyms;
     static String[] wordSynonyms;
     static String[] wordApplication;
     static String[] wordAudio;
     static String[] sentenceFront;
-    static int[] sentenceBack;
-    static int[] sentenceExplain;
+    static String[] sentenceBack;
+    static String[] sentenceExplain;
     static String[] sentenceAudio;
     static String[] sentenceClause;
     static int[] peopleImage;
@@ -122,25 +122,25 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         lessonClauseLength = lesson.getSentenceClause().length;
 
         String packageName = context.getPackageName();
-        wordBack = new int[lessonWordLength];
+        wordBack = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
             String stringWordBack = "L" + generalLessonUnit + "_WORD_BACK_" + i;
             int intWordBack = getResources().getIdentifier(stringWordBack, "string", packageName);
-            wordBack[i] = intWordBack;
+            wordBack[i] = getString(intWordBack);
         }
 
-        sentenceBack = new int[lessonSentenceLength];
+        sentenceBack = new String[lessonSentenceLength];
         for(int i=0; i<lessonSentenceLength; i++) {
             String stringSentenceBack = "L" + generalLessonUnit + "_SENTENCE_BACK_" + i;
             int intSentenceBack = getResources().getIdentifier(stringSentenceBack, "string", packageName);
-            sentenceBack[i] = intSentenceBack;
+            sentenceBack[i] = getString(intSentenceBack);
         }
 
-        sentenceExplain = new int[lessonSentenceLength];
+        sentenceExplain = new String[lessonSentenceLength];
         for(int i=0; i<lessonSentenceLength; i++) {
             String stringSentenceExplain = "L" + generalLessonUnit + "_SENTENCE_EXPLAIN_" + i;
             int intSentenceExplain = getResources().getIdentifier(stringSentenceExplain, "string", packageName);
-            sentenceExplain[i] = intSentenceExplain;
+            sentenceExplain[i] = getString(intSentenceExplain);
         }
 
         wordFront = lesson.getWordFront();
@@ -196,7 +196,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
             case R.id.btnCollect :
                 String front = wordFront[lessonCount];
-                String back = getString(wordBack[lessonCount]);
+                String back = wordBack[lessonCount];
                 String audio = wordAudio[lessonCount];
 
                 CollectionRepository repository = new CollectionRepository(getContext());
