@@ -67,12 +67,14 @@ public class WritingCorrection extends AppCompatActivity implements View.OnClick
         sendFeedback.setOnClickListener(this);
 
         intent = getIntent();
-        guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
-        article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
-        correction = intent.getExtras().getString(getString(R.string.EXTRA_CORRECTION));
-        feedbackT = intent.getExtras().getString(getString(R.string.EXTRA_TEACHER_FEEDBACK));
-        feedbackS = intent.getExtras().getString(getString(R.string.EXTRA_STUDENT_FEEDBACK));
-        System.out.println("FEEDBACK"+feedbackS);
+
+        WritingEntity correctedWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
+        guid = correctedWriting.getGuid();
+        article = correctedWriting.getArticle();
+        correction = correctedWriting.getCorrection();
+        feedbackT = correctedWriting.getTeacherFeedback();
+        feedbackS = correctedWriting.getStudentFeedback();
+
         if(feedbackS != null) {
             btnGiveUsFeedback.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_grey_30));
             btnGiveUsFeedback.setEnabled(false);

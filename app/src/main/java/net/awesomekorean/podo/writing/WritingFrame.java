@@ -41,6 +41,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     ImageView btnClose;
 
     String code; // add 인지 edit 인지를 판별
+    WritingEntity editWriting;
 
     WritingRepository repository;
 
@@ -69,11 +70,17 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
         // EDIT 일 때, 기존의 글을 출력
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
-            guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
-            article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
-            letters = intent.getExtras().getString(getString(R.string.EXTRA_LETTERS));
+            editWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
+            guid = editWriting.getGuid();
+            article = editWriting.getArticle();
+            letters = editWriting.getLetters();
             editText.setText(article);
             textCount.setText(letters);
+//            guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
+//            article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
+//            letters = intent.getExtras().getString(getString(R.string.EXTRA_LETTERS));
+//            editText.setText(article);
+//            textCount.setText(letters);
         }
 
         // 글을 쓸 때 바로바로 글자수를 가져옴
@@ -130,6 +137,9 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnCorrection :
                 WritingEntity entity = saveWriting();
+                if(entity == null) {
+                    entity = editWriting;
+                }
                 Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SAVED), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, Teachers.class);
                 intent.putExtra("code", "correction");
@@ -164,6 +174,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
 
         }else{
+            editWriting.setArticle(article);
+            editWriting.setLetters(letters);
             repository = new WritingRepository(this);
             repository.editByGuid(guid, article, letters);
             return null;

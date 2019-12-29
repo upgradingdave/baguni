@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     Intent intent;
 
-    public static String userEmail = "gabmanpark@gmail.com";
+    public static String userEmail;
     public static String userName;
     public static Uri userImage;
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         SettingStatusBar.setStatusBar(this);
 
         viewPager = findViewById(R.id.viewPager);
-        adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager());
+        adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapterViewPager);
 
         tvTitle = findViewById(R.id.tvTitle);

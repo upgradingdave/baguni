@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
