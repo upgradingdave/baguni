@@ -20,8 +20,11 @@ import static net.awesomekorean.podo.MainActivity.btnWriting;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    public ViewPagerAdapter(FragmentManager fragmentManager) {
+    MainActivity mainActivity;
+
+    public ViewPagerAdapter(FragmentManager fragmentManager, MainActivity mainActivity) {
         super(fragmentManager);
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -35,10 +38,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
 
             case 0 :
-                return MainLesson.newInstance();
+                return MainLesson.newInstance(mainActivity);
 
             case 1 :
-                return MainReading.newInstance();
+                return MainReading.newInstance(mainActivity);
 
             case 2 :
                 return  MainWriting.newInstance();

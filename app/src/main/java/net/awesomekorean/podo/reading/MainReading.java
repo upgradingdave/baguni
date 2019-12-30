@@ -12,10 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.reading.readings.Reading0;
 
 import java.util.ArrayList;
+
+import static net.awesomekorean.podo.MainActivity.btnLesson;
+import static net.awesomekorean.podo.MainActivity.btnReading;
 
 public class MainReading extends Fragment {
 
@@ -27,10 +31,15 @@ public class MainReading extends Fragment {
 
     Intent intent;
 
-    public static MainReading newInstance() {
-        return new MainReading();
+    MainActivity mainActivity;
+
+    public MainReading(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
+    public static MainReading newInstance(MainActivity mainActivity) {
+        return new MainReading(mainActivity);
+    }
 
 
     @Nullable
@@ -65,6 +74,15 @@ public class MainReading extends Fragment {
         context = getContext();
 
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            mainActivity.setMainBtns(btnReading, R.drawable.reading_active, R.string.READING);
+            System.out.println("Reading Fragment is Visible!!");
+        }
     }
 
 }
