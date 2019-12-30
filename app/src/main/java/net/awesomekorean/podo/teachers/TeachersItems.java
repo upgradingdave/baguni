@@ -7,7 +7,7 @@ public class TeachersItems {
 
     private String image;
     private String audio;
-    private String status;
+    private int status; // 0: 준비중, 1: available, 2: vacation
     private String name;
     private String tag;
     private Boolean isChecked = false;
@@ -29,11 +29,11 @@ public class TeachersItems {
         this.audio = audio;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

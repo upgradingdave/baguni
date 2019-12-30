@@ -304,6 +304,7 @@
     <string name="DB_WRITINGS">android/podo/writings</string>
     <string name="DB_MESSAGES">android/podo/messages</string>
     <string name="DB_TEACHERS">android/podo/teachers</string>
+    <string name="LOADING">Loading...</string>
 
 
 

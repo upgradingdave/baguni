@@ -15,10 +15,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -144,10 +147,10 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, int position) {
         TeachersItems item = list.get(position);
 
-        if(item.getStatus().equals("available")) {
+        if(item.getStatus() == 1) {
             holder.available.setVisibility(View.VISIBLE);
             holder.vacation.setVisibility(View.GONE);
-        } else if(item.getStatus().equals("vacation")) {
+        } else if(item.getStatus() == 2) {
             holder.available.setVisibility(View.GONE);
             holder.vacation.setVisibility(View.VISIBLE);
         }
@@ -172,7 +175,6 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
                 Picasso.with(context).load(uri).into(holder.teacherImage);
             }
         });
-
     }
 
     @Override

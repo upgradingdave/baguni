@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.login;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -79,6 +82,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     EditText sendEmail;
     Button btnSend;
 
+    LinearLayout progressBarLayout;
+    ProgressBar progressBar;
+
     Intent intent;
 
     static final int RC_SIGN_IN = 100;
@@ -120,6 +126,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         selectJapanese = findViewById(R.id.selectJapanese);
         selectThai = findViewById(R.id.selectThai);
         selectKorean = findViewById(R.id.selectKorean);
+        progressBarLayout = findViewById(R.id.progressBarLayout);
+        progressBar = findViewById(R.id.progressBar);
 
         selectLanguage.setOnClickListener(this);
         selectEnglish.setOnClickListener(this);
@@ -151,7 +159,14 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
         btnSend = findViewById(R.id.btnSend);
         findPasswordBg.setOnClickListener(this);
         btnSend.setOnClickListener(this);
+
+        int color = ContextCompat.getColor(this, R.color.PURPLE);
+        progressBar.setIndeterminate(true);
+        progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+
     }
+
+
 
 
     // 페이스북 로그인 결과
@@ -308,6 +323,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
 
             case R.id.btnSignIn :
+                progressBarLayout.setVisibility(View.VISIBLE);
 
                 final String userEmail = email.getText().toString();
                 final String userPass = password.getText().toString();
@@ -356,11 +372,13 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.btnSignInGoogle :
+                progressBarLayout.setVisibility(View.VISIBLE);
                 intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
                 break;
 
             case R.id.btnSignInFacebook :
+                progressBarLayout.setVisibility(View.VISIBLE);
                 LoginManager loginManager = LoginManager.getInstance();
                 loginManager.logInWithReadPermissions(SignIn.this, Arrays.asList("public_profile", "email"));
                 loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -384,6 +402,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
             case R.id.btnSignUp :
                 intent = new Intent(this, SignUp.class);
+                finish();
                 startActivity(intent);
                 break;
 

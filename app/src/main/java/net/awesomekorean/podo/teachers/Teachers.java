@@ -1,14 +1,17 @@
 package net.awesomekorean.podo.teachers;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,6 +64,9 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
     ArrayList<TeachersItems> list;
 
+    LinearLayout progressBarLayout;
+    ProgressBar progressBar;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +79,22 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         btnTopUp = findViewById(R.id.btnTopUp);
         btnSubmit = findViewById(R.id.btnSubmit);
         requestResult = findViewById(R.id.requestResult);
+        progressBarLayout = findViewById(R.id.progressBarLayout);
+        progressBar = findViewById(R.id.progressBar);
         btnBack.setOnClickListener(this);
         btnTopUp.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+
+        int color = ContextCompat.getColor(this, R.color.PURPLE);
+        progressBar.setIndeterminate(true);
+        progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+
 
         //holdingPoints.setText(String.valueOf(MainActivity.userInformation.getPoints()));
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();
-        db.collection(getString(R.string.DB_TEACHERS))
+        db.collection(getString(R.string.DB_TEACHERS)).whereGreaterThan("status", 0)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -99,6 +112,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 }).addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -113,6 +127,8 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 });
 
                 recyclerView.setAdapter(adapter);
+
+                progressBarLayout.setVisibility(View.GONE);
             }
         });
 

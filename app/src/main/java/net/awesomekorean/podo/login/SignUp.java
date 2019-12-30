@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.login;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +56,9 @@ public class SignUp extends AppCompatActivity {
 
     TextView btnSignIn;
 
+    LinearLayout progressBarLayout;
+    ProgressBar progressBar;
+
     int focused;
 
     @Override
@@ -69,6 +75,9 @@ public class SignUp extends AppCompatActivity {
         password = findViewById(R.id.password);
         passwordConfirm = findViewById(R.id.passwordConfirm);
         warningPass = findViewById(R.id.warningPass);
+        progressBarLayout = findViewById(R.id.progressBarLayout);
+        progressBar = findViewById(R.id.progressBar);
+
         email.addTextChangedListener(textWatcher);
         email.setOnFocusChangeListener(focusChangeListener);
         password.addTextChangedListener(textWatcher);
@@ -76,10 +85,16 @@ public class SignUp extends AppCompatActivity {
         passwordConfirm.addTextChangedListener(textWatcher);
         passwordConfirm.setOnFocusChangeListener(focusChangeListener);
 
+        int color = ContextCompat.getColor(this, R.color.PURPLE);
+        progressBar.setIndeterminate(true);
+        progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+
+
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBarLayout.setVisibility(View.VISIBLE);
 
                 userEmail = email.getText().toString();
                 userPass = password.getText().toString();
@@ -129,6 +144,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignIn.class);
+                finish();
                 startActivity(intent);
             }
         });
