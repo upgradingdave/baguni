@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/itemLayout"
+<LinearLayout android:id="@+id/itemLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +9,7 @@
     android:background="@drawable/bg_white_10_stroke_grey"
     android:elevation="1dp"
     android:descendantFocusability="blocksDescendants"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/teacherCondition"
@@ -60,11 +59,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/teacherImage"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/GREY_DARK"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/people7" />
+            android:layout_height="80dp"/>
 
         <TextView
             android:id="@+id/teacherName"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,8 +26,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
+import com.google.firebase.storage.FirebaseStorage;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -73,44 +77,45 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         btnTopUp.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
 
+        //holdingPoints.setText(String.valueOf(MainActivity.userInformation.getPoints()));
+
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();
-
-        TeachersItems teacher1 = new TeachersItems();
-        teacher1.setPicture(getDrawable(R.drawable.back));
-        teacher1.setIsAvailable(true);
-        teacher1.setName("Danny");
-        teacher1.setTag("#male #KoreanTeacher");
-        list.add(teacher1);
-
-        TeachersItems teacher2 = new TeachersItems();
-        teacher2.setPicture(getDrawable(R.drawable.back));
-        teacher2.setIsAvailable(false);
-        teacher2.setName("Dave");
-        teacher2.setTag("#male #KoreanTeacher");
-        list.add(teacher2);
-
-        TeachersItems teacher3 = new TeachersItems();
-        teacher3.setPicture(getDrawable(R.drawable.back));
-        teacher3.setIsAvailable(true);
-        teacher3.setName("Lyla");
-        teacher3.setTag("#male #KoreanTeacher");
-        list.add(teacher3);
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        TeachersAdapter adapter = new TeachersAdapter(this, list);
-
-        adapter.setOnItemClickListener(new TeachersAdapter.OnItemClickListener() {
+        db.collection(getString(R.string.DB_TEACHERS))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                System.out.println("선생님 정보를 로드했습니다");
+                                TeachersItems items = document.toObject(TeachersItems.class);
+                                list.add(items);
+                            }
+                        } else {
+                            System.out.println("선생님 정보 로드 중 오류가 발생했습니다." + task.getException());
+                        }
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onItemClick(View v, int pos) {
-                btnSubmit.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_30));
-                teacherName = list.get(pos).getName();
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                TeachersAdapter adapter = new TeachersAdapter(getApplicationContext(), list);
+
+                adapter.setOnItemClickListener(new TeachersAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int pos) {
+                        btnSubmit.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_30));
+                        teacherName = list.get(pos).getName();
+                    }
+                });
+
+                recyclerView.setAdapter(adapter);
             }
         });
 
-        recyclerView.setAdapter(adapter);
     }
 
     @Override

@@ -27,7 +27,9 @@
         <activity android:name=".qna.AskQuestion" />
         <activity android:name=".Logo" />
         <activity android:name=".login.SignUp"></activity>
-        <activity android:name=".teachers.Teachers" />
+        <activity android:name=".teachers.Teachers" >
+
+        </activity>
         <activity android:name=".login.SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

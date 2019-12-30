@@ -1,6 +1,13 @@
 package net.awesomekorean.podo.teachers;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +18,20 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
 import net.awesomekorean.podo.R;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHolder> {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+
 
     // 아이템 클릭 이벤트를 MainLesson 에서 처리하기 위한 인터페이스
     public interface OnItemClickListener {
@@ -44,9 +61,12 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
         TextView available;
         TextView vacation;
         ImageView btnAudio;
+        String pathAudio;
         TextView teacherName;
         TextView teacherTag;
         ImageView teacherCheck;
+
+        MediaPlayer mediaPlayer = new MediaPlayer();
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -81,6 +101,32 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
                     }
                }
             });
+
+
+            // 오디오 버튼 클릭
+            btnAudio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!mediaPlayer.isPlaying()) {
+                        StorageReference reference = storage.getReference().child(pathAudio);
+                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                try {
+                                    mediaPlayer = new MediaPlayer();
+                                    mediaPlayer.setDataSource(uri.toString());
+                                    mediaPlayer.prepare();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                mediaPlayer.start();
+                            }
+                        });
+                    } else {
+                        mediaPlayer.stop();
+                    }
+                }
+            });
         }
     }
 
@@ -95,13 +141,13 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         TeachersItems item = list.get(position);
 
-        if(item.getIsAvailable()) {
+        if(item.getStatus().equals("available")) {
             holder.available.setVisibility(View.VISIBLE);
             holder.vacation.setVisibility(View.GONE);
-        } else {
+        } else if(item.getStatus().equals("vacation")) {
             holder.available.setVisibility(View.GONE);
             holder.vacation.setVisibility(View.VISIBLE);
         }
@@ -116,6 +162,17 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
 
         holder.teacherName.setText(item.getName());
         holder.teacherTag.setText(item.getTag());
+        holder.pathAudio = item.getAudio();
+
+        // 선생님 이미지 가져오기
+        StorageReference reference = storage.getReference().child(item.getImage());
+        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(context).load(uri).into(holder.teacherImage);
+            }
+        });
+
     }
 
     @Override

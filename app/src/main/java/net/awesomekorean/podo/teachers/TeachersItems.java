@@ -5,27 +5,36 @@ import android.graphics.drawable.Drawable;
 
 public class TeachersItems {
 
-    // 오디오는 어떻게 해야할까?
-    private Drawable picture;
-    private Boolean isAvailable;
+    private String image;
+    private String audio;
+    private String status;
     private String name;
     private String tag;
     private Boolean isChecked = false;
 
-    public Drawable getPicture() {
-        return picture;
+
+    public String getImage() {
+        return image;
     }
 
-    public void setPicture(Drawable picture) {
-        this.picture = picture;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Boolean getIsAvailable() {
-        return isAvailable;
+    public String getAudio() {
+        return audio;
     }
 
-    public void setIsAvailable(Boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getName() {
