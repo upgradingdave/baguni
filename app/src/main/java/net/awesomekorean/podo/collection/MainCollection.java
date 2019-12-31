@@ -49,6 +49,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
+import static net.awesomekorean.podo.MainActivity.btnCollection;
 
 public class MainCollection extends Fragment implements Button.OnClickListener {
 
@@ -103,9 +104,14 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
     ArrayList<CollectionEntity> checkedList;
 
+    MainActivity mainActivity;
 
-    public static MainCollection newInstance() {
-        return new MainCollection();
+    public MainCollection(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
+    public static MainCollection newInstance(MainActivity mainActivity) {
+        return new MainCollection(mainActivity);
     }
 
     @Nullable
@@ -568,6 +574,14 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
         @Override
         public int compare(CollectionEntity c1, CollectionEntity c2) {
             return c2.getDateNew().compareTo(c1.getDateNew());
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            mainActivity.setMainBtns(btnCollection, R.drawable.collection_active, R.string.COLLECTION);
         }
     }
 }

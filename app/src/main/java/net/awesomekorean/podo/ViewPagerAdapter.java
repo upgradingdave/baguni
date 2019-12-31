@@ -44,10 +44,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return MainReading.newInstance(mainActivity);
 
             case 2 :
-                return  MainWriting.newInstance();
+                return  MainWriting.newInstance(mainActivity);
 
             case 3 :
-                return MainCollection.newInstance();
+                return MainCollection.newInstance(mainActivity);
 
             case 4 :
                 return MainQna.newInstance();

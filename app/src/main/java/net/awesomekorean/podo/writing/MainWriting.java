@@ -27,6 +27,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static net.awesomekorean.podo.MainActivity.btnWriting;
 
 public class MainWriting extends Fragment implements View.OnClickListener {
 
@@ -59,8 +61,14 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     Button btnYes;
     Button btnNo;
 
-    public static MainWriting newInstance() {
-        return new MainWriting();
+    MainActivity mainActivity;
+
+    public MainWriting(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
+    public static MainWriting newInstance(MainActivity mainActivity) {
+        return new MainWriting(mainActivity);
     }
 
 
@@ -254,6 +262,14 @@ public class MainWriting extends Fragment implements View.OnClickListener {
             case R.id.btnNo :
                 msgDelete.setVisibility(View.GONE);
                 break;
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            mainActivity.setMainBtns(btnWriting, R.drawable.writing_active, R.string.WRITING);
         }
     }
 }

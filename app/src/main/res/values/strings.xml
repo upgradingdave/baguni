@@ -194,6 +194,8 @@
 
 <!--    레슨내용현지화-->
     <string name="SL0_TITLE">Start of learning Korean</string>
+    <string name="SL1_TITLE">Conjugation of verbs and adjectives</string>
+
 
     <string name="L0_TITLE">Greetings</string>
     <string name="L0_WORD_BACK_0">Hello</string>

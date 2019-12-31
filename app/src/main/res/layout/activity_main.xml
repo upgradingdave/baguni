@@ -89,7 +89,7 @@
 
         <ImageView
             android:id="@+id/btnWriting"
-            android:src="@drawable/writting"
+            android:src="@drawable/writing"
             android:padding="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

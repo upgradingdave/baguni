@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnWriting:
-                setMainBtns(btnWriting, R.drawable.writting_active, R.string.WRITING);
+                setMainBtns(btnWriting, R.drawable.writing_active, R.string.WRITING);
                 viewPager.setCurrentItem(2);
                 break;
 
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public void setMainBtns(ImageView btn, int active, int title) {
         btnLesson.setImageResource(R.drawable.lesson);
         btnReading.setImageResource(R.drawable.reading);
-        btnWriting.setImageResource(R.drawable.writting);
+        btnWriting.setImageResource(R.drawable.writing);
         btnCollection.setImageResource(R.drawable.collection);
         btnQnA.setImageResource(R.drawable.qna);
 

@@ -67,6 +67,8 @@ public class MainLesson extends Fragment {
         list.add(item2);
         list.add(item3);
 
+
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
