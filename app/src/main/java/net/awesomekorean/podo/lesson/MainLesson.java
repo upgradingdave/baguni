@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
 import net.awesomekorean.podo.lesson.lessons.Lesson1;
@@ -21,6 +25,8 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson0;
 import net.awesomekorean.podo.lesson.lessons.Lesson0;
 
 import java.util.ArrayList;
+
+import static net.awesomekorean.podo.MainActivity.btnLesson;
 
 public class MainLesson extends Fragment {
 
@@ -32,11 +38,15 @@ public class MainLesson extends Fragment {
 
     Intent intent;
 
-    public static MainLesson newInstance() {
-        return new MainLesson();
+    MainActivity mainActivity;
+
+    public MainLesson(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
-
+    public static MainLesson newInstance(MainActivity mainActivity) {
+        return new MainLesson(mainActivity);
+    }
 
     @Nullable
     @Override
@@ -89,6 +99,16 @@ public class MainLesson extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            mainActivity.setMainBtns(btnLesson, R.drawable.lesson_active, R.string.LESSON);
+            System.out.println("Lesson Fragment is Visible!!");
+        }
+    }
+
 }
 
 
