@@ -1,10 +1,10 @@
 <resources>
 
-<!--    타이틀-->
+    <!--    타이틀-->
     <string name="app_name">podo</string>
 
 
-<!--    로그인-->
+    <!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
@@ -40,7 +40,7 @@
     <string name="KOREAN">Korean</string>
 
 
-<!--    메뉴-->
+    <!--    메뉴-->
     <string name="LESSON">Lesson</string>
     <string name="READING">Reading</string>
     <string name="WRITING">Writing</string>
@@ -49,14 +49,14 @@
     <string name="MESSAGE">Message</string>
 
 
-<!--    주요버튼-->
+    <!--    주요버튼-->
     <string name="YES">Yes</string>
     <string name="NO">No</string>
     <string name="SAVE">Save</string>
     <string name="CANCEL">Cancel</string>
 
 
-<!--    레슨-->
+    <!--    레슨-->
     <string name="CONFIRM_QUIT">Do you want to go back to main? (progress will not be saved)</string>
     <string name="HANGUL">Hangul</string>
     <string name="CONSONANT">Consonant</string>
@@ -83,13 +83,13 @@
     <string name="GET_POINT">Get the point</string>
 
 
-<!--    읽기-->
+    <!--    읽기-->
     <string name="NORMAL">Normal</string>
     <string name="SPEED">Speed x0.8</string>
     <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
 
 
-<!--    쓰기-->
+    <!--    쓰기-->
     <string name="CORRECTION">Correction</string>
     <string name="WRITING_SAVED">Writing is saved</string>
     <string name="WRITING_DELETE">Do you really want to delete writing?</string>
@@ -109,7 +109,7 @@
     <string name="SEND">Send</string>
 
 
-<!--    컬렉션-->
+    <!--    컬렉션-->
     <string name="ANSWER">Answer</string>
     <string name="NEXT">Next</string>
     <string name="STUDY">Study</string>
@@ -128,7 +128,7 @@
     <string name="COLLECTION_SAVED">Collection is saved</string>
 
 
-<!--    프로필/옵션-->
+    <!--    프로필/옵션-->
     <string name="PROFILE">Profile / Option</string>
     <string name="ATTENDANCE">Attendance (sunday-saturday)</string>
     <string name="GET">Get</string>
@@ -143,7 +143,7 @@
     <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
 
 
-<!--    구매-->
+    <!--    구매-->
     <string name="GO_PREMIUM">Go Premium</string>
     <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
         Subscription will be automatically renewed as soon as your subscription expires.
@@ -182,7 +182,7 @@
     </string>
 
 
-<!--    선생님페이지-->
+    <!--    선생님페이지-->
     <string name="NOW_AVAILABLE">Now available</string>
     <string name="ON_VACATION">On vacation</string>
     <string name="REQUIRE">Require: </string>
@@ -192,7 +192,7 @@
     <string name="TEACHERS">Teachers</string>
 
 
-<!--    레슨내용현지화-->
+    <!--    레슨내용현지화-->
     <string name="SL0_TITLE">Start of learning Korean</string>
     <string name="SL1_TITLE">Conjugation of verbs and adjectives</string>
 
@@ -276,9 +276,6 @@
     <string name="L2_SENTENCE_EXPLAIN_11">-</string>
 
 
-
-
-
     <!--번역 필요 없는 부분-->
     <string name="facebook_app_id">1366274056887552</string>
     <string name="fb_login_protocol_scheme">fb1366274056887552</string>
@@ -307,9 +304,6 @@
     <string name="DB_MESSAGES">android/podo/messages</string>
     <string name="DB_TEACHERS">android/podo/teachers</string>
     <string name="LOADING">Loading...</string>
-
-
-
 
 
     <!--지울것-->

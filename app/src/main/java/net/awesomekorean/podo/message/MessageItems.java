@@ -2,22 +2,16 @@ package net.awesomekorean.podo.message;
 
 public class MessageItems {
 
-    private String userEmail;
     private String message;
     private String messageDate;
 
     private int senderImage;
     private boolean isNew;
 
-    public void MessageItems(){}
-
-    public String getUserEmail() {
-        return userEmail;
+    public void MessageItems(){
+        this.isNew = true;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
 
     public int getSenderImage() {
         return senderImage;

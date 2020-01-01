@@ -90,7 +90,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 
 
-        //holdingPoints.setText(String.valueOf(MainActivity.userInformation.getPoints()));
+        holdingPoints.setText(String.valueOf(MainActivity.userInformation.getPoints()));
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();

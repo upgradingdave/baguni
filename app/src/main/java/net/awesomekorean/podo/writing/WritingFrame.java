@@ -143,7 +143,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SAVED), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, Teachers.class);
                 intent.putExtra("code", "correction");
-                intent.putExtra("ENTITY", entity);
+                intent.putExtra(getString(R.string.EXTRA_ENTITY), entity);
                 startActivity(intent);
                 finish();
                 break;

@@ -20,17 +20,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
 import net.awesomekorean.podo.UserInformation;
+import net.awesomekorean.podo.message.MessageItems;
 
 public class SignUp extends AppCompatActivity {
 
@@ -108,24 +111,30 @@ public class SignUp extends AppCompatActivity {
                                     System.out.println("회원가입에 성공했습니다");
 
                                     final UserInformation userInformation = new UserInformation();
-                                    CollectionReference reference = db.collection(getString(R.string.DB_USERINFO));
-                                    reference.document(userEmail).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    CollectionReference userRef = db.collection(getString(R.string.DB_USERINFO));
+                                    userRef.document(userEmail).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             System.out.println("유저정보 DB를 만들었습니다");
-                                            Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            MainActivity.userEmail = userEmail;
-                                            finish();
-                                            startActivity(intent);
+                                            NewMessageDb newMessageDb = new NewMessageDb();
+                                            newMessageDb.makeNewMessageDb(SignUp.this, getApplicationContext(), userEmail);
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getApplicationContext(), "Failed: User DB is not created"+e, Toast.LENGTH_LONG).show();
                                         }
                                     });
+
 
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     System.out.println("회원가입에 실패했습니다");
                                     Toast.makeText(getApplicationContext(), getString(R.string.EMAIL_EXIST),
                                             Toast.LENGTH_SHORT).show();
+                                    progressBarLayout.setVisibility(View.GONE);
+
                                 }
                             }
                         });
@@ -212,9 +221,6 @@ public class SignUp extends AppCompatActivity {
                     break;
             }
 
-            System.out.println("EMAIL : " + userEmailOk);
-            System.out.println("EMAIL CHECK: " + userEmailDuplicateOk);
-            System.out.println("PASS : " + userPassOk);
             if(userEmailOk.equals(true) && userEmailDuplicateOk.equals(true) && userPassOk.equals(true)) {
                 btnSignUp.setEnabled(true);
             }else {

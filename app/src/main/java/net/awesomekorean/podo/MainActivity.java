@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 DocumentSnapshot snapshot = transaction.get(sfDocRef);
                 UserInformation userInformationFromDB = snapshot.toObject(UserInformation.class);
 
-                // 어제 출석 했는지 확인하기
+                // 어제 출석 했는지 확인하기 (하루에 한 번만 하게 할 수 있을까?)
                 int yesterday;
                 if(today == 0) {
                     yesterday = 6;

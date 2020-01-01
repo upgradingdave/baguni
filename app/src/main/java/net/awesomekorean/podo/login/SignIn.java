@@ -271,6 +271,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         } else {
                             // 로그인 실패
                             Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_FAILED), Toast.LENGTH_SHORT).show();
+                            progressBarLayout.setVisibility(View.GONE);
                         }
                     }
                 });

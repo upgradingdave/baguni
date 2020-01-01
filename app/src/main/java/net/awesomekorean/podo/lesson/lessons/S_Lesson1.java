@@ -2,8 +2,9 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.LessonItem;
+import net.awesomekorean.podo.lesson.LessonSpecial;
 
-public class S_Lesson1 implements LessonItem {
+public class S_Lesson1 implements LessonItem, LessonSpecial {
 
     private int title = R.string.SL1_TITLE;
     private String subTitle = "한글(Hangul)";
@@ -11,6 +12,9 @@ public class S_Lesson1 implements LessonItem {
     private Boolean isSpecial = true;
     private Boolean isLock = false;
     private Boolean isCompleted = false;
+
+    private String lessonSpecialTitle = "Lesson special title";
+    private String lessonSpecialArticle = "Lesson special article";
 
 
     @Override
@@ -41,5 +45,15 @@ public class S_Lesson1 implements LessonItem {
     @Override
     public boolean getIsCompleted() {
         return isCompleted;
+    }
+
+    @Override
+    public String getLessonSpecialTitle() {
+        return null;
+    }
+
+    @Override
+    public String getLessonSpecialArticle() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.writing;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -13,7 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -118,7 +121,12 @@ public class WritingCorrection extends AppCompatActivity implements View.OnClick
                                 WritingRepository repository = new WritingRepository(getApplicationContext());
                                 repository.updateStudentFeedbackByGuid(guid, studentFeedback);
                             }
-                        });
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Failed to send a student feedback: " + e, Toast.LENGTH_LONG).show();
+                    }
+                });
 
 
                 Handler handler = new Handler();
