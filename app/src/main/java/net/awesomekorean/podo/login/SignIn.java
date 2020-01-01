@@ -172,7 +172,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     // 페이스북 로그인 결과
     // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
     // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증합니다.
-    private void handleFacebookAccessToken(AccessToken accessToken) {
+    private void handleFacebookAccessToken(final AccessToken accessToken) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential)
@@ -180,14 +180,16 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            System.out.println("성공");
+                            // 페이스북 로그인 성공, 출석부 있는지 확인
+                            final String userEmail = accessToken.getUserId();
+                            System.out.println("USERID?:"+userEmail);
                             // 로그인 성공
                             intent = new Intent(getApplicationContext(), MainActivity.class);
                             finish();
                             startActivity(intent);
                             Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_SUCCEED), Toast.LENGTH_SHORT).show();
                         } else {
-                            System.out.println("실패");
+                            System.out.println("페이스북 로그인 실패");
 
                             // 로그인 실패
                             Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_FAILED), Toast.LENGTH_SHORT).show();
@@ -231,7 +233,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            // 로그인 성공, 출석부 있는지 확인
+                            // 구글 로그인 성공, 출석부 있는지 확인
                             final String userEmail = account.getEmail();
                             DocumentReference docRef = db.collection(getString(R.string.DB_USERINFO)).document(userEmail);
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -248,19 +250,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
 
                                         } else {
-                                            System.out.println("출석부가 없습니다. 새로운 출석부를 만듭니다");
-                                            final UserInformation userInformation = new UserInformation();
-                                            CollectionReference reference = db.collection(getString(R.string.DB_USERINFO));
-                                            reference.document(userEmail).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    System.out.println("유저정보 DB를 만들었습니다");
-                                                    intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                    finish();
-                                                    startActivity(intent);
-                                                    Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
+                                            System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
+                                            MakeNewDb makeNewDb = new MakeNewDb();
+                                            makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
                                         }
                                     } else {
                                         System.out.println("유저정보 불러오기를 실패했습니다");
@@ -392,7 +384,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     @Override
                     public void onCancel() {
                         System.out.println("페이스북 로그인을 취소했습니다");
+                        progressBarLayout.setVisibility(View.GONE);
                     }
+
 
                     @Override
                     public void onError(FacebookException error) {

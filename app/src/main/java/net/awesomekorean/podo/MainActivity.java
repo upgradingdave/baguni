@@ -109,8 +109,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
 
         // 알림 메시지 실시간 리스너
-        db.collection(getString(R.string.DB_MESSAGES))
-                .whereEqualTo("userEmail", userEmail)
+        db.collection(getString(R.string.DB_MESSAGES)).document(userEmail).collection("message")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,

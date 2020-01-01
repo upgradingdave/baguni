@@ -26,14 +26,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.message.MessageItems;
 
 public class SignUp extends AppCompatActivity {
 
@@ -110,23 +107,8 @@ public class SignUp extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     System.out.println("회원가입에 성공했습니다");
 
-                                    final UserInformation userInformation = new UserInformation();
-                                    CollectionReference userRef = db.collection(getString(R.string.DB_USERINFO));
-                                    userRef.document(userEmail).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            System.out.println("유저정보 DB를 만들었습니다");
-                                            NewMessageDb newMessageDb = new NewMessageDb();
-                                            newMessageDb.makeNewMessageDb(SignUp.this, getApplicationContext(), userEmail);
-
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(getApplicationContext(), "Failed: User DB is not created"+e, Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-
+                                    MakeNewDb makeNewDb = new MakeNewDb();
+                                    makeNewDb.makeNewDb(SignUp.this, getApplicationContext(), userEmail);
 
                                 } else {
                                     // If sign in fails, display a message to the user.

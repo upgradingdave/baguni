@@ -1,5 +1,10 @@
 package net.awesomekorean.podo.message;
 
+import com.google.firebase.firestore.FieldValue;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MessageItems {
 
     private String message;
@@ -8,9 +13,17 @@ public class MessageItems {
     private int senderImage;
     private boolean isNew;
 
-    public void MessageItems(){
+    public MessageItems(){
+        getDateNow();
         this.isNew = true;
     }
+
+    public void getDateNow() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date time = new Date();
+        messageDate = format.format(time);
+    }
+
 
 
     public int getSenderImage() {

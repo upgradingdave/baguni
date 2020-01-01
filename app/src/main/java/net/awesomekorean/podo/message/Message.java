@@ -44,8 +44,7 @@ public class Message extends AppCompatActivity {
         list = new ArrayList<>();
 
         // DB 에서 일괄 불러오기
-        db.collection(getString(R.string.DB_MESSAGES))
-                .whereEqualTo("userEmail", userEmail)
+        db.collection(getString(R.string.DB_MESSAGES)).document(userEmail).collection("message")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -65,7 +64,7 @@ public class Message extends AppCompatActivity {
                                 recyclerView.setAdapter(adapter);
 
                                 if(item.getIsNew()) {
-                                    DocumentReference docRef = db.collection(getString(R.string.DB_MESSAGES)).document(doc.getId());
+                                    DocumentReference docRef = db.collection(getString(R.string.DB_MESSAGES)).document(userEmail).collection("message").document(doc.getId());
 
                                     docRef.update("isNew", false)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
