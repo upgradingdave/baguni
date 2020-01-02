@@ -254,7 +254,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 Calendar cal = Calendar.getInstance();
                 int today = cal.get(Calendar.DAY_OF_WEEK); // 1:일요일 ~ 7:토요일
                 MainActivity.userInformation.resetDays(today);
-                db.collection(getString(R.string.DB_USERINFO)).document(MainActivity.userEmail).set(MainActivity.userInformation);
+                db.collection(getString(R.string.DB_INFORMATION)).document(MainActivity.userEmail).set(MainActivity.userInformation);
                 System.out.println("일주일 모두 출석! DB의 출석부를 초기화 했습니다");
 
                 intent = new Intent(this, LessonFinish.class);

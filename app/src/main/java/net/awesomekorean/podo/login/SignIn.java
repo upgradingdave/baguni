@@ -43,6 +43,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -235,28 +237,29 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                             // 구글 로그인 성공, 출석부 있는지 확인
                             final String userEmail = account.getEmail();
-                            DocumentReference docRef = db.collection(getString(R.string.DB_USERINFO)).document(userEmail);
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+                            DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                            informationRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        DocumentSnapshot document = task.getResult();
-                                        if (document.exists()) {
-                                            System.out.println("유저정보가 있습니다");
-                                            intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            finish();
-                                            startActivity(intent);
-                                            Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_SHORT).show();
+                                    if (task.getResult().exists()) {
+                                        System.out.println("유저정보가 있습니다");
+                                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        finish();
+                                        startActivity(intent);
+                                        Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_SHORT).show();
 
-
-                                        } else {
-                                            System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
-                                            MakeNewDb makeNewDb = new MakeNewDb();
-                                            makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
-                                        }
                                     } else {
-                                        System.out.println("유저정보 불러오기를 실패했습니다");
+                                        System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
+                                        MakeNewDb makeNewDb = new MakeNewDb();
+                                        makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
                                     }
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    System.out.println("유저정보 불러오기를 실패했습니다: " + e);
                                 }
                             });
 

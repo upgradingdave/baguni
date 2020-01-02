@@ -20,28 +20,29 @@ public class WritingEntity implements Serializable {
     private String guid;
     private String userEmail;
     private String userName;
-    private String article;
+    private String contents;
     private String letters;
     private String writingDate;
-    private int isCorrected = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
+    private int status = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
 
     private String teacherName;
+    private String teacherId;
     private String dateRequest;
 
     private String correction;
     private String teacherFeedback;
-    private String dateCorrection;
+    private String dateAnswer;
 
     private String studentFeedback;
 
     @Ignore
     public WritingEntity() {}
 
-    public WritingEntity(String article, String letters, String writingDate) {
+    public WritingEntity(String contents, String letters, String writingDate) {
         this.guid = UUID.randomUUID().toString();
         this.userEmail = MainActivity.userEmail;
         this.userName = MainActivity.userName;
-        this.article = article;
+        this.contents = contents;
         this.letters = letters;
         this.writingDate = writingDate;
     }
@@ -53,6 +54,14 @@ public class WritingEntity implements Serializable {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getDateRequest() {
@@ -79,12 +88,12 @@ public class WritingEntity implements Serializable {
         this.teacherFeedback = teacherFeedback;
     }
 
-    public String getDateCorrection() {
-        return dateCorrection;
+    public String getDateAnswer() {
+        return dateAnswer;
     }
 
-    public void setDateCorrection(String dateCorrection) {
-        this.dateCorrection = dateCorrection;
+    public void setDateAnswer(String dateAnswer) {
+        this.dateAnswer = dateAnswer;
     }
 
     public String getStudentFeedback() {
@@ -135,19 +144,19 @@ public class WritingEntity implements Serializable {
         this.letters = letters;
     }
 
-    public String getArticle() {
-        return article;
+    public String getContents() {
+        return contents;
     }
 
-    public void setArticle(String article) {
-        this.article = article;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
-    public int getIsCorrected() {
-        return isCorrected;
+    public int getStatus() {
+        return status;
     }
 
-    public void setIsCorrected(int corrected) {
-        isCorrected = corrected;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

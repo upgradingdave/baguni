@@ -59,6 +59,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
     Intent intent;
     String teacherName;
+    String teacherId;
 
     LinearLayout requestResult;
 
@@ -94,7 +95,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();
-        db.collection(getString(R.string.DB_TEACHERS)).whereGreaterThan("status", 0)
+        db.collection(getString(R.string.DB_TEACHERS_INFORMATION)).whereGreaterThan("status", 0)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -123,6 +124,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     public void onItemClick(View v, int pos) {
                         btnSubmit.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_30));
                         teacherName = list.get(pos).getName();
+                        teacherId = list.get(pos).getId();
                     }
                 });
 
@@ -158,19 +160,20 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
                 // 교정요청일 때
                 if(code.equals("correction")) {
-                    WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra("ENTITY");
+                    WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
 
                     requestWriting.setUserEmail(MainActivity.userEmail);
                     requestWriting.setUserName(MainActivity.userName);
                     requestWriting.setTeacherName(teacherName);
+                    requestWriting.setTeacherId(teacherId);
                     requestWriting.setDateRequest(date);
-                    requestWriting.setIsCorrected(1);
+                    requestWriting.setStatus(1);
 
                     WritingRepository repository = new WritingRepository(this);
                     repository.update(requestWriting);
 
                     // 교정요청 DB 에 저장하기
-                    db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
+                    db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
                             .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -194,11 +197,12 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
                     for (final CollectionEntity entity : recordList) {
                         entity.setTeacherName(teacherName);
+                        entity.setTeacherId(teacherId);
                         entity.setDateRequest(date);
-                        entity.setIsRecorded(1);
+                        entity.setStatus(1);
 
                         // 녹음요청 DB 에 저장하기
-                        final DocumentReference docRef = db.collection(getString(R.string.DB_COLLECTIONS)).document(entity.getGuid());
+                        final DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document(entity.getGuid());
 
                         db.runTransaction(new Transaction.Function<Void>() {
                             @Nullable

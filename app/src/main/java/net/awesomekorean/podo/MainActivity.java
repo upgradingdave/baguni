@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
 
         // 알림 메시지 실시간 리스너
-        db.collection(getString(R.string.DB_MESSAGES)).document(userEmail).collection("message")
+        db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_MESSAGES))
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         final Calendar cal = Calendar.getInstance();
         final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일
 
-        final DocumentReference sfDocRef = db.collection(getString(R.string.DB_USERINFO)).document(userEmail);
+        final DocumentReference sfDocRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
 
         db.runTransaction(new Transaction.Function<Void>() {
             @Override

@@ -30,7 +30,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     LinearLayout saveResult; //저장 메시지
 
     public static String guid;
-    String article;
+    String contents;
     String letters;
 
     ImageView btnBack;
@@ -72,9 +72,9 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
             editWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
             guid = editWriting.getGuid();
-            article = editWriting.getArticle();
+            contents = editWriting.getContents();
             letters = editWriting.getLetters();
-            editText.setText(article);
+            editText.setText(contents);
             textCount.setText(letters);
 //            guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
 //            article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
@@ -159,12 +159,12 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     }
 
     private WritingEntity saveWriting() {
-        article = editText.getText().toString();
+        contents = editText.getText().toString();
         letters = textCount.getText().toString();
         String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
 
         if(code.equals(getString(R.string.REQUEST_ADD))) {
-            WritingEntity entity = new WritingEntity(article, letters, date);
+            WritingEntity entity = new WritingEntity(contents, letters, date);
             guid = entity.getGuid();
             System.out.println("DATE : " + entity.getWritingDate());
             repository = new WritingRepository(this);
@@ -174,10 +174,10 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
 
         }else{
-            editWriting.setArticle(article);
+            editWriting.setContents(contents);
             editWriting.setLetters(letters);
             repository = new WritingRepository(this);
-            repository.editByGuid(guid, article, letters);
+            repository.editByGuid(guid, contents, letters);
             return null;
         }
     }

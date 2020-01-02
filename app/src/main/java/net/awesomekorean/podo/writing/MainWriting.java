@@ -36,6 +36,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static net.awesomekorean.podo.MainActivity.btnWriting;
+import static net.awesomekorean.podo.MainActivity.userEmail;
 
 public class MainWriting extends Fragment implements View.OnClickListener {
 
@@ -109,10 +110,10 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                     WritingEntity items = new WritingEntity();
                     items.setGuid(entity.getGuid());
                     items.setUserEmail(entity.getUserEmail());
-                    items.setArticle(entity.getArticle());
+                    items.setContents(entity.getContents());
                     items.setLetters(entity.getLetters());
                     items.setWritingDate(entity.getWritingDate());
-                    items.setIsCorrected(entity.getIsCorrected());
+                    items.setStatus(entity.getStatus());
                     items.setTeacherName(entity.getTeacherName());
                     items.setCorrection(entity.getCorrection());
                     items.setTeacherFeedback(entity.getTeacherFeedback());
@@ -120,8 +121,8 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                     listAllData.add(items);
 
                     // 교정 중인 writing 이 있으면, 실시간 리스너 설정
-                    if(items.getIsCorrected() == 1) {
-                        final DocumentReference docRef = db.collection(getString(R.string.DB_WRITINGS)).document(items.getGuid());
+                    if(items.getStatus() == 1) {
+                        final DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(items.getGuid());
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot snapshot,
@@ -135,7 +136,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                                     WritingEntity download = snapshot.toObject(WritingEntity.class);
                                     System.out.println("완료된 글쓰기 교정이 없습니다.");
 
-                                    if(download.getIsCorrected()==2) {
+                                    if(download.getStatus() > 1) {
                                         System.out.println("글쓰기 교정이 완료되었습니다");
                                         WritingRepository repository = new WritingRepository(getContext());
                                         repository.update(download);
@@ -170,7 +171,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                 WritingEntity item = (WritingEntity) adapterView.getItemAtPosition(i);
 
                 // 교정완료 된 아이템
-                if(item.getIsCorrected()==2) {
+                if(item.getStatus()==2 || item.getStatus()==3) {
                     Intent intent = new Intent(getContext(), WritingCorrection.class);
                     intent.putExtra(getString(R.string.EXTRA_ENTITY), item);
                     startActivityForResult(intent, 300);

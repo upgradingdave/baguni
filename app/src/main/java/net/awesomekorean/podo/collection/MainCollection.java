@@ -26,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -498,7 +499,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                 // delete = 1 인 아이템 DB 이랑 Room 에서 지우기
                 for(final CollectionEntity itemToDelete : itemsToDelete) {
-                    final DocumentReference docRef = db.collection(getString(R.string.DB_COLLECTIONS)).document(itemToDelete.getGuid());
+                    final DocumentReference docRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_COLLECTIONS)).document(itemToDelete.getGuid());
                     db.runTransaction(new Transaction.Function<Void>() {
                         @Nullable
                         @Override
@@ -525,7 +526,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
 
                 // DB 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 다운로드
-                db.collection(getString(R.string.DB_COLLECTIONS))
+                db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_COLLECTIONS))
                         .whereGreaterThan("dateEdit", copyDateLastSync)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -545,7 +546,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                                     // 업로드
                                     for (CollectionEntity upload : itemsToUpload) {
-                                        db.collection(getString(R.string.DB_COLLECTIONS)).document(upload.getGuid()).set(upload);
+                                        db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_COLLECTIONS)).document(upload.getGuid()).set(upload);
                                         System.out.println("아이템을 업로드 했습니다: " + upload.getFront());
                                     }
                                 }

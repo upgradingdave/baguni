@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -44,7 +45,8 @@ public class Message extends AppCompatActivity {
         list = new ArrayList<>();
 
         // DB 에서 일괄 불러오기
-        db.collection(getString(R.string.DB_MESSAGES)).document(userEmail).collection("message")
+        db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_MESSAGES))
+                .orderBy("messageDate", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -64,7 +66,7 @@ public class Message extends AppCompatActivity {
                                 recyclerView.setAdapter(adapter);
 
                                 if(item.getIsNew()) {
-                                    DocumentReference docRef = db.collection(getString(R.string.DB_MESSAGES)).document(userEmail).collection("message").document(doc.getId());
+                                    DocumentReference docRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_MESSAGES)).document(doc.getId());
 
                                     docRef.update("isNew", false)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {

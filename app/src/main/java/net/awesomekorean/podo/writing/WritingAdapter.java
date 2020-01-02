@@ -69,15 +69,15 @@ public class WritingAdapter extends BaseAdapter {
 
         holder.writingDate.setText(items.getWritingDate());
         holder.letters.setText(items.getLetters());
-        holder.article.setText(items.getArticle());
+        holder.article.setText(items.getContents());
 
-        if(items.getIsCorrected() == 0) {
+        if(items.getStatus() == 0) {
             setVisibility(holder, View.GONE, View.GONE, View.GONE);
-        } else if(items.getIsCorrected() == 1) {
+        } else if(items.getStatus() == 1) {
             setVisibility(holder, View.VISIBLE, View.GONE, View.GONE);
-        } else if(items.getIsCorrected() == 2) {
+        } else if(items.getStatus() == 2) {
             setVisibility(holder, View.GONE, View.VISIBLE, View.GONE);
-        } else if(items.getIsCorrected() == 99) {
+        } else if(items.getStatus() == 3) {
             setVisibility(holder, View.GONE, View.GONE, View.VISIBLE);
         }
 

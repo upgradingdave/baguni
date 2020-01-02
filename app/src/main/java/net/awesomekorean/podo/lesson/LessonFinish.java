@@ -67,7 +67,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnGetPoint :
                 // Room 에 포인트 합산하기, 레슨 완료 표시하기
-                final DocumentReference reference = db.collection(getString(R.string.DB_USERINFO)).document(MainActivity.userEmail);
+                final DocumentReference reference = db.collection(getString(R.string.DB_INFORMATION)).document(MainActivity.userEmail);
 
                 db.runTransaction(new Transaction.Function<Void>() {
                     @Override

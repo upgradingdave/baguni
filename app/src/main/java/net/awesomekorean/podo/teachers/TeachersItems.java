@@ -8,6 +8,7 @@ public class TeachersItems {
     private String image;
     private String audio;
     private int status; // 0: 준비중, 1: available, 2: vacation
+    private String id;
     private String name;
     private String tag;
     private Boolean isChecked = false;
@@ -35,6 +36,14 @@ public class TeachersItems {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

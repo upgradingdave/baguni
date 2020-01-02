@@ -73,7 +73,7 @@ public class WritingCorrection extends AppCompatActivity implements View.OnClick
 
         WritingEntity correctedWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
         guid = correctedWriting.getGuid();
-        article = correctedWriting.getArticle();
+        article = correctedWriting.getContents();
         correction = correctedWriting.getCorrection();
         feedbackT = correctedWriting.getTeacherFeedback();
         feedbackS = correctedWriting.getStudentFeedback();
@@ -111,7 +111,7 @@ public class WritingCorrection extends AppCompatActivity implements View.OnClick
 
                 final String studentFeedback = feedbackStudent.getText().toString();
 
-                DocumentReference reference = db.collection(getString(R.string.DB_WRITINGS)).document(guid);
+                DocumentReference reference = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(guid);
                 reference
                         .update("studentFeedback", studentFeedback)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

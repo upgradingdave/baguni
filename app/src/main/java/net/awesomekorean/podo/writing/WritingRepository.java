@@ -51,7 +51,7 @@ public class WritingRepository {
                 entity.setUserEmail(MainActivity.userEmail);
                 entity.setUserName(MainActivity.userName);
                 entity.setTeacherName(teacherName);
-                entity.setIsCorrected(1);
+                entity.setStatus(1);
                 entity.setDateRequest(date);
                 db.writingDao().update(entity);
                 return null;
@@ -80,7 +80,7 @@ public class WritingRepository {
             @Override
             protected WritingEntity doInBackground(Void... voids) {
                 WritingEntity entity = db.writingDao().getByGuid(guid);
-                entity.setArticle(article);
+                entity.setContents(article);
                 entity.setLetters(letters);
                 db.writingDao().update(entity);
                 return null;
