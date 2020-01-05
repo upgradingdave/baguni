@@ -1,6 +1,8 @@
 package net.awesomekorean.podo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 
@@ -12,15 +14,19 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -29,12 +35,19 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
 import net.awesomekorean.podo.reading.MainReading;
+import net.awesomekorean.podo.writing.MainWriting;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -60,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     Intent intent;
 
-    public static String userEmail;
+    public static String userEmail = "gabmanpark@gmail.com";
     public static String userName;
     public static Uri userImage;
 
@@ -103,16 +116,15 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         // 유저정보 가져오기
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null) {
+        if (user != null) {
             userEmail = user.getEmail();
-            if(user.getDisplayName() != null) {
+            if (user.getDisplayName() != null) {
                 userName = user.getDisplayName();
-            }else {
+            } else {
                 userName = userEmail.substring(0, userEmail.lastIndexOf("@"));
             }
             userImage = user.getPhotoUrl();
         }
-
 
 
         // 알림 메시지 실시간 리스너
@@ -135,61 +147,60 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     }
                 });
 
-        // DB에서 유저정보(출석부, 포인트, 레슨완료, 읽기완료, 스페셜레슨해제) 가져오고 업데이트하기
+
+        // 앱에서 유저 데이터 가져오기
+        System.out.println("앱에서 유저 데이터를 가져옵니다.");
+        userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
+
+        lessonComplete = userInformation.getLessonComplete();
+        specialLessonUnlock = userInformation.getSpecialLessonUnlock();
+        readingComplete = userInformation.getReadingComplete();
+
+
         final Calendar cal = Calendar.getInstance();
         final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일
 
-        final DocumentReference sfDocRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
 
-        db.runTransaction(new Transaction.Function<Void>() {
-            @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(sfDocRef);
-                UserInformation userInformationFromDB = snapshot.toObject(UserInformation.class);
+        // 오늘 출석체크 안했으면 출석부 업데이트 (버그: 요일이 같으면 일주일만에 접속해도 초기화 안됨)
+        if (!userInformation.getAttendance().get(today)) {
+            System.out.println("출석체크를 시작합니다.");
+            int yesterday;
+            if (today == 0) {
+                yesterday = 6;
+            } else {
+                yesterday = today - 1;
+            }
 
-                System.out.println("GET"+ userInformationFromDB.getLessonComplete().size());
-                lessonComplete = userInformationFromDB.getLessonComplete();
-                specialLessonUnlock = userInformationFromDB.getSpecialLessonUnlock();
-                readingComplete = userInformationFromDB.getReadingComplete();
+            // 어제 출석 했는지 확인하고 안했으면 출석부 초기화 (오늘만 출석표시)
+            if (!userInformation.getAttendance().get(yesterday)) {
+                System.out.println("어제 출석하지 않았습니다");
+                userInformation.resetDays(today);
 
-                // 어제 출석 했는지 확인하기 (하루에 한 번만 하게 할 수 있을까?)
-                int yesterday;
-                if(today == 0) {
-                    yesterday = 6;
-                } else {
-                    yesterday = today - 1;
+                // 어제도 출석했으면 오늘 출석 표시
+            } else {
+                System.out.println("어제도 출석했습니다");
+                userInformation.setDay(today);
+            }
+
+            SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+            System.out.println("앱에 출석부를 업데이트 했습니다");
+
+            // DB 에 출석부 업데이트하기
+            DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+            reference.update("attendance", userInformation.getAttendance()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("DB에 출석부를 업데이트 했습니다");
                 }
-
-                // 어제 출석 안했으면 출석부 초기화 (오늘만 출석표시)
-                if(!userInformationFromDB.getAttendance().get(yesterday)) {
-                    System.out.println("어제 출석하지 않았습니다");
-                    userInformationFromDB.resetDays(today);
-
-                    // 어제도 출석했으면 오늘 출석 표시
-                } else {
-                    System.out.println("어제도 출석했습니다");
-                    userInformationFromDB.setDay(today);
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("출석부 업데이트를 실패했습니다:" + e);
                 }
-
-                transaction.set(sfDocRef, userInformationFromDB);
-                userInformation = userInformationFromDB;
-                System.out.println("DB에 출석부를 업데이트 했습니다");
-                return null;
-            }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                System.out.println("출석부 업데이트를 성공했습니다");
-                viewPager.setCurrentItem(1);
-                viewPager.setCurrentItem(0);
-            }
-        })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println("출석부 업데이트를 실패했습니다:"+e);
-            }
-        });
+            });
+        } else {
+            System.out.println("오늘의 출석체크가 이미 끝났습니다.");
+        }
     }
 
 

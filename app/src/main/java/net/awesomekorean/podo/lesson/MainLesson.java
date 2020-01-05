@@ -74,10 +74,13 @@ public class MainLesson extends Fragment {
         list.add(item3);
         list.add(item4);
 
-
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new LessonAdapter(list);
+
+        System.out.println("완료된 레슨을 세팅합니다");
+        setCompletedLessons();
+
         adapter.setOnItemClickListener(new LessonAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -114,23 +117,24 @@ public class MainLesson extends Fragment {
         return view;
     }
 
+    private void setCompletedLessons() {
+        System.out.println("LESSONCOMPLETE:"+MainActivity.lessonComplete);
+        if(MainActivity.lessonComplete != null) {
+            for(int i=0; i<MainActivity.lessonComplete.size(); i++) {
+                list.get(MainActivity.lessonComplete.get(i)).setIsCompleted(true);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    }
 
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-
         if (isVisibleToUser) {
             mainActivity.setMainBtns(btnLesson, R.drawable.lesson_active, R.string.LESSON);
-
-            if(MainActivity.lessonComplete != null) {
-                System.out.println("SIZE:"+MainActivity.lessonComplete.size());
-                for(int i=0; i<MainActivity.lessonComplete.size(); i++) {
-                    list.get(MainActivity.lessonComplete.get(i)).setIsCompleted(true);
-                }
-                adapter.notifyDataSetChanged();
-            }
+            //setCompletedLessons();
         }
     }
 }

@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesUserInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.message.MessageItems;
 
@@ -33,6 +34,10 @@ public class MakeNewDb {
             @Override
             public void onSuccess(Void aVoid) {
                 System.out.println("유저정보 DB를 만들었습니다");
+                UserInformation userInformation = new UserInformation();
+                SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+                System.out.println("앱에 유저 데이터를 저장했습니다.");
+
 
                 final MessageItems messageItems = new MessageItems();
                 messageItems.setMessage("welcom to podo blabla");

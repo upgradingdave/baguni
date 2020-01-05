@@ -103,12 +103,12 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 readyForLesson(0);
                 break;
 
-            case 2:
+            case 3:
                 lesson = new Lesson1();
                 readyForLesson(1);
                 break;
 
-            case 3:
+            case 4:
                 lesson = new Lesson2();
                 readyForLesson(2);
                 break;

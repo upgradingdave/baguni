@@ -53,6 +53,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".collection.CollectionStudy" />
         <activity android:name=".collection.CollectionFlashCard" />
@@ -66,7 +67,9 @@
         <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing"></activity>
+            android:windowSoftInputMode="adjustNothing">
+
+        </activity>
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@ import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesUserInfo;
 import net.awesomekorean.podo.UserInformation;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
@@ -41,6 +42,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
     Button btnGetPoint;
 
     int reward;
+
+    boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,37 +69,28 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.btnGetPoint :
-                // DB 에 포인트 합산하기, 레슨 완료 표시하기
-                final DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                // DB 에 포인트 합산하기
+                UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
+                int oldPoints = userInformation.getPoints();
+                int newPoints = oldPoints + reward;
+                userInformation.setPoints(newPoints);
 
-                db.runTransaction(new Transaction.Function<Void>() {
-                    @Override
-                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                        DocumentSnapshot snapshot = transaction.get(reference);
-
-                        UserInformation userInformation = snapshot.toObject(UserInformation.class);
-                        int oldPoints = userInformation.getPoints();
-                        int newPoints = oldPoints + reward;
-                        userInformation.setPoints(newPoints);
-
-                        userInformation.addLessonComplete(MainLesson.lessonUnit);
-
-                        transaction.set(reference, userInformation);
-
-                        return null;
+                // 레슨완료 정보 업데이트 하기
+                for(Integer lessonUnit : userInformation.getLessonComplete()) {
+                    if(lessonUnit == MainLesson.lessonUnit) {
+                        isFirst = false;
                     }
-                }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        System.out.println("포인트를 업데이트 했습니다");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("포인트 업데이트를 실패했습니다: "+e);
-                    }
-                });
+                }
+
+                if(isFirst) {
+                    userInformation.addLessonComplete(MainLesson.lessonUnit);
+                    System.out.println("레슨을 완료했습니다.");
+                } else {
+                    System.out.println("이미 완료된 레슨입니다.");
+                }
+
+                SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

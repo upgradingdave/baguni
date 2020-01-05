@@ -49,6 +49,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
+import net.awesomekorean.podo.SharedPreferencesUserInfo;
 import net.awesomekorean.podo.UserInformation;
 
 import java.util.Arrays;
@@ -239,11 +240,16 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                             final String userEmail = account.getEmail();
 
                             DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-                            informationRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            informationRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if (task.getResult().exists()) {
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if(documentSnapshot.exists()) {
                                         System.out.println("유저정보가 있습니다");
+                                        UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
+
+                                        SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+                                        System.out.println("앱에 유저 데이터를 저장했습니다.");
+
                                         intent = new Intent(getApplicationContext(), MainActivity.class);
                                         finish();
                                         startActivity(intent);
@@ -254,7 +260,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                         MakeNewDb makeNewDb = new MakeNewDb();
                                         makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
                                     }
-
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
