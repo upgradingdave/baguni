@@ -42,6 +42,10 @@ public class UserInformation {
         this.lessonComplete = lessonComplete;
     }
 
+    public void addLessonComplete(int lessonUnit) {
+        this.lessonComplete.add(lessonUnit);
+    }
+
     public List<Integer> getReadingComplete() {
         return readingComplete;
     }

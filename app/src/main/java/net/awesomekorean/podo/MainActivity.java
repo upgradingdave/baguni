@@ -30,10 +30,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
+import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
+import net.awesomekorean.podo.reading.MainReading;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
@@ -62,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static Uri userImage;
 
     public static UserInformation userInformation;
+
+    public static List<Integer> lessonComplete;
+    public static List<Integer> specialLessonUnlock;
+    public static List<Integer> readingComplete;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -140,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 DocumentSnapshot snapshot = transaction.get(sfDocRef);
                 UserInformation userInformationFromDB = snapshot.toObject(UserInformation.class);
 
+                System.out.println("GET"+ userInformationFromDB.getLessonComplete().size());
+                lessonComplete = userInformationFromDB.getLessonComplete();
+                specialLessonUnlock = userInformationFromDB.getSpecialLessonUnlock();
+                readingComplete = userInformationFromDB.getReadingComplete();
+
                 // 어제 출석 했는지 확인하기 (하루에 한 번만 하게 할 수 있을까?)
                 int yesterday;
                 if(today == 0) {
@@ -168,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             @Override
             public void onSuccess(Void aVoid) {
                 System.out.println("출석부 업데이트를 성공했습니다");
+                viewPager.setCurrentItem(1);
+                viewPager.setCurrentItem(0);
             }
         })
         .addOnFailureListener(new OnFailureListener() {

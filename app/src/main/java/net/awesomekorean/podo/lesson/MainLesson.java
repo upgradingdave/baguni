@@ -23,8 +23,10 @@ import net.awesomekorean.podo.lesson.lessons.Lesson1;
 import net.awesomekorean.podo.lesson.lessons.Lesson2;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson0;
 import net.awesomekorean.podo.lesson.lessons.Lesson0;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static net.awesomekorean.podo.MainActivity.btnLesson;
 
@@ -40,9 +42,13 @@ public class MainLesson extends Fragment {
 
     MainActivity mainActivity;
 
+    ArrayList<LessonItem> list;
+    LessonAdapter adapter;
+
     public MainLesson(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
+    public MainLesson() {};
 
     public static MainLesson newInstance(MainActivity mainActivity) {
         return new MainLesson(mainActivity);
@@ -54,25 +60,24 @@ public class MainLesson extends Fragment {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        ArrayList<LessonItem> list = new ArrayList<>();
+        list = new ArrayList<>();
 
         LessonItem item0 = new S_Lesson0();
         LessonItem item1 = new Lesson0();
-        LessonItem item2 = new Lesson1();
-        LessonItem item3 = new Lesson2();
-
+        LessonItem item2 = new S_Lesson1();
+        LessonItem item3 = new Lesson1();
+        LessonItem item4 = new Lesson2();
 
         list.add(item0);
         list.add(item1);
         list.add(item2);
         list.add(item3);
-
+        list.add(item4);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        LessonAdapter adapter = new LessonAdapter(list);
+        adapter = new LessonAdapter(list);
         adapter.setOnItemClickListener(new LessonAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -87,8 +92,15 @@ public class MainLesson extends Fragment {
                         startActivity(intent);
                         break;
 
+                    case 2 :
+                        intent = new Intent(context, LessonSpecialFrame.class);
+                        intent.putExtra("position", pos);
+                        startActivity(intent);
+                        break;
+
                     default :
                         intent = new Intent(context, LessonFrame.class);
+                        intent.putExtra("position", pos);
                         startActivity(intent);
                         break;
                 }
@@ -102,15 +114,25 @@ public class MainLesson extends Fragment {
         return view;
     }
 
+
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
+
         if (isVisibleToUser) {
             mainActivity.setMainBtns(btnLesson, R.drawable.lesson_active, R.string.LESSON);
-            System.out.println("Lesson Fragment is Visible!!");
+
+            if(MainActivity.lessonComplete != null) {
+                System.out.println("SIZE:"+MainActivity.lessonComplete.size());
+                for(int i=0; i<MainActivity.lessonComplete.size(); i++) {
+                    list.get(MainActivity.lessonComplete.get(i)).setIsCompleted(true);
+                }
+                adapter.notifyDataSetChanged();
+            }
         }
     }
-
 }
 
 

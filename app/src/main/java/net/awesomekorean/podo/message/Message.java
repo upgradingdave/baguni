@@ -29,6 +29,7 @@ public class Message extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
     MessageAdapter adapter;
 
     String userEmail = MainActivity.userEmail;

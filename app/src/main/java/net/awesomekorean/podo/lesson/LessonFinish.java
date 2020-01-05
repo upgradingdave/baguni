@@ -66,8 +66,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.btnGetPoint :
-                // Room 에 포인트 합산하기, 레슨 완료 표시하기
-                final DocumentReference reference = db.collection(getString(R.string.DB_INFORMATION)).document(MainActivity.userEmail);
+                // DB 에 포인트 합산하기, 레슨 완료 표시하기
+                final DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
 
                 db.runTransaction(new Transaction.Function<Void>() {
                     @Override
@@ -79,7 +79,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                         int newPoints = oldPoints + reward;
                         userInformation.setPoints(newPoints);
 
-                        // 레슨완료 표시하기!!!
+                        userInformation.addLessonComplete(MainLesson.lessonUnit);
 
                         transaction.set(reference, userInformation);
 

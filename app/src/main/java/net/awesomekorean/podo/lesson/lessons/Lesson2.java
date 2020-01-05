@@ -117,4 +117,9 @@ public class Lesson2 implements Lesson, LessonItem {
     public boolean getIsCompleted() {
         return isCompleted;
     }
+
+    @Override
+    public void setIsCompleted(boolean b) {
+        this.isCompleted = b;
+    }
 }

@@ -194,7 +194,30 @@
 
     <!--    레슨내용현지화-->
     <string name="SL0_TITLE">Start of learning Korean</string>
-    <string name="SL1_TITLE">Conjugation of verbs and adjectives</string>
+    <string name="SL1_TITLE">Conjugation</string>
+    <string name="SL1_CONTENTS">
+"한국어의 동사, 형용사에는 '기본형'이라는 것이 있다.
+'먹다'(to eat), '가다'(to go), '사다'(to buy)와 같이 '~다'로 끝나는 것들을 말하는데,
+사전을 찾을 때는 이 기본형을 사용하지만 실재로 대화나 글에 사용할 때는 기본형을 사용하고자 하는 형태로 바꿔야 한다.
+예를 들어 '먹다'는 아래와 같이 형태가 바뀐다.
+- 먹다 (기본형)
+- 먹어요 (I eat)
+- 먹으면 (if I eat)
+- 먹어서 (because I eat)
+- 먹고 (after I eat)...
+대부분의 단어는 기본형에서 '다'를 원하는 형태로 바꾸기만 하면 되지만
+때때로 '다'가 아닌 부분도 같이 바뀌는 불규칙 단어도 존재한다.
+예를 들면...
+- 듣다 (to listen, base form)
+- 들어요 (I listen)
+- 들으면 (If I listen)
+- 들어서(because I listen)
+- 듣고(after I listen)
+많은 학생들이 불규칙 단어가 어렵다고 생각는데 전혀 그럴 필요 없다.
+왜냐하면 대부분의 경우는 발음을 더 쉽게 하기 위한 불규칙 변화이기 때문이다.
+위의 예에서 '듣어요'[드더요]가 아닌 '들어요'[드러요]로 불규칙 변화를 함으로써 좀 더 부드러운 발음을 할 수 있다.
+따라서 단어마다 다른 형태를 외우려고 하지 말고 말하기 연습을 통해 여러 번 사용하다보면 자연스럽게 기억할 수 있게 될 것이다."
+    </string>
 
 
     <string name="L0_TITLE">Greetings</string>

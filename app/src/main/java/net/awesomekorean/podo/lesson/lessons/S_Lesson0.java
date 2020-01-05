@@ -43,4 +43,9 @@ public class S_Lesson0 implements LessonItem {
     public boolean getIsCompleted() {
         return isCompleted;
     }
+
+    @Override
+    public void setIsCompleted(boolean b) {
+        this.isCompleted = b;
+    }
 }
