@@ -65,10 +65,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     int playingTime; // 오디오 길이
     int audio; // 오디오 파일 경로
 
-    LinearLayout confirmFinish;
-    Button finishYes;
-    Button finishNo;
-
 
     class MyThread extends Thread {
         @Override
@@ -99,9 +95,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         btnPause = findViewById(R.id.btnPause);
         btnSlow = findViewById(R.id.btnSlow);
         btnFinish = findViewById(R.id.btnFinish);
-        confirmFinish = findViewById(R.id.confirmFinish);
-        finishYes = findViewById(R.id.finishYes);
-        finishNo = findViewById(R.id.finishNo);
         btnBack.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
         btnNormal.setOnClickListener(this);
@@ -109,8 +102,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         btnPause.setOnClickListener(this);
         btnSlow.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
-        finishYes.setOnClickListener(this);
-        finishNo.setOnClickListener(this);
 
         // 시크바 이벤트
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -269,14 +260,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 if(mediaPlayer!=null) {
                     mediaPlayer.pause();
                 }
-                confirmFinish.setVisibility(View.VISIBLE);
-                break;
 
-            case R.id.finishNo :
-                confirmFinish.setVisibility(View.GONE);
-                break;
-
-            case R.id.finishYes :
                 setVisibility(View.VISIBLE, View.GONE);
                 seekBar.setProgress(0);
 
@@ -297,9 +281,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
-
-
                 break;
+
         }
     }
 

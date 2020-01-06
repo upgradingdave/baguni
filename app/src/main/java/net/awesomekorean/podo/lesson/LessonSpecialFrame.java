@@ -69,11 +69,10 @@ public class LessonSpecialFrame extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        int lessonNo = intent.getExtras().getInt("position");
-        
-        switch(lessonNo) {
+
+        switch(MainLesson.lessonId) {
             
-            case 2:
+            case "SL_01":
                 lessonSpecial = new S_Lesson1();
                 readyForLesson();
                 break;

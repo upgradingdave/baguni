@@ -32,7 +32,6 @@ import static net.awesomekorean.podo.MainActivity.btnLesson;
 
 public class MainLesson extends Fragment {
 
-    public static int lessonUnit = 0;
     public static String lessonId;
 
     Context context;
@@ -86,28 +85,25 @@ public class MainLesson extends Fragment {
             @Override
             public void onItemClick(View v, int pos) {
 
-                lessonUnit = pos;
                 lessonId = list.get(pos).getLessonId();
                 System.out.println("LESSONID:"+ lessonId);
 
 
-                switch (pos) {
+                switch (lessonId) {
 
                     // 스페셜 레슨만 case 분리해서 설정할 것
-                    case 0 :
+                    case "SL_00" :
                         intent = new Intent(context, LessonHangulMenu.class);
                         startActivity(intent);
                         break;
 
-                    case 2 :
+                    case "SL_01" :
                         intent = new Intent(context, LessonSpecialFrame.class);
-                        intent.putExtra("position", pos);
                         startActivity(intent);
                         break;
 
                     default :
                         intent = new Intent(context, LessonFrame.class);
-                        intent.putExtra("position", pos);
                         startActivity(intent);
                         break;
                 }

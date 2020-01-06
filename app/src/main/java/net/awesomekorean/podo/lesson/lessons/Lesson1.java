@@ -7,7 +7,7 @@ import net.awesomekorean.podo.lesson.LessonItem;
 public class Lesson1 implements Lesson, LessonItem {
 
     private String lessonId = "L_01";
-    private int title = R.string.L1_TITLE;
+    private int title = R.string.L_01_TITLE;
     private String subTitle = "제 이름은 데니예요";
     private int lessonImage = R.drawable.hangul;
     private Boolean isSpecial = false;

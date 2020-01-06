@@ -86,7 +86,6 @@
     <!--    읽기-->
     <string name="NORMAL">Normal</string>
     <string name="SPEED">Speed x0.8</string>
-    <string name="CONFIRM_FINISH">Are you sure to finish this reading?</string>
 
 
     <!--    쓰기-->
@@ -193,9 +192,9 @@
 
 
     <!--    레슨내용현지화-->
-    <string name="SL0_TITLE">Start of learning Korean</string>
-    <string name="SL1_TITLE">Conjugation</string>
-    <string name="SL1_CONTENTS">
+    <string name="SL_00_TITLE">Start of learning Korean</string>
+    <string name="SL_01_TITLE">Conjugation</string>
+    <string name="SL_01_CONTENTS">
 "한국어의 동사, 형용사에는 '기본형'이라는 것이 있다.
 '먹다'(to eat), '가다'(to go), '사다'(to buy)와 같이 '~다'로 끝나는 것들을 말하는데,
 사전을 찾을 때는 이 기본형을 사용하지만 실재로 대화나 글에 사용할 때는 기본형을 사용하고자 하는 형태로 바꿔야 한다.
@@ -220,83 +219,83 @@
     </string>
 
 
-    <string name="L0_TITLE">Greetings</string>
-    <string name="L0_WORD_BACK_0">Hello</string>
-    <string name="L0_WORD_BACK_1">next</string>
-    <string name="L0_WORD_BACK_2">again</string>
-    <string name="L0_WORD_BACK_3">to see / to watch</string>
-    <string name="L0_WORD_BACK_4">to go</string>
-    <string name="L0_SENTENCE_BACK_0">Hello</string>
-    <string name="L0_SENTENCE_BACK_1">Nice to meet you</string>
-    <string name="L0_SENTENCE_BACK_2">Long time no see</string>
-    <string name="L0_SENTENCE_BACK_3">How have you been?</string>
-    <string name="L0_SENTENCE_BACK_4">See you again</string>
-    <string name="L0_SENTENCE_BACK_5">Good bye</string>
-    <string name="L0_SENTENCE_EXPLAIN_0">‘몸과 마음에 아무 문제나 걱정없이 편안한 상태인가요?’ 라는 의미이다. 아침, 점심, 저녁 모두 시간에 상관없이 이렇게 인사를 한다. 친한 친구(나이가 같은 사람)나 친한 동생(나이가 어린 사람)에게는 간단하게 ‘안녕?’이라고 인사한다.</string>
-    <string name="L0_SENTENCE_EXPLAIN_1">주로 처음 만난 사람과 서로 소개를 한 후에 바로 이렇게 인사한다. 좀 더 공손하게 \'반갑습니다\'라고 해도 된다. 오랜만에 만난 사람과도 이 인사를 할 수 있다.</string>
-    <string name="L0_SENTENCE_EXPLAIN_2">원래 알던 사이에서 오랜만에 만났을 때 하는 인사이다. ‘반가워요’와 같이 사용해도 좋다.</string>
-    <string name="L0_SENTENCE_EXPLAIN_3">그 동안 별 일이 없었는지 관습적으로 묻는 말이다</string>
-    <string name="L0_SENTENCE_EXPLAIN_4">진짜로 다시 볼 상황이 아니더라도 관습적으로 이렇게 인사 할 수 있다.</string>
-    <string name="L0_SENTENCE_EXPLAIN_5">‘가세요’는 ‘가다’에서 나온 말이고 ‘계세요’는 ‘있다’에서 나온 말이다. 즉, 헤어지는 인사를 한 후에 상대방이 ‘가는’ 상황이면 ‘안녕히 가세요’를, 상대방이 ‘있는’ 상황이면 ‘안녕히 계세요’를 사용한다. 친한 사이에는 간단하게 ‘안녕~’이라고 하면 된다.</string>
+    <string name="L_00_TITLE">Greetings</string>
+    <string name="L_00_WORD_BACK_0">Hello</string>
+    <string name="L_00_WORD_BACK_1">next</string>
+    <string name="L_00_WORD_BACK_2">again</string>
+    <string name="L_00_WORD_BACK_3">to see / to watch</string>
+    <string name="L_00_WORD_BACK_4">to go</string>
+    <string name="L_00_SENTENCE_BACK_0">Hello</string>
+    <string name="L_00_SENTENCE_BACK_1">Nice to meet you</string>
+    <string name="L_00_SENTENCE_BACK_2">Long time no see</string>
+    <string name="L_00_SENTENCE_BACK_3">How have you been?</string>
+    <string name="L_00_SENTENCE_BACK_4">See you again</string>
+    <string name="L_00_SENTENCE_BACK_5">Good bye</string>
+    <string name="L_00_SENTENCE_EXPLAIN_0">‘몸과 마음에 아무 문제나 걱정없이 편안한 상태인가요?’ 라는 의미이다. 아침, 점심, 저녁 모두 시간에 상관없이 이렇게 인사를 한다. 친한 친구(나이가 같은 사람)나 친한 동생(나이가 어린 사람)에게는 간단하게 ‘안녕?’이라고 인사한다.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_1">주로 처음 만난 사람과 서로 소개를 한 후에 바로 이렇게 인사한다. 좀 더 공손하게 \'반갑습니다\'라고 해도 된다. 오랜만에 만난 사람과도 이 인사를 할 수 있다.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_2">원래 알던 사이에서 오랜만에 만났을 때 하는 인사이다. ‘반가워요’와 같이 사용해도 좋다.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_3">그 동안 별 일이 없었는지 관습적으로 묻는 말이다</string>
+    <string name="L_00_SENTENCE_EXPLAIN_4">진짜로 다시 볼 상황이 아니더라도 관습적으로 이렇게 인사 할 수 있다.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_5">‘가세요’는 ‘가다’에서 나온 말이고 ‘계세요’는 ‘있다’에서 나온 말이다. 즉, 헤어지는 인사를 한 후에 상대방이 ‘가는’ 상황이면 ‘안녕히 가세요’를, 상대방이 ‘있는’ 상황이면 ‘안녕히 계세요’를 사용한다. 친한 사이에는 간단하게 ‘안녕~’이라고 하면 된다.</string>
 
-    <string name="L1_TITLE">self-introduction</string>
-    <string name="L1_WORD_BACK_0">name</string>
-    <string name="L1_WORD_BACK_1">what</string>
-    <string name="L1_WORD_BACK_2">which</string>
-    <string name="L1_WORD_BACK_3">country</string>
-    <string name="L1_WORD_BACK_4">person / people</string>
-    <string name="L1_WORD_BACK_5">Korea</string>
-    <string name="L1_SENTENCE_BACK_0">what</string>
-    <string name="L1_SENTENCE_BACK_1">what is</string>
-    <string name="L1_SENTENCE_BACK_2">What is your name?</string>
-    <string name="L1_SENTENCE_BACK_3">Danny / Danning</string>
-    <string name="L1_SENTENCE_BACK_4">country</string>
-    <string name="L1_SENTENCE_BACK_5">which country</string>
-    <string name="L1_SENTENCE_BACK_6">Which country person are you (= Where are you from?)</string>
-    <string name="L1_SENTENCE_BACK_7">person / people</string>
-    <string name="L1_SENTENCE_BACK_8">It’s a person</string>
-    <string name="L1_SENTENCE_BACK_9">I’m Korean</string>
-    <string name="L1_SENTENCE_EXPLAIN_0">-</string>
-    <string name="L1_SENTENCE_EXPLAIN_1">우리는 한국어 공부를 이제 막 시작했기 때문에 궁금한 것이 많다. 궁금한 것이 있을 때 이 표현이 아주 유용하다. 손가락으로 모르는 것을 가리키며 ‘이거 뭐예요’ (what’s this?)라고 하면 된다. 조금 멀리 있는 것을 가리킬 땐 ‘저거 뭐예요?’(what’s that?) 라고 한다.</string>
-    <string name="L1_SENTENCE_EXPLAIN_2">‘이름’ 뒤에 ‘이’가 무엇인지 궁금할 것이다. 이것은 한국어 학습자들이 가장 어려워하는 주격조사인데 지금은 알려고 하지 말자. ‘이름 뭐예요?’라고 해도 좋지만 ‘이름이 뭐예요?’라고 하면 좀 더 자연스러운 표현이 된다고만 이해하고 익숙해지는 것이 중요하다. (스페셜레슨 ‘조사를 사용하는 이유’ 참고)</string>
-    <string name="L1_SENTENCE_EXPLAIN_3">(‘예요/이에요’ 사용하는 법)\n앞 글자에 받침이 없으면 ‘예요’, 받침이 있으면 ‘이에요’를 사용 한다.</string>
-    <string name="L1_SENTENCE_EXPLAIN_4">-</string>
-    <string name="L1_SENTENCE_EXPLAIN_5">-</string>
-    <string name="L1_SENTENCE_EXPLAIN_6">-</string>
-    <string name="L1_SENTENCE_EXPLAIN_7">-</string>
-    <string name="L1_SENTENCE_EXPLAIN_8">-</string>
-    <string name="L1_SENTENCE_EXPLAIN_9">당신의 나라가 한국어로 무엇인지 찾아서 문장으로 만들어 보세요.</string>
+    <string name="L_01_TITLE">self-introduction</string>
+    <string name="L_01_WORD_BACK_0">name</string>
+    <string name="L_01_WORD_BACK_1">what</string>
+    <string name="L_01_WORD_BACK_2">which</string>
+    <string name="L_01_WORD_BACK_3">country</string>
+    <string name="L_01_WORD_BACK_4">person / people</string>
+    <string name="L_01_WORD_BACK_5">Korea</string>
+    <string name="L_01_SENTENCE_BACK_0">what</string>
+    <string name="L_01_SENTENCE_BACK_1">what is</string>
+    <string name="L_01_SENTENCE_BACK_2">What is your name?</string>
+    <string name="L_01_SENTENCE_BACK_3">Danny / Danning</string>
+    <string name="L_01_SENTENCE_BACK_4">country</string>
+    <string name="L_01_SENTENCE_BACK_5">which country</string>
+    <string name="L_01_SENTENCE_BACK_6">Which country person are you (= Where are you from?)</string>
+    <string name="L_01_SENTENCE_BACK_7">person / people</string>
+    <string name="L_01_SENTENCE_BACK_8">It’s a person</string>
+    <string name="L_01_SENTENCE_BACK_9">I’m Korean</string>
+    <string name="L_01_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_1">우리는 한국어 공부를 이제 막 시작했기 때문에 궁금한 것이 많다. 궁금한 것이 있을 때 이 표현이 아주 유용하다. 손가락으로 모르는 것을 가리키며 ‘이거 뭐예요’ (what’s this?)라고 하면 된다. 조금 멀리 있는 것을 가리킬 땐 ‘저거 뭐예요?’(what’s that?) 라고 한다.</string>
+    <string name="L_01_SENTENCE_EXPLAIN_2">‘이름’ 뒤에 ‘이’가 무엇인지 궁금할 것이다. 이것은 한국어 학습자들이 가장 어려워하는 주격조사인데 지금은 알려고 하지 말자. ‘이름 뭐예요?’라고 해도 좋지만 ‘이름이 뭐예요?’라고 하면 좀 더 자연스러운 표현이 된다고만 이해하고 익숙해지는 것이 중요하다. (스페셜레슨 ‘조사를 사용하는 이유’ 참고)</string>
+    <string name="L_01_SENTENCE_EXPLAIN_3">(‘예요/이에요’ 사용하는 법)\n앞 글자에 받침이 없으면 ‘예요’, 받침이 있으면 ‘이에요’를 사용 한다.</string>
+    <string name="L_01_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_9">당신의 나라가 한국어로 무엇인지 찾아서 문장으로 만들어 보세요.</string>
 
-    <string name="L2_TITLE">shopping</string>
-    <string name="L2_WORD_BACK_0">this one</string>
-    <string name="L2_WORD_BACK_1">that one</string>
-    <string name="L2_WORD_BACK_2">how much</string>
-    <string name="L2_WORD_BACK_3">sale</string>
-    <string name="L2_WORD_BACK_4">so / therefore</string>
-    <string name="L2_SENTENCE_BACK_0">how much</string>
-    <string name="L2_SENTENCE_BACK_1">How much is it?</string>
-    <string name="L2_SENTENCE_BACK_2">How much is this?</string>
-    <string name="L2_SENTENCE_BACK_3">It’s 10,000 won</string>
-    <string name="L2_SENTENCE_BACK_4">that one</string>
-    <string name="L2_SENTENCE_BACK_5">What about that one?</string>
-    <string name="L2_SENTENCE_BACK_6">sale</string>
-    <string name="L2_SENTENCE_BACK_7">It’s on sale</string>
-    <string name="L2_SENTENCE_BACK_8">It’s 50% off</string>
-    <string name="L2_SENTENCE_BACK_9">That’s 50% off.</string>
-    <string name="L2_SENTENCE_BACK_10">It’s 5,000 won</string>
-    <string name="L2_SENTENCE_BACK_11">So, it’s 5,000 won</string>
-    <string name="L2_SENTENCE_EXPLAIN_0">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_1">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_2">‘이거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘이것’이라고 써야한다</string>
-    <string name="L2_SENTENCE_EXPLAIN_3">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_4">‘저거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘저것’이라고 써야한다</string>
-    <string name="L2_SENTENCE_EXPLAIN_5">‘저거는 얼마예요?’를 줄여서 이렇게 말할 수 있다</string>
-    <string name="L2_SENTENCE_EXPLAIN_6">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_7">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_8">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_9">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_10">-</string>
-    <string name="L2_SENTENCE_EXPLAIN_11">-</string>
+    <string name="L_02_TITLE">shopping</string>
+    <string name="L_02_WORD_BACK_0">this one</string>
+    <string name="L_02_WORD_BACK_1">that one</string>
+    <string name="L_02_WORD_BACK_2">how much</string>
+    <string name="L_02_WORD_BACK_3">sale</string>
+    <string name="L_02_WORD_BACK_4">so / therefore</string>
+    <string name="L_02_SENTENCE_BACK_0">how much</string>
+    <string name="L_02_SENTENCE_BACK_1">How much is it?</string>
+    <string name="L_02_SENTENCE_BACK_2">How much is this?</string>
+    <string name="L_02_SENTENCE_BACK_3">It’s 10,000 won</string>
+    <string name="L_02_SENTENCE_BACK_4">that one</string>
+    <string name="L_02_SENTENCE_BACK_5">What about that one?</string>
+    <string name="L_02_SENTENCE_BACK_6">sale</string>
+    <string name="L_02_SENTENCE_BACK_7">It’s on sale</string>
+    <string name="L_02_SENTENCE_BACK_8">It’s 50% off</string>
+    <string name="L_02_SENTENCE_BACK_9">That’s 50% off.</string>
+    <string name="L_02_SENTENCE_BACK_10">It’s 5,000 won</string>
+    <string name="L_02_SENTENCE_BACK_11">So, it’s 5,000 won</string>
+    <string name="L_02_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_2">‘이거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘이것’이라고 써야한다</string>
+    <string name="L_02_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_4">‘저거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘저것’이라고 써야한다</string>
+    <string name="L_02_SENTENCE_EXPLAIN_5">‘저거는 얼마예요?’를 줄여서 이렇게 말할 수 있다</string>
+    <string name="L_02_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_02_SENTENCE_EXPLAIN_11">-</string>
 
 
     <!--번역 필요 없는 부분-->

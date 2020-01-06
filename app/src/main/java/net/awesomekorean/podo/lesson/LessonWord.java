@@ -61,7 +61,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] sentenceClause;
     static int[] peopleImage;
 
-
+    String lessonId;
 
     Context context;
     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
@@ -94,23 +94,25 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
-        switch (MainLesson.lessonUnit) {
+        lessonId = MainLesson.lessonId;
+
+        switch (lessonId) {
 
 
             // 어뎁터에 연결된 일반 레슨의 position 번호임. 번호가 맞는지 확인할 것
-            case 1:
+            case "L_00":
                 lesson = new Lesson0();
-                readyForLesson(0);
+                readyForLesson();
                 break;
 
-            case 3:
+            case "L_01":
                 lesson = new Lesson1();
-                readyForLesson(1);
+                readyForLesson();
                 break;
 
-            case 4:
+            case "L_02":
                 lesson = new Lesson2();
-                readyForLesson(2);
+                readyForLesson();
                 break;
 
 
@@ -120,9 +122,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     }
 
 
-    public void readyForLesson(int unit) {
-
-        generalLessonUnit = unit;
+    public void readyForLesson() {
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
@@ -131,21 +131,21 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         String packageName = context.getPackageName();
         wordBack = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
-            String stringWordBack = "L" + generalLessonUnit + "_WORD_BACK_" + i;
+            String stringWordBack = lessonId + "_WORD_BACK_" + i;
             int intWordBack = getResources().getIdentifier(stringWordBack, "string", packageName);
             wordBack[i] = getString(intWordBack);
         }
 
         sentenceBack = new String[lessonSentenceLength];
         for(int i=0; i<lessonSentenceLength; i++) {
-            String stringSentenceBack = "L" + generalLessonUnit + "_SENTENCE_BACK_" + i;
+            String stringSentenceBack = lessonId + "_SENTENCE_BACK_" + i;
             int intSentenceBack = getResources().getIdentifier(stringSentenceBack, "string", packageName);
             sentenceBack[i] = getString(intSentenceBack);
         }
 
         sentenceExplain = new String[lessonSentenceLength];
         for(int i=0; i<lessonSentenceLength; i++) {
-            String stringSentenceExplain = "L" + generalLessonUnit + "_SENTENCE_EXPLAIN_" + i;
+            String stringSentenceExplain = lessonId + "_SENTENCE_EXPLAIN_" + i;
             int intSentenceExplain = getResources().getIdentifier(stringSentenceExplain, "string", packageName);
             sentenceExplain[i] = getString(intSentenceExplain);
         }
@@ -167,11 +167,11 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         wordAudio = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
-            wordAudio[i] = "word_" + MainLesson.lessonUnit + "_" + i;
+            wordAudio[i] = "word_" + lessonId.toLowerCase() + "_" + i;
         }
         sentenceAudio = new String[lessonSentenceLength];
         for(int j=0; j<lessonSentenceLength; j++) {
-            sentenceAudio[j] = "sentence_" + MainLesson.lessonUnit + "_" + j;
+            sentenceAudio[j] = "sentence_" + lessonId.toLowerCase() + "_" + j;
         }
 
 
