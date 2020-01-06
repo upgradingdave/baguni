@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.reading;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -20,11 +21,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesUserInfo;
+import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.reading.readings.Reading0;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     Reading reading; // Reading 인스턴스
 
@@ -268,8 +277,32 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             case R.id.finishYes :
                 setVisibility(View.VISIBLE, View.GONE);
                 seekBar.setProgress(0);
-                // 리딩 메뉴에서 완료 표시하기
+
+                // 읽기완료 정보 업데이트 하기
+                boolean isFirst = true;
+                int readingUnit = MainReading.readingUnit;
+
+                UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
+                for(Integer unit : userInformation.getReadingComplete()) {
+                    if(unit == readingUnit) {
+                        isFirst = false;
+                    }
+                }
+
+                if(isFirst) {
+                    userInformation.addReadingComplete(readingUnit);
+                    SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+
+                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
+                    System.out.println("읽기를 완료했습니다.");
+                } else {
+                    System.out.println("이미 완료된 읽기입니다.");
+                }
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
+
                 break;
         }
     }

@@ -5,7 +5,7 @@ public class ReadingItems {
     private String title;
     private String subTitle;
     private int readingImage;
-    private Boolean isCompleted = true;
+    private boolean isCompleted = true;
 
     public String getTitle() {
         return title;
@@ -31,11 +31,11 @@ public class ReadingItems {
         this.readingImage = lessonImage;
     }
 
-    public Boolean getIsCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(Boolean completed) {
+    public void setIsCompleted(boolean completed) {
         isCompleted = completed;
     }
 }

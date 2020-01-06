@@ -17,6 +17,7 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.reading.readings.Reading0;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static net.awesomekorean.podo.MainActivity.btnLesson;
 import static net.awesomekorean.podo.MainActivity.btnReading;
@@ -33,6 +34,9 @@ public class MainReading extends Fragment {
 
     MainActivity mainActivity;
 
+    ArrayList<Reading> list;
+    ReadingAdapter adapter;
+
     public MainReading(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
@@ -48,15 +52,23 @@ public class MainReading extends Fragment {
 
         view = inflater.inflate(R.layout.main_reading, container, false);
 
-        ArrayList<Reading> list = new ArrayList<>();
+        list = new ArrayList<>();
 
         Reading item0 = new Reading0();
+        Reading item1 = new Reading0();
+
         list.add(item0);
+        list.add(item1);
+
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ReadingAdapter adapter = new ReadingAdapter(list);
+        adapter = new ReadingAdapter(list);
+
+        System.out.println("완료된 읽기를 세팅합니다");
+        setCompletedReadings();
+
         adapter.setOnItemClickListener(new ReadingAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -75,6 +87,19 @@ public class MainReading extends Fragment {
 
         return view;
     }
+
+    private void setCompletedReadings() {
+        System.out.println("READINGCOMPLETE:"+MainActivity.readingComplete);
+        List<Integer> readingComplete = MainActivity.readingComplete;
+
+        if(readingComplete != null) {
+            for(int i=0; i<readingComplete.size(); i++) {
+                list.get(readingComplete.get(i)).setIsCompleted(true);
+            }
+            adapter.notifyDataSetChanged();
+        }
+    }
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

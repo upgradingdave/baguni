@@ -36,9 +36,6 @@ public class LessonSpecialFrame extends AppCompatActivity {
     
     LessonSpecial lessonSpecial;
 
-    Gson gson = new Gson();
-
-    boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +51,17 @@ public class LessonSpecialFrame extends AppCompatActivity {
             public void onClick(View v) {
 
                 // 레슨완료 정보 업데이트 하기
+                boolean isFirst = true;
+                int lessonUnit = MainLesson.lessonUnit;
                 UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
-                for(Integer lessonUnit : userInformation.getLessonComplete()) {
-                    if(lessonUnit == MainLesson.lessonUnit) {
+                for(Integer unit : userInformation.getLessonComplete()) {
+                    if(unit == lessonUnit) {
                         isFirst = false;
                     }
                 }
 
                 if(isFirst) {
-                    userInformation.addLessonComplete(MainLesson.lessonUnit);
+                    userInformation.addLessonComplete(lessonUnit);
                     SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
 
                     db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);

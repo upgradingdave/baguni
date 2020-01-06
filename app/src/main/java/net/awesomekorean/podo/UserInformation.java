@@ -50,9 +50,10 @@ public class UserInformation {
         return readingComplete;
     }
 
-    public void setReadingComplete(List<Integer> readingComplete) {
-        this.readingComplete = readingComplete;
+    public void addReadingComplete(int readingUnit) {
+        this.readingComplete.add(readingUnit);
     }
+
 
     public List<Integer> getSpecialLessonUnlock() {
         return specialLessonUnlock;

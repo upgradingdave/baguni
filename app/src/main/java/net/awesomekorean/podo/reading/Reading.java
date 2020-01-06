@@ -20,4 +20,6 @@ public interface Reading {
     int getReadingImage();
 
     boolean getIsCompleted();
+
+    void setIsCompleted(boolean b);
 }

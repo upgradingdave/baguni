@@ -72,4 +72,9 @@ public class Reading0 implements Reading {
     public boolean getIsCompleted() {
         return this.isCompleted;
     }
+
+    @Override
+    public void setIsCompleted(boolean b) {
+        this.isCompleted = b;
+    }
 }
