@@ -51,23 +51,15 @@ public class LessonSpecialFrame extends AppCompatActivity {
             public void onClick(View v) {
 
                 // 레슨완료 정보 업데이트 하기
-                boolean isFirst = true;
-                int lessonUnit = MainLesson.lessonUnit;
+                String lessonId = MainLesson.lessonId;
                 UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
-                for(Integer unit : userInformation.getLessonComplete()) {
-                    if(unit == lessonUnit) {
-                        isFirst = false;
-                    }
-                }
-
-                if(isFirst) {
-                    userInformation.addLessonComplete(lessonUnit);
+                if(!userInformation.getLessonComplete().contains(lessonId)) {
+                    userInformation.addLessonComplete(lessonId);
                     SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
-
                     db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
-                    System.out.println("레슨을 완료했습니다.");
+                    System.out.println("Lesson 완료 리스트를 업데이트 했습니다.");
                 } else {
-                    System.out.println("이미 완료된 레슨입니다.");
+                    System.out.println("이미 완료된 Lesson 입니다.");
                 }
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -247,6 +247,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                         System.out.println("유저정보가 있습니다");
                                         UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
 
+                                        SharedPreferencesUserInfo.deleteUserInfo(getApplicationContext());
                                         SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
                                         System.out.println("앱에 유저 데이터를 저장했습니다.");
 

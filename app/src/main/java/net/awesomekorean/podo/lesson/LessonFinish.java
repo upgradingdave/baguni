@@ -43,8 +43,6 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     int reward;
 
-    boolean isFirst = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,18 +74,14 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                 userInformation.setPoints(newPoints);
 
                 // 레슨완료 정보 업데이트 하기
-                for(Integer lessonUnit : userInformation.getLessonComplete()) {
-                    if(lessonUnit == MainLesson.lessonUnit) {
-                        isFirst = false;
-                    }
+                String lessonId = MainLesson.lessonId;
+                if(!userInformation.getLessonComplete().contains(lessonId)) {
+                    userInformation.addLessonComplete(lessonId);
+                    System.out.println("Lesson 완료 리스트를 업데이트 했습니다.");
+                } else {
+                    System.out.println("이미 완료된 Lesson 입니다.");
                 }
 
-                if(isFirst) {
-                    userInformation.addLessonComplete(MainLesson.lessonUnit);
-                    System.out.println("레슨을 완료했습니다.");
-                } else {
-                    System.out.println("이미 완료된 레슨입니다.");
-                }
 
                 SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
                 db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);

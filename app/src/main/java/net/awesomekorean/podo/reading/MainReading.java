@@ -25,6 +25,7 @@ import static net.awesomekorean.podo.MainActivity.btnReading;
 public class MainReading extends Fragment {
 
     public static int readingUnit = 0;
+    public static String readingId;
 
     Context context;
 
@@ -55,10 +56,8 @@ public class MainReading extends Fragment {
         list = new ArrayList<>();
 
         Reading item0 = new Reading0();
-        Reading item1 = new Reading0();
 
         list.add(item0);
-        list.add(item1);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
@@ -74,6 +73,9 @@ public class MainReading extends Fragment {
             public void onItemClick(View v, int pos) {
 
                 readingUnit = pos;
+                readingId = list.get(pos).getReadingId();
+                System.out.println("READINGID:"+ readingId);
+
 
                 intent = new Intent(context, ReadingFrame.class);
                 startActivity(intent);
@@ -90,11 +92,13 @@ public class MainReading extends Fragment {
 
     private void setCompletedReadings() {
         System.out.println("READINGCOMPLETE:"+MainActivity.readingComplete);
-        List<Integer> readingComplete = MainActivity.readingComplete;
+        List<String> readingComplete = MainActivity.readingComplete;
 
         if(readingComplete != null) {
-            for(int i=0; i<readingComplete.size(); i++) {
-                list.get(readingComplete.get(i)).setIsCompleted(true);
+            for(int i=0; i<list.size(); i++) {
+                if(readingComplete.contains(list.get(i).getReadingId())) {
+                    list.get(i).setIsCompleted(true);
+                }
             }
             adapter.notifyDataSetChanged();
         }

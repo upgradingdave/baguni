@@ -2,6 +2,8 @@ package net.awesomekorean.podo.reading;
 
 public interface Reading {
 
+    String getReadingId();
+
     String getTitle();
 
     String getArticle();

@@ -6,6 +6,7 @@ import net.awesomekorean.podo.lesson.LessonItem;
 
 public class S_Lesson0 implements LessonItem {
 
+    private String lessonId = "SL_00";
     private int title = R.string.SL0_TITLE;
     private String subTitle = "한글(Hangul)";
     private int lessonImage = R.drawable.hangul;
@@ -13,6 +14,10 @@ public class S_Lesson0 implements LessonItem {
     private Boolean isLock = false;
     private Boolean isCompleted = false;
 
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
 
     @Override
     public int getTitle() {

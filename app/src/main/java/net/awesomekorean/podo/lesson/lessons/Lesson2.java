@@ -6,6 +6,7 @@ import net.awesomekorean.podo.lesson.LessonItem;
 
 public class Lesson2 implements Lesson, LessonItem {
 
+    private String lessonId = "L_02";
     private int title = R.string.L2_TITLE;
     private String subTitle = "얼마예요?";
     private int lessonImage = R.drawable.hangul;
@@ -44,6 +45,10 @@ public class Lesson2 implements Lesson, LessonItem {
     final static int[] peopleImage = {5,6};
 
 
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
 
     @Override
     public String[] getWordFront() {

@@ -5,6 +5,8 @@ import net.awesomekorean.podo.reading.Reading;
 
 public class Reading0 implements Reading {
 
+    String readingId = "R_00";
+
     final String title = "화성, 지구에 가장 가까워지다";
 
 
@@ -31,6 +33,10 @@ public class Reading0 implements Reading {
     private int readingImage = R.drawable.hangul;
     private boolean isCompleted = false;
 
+    @Override
+    public String getReadingId() {
+        return readingId;
+    }
 
     @Override
     public String getTitle() {

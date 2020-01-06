@@ -7,8 +7,8 @@ public class UserInformation {
 
     private List<Boolean> attendance = new ArrayList<>(7); // [0]~[6], 일~토
     private int points;
-    private List<Integer> lessonComplete = new ArrayList<>();
-    private List<Integer> readingComplete = new ArrayList<>();
+    private List<String> lessonComplete = new ArrayList<>();
+    private List<String> readingComplete = new ArrayList<>();
     private List<Integer> specialLessonUnlock = new ArrayList<>();
 
     public UserInformation() {
@@ -34,24 +34,20 @@ public class UserInformation {
         this.points = points;
     }
 
-    public List<Integer> getLessonComplete() {
+    public List<String> getLessonComplete() {
         return lessonComplete;
     }
 
-    public void setLessonComplete(List<Integer> lessonComplete) {
-        this.lessonComplete = lessonComplete;
+    public void addLessonComplete(String lessonId) {
+        this.lessonComplete.add(lessonId);
     }
 
-    public void addLessonComplete(int lessonUnit) {
-        this.lessonComplete.add(lessonUnit);
-    }
-
-    public List<Integer> getReadingComplete() {
+    public List<String> getReadingComplete() {
         return readingComplete;
     }
 
-    public void addReadingComplete(int readingUnit) {
-        this.readingComplete.add(readingUnit);
+    public void addReadingComplete(String readingId) {
+        this.readingComplete.add(readingId);
     }
 
 

@@ -33,6 +33,7 @@ import static net.awesomekorean.podo.MainActivity.btnLesson;
 public class MainLesson extends Fragment {
 
     public static int lessonUnit = 0;
+    public static String lessonId;
 
     Context context;
 
@@ -86,6 +87,9 @@ public class MainLesson extends Fragment {
             public void onItemClick(View v, int pos) {
 
                 lessonUnit = pos;
+                lessonId = list.get(pos).getLessonId();
+                System.out.println("LESSONID:"+ lessonId);
+
 
                 switch (pos) {
 
@@ -119,9 +123,13 @@ public class MainLesson extends Fragment {
 
     private void setCompletedLessons() {
         System.out.println("LESSONCOMPLETE:"+MainActivity.lessonComplete);
-        if(MainActivity.lessonComplete != null) {
-            for(int i=0; i<MainActivity.lessonComplete.size(); i++) {
-                list.get(MainActivity.lessonComplete.get(i)).setIsCompleted(true);
+        List<String> lessonComplete = MainActivity.lessonComplete;
+
+        if(lessonComplete != null) {
+            for(int i=0; i<list.size(); i++) {
+                if(lessonComplete.contains(list.get(i).getLessonId())) {
+                    list.get(i).setIsCompleted(true);
+                }
             }
             adapter.notifyDataSetChanged();
         }

@@ -2,6 +2,8 @@ package net.awesomekorean.podo.lesson;
 
 public interface LessonItem {
 
+    String getLessonId();
+
     int getTitle();
 
     String getSubTitle();

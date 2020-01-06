@@ -79,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     public static UserInformation userInformation;
 
-    public static List<Integer> lessonComplete;
+    public static List<String> lessonComplete;
     public static List<Integer> specialLessonUnlock;
-    public static List<Integer> readingComplete;
+    public static List<String> readingComplete;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override

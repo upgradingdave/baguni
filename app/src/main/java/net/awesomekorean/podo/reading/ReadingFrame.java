@@ -126,7 +126,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 isPlaying = false;
-                mediaPlayer.pause();
+                if(mediaPlayer.isPlaying()){
+                    mediaPlayer.pause();
+                }
             }
 
             @Override
@@ -279,29 +281,23 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 seekBar.setProgress(0);
 
                 // 읽기완료 정보 업데이트 하기
-                boolean isFirst = true;
-                int readingUnit = MainReading.readingUnit;
-
+                String readingId = MainReading.readingId;
                 UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
-                for(Integer unit : userInformation.getReadingComplete()) {
-                    if(unit == readingUnit) {
-                        isFirst = false;
-                    }
-                }
-
-                if(isFirst) {
-                    userInformation.addReadingComplete(readingUnit);
+                if(!userInformation.getReadingComplete().contains(readingId)) {
+                    userInformation.addReadingComplete(readingId);
                     SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
-
                     db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
-                    System.out.println("읽기를 완료했습니다.");
+                    System.out.println("Reading 완료 리스트를 업데이트 했습니다.");
+
                 } else {
-                    System.out.println("이미 완료된 읽기입니다.");
+                    System.out.println("이미 완료된 Reading 입니다.");
                 }
+
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
+
 
                 break;
         }
