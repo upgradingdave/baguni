@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.PlayAudioWithString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class CollectionAdapter extends BaseAdapter {
 
     private Context context;
     public static List<CollectionEntity> list;
+
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
     MediaPlayer mp;
 
@@ -106,24 +109,11 @@ public class CollectionAdapter extends BaseAdapter {
             public void onClick(View v) {
                 System.out.println("Audio button clicked");
                 String audioFile = items.getAudio();
-                playAudio(audioFile);
+                playAudioWithString.playAudio(context, audioFile);
             }
         });
         return view;
     }
-
-    // 오디오 재생 메소드
-    public void playAudio(String audioFile) {
-        System.out.println("PATH:"+ audioFile);
-        String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audioFile;
-        Uri uri = Uri.parse(uriPath);
-        mp = MediaPlayer.create(context, uri);
-        try {
-            mp.start();
-        }
-        catch (Exception e) {}
-    }
-
 
 
     // 뷰홀더란? 뷰들을 홀더에 꼽아놓듯이 보관하는 객체. 리스트뷰의 성능을 높이기 위해 사용

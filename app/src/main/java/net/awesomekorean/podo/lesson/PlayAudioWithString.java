@@ -9,7 +9,7 @@ public class PlayAudioWithString {
 
     // 오디오 재생 메소드
     public void playAudio(Context context, String audioFile) {
-        if(context != null) {
+        if(audioFile != null && context != null) {
             if(mp != null) {
                 mp.release();
             }
@@ -29,5 +29,4 @@ public class PlayAudioWithString {
             catch (Exception e) {}
         }
     }
-
 }

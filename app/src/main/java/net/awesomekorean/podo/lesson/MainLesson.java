@@ -88,25 +88,30 @@ public class MainLesson extends Fragment {
                 lessonId = list.get(pos).getLessonId();
                 System.out.println("LESSONID:"+ lessonId);
 
+                if(!list.get(pos).getIsLock()) {
+                    switch (lessonId) {
 
-                switch (lessonId) {
+                        // 스페셜 레슨만 case 분리해서 설정할 것
+                        case "SL_00" :
+                            intent = new Intent(context, LessonHangulMenu.class);
+                            startActivity(intent);
+                            break;
 
-                    // 스페셜 레슨만 case 분리해서 설정할 것
-                    case "SL_00" :
-                        intent = new Intent(context, LessonHangulMenu.class);
-                        startActivity(intent);
-                        break;
+                        case "SL_01" :
+                            intent = new Intent(context, LessonSpecialFrame.class);
+                            startActivity(intent);
+                            break;
 
-                    case "SL_01" :
-                        intent = new Intent(context, LessonSpecialFrame.class);
-                        startActivity(intent);
-                        break;
+                        default :
+                            intent = new Intent(context, LessonFrame.class);
+                            startActivity(intent);
+                            break;
+                    }
 
-                    default :
-                        intent = new Intent(context, LessonFrame.class);
-                        startActivity(intent);
-                        break;
+                } else {
+                    // 포인트 사용 확인창 띄우기
                 }
+
             }
         });
 

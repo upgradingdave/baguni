@@ -18,10 +18,10 @@ public interface CollectionDao {
     @Query("SELECT * FROM COLLECTION WHERE guid = :guid")
     CollectionEntity getByGuid(String guid);
 
-    @Query("SELECT * FROM COLLECTION ORDER BY RANDOM() LIMIT 1")
+    @Query("SELECT * FROM COLLECTION WHERE deleted != 1 ORDER BY RANDOM() LIMIT 1")
     CollectionEntity getRandom();
 
-    @Query("SELECT * FROM COLLECTION ORDER BY dateNew DESC LIMIT 1 OFFSET :index")
+    @Query("SELECT * FROM COLLECTION WHERE deleted != 1 ORDER BY dateNew DESC LIMIT 1 OFFSET :index")
     CollectionEntity getDesc(int index);
 
     //@Query("SELECT * FROM COLLECTIONENTITY LIMIT people20 OFFSET 0")

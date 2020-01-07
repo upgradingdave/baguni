@@ -2,9 +2,12 @@ package net.awesomekorean.podo.collection;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
+
+import net.awesomekorean.podo.lesson.PlayAudioWithString;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +21,9 @@ public class CollectionRepository {
 
     private String front; // 플래시 카드 앞면
     private String back; // 플래시 카드 뒷면
+
+    PlayAudioWithString playAudioWithString;
+
 
     public CollectionRepository(Context context) {
 
@@ -174,7 +180,7 @@ public class CollectionRepository {
     }
 
     // 컬렉션 스터디에서 랜덤 플래시 카드 불러오기
-    public void getRandomForStudy() {
+    public void getRandomForStudy(final Context context) {
         new AsyncTask<Void, Void, CollectionEntity>() {
             @Override
             protected CollectionEntity doInBackground(Void... voids) {
@@ -186,15 +192,13 @@ public class CollectionRepository {
 
             @Override
             protected void onPostExecute(CollectionEntity entity) {
-                // 오디오 출력 추가할 것
-                CollectionStudy.studyFront.setText(front);
-                CollectionStudy.studyBack.setText(back);
+                setCollectionStudy(context, entity);
             }
         }.execute();
     }
 
     // 컬렉션 스터디에서 최신 컬렉션 순으로 불러오기
-    public void getDescForStudy(final int index) {
+    public void getDescForStudy(final Context context, final int index) {
         new AsyncTask<Void, Void, CollectionEntity>() {
             @Override
             protected CollectionEntity doInBackground(Void... voids) {
@@ -206,12 +210,25 @@ public class CollectionRepository {
 
             @Override
             protected void onPostExecute(CollectionEntity entity) {
-                // 오디오 출력 추가할 것
-                CollectionStudy.studyFront.setText(front);
-                CollectionStudy.studyBack.setText(back);
+                setCollectionStudy(context, entity);
             }
         }.execute();
     }
+
+    private void setCollectionStudy(Context context, CollectionEntity entity) {
+        String studyAudio = entity.getAudio();
+        if(studyAudio != null) {
+            playAudioWithString = new PlayAudioWithString();
+            playAudioWithString.playAudio(context, studyAudio);
+            CollectionStudy.btnAudio.setVisibility(View.VISIBLE);
+        } else {
+            CollectionStudy.btnAudio.setVisibility(View.GONE);
+        }
+        CollectionStudy.studyAudio = studyAudio;
+        CollectionStudy.studyFront.setText(front);
+        CollectionStudy.studyBack.setText(back);
+    }
+
 
     public void initDateLasySync() {
         new AsyncTask<Void, Void, Void>() {
