@@ -1,29 +1,21 @@
 package net.awesomekorean.podo.lesson;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.SharedPreferencesUserInfo;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
@@ -68,7 +60,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnGetPoint :
                 // DB 에 포인트 합산하기
-                UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 int oldPoints = userInformation.getPoints();
                 int newPoints = oldPoints + reward;
                 userInformation.setPoints(newPoints);
@@ -83,7 +75,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                 }
 
 
-                SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+                SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
                 db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
 
                 Intent intent = new Intent(this, MainActivity.class);

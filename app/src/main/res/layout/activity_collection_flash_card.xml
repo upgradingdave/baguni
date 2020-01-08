@@ -48,13 +48,14 @@
 
         <EditText
             android:id="@+id/textFront"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:textSize="30dp"
-            android:paddingLeft="15dp"
+            android:maxLength="100"
             android:background="@drawable/bg_white_30_stroke_grey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:paddingLeft="15dp"
+            android:textSize="30dp" />
 
         <TextView
             android:layout_marginTop="30dp"
@@ -70,6 +71,7 @@
             android:paddingLeft="15dp"
             android:layout_marginTop="10dp"
             android:textSize="30dp"
+            android:maxLength="100"
             android:background="@drawable/bg_white_30_stroke_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

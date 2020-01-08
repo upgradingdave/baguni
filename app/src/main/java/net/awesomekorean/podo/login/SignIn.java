@@ -39,17 +39,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
-import net.awesomekorean.podo.SharedPreferencesUserInfo;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 
 import java.util.Arrays;
@@ -247,7 +244,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                         System.out.println("유저정보가 있습니다");
                                         UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
 
-                                        SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+                                        SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
                                         System.out.println("앱에 유저 데이터를 저장했습니다.");
 
                                         intent = new Intent(getApplicationContext(), MainActivity.class);

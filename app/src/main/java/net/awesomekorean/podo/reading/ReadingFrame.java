@@ -25,10 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.SharedPreferencesUserInfo;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
-import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.reading.readings.Reading0;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
@@ -266,10 +265,10 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                 // 읽기완료 정보 업데이트 하기
                 String readingId = MainReading.readingId;
-                UserInformation userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 if(!userInformation.getReadingComplete().contains(readingId)) {
                     userInformation.addReadingComplete(readingId);
-                    SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+                    SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
                     db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
                     System.out.println("Reading 완료 리스트를 업데이트 했습니다.");
 

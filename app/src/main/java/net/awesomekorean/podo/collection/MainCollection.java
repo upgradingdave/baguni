@@ -38,6 +38,7 @@ import com.google.firebase.firestore.Transaction;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.teachers.Teachers;
 
 import java.text.SimpleDateFormat;
@@ -93,7 +94,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
     TextView msgNoCollection;
 
     List<CollectionEntity> copyListAllData = new ArrayList<>(); // 동기화를 위해 아이템 목록 복사
-    String copyDateLastSync = new String(); // 동기화를 위해 마지막 동기화 날짜 가져옴
 
     public static TextView collectionNo;
 
@@ -200,17 +200,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
         // Room 의 플래쉬 카드를 listView 로 가져오기
         repository.getAll().observe(this, observer);
-
-        repository.getDateSync().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                if (s == null) {
-                    repository.initDateLasySync();
-                }
-                copyDateLastSync = s;
-                System.out.println("LASTDATE : " + copyDateLastSync);
-            }
-        });
 
 
         // 검색 뷰에 입력을 하는지 확인하는 리스너
@@ -478,9 +467,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 // Room 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 가져오기
                 final List<CollectionEntity> itemsToUpload = new ArrayList<>();
                 final List<CollectionEntity> itemsToDelete = new ArrayList<>();
+                String dateLastSync = SharedPreferencesInfo.getDateLastSync(getContext());
 
                 for (final CollectionEntity entity : copyListAllData) {
-                    if (entity.getDateEdit().compareTo(copyDateLastSync) > 0) {
+                    if (entity.getDateEdit().compareTo(dateLastSync) > 0) {
 
                         // 삭제된 아이템이 있는지 확인
                         if(entity.getDeleted() == 1) {
@@ -527,7 +517,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                 // DB 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 다운로드
                 db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_COLLECTIONS))
-                        .whereGreaterThan("dateEdit", copyDateLastSync)
+                        .whereGreaterThan("dateEdit", dateLastSync)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -555,9 +545,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
                 // 동기화 날짜 업데이트
                 String now = getDateNow();
-                DateSyncEntity dateSyncEntity = new DateSyncEntity();
-                dateSyncEntity.setDateSync(now);
-                repository.updateLastSync(dateSyncEntity);
+                SharedPreferencesInfo.setDateLastSync(getContext(), now);
                 break;
         }
     }

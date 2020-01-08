@@ -35,10 +35,6 @@ public class CollectionRepository {
         return db.collectionDao().getAll();
     }
 
-    public LiveData<String> getDateSync() {
-        return db.collectionDao().getDateSync();
-    }
-
     public void getCount() {
         new AsyncTask<Void, Void, Integer>() {
             @Override
@@ -116,16 +112,6 @@ public class CollectionRepository {
         }.execute();
     }
 
-    public void updateLastSync(final DateSyncEntity entity) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                db.collectionDao().updateDateSync(entity);
-                return null;
-            }
-        }.execute();
-    }
-
 
     public void deleteAll() {
 
@@ -147,18 +133,6 @@ public class CollectionRepository {
                 entity.setDateEdit(getDateNow());
                 entity.setDeleted(1);
                 db.collectionDao().update(entity);
-                return null;
-            }
-        }.execute();
-    }
-
-    // 개발용으로 만듦. 개발 끝나면 삭제할 것
-    public void deleteDateLastSync() {
-
-        new AsyncTask<Void, Void,Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                db.collectionDao().deleteDateSync();
                 return null;
             }
         }.execute();
@@ -229,17 +203,6 @@ public class CollectionRepository {
         CollectionStudy.studyBack.setText(back);
     }
 
-
-    public void initDateLasySync() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                DateSyncEntity lastSync = new DateSyncEntity();
-                db.collectionDao().initDateSync(lastSync);
-                return null;
-            }
-        }.execute();
-    }
 /*
     public void downloadItemsFromDb(final CollectionEntity entityInDB) {
         new AsyncTask<Void, Void, Void>() {

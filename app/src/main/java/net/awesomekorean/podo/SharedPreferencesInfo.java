@@ -8,7 +8,7 @@ import com.google.gson.GsonBuilder;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class SharedPreferencesUserInfo {
+public class SharedPreferencesInfo {
 
     static Gson gson = new GsonBuilder().create();
 
@@ -38,4 +38,18 @@ public class SharedPreferencesUserInfo {
         editor.commit();
     }
 
+    // 마지막 동기화 날짜 불러오기
+    public static String getDateLastSync(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("date", MODE_PRIVATE);
+        String dateLastSync = sp.getString("dateLastSync", "0000-00-00 00:00:00");
+        return dateLastSync;
+    }
+
+    // 마지막 동기화 날짜 저장하기
+    public static void setDateLastSync(Context context, String dateLastSync) {
+        SharedPreferences sp = context.getSharedPreferences("date", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("dateLastSync", dateLastSync);
+        editor.commit();
+    }
 }

@@ -24,8 +24,6 @@ public interface CollectionDao {
     @Query("SELECT * FROM COLLECTION WHERE deleted != 1 ORDER BY dateNew DESC LIMIT 1 OFFSET :index")
     CollectionEntity getDesc(int index);
 
-    //@Query("SELECT * FROM COLLECTIONENTITY LIMIT people20 OFFSET 0")
-
     @Query("SELECT COUNT(*) FROM COLLECTION WHERE deleted != 1")
     int getCount();
 
@@ -35,20 +33,6 @@ public interface CollectionDao {
     // 신규 추가된 아이템들 가져오기
     @Query("SELECT * FROM COLLECTION WHERE dateEdit > :dateSync")
     List<CollectionEntity> getUploadItems(String dateSync);
-
-    // 마지막 동기화 날짜 가져오기
-    @Query("SELECT dateSync FROM DATE_SYNC")
-    LiveData<String> getDateSync();
-
-    // 마지막 동기화 날짜 업데이트하기
-    @Update
-
-    void updateDateSync(DateSyncEntity dateSyncEntity);
-
-
-
-    @Insert
-    void initDateSync(DateSyncEntity dateSyncEntity);
 
 
     @Query("DELETE FROM COLLECTION")
@@ -64,8 +48,5 @@ public interface CollectionDao {
     @Delete
     void delete(CollectionEntity collectionEntity);
 
-    // 개발용으로 만듦. 개발 끝나면 삭제할 것
-    @Query("DELETE FROM DATE_SYNC")
-    void deleteDateSync();
 }
 

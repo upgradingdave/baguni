@@ -1,8 +1,6 @@
 package net.awesomekorean.podo;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 
@@ -14,40 +12,25 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Transaction;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
-import net.awesomekorean.podo.reading.MainReading;
-import net.awesomekorean.podo.writing.MainWriting;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -150,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         // 앱에서 유저 데이터 가져오기
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
-        userInformation = SharedPreferencesUserInfo.getUserInfo(getApplicationContext());
+        userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
 
         lessonComplete = userInformation.getLessonComplete();
         specialLessonUnlock = userInformation.getSpecialLessonUnlock();
@@ -182,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 userInformation.setDay(today);
             }
 
-            SharedPreferencesUserInfo.setUserInfo(getApplicationContext(), userInformation);
+            SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
             System.out.println("앱에 출석부를 업데이트 했습니다");
 
             // DB 에 출석부 업데이트하기
