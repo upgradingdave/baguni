@@ -1,8 +1,10 @@
 package net.awesomekorean.podo.reading;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -62,7 +64,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     MediaPlayer mediaPlayer;
     Integer playingPosition = null; // 오디오 재생 멈춘 지점
     int playingTime; // 오디오 길이
-    int audio; // 오디오 파일 경로
+    String audio; // 오디오 파일 경로
+
+    Context context;
 
 
     class MyThread extends Thread {
@@ -102,6 +106,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         btnSlow.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
 
+        context = getApplicationContext();
+
         // 시크바 이벤트
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -137,7 +143,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             case 0 :
                 reading = new Reading0();
                 readyForReading();
-                audio = R.raw.sample; // 개발용
                 break;
 
         }
@@ -160,13 +165,24 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                     popUpFront.setText(reading.getPopUpFront()[finalI]);
                     popUpBack.setText(reading.getPopUpBack()[finalI]);
                     popUpLayout.setVisibility(View.VISIBLE);
+
+                    // 단어 오디오 재생
+                    if(mediaPlayer != null ) {
+                        playingPosition = mediaPlayer.getCurrentPosition();
+                        mediaPlayer.pause();
+                        setVisibility(View.VISIBLE, View.GONE);
+                        isPlaying = false;
+                    }
+                    String audioPopUp = "android.resource://" + context.getPackageName() + "/raw/" + audio + "_" + finalI;
+                    Uri uri = Uri.parse(audioPopUp);
+                    MediaPlayer mpPopUp = MediaPlayer.create(context, uri);
+                    mpPopUp.start();
                 }
 
                 @Override
                 public void updateDrawState(@NonNull TextPaint ds) {   // 하이라이트 디자인 설정
-                    ds.setColor(Color.rgb(243,110,84));
-                    ds.setUnderlineText(true);
-                    ds.setFakeBoldText(true);
+                    ds.setColor(ContextCompat.getColor(context, R.color.PURPLE));
+                    ds.bgColor = ContextCompat.getColor(context, R.color.PURPLE_TRANSPARENT);
                 }
             }, reading.getStart()[i], reading.getEnd()[i], 0);  // 하이라이트 위치 설정
 
@@ -184,6 +200,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 return false;
             }
         });
+
+        audio = reading.getReadingId().toLowerCase();
 
     }
 
@@ -222,7 +240,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                     // 최초 플레이 or 다시 플레이 시
                 } else {
-                    mediaPlayer = MediaPlayer.create(getApplicationContext(), audio);
+                    String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audio;
+                    Uri uri = Uri.parse(uriPath);
+                    mediaPlayer = MediaPlayer.create(context, uri);
                     mediaPlayer.setLooping(false); // 무한반복 false
                     mediaPlayer.start();
 
@@ -265,10 +285,10 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                 // 읽기완료 정보 업데이트 하기
                 String readingId = MainReading.readingId;
-                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
                 if(!userInformation.getReadingComplete().contains(readingId)) {
                     userInformation.addReadingComplete(readingId);
-                    SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                    SharedPreferencesInfo.setUserInfo(context, userInformation);
                     db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
                     System.out.println("Reading 완료 리스트를 업데이트 했습니다.");
 
@@ -277,7 +297,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 }
 
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 finish();
                 break;

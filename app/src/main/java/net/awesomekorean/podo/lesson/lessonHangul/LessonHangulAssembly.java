@@ -180,9 +180,10 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                String url = uri.toString();
                 MediaPlayer mediaPlayer = new MediaPlayer();
                 try {
-                    mediaPlayer.setDataSource(context, uri);
+                    mediaPlayer.setDataSource(url);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
