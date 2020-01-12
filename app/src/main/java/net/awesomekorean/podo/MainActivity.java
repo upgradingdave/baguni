@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     Intent intent;
 
     public static String userEmail = "gabmanpark@gmail.com";
-    public static String userName;
+    public static String userName = "userName";
     public static Uri userImage;
 
     public static UserInformation userInformation;

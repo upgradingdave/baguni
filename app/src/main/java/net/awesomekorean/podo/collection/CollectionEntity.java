@@ -28,16 +28,6 @@ public class CollectionEntity implements Serializable {
     private boolean isVisible = false;
 
 
-    // 녹음요청할 때 필요한 변수들
-    private int status = 0; // 0:녹음요청없음, 1:검토중, 2:녹음됨, 3:거부됨
-    private String teacherName;
-    private String teacherId;
-    private String dateRequest;
-    private String dateAnswer;
-
-
-
-
     @Ignore
     public CollectionEntity() {
 
@@ -76,46 +66,6 @@ public class CollectionEntity implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getDateRequest() {
-        return dateRequest;
-    }
-
-    public void setDateRequest(String dateRequest) {
-        this.dateRequest = dateRequest;
-    }
-
-    public String getDateAnswer() {
-        return dateAnswer;
-    }
-
-    public void setDateAnswer(String dateAnswer) {
-        this.dateAnswer = dateAnswer;
     }
 
     public String getUserEmail() {

@@ -265,18 +265,21 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             case R.id.btnNormal :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
-                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1f));
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1f));
+                }
                 break;
 
             case R.id.btnSlow :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
-
-                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(0.8f));
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(0.8f));
+                }
             break;
 
             case R.id.btnFinish :
-                if(mediaPlayer!=null) {
+                if(mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                 }
 

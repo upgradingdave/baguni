@@ -46,6 +46,9 @@ import net.awesomekorean.podo.writing.WritingRepository;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Teachers extends AppCompatActivity implements View.OnClickListener {
 
@@ -136,6 +139,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
     }
 
+
     @Override
     public void onClick(View v) {
 
@@ -152,6 +156,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btnSubmit :
+                btnSubmit.setEnabled(false);
 
                 Intent intent = getIntent();
                 String code = intent.getStringExtra("code");
@@ -194,48 +199,51 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 } else if(code.equals("record")) {
                     ArrayList<CollectionEntity> recordList = (ArrayList<CollectionEntity>) intent.getSerializableExtra("checkedList");
 
+                    List<String> guid = new ArrayList();
+                    List<String> front = new ArrayList();
+                    List<String> back = new ArrayList();
+                    List<String> audio = new ArrayList();
 
                     for (final CollectionEntity entity : recordList) {
-                        entity.setTeacherName(teacherName);
-                        entity.setTeacherId(teacherId);
-                        entity.setDateRequest(date);
-                        entity.setStatus(1);
 
-                        // 녹음요청 DB 에 저장하기
-                        final DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document(entity.getGuid());
-
-                        db.runTransaction(new Transaction.Function<Void>() {
-                            @Nullable
-                            @Override
-                            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
-                                DocumentSnapshot snapshot = transaction.get(docRef);
-                                if (snapshot.exists()) {
-                                    transaction.update(docRef, "teacherName", teacherName);
-                                    transaction.update(docRef, "dateRequest", date);
-                                    transaction.update(docRef, "isRecorded", 1);
-                                } else {
-                                    transaction.set(docRef, entity);
-                                }
-                                return null;
-                            }
-                        }).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                requestResult.setVisibility(View.VISIBLE);
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        requestResult.setVisibility(View.GONE);
-                                        Intent intent = new Intent(getApplication(), MainActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }, 3000);
-                            }
-                        });
+                        guid.add(entity.getGuid());
+                        front.add(entity.getFront());
+                        back.add(entity.getBack());
                     }
+
+                    // 녹음요청 DB 에 저장하기
+                    Map<String, Object> request = new HashMap<>();
+                    request.put("guid", guid);
+                    request.put("front", front);
+                    request.put("back", back);
+                    request.put("audio", audio);
+                    request.put("dateRequest", date);
+                    request.put("dateAnswer", "");
+                    request.put("status", 1);
+                    request.put("teacherId", teacherId);
+                    request.put("teacherName", teacherName);
+                    request.put("userEmail", MainActivity.userEmail);
+                    request.put("userName", MainActivity.userName);
+
+                    db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document()
+                            .set(request)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    requestResult.setVisibility(View.VISIBLE);
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            requestResult.setVisibility(View.GONE);
+                                            Intent intent = new Intent(getApplication(), MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 3000);
+                                }
+                            });
+                    break;
                 }
-                break;
         }
     }
 }
