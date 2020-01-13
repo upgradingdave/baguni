@@ -63,6 +63,10 @@
     <string name="VOWEL">Vowel</string>
     <string name="BATCHIM">Batchim</string>
     <string name="ASSEMBLY">Assembly</string>
+    <string name="NUMBERS">Numbers</string>
+    <string name="SINO_NUMBER">Sino-Korean number</string>
+    <string name="NATIVE_NUMBER">Native-Korean number</string>
+    <string name="PRACTICE">Practice</string>
     <string name="INTRO">Intro</string>
     <string name="HINT">Hint</string>
     <string name="SPECIAL_LESSON">Special lesson</string>
@@ -217,6 +221,7 @@
 위의 예에서 '듣어요'[드더요]가 아닌 '들어요'[드러요]로 불규칙 변화를 함으로써 좀 더 부드러운 발음을 할 수 있다.
 따라서 단어마다 다른 형태를 외우려고 하지 말고 말하기 연습을 통해 여러 번 사용하다보면 자연스럽게 기억할 수 있게 될 것이다."
     </string>
+    <string name="SL_02_TITLE">Numbers</string>
 
 
     <string name="L_00_TITLE">Greetings</string>

@@ -55,10 +55,13 @@ public class MainReading extends Fragment {
 
         list = new ArrayList<>();
 
-        Reading item0 = new Reading0();
+        Reading[] items = {
+                new Reading0()
+        };
 
-        list.add(item0);
-
+        for(Reading item : items) {
+            list.add(item);
+        }
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

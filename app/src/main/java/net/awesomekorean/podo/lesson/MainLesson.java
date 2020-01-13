@@ -24,6 +24,7 @@ import net.awesomekorean.podo.lesson.lessons.Lesson2;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson0;
 import net.awesomekorean.podo.lesson.lessons.Lesson0;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson1;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,17 +63,14 @@ public class MainLesson extends Fragment {
 
         list = new ArrayList<>();
 
-        LessonItem item0 = new S_Lesson0();
-        LessonItem item1 = new Lesson0();
-        LessonItem item2 = new S_Lesson1();
-        LessonItem item3 = new Lesson1();
-        LessonItem item4 = new Lesson2();
+        LessonItem[] items = {
+                new S_Lesson0(), new Lesson0(), new S_Lesson1(), new Lesson1(), new Lesson2(), new S_Lesson2()
+        };
 
-        list.add(item0);
-        list.add(item1);
-        list.add(item2);
-        list.add(item3);
-        list.add(item4);
+        for(LessonItem item : items) {
+            list.add(item);
+        }
+
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -98,6 +96,11 @@ public class MainLesson extends Fragment {
                             break;
 
                         case "SL_01" :
+                            intent = new Intent(context, LessonSpecialFrame.class);
+                            startActivity(intent);
+                            break;
+
+                        case "SL_02" :
                             intent = new Intent(context, LessonSpecialFrame.class);
                             startActivity(intent);
                             break;

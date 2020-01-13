@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -68,6 +69,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     Context context;
 
+    SpannableStringBuilder span = new SpannableStringBuilder();
+
 
     class MyThread extends Thread {
         @Override
@@ -122,18 +125,20 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 isPlaying = false;
-                if(mediaPlayer.isPlaying()){
+                if(mediaPlayer != null && mediaPlayer.isPlaying()){
                     mediaPlayer.pause();
                 }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                isPlaying = true;
-                int position = seekBar.getProgress(); // 유저가 움직여 놓은 위치
-                mediaPlayer.seekTo(position);
-                mediaPlayer.start();
-                new MyThread().start();
+                if(mediaPlayer != null) {
+                    isPlaying = true;
+                    int position = seekBar.getProgress(); // 유저가 움직여 놓은 위치
+                    mediaPlayer.seekTo(position);
+                    mediaPlayer.start();
+                    new MyThread().start();
+                }
             }
         });
 
@@ -147,50 +152,49 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
         }
     }
-
     public void readyForReading() {  // 글 생성
 
         readingTitle.setText(reading.getTitle());
+        for(int i=0; i<reading.getArticle().length; i++) {
+            SpannableStringBuilder ssb = new SpannableStringBuilder(reading.getArticle()[i]);
 
-        SpannableStringBuilder span = new SpannableStringBuilder(reading.getArticle());
+            // 짝수번째에 있는 단어에 setSpan 하기
+            if(i%2 == 1) {
+                final int popUpIndex = i/2;
+                ssb.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View view) {  // 하이라이트 클릭 이벤트
+                        front = reading.getPopUpFront()[popUpIndex];
+                        back = reading.getPopUpBack()[popUpIndex];
+                        popUpFront.setText(front);
+                        popUpBack.setText(back);
+                        popUpLayout.setVisibility(View.VISIBLE);
 
-        for(int i=0; i<reading.getStart().length; i++) {
-
-            final int finalI = i;
-            span.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View view) {  // 하이라이트 클릭 이벤트
-                    front = reading.getPopUpFront()[finalI];
-                    back = reading.getPopUpBack()[finalI];
-                    popUpFront.setText(reading.getPopUpFront()[finalI]);
-                    popUpBack.setText(reading.getPopUpBack()[finalI]);
-                    popUpLayout.setVisibility(View.VISIBLE);
-
-                    // 단어 오디오 재생
-                    if(mediaPlayer != null ) {
-                        playingPosition = mediaPlayer.getCurrentPosition();
-                        mediaPlayer.pause();
-                        setVisibility(View.VISIBLE, View.GONE);
-                        isPlaying = false;
+                        // 단어 오디오 재생
+                        if(mediaPlayer != null ) {
+                            playingPosition = mediaPlayer.getCurrentPosition();
+                            mediaPlayer.pause();
+                            setVisibility(View.VISIBLE, View.GONE);
+                            isPlaying = false;
+                        }
+                        String audioPopUp = "android.resource://" + context.getPackageName() + "/raw/" + audio + "_" + popUpIndex;
+                        Uri uri = Uri.parse(audioPopUp);
+                        MediaPlayer mpPopUp = MediaPlayer.create(context, uri);
+                        mpPopUp.start();
                     }
-                    String audioPopUp = "android.resource://" + context.getPackageName() + "/raw/" + audio + "_" + finalI;
-                    Uri uri = Uri.parse(audioPopUp);
-                    MediaPlayer mpPopUp = MediaPlayer.create(context, uri);
-                    mpPopUp.start();
-                }
 
-                @Override
-                public void updateDrawState(@NonNull TextPaint ds) {   // 하이라이트 디자인 설정
-                    ds.setColor(ContextCompat.getColor(context, R.color.PURPLE));
-                    ds.bgColor = ContextCompat.getColor(context, R.color.PURPLE_TRANSPARENT);
-                }
-            }, reading.getStart()[i], reading.getEnd()[i], 0);  // 하이라이트 위치 설정
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint ds) {   // 하이라이트 디자인 설정
+                        ds.setColor(ContextCompat.getColor(context, R.color.PURPLE));
+//                        ds.bgColor = ContextCompat.getColor(context, R.color.PURPLE_TRANSPARENT);
+                    }
+                }, 0, reading.getArticle()[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  // 하이라이트 위치 설정
 
-            readingArticle.setTag(i);
-            readingArticle.setText(span);
-            readingArticle.setMovementMethod(LinkMovementMethod.getInstance());
+            }
+            span.append(ssb);
         }
-
+        readingArticle.setText(span);
+        readingArticle.setMovementMethod(LinkMovementMethod.getInstance());
         readingArticle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -265,7 +269,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             case R.id.btnNormal :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
-                if (mediaPlayer.isPlaying()) {
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
                     mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1f));
                 }
                 break;
@@ -273,13 +277,13 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             case R.id.btnSlow :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
-                if(mediaPlayer.isPlaying()) {
+                if(mediaPlayer != null && mediaPlayer.isPlaying()) {
                     mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(0.8f));
                 }
             break;
 
             case R.id.btnFinish :
-                if(mediaPlayer.isPlaying()) {
+                if(mediaPlayer != null && mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                 }
 

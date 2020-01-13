@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".lesson.lessonNumber.LessonNumberMenu">
+
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:text="@string/NUMBERS"
+        android:textSize="18dp"
+        android:textColor="@color/BLACK"
+        android:background="@color/WHITE"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:id="@+id/sinoNumber"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:src="@drawable/hangul_menu_consonant"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/SINO_NUMBER"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nativeNumber"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:src="@drawable/hangul_menu_vowel"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/NATIVE_NUMBER"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/practice"
+            android:background="@drawable/bg_white_10_stroke_grey"
+            android:padding="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:src="@drawable/hangul_menu_batchim"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:text="@string/PRACTICE"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
