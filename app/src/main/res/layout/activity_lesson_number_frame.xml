@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/FOGGY"
+
+    tools:context=".lesson.lessonNumber.LessonNumber">
+
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:text="@string/COLLECTION"
+        android:textSize="18dp"
+        android:textColor="@color/BLACK"
+        android:background="@color/WHITE"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/btnRadio"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btnInOrder"
+            android:text="@string/IN_ORDER"
+            android:textColor="@color/WHITE"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:background="@drawable/bg_purple_20_left"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/btnRandom"
+            android:text="@string/RANDOM"
+            android:textColor="@color/GREY_TEXT"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:background="@drawable/bg_white_20_right_stroke_purple"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutStudy"
+        app:layout_constraintTop_toBottomOf="@id/btnRadio"
+        app:layout_constraintBottom_toTopOf="@id/btnNext"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_white_30_stroke_grey"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/studyFront"
+            android:text="TEST"
+            android:textColor="@color/BLACK"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/studyBack"
+            android:text="TEST"
+            android:textColor="@color/GREY_TEXT"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="visible"
+        android:text="@string/ANSWER"
+        android:textColor="@color/WHITE"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_purple_30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:id="@+id/btnAudio"
+        app:layout_constraintTop_toTopOf="@id/layoutStudy"
+        app:layout_constraintEnd_toEndOf="@id/layoutStudy"
+        android:layout_margin="20dp"
+        android:src="@drawable/audio_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/GREY"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        app:layout_constraintTop_toTopOf="@id/layoutStudy"
+        app:layout_constraintBottom_toBottomOf="@id/layoutStudy"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

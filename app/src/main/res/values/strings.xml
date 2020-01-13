@@ -64,9 +64,34 @@
     <string name="BATCHIM">Batchim</string>
     <string name="ASSEMBLY">Assembly</string>
     <string name="NUMBERS">Numbers</string>
+    <string name="NUMBERS_INTRO_TITLE">How to say numbers in Korean</string>
+    <string name="NUMBERS_INTRO">Many Korean learners think Korean numbers are really difficult.
+Because there are two systems of Korean numbers
+(Sino-Korean number / Native Korean number) and you should
+use each number system depending on what the number is used for.
+Therefore whenever students say numbers, they are confused about
+which system of number to use.
+In general, each number system is used in the following situations:
+1.Sino-Korean number: Number itself
+2.Native-Korean number: Counting numbers
+But when you learn Korean numbers, you can see that this rule is not always correct.
+(For example, why the hour is Native-Korean number
+ but the minute is Sino-Korean number?)
+So I suggest to students
+\"Just listen and follow the correct number a lot.
+Then you will feel something strange right before you try to use the wrong number.\"
+This lesson is designed to learn Sino-Korean numbers and Native Korean numbers
+and then practice the numbers repeatedly in different situations.
+Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="SINO_NUMBER">Sino-Korean number</string>
-    <string name="NATIVE_NUMBER">Native-Korean number</string>
+    <string name="NATIVE_NUMBER">Native-Korean number (1~99)</string>
     <string name="PRACTICE">Practice</string>
+    <string name="TIME">Time</string>
+    <string name="MONEY">Money</string>
+    <string name="DATE">Date</string>
+    <string name="PHONE_NUMBER">Phone number</string>
+    <string name="AGE">Age</string>
+    <string name="IN_ORDER">In order</string>
     <string name="INTRO">Intro</string>
     <string name="HINT">Hint</string>
     <string name="SPECIAL_LESSON">Special lesson</string>

@@ -10,7 +10,7 @@ public class S_Lesson2 implements LessonItem {
     private String subTitle = "숫자";
     private int lessonImage = R.drawable.hangul;
     private Boolean isSpecial = true;
-    private Boolean isLock = true;
+    private Boolean isLock = false;
     private Boolean isCompleted = false;
 
     @Override
