@@ -187,12 +187,12 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                             intent = new Intent(getApplicationContext(), MainActivity.class);
                             finish();
                             startActivity(intent);
-                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_SUCCEED), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_SUCCEED), Toast.LENGTH_LONG).show();
                         } else {
                             System.out.println("페이스북 로그인 실패");
 
                             // 로그인 실패
-                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_FAILED), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_FAILED), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -250,7 +250,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                         intent = new Intent(getApplicationContext(), MainActivity.class);
                                         finish();
                                         startActivity(intent);
-                                        Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_LONG).show();
 
                                     } else {
                                         System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
@@ -267,7 +267,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                         } else {
                             // 로그인 실패
-                            Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_FAILED), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_FAILED), Toast.LENGTH_LONG).show();
                             progressBarLayout.setVisibility(View.GONE);
                         }
                     }

@@ -10,6 +10,9 @@ public class UserInformation {
     private List<String> lessonComplete = new ArrayList<>();
     private List<String> readingComplete = new ArrayList<>();
     private List<Integer> specialLessonUnlock = new ArrayList<>();
+    private Boolean isPremium;
+    private long datePurchase;
+    // 구독 유효기간... 그 머더라 숫자로 시간 통일시키는 거 그거로 저장하기 그리고 현재시간이랑 빼기해서 유효성 검사
 
     public UserInformation() {
         for(int i=0; i<7; i++) {
@@ -50,6 +53,19 @@ public class UserInformation {
         this.readingComplete.add(readingId);
     }
 
+    public Boolean getIsPremium() {return isPremium;}
+
+    public void setIsPremium(boolean b) {
+        this.isPremium = b;
+    }
+
+    public long getDatePurchase() {
+        return datePurchase;
+    }
+
+    public void setDatePurchase(long datePurchase) {
+        this.datePurchase = datePurchase;
+    }
 
     public List<Integer> getSpecialLessonUnlock() {
         return specialLessonUnlock;

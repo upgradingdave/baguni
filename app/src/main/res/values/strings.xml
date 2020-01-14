@@ -173,6 +173,8 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
 
     <!--    구매-->
     <string name="GO_PREMIUM">Go Premium</string>
+    <string name="ALREADY_SUBSCRIBE">You are already subscribed.</string>
+    <string name="THANKS_SUBSCRIBE">Thank you for your subscribe.</string>
     <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
         Subscription will be automatically renewed as soon as your subscription expires.
         If you don\'t want to renew your subscription, you can manage it from Google account settings.

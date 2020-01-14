@@ -13,7 +13,7 @@
     <TextView
         android:id="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:text="@string/LISTEN_AND_ANSWER"
         android:gravity="center"
         android:textSize="20dp"
