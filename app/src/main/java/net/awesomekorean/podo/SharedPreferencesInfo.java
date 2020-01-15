@@ -38,18 +38,18 @@ public class SharedPreferencesInfo {
         editor.commit();
     }
 
-    // 마지막 동기화 날짜 불러오기
-    public static String getDateLastSync(Context context) {
+    // 마지막 동기화 날짜(UNIX 타임스탬프) 불러오기
+    public static Long getDateLastSync(Context context) {
         SharedPreferences sp = context.getSharedPreferences("date", MODE_PRIVATE);
-        String dateLastSync = sp.getString("dateLastSync", "0000-00-00 00:00:00");
+        long dateLastSync = sp.getLong("dateLastSync", 0);
         return dateLastSync;
     }
 
-    // 마지막 동기화 날짜 저장하기
-    public static void setDateLastSync(Context context, String dateLastSync) {
+    // 마지막 동기화 날짜(UNIX 타임스탬프) 저장하기
+    public static void setDateLastSync(Context context, Long dateLastSync) {
         SharedPreferences sp = context.getSharedPreferences("date", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("dateLastSync", dateLastSync);
+        editor.putLong("dateLastSync", dateLastSync);
         editor.commit();
     }
 }

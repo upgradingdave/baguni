@@ -6,6 +6,7 @@
 
     <!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
+    <string name="WELCOME_MSG"> Welcome to Podo blabla</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
     <string name="PASSWORD_SIX_CHARACTERS_LONG">Should be at least 6 characters</string>
@@ -335,8 +336,8 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
 
 
     <!--번역 필요 없는 부분-->
-    <string name="facebook_app_id">1366274056887552</string>
-    <string name="fb_login_protocol_scheme">fb1366274056887552</string>
+    <string name="facebook_app_id">3034621716562505</string>
+    <string name="fb_login_protocol_scheme">fb3034621716562505</string>
     <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~4016696435</string>
     <string name="ADMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ADMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>

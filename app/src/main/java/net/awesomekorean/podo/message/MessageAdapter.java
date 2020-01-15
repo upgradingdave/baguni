@@ -10,8 +10,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.UnixTimeStamp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
@@ -58,7 +62,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.senderImage.setImageResource(items.getSenderImage());
         }
         holder.message.setText(items.getMessage());
-        holder.messageDate.setText(items.getMessageDate());
+        holder.messageDate.setText(UnixTimeStamp.unixTimeFormat(items.getMessageDate()));
         if(items.getIsNew()) { holder.isNew.setVisibility(View.VISIBLE);
         } else{holder.isNew.setVisibility(View.INVISIBLE);}
     }

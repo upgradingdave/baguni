@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.UnixTimeStamp;
 
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class WritingAdapter extends BaseAdapter {
 
         final WritingEntity items = list.get(i);
 
-        holder.writingDate.setText(items.getWritingDate());
+        holder.writingDate.setText(UnixTimeStamp.unixTimeFormat(items.getWritingDate()));
         holder.letters.setText(items.getLetters());
         holder.article.setText(items.getContents());
 

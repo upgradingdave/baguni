@@ -2,28 +2,23 @@ package net.awesomekorean.podo.message;
 
 import com.google.firebase.firestore.FieldValue;
 
+import net.awesomekorean.podo.UnixTimeStamp;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MessageItems {
 
     private String message;
-    private String messageDate;
+    private Long messageDate;
 
     private int senderImage;
     private boolean isNew;
 
     public MessageItems(){
-        getDateNow();
+        this.messageDate = UnixTimeStamp.getTimeNow();
         this.isNew = true;
     }
-
-    public void getDateNow() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date time = new Date();
-        messageDate = format.format(time);
-    }
-
 
 
     public int getSenderImage() {
@@ -42,11 +37,11 @@ public class MessageItems {
         this.message = message;
     }
 
-    public String getMessageDate() {
+    public Long getMessageDate() {
         return messageDate;
     }
 
-    public void setMessageDate(String messageDate) {
+    public void setMessageDate(Long messageDate) {
         this.messageDate = messageDate;
     }
 

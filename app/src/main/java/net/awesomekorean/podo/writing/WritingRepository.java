@@ -41,26 +41,6 @@ public class WritingRepository {
         }.execute();
     }
 
-    public void updateBeforeRequestCorrection(final String guid, final String teacherName) {
-
-        new AsyncTask<Void, Void, WritingEntity>() {
-            @Override
-            protected WritingEntity doInBackground(Void... voids) {
-                String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
-                WritingEntity entity = db.writingDao().getByGuid(guid);
-                entity.setUserEmail(MainActivity.userEmail);
-                entity.setUserName(MainActivity.userName);
-                entity.setTeacherName(teacherName);
-                entity.setStatus(1);
-                entity.setDateRequest(date);
-                db.writingDao().update(entity);
-                return null;
-            }
-        }.execute();
-    }
-
-
-
     public void updateStudentFeedbackByGuid(final String guid, final String feedback) {
 
         new AsyncTask<Void, Void, WritingEntity>() {

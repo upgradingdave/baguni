@@ -37,6 +37,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.collection.CollectionEntity;
 import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.purchase.TopUp;
@@ -92,7 +93,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         int color = ContextCompat.getColor(this, R.color.PURPLE);
         progressBar.setIndeterminate(true);
         progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-
 
         holdingPoints.setText(String.valueOf(MainActivity.userInformation.getPoints()));
 
@@ -160,7 +160,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
                 Intent intent = getIntent();
                 String code = intent.getStringExtra("code");
-                final String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
 
 
                 // 교정요청일 때
@@ -171,7 +170,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     requestWriting.setUserName(MainActivity.userName);
                     requestWriting.setTeacherName(teacherName);
                     requestWriting.setTeacherId(teacherId);
-                    requestWriting.setDateRequest(date);
+                    requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
                     requestWriting.setStatus(1);
 
                     WritingRepository repository = new WritingRepository(this);
@@ -217,7 +216,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     request.put("front", front);
                     request.put("back", back);
                     request.put("audio", audio);
-                    request.put("dateRequest", date);
+                    request.put("dateRequest", UnixTimeStamp.getTimeNow());
                     request.put("dateAnswer", "");
                     request.put("status", 1);
                     request.put("teacherId", teacherId);

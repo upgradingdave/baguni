@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -120,7 +121,25 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                     items.setStudentFeedback(entity.getStudentFeedback());
                     listAllData.add(items);
 
-                    // 교정 중인 writing 이 있으면, 실시간 리스너 설정
+                    // 교정 중인 writing 이 있으면, DB 접속
+                    if (items.getStatus() == 1) {
+                        DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(items.getGuid());
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                WritingEntity download = documentSnapshot.toObject(WritingEntity.class);
+                                if (download.getStatus() > 1) {
+                                    System.out.println("글쓰기 교정이 완료되었습니다");
+                                    WritingRepository repository = new WritingRepository(getContext());
+                                    repository.update(download);
+                                    repository.getAll().observe(getViewLifecycleOwner(), observer);
+                                }
+                            }
+                        });
+                    }
+                }
+
+                    /*
                     if(items.getStatus() == 1) {
                         final DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(items.getGuid());
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -146,7 +165,8 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                             }
                         });
                     }
-                }
+
+                     */
 
                 if(entities.size()>10) {
                     list = new ArrayList<>(listAllData.subList(0,10));

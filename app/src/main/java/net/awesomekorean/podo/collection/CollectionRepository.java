@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
+import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.lesson.PlayAudioWithString;
 
 import java.text.ParseException;
@@ -70,10 +71,7 @@ public class CollectionRepository {
         new AsyncTask<Void, Void,Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                String dateNow = getDateNow();
                 entity.setAudio(audio);
-                entity.setDateNew(dateNow);
-                entity.setDateEdit(dateNow);
                 db.collectionDao().insert(entity);
                 return null;
             }
@@ -203,128 +201,8 @@ public class CollectionRepository {
         CollectionStudy.studyBack.setText(back);
     }
 
-/*
-    public void downloadItemsFromDb(final CollectionEntity entityInDB) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-
-                String guid = entityInDB.getGuid();
-
-                CollectionEntity entityInRoom = db.collectionDao().getByGuid(guid);
-
-                // DB 에서 가져온 아이템이 폰에 없으면 저장
-                if(entityInRoom == null) {
-                    db.collectionDao().insert(entityInDB);
-                    System.out.println("Downloaded to device: "+entityInDB.getFront());
-
-                }else {
-                    try {
-                        Date dateEditInRoom = stringToDate(entityInRoom.getDateEdit());
-                        Date dateEditInDb = stringToDate(entityInDB.getDateEdit());
-
-                        // Room 날짜가 빠르면 Room 업데이트
-                        if(dateEditInRoom.getTime() < dateEditInDb.getTime()) {
-                            db.collectionDao().update(entityInDB);
-                            System.out.println("Updated to device: "+entityInRoom.getFront());
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                return null;
-            }
-        }.execute();
+    public Long getDateNow() {
+        Long timeNow = UnixTimeStamp.getTimeNow();
+        return timeNow;
     }
-
-
-    // 동기화 작업 시작
-    public void syncCollections() {
-        new AsyncTask<Void, Void, List<Collection>>() {
-            @Override
-            protected List<Collection> doInBackground(Void... voids) {
-                // 마지막 동기화 날짜 가져오기
-                String dateSync = db.collectionDao().getDateSync();
-                if (dateSync == null) { // 날짜가 없으면 초기화 0000-00-00 00:00:00
-                    DateSyncEntity lastSync = new DateSyncEntity();
-                    db.collectionDao().initDateSync(lastSync);
-                    dateSync = db.collectionDao().getDateSync();
-                }
-
-                // 업로드 할 아이템 가져오기
-                List<CollectionEntity> getUploadItems = db.collectionDao().getUploadItems(dateSync);
-
-                // 마지막으로 동기한 날짜 보내서 다운로드 아이템 받기
-                RetrofitConnection retrofitConnection = new RetrofitConnection();
-                Call<List<CollectionEntity>> downloadItems = retrofitConnection.service().sendDateSync(dateSync);
-                downloadItems.enqueue(new Callback<List<CollectionEntity>>() {
-                    @Override
-                    public void onResponse(Call<List<CollectionEntity>> call, Response<List<CollectionEntity>> response) {
-                        if (response.isSuccessful()) {
-                            System.out.println("Found items to DOWNLOAD");
-                            List<CollectionEntity> entities = response.body();
-
-                            for (CollectionEntity entityInDB : entities) {
-                                downloadItemsFromDb(entityInDB);
-                            }
-
-                        } else {
-                            System.out.println("No item to DOWNLOAD");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<CollectionEntity>> call, Throwable t) {
-                        System.out.println("Connection Failed");
-                    }
-                });
-
-                // 업로드 아이템 보내기
-                if (getUploadItems.size() > 0) {
-                    System.out.println("Found items to UPLOAD");
-                    Call<List<CollectionEntity>> uploadItems = retrofitConnection.service().uploadItems(getUploadItems);
-                    uploadItems.enqueue(new Callback<List<CollectionEntity>>() {
-                        @Override
-                        public void onResponse(Call<List<CollectionEntity>> call, Response<List<CollectionEntity>> response) {
-                            if (response.isSuccessful()) {
-                                System.out.println("UPLOAD Succeed");
-                            } else {
-                                System.out.println("UPLOAD Failed");
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<CollectionEntity>> call, Throwable t) {
-                            System.out.println("Connection Failed");
-                        }
-                    });
-                } else {
-                    System.out.println("No item to UPLOAD");
-                }
-
-                // dateLastSync 업데이트하기
-                DateSyncEntity dateSyncEntity = new DateSyncEntity();
-                String dateNow = getDateNow();
-                dateSyncEntity.setDateSync(dateNow);
-                updateLastSync(dateSyncEntity);
-                System.out.println("Updated the last synced date: " + dateNow);
-                return null;
-            }
-        }.execute();
-    }
-
-*/
-    public String getDateNow() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date time = new Date();
-        String dateNow = format.format(time);
-        return dateNow;
-    }
-
-    public Date stringToDate(String stringDate) throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(stringDate);
-        return date;
-    }
-
 }

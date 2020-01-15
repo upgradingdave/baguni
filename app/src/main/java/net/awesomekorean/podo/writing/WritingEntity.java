@@ -6,6 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.UnixTimeStamp;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -22,29 +23,29 @@ public class WritingEntity implements Serializable {
     private String userName;
     private String contents;
     private String letters;
-    private String writingDate;
+    private Long writingDate;
     private int status = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
 
     private String teacherName;
     private String teacherId;
-    private String dateRequest;
+    private Long dateRequest;
 
     private String correction;
     private String teacherFeedback;
-    private String dateAnswer;
+    private Long dateAnswer;
 
     private String studentFeedback;
 
     @Ignore
     public WritingEntity() {}
 
-    public WritingEntity(String contents, String letters, String writingDate) {
+    public WritingEntity(String contents, String letters) {
         this.guid = UUID.randomUUID().toString();
         this.userEmail = MainActivity.userEmail;
         this.userName = MainActivity.userName;
         this.contents = contents;
         this.letters = letters;
-        this.writingDate = writingDate;
+        this.writingDate = UnixTimeStamp.getTimeNow();
     }
 
 
@@ -64,11 +65,11 @@ public class WritingEntity implements Serializable {
         this.teacherId = teacherId;
     }
 
-    public String getDateRequest() {
+    public Long getDateRequest() {
         return dateRequest;
     }
 
-    public void setDateRequest(String dateRequest) {
+    public void setDateRequest(Long dateRequest) {
         this.dateRequest = dateRequest;
     }
 
@@ -88,11 +89,11 @@ public class WritingEntity implements Serializable {
         this.teacherFeedback = teacherFeedback;
     }
 
-    public String getDateAnswer() {
+    public Long getDateAnswer() {
         return dateAnswer;
     }
 
-    public void setDateAnswer(String dateAnswer) {
+    public void setDateAnswer(Long dateAnswer) {
         this.dateAnswer = dateAnswer;
     }
 
@@ -128,11 +129,11 @@ public class WritingEntity implements Serializable {
         this.userName = userName;
     }
 
-    public String getWritingDate() {
+    public Long getWritingDate() {
         return writingDate;
     }
 
-    public void setWritingDate(String date) {
+    public void setWritingDate(Long date) {
         this.writingDate = date;
     }
 

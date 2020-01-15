@@ -6,6 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.UnixTimeStamp;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -21,8 +22,8 @@ public class CollectionEntity implements Serializable {
     private String front;
     private String back;
     private String audio;
-    private String dateNew;
-    private String dateEdit;
+    private Long dateNew;
+    private Long dateEdit;
     private int deleted = 0; // 0=false, 1=true
     private boolean isChecked = false;
     private boolean isVisible = false;
@@ -42,6 +43,11 @@ public class CollectionEntity implements Serializable {
 
         // GUID 생성하기
         this.guid = UUID.randomUUID().toString();
+
+        // UNIX 타임스탬프 생성하기
+        Long timeNow = UnixTimeStamp.getTimeNow();
+        this.dateNew = timeNow;
+        this.dateEdit = timeNow;
     }
 
     public boolean getIsChecked() {
@@ -108,19 +114,19 @@ public class CollectionEntity implements Serializable {
         this.audio = audio;
     }
 
-    public String getDateNew() {
+    public Long getDateNew() {
         return dateNew;
     }
 
-    public void setDateNew(String dateNew) {
+    public void setDateNew(Long dateNew) {
         this.dateNew = dateNew;
     }
 
-    public String getDateEdit() {
+    public Long getDateEdit() {
         return dateEdit;
     }
 
-    public void setDateEdit(String dateEdit) {
+    public void setDateEdit(Long dateEdit) {
         this.dateEdit = dateEdit;
     }
 

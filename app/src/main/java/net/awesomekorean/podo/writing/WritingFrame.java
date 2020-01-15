@@ -161,17 +161,13 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
     private WritingEntity saveWriting() {
         contents = editText.getText().toString();
         letters = textCount.getText().toString();
-        String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
 
         if(code.equals(getString(R.string.REQUEST_ADD))) {
-            WritingEntity entity = new WritingEntity(contents, letters, date);
+            WritingEntity entity = new WritingEntity(contents, letters);
             guid = entity.getGuid();
-            System.out.println("DATE : " + entity.getWritingDate());
             repository = new WritingRepository(this);
             repository.insert(entity);
-
             return entity;
-
 
         }else{
             editWriting.setContents(contents);

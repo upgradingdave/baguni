@@ -39,6 +39,7 @@ import com.google.firebase.firestore.Transaction;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.teachers.Teachers;
 
 import java.text.SimpleDateFormat;
@@ -467,10 +468,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 // Room 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 가져오기
                 final List<CollectionEntity> itemsToUpload = new ArrayList<>();
                 final List<CollectionEntity> itemsToDelete = new ArrayList<>();
-                String dateLastSync = SharedPreferencesInfo.getDateLastSync(getContext());
+                long dateLastSync = SharedPreferencesInfo.getDateLastSync(getContext());
 
                 for (final CollectionEntity entity : copyListAllData) {
-                    if (entity.getDateEdit().compareTo(dateLastSync) > 0) {
+                    if (entity.getDateEdit() > dateLastSync) {
 
                         // 삭제된 아이템이 있는지 확인
                         if(entity.getDeleted() == 1) {
@@ -544,18 +545,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                         });
 
                 // 동기화 날짜 업데이트
-                String now = getDateNow();
-                SharedPreferencesInfo.setDateLastSync(getContext(), now);
+                Long timeNow = UnixTimeStamp.getTimeNow();
+                SharedPreferencesInfo.setDateLastSync(getContext(), timeNow);
                 break;
         }
-    }
-
-    public String getDateNow() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date time = new Date();
-        String dateNow = format.format(time);
-
-        return dateNow;
     }
 
     // 컬렉션 리스트를 내림차순으로 정렬하기

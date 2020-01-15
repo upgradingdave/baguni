@@ -39,7 +39,7 @@ public class MakeNewDb {
 
 
                 final MessageItems messageItems = new MessageItems();
-                messageItems.setMessage("welcom to podo blabla");
+                messageItems.setMessage(activity.getString(R.string.WELCOME_MSG));
                 CollectionReference messageRef = db.collection(activity.getString(R.string.DB_USERS)).document(userEmail).collection(activity.getString(R.string.DB_MESSAGES));
                 messageRef.add(messageItems).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
