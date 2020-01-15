@@ -164,6 +164,10 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="PURCHASE_PACKAGE">Purchase package</string>
     <string name="EVALUATION_APP">Evaluation this app</string>
     <string name="RECOMMEND">Recommend this app</string>
+    <string name="GET_POINTS_BY_AD">Get points by watching ads</string>
+    <string name="AD_LOAD_FAILED">Failed to load ad. Please try it again.</string>
+    <string name="AD_DISPLAY_FAILED">Failed to display ad</string>
+    <string name="BUG_REPORT">Report bug or idea</string>
     <string name="LOG_OUT">Log out</string>
     <string name="SAVE_NEW_NAME">Saved new name</string>
     <string name="UPDATED_USERNAME">Updated user name</string>
@@ -333,6 +337,9 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <!--번역 필요 없는 부분-->
     <string name="facebook_app_id">1366274056887552</string>
     <string name="fb_login_protocol_scheme">fb1366274056887552</string>
+    <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~4016696435</string>
+    <string name="ADMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ADMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>
     <string name="REQUEST_EDIT">edit</string>

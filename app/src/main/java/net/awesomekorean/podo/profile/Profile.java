@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.profile;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +39,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.MessageAdapter;
@@ -50,6 +57,8 @@ import java.util.List;
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    RewardedAd rewardedAd;
 
     ImageView btnBack;
     ImageView userImage;
@@ -78,6 +87,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout evaluation;
     LinearLayout recommend;
+    LinearLayout report;
+    LinearLayout getPointByAd;
     LinearLayout logout;
 
     ImageView arrowEditProfile;
@@ -126,6 +137,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         evaluation = findViewById(R.id.evaluation);
         recommend = findViewById(R.id.recommend);
+        report = findViewById(R.id.report);
+        getPointByAd = findViewById(R.id.getPointsByAd);
         logout = findViewById(R.id.logout);
 
         arrowEditProfile = findViewById(R.id.arrowEditProfile);
@@ -143,6 +156,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         layoutThai.setOnClickListener(this);
         evaluation.setOnClickListener(this);
         recommend.setOnClickListener(this);
+        report.setOnClickListener(this);
+        getPointByAd.setOnClickListener(this);
         logout.setOnClickListener(this);
 
         userName.setText(MainActivity.userName);
@@ -223,8 +238,23 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         adapter = new AttendanceAdapter(list);
         recyclerView.setAdapter(adapter);
 
+        rewardedAd = createAndLoadRewardedAd();
     }
 
+    // 리워드 광고 로드하기
+    public RewardedAd createAndLoadRewardedAd() {
+        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
+        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdLoaded() {
+                System.out.println("광고를 로드했습니다");
+            }
+        };
+        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
+        return rewardedAd;
+    }
+
+    // 출석부 세팅하기
     private void setItems(DayOfWeekItem item, String day, boolean isChecked) {
         item.setDay(day);
         item.setChecked(isChecked);
@@ -334,6 +364,37 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(chooser);
                 break;
 
+            case R.id.report :
+                break;
+
+            case R.id.getPointsByAd :
+                if(rewardedAd.isLoaded()) {
+                    RewardedAdCallback adCallback = new RewardedAdCallback() {
+
+                        @Override
+                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                            System.out.println("보상을 받습니다.");
+                            Intent intent = new Intent(Profile.this, LessonFinish.class);
+                            intent.putExtra("fromProfile", true);
+                            startActivityForResult(intent, 200);
+                        }
+
+                        @Override
+                        public void onRewardedAdFailedToShow(int i) {
+                            Toast.makeText(getApplicationContext(), getString(R.string.AD_DISPLAY_FAILED), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onRewardedAdClosed() {
+                            rewardedAd = createAndLoadRewardedAd();
+                        }
+                    };
+                    rewardedAd.show(Profile.this, adCallback);
+                } else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
+                }
+                break;
+
             case R.id.logout :
                 new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.SIGN_OUT)).setMessage(getString(R.string.SIGN_OUT_MESSAGE))
@@ -352,6 +413,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                         })
                         .show();
                 break;
+        }
+    }
+
+    // 광고 보고 포인트 받아 왔을 때 userPoint 에 최신 포인트 반영
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 200) {
+            userPoint.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
         }
     }
 

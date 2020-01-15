@@ -23,6 +23,7 @@ public class Logo extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent = new Intent(getApplicationContext(), SignIn.class);
                 startActivity(intent);
+                finish();
             }
         }, 2000);
 

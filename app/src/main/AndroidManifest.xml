@@ -8,7 +8,8 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,6 +23,10 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ADMOB_APP_ID"/>
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -44,10 +49,14 @@
         <activity android:name=".purchase.Subscribe" />
         <activity android:name=".profile.Profile" />
         <activity android:name=".message.Message" />
-        <activity android:name=".lesson.LessonFinish" />
+        <activity android:name=".lesson.LessonFinish" >
+
+        </activity>
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />
-        <activity android:name=".Logo" />
+        <activity android:name=".Logo" >
+
+        </activity>
         <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
         <activity android:name=".login.SignIn" />
@@ -69,6 +78,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -184,6 +185,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         } else {
             System.out.println("오늘의 출석체크가 이미 끝났습니다.");
         }
+
+
+        // 애드몹 초기화
+        MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
     }
 
 

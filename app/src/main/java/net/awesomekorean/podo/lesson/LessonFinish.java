@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -11,16 +12,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
+import net.awesomekorean.podo.profile.Profile;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    InterstitialAd interstitialAd;
 
     LinearLayout selectBox;
     ConstraintLayout selectResult;
@@ -34,6 +44,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
     Button btnGetPoint;
 
     int reward;
+
+    boolean isFromProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +63,39 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         box2.setOnClickListener(this);
         box3.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
+
+        isFromProfile = getIntent().getBooleanExtra("fromProfile", false);
+
+        if(!isFromProfile) {
+            // 애드몹 전면광고 로드하기
+            MobileAds.initialize(getApplicationContext(), getString(R.string.ADMOB_APP_ID));
+            interstitialAd = new InterstitialAd(getApplicationContext());
+            interstitialAd.setAdUnitId(getString(R.string.ADMOB_TEST_ID_FULL_SCREEN));
+            interstitialAd.loadAd(new AdRequest.Builder().build());
+            interstitialAd.setAdListener(new AdListener() {
+
+                @Override
+                public void onAdLoaded() {
+                    System.out.println("광고가 로드되었습니다");
+                }
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    System.out.println("광고가 로드에 실패했습니다.");
+                }
+
+                @Override
+                public void onAdClosed() {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
+
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -59,27 +103,49 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.btnGetPoint :
-                // DB 에 포인트 합산하기
+
+                // 포인트 합산하기
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 int oldPoints = userInformation.getPoints();
                 int newPoints = oldPoints + reward;
                 userInformation.setPoints(newPoints);
 
-                // 레슨완료 정보 업데이트 하기
-                String lessonId = MainLesson.lessonId;
-                if(!userInformation.getLessonComplete().contains(lessonId)) {
-                    userInformation.addLessonComplete(lessonId);
-                    System.out.println("Lesson 완료 리스트를 업데이트 했습니다.");
-                } else {
-                    System.out.println("이미 완료된 Lesson 입니다.");
+                if(!isFromProfile) {
+                    // 레슨완료 정보 업데이트 하기
+                    String lessonId = MainLesson.lessonId;
+                    if (!userInformation.getLessonComplete().contains(lessonId)) {
+                        userInformation.addLessonComplete(lessonId);
+                    } else {
+                        System.out.println("이미 완료된 Lesson 입니다.");
+                    }
                 }
 
-
+                // DB 에 유저 정보 업데이드 하기
                 SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
+                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
+                        .set(userInformation)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                System.out.println("DB에 유저 정보를 업데이트 했습니다.");
 
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                                if(isFromProfile) {
+                                    Intent intent = new Intent();
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+
+                                } else {
+                                    // 애드몹 광고 보여주기
+                                    if(interstitialAd.isLoaded()) {
+                                        interstitialAd.show();
+                                    } else {
+                                        System.out.println("The interstitial ads wasn't loaded yet.");
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+                            }
+                        });
                 break;
 
             default:
