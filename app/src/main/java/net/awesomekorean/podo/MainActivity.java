@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.MobileAds;
@@ -67,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static List<Integer> specialLessonUnlock;
     public static List<String> readingComplete;
 
+    LinearLayout confirmQuit;
+    Button btnYes;
+    Button btnNo;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnWriting = findViewById(R.id.btnWriting);
         btnCollection = findViewById(R.id.btnCollection);
         btnQnA = findViewById(R.id.btnQnA);
+        confirmQuit = findViewById(R.id.confirmQuit);
+        btnYes = findViewById(R.id.btnYes);
+        btnNo = findViewById(R.id.btnNo);
         btnProfile.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
         btnLesson.setOnClickListener(this);
@@ -95,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnWriting.setOnClickListener(this);
         btnCollection.setOnClickListener(this);
         btnQnA.setOnClickListener(this);
+        btnYes.setOnClickListener(this);
+        btnNo.setOnClickListener(this);
 
 
         // 유저정보 가져오기
@@ -229,6 +239,16 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 viewPager.setCurrentItem(4);
                 break;
 
+            case R.id.btnYes :
+                finishAffinity();
+                System.runFinalization();
+                System.exit(0);
+                break;
+
+            case R.id.btnNo :
+                confirmQuit.setVisibility(View.GONE);
+                break;
+
         }
     }
 
@@ -241,6 +261,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         btn.setImageResource(active);
         tvTitle.setText(getString(title));
+    }
+
+    @Override
+    public void onBackPressed() {
+        confirmQuit.setVisibility(View.VISIBLE);
     }
 }
 

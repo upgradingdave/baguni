@@ -365,6 +365,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.report :
+                Uri uri = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 break;
 
             case R.id.getPointsByAd :
