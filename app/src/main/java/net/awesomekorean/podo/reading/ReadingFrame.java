@@ -2,7 +2,6 @@ package net.awesomekorean.podo.reading;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
@@ -31,7 +30,6 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
-import net.awesomekorean.podo.reading.readings.Reading0;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
@@ -142,16 +140,10 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             }
         });
 
-
-        switch (MainReading.readingUnit) {
-
-            case 0 :
-                reading = new Reading0();
-                readyForReading();
-                break;
-
-        }
+        reading = MainReading.readingUnit;
+        readyForReading();
     }
+
     public void readyForReading() {  // 글 생성
 
         readingTitle.setText(reading.getTitle());
@@ -180,7 +172,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         String audioPopUp = "android.resource://" + context.getPackageName() + "/raw/" + audio + "_" + popUpIndex;
                         Uri uri = Uri.parse(audioPopUp);
                         MediaPlayer mpPopUp = MediaPlayer.create(context, uri);
-                        mpPopUp.start();
+                        if(mpPopUp != null) {
+                            mpPopUp.start();
+                        }
                     }
 
                     @Override
@@ -291,7 +285,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 seekBar.setProgress(0);
 
                 // 읽기완료 정보 업데이트 하기
-                String readingId = MainReading.readingId;
+                String readingId = reading.getReadingId();
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
                 if(!userInformation.getReadingComplete().contains(readingId)) {
                     userInformation.addReadingComplete(readingId);
@@ -302,7 +296,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 } else {
                     System.out.println("이미 완료된 Reading 입니다.");
                 }
-
 
                 Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);

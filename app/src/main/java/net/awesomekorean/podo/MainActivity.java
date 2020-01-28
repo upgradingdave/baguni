@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static UserInformation userInformation;
 
     public static List<String> lessonComplete;
-    public static List<Integer> specialLessonUnlock;
+    public static List<String> specialLessonUnlock;
     public static List<String> readingComplete;
+    public static List<String> readingUnlock;
+
 
     LinearLayout confirmQuit;
     Button btnYes;
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         lessonComplete = userInformation.getLessonComplete();
         specialLessonUnlock = userInformation.getSpecialLessonUnlock();
         readingComplete = userInformation.getReadingComplete();
-
+        readingUnlock = userInformation.getReadingUnlock();
 
         final Calendar cal = Calendar.getInstance();
         final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일

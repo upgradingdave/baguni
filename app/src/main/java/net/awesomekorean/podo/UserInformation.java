@@ -9,7 +9,8 @@ public class UserInformation {
     private int points;
     private List<String> lessonComplete = new ArrayList<>();
     private List<String> readingComplete = new ArrayList<>();
-    private List<Integer> specialLessonUnlock = new ArrayList<>();
+    private List<String> specialLessonUnlock = new ArrayList<>();
+    private List<String> readingUnlock = new ArrayList<>();
     private Boolean isPremium;
     private Long datePurchase;
     private Long dateExpire;
@@ -76,12 +77,20 @@ public class UserInformation {
         this.dateExpire = dateExpire;
     }
 
-    public List<Integer> getSpecialLessonUnlock() {
+    public List<String> getSpecialLessonUnlock() {
         return specialLessonUnlock;
     }
 
-    public void setSpecialLessonUnlock(List<Integer> specialLessonUnlock) {
+    public void setSpecialLessonUnlock(List<String> specialLessonUnlock) {
         this.specialLessonUnlock = specialLessonUnlock;
+    }
+
+    public List<String> getReadingUnlock() {
+        return readingUnlock;
+    }
+
+    public void setReadingUnlock(List<String> readingUnlock) {
+        this.readingUnlock = readingUnlock;
     }
 
     public void resetDays(int today) {

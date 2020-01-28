@@ -66,6 +66,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:weightSum="1"
         android:orientation="horizontal"
         android:layout_weight="0.6"
         android:layout_width="match_parent"
@@ -73,15 +74,16 @@
 
         <ImageView
             android:id="@+id/lessonImage"
+            android:layout_weight="0.3"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@drawable/hangul" />
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:paddingLeft="20dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">

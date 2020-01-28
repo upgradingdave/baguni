@@ -14,18 +14,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.reading.readings.Reading0;
+import net.awesomekorean.podo.reading.readings.Reading00;
+import net.awesomekorean.podo.reading.readings.Reading01;
+import net.awesomekorean.podo.reading.readings.Reading02;
+import net.awesomekorean.podo.reading.readings.Reading03;
+import net.awesomekorean.podo.reading.readings.Reading04;
+import net.awesomekorean.podo.reading.readings.Reading05;
+import net.awesomekorean.podo.reading.readings.Reading06;
+import net.awesomekorean.podo.reading.readings.Reading07;
+import net.awesomekorean.podo.reading.readings.Reading08;
+import net.awesomekorean.podo.reading.readings.Reading09;
+import net.awesomekorean.podo.reading.readings.Reading10;
+import net.awesomekorean.podo.reading.readings.Reading11;
+import net.awesomekorean.podo.reading.readings.Reading12;
+import net.awesomekorean.podo.reading.readings.Reading13;
+import net.awesomekorean.podo.reading.readings.Reading14;
+import net.awesomekorean.podo.reading.readings.Reading15;
+import net.awesomekorean.podo.reading.readings.Reading16;
+import net.awesomekorean.podo.reading.readings.Reading17;
+import net.awesomekorean.podo.reading.readings.Reading18;
+import net.awesomekorean.podo.reading.readings.Reading19;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.awesomekorean.podo.MainActivity.btnLesson;
 import static net.awesomekorean.podo.MainActivity.btnReading;
 
 public class MainReading extends Fragment {
 
-    public static int readingUnit = 0;
-    public static String readingId;
+    public static Reading readingUnit;
 
     Context context;
 
@@ -56,7 +73,7 @@ public class MainReading extends Fragment {
         list = new ArrayList<>();
 
         Reading[] items = {
-                new Reading0()
+                new Reading00(), new Reading01(), new Reading02(), new Reading03(), new Reading04(), new Reading05(), new Reading06(), new Reading07(), new Reading08(), new Reading09(), new Reading10(), new Reading11(), new Reading12(), new Reading13(), new Reading14(), new Reading15(), new Reading16(), new Reading17(), new Reading18(), new Reading19()
         };
 
         for(Reading item : items) {
@@ -75,10 +92,7 @@ public class MainReading extends Fragment {
             @Override
             public void onItemClick(View v, int pos) {
 
-                readingUnit = pos;
-                readingId = list.get(pos).getReadingId();
-                System.out.println("READINGID:"+ readingId);
-
+                readingUnit = list.get(pos);
 
                 intent = new Intent(context, ReadingFrame.class);
                 startActivity(intent);
