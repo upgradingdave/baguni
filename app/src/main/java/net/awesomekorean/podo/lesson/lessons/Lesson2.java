@@ -4,15 +4,12 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.Lesson;
 import net.awesomekorean.podo.lesson.LessonItem;
 
-public class Lesson2 implements Lesson, LessonItem {
+public class Lesson2 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_02";
     private int title = R.string.L_02_TITLE;
     private String subTitle = "얼마예요?";
     private int lessonImage = R.drawable.hangul;
-    private Boolean isSpecial = false;
-    private Boolean isLock = false;
-    private Boolean isCompleted = false;
 
     final static String[] wordFront = {"이거", "저거", "얼마", "세일", "그래서"};
     final static String[] wordPronunciation = {"-", "-", "-", "-", "[쎄일]", "-"};
@@ -106,25 +103,5 @@ public class Lesson2 implements Lesson, LessonItem {
     @Override
     public int getLessonImage() {
         return lessonImage;
-    }
-
-    @Override
-    public boolean getIsSpecial() {
-        return isSpecial;
-    }
-
-    @Override
-    public boolean getIsLock() {
-        return isLock;
-    }
-
-    @Override
-    public boolean getIsCompleted() {
-        return isCompleted;
-    }
-
-    @Override
-    public void setIsCompleted(boolean b) {
-        this.isCompleted = b;
     }
 }
