@@ -3,7 +3,7 @@ package net.awesomekorean.podo.reading.readings;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.reading.Reading;
 
-public class Reading06 implements Reading {
+public class Reading06 extends ReadingInit implements Reading {
 
     String readingId = "R_06";
 
@@ -42,7 +42,6 @@ public class Reading06 implements Reading {
     final String[] popUpBack = {"rice", "traditional wine", "sweet", "soft", "ferment", "lactic acid bacteria", "intestine", "skin", "immunity", "effect", "get drunk", "suitably"};
 
     private int readingImage = R.drawable.makguli;
-    private boolean isCompleted = false;
 
     @Override
     public String getReadingId() {
@@ -69,19 +68,8 @@ public class Reading06 implements Reading {
         return popUpBack;
     }
 
-
     @Override
     public int getReadingImage() {
         return this.readingImage;
-    }
-
-    @Override
-    public boolean getIsCompleted() {
-        return this.isCompleted;
-    }
-
-    @Override
-    public void setIsCompleted(boolean b) {
-        this.isCompleted = b;
     }
 }

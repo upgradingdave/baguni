@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +36,7 @@ import java.util.List;
 
 import static net.awesomekorean.podo.MainActivity.btnLesson;
 
-public class MainLesson extends Fragment {
+public class MainLesson extends Fragment implements View.OnClickListener {
 
     public static String lessonId;
 
@@ -46,6 +50,14 @@ public class MainLesson extends Fragment {
 
     ArrayList<LessonItem> list;
     LessonAdapter adapter;
+
+    LinearLayout unlockLayout;
+    TextView pointHave;
+    TextView pointNeed;
+    Button btnUnlock;
+    Button btnChargePoint;
+    ImageView btnClose;
+
 
     public MainLesson(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -61,6 +73,16 @@ public class MainLesson extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
+
+        unlockLayout = view.findViewById(R.id.unlockLayout);
+        pointHave = view.findViewById(R.id.pointHave);
+        pointNeed = view.findViewById(R.id.pointNeed);
+        btnUnlock = view.findViewById(R.id.btnUnlock);
+        btnChargePoint = view.findViewById(R.id.btnChargePoint);
+        btnClose = view.findViewById(R.id.btnClose);
+        btnUnlock.setOnClickListener(this);
+        btnChargePoint.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
 
         list = new ArrayList<>();
 
@@ -114,6 +136,7 @@ public class MainLesson extends Fragment {
 
                 } else {
                     // 포인트 사용 확인창 띄우기
+                    unlockLayout.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -124,6 +147,23 @@ public class MainLesson extends Fragment {
         context = getContext();
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.btnUnlock :
+                break;
+
+            case R.id.btnChargePoint :
+                break;
+
+            case R.id.btnClose :
+                unlockLayout.setVisibility(View.GONE);
+                break;
+        }
     }
 
     private void setCompletedLessons() {

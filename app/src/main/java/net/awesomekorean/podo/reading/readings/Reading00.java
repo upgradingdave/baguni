@@ -35,6 +35,7 @@ public class Reading00 implements Reading {
 
     private int readingImage = R.drawable.hangul;
     private boolean isCompleted = false;
+    private boolean isLock = false;
 
     @Override
     public String getReadingId() {
@@ -61,19 +62,28 @@ public class Reading00 implements Reading {
         return popUpBack;
     }
 
-
     @Override
     public int getReadingImage() {
         return this.readingImage;
     }
 
     @Override
+    public boolean getIsLock() {
+        return isLock;
+    }
+
+    @Override
     public boolean getIsCompleted() {
-        return this.isCompleted;
+        return isCompleted;
     }
 
     @Override
     public void setIsCompleted(boolean b) {
         this.isCompleted = b;
+    }
+
+    @Override
+    public void setIsLock(boolean b) {
+        this.isLock = b;
     }
 }

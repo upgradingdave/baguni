@@ -12,6 +12,8 @@ public interface Reading {
 
     String[] getPopUpBack();
 
+    boolean getIsLock();
+
 
     // 리딩어뎁터 아이템
 
@@ -20,4 +22,6 @@ public interface Reading {
     boolean getIsCompleted();
 
     void setIsCompleted(boolean b);
+
+    void setIsLock(boolean b);
 }

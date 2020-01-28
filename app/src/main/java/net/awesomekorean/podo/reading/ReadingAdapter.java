@@ -41,6 +41,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
         TextView title;
         ImageView readingImage;
+        ImageView iconLock;
         LinearLayout layoutCompleted;
 
         ViewHolder(View itemView) {
@@ -48,6 +49,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
             title = itemView.findViewById(R.id.title);
             readingImage = itemView.findViewById(R.id.readingImage);
+            iconLock = itemView.findViewById(R.id.iconLock);
             layoutCompleted = itemView.findViewById(R.id.layoutCompleted);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +88,8 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         holder.readingImage.setImageResource(items.getReadingImage());
         if(items.getIsCompleted()) { holder.layoutCompleted.setVisibility(View.VISIBLE);
         } else{holder.layoutCompleted.setVisibility(View.INVISIBLE);}
+        if(items.getIsLock()) { holder.iconLock.setVisibility(View.VISIBLE);
+        } else{holder.iconLock.setVisibility(View.INVISIBLE);}
     }
 
     @Override

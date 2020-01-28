@@ -9,7 +9,7 @@ public class S_Lesson0 implements LessonItem {
     private String lessonId = "SL_00";
     private int title = R.string.SL_00_TITLE;
     private String subTitle = "한글(Hangul)";
-    private int lessonImage = R.drawable.makguli;
+    private int lessonImage = R.drawable.hangul;
     private Boolean isSpecial = true;
     private Boolean isLock = false;
     private Boolean isCompleted = false;

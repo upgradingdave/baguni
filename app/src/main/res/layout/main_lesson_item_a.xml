@@ -35,12 +35,12 @@
 
         <ImageView
             android:id="@+id/iconLock"
-            android:src="@drawable/lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="100dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/lock" />
 
         <LinearLayout
             android:id="@+id/layoutCompleted"
