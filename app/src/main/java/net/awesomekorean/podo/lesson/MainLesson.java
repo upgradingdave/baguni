@@ -38,7 +38,7 @@ import static net.awesomekorean.podo.MainActivity.btnLesson;
 
 public class MainLesson extends Fragment implements View.OnClickListener {
 
-    public static String lessonId;
+    public static LessonItem lessonUnit;
 
     Context context;
 
@@ -106,32 +106,31 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(View v, int pos) {
 
-                lessonId = list.get(pos).getLessonId();
-                System.out.println("LESSONID:"+ lessonId);
+                lessonUnit = list.get(pos);
 
-                if(!list.get(pos).getIsLock()) {
-                    switch (lessonId) {
+                if(!lessonUnit.getIsLock()) {
 
-                        // 스페셜 레슨만 case 분리해서 설정할 것
-                        case "SL_00" :
-                            intent = new Intent(context, LessonHangulMenu.class);
-                            startActivity(intent);
-                            break;
+                    if(lessonUnit.getIsSpecial()) {
 
-                        case "SL_01" :
-                            intent = new Intent(context, LessonSpecialFrame.class);
-                            startActivity(intent);
-                            break;
+                        switch (lessonUnit.getLessonId()) {
+                            case "SL_00" :
+                                intent = new Intent(context, LessonHangulMenu.class);
+                                startActivity(intent);
+                                break;
 
-                        case "SL_02" :
-                            intent = new Intent(context, LessonNumberMenu.class);
-                            startActivity(intent);
-                            break;
+                            case "SL_02" :
+                                intent = new Intent(context, LessonNumberMenu.class);
+                                startActivity(intent);
+                                break;
 
-                        default :
-                            intent = new Intent(context, LessonFrame.class);
-                            startActivity(intent);
-                            break;
+                            default :
+                                intent = new Intent(context, LessonSpecialFrame.class);
+                                startActivity(intent);
+                                break;
+                        }
+                    } else {
+                        intent = new Intent(context, LessonFrame.class);
+                        startActivity(intent);
                     }
 
                 } else {

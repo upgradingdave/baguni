@@ -42,7 +42,7 @@ public class LessonSpecialFrame extends AppCompatActivity {
             public void onClick(View v) {
 
                 // 레슨완료 정보 업데이트 하기
-                String lessonId = MainLesson.lessonId;
+                String lessonId = MainLesson.lessonUnit.getLessonId();
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 if(!userInformation.getLessonComplete().contains(lessonId)) {
                     userInformation.addLessonComplete(lessonId);
@@ -59,16 +59,8 @@ public class LessonSpecialFrame extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-
-        switch(MainLesson.lessonId) {
-            
-            case "SL_01":
-                lessonSpecial = new S_Lesson1();
-                readyForLesson();
-                break;
-        }
-
+        lessonSpecial = (LessonSpecial) MainLesson.lessonUnit;
+        readyForLesson();
     }
 
     private void readyForLesson() {

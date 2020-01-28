@@ -112,7 +112,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
                 if(!isFromProfile) {
                     // 레슨완료 정보 업데이트 하기
-                    String lessonId = MainLesson.lessonId;
+                    String lessonId = MainLesson.lessonUnit.getLessonId();
                     if (!userInformation.getLessonComplete().contains(lessonId)) {
                         userInformation.addLessonComplete(lessonId);
                     } else {

@@ -27,6 +27,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     View view;
 
     Lesson lesson;
+    String lessonId;
 
     Button btnCollect;
 
@@ -39,8 +40,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static TextView tvWordAntonyms;
     static TextView tvWordApplication;
     static ImageView btnAudio;
-
-    int generalLessonUnit;
 
     static int lessonCount;
     static int lessonWordLength = 0;
@@ -60,8 +59,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] sentenceAudio;
     static String[] sentenceClause;
     static int[] peopleImage;
-
-    String lessonId;
 
     Context context;
     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
@@ -94,29 +91,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
-        lessonId = MainLesson.lessonId;
-
-        switch (lessonId) {
-
-
-            // 어뎁터에 연결된 일반 레슨의 position 번호임. 번호가 맞는지 확인할 것
-            case "L_00":
-                lesson = new Lesson0();
-                readyForLesson();
-                break;
-
-            case "L_01":
-                lesson = new Lesson1();
-                readyForLesson();
-                break;
-
-            case "L_02":
-                lesson = new Lesson2();
-                readyForLesson();
-                break;
-
-
-        }
+        lesson = (Lesson) MainLesson.lessonUnit;
+        lessonId = MainLesson.lessonUnit.getLessonId();
+        readyForLesson();
 
         return view;
     }
