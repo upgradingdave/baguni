@@ -27,7 +27,7 @@ public class Reading19 extends ReadingInit implements Reading {
     final String[] popUpFront = {"음력 새해", "친척", "전통놀이", "어른", "절"};
     final String[] popUpBack = {"lunar new year", "relative", "traditional game", "older people", "bow"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.sulnal;
 
     @Override
     public String getReadingId() {

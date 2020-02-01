@@ -43,7 +43,7 @@ public class Reading15 extends ReadingInit implements Reading {
     final String[] popUpFront = {"나무", "흙", "돌", "자연", "전통", "방바닥", "불을 피우다", "열", "반대로", "땅", "떨어지다", "사계절", "마을"};
     final String[] popUpBack = {"wood", "soil", "stone", "nature", "tradition", "floor of the room", "make a fire", "heat", "the other way", "ground", "fall", "four seasons", "village"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.hanok;
 
     @Override
     public String getReadingId() {

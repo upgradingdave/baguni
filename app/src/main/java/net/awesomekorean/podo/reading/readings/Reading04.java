@@ -55,7 +55,7 @@ public class Reading04 extends ReadingInit implements Reading {
     final String[] popUpFront = {"혈액형", "사고가 나다", "정보", "의미", "관심", "성격", "재미로", "말도 안되다", "신중하다", "소심하다", "걱정", "자유롭다", "집중", "밝다", "인기가 많다", "귀찮다", "머리가 좋다", "싫증 내다", "포기하다"};
     final String[] popUpBack = {"blood type", "have an accident", "information", "meaning", "interest", "personality", "for fun", "ridiculous", "careful", "timid", "worry", "free", "concentration", "bright", "popular", "annoying", "smart", "lose interest", "give up"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.bloodtype;
 
     @Override
     public String getReadingId() {

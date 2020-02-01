@@ -57,7 +57,11 @@
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />
         <activity android:name=".Logo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
@@ -77,11 +81,6 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

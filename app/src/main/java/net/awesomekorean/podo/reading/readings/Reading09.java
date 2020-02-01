@@ -45,7 +45,7 @@ public class Reading09 extends ReadingInit implements Reading {
     final String[] popUpFront = {"헷갈리다", "이유", "옛날", "해", "달", "대략", "정확하다", "초", "익숙한", "나중에", "추측", "습관적으로", "자연스럽다", "금방"};
     final String[] popUpBack = {"be confused", "reason", "the old times", "sun", "moon", "approximately", "exact", "second", "familiar", "later", "guess", "habitually", "natural", "soon"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.onehouronemin;
 
     @Override
     public String getReadingId() {

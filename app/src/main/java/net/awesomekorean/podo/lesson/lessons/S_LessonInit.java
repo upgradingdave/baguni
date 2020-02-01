@@ -3,7 +3,7 @@ package net.awesomekorean.podo.lesson.lessons;
 public class S_LessonInit {
 
     private Boolean isSpecial = true;
-    private Boolean isLock = true;
+    private Boolean isLock = false;
     private Boolean isCompleted = false;
 
     public boolean getIsSpecial() {

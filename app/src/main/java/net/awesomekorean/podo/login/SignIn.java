@@ -233,37 +233,11 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            // 구글 로그인 성공, 출석부 있는지 확인
+                            // 구글 로그인 성공
                             final String userEmail = account.getEmail();
 
-                            DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-                            informationRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    if(documentSnapshot.exists()) {
-                                        System.out.println("유저정보가 있습니다");
-                                        UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
-
-                                        SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                                        System.out.println("앱에 유저 데이터를 저장했습니다.");
-
-                                        intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        finish();
-                                        startActivity(intent);
-                                        Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_LONG).show();
-
-                                    } else {
-                                        System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
-                                        MakeNewDb makeNewDb = new MakeNewDb();
-                                        makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
-                                    }
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    System.out.println("유저정보 불러오기를 실패했습니다: " + e);
-                                }
-                            });
+                            // 출석부 확인 후 메인페이지로 넘어가기
+                            getUserInfoAndGoToMain(userEmail);
 
                         } else {
                             // 로그인 실패
@@ -272,6 +246,39 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         }
                     }
                 });
+    }
+
+    private void getUserInfoAndGoToMain(final String userEmail) {
+        DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+        informationRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()) {
+
+                    System.out.println("유저정보가 있습니다");
+                    UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
+
+                    SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                    SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
+                    System.out.println("앱에 유저 데이터를 저장했습니다.");
+
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    finish();
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_LONG).show();
+
+                } else {
+                    System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
+                    MakeNewDb makeNewDb = new MakeNewDb();
+                    makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("유저정보 불러오기를 실패했습니다: " + e);
+            }
+        });
     }
 
 
@@ -330,14 +337,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         .addOnSuccessListener(SignIn.this, new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                // Sign in success, update UI with the signed-in user's information
                                 System.out.println("로그인에 성공했습니다");
-                                Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
-                                intent = new Intent(getApplicationContext(), MainActivity.class);
-                                MainActivity.userEmail = userEmail;
-                                finish();
-                                startActivity(intent);
 
+                                getUserInfoAndGoToMain(userEmail);
                             }
                         })
 

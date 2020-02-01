@@ -41,7 +41,7 @@ public class Reading13 extends ReadingInit implements Reading {
     final String[] popUpFront = {"욕조", "대중 목욕탕", "독특하다", "피부", "붙어있다", "평소에", "문지르다", "부드러워지다", "세게", "자주", "오히려", "다치다"};
     final String[] popUpBack = {"bathtub", "public bath", "unusual", "skin", "stick", "usually", "scrub", "soften", "strongly", "often", "instead", "hurt"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.ddaemili;
 
     @Override
     public String getReadingId() {

@@ -35,7 +35,7 @@ public class Reading05 extends ReadingInit implements Reading {
     final String[] popUpFront = {"내년", "같이", "시기", "보통", "정하다", "알려주다", "나누어 주다", "보관하다", "다양하다"};
     final String[] popUpBack = {"next year", "together", "period", "usually", "set", "inform", "divide", "store", "various"};
 
-    private int readingImage = R.drawable.kimchi;
+    private int readingImage = R.drawable.kimjang;
 
     @Override
     public String getReadingId() {

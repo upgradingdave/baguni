@@ -21,7 +21,13 @@ public class Logo extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent();
-                intent = new Intent(getApplicationContext(), SignIn.class);
+
+                boolean isSignIn = SharedPreferencesInfo.getSignIn(getApplicationContext());
+                if(isSignIn) {
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                } else {
+                    intent = new Intent(getApplicationContext(), SignIn.class);
+                }
                 startActivity(intent);
                 finish();
             }

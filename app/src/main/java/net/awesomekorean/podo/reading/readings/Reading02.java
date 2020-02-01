@@ -33,7 +33,7 @@ public class Reading02 extends ReadingInit implements Reading {
     final String[] popUpFront = {"존댓말", "상대방", "존중", "문화", "자세히", "충분하다", "대부분", "이미"};
     final String[] popUpBack = {"honorific", "the other side person", "respect", "culture", "in detail", "enough", "mostly", "already"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.honorific;
 
     @Override
     public String getReadingId() {

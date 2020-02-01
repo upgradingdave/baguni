@@ -33,7 +33,7 @@ public class Reading00 implements Reading {
     final String[] popUpFront = {"성조", "소리", "의미", "첫째", "짧다", "상대방", "길다", "동의"};
     final String[] popUpBack = {"intonation", "sound", "meaning", "first", "short", "the other side person", "long", "agree"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.yesyesyes;
     private boolean isCompleted = false;
     private boolean isLock = false;
 

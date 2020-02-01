@@ -51,7 +51,7 @@ public class Reading11 extends ReadingInit implements Reading {
     final String[] popUpFront = {"초대", "예절", "물론", "걱정", "필요 없다", "경험", "어른", "숟가락", "반찬", "젓가락", "집다", "내려놓다", "남기다", "남다", "손님", "잔", "추가"};
     final String[] popUpBack = {"invitation", "manners", "of course", "worry", "unnecessary", "experience", "older people", "spoon", "side dish", "chopsticks", "pick up", "put down", "leave", "be left", "guest", "glass", "addition"};
 
-    private int readingImage = R.drawable.hangul;
+    private int readingImage = R.drawable.diningetiquette;
 
     @Override
     public String getReadingId() {

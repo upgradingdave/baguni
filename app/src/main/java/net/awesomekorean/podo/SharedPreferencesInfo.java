@@ -52,4 +52,19 @@ public class SharedPreferencesInfo {
         editor.putLong("dateLastSync", dateLastSync);
         editor.commit();
     }
+
+    // 로그인 상태 저장하기
+    public static void setSignIn(Context context, boolean b) {
+        SharedPreferences sp = context.getSharedPreferences("signIn", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("isSignIn", b);
+        editor.commit();
+    }
+
+    // 로그인 상태 불러오기
+    public static boolean getSignIn(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("signIn", MODE_PRIVATE);
+        boolean isSignIn = sp.getBoolean("isSignIn", false);
+        return isSignIn;
+    }
 }
