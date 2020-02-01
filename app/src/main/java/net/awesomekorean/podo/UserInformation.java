@@ -81,16 +81,16 @@ public class UserInformation {
         return specialLessonUnlock;
     }
 
-    public void setSpecialLessonUnlock(List<String> specialLessonUnlock) {
-        this.specialLessonUnlock = specialLessonUnlock;
+    public void addSpecialLessonUnlock(String lessonId) {
+        this.specialLessonUnlock.add(lessonId);
     }
 
     public List<String> getReadingUnlock() {
         return readingUnlock;
     }
 
-    public void setReadingUnlock(List<String> readingUnlock) {
-        this.readingUnlock = readingUnlock;
+    public void addReadingUnlock(String readingId) {
+        this.readingUnlock.add(readingId);
     }
 
     public void resetDays(int today) {

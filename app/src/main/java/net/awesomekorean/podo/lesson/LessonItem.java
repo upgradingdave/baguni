@@ -17,5 +17,6 @@ public interface LessonItem {
     boolean getIsCompleted();
 
     void setIsCompleted(boolean b);
+    void setIsLocked(boolean b);
 
 }

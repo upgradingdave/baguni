@@ -64,12 +64,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     public static UserInformation userInformation;
 
-    public static List<String> lessonComplete;
-    public static List<String> specialLessonUnlock;
-    public static List<String> readingComplete;
-    public static List<String> readingUnlock;
-
-
     LinearLayout confirmQuit;
     Button btnYes;
     Button btnNo;
@@ -109,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnNo.setOnClickListener(this);
 
 
-        // 유저정보 가져오기
+        // 유저정보 가져오기 (Email, Name, Image)
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -147,11 +141,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         // 앱에서 유저 데이터 가져오기
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
-
-        lessonComplete = userInformation.getLessonComplete();
-        specialLessonUnlock = userInformation.getSpecialLessonUnlock();
-        readingComplete = userInformation.getReadingComplete();
-        readingUnlock = userInformation.getReadingUnlock();
 
         final Calendar cal = Calendar.getInstance();
         final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일

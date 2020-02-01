@@ -83,7 +83,7 @@ public class Reading00 implements Reading {
     }
 
     @Override
-    public void setIsLock(boolean b) {
+    public void setIsLocked(boolean b) {
         this.isLock = b;
     }
 }

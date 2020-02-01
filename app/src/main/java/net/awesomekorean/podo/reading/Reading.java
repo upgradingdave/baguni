@@ -23,5 +23,5 @@ public interface Reading {
 
     void setIsCompleted(boolean b);
 
-    void setIsLock(boolean b);
+    void setIsLocked(boolean b);
 }

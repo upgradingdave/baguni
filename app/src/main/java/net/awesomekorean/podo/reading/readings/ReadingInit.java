@@ -17,7 +17,7 @@ public class ReadingInit {
         return isLock;
     }
 
-    public void setIsLock(boolean b) {
+    public void setIsLocked(boolean b) {
         this.isLock = b;
     }
 

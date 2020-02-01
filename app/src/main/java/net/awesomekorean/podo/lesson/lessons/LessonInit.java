@@ -18,4 +18,7 @@ public class LessonInit {
     public void setIsCompleted(boolean b) {
         this.isCompleted = b;
     }
+    public void setIsLocked(boolean b) {
+        this.isLock = b;
+    }
 }

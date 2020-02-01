@@ -53,4 +53,9 @@ public class S_Lesson0 implements LessonItem {
     public void setIsCompleted(boolean b) {
         this.isCompleted = b;
     }
+
+    @Override
+    public void setIsLocked(boolean b) {
+        this.isLock = b;
+    }
 }
