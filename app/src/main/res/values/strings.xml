@@ -111,16 +111,14 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="SELECT_BOX">Select a box to get the points</string>
     <string name="CONGRATULATION">Congratulation</string>
     <string name="GET_POINT">Get the points</string>
-    <string name="UNLOCK_LESSON">Do you want to unlock this lesson by using points?</string>
-    <string name="FAILED_UNLOCK_LESSON">You don\'t have points enough.</string>
-    <string name="SUCCEEDED_UNLOCK_LESSON">Successful purchase of the special lesson</string>
+    <string name="UNLOCK">Do you want to unlock this by using points?</string>
+    <string name="UNLOCK_FAILED">You don\'t have points enough.</string>
+    <string name="UNLOCK_SUCCEEDED">Unlock succeeded</string>
 
 
     <!--    읽기-->
     <string name="NORMAL">Normal</string>
     <string name="SPEED">Speed x0.8</string>
-    <string name="SUCCEEDED_UNLOCK_READING">Successful purchase of the reading</string>
-    <string name="FAILED_UNLOCK_READING">Failed to purchase of the reading</string>
 
 
     <!--    쓰기-->

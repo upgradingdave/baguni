@@ -47,10 +47,13 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     Button btnWatchAds;
     ImageView btnClose;
 
-    UserInformation userInformation = MainActivity.userInformation;
-    int userPoint = userInformation.getPoints(); // 유저 포인트
+    UserInformation userInformation;
+    int userPoint; // 유저 포인트
 
     int specialLessonPrice = 100;
+    int readingPrice = 50;
+    int unlockPrice;
+
 
     Intent intent;
 
@@ -75,8 +78,21 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         btnWatchAds.setOnClickListener(this);
         btnClose.setOnClickListener(this);
 
+        userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+        userPoint = userInformation.getPoints();
+
         rewardedAd = createAndLoadRewardedAd();
+
+        String extra = getIntent().getStringExtra("unlock");
+        if(extra.equals("specialLesson")) {
+            unlockPrice = specialLessonPrice;
+        } else {
+            unlockPrice = readingPrice;
+        }
+
+        pointNeed.setText(String.valueOf(unlockPrice));
     }
+
 
     // 리워드 광고 로드하기
     public RewardedAd createAndLoadRewardedAd() {
@@ -98,7 +114,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK) {
             userPoint = SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints();
-            if(userPoint >= specialLessonPrice) {
+            if(userPoint >= unlockPrice) {
                 unlockFirst.setVisibility(View.VISIBLE);
                 unlockSecond.setVisibility(View.GONE);
 
@@ -116,11 +132,11 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
 
             case R.id.btnYes :
-                if(userPoint >= specialLessonPrice) {
+                if(userPoint >= unlockPrice) {
                     unlockFirst.setVisibility(View.GONE);
 
                     // 포인트 차감하고 specialLessonUnlock 에 레슨아이디 추가, 해당 레슨에 unlock = true 세팅
-                    int newPoint = userPoint - specialLessonPrice;
+                    int newPoint = userPoint - unlockPrice;
                     String lessonId = MainLesson.lessonUnit.getLessonId();
                     userInformation.setPoints(newPoint);
                     userInformation.addSpecialLessonUnlock(lessonId);
@@ -133,13 +149,13 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             intent = new Intent();
                             setResult(RESULT_OK, intent);
                             finish();
-                            System.out.println("스페셜 레슨을 포인트로 구매했습니다.");
-                            Toast.makeText(getApplicationContext(), getString(R.string.SUCCEEDED_UNLOCK_LESSON), Toast.LENGTH_LONG).show();
+                            System.out.println("레슨/읽기를 포인트로 구매했습니다.");
+                            Toast.makeText(getApplicationContext(), getString(R.string.UNLOCK_SUCCEEDED), Toast.LENGTH_LONG).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.FAILED_UNLOCK_LESSON), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.UNLOCK_FAILED), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {

@@ -40,6 +40,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.MessageAdapter;
@@ -105,6 +106,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     Bitmap bitmap;
 
+    UserInformation userInformation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,8 +163,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         getPointByAd.setOnClickListener(this);
         logout.setOnClickListener(this);
 
+        userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+
         userName.setText(MainActivity.userName);
-        userPoint.setText(String.valueOf(MainActivity.userInformation.getPoints()));
+        userPoint.setText(String.valueOf(userInformation.getPoints()));
 
         // 유저프로필사진 가져오기
         final Uri profileImage = MainActivity.userImage;
@@ -195,7 +200,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
         }
 
-        setAttendance(MainActivity.userInformation.getAttendance());
+        setAttendance(userInformation.getAttendance());
     }
 
 

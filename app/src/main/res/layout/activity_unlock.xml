@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="@string/UNLOCK_LESSON"
+            android:text="@string/UNLOCK"
             android:textSize="20dp"
             android:textColor="@color/BLACK"
             android:gravity="center"
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="@string/FAILED_UNLOCK_LESSON"
+            android:text="@string/UNLOCK_FAILED"
             android:textSize="20dp"
             android:textColor="@color/BLACK"
             android:gravity="center"

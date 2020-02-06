@@ -158,6 +158,7 @@ public class MainLesson extends Fragment{
                 } else {
                     // 포인트 사용 확인창 띄우기
                     intent = new Intent(context, UnlockActivity.class);
+                    intent.putExtra("unlock", "specialLesson");
                     startActivityForResult(intent, 200);
 /*
                     point = userInformation.getPoints();

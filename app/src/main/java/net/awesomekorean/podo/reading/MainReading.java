@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.LessonItem;
 import net.awesomekorean.podo.purchase.TopUp;
@@ -53,13 +54,12 @@ import net.awesomekorean.podo.reading.readings.Reading19;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static net.awesomekorean.podo.MainActivity.btnReading;
 
-public class MainReading extends Fragment implements View.OnClickListener {
+public class MainReading extends Fragment {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    int readingPrice = 100;
 
     public static Reading readingUnit;
 
@@ -73,13 +73,6 @@ public class MainReading extends Fragment implements View.OnClickListener {
 
     ArrayList<Reading> list;
     ReadingAdapter adapter;
-
-    LinearLayout unlockLayout;
-    TextView pointHave;
-    TextView pointNeed;
-    Button btnUnlock;
-    Button btnChargePoint;
-    ImageView btnClose;
 
     UserInformation userInformation = MainActivity.userInformation;
 
@@ -98,16 +91,6 @@ public class MainReading extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_reading, container, false);
-
-        unlockLayout = view.findViewById(R.id.unlockLayout);
-        pointHave = view.findViewById(R.id.pointHave);
-        pointNeed = view.findViewById(R.id.pointNeed);
-        btnUnlock = view.findViewById(R.id.btnUnlock);
-        btnChargePoint = view.findViewById(R.id.btnChargePoint);
-        btnClose = view.findViewById(R.id.btnClose);
-        btnUnlock.setOnClickListener(this);
-        btnChargePoint.setOnClickListener(this);
-        btnClose.setOnClickListener(this);
 
         list = new ArrayList<>();
 
@@ -139,13 +122,10 @@ public class MainReading extends Fragment implements View.OnClickListener {
 
                 } else {
                     // 포인트 사용 확인창 띄우기
-                    int point = userInformation.getPoints();
-                    if(point < readingPrice) {
-                        pointHave.setTextColor(Color.RED);
-                        btnUnlock.setEnabled(false);
-                    }
-                    pointHave.setText(String.valueOf(point));
-                    unlockLayout.setVisibility(View.VISIBLE);
+                    intent = new Intent(context, UnlockActivity.class);
+                    intent.putExtra("unlock", "reading");
+                    startActivityForResult(intent, 200);
+
                 }
             }
         });
@@ -157,48 +137,16 @@ public class MainReading extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    // 읽기 구매 성공
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-
-            case R.id.btnUnlock :
-                unlockLayout.setVisibility(View.GONE);
-                // 포인트 차감하고 readingUnlock 에 읽기아이디 추가, 해당 읽기에 unlock = true 세팅
-                int newPoint = userInformation.getPoints() - readingPrice;
-                String readingId = readingUnit.getReadingId();
-                userInformation.setPoints(newPoint);
-                userInformation.addReadingUnlock(readingId);
-
-                DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-                informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        SharedPreferencesInfo.setUserInfo(context, userInformation);
-                        setUnlockedReadings();
-                        System.out.println("읽기를 포인트로 구매했습니다.");
-                        Toast.makeText(context, getString(R.string.SUCCEEDED_UNLOCK_READING), Toast.LENGTH_LONG).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, getString(R.string.FAILED_UNLOCK_READING), Toast.LENGTH_LONG).show();
-                    }
-                });
-
-                break;
-
-            case R.id.btnChargePoint :
-                unlockLayout.setVisibility(View.GONE);
-                intent = new Intent(context, TopUp.class);
-                startActivity(intent);
-                break;
-
-            case R.id.btnClose :
-                unlockLayout.setVisibility(View.GONE);
-                break;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 200 && resultCode == RESULT_OK) {
+            setUnlockedReadings();
         }
     }
+
+
 
     // 완료된 읽기 세팅하기
     private void setCompletedReadings() {
