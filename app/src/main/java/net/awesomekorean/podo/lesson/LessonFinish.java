@@ -64,7 +64,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         box3.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
 
-        isFromProfile = getIntent().getBooleanExtra("fromProfile", false);
+        isFromProfile = getIntent().getBooleanExtra("isReward", false);
 
         if(!isFromProfile) {
             // 애드몹 전면광고 로드하기

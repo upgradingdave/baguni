@@ -378,7 +378,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                             System.out.println("보상을 받습니다.");
                             Intent intent = new Intent(Profile.this, LessonFinish.class);
-                            intent.putExtra("fromProfile", true);
+                            intent.putExtra("isReward", true);
                             startActivityForResult(intent, 200);
                         }
 

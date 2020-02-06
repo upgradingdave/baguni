@@ -16,7 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lesson.lessonNumber.LessonNumberPracticeMenu"></activity>
+
+        <activity
+            android:name=".UnlockActivity"
+            android:theme="@style/DialogFullScreen"></activity>
+        <activity android:name=".lesson.lessonNumber.LessonNumberPracticeMenu" />
         <activity android:name=".lesson.lessonNumber.LessonNumber" />
         <activity android:name=".lesson.lessonNumber.LessonNumberMenu" />
         <activity android:name=".lesson.LessonSpecialFrame" />
@@ -24,10 +28,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ADMOB_APP_ID"/>
+            android:value="@string/ADMOB_APP_ID" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -45,22 +48,23 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
         <activity android:name=".writing.WritingCorrection" />
         <activity android:name=".purchase.TopUp" />
         <activity android:name=".purchase.Subscribe" />
         <activity android:name=".profile.Profile" />
         <activity android:name=".message.Message" />
-        <activity android:name=".lesson.LessonFinish" >
-
-        </activity>
+        <activity android:name=".lesson.LessonFinish"></activity>
         <activity android:name=".qna.QnaDetail" />
         <activity android:name=".qna.AskQuestion" />
-        <activity android:name=".Logo" >
-        </activity>
+        <activity android:name=".Logo"></activity>
         <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
-        <activity android:name=".login.SignIn" >
+        <activity android:name=".login.SignIn">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".collection.CollectionStudy" />
@@ -76,11 +80,6 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

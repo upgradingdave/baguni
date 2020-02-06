@@ -116,13 +116,11 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="SUCCEEDED_UNLOCK_LESSON">Successful purchase of the special lesson</string>
 
 
-
     <!--    읽기-->
     <string name="NORMAL">Normal</string>
     <string name="SPEED">Speed x0.8</string>
     <string name="SUCCEEDED_UNLOCK_READING">Successful purchase of the reading</string>
     <string name="FAILED_UNLOCK_READING">Failed to purchase of the reading</string>
-
 
 
     <!--    쓰기-->
@@ -277,7 +275,7 @@ Let's call it '아/어요' for short.
 '아/어요' is not too formal and can be polite enough.
 Therefore, it is most often used in everyday conversations.
 
-There are three rules for converting the base form to the '아/어요'.
+There are three rules for converting the base form to '아/어요'.
 Let's take a look with an example. (You don't need to know the meaning of the words
 in the example right now. Let's focus on the process of changing the base form into '아/어요'.)
 
@@ -294,7 +292,7 @@ ex)
 2.
 
 When there is a vowel 'ㅏ' or 'ㅗ' -> 아요
-: In the base form, you should see the letter right before of the '다'.
+: In the base form, you should see the letter right before the '다'.
 If the letter has a vowel 'ㅏ' or 'ㅗ', this word should be added with '아요'.
 Let's take a look the word '가다'.
 The previous letter of '다' is '가' and '가' has a vowel 'ㅏ'.
@@ -358,8 +356,8 @@ so the sentence always has the same meaning no matter where the word is.
 Therefore, sentence 1 and 2 is totally same meaning as 'I eat lion'.
 
 This is the difference between a language that uses particles and a language that does not.
-But that's not a good idea to change the position of words all the time.
-Korean generally uses the order of 'subject-object-predicate',
+But it's not a good idea to change the position of words all the time.
+Korean language generally uses the order of 'subject-object-predicate',
 so it would be better to follow this order."</string>
 
     <string name="SL_05_TITLE">Speaking Naturally</string>
@@ -438,7 +436,7 @@ but sometimes use '에' after the noun that indicating the place according to ve
 Is that right?
 
 You can say '식당' when you talk about a restaurant,
-but native speakers also speak a lot as like 'food' + '집'(house).
+but native speakers often say the 'food' + '집'(house).
 So the restaurants above could be
 
 - 비빔밥집
@@ -479,9 +477,9 @@ ex)
 "</string>
 
     <string name="SL_09_TITLE">Newly-coined word</string>
-    <string name="SL_09_CONTENTS">"Newly-coined word' is a newly popular word made by young people.
+    <string name="SL_09_CONTENTS">"Newly-coined word' is a new word made popular by young people.
 Some people say it's better not to use it because it's not a standard language.
-But I think it is helpful to foreigners to learn Korean more fun.
+But I think it is helpful to foreigners to make learning korean more fun.
 However, it is recommended not to use it in formal situations.
 
 Wll, let's look at some of the most common new words used in 2019.
@@ -1114,8 +1112,6 @@ ex) '운동' + '하다' = '운동하다' (o)
     <string name="L_14_SENTENCE_EXPLAIN_19">"When you ask something, you can use '~아/어 주세요'.
 '추천하다' -> 추천해요' -> '추천해' + '주세요' = '추천해 주세요'"</string>
     <string name="L_14_SENTENCE_EXPLAIN_20">-</string>
-
-
 
 
     <!--번역 필요 없는 부분-->

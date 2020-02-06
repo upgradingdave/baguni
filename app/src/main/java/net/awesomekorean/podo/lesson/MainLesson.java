@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
@@ -57,23 +58,19 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson06;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson07;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson08;
+import net.awesomekorean.podo.profile.Profile;
 import net.awesomekorean.podo.purchase.TopUp;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static net.awesomekorean.podo.MainActivity.btnLesson;
 
-public class MainLesson extends Fragment implements View.OnClickListener {
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    RewardedAd rewardedAd;
-
+public class MainLesson extends Fragment{
 
     public static LessonItem lessonUnit;
 
-    int specialLessonPrice = 100;
 
     Context context;
 
@@ -86,19 +83,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     ArrayList<LessonItem> list;
     LessonAdapter adapter;
 
-    LinearLayout unlockLayout;
-    LinearLayout unlockFirst;
-    LinearLayout unlockSecond;
-    TextView pointHave;
-    TextView pointNeed;
-    Button btnYes;
-    Button btnNo;
-    Button btnPurchasePoints;
-    Button btnWatchAds;
-    ImageView btnClose;
-
     UserInformation userInformation = MainActivity.userInformation;
-    int point; //유저 포인트
 
 
     public MainLesson(MainActivity mainActivity) {
@@ -116,19 +101,6 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
-        unlockLayout = view.findViewById(R.id.unlockLayout);
-        pointHave = view.findViewById(R.id.pointHave);
-        pointNeed = view.findViewById(R.id.pointNeed);
-        btnYes = view.findViewById(R.id.btnYes);
-        btnNo = view.findViewById(R.id.btnNo);
-        btnPurchasePoints = view.findViewById(R.id.btnPurchasePoints);
-        btnWatchAds = view.findViewById(R.id.btnWatchAds);
-        btnClose = view.findViewById(R.id.btnClose);
-        btnYes.setOnClickListener(this);
-        btnNo.setOnClickListener(this);
-        btnPurchasePoints.setOnClickListener(this);
-        btnWatchAds.setOnClickListener(this);
-        btnClose.setOnClickListener(this);
 
         list = new ArrayList<>();
 
@@ -185,15 +157,19 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
                 } else {
                     // 포인트 사용 확인창 띄우기
+                    intent = new Intent(context, UnlockActivity.class);
+                    startActivityForResult(intent, 200);
+/*
                     point = userInformation.getPoints();
                     if(point < specialLessonPrice) {
                         pointHave.setTextColor(Color.RED);
                         btnYes.setEnabled(false);
                     }
                     pointHave.setText(String.valueOf(point));
-                    unlockLayout.setVisibility(View.VISIBLE);
                     unlockFirst.setVisibility(View.VISIBLE);
                     unlockSecond.setVisibility(View.GONE);
+
+ */
                 }
 
             }
@@ -203,73 +179,15 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         context = getContext();
 
-        rewardedAd = createAndLoadRewardedAd();
-
         return view;
     }
 
-    // 리워드 광고 로드하기
-    public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(context, getString(R.string.ADMOB_TEST_ID_REWARDED));
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
-            @Override
-            public void onRewardedAdLoaded() {
-                System.out.println("광고를 로드했습니다");
-            }
-        };
-        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
-        return rewardedAd;
-    }
-
+    // 스페셜 레슨 구매 성공
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-
-            case R.id.btnYes :
-                if(point >= specialLessonPrice) {
-                    unlockLayout.setVisibility(View.GONE);
-
-                    // 포인트 차감하고 specialLessonUnlock 에 레슨아이디 추가, 해당 레슨에 unlock = true 세팅
-                    int newPoint = userInformation.getPoints() - specialLessonPrice;
-                    String lessonId = lessonUnit.getLessonId();
-                    userInformation.setPoints(newPoint);
-                    userInformation.addSpecialLessonUnlock(lessonId);
-
-                    DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-                    informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            SharedPreferencesInfo.setUserInfo(context, userInformation);
-                            setUnlockedLessons();
-                            System.out.println("스페셜 레슨을 포인트로 구매했습니다.");
-                            Toast.makeText(context, getString(R.string.SUCCEEDED_UNLOCK_LESSON), Toast.LENGTH_LONG).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, getString(R.string.FAILED_UNLOCK_LESSON), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } else {
-                    unlockFirst.setVisibility(View.GONE);
-                    unlockSecond.setVisibility(View.VISIBLE);
-                }
-
-                break;
-
-            case R.id.btnPurchasePoints :
-                unlockLayout.setVisibility(View.GONE);
-                intent = new Intent(context, TopUp.class);
-                startActivity(intent);
-                break;
-
-            case R.id.btnWatchAds :
-                break;
-
-            default: // btnNo, btnClose
-                unlockLayout.setVisibility(View.GONE);
-                break;
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 200 && resultCode == RESULT_OK) {
+            setUnlockedLessons();
         }
     }
 
