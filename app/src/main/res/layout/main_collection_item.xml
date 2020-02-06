@@ -5,15 +5,13 @@
     android:orientation="horizontal"
     android:paddingRight="30dp"
     android:layout_marginBottom="10dp"
-    android:weightSum="1"
     android:descendantFocusability="blocksDescendants"
     >
 
     <CheckBox
         android:id="@+id/checkBox"
         android:buttonTint="@color/PURPLE"
-        android:layout_weight="0.1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_marginRight="15dp"
         android:layout_height="match_parent" />
 
@@ -21,7 +19,7 @@
         android:id="@+id/collectionFront"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
+        android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="left|center_vertical"
         android:maxLines="1"
@@ -37,15 +35,15 @@
         android:text="apple"
         android:textSize="20dp"
         android:fontFamily="@font/avenir_light"
-        android:layout_weight="0.4"
+        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/btnAudio"
-        android:src="@drawable/audio_small_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0.1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/audio_small_blue" />
+
 </LinearLayout>

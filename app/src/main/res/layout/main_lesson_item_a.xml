@@ -75,9 +75,8 @@
         <ImageView
             android:id="@+id/lessonImage"
             android:layout_weight="0.3"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_width="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_height="match_parent"
             android:src="@drawable/hangul" />
 

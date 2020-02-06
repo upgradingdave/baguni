@@ -4,18 +4,17 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.Lesson;
 import net.awesomekorean.podo.lesson.LessonItem;
 
-public class Lesson2 extends LessonInit implements Lesson, LessonItem {
+public class Lesson02 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_02";
     private int title = R.string.L_02_TITLE;
     private String subTitle = "얼마예요?";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.shopping;
 
     final static String[] wordFront = {"이거", "저거", "얼마", "세일", "그래서"};
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "[쎄일]", "-"};
+    final static String[] wordPronunciation = {"-", "-", "-", "[쎄일]", "-"};
     final static String[] wordSynonyms = {"이것", "저것", "-", "할인", "그러므로, 따라서"};
     final static String[] wordAntonyms = {"-", "-", "-", "-", "그러나"};
-    final static String[] wordApplication = {"이거 뭐예요?", "저거 뭐예요?", "이거 얼마예요?", "지금 세일해요?", "떡복이 좋아요. 그래서 많이 먹어요."};
 
     final static String[] sentenceFront = {
             "얼마",
@@ -65,11 +64,6 @@ public class Lesson2 extends LessonInit implements Lesson, LessonItem {
     @Override
     public String[] getWordAntonyms() {
         return wordAntonyms;
-    }
-
-    @Override
-    public String[] getWordApplication() {
-        return wordApplication;
     }
 
     @Override

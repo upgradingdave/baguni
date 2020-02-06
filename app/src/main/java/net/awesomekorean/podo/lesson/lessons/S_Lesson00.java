@@ -4,7 +4,7 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.Lesson;
 import net.awesomekorean.podo.lesson.LessonItem;
 
-public class S_Lesson0 implements LessonItem {
+public class S_Lesson00 implements LessonItem {
 
     private String lessonId = "SL_00";
     private int title = R.string.SL_00_TITLE;

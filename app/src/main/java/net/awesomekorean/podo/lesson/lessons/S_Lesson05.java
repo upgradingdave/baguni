@@ -2,13 +2,16 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.LessonItem;
+import net.awesomekorean.podo.lesson.LessonSpecial;
 
-public class S_Lesson2 extends S_LessonInit implements LessonItem {
+public class S_Lesson05 extends S_LessonInit implements LessonItem, LessonSpecial {
 
-    private String lessonId = "SL_02";
-    private int title = R.string.SL_02_TITLE;
-    private String subTitle = "숫자";
+    private String lessonId = "SL_05";
+    private int title = R.string.SL_05_TITLE;
+    private String subTitle = "Basic pronunciation rule";
     private int lessonImage = R.drawable.hangul;
+
+    private int contents = R.string.SL_05_CONTENTS;
 
     @Override
     public String getLessonId() {
@@ -30,4 +33,9 @@ public class S_Lesson2 extends S_LessonInit implements LessonItem {
         return lessonImage;
     }
 
+    @Override
+    public int getContents() {
+        return contents;
+    }
 }
+

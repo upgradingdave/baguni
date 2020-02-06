@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <!--    <color name="PURPLE">#6530D9</color>-->
-    <color name="PURPLE">#5453E8</color>
+    <color name="PURPLE">#6A69EF</color>
     <color name="PURPLE_TRANSPARENT">#196A69EF</color>
     <color name="GREEN">#5BDA8C</color>
     <color name="WHITE">#FFFFFF</color>
@@ -12,7 +12,7 @@
     <color name="GREY_TEXT">#4D0A2463</color>
     <color name="GREY">#E6E6E6</color>
     <color name="GREY_DARK">#979797</color>
-    <color name="YELLOW">#F5A623</color>
+    <color name="YELLOW">#FFC300</color>
     <color name="RED">#FF5A5F</color>
     <color name="TRANSPARENT">#00000000</color>
     <color name="BLUE">#518EF8</color>

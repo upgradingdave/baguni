@@ -111,8 +111,10 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="SELECT_BOX">Select a box to get the points</string>
     <string name="CONGRATULATION">Congratulation</string>
     <string name="GET_POINT">Get the points</string>
+    <string name="UNLOCK_LESSON">Do you want to unlock this lesson by using points?</string>
+    <string name="FAILED_UNLOCK_LESSON">You don\'t have points enough.</string>
     <string name="SUCCEEDED_UNLOCK_LESSON">Successful purchase of the special lesson</string>
-    <string name="FAILED_UNLOCK_LESSON">Failed to purchase of the special lesson</string>
+
 
 
     <!--    읽기-->
@@ -233,32 +235,275 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
 
     <!--    레슨내용현지화-->
     <string name="SL_00_TITLE">Start of learning Korean</string>
+
     <string name="SL_01_TITLE">Conjugation</string>
-    <string name="SL_01_CONTENTS">
-"한국어의 동사, 형용사에는 '기본형'이라는 것이 있다.
-'먹다'(to eat), '가다'(to go), '사다'(to buy)와 같이 '~다'로 끝나는 것들을 말하는데,
-사전을 찾을 때는 이 기본형을 사용하지만 실재로 대화나 글에 사용할 때는 기본형을 사용하고자 하는 형태로 바꿔야 한다.
-예를 들어 '먹다'는 아래와 같이 형태가 바뀐다.
-- 먹다 (기본형)
+    <string name="SL_01_CONTENTS">"All Korean verbs and adjectives have a base form.
+It means things that end with '~다'
+, such as '먹다 (to eat)', '가다 (to go)' and '사다 (to buy)'.
+
+You'll use base forms when looking for a word on dictionary, but you should change
+the base form to the form that you want to use when talking or writing.
+For example, '먹다 (to eat)' changes as followed.
+
+- 먹다 (to eat) : base form
 - 먹어요 (I eat)
 - 먹으면 (if I eat)
 - 먹어서 (because I eat)
-- 먹고 (after I eat)...
-대부분의 단어는 기본형에서 '다'를 원하는 형태로 바꾸기만 하면 되지만
-때때로 '다'가 아닌 부분도 같이 바뀌는 불규칙 단어도 존재한다.
-예를 들면...
-- 듣다 (to listen, base form)
+- 먹고 (after I eat)
+
+For most of the words base forms you only need to change ""다"" to other forms
+But sometimes there are irregular words that change parts that are not '다' as well.
+For example...
+
+- 듣다 (to listen / base form)
 - 들어요 (I listen)
 - 들으면 (If I listen)
 - 들어서(because I listen)
 - 듣고(after I listen)
-많은 학생들이 불규칙 단어가 어렵다고 생각는데 전혀 그럴 필요 없다.
-왜냐하면 대부분의 경우는 발음을 더 쉽게 하기 위한 불규칙 변화이기 때문이다.
-위의 예에서 '듣어요'[드더요]가 아닌 '들어요'[드러요]로 불규칙 변화를 함으로써 좀 더 부드러운 발음을 할 수 있다.
-따라서 단어마다 다른 형태를 외우려고 하지 말고 말하기 연습을 통해 여러 번 사용하다보면 자연스럽게 기억할 수 있게 될 것이다."
-    </string>
+
+Many students think that irregular words are difficult,
+but you don't need to worry about that.
+Because most of irregular forms are for easier pronunciation.
+In the example above, you can pronounce easier
+by changing irregularly to '들어요[드러요]' instead of '듣어요[드더요]'.
+Therefore, if you use it several times through speaking practice,
+you will naturally be able to remember irregular words."</string>
+
     <string name="SL_02_TITLE">Numbers</string>
 
+    <string name="SL_03_TITLE">Conjugation</string>
+    <string name="SL_03_CONTENTS">"The first conjugation you learn is the '아요/어요' form.
+Let's call it '아/어요' for short.
+'아/어요' is not too formal and can be polite enough.
+Therefore, it is most often used in everyday conversations.
+
+There are three rules for converting the base form to the '아/어요'.
+Let's take a look with an example. (You don't need to know the meaning of the words
+in the example right now. Let's focus on the process of changing the base form into '아/어요'.)
+
+1.
+
+하다 -> 해요
+: The base form of a verb or adjective ending with '~하다' is simply converted to '해요'.
+
+ex)
+공부하다 -> 공부해요
+운동하다 -> 운동해요
+좋아하다 -> 좋아해요
+
+2.
+
+When there is a vowel 'ㅏ' or 'ㅗ' -> 아요
+: In the base form, you should see the letter right before of the '다'.
+If the letter has a vowel 'ㅏ' or 'ㅗ', this word should be added with '아요'.
+Let's take a look the word '가다'.
+The previous letter of '다' is '가' and '가' has a vowel 'ㅏ'.
+Therefore, the word '가다' is conjugated to '가' + '아요' = '가아요',
+and '가아요' can be simplified to '가요'.
+
+ex)
+'오다' -> '오' + '아요' = '오아요' -> '와요'
+'만나다' -> '만나' + '아요' = '만나아요' -> '만나요'
+'살다' -> '살' + '아요' -> '살아요'
+
+3.
+
+Everything except 1 and 2 -> 어요
+: Let's look at the word '먹다.
+This word doesn't end with '하다'.
+And since the vowels of the '먹' is 'ㅓ', it's not type 2 as well.
+Therefore, this word is type 3 and you should add '어요'.
+
+ex)
+'먹다' -> '먹' + '어요' = '먹어요'
+'배우다' -> '배우' + '어요' = '배우어요' -> '배워요'
+'읽다' -> '읽' + '어요' = '읽어요'
+
+So far, we have looked at the '아/어요' and let's make a promise with me now.
+Just think about this rule until Lesson 10 and forget about this.
+Actually there are only a few Koreans who know this rule.
+When you learn new verbs or adjectives just take a look '아/어요' as well.
+And just say '아요' or '어요' as it is pronounced comfortably. It might be correct.
+
+I'm going to say one more interesting thing and finish this lesson.
+The '아/어요' is so powerful that it can have a variety meanings depending on how you speak or what's the situation.
+
+For example, let's see the word '먹어요'.
+a. ""먹어요."" (You eat)
+b. ""먹어요?"" (Do you eat?)
+c. ""먹어요!!"" (You must to eat!)
+There are many other meanings, but let's just remember two things of 'a' and 'b'.\"</string>
+
+    <string name="SL_04_TITLE">Particles</string>
+    <string name="SL_04_CONTENTS">"Students who use a language without particles have a lot of difficulty with particles in Korean.
+The most difficult are '은/는', '이/가' and '을/를'.
+We'll learn each particle later and I'm going to explain why we use the particles in this lesson.
+
+There are two sentences in English.
+1. I eat lion.
+2. Lion eat I. (Of course,'The lion eats me' is correct but ignore it now)
+
+The subject of sentence 1 is 'I' and the object is 'lion'.
+However, the subject of sentence 2 is 'lion' and the object is 'I'.
+In other words, depending on the position of the word,
+the subject and the object are determined and the meaning of sentence becomes completely different.
+
+Now let's look at the Korean sentence using particles.
+1. 나는 사자를 먹어요
+2. 사자를 나는 먹어요
+'나' meaning 'I' is added subject particle '는'
+and '사자' meaning 'lion' is added object particle '를'.
+When you use particles, the role of the word is fixed
+so the sentence always has the same meaning no matter where the word is.
+Therefore, sentence 1 and 2 is totally same meaning as 'I eat lion'.
+
+This is the difference between a language that uses particles and a language that does not.
+But that's not a good idea to change the position of words all the time.
+Korean generally uses the order of 'subject-object-predicate',
+so it would be better to follow this order."</string>
+
+    <string name="SL_05_TITLE">Speaking Naturally</string>
+    <string name="SL_05_CONTENTS">"There are 2 basic tips to make your pronunciation better.
+
+1. The consonant (not batchim) 'ㅇ' is a kind of an empty place because it has no sound.
+Therefore, when there is a batchim before the consonant 'ㅇ',
+you can put this batchim into the place of the consonant 'ㅇ' for reading naturally.
+For example, '사람이에요' has a batchim 'ㅁ' in the letter '람' and the next letter of '이' has
+a consonant 'ㅇ' that is an empty place.
+So it is good to read [사라미에요].""
+
+2. batchim 'ㅎ' makes following consonants stronger.
+If the consonants 'ㄱ', 'ㄷ', 'ㅈ' comes after batchim 'ㅎ', they sound each 'ㅋ', 'ㅌ', 'ㅊ'.
+ex)
+- 좋다 -> [조타]
+- 놓고 -> [노코]
+- 많지 -> [만치]
+"</string>
+
+    <string name="SL_06_TITLE">Confusing expression</string>
+    <string name="SL_06_CONTENTS">"1. 5시에 운동을 해요.
+2. 5시에서 운동을 해요.
+
+Which one is correct?
+
+1.
+
+Use '에' after the noun to indicate the time.
+
+ex)
+- 5시에 운동을 해요.
+- 아침에 학교를 가요.
+- 저녁에 약속이 있어요.
+
+2.
+
+Use '에서' after the noun to indicate the place
+
+ex)
+- 학교에서 한국어를 공부해요.
+- 집에서 TV를 봐요.
+- 식당에서 밥을 먹어요.
+
+Isn't it too easy? Now, let's learn a little bit more.
+
+2-1.
+
+In a sentence with a verb indicating existence (있다/없다)
+and a verb indicating movement (가다/오다/도착하다/다니다...),
+we use '에' after the noun indicating the place.
+
+ex)
+- 서점에 책이 있어요.
+- 밖에 사람이 없어요.
+- 병원에 가요.
+- 어제 한국에 도착했어요.
+- 한국어 학교에 다녀요.
+
+In other words, we unconditionally use '에' after the noun that indicating the time,
+and we basically use ""에서"" after the noun that indicates the place.
+but sometimes use '에' after the noun that indicating the place according to verb of its sentence.
+"</string>
+
+    <string name="SL_07_TITLE">Speaking Naturally</string>
+    <string name="SL_07_CONTENTS">"How do you say the words below in Korean?
+
+- Bibimbap restaurant
+- Spaghetti restaurant
+- tteokbokki restaurant
+
+- 비빔밥 식당
+- 스파게티 식당
+- 떡볶이 식당
+
+Is that right?
+
+You can say '식당' when you talk about a restaurant,
+but native speakers also speak a lot as like 'food' + '집'(house).
+So the restaurants above could be
+
+- 비빔밥집
+- 스파게티집
+- 떡볶이집
+
+In this way, it can be much more natural.
+Well, how can we say Korean restaurant?
+Korean food is called '한국 음식' and is called '한식' shortly.
+Therefore, you can say '한식집' or '한식당'. "</string>
+
+    <string name="SL_08_TITLE">Conjugation</string>
+    <string name="SL_08_CONTENTS">"1.
+
+As we learned in Lesson 8, '아서/어서' is used as a reason or cause.
+
+ex)
+- 만나서 반가워요. (만나다 -> 만나서)
+- 저거는 50% 세일이어서 5,000원이에요. (이다 -> 이어서)
+- 겨울이어서 날씨가 추워요. (이다 -> 이어서)
+
+'이다 -> 이어서' is better to say '이라서' in the conversation.
+So in the real conversation the above are ...
+
+- 저거는 50% 세일이라서 5,000원이에요.
+- 겨울이라서 날씨가 추워요.
+
+2.
+
+We also use '아서/어서' to refer to the relationship between time.
+At this time, there must be a close connection between
+what happened before and what happened afterwards.
+
+ex)
+- 한국에 가서 한국어를 배워요.
+- 친구를 만나서 얘기해요.
+- 식당에 가서 밥을 먹어요.
+"</string>
+
+    <string name="SL_09_TITLE">Newly-coined word</string>
+    <string name="SL_09_CONTENTS">"Newly-coined word' is a newly popular word made by young people.
+Some people say it's better not to use it because it's not a standard language.
+But I think it is helpful to foreigners to learn Korean more fun.
+However, it is recommended not to use it in formal situations.
+
+Wll, let's look at some of the most common new words used in 2019.
+
+1. 인플루언서
+: Korean pronunciation of English 'influencer'.
+It means the people who have a large number of followers In social media and influence the public.
+
+2. 편스토랑
+: A combination of '편의점 (convenience store)' and '레스토랑 (restaurant)'.
+It means a convenience store where you can have a good meal like a restaurant.
+
+3. 소떡소떡
+: It's a snack that '소시지 (sausage)' and '떡 (rice cake)' are alternately sticked and baked.
+That's why it is called '소떡소떡'.
+
+4. 스포
+: It's from English 'spoiler'. The act of telling others about the contents of a movie in advance.
+
+5. 꾸안꾸
+: It is made up of shortened '꾸민 듯 안 꾸민 듯 (like not put makeup)'.
+It means that you put on makeup naturally, as if you did not do makeup."</string>
 
     <string name="L_00_TITLE">Greetings</string>
     <string name="L_00_WORD_BACK_0">Hello</string>
@@ -272,12 +517,18 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="L_00_SENTENCE_BACK_3">How have you been?</string>
     <string name="L_00_SENTENCE_BACK_4">See you again</string>
     <string name="L_00_SENTENCE_BACK_5">Good bye</string>
-    <string name="L_00_SENTENCE_EXPLAIN_0">‘몸과 마음에 아무 문제나 걱정없이 편안한 상태인가요?’ 라는 의미이다. 아침, 점심, 저녁 모두 시간에 상관없이 이렇게 인사를 한다. 친한 친구(나이가 같은 사람)나 친한 동생(나이가 어린 사람)에게는 간단하게 ‘안녕?’이라고 인사한다.</string>
-    <string name="L_00_SENTENCE_EXPLAIN_1">주로 처음 만난 사람과 서로 소개를 한 후에 바로 이렇게 인사한다. 좀 더 공손하게 \'반갑습니다\'라고 해도 된다. 오랜만에 만난 사람과도 이 인사를 할 수 있다.</string>
-    <string name="L_00_SENTENCE_EXPLAIN_2">원래 알던 사이에서 오랜만에 만났을 때 하는 인사이다. ‘반가워요’와 같이 사용해도 좋다.</string>
-    <string name="L_00_SENTENCE_EXPLAIN_3">그 동안 별 일이 없었는지 관습적으로 묻는 말이다</string>
-    <string name="L_00_SENTENCE_EXPLAIN_4">진짜로 다시 볼 상황이 아니더라도 관습적으로 이렇게 인사 할 수 있다.</string>
-    <string name="L_00_SENTENCE_EXPLAIN_5">‘가세요’는 ‘가다’에서 나온 말이고 ‘계세요’는 ‘있다’에서 나온 말이다. 즉, 헤어지는 인사를 한 후에 상대방이 ‘가는’ 상황이면 ‘안녕히 가세요’를, 상대방이 ‘있는’ 상황이면 ‘안녕히 계세요’를 사용한다. 친한 사이에는 간단하게 ‘안녕~’이라고 하면 된다.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_0">"No matter in the morning, afternoon, evening, we say hello like this.
+You can just say '안녕' to your close friend (friend means same age)
+or a close sister/brother (It means a close friend that is younger than you)"</string>
+    <string name="L_00_SENTENCE_EXPLAIN_1">We say this to someone who met for the first time or after a long time.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_00_SENTENCE_EXPLAIN_3">Conventionally asking if nothing has happened so far.</string>
+    <string name="L_00_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_00_SENTENCE_EXPLAIN_5">"가세요' is from 'to go' and '계세요' is from 'to stay'.
+Therefore, if the other person will 'go' from here after saying goodbye,
+we say '안녕히 가세요' and if the other person will 'stay' here after saying goodbye,
+we say '안녕히 계세요'.
+If they are close friends or younger friends, you can just say goodbye like this '안녕'."</string>
 
     <string name="L_01_TITLE">self-introduction</string>
     <string name="L_01_WORD_BACK_0">name</string>
@@ -287,31 +538,42 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="L_01_WORD_BACK_4">person / people</string>
     <string name="L_01_WORD_BACK_5">Korea</string>
     <string name="L_01_SENTENCE_BACK_0">what</string>
-    <string name="L_01_SENTENCE_BACK_1">what is</string>
+    <string name="L_01_SENTENCE_BACK_1">what is it?</string>
     <string name="L_01_SENTENCE_BACK_2">What is your name?</string>
-    <string name="L_01_SENTENCE_BACK_3">Danny / Danning</string>
+    <string name="L_01_SENTENCE_BACK_3">Danny / Megan</string>
     <string name="L_01_SENTENCE_BACK_4">country</string>
     <string name="L_01_SENTENCE_BACK_5">which country</string>
-    <string name="L_01_SENTENCE_BACK_6">Which country person are you (= Where are you from?)</string>
+    <string name="L_01_SENTENCE_BACK_6">Where are you from?</string>
     <string name="L_01_SENTENCE_BACK_7">person / people</string>
     <string name="L_01_SENTENCE_BACK_8">It’s a person</string>
     <string name="L_01_SENTENCE_BACK_9">I’m Korean</string>
     <string name="L_01_SENTENCE_EXPLAIN_0">-</string>
-    <string name="L_01_SENTENCE_EXPLAIN_1">우리는 한국어 공부를 이제 막 시작했기 때문에 궁금한 것이 많다. 궁금한 것이 있을 때 이 표현이 아주 유용하다. 손가락으로 모르는 것을 가리키며 ‘이거 뭐예요’ (what’s this?)라고 하면 된다. 조금 멀리 있는 것을 가리킬 땐 ‘저거 뭐예요?’(what’s that?) 라고 한다.</string>
-    <string name="L_01_SENTENCE_EXPLAIN_2">‘이름’ 뒤에 ‘이’가 무엇인지 궁금할 것이다. 이것은 한국어 학습자들이 가장 어려워하는 주격조사인데 지금은 알려고 하지 말자. ‘이름 뭐예요?’라고 해도 좋지만 ‘이름이 뭐예요?’라고 하면 좀 더 자연스러운 표현이 된다고만 이해하고 익숙해지는 것이 중요하다. (스페셜레슨 ‘조사를 사용하는 이유’ 참고)</string>
-    <string name="L_01_SENTENCE_EXPLAIN_3">(‘예요/이에요’ 사용하는 법)\n앞 글자에 받침이 없으면 ‘예요’, 받침이 있으면 ‘이에요’를 사용 한다.</string>
+    <string name="L_01_SENTENCE_EXPLAIN_1">"We have a lot of questions because we have just started studying Korean.
+This expression is very useful when you have questions.
+You can point your finger at something you don't know and say ‘이거 뭐예요?’ (what's this?)
+When you point something out a little farther away, you can say '저거 뭐예요?' (what's that?)"</string>
+    <string name="L_01_SENTENCE_EXPLAIN_2">"You may be wondering what '이' is after '이름'.
+This is the main challenge for Korean language learners, called 'subject particle'
+but don't struggle to know it now.
+Just remember that you can also say '이름 뭐예요?' but '이름이 뭐예요?' is a better expression.
+It is important to get used to it in this level.
+(See the special lesson ‘particles 1 : Why we use particles?)"</string>
+    <string name="L_01_SENTENCE_EXPLAIN_3">"How to use '예요 / 이에요'?
+If there isn't a batchim (last consonant) in the previous letter, we use ‘예요’.
+If there is a batchim in the previous letter, we use ‘이에요’."</string>
     <string name="L_01_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_5">-</string>
-    <string name="L_01_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_01_SENTENCE_EXPLAIN_6">"사람이에요 [사라미에요]
+(See the special lesson 'Speaking Naturally 1 : Pronunciation rule')"</string>
     <string name="L_01_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_8">-</string>
-    <string name="L_01_SENTENCE_EXPLAIN_9">당신의 나라가 한국어로 무엇인지 찾아서 문장으로 만들어 보세요.</string>
+    <string name="L_01_SENTENCE_EXPLAIN_9">Find out what your country is in Korean and make it into a sentence.</string>
 
     <string name="L_02_TITLE">shopping</string>
     <string name="L_02_WORD_BACK_0">this one</string>
     <string name="L_02_WORD_BACK_1">that one</string>
     <string name="L_02_WORD_BACK_2">how much</string>
-    <string name="L_02_WORD_BACK_3">sale</string>
+    <string name="L_02_WORD_BACK_3">discount</string>
     <string name="L_02_WORD_BACK_4">so / therefore</string>
     <string name="L_02_SENTENCE_BACK_0">how much</string>
     <string name="L_02_SENTENCE_BACK_1">How much is it?</string>
@@ -327,16 +589,533 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="L_02_SENTENCE_BACK_11">So, it’s 5,000 won</string>
     <string name="L_02_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_1">-</string>
-    <string name="L_02_SENTENCE_EXPLAIN_2">‘이거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘이것’이라고 써야한다</string>
+    <string name="L_02_SENTENCE_EXPLAIN_2">"‘이거’ is used a lot in the conversational language
+and you should say ‘이것‘ in the formal situation."</string>
     <string name="L_02_SENTENCE_EXPLAIN_3">-</string>
-    <string name="L_02_SENTENCE_EXPLAIN_4">‘저거’는 구어에서 많이 쓰이며 격식을 갖춰야 할 땐 ‘저것’이라고 써야한다</string>
-    <string name="L_02_SENTENCE_EXPLAIN_5">‘저거는 얼마예요?’를 줄여서 이렇게 말할 수 있다</string>
+    <string name="L_02_SENTENCE_EXPLAIN_4">"‘저거’ is used a lot in the conversational language
+and you should say ‘저것‘ in the formal situation."</string>
+    <string name="L_02_SENTENCE_EXPLAIN_5">You can say like this for short of \'저거는 얼마예요?\'</string>
     <string name="L_02_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_10">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_11">-</string>
+
+    <string name="L_03_TITLE">posession / existence</string>
+    <string name="L_03_WORD_BACK_0">there is / to have</string>
+    <string name="L_03_WORD_BACK_1">friend</string>
+    <string name="L_03_WORD_BACK_2">to talk</string>
+    <string name="L_03_WORD_BACK_3">where</string>
+    <string name="L_03_WORD_BACK_4">Korean language</string>
+    <string name="L_03_SENTENCE_BACK_0">There is</string>
+    <string name="L_03_SENTENCE_BACK_1">is there?</string>
+    <string name="L_03_SENTENCE_BACK_2">Do you have a friend?</string>
+    <string name="L_03_SENTENCE_BACK_3">Do you have a Korean friend?</string>
+    <string name="L_03_SENTENCE_BACK_4">Yes, I have a korean friend.</string>
+    <string name="L_03_SENTENCE_BACK_5">Yes, I have one.</string>
+    <string name="L_03_SENTENCE_BACK_6">to talk</string>
+    <string name="L_03_SENTENCE_BACK_7">Are you talking?</string>
+    <string name="L_03_SENTENCE_BACK_8">Where are you talking?</string>
+    <string name="L_03_SENTENCE_BACK_9">Kakao talk</string>
+    <string name="L_03_SENTENCE_BACK_10">in Kakao talk</string>
+    <string name="L_03_SENTENCE_BACK_11">We talk in Kakao talk.</string>
+    <string name="L_03_SENTENCE_EXPLAIN_0">"You can say this when you 'have' something or someone 'exists'.
+In Korean, we don't consider singular and plural that much
+and the meaning of 'There isn't' is '없다'."</string>
+    <string name="L_03_SENTENCE_EXPLAIN_1">"When you conjugate verbs or adjectives to the form of '아요/어요',
+If you say it with a lower intonation , its a statement.
+But If you raise the intonation at the end , it becomes a question.
+ex) '있어요?' : is there? / '있어요.' : there is"</string>
+    <string name="L_03_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_03_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_03_SENTENCE_EXPLAIN_4">yes : \'네\' / no : \'아니요\'</string>
+    <string name="L_03_SENTENCE_EXPLAIN_5">"There are lots of unit nouns in Korean.
+Don't try to learn all at once.
+Just remember to use '명' for people and '개' for things."</string>
+    <string name="L_03_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_03_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_03_SENTENCE_EXPLAIN_8">The words that describe the place should be followed by the place particle \'에서\'.</string>
+    <string name="L_03_SENTENCE_EXPLAIN_9">kakao talk: Messenger name used by most Koreans</string>
+    <string name="L_03_SENTENCE_EXPLAIN_10">Because KakaoTalk is used as a place, \'에서\' is added.</string>
+    <string name="L_03_SENTENCE_EXPLAIN_11">-</string>
+
+    <string name="L_04_TITLE">past tense</string>
+    <string name="L_04_WORD_BACK_0">yesterday</string>
+    <string name="L_04_WORD_BACK_1">home</string>
+    <string name="L_04_WORD_BACK_2">no</string>
+    <string name="L_04_WORD_BACK_3">shopping</string>
+    <string name="L_04_SENTENCE_BACK_0">to be</string>
+    <string name="L_04_SENTENCE_BACK_1">to be</string>
+    <string name="L_04_SENTENCE_BACK_2">are you?</string>
+    <string name="L_04_SENTENCE_BACK_3">Are you at home?</string>
+    <string name="L_04_SENTENCE_BACK_4">Were you at home yesterday?</string>
+    <string name="L_04_SENTENCE_BACK_5">no</string>
+    <string name="L_04_SENTENCE_BACK_6">to do</string>
+    <string name="L_04_SENTENCE_BACK_7">do</string>
+    <string name="L_04_SENTENCE_BACK_8">Did you do it?</string>
+    <string name="L_04_SENTENCE_BACK_9">What did you do?</string>
+    <string name="L_04_SENTENCE_BACK_10">What did you do yesterday?</string>
+    <string name="L_04_SENTENCE_BACK_11">I went shopping.</string>
+    <string name="L_04_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_1">"conjugate '아요/어요' : '있다' -> '있' + '어요'  '있어요'"</string>
+    <string name="L_04_SENTENCE_EXPLAIN_2">"When you say past tense, you only need to put 'ㅆ어' into the form of '아요/어요'.
+Therefore, we can call the past tense to '았어요/었어요' form.
+'있어요' -> '있어(ㅆ어)요' = '있었어요'"</string>
+    <string name="L_04_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_7">"conjugate '아요/어요' : '하다' -> '해요'"</string>
+    <string name="L_04_SENTENCE_EXPLAIN_8">"해요' -> '해(ㅆ어)요' = '했어요'"</string>
+    <string name="L_04_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_04_SENTENCE_EXPLAIN_11">-</string>
+
+    <string name="L_05_TITLE">future tense</string>
+    <string name="L_05_WORD_BACK_0">tomorrow</string>
+    <string name="L_05_WORD_BACK_1">restaurant</string>
+    <string name="L_05_WORD_BACK_2">weekend</string>
+    <string name="L_05_WORD_BACK_3">fun / interesting</string>
+    <string name="L_05_WORD_BACK_4">movie</string>
+    <string name="L_05_SENTENCE_BACK_0">to do </string>
+    <string name="L_05_SENTENCE_BACK_1">Will you do it?</string>
+    <string name="L_05_SENTENCE_BACK_2">What will you do?</string>
+    <string name="L_05_SENTENCE_BACK_3">What will you do tomorrow.</string>
+    <string name="L_05_SENTENCE_BACK_4">to go</string>
+    <string name="L_05_SENTENCE_BACK_5">I will go</string>
+    <string name="L_05_SENTENCE_BACK_6">I will go to the restaurant.</string>
+    <string name="L_05_SENTENCE_BACK_7">I will go to a Korean restaurant.</string>
+    <string name="L_05_SENTENCE_BACK_8">I will go to a Korean restaurant with my friend.</string>
+    <string name="L_05_SENTENCE_BACK_9">How about on the weekend?</string>
+    <string name="L_05_SENTENCE_BACK_10">to see / to watch</string>
+    <string name="L_05_SENTENCE_BACK_11">I will watch</string>
+    <string name="L_05_SENTENCE_BACK_12">I will watch a movie.</string>
+    <string name="L_05_SENTENCE_BACK_13">I will watch an interesting movie.</string>
+    <string name="L_05_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_1">"When we say future tense, we conjugate 'ㄹ 거예요/을 거예요' form.
+If there is no batchim, add 'ㄹ 거예요'.
+If there is a batchim, add '을 거예요'.
+conjugate 'ㄹ 거예요/을 거예요' : '하다' -> '하' + 'ㄹ 거예요' = '할 거예요'"</string>
+    <string name="L_05_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_5">"conjugate 'ㄹ 거예요/을 거예요' : '가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'"</string>
+    <string name="L_05_SENTENCE_EXPLAIN_6">"If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)
+we add '에' after the noun that is the destination.
+We can also omit '에' in the conversation.
+(See the special lesson '에 vs. 에서')"</string>
+    <string name="L_05_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_8">"We can say ‘랑/이랑’ for the conversational language."</string>
+    <string name="L_05_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_05_SENTENCE_EXPLAIN_11">"conjugate 'ㄹ 거예요/을 거예요' : '보다' -> '보' + 'ㄹ 거예요' = '볼 거예요'"</string>
+    <string name="L_05_SENTENCE_EXPLAIN_12">"Object particle is used.
+However, we can omit object particles when speaking.
+'영화를 볼 거예요' -> '영화 볼 거예요'"</string>
+    <string name="L_05_SENTENCE_EXPLAIN_13">-</string>
+
+    <string name="L_06_TITLE">progressive form</string>
+    <string name="L_06_WORD_BACK_0">now</string>
+    <string name="L_06_WORD_BACK_1">later (short time)</string>
+    <string name="L_06_WORD_BACK_2">together</string>
+    <string name="L_06_WORD_BACK_3">gym (weight training)</string>
+    <string name="L_06_SENTENCE_BACK_0">where</string>
+    <string name="L_06_SENTENCE_BACK_1">Where are you?</string>
+    <string name="L_06_SENTENCE_BACK_2">Where are you now?</string>
+    <string name="L_06_SENTENCE_BACK_3">to go</string>
+    <string name="L_06_SENTENCE_BACK_4">I\'m going.</string>
+    <string name="L_06_SENTENCE_BACK_5">I\'m going home.</string>
+    <string name="L_06_SENTENCE_BACK_6">to go</string>
+    <string name="L_06_SENTENCE_BACK_7">I go.</string>
+    <string name="L_06_SENTENCE_BACK_8">I go to the gym.</string>
+    <string name="L_06_SENTENCE_BACK_9">Let\'s go to the gym together</string>
+    <string name="L_06_SENTENCE_BACK_10">Let\'s go the gym together later</string>
+    <string name="L_06_SENTENCE_BACK_11">Good.</string>
+    <string name="L_06_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_06_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_06_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_06_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_06_SENTENCE_EXPLAIN_4">"conjugate '고 있다' : '가다' -> '가' + '고 있다' = '가고 있다'
+conjugate '아요/어요' : '가고 있다' -> '가고 있' + '어요' = '가고 있어요'"</string>
+    <string name="L_06_SENTENCE_EXPLAIN_5">"If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)
+we add '에' after the noun that is the destination.
+We can also omit ""에"" when speaking
+(See the special lesson '에 vs. 에서')"</string>
+    <string name="L_06_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_06_SENTENCE_EXPLAIN_7">"conjugate '아요/어요' : '가다' -> '가' + '아요' = '가아요' -> '가요'"</string>
+    <string name="L_06_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_06_SENTENCE_EXPLAIN_9">"You can also use '랑/이랑' that we learned in the previous lesson.
+'저' (a polite expression of 'me', to most people except closed friends and brothers/sisters (close friends that are younger than you))
+ + '랑' = '저랑 헬스장에 가요'
+Or you can also use '랑/이랑' with '같이' means together. '저랑 같이 헬스장에 가요'"</string>
+    <string name="L_06_SENTENCE_EXPLAIN_10">"When you want to express a short time within a few hours, use '이따' or '이따가'.
+It's for conversational speaking."</string>
+    <string name="L_06_SENTENCE_EXPLAIN_11">-</string>
+
+    <string name="L_07_TITLE">negative1 (do not)</string>
+    <string name="L_07_WORD_BACK_0">weather</string>
+    <string name="L_07_WORD_BACK_1">How is it?</string>
+    <string name="L_07_WORD_BACK_2">here</string>
+    <string name="L_07_WORD_BACK_3">winter</string>
+    <string name="L_07_WORD_BACK_4">a bit</string>
+    <string name="L_07_WORD_BACK_5">cold</string>
+    <string name="L_07_WORD_BACK_6">snow</string>
+    <string name="L_07_WORD_BACK_7">to come</string>
+    <string name="L_07_WORD_BACK_8">not that much / many</string>
+    <string name="L_07_SENTENCE_BACK_0">How is it?</string>
+    <string name="L_07_SENTENCE_BACK_1">How\'s the weather?</string>
+    <string name="L_07_SENTENCE_BACK_2">How\'s the weather in Korea?</string>
+    <string name="L_07_SENTENCE_BACK_3">winter</string>
+    <string name="L_07_SENTENCE_BACK_4">It\'s winter.</string>
+    <string name="L_07_SENTENCE_BACK_5">It\'s winter here.</string>
+    <string name="L_07_SENTENCE_BACK_6">cold</string>
+    <string name="L_07_SENTENCE_BACK_7">It\'s cold.</string>
+    <string name="L_07_SENTENCE_BACK_8">It\'s a bit cold.</string>
+    <string name="L_07_SENTENCE_BACK_9">to come</string>
+    <string name="L_07_SENTENCE_BACK_10">Is it comming?</string>
+    <string name="L_07_SENTENCE_BACK_11">Is it snowing?</string>
+    <string name="L_07_SENTENCE_BACK_12">It\'s comming.</string>
+    <string name="L_07_SENTENCE_BACK_13">It\'s not comming.</string>
+    <string name="L_07_SENTENCE_BACK_14">It\'s not snowing.</string>
+    <string name="L_07_SENTENCE_BACK_15">It\'s not snowing a lot.</string>
+    <string name="L_07_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_7">"conjugate '아요/어요' : '춥다' -> '춥' + '어요' = '춥어요' -> '추워요' (exception)
+Most exceptions are for ease of pronunciation.
+'추워요' is more comfortable and natural to pronounce than '춥어요'."</string>
+    <string name="L_07_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_10">"conjugate '아요/어요' : '오다' -> '오' + '아요' = '오아요' -> '와요'"</string>
+    <string name="L_07_SENTENCE_EXPLAIN_11">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_12">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_13">"You can make negative forms by using '안' before a verb or adjective.
+When a verb composed of 'noun + 하다' is made into a negative sentence,
+it should be written as 'noun + 안 + 하다'.
+ex) '얘기하다' -> '얘기 안 하다'
+Negative sentences using '안' are direct expressions.
+If you want to express it indirectly, use '~지 않다'.
+ex) '얘기하다' -> '얘기하지 않다'"</string>
+    <string name="L_07_SENTENCE_EXPLAIN_14">-</string>
+    <string name="L_07_SENTENCE_EXPLAIN_15">-</string>
+
+    <string name="L_08_TITLE">negative2 (can not)</string>
+    <string name="L_08_WORD_BACK_0">recently</string>
+    <string name="L_08_WORD_BACK_1">too much</string>
+    <string name="L_08_WORD_BACK_2">busy</string>
+    <string name="L_08_WORD_BACK_3">many / much</string>
+    <string name="L_08_WORD_BACK_4">tired</string>
+    <string name="L_08_WORD_BACK_5">morning / breakfast</string>
+    <string name="L_08_WORD_BACK_6">early</string>
+    <string name="L_08_WORD_BACK_7">wake up</string>
+    <string name="L_08_SENTENCE_BACK_0">busy</string>
+    <string name="L_08_SENTENCE_BACK_1">I\'m busy.</string>
+    <string name="L_08_SENTENCE_BACK_2">I\'m very busy.</string>
+    <string name="L_08_SENTENCE_BACK_3">I\'m very busy recently.</string>
+    <string name="L_08_SENTENCE_BACK_4">tired</string>
+    <string name="L_08_SENTENCE_BACK_5">I\m tired.</string>
+    <string name="L_08_SENTENCE_BACK_6">I\'m so tired.</string>
+    <string name="L_08_SENTENCE_BACK_7">Therefore, I\'m so tired.</string>
+    <string name="L_08_SENTENCE_BACK_8">I\'m so tired because I\'m very busy recently.</string>
+    <string name="L_08_SENTENCE_BACK_9">wake up</string>
+    <string name="L_08_SENTENCE_BACK_10">wake up.</string>
+    <string name="L_08_SENTENCE_BACK_11">I can\t wake up.</string>
+    <string name="L_08_SENTENCE_BACK_12">I can\'t wake up early.</string>
+    <string name="L_08_SENTENCE_BACK_13">I can\'t wake up early in the morning.</string>
+    <string name="L_08_SENTENCE_BACK_14">to eat</string>
+    <string name="L_08_SENTENCE_BACK_15">I eat.</string>
+    <string name="L_08_SENTENCE_BACK_16">I can\'t eat.</string>
+    <string name="L_08_SENTENCE_BACK_17">So I can\'t have breakfast as well</string>
+    <string name="L_08_SENTENCE_BACK_18">I can\'t have breakfast as well because I can\'t wake up early in the morning.</string>
+    <string name="L_08_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_1">"conjugate '아요/어요' : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_8">"Use '아서/어서' to combine two sentences together using '그래서'.
+conjugate '아요/어요' : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'
+conjugate '아서/어서' : '바빠요' -> '바빠' + '아서' = '바빠아서' -> '바빠서'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_10">"conjugate '아요/어요' : '일어나다' -> '알어나' + '아요' = '일어나아요' -> '일어나요'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_11">"'안' : do not
+'못' : can not"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_12">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_13">"시간 + '에'
+(See the special lesson '에 vs. 에서')"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_14">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_15">"conjugate '아요/어요' : '먹다' -> '먹' + '어요' = '먹어요'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_16">-</string>
+    <string name="L_08_SENTENCE_EXPLAIN_17">"We can use '도' to mean 'also'.
+'아침/점심/저녁' means 'morning / noon / night' respectively.
+Also, they have the meaning of 'breakfast / lunch / dinner.'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_18">"conjugate '아서/어서' : '일어나요' -> '일어나' + '아서' = '일어나서'"</string>
+
+    <string name="L_09_TITLE">range1 (for place)</string>
+    <string name="L_09_WORD_BACK_0">company</string>
+    <string name="L_09_WORD_BACK_1">how</string>
+    <string name="L_09_WORD_BACK_2">subway</string>
+    <string name="L_09_WORD_BACK_3">how much / how many</string>
+    <string name="L_09_WORD_BACK_4">take time</string>
+    <string name="L_09_SENTENCE_BACK_0">to go</string>
+    <string name="L_09_SENTENCE_BACK_1">Do you go?</string>
+    <string name="L_09_SENTENCE_BACK_2">How do you go?</string>
+    <string name="L_09_SENTENCE_BACK_3">How do you get to the company.</string>
+    <string name="L_09_SENTENCE_BACK_4">How do you get to the company from home.</string>
+    <string name="L_09_SENTENCE_BACK_5">to take / to ride</string>
+    <string name="L_09_SENTENCE_BACK_6">I take.</string>
+    <string name="L_09_SENTENCE_BACK_7">I take the subway.</string>
+    <string name="L_09_SENTENCE_BACK_8">It takes (time)</string>
+    <string name="L_09_SENTENCE_BACK_9">Does it take?</string>
+    <string name="L_09_SENTENCE_BACK_10">How long does it take?</string>
+    <string name="L_09_SENTENCE_BACK_11">It takes 30 mins.</string>
+    <string name="L_09_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_4">"When referring to a range of places, use '~에서 ~까지'."</string>
+    <string name="L_09_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_11">-</string>
+
+    <string name="L_10_TITLE">range2 (for time)</string>
+    <string name="L_10_WORD_BACK_0">time</string>
+    <string name="L_10_WORD_BACK_1">to work</string>
+    <string name="L_10_WORD_BACK_2">how many</string>
+    <string name="L_10_WORD_BACK_3">am.</string>
+    <string name="L_10_WORD_BACK_4">pm.</string>
+    <string name="L_10_WORD_BACK_5">noon / lunch</string>
+    <string name="L_10_WORD_BACK_6">when</string>
+    <string name="L_10_SENTENCE_BACK_0">to work</string>
+    <string name="L_10_SENTENCE_BACK_1">Do you work?</string>
+    <string name="L_10_SENTENCE_BACK_2">How many hours do you work?</string>
+    <string name="L_10_SENTENCE_BACK_3">I work.</string>
+    <string name="L_10_SENTENCE_BACK_4">I work until 6 pm.</string>
+    <string name="L_10_SENTENCE_BACK_5">I work from 9 am to 6 pm.</string>
+    <string name="L_10_SENTENCE_BACK_6">when</string>
+    <string name="L_10_SENTENCE_BACK_7">When is it?</string>
+    <string name="L_10_SENTENCE_BACK_8">When is the lunch break?</string>
+    <string name="L_10_SENTENCE_BACK_9">It\'s from 12:30 to 1:30.</string>
+    <string name="L_10_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_2">"Use '몇' when asking questions about numbers"</string>
+    <string name="L_10_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_5">"When referring to a range of time, use '~부터 ~까지'.
+Its okay to use ""~에서 ~ 까지"" for a range of places"</string>
+    <string name="L_10_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_10_SENTENCE_EXPLAIN_9">"30 minutes can also be called '반'."</string>
+
+    <string name="L_11_TITLE">listing</string>
+    <string name="L_11_WORD_BACK_0">to like</string>
+    <string name="L_11_WORD_BACK_1">yes</string>
+    <string name="L_11_WORD_BACK_2">the most</string>
+    <string name="L_11_WORD_BACK_3">why</string>
+    <string name="L_11_WORD_BACK_4">and</string>
+    <string name="L_11_WORD_BACK_5">well</string>
+    <string name="L_11_WORD_BACK_6">sing a song</string>
+    <string name="L_11_WORD_BACK_7">dance</string>
+    <string name="L_11_SENTENCE_BACK_0">like</string>
+    <string name="L_11_SENTENCE_BACK_1">Do you like?</string>
+    <string name="L_11_SENTENCE_BACK_2">Do you like K-pop?</string>
+    <string name="L_11_SENTENCE_BACK_3">Yes</string>
+    <string name="L_11_SENTENCE_BACK_4">Yes, I like it.</string>
+    <string name="L_11_SENTENCE_BACK_5">Yes, I like BTS.</string>
+    <string name="L_11_SENTENCE_BACK_6">Yes, I like BTS the most.</string>
+    <string name="L_11_SENTENCE_BACK_7">Why do you like BTS?</string>
+    <string name="L_11_SENTENCE_BACK_8">sing a song</string>
+    <string name="L_11_SENTENCE_BACK_9">sing a song.</string>
+    <string name="L_11_SENTENCE_BACK_10">good at singing.</string>
+    <string name="L_11_SENTENCE_BACK_11">BTS sings songs well</string>
+    <string name="L_11_SENTENCE_BACK_12">dance</string>
+    <string name="L_11_SENTENCE_BACK_13">dance</string>
+    <string name="L_11_SENTENCE_BACK_14">good at dancing.</string>
+    <string name="L_11_SENTENCE_BACK_15">good at dancing as well.</string>
+    <string name="L_11_SENTENCE_BACK_16">BTS is good at singing and dancing as well.</string>
+    <string name="L_11_SENTENCE_BACK_17">BTS is good at singing and dancing as well.</string>
+    <string name="L_11_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_9">"부르다' -> '부르' + '어요' = '부르어요' -> '불러요' (exception)"</string>
+    <string name="L_11_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_11">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_12">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_13">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_14">-</string>
+    <string name="L_11_SENTENCE_EXPLAIN_15">"We can use '도' to mean 'also'."</string>
+    <string name="L_11_SENTENCE_EXPLAIN_16">"Use '그리고' to list sentences."</string>
+    <string name="L_11_SENTENCE_EXPLAIN_17">"Use '~고' to combine two sentences together using '그리고'.
+ex) '부르다' -> '부르' + '고' = '부르고'"</string>
+
+    <string name="L_12_TITLE">contrast</string>
+    <string name="L_12_WORD_BACK_0">difficult</string>
+    <string name="L_12_WORD_BACK_1">to speak</string>
+    <string name="L_12_WORD_BACK_2">to write</string>
+    <string name="L_12_WORD_BACK_3">but</string>
+    <string name="L_12_WORD_BACK_4">to read</string>
+    <string name="L_12_WORD_BACK_5">easy</string>
+    <string name="L_12_SENTENCE_BACK_0">How is it?</string>
+    <string name="L_12_SENTENCE_BACK_1">How\'s learnining Korean?</string>
+    <string name="L_12_SENTENCE_BACK_2">difficult</string>
+    <string name="L_12_SENTENCE_BACK_3">It\'s difficult.</string>
+    <string name="L_12_SENTENCE_BACK_4">Korean is difficult.</string>
+    <string name="L_12_SENTENCE_BACK_5">interesting</string>
+    <string name="L_12_SENTENCE_BACK_6">It\'s interesting.</string>
+    <string name="L_12_SENTENCE_BACK_7">Korean is difficult but interesting.</string>
+    <string name="L_12_SENTENCE_BACK_8">Korean is difficult but interesting.</string>
+    <string name="L_12_SENTENCE_BACK_9">Is it difficult?</string>
+    <string name="L_12_SENTENCE_BACK_10">What is difficult?</string>
+    <string name="L_12_SENTENCE_BACK_11">What is the most difficult?</string>
+    <string name="L_12_SENTENCE_BACK_12">It\'s difficult.</string>
+    <string name="L_12_SENTENCE_BACK_13">Speaking is difficult.</string>
+    <string name="L_12_SENTENCE_BACK_14">Speaking and writing are difficult.</string>
+    <string name="L_12_SENTENCE_BACK_15">It\'s easy.</string>
+    <string name="L_12_SENTENCE_BACK_16">Reading is easy.</string>
+    <string name="L_12_SENTENCE_BACK_17">Speaking and writing are difficult but reading is easy.</string>
+    <string name="L_12_SENTENCE_BACK_18">Speaking and writing are difficult but reading is easy.</string>
+    <string name="L_12_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_3">"어렵다' -> '어렵' + '어요' = '어렵어요' -> '어려워요' (exception)"</string>
+    <string name="L_12_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_8">"Use '~지만' to combine two sentences together using '하지만'.
+ex) '어렵다' -> '어렵' + '지만' = '어렵지만'"</string>
+    <string name="L_12_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_11">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_12">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_13">"When you change a verb to a noun, you can use '~기' like '~ing' in English.
+ex) 말하다 -> 말하기 / speak -> speaking
+쓰다 -> 쓰기 / write -> writing
+읽다 -> 읽기 / read -> reading"</string>
+    <string name="L_12_SENTENCE_EXPLAIN_14">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_15">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_16">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_17">-</string>
+    <string name="L_12_SENTENCE_EXPLAIN_18">-</string>
+
+    <string name="L_13_TITLE">time expression 1</string>
+    <string name="L_13_WORD_BACK_0">have a cold</string>
+    <string name="L_13_WORD_BACK_1">to eat</string>
+    <string name="L_13_WORD_BACK_2">medicine</string>
+    <string name="L_13_WORD_BACK_3">rice / meal</string>
+    <string name="L_13_WORD_BACK_4">before</string>
+    <string name="L_13_SENTENCE_BACK_0">have a cold</string>
+    <string name="L_13_SENTENCE_BACK_1">I had a cold.</string>
+    <string name="L_13_SENTENCE_BACK_2">to eat</string>
+    <string name="L_13_SENTENCE_BACK_3">You eat.</string>
+    <string name="L_13_SENTENCE_BACK_4">Take this medicine.</string>
+    <string name="L_13_SENTENCE_BACK_5">How do I take it?</string>
+    <string name="L_13_SENTENCE_BACK_6">have a meal</string>
+    <string name="L_13_SENTENCE_BACK_7">having a meal</string>
+    <string name="L_13_SENTENCE_BACK_8">Take this medicine before you have a meal</string>
+    <string name="L_13_SENTENCE_BACK_9">Take this medicine 30 minutes before you have a meal</string>
+    <string name="L_13_SENTENCE_EXPLAIN_0">"감기' and '걸리다' is a commonly used word, so it is good to memorize it together."</string>
+    <string name="L_13_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_13_SENTENCE_EXPLAIN_8">"You can also use 'N + 전에' instead of 'V + 기 전에'
+However, only nouns that can be used as 'N + 하다'
+(nouns that represent actions) are possible.
+ex)
+'식사' + '하다' = '식사하다' (o)
+식사 하기 전에~
+식사 전에~
+'쇼핑' + '하다' = '쇼핑하다' (o)
+쇼핑 하기 전에~
+쇼핑 전에 ~"</string>
+    <string name="L_13_SENTENCE_EXPLAIN_9">-</string>
+
+    <string name="L_14_TITLE">time expression 2</string>
+    <string name="L_14_WORD_BACK_0">today</string>
+    <string name="L_14_WORD_BACK_1">night / dinner</string>
+    <string name="L_14_WORD_BACK_2">work</string>
+    <string name="L_14_WORD_BACK_3">finish</string>
+    <string name="L_14_WORD_BACK_4">after</string>
+    <string name="L_14_WORD_BACK_5">family</string>
+    <string name="L_14_WORD_BACK_6">drama</string>
+    <string name="L_14_WORD_BACK_7">to see / watch</string>
+    <string name="L_14_WORD_BACK_8">recommend</string>
+    <string name="L_14_SENTENCE_BACK_0">What do you do?</string>
+    <string name="L_14_SENTENCE_BACK_1">What do you do at night?</string>
+    <string name="L_14_SENTENCE_BACK_2">What will you do at night today?</string>
+    <string name="L_14_SENTENCE_BACK_3">finish</string>
+    <string name="L_14_SENTENCE_BACK_4">after finishing</string>
+    <string name="L_14_SENTENCE_BACK_5">after finishing work</string>
+    <string name="L_14_SENTENCE_BACK_6">I\'ll have dinner after finishing work.</string>
+    <string name="L_14_SENTENCE_BACK_7">I\'ll have dinner after finishing work with my family.</string>
+    <string name="L_14_SENTENCE_BACK_8">to eat</string>
+    <string name="L_14_SENTENCE_BACK_9">after having</string>
+    <string name="L_14_SENTENCE_BACK_10">after having dinner</string>
+    <string name="L_14_SENTENCE_BACK_11">I watch a drama after having dinner.</string>
+    <string name="L_14_SENTENCE_BACK_12">I\'ll watch a drama after having dinner.</string>
+    <string name="L_14_SENTENCE_BACK_13">to watch</string>
+    <string name="L_14_SENTENCE_BACK_14">Do you watch?</string>
+    <string name="L_14_SENTENCE_BACK_15">Do you watch dramas?</string>
+    <string name="L_14_SENTENCE_BACK_16">Did you watch any dramas recently?</string>
+    <string name="L_14_SENTENCE_BACK_17">recommend</string>
+    <string name="L_14_SENTENCE_BACK_18">I recommend.</string>
+    <string name="L_14_SENTENCE_BACK_19">Please recommend.</string>
+    <string name="L_14_SENTENCE_BACK_20">Please recommend me too.</string>
+    <string name="L_14_SENTENCE_EXPLAIN_0">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_2">"You can also say '뭐 할거예요?' when using future tense like you learned in Lesson 5.
+But in situations where the content of the future is clear, such as 'tonight',
+you can use the present tense."</string>
+    <string name="L_14_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_4">"If the verb doesn't have a batchim, use 'V-ㄴ 후에' and use 'V-은 후에' when it has a batchim.
+'끝나다' -> '끝나' + 'ㄴ 후에' = '끝난 후에'
+You can also use 'N + 후에' instead.
+Of course, nouns that can only be uses as 'N + 하다'
+(nouns that represent actions) are possible like 'N + 전에'.
+ex) '운동' + '하다' = '운동하다' (o)
+운동 한 후에~
+운동 후에~"</string>
+    <string name="L_14_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_7">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_8">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_9">"먹다' -> '먹' + '은 후에' = '먹은 후에'"</string>
+    <string name="L_14_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_11">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_12">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_13">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_14">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_15">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_16">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_17">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_18">-</string>
+    <string name="L_14_SENTENCE_EXPLAIN_19">"When you ask something, you can use '~아/어 주세요'.
+'추천하다' -> 추천해요' -> '추천해' + '주세요' = '추천해 주세요'"</string>
+    <string name="L_14_SENTENCE_EXPLAIN_20">-</string>
+
+
 
 
     <!--번역 필요 없는 부분-->
@@ -370,7 +1149,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="DB_TEACHERS_WRITINGS">android/podo/teachers/requests/writings</string>
     <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
     <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>
-    <string name="LOADING">Loading...</string>
+    <string name="LOADING">Loading</string>
 
 
     <!--지울것-->

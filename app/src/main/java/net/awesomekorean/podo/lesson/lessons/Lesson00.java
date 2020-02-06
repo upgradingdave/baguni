@@ -4,18 +4,17 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.Lesson;
 import net.awesomekorean.podo.lesson.LessonItem;
 
-public class Lesson0 extends LessonInit implements Lesson, LessonItem {
+public class Lesson00 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_00";
     private int title = R.string.L_00_TITLE;
     private String subTitle = "안녕하세요?";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.greetings;
 
     final static String[] wordFront = {"안녕하세요", "다음", "또", "보다", "가다"};
     final static String[] wordPronunciation = {"-", "-", "-", "-", "-"};
     final static String[] wordSynonyms = {"-", "-", "다시", "-", "-"};
     final static String[] wordAntonyms = {"안녕히 계세요 / 안녕히 가세요", "전", "-", "안 보다", "오다"};
-    final static String[] wordApplication = {"-", "다음 역은 서울역입니다", "한국에 또 가고 싶어요", "영화를 보다", "학교에 가다"};
 
     final static String[] sentenceFront = {
             "안녕하세요? / 안녕?",
@@ -59,11 +58,6 @@ public class Lesson0 extends LessonInit implements Lesson, LessonItem {
     @Override
     public String[] getWordAntonyms() {
         return wordAntonyms;
-    }
-
-    @Override
-    public String[] getWordApplication() {
-        return wordApplication;
     }
 
     @Override

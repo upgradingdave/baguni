@@ -4,24 +4,23 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.Lesson;
 import net.awesomekorean.podo.lesson.LessonItem;
 
-public class Lesson1 extends LessonInit implements Lesson, LessonItem {
+public class Lesson01 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_01";
     private int title = R.string.L_01_TITLE;
     private String subTitle = "제 이름은 데니예요";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.selfintroduction;
 
     final static String[] wordFront = {"이름", "뭐", "어느", "나라", "사람", "한국"};
     final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
     final static String[] wordSynonyms = {"-", "무엇", "-", "국가", "~인", "-"};
     final static String[] wordAntonyms = {"-", "-", "-", "-", "물건", "-"};
-    final static String[] wordApplication = {"이름이 뭐예요?", "이거 뭐예요?", "어느 것이 좋아요?", "우리 나라 좋아요", "한국 사람 = 한국인", "한국 사람이에요"};
 
     final static String[] sentenceFront = {
             "뭐",
             "뭐예요?",
             "이름이 뭐예요?",
-            "데니예요. / 데닝이에요.",
+            "데니예요. / 메간이에요.",
             "나라",
             "어느 나라",
             "어느 나라 사람이에요?",
@@ -61,11 +60,6 @@ public class Lesson1 extends LessonInit implements Lesson, LessonItem {
     @Override
     public String[] getWordAntonyms() {
         return wordAntonyms;
-    }
-
-    @Override
-    public String[] getWordApplication() {
-        return wordApplication;
     }
 
     @Override

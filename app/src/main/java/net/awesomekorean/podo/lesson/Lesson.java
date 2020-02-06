@@ -10,8 +10,6 @@ public interface Lesson {
 
     String[] getWordAntonyms();
 
-    String[] getWordApplication();
-
     String[] getSentenceFront();
 
     String[] getSentenceClause();

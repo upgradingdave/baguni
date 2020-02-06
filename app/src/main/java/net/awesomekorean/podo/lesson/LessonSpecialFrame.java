@@ -15,7 +15,6 @@ import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson1;
 
 public class LessonSpecialFrame extends AppCompatActivity {
 

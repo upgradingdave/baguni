@@ -18,9 +18,6 @@ import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
-import net.awesomekorean.podo.lesson.lessons.Lesson0;
-import net.awesomekorean.podo.lesson.lessons.Lesson1;
-import net.awesomekorean.podo.lesson.lessons.Lesson2;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
 
@@ -38,7 +35,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static TextView tvWordPronunciation;
     static TextView tvWordSynonyms;
     static TextView tvWordAntonyms;
-    static TextView tvWordApplication;
     static ImageView btnAudio;
 
     static int lessonCount;
@@ -51,7 +47,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] wordPronunciation;
     static String[] wordAntonyms;
     static String[] wordSynonyms;
-    static String[] wordApplication;
     static String[] wordAudio;
     static String[] sentenceFront;
     static String[] sentenceBack;
@@ -86,7 +81,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordPronunciation = view.findViewById(R.id.tvWordPronunciation);
         tvWordSynonyms = view.findViewById(R.id.tvWordSynonyms);
         tvWordAntonyms = view.findViewById(R.id.tvWordAntonyms);
-        tvWordApplication = view.findViewById(R.id.tvWordApplication);
 
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
@@ -131,7 +125,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         wordPronunciation = lesson.getWordPronunciation();
         wordSynonyms = lesson.getWordSynonyms();
         wordAntonyms = lesson.getWordAntonyms();
-        wordApplication = lesson.getWordApplication();
 
         sentenceFront = lesson.getSentenceFront();
         sentenceClause = lesson.getSentenceClause();
@@ -163,7 +156,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordPronunciation.setText(wordPronunciation[lessonCount]);
         tvWordSynonyms.setText(wordSynonyms[lessonCount]);
         tvWordAntonyms.setText(wordAntonyms[lessonCount]);
-        tvWordApplication.setText(wordApplication[lessonCount]);
         playAudioWithString.playAudio(context, wordAudio[lessonCount]);
     }
 
