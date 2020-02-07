@@ -227,8 +227,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     public void audioPlay() {
 
-        String audioFile = thisHangul.getHangulAudio(currentHangul);
-        playAudioWithString.playAudio(context, audioFile);
+        String audioFile = thisHangul.getHangulAudio(currentHangul) + ".mp3";
+        playAudioWithString.playAudio(audioFile, conVowBat);
     }
 
 

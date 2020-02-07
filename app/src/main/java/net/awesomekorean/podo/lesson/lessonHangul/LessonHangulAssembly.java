@@ -20,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.PlayAudioWithString;
 
 import java.io.IOException;
 
@@ -93,6 +94,8 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     String audioFile;
 
+    PlayAudioWithString playAudioWithString =  new PlayAudioWithString();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,12 +159,12 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                 if(consonantSelected == true && vowelSelected == true && batchimSelected == false) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel);
                     audioFile = hangul.getAudioFile();
-                    playAudio(audioFile);
+                    playAudioWithString.playAudio(audioFile, "assy");
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else if(consonantSelected == true && vowelSelected == true && batchimSelected == true) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel, selectedBatchim);
                     audioFile = hangul.getAudioFile();
-                    playAudio(audioFile);
+                    playAudioWithString.playAudio(audioFile, "assy");
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else {
                     assemblyTextView.setText(selectedHangul);
@@ -174,38 +177,13 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     }
 
 
-    // 저장소에서 오디오 재생하기
-    public void playAudio(String audioFile) {
-        System.out.println("audioFile" + audioFile);
-        StorageReference storageRef = storage.getReference().child("assy").child(audioFile);
-        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String url = uri.toString();
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                try {
-                    mediaPlayer.setDataSource(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mediaPlayer.start();
-            }
-        });
-    }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.btnAudio :
                 if(audioFile != null) {
-                    playAudio(audioFile);
+                    playAudioWithString.playAudio(audioFile, "assy");
                 }
                 break;
 
