@@ -19,7 +19,7 @@ public class Reading10 extends ReadingInit implements Reading {
             "복잡한",
             " ",
             "모양",
-            "을 가지고 있습니다. \n어떤 의미를 가지고 있는지 볼까요?\n\n",
+            "을 가지고 있습니다. \n어떤 의미를 가지고 있을까요?\n\n",
             "가운데",
             "에 빨간색과 파란색은 ",
             "각각",

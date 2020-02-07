@@ -2,16 +2,10 @@ package net.awesomekorean.podo.reading;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,19 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.LessonItem;
-import net.awesomekorean.podo.purchase.TopUp;
-import net.awesomekorean.podo.reading.readings.Reading00;
+import net.awesomekorean.podo.reading.readings.Reading08;
 import net.awesomekorean.podo.reading.readings.Reading01;
 import net.awesomekorean.podo.reading.readings.Reading02;
 import net.awesomekorean.podo.reading.readings.Reading03;
@@ -39,7 +27,7 @@ import net.awesomekorean.podo.reading.readings.Reading04;
 import net.awesomekorean.podo.reading.readings.Reading05;
 import net.awesomekorean.podo.reading.readings.Reading06;
 import net.awesomekorean.podo.reading.readings.Reading07;
-import net.awesomekorean.podo.reading.readings.Reading08;
+import net.awesomekorean.podo.reading.readings.Reading00;
 import net.awesomekorean.podo.reading.readings.Reading09;
 import net.awesomekorean.podo.reading.readings.Reading10;
 import net.awesomekorean.podo.reading.readings.Reading11;
@@ -101,6 +89,9 @@ public class MainReading extends Fragment {
         for(Reading item : items) {
             list.add(item);
         }
+
+        list.get(0).setIsLocked(false);
+        list.get(1).setIsLocked(false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

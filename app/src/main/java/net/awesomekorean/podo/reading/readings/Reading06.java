@@ -19,7 +19,9 @@ public class Reading06 extends ReadingInit implements Reading {
             "달고",
             "",
             "부드러워",
-            "서 한국 사람뿐만 아니라 외국 사람들에게도 인기가 많습니다.\n\n막걸리는 쌀을 ",
+            "서 한국 사람",
+            "뿐만 아니라",
+            " 외국 사람들에게도 인기가 많습니다.\n\n막걸리는 쌀을 ",
             "발효시켜",
             "서 만든 술이기 때문에 다른 술과 다르게 ",
             "유산균",
@@ -38,8 +40,8 @@ public class Reading06 extends ReadingInit implements Reading {
             " 즐기면 좋을 것 같습니다.\n\n"
     };
 
-    final String[] popUpFront = {"쌀", "전통 술", "달다", "부드럽다", "발효시키다", "유산균", "장", "피부", "면역력", "영향", "취하다", "적당히"};
-    final String[] popUpBack = {"rice", "traditional wine", "sweet", "soft", "ferment", "lactic acid bacteria", "intestine", "skin", "immunity", "effect", "get drunk", "suitably"};
+    final String[] popUpFront = {"쌀", "전통 술", "달다", "부드럽다", "A 뿐만 아니라", "발효시키다", "유산균", "장", "피부", "면역력", "영향", "취하다", "적당히"};
+    final String[] popUpBack = {"rice", "traditional wine", "sweet", "soft", "not only A", "ferment", "lactic acid bacteria", "intestine", "skin", "immunity", "effect", "get drunk", "suitably"};
 
     private int readingImage = R.drawable.makguli;
 

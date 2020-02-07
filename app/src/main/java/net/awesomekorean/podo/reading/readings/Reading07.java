@@ -19,21 +19,11 @@ public class Reading07 extends ReadingInit implements Reading {
             "완전히",
             " 같습니다. \n어떤 사람들은 ‘감사합니다’가 더 ",
             "공손한",
-            " 표현이라고 하는데 이는 잘못된 생각입니다. \n\n아주 ",
-            "옛날",
-            "에 한글이 아직 없었을 때 한국 사람들은 중국의 한자를 사용했습니다. \n하지만 한자는 배우기가 어려워서 ",
-            "똑똑하",
-            "고 돈이 많은 사람들만 사용할 수 있었습니다. \n그리고 그 사람들은 자기들이 ",
-            "특별하다",
-            "는 것을 보여주고 싶어서 한자로 된 단어를 더 많이 사용했습니다.\n그 때의 생각이 잘못 ",
-            "전해져",
-            "서 한자로 된 단어를 더 좋은 표현으로 알고 있는 사람도 있게 되었습니다.\n\n‘감사합니다’가 안 좋은 말이라는 뜻은 아닙니다. \n두 말은 100% 같은 의미이고 모두 공손한 표현이므로 ",
-            "그냥",
-            " 둘 중에 쓰고 싶은 말을 사용하면 됩니다.\n\n"
+            " 표현이라고 하는데 이것은 잘못된 생각입니다. \n\n두 말은 100% 같은 의미이고 모두 공손한 표현이므로 쓰고 싶은 말을 사용하면 됩니다.\n\n"
     };
 
-    final String[] popUpFront = {"여러분", "순수하다", "완전히", "공손하다", "옛날", "똑똑하다", "특별하다", "전해지다", "그냥"};
-    final String[] popUpBack = {"everyone", "pure", "absolutely", "polite", "the old times", "smart", "special", "be told", "just"};
+    final String[] popUpFront = {"여러분", "순수하다", "완전히", "공손하다"};
+    final String[] popUpBack = {"everyone", "pure", "totally", "polite"};
 
     private int readingImage = R.drawable.thankyou;
 

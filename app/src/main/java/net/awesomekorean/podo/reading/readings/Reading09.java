@@ -31,19 +31,19 @@ public class Reading09 extends ReadingInit implements Reading {
             "익숙한",
             " ‘시간’에는 고유어를 사용하지만 ",
             "나중에",
-            " 중국에서 시계가 들어온 후 익숙하지 않은 ‘분’이나 ‘초’는 한자어를 사용하게 되었다는 ",
+            " 중국에서 시계가 들어온 후 알게 된 ‘분’이나 ‘초’는 한자어를 사용하게 되었다는 ",
             "추측",
             "이 있습니다.\n\n대부분의 한국 사람들은 ",
             "습관적으로",
             " ‘시간’과 ‘분’을 ",
             "자연스럽",
-            "게 사용합니다. \n사실 ‘시간’과 ‘분’을 다르게 쓰고 있다는 사실도 모르는 사람들도 많습니다. \n여러분도 많이 듣고 많이 말하면 ",
-            "금방",
-            " 자연스럽게 사용할 수 있을거라고 생각합니다.\n\n"
+            "게 사용합니다. \n사실 ‘시간’과 ‘분’을 다르게 쓰고 있다는 사실도 모르는 사람들도 많습니다. \n여러분도 많이 듣고 많이 말하면 생각하지 않아도 ",
+            "정확히",
+            " 사용할 수 있을거라고 생각합니다.\n\n"
     };
 
-    final String[] popUpFront = {"헷갈리다", "이유", "옛날", "해", "달", "대략", "정확하다", "초", "익숙한", "나중에", "추측", "습관적으로", "자연스럽다", "금방"};
-    final String[] popUpBack = {"be confused", "reason", "the old times", "sun", "moon", "approximately", "exact", "second", "familiar", "later", "guess", "habitually", "natural", "soon"};
+    final String[] popUpFront = {"헷갈리다", "이유", "옛날", "해", "달", "대략", "정확하다", "초", "익숙한", "나중에", "추측", "습관적으로", "자연스럽다", "정확하다"};
+    final String[] popUpBack = {"be confused", "reason", "the old times", "sun", "moon", "approximately", "exact", "second", "familiar", "later", "guess", "habitually", "natural", "correct"};
 
     private int readingImage = R.drawable.onehouronemin;
 

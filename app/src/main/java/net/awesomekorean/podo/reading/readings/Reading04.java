@@ -7,7 +7,7 @@ public class Reading04 extends ReadingInit implements Reading {
 
     String readingId = "R_04";
 
-    final String title = "혈액형의 의미";
+    final String title = "혈액형의 다른 의미";
 
 
     final String[] article = {
@@ -19,13 +19,15 @@ public class Reading04 extends ReadingInit implements Reading {
             "정보",
             "입니다. \n하지만 한국 사람들은 다른 ",
             "의미",
-            "로도 혈액형에 ",
+            "로 혈액형에 ",
             "관심",
-            "이 많습니다. \n같은 혈액형은 비슷한 ",
+            "이 많습니다. \n같은 혈액형은 ",
+            "비슷한 ",
+            "",
             "성격",
             "을 가지고 있다고 생각하기 때문입니다. \n물론 ",
             "재미로",
-            " 그렇게 생각합니다.\n모든 사람의 성격을 4가지로 나누는 것은 ",
+            " 그렇게 생각합니다.\n모든 사람의 성격을 4개로 나누는 것은 ",
             "말도 안되",
             "기 때문입니다. \n하지만 비슷한 경우도 많습니다. \n한 번 같이 볼까요?\n\nA형 : ",
             "신중한",
@@ -49,11 +51,11 @@ public class Reading04 extends ReadingInit implements Reading {
             "싫증",
             "을 잘 내고 빨리 ",
             "포기합",
-            "니다.\n\n"
+            "니다.\n여러분의 혈액형은 무엇인가요? :)\n\n"
     };
 
-    final String[] popUpFront = {"혈액형", "사고가 나다", "정보", "의미", "관심", "성격", "재미로", "말도 안되다", "신중하다", "소심하다", "걱정", "자유롭다", "집중", "밝다", "인기가 많다", "귀찮다", "머리가 좋다", "싫증 내다", "포기하다"};
-    final String[] popUpBack = {"blood type", "have an accident", "information", "meaning", "interest", "personality", "for fun", "ridiculous", "careful", "timid", "worry", "free", "concentration", "bright", "popular", "annoying", "smart", "lose interest", "give up"};
+    final String[] popUpFront = {"혈액형", "사고가 나다", "정보", "의미", "관심", "비슷하다", "성격", "재미로", "말도 안되다", "신중하다", "소심하다", "걱정", "자유롭다", "집중", "밝다", "인기가 많다", "귀찮다", "머리가 좋다", "싫증 내다", "포기하다"};
+    final String[] popUpBack = {"blood type", "have an accident", "information", "meaning", "interest", "similar", "personality", "for fun", "ridiculous", "careful", "timid", "worry", "free", "concentration", "bright", "popular", "annoying", "smart", "lose interest", "give up"};
 
     private int readingImage = R.drawable.bloodtype;
 

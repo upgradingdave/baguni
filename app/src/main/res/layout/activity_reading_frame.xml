@@ -62,7 +62,7 @@
                 android:lineSpacingExtra="10dp"
                 android:background="@android:color/transparent"
                 android:gravity="left|top"
-                android:padding="10dp"
+                android:paddingTop="20dp"
                 android:text="2018 러시아 월드컵 '점쟁이'의 능력이 보통이 아니다.
     월드컵 개막 이후 세 경기 결과를 모두 맞혔다.
     이 고양이는 러시아 상트페테르부르크 에르미타주 박물관에 사는 '아킬레스'이다.
