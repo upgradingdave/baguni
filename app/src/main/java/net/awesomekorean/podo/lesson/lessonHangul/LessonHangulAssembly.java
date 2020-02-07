@@ -176,6 +176,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     // 저장소에서 오디오 재생하기
     public void playAudio(String audioFile) {
+        System.out.println("audioFile" + audioFile);
         StorageReference storageRef = storage.getReference().child("assy").child(audioFile);
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -239,8 +240,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
             case R.id.cvcH :
 
                 vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ"};
-                vowel = new String[] {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅣ", "ㅐ", "ㅒ"};
-
 
                 initialization();
 
