@@ -8,11 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
 import net.awesomekorean.podo.UnixTimeStamp;
-import net.awesomekorean.podo.lesson.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioWithString;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class CollectionRepository {

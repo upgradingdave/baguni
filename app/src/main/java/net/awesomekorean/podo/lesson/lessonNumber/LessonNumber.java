@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioWithString;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberAge;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberMoney;

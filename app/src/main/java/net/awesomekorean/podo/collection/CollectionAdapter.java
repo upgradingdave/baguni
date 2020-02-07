@@ -2,7 +2,6 @@ package net.awesomekorean.podo.collection;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioWithString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionAdapter extends BaseAdapter {

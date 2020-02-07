@@ -23,17 +23,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.PlayAudioWithString;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
+import java.io.IOException;
+
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     Reading reading; // Reading 인스턴스
 
@@ -63,11 +70,14 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     MediaPlayer mediaPlayer;
     Integer playingPosition = null; // 오디오 재생 멈춘 지점
     int playingTime; // 오디오 길이
-    String audio; // 오디오 파일 경로
+    String audioFile;
+    String unitId;
 
     Context context;
 
     SpannableStringBuilder span = new SpannableStringBuilder();
+
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
 
     class MyThread extends Thread {
@@ -169,12 +179,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                             setVisibility(View.VISIBLE, View.GONE);
                             isPlaying = false;
                         }
-                        String audioPopUp = "android.resource://" + context.getPackageName() + "/raw/" + audio + "_" + popUpIndex;
-                        Uri uri = Uri.parse(audioPopUp);
-                        MediaPlayer mpPopUp = MediaPlayer.create(context, uri);
-                        if(mpPopUp != null) {
-                            mpPopUp.start();
-                        }
+
+                        String audioFileWord = unitId + "_" + popUpIndex + ".mp3";
+                        playAudioWithString.playAudioReading(audioFileWord, unitId);
                     }
 
                     @Override
@@ -199,8 +206,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             }
         });
 
-        audio = reading.getReadingId().toLowerCase();
-
+        unitId = reading.getReadingId().toLowerCase();
+        audioFile = unitId + ".mp3";
     }
 
     @Override
@@ -238,18 +245,33 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                     // 최초 플레이 or 다시 플레이 시
                 } else {
-                    String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audio;
-                    Uri uri = Uri.parse(uriPath);
-                    mediaPlayer = MediaPlayer.create(context, uri);
-                    mediaPlayer.setLooping(false); // 무한반복 false
-                    mediaPlayer.start();
-
-                    playingTime = mediaPlayer.getDuration(); // 노래 재생시간
-                    seekBar.setMax(playingTime);
-                    new MyThread().start();
-                    isPlaying = true;
-
-                    setVisibility(View.GONE, View.VISIBLE);
+                    StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(audioFile);
+                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if(mediaPlayer != null) {
+                                mediaPlayer.release();
+                            }
+                            String url = uri.toString();
+                            mediaPlayer = new MediaPlayer();
+                            try {
+                                mediaPlayer.setDataSource(url);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                mediaPlayer.prepare();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            mediaPlayer.start();
+                            playingTime = mediaPlayer.getDuration(); // 노래 재생시간
+                            seekBar.setMax(playingTime);
+                            new MyThread().start();
+                            isPlaying = true;
+                            setVisibility(View.GONE, View.VISIBLE);
+                        }
+                    });
                 }
                 break;
 

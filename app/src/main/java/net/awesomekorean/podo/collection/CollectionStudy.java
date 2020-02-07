@@ -1,6 +1,5 @@
 package net.awesomekorean.podo.collection;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioWithString;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {
 

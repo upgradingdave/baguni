@@ -1,8 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
-import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import net.awesomekorean.podo.PlayAudioWithString;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;

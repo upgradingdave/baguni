@@ -2,8 +2,6 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -15,14 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.PlayAudioWithString;
-
-import java.io.IOException;
+import net.awesomekorean.podo.PlayAudioWithString;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -159,12 +153,12 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                 if(consonantSelected == true && vowelSelected == true && batchimSelected == false) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel);
                     audioFile = hangul.getAudioFile();
-                    playAudioWithString.playAudio(audioFile, "assy");
+                    playAudioWithString.playAudioHangul(audioFile, "assy");
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else if(consonantSelected == true && vowelSelected == true && batchimSelected == true) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel, selectedBatchim);
                     audioFile = hangul.getAudioFile();
-                    playAudioWithString.playAudio(audioFile, "assy");
+                    playAudioWithString.playAudioHangul(audioFile, "assy");
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else {
                     assemblyTextView.setText(selectedHangul);
@@ -183,7 +177,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             case R.id.btnAudio :
                 if(audioFile != null) {
-                    playAudioWithString.playAudio(audioFile, "assy");
+                    playAudioWithString.playAudioHangul(audioFile, "assy");
                 }
                 break;
 

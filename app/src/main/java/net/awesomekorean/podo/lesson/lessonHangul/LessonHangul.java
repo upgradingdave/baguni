@@ -2,11 +2,8 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,10 +12,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GestureDetectorCompat;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioWithString;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -228,7 +224,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     public void audioPlay() {
 
         String audioFile = thisHangul.getHangulAudio(currentHangul) + ".mp3";
-        playAudioWithString.playAudio(audioFile, conVowBat);
+        playAudioWithString.playAudioHangul(audioFile, conVowBat);
     }
 
 
