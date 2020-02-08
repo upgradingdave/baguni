@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading01 implements Reading{
 
     String readingId = "R_01";
-
+    int readingLevel = 1;
     final String title = "‘당신’, ‘그/그녀’ 보다 좋은 표현";
 
 
@@ -89,5 +89,10 @@ public class Reading01 implements Reading{
     @Override
     public void setIsLocked(boolean b) {
         this.isLock = b;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

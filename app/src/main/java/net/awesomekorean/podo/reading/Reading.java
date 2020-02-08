@@ -24,4 +24,6 @@ public interface Reading {
     void setIsCompleted(boolean b);
 
     void setIsLocked(boolean b);
+
+    int getReadingLevel();
 }

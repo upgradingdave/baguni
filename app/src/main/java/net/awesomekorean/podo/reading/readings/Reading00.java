@@ -6,6 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading00 extends ReadingInit implements Reading {
 
     String readingId = "R_00";
+    int readingLevel = 2;
 
     final String title = "한국돈 ‘10,000원’에 있는 사람은?";
 
@@ -19,7 +20,7 @@ public class Reading00 extends ReadingInit implements Reading {
             "가난한",
             " 사람들은 배울 수가 없었습니다. \n나라에서 사람들에게 ",
             "알리",
-            "고 싶은 말이 있으면 글로 써서 사람들이 많이 있는 곳에 ",
+            "고 싶은 말이 있으면 글로 써서 사람들이 많은 곳에 ",
             "붙였",
             "는데 돈이 많고 ",
             "똑똑한",
@@ -27,7 +28,7 @@ public class Reading00 extends ReadingInit implements Reading {
             "이해할",
             " 수 있었습니다. \n그래서 세종대왕이 누구나 배우기 쉬운 ‘한글’을 만들었습니다.\n\n세종대왕은 한글 ",
             "뿐만 아니라",
-            "",
+            " ",
             "과학",
             ", ",
             "예술",
@@ -73,5 +74,10 @@ public class Reading00 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

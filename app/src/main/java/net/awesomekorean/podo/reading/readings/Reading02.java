@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading02 extends ReadingInit implements Reading {
 
     String readingId = "R_02";
-
+    int readingLevel = 2;
     final String title = "한국어의 존댓말";
 
 
@@ -17,9 +17,9 @@ public class Reading02 extends ReadingInit implements Reading {
             "중요합",
             "니다.\n처음 보는 사람이나 나이가 많은 사람에게는 꼭 존댓말을 사용해야 합니다.\n왜냐하면 한국에는 존댓말을 사용해서 ",
             "상대방",
-            "을 ‘",
+            "을 ",
             "존중",
-            "’하는 ",
+            "하는 ",
             "문화",
             "가 있기 때문입니다.\n\n보통 ‘(으)시’를 사용해서 존댓말을 만들지만 ",
             "전혀",
@@ -65,5 +65,10 @@ public class Reading02 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

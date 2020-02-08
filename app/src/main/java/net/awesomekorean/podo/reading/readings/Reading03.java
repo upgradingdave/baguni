@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading03 extends ReadingInit implements Reading {
 
     String readingId = "R_03";
-
+    int readingLevel = 1;
     final String title = "이상한 ‘한국 나이’";
 
 
@@ -61,5 +61,10 @@ public class Reading03 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

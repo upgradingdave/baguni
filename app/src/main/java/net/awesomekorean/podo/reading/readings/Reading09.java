@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading09 extends ReadingInit implements Reading {
 
     String readingId = "R_09";
-
+    int readingLevel = 2;
     final String title = "왜 ‘한’ 시 ‘일’ 분일까?";
 
 
@@ -75,5 +75,10 @@ public class Reading09 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.collection.LLRBBlackValueNode;
+
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.LessonFrame;
 
@@ -29,19 +31,24 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         this.listener = listener;
     }
 
-
+    Context context;
 
     private ArrayList<Reading> list;
 
-    public ReadingAdapter(ArrayList<Reading> list) {
+    public ReadingAdapter(Context context, ArrayList<Reading> list) {
+        this.context = context;
         this.list = list;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
         ImageView readingImage;
         ImageView iconLock;
+        LinearLayout levelRocket1;
+        LinearLayout levelRocket2;
+        LinearLayout levelRocket3;
         LinearLayout layoutCompleted;
 
         ViewHolder(View itemView) {
@@ -50,6 +57,9 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             title = itemView.findViewById(R.id.title);
             readingImage = itemView.findViewById(R.id.readingImage);
             iconLock = itemView.findViewById(R.id.iconLock);
+            levelRocket1 = itemView.findViewById(R.id.levelRocket1);
+            levelRocket2 = itemView.findViewById(R.id.levelRocket2);
+            levelRocket3 = itemView.findViewById(R.id.levelRocket3);
             layoutCompleted = itemView.findViewById(R.id.layoutCompleted);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -86,11 +96,33 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
         holder.title.setText(items.getTitle());
         holder.readingImage.setImageResource(items.getReadingImage());
-        if(items.getIsCompleted()) { holder.layoutCompleted.setVisibility(View.VISIBLE);
-        } else{holder.layoutCompleted.setVisibility(View.INVISIBLE);}
-        if(items.getIsLock()) { holder.iconLock.setVisibility(View.VISIBLE);
-        } else{holder.iconLock.setVisibility(View.INVISIBLE);}
+        if (items.getIsCompleted()) {
+            holder.layoutCompleted.setVisibility(View.VISIBLE);
+        } else {
+            holder.layoutCompleted.setVisibility(View.INVISIBLE);
+        }
+        if (items.getIsLock()) {
+            holder.iconLock.setVisibility(View.VISIBLE);
+        } else {
+            holder.iconLock.setVisibility(View.INVISIBLE);
+        }
+
+        int readingLevel = items.getReadingLevel();
+        if(readingLevel == 1) {
+            setLevel(View.VISIBLE, View.GONE, View.GONE, holder);
+        } else if(readingLevel == 2) {
+            setLevel(View.GONE, View.VISIBLE, View.GONE, holder);
+        } else if(readingLevel == 3) {
+            setLevel(View.GONE, View.GONE, View.VISIBLE, holder);
+        }
     }
+
+    private void setLevel(int rocket1, int rocket2, int rocket3, ViewHolder holder) {
+        holder.levelRocket1.setVisibility(rocket1);
+        holder.levelRocket2.setVisibility(rocket2);
+        holder.levelRocket3.setVisibility(rocket3);
+    }
+
 
     @Override
     public int getItemCount() {

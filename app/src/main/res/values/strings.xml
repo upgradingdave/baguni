@@ -6,7 +6,17 @@
 
     <!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
-    <string name="WELCOME_MSG"> Welcome to Podo blabla</string>
+    <string name="WELCOME_MSG">Received 100 points of Sign up gift.\n\n
+
+- Things you can do with points\n
+1. Lesson: Unlocking Special Lessons\n
+2. Reading: Unlock Readings\n
+3. Writing: Ask a native speaker for correction\n\n
+
+- How to collect points\n
+1. Completing General Lessons\n
+2. Watching ads\n
+3. Purchasing</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
     <string name="PASSWORD_SIX_CHARACTERS_LONG">Should be at least 6 characters</string>

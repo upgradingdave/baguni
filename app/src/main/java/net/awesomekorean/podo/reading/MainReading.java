@@ -36,8 +36,8 @@ import net.awesomekorean.podo.reading.readings.Reading13;
 import net.awesomekorean.podo.reading.readings.Reading14;
 import net.awesomekorean.podo.reading.readings.Reading15;
 import net.awesomekorean.podo.reading.readings.Reading16;
+import net.awesomekorean.podo.reading.readings.Reading17;
 import net.awesomekorean.podo.reading.readings.Reading18;
-import net.awesomekorean.podo.reading.readings.Reading19;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public class MainReading extends Fragment {
         list = new ArrayList<>();
 
         Reading[] items = {
-                new Reading00(), new Reading01(), new Reading02(), new Reading03(), new Reading04(), new Reading05(), new Reading06(), new Reading07(), new Reading08(), new Reading09(), new Reading10(), new Reading11(), new Reading12(), new Reading13(), new Reading14(), new Reading15(), new Reading16(), new Reading18(), new Reading19()
+                new Reading00(), new Reading01(), new Reading02(), new Reading03(), new Reading04(), new Reading05(), new Reading06(), new Reading07(), new Reading08(), new Reading09(), new Reading10(), new Reading11(), new Reading12(), new Reading13(), new Reading14(), new Reading15(), new Reading16(), new Reading17(), new Reading18()
         };
 
         for(Reading item : items) {
@@ -96,7 +96,7 @@ public class MainReading extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new ReadingAdapter(list);
+        adapter = new ReadingAdapter(getContext(), list);
 
         setCompletedReadings();
         setUnlockedReadings();

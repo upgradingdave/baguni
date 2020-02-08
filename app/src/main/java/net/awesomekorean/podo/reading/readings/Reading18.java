@@ -6,32 +6,28 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading18 extends ReadingInit implements Reading {
 
     String readingId = "R_18";
-
-    final String title = "생일에 미역국을 먹는 이유";
+    int readingLevel = 1;
+    final String title = "한국의 명절 - 설날";
 
 
     final String[] article = {
-            "한국 사람들은 생일이 되면 꼭 ‘",
-            "미역국",
-            "’을 먹습니다. \n생일 케이크처럼 ",
-            "보통",
-            " 가족이나 친한 친구가 미역국을 만들어 줍니다. 생일에 미역국을 먹지 못하면 아주 슬플 정도로 한국인에게 생일 미역국은 중요한 음식입니다. \n\n그럼 생일에 왜 미역국을 먹을까요? \n미역은 아이를 ",
-            "낳은",
-            " 후에 몸을 ",
-            "회복시켜",
-            "주는데 아주 좋은 음식입니다. \n그래서 한국에서 아이를 낳으면 ",
-            "며칠 동안",
-            " 계속 미역국을 먹습니다. \n\n",
-            "원래",
-            " 미역국은 엄마가 먹었던 것이지만 시간이 지나면서 생일을 축하하는 ",
-            "의미",
-            "로 미역국을 먹는 문화가 생겼습니다.\n\n"
+            "‘설날’은 ",
+            "음력 새해",
+            "를 말하며 ‘설’이라고도 합니다. \n설날에는 ",
+            "친척",
+            "들이 모두 모여서 맛있는 음식도 만들어 먹고 ",
+            "전통놀이",
+            "를 하기도 합니다. \n\n설날에 먹는 가장 중요한 음식은 ‘떡국’ 입니다. \n설날에 떡국을 먹으면 나이를 한 살 더 먹는다는 의미가 있습니다.\n\n그리고 설날에는 아이들이 가장 좋아하는 ‘세배’도 합니다. \n세배는 ",
+            "어른",
+            "들께 ‘새해 복 많이 받으세요’라고 말하면서 ",
+            "절",
+            "을 하는 것을 말합니다. \n절을 받은 어른들은 좋은 이야기를 해주고 아이들에게는 돈을 줍니다. \n이것을 ‘세뱃돈’이라고 합니다. \n그래서 아이들은 모든 어른들에게 세배를 하고 싶어합니다.\n\n설날에 하는 전통놀이도 많습니다. \n친척들과 팀을 만들어 ‘윷놀이’, ‘널뛰기’, ‘제기차기’ 등을 하며 즐거운 설날을 보냅니다.\n\n"
     };
 
-    final String[] popUpFront = {"미역국", "보통", "낳다", "회복시키다", "며칠 동안", "원래", "의미"};
-    final String[] popUpBack = {"seaweed soup", "normally", "give birth", "recovery", "for a few days", "originally", "meaning"};
+    final String[] popUpFront = {"음력 새해", "친척", "전통놀이", "어른", "절"};
+    final String[] popUpBack = {"lunar new year", "relative", "traditional game", "older people", "bow"};
 
-    private int readingImage = R.drawable.seaweedsoup;
+    private int readingImage = R.drawable.sulnal;
 
     @Override
     public String getReadingId() {
@@ -61,5 +57,10 @@ public class Reading18 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading08 implements Reading {
 
     String readingId = "R_08";
-
+    int readingLevel = 1;
     final String title = "‘네’ 를 말하는 여러가지 방법";
 
 
@@ -83,5 +83,10 @@ public class Reading08 implements Reading {
     @Override
     public void setIsLocked(boolean b) {
         this.isLock = b;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

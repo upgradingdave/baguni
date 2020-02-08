@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading04 extends ReadingInit implements Reading {
 
     String readingId = "R_04";
-
+    int readingLevel = 2;
     final String title = "혈액형의 다른 의미";
 
 
@@ -51,7 +51,7 @@ public class Reading04 extends ReadingInit implements Reading {
             "싫증",
             "을 잘 내고 빨리 ",
             "포기합",
-            "니다.\n여러분의 혈액형은 무엇인가요? :)\n\n"
+            "니다.\n\n여러분의 혈액형은 무엇인가요? :)\n\n"
     };
 
     final String[] popUpFront = {"혈액형", "사고가 나다", "정보", "의미", "관심", "비슷하다", "성격", "재미로", "말도 안되다", "신중하다", "소심하다", "걱정", "자유롭다", "집중", "밝다", "인기가 많다", "귀찮다", "머리가 좋다", "싫증 내다", "포기하다"};
@@ -87,5 +87,10 @@ public class Reading04 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

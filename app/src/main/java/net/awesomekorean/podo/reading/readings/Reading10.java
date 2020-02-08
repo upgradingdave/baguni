@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading10 extends ReadingInit implements Reading {
 
     String readingId = "R_10";
-
+    int readingLevel = 2;
     final String title = "태극기의 의미";
 
 
@@ -82,5 +82,10 @@ public class Reading10 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

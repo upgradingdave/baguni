@@ -6,7 +6,7 @@ import net.awesomekorean.podo.reading.Reading;
 public class Reading12 extends ReadingInit implements Reading {
 
     String readingId = "R_12";
-
+    int readingLevel = 2;
     final String title = "집들이 선물";
 
 
@@ -39,7 +39,7 @@ public class Reading12 extends ReadingInit implements Reading {
             "해결된다",
             "는 뜻도 있기 때문에 새로운 집에서 모든 일이 잘 풀리기를 ",
             "바란다",
-            "는 의미도 가지고 있습니다.",
+            "는 의미도 가지고 있습니다.\n",
             "게다가",
             " 휴지나 세제는 모든 집에 꼭 필요한 물건이고 아무리 많아도 다 사용할 수 있기 때문에 아주 ",
             "실용적",
@@ -47,7 +47,7 @@ public class Reading12 extends ReadingInit implements Reading {
     };
 
     final String[] popUpFront = {"새로운", "이사", "초대", "휴지", "세제", "이상하다", "느낌", "제사", "또한", "풀다", "문제", "고민", "해결되다", "바라다", "게다가", "실용적이다"};
-    final String[] popUpBack = {"new", "move", "invitation", "tissue", "detergent", "strange", "feeling", "ancestral rites", "in addition", "solve", "trouble", "worry", "be solved", "wish", "moreover", "practical"};
+    final String[] popUpBack = {"new", "move", "invitation", "tissue", "detergent", "strange", "feeling", "ancestral rites", "in addition", "be solved", "trouble", "worry", "be solved", "wish", "moreover", "practical"};
 
     private int readingImage = R.drawable.jipdli;
 
@@ -80,5 +80,10 @@ public class Reading12 extends ReadingInit implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
+    }
+
+    @Override
+    public int getReadingLevel() {
+        return this.readingLevel;
     }
 }

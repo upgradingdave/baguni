@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.awesomekorean.podo">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -60,7 +61,6 @@
         <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
         <activity android:name=".login.SignIn">
-
         </activity>
         <activity android:name=".collection.CollectionStudy" />
         <activity android:name=".collection.CollectionFlashCard" />
@@ -80,7 +80,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
