@@ -76,7 +76,7 @@
         android:layout_height="0dp">
 
         <TextView
-            android:id="@+id/studyFront"
+            android:id="@+id/numberFront"
             android:text="TEST"
             android:textColor="@color/BLACK"
             android:textSize="40dp"
@@ -86,7 +86,7 @@
             android:layout_height="0dp" />
 
         <TextView
-            android:id="@+id/studyBack"
+            android:id="@+id/numberBack"
             android:text="TEST"
             android:textColor="@color/GREY_TEXT"
             android:textSize="40dp"
@@ -115,6 +115,7 @@
 
     <ImageView
         android:id="@+id/btnAudio"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/layoutStudy"
         app:layout_constraintEnd_toEndOf="@id/layoutStudy"
         android:layout_margin="20dp"

@@ -23,9 +23,8 @@ import java.util.Random;
 
 public class LessonNumber extends AppCompatActivity implements View.OnClickListener {
 
-    TextView studyFront;
-    TextView studyBack;
-    String studyAudio;
+    TextView numberFront;
+    TextView numberBack;
 
     ImageView btnBack;
     TextView btnRandom;
@@ -35,11 +34,17 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
     Number number;
 
+    String numberTitle;
+    String[] numberAudio;
+    int numberLength;
+
     boolean randomBtnClicked = false;
 
     int index = 0; // 최신 플래시 카드부터 공부할 때의 인덱스
 
     Random random = new Random();
+
+    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +56,8 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
         btnInOrder = findViewById(R.id.btnInOrder);
         btnAudio = findViewById(R.id.btnAudio);
         btnNext = findViewById(R.id.btnNext);
-        studyFront = findViewById(R.id.studyFront);
-        studyBack = findViewById(R.id.studyBack);
+        numberFront = findViewById(R.id.numberFront);
+        numberBack = findViewById(R.id.numberBack);
         btnBack.setOnClickListener(this);
         btnRandom.setOnClickListener(this);
         btnInOrder.setOnClickListener(this);
@@ -61,58 +66,70 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = getIntent();
 
-        switch (intent.getExtras().getString("extra")) {
+        numberTitle = intent.getExtras().getString("extra");
+
+        switch (numberTitle) {
 
             case "sino" :
                 number = new NumberSino();
+                setNumbers(numberTitle);
                 break;
 
             case "native" :
                 number = new NumberNative();
+                setNumbers(numberTitle);
                 break;
 
             case "time" :
                 number = new NumberTime();
+                setNumbers(numberTitle);
                 break;
 
             case "money" :
                 number = new NumberMoney();
+                setNumbers(numberTitle);
                 break;
 
             case "date" :
                 number = new NumberDate();
+                setNumbers(numberTitle);
                 break;
 
             case "age" :
                 number = new NumberAge();
+                setNumbers(numberTitle);
                 break;
-
         }
 
-        studyBack.setVisibility(View.INVISIBLE);
+        numberBack.setVisibility(View.INVISIBLE);
         numberStudyInOrder();
+    }
+
+    private void setNumbers(String numberTitle) {
+        numberLength = number.getFront().length;
+        numberAudio = new String[numberLength];
+        for(int i=0; i<numberLength; i++) {
+            numberAudio[i] = "number_" + numberTitle + "_" + i + ".mp3";
+        }
     }
 
     // 랜덤학습 시작
     public void numberStudyRandom() {
-        int randonIndex = random.nextInt(number.getFront().length);
-        studyFront.setText(number.getFront()[randonIndex]);
-        studyBack.setText(number.getBack()[randonIndex]);
+        int randomIndex = random.nextInt(number.getFront().length);
+        index = randomIndex;
+        displayNumber();
     }
-
 
     // 최신부터 학습 모드
     public void numberStudyInOrder() {
-        studyFront.setText(number.getFront()[index]);
-        studyBack.setText(number.getBack()[index]);
-
-        if(index < number.getFront().length-1) {
-            index++;
-        } else {
-            index = 0;
-        }
-
+        displayNumber();
     }
+
+    private void displayNumber() {
+        numberFront.setText(number.getFront()[index]);
+        numberBack.setText(number.getBack()[index]);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -142,23 +159,30 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnAudio :
-                if(studyAudio != null) {
-                    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
-                    playAudioWithString.playAudio(getApplicationContext(), studyAudio);
-                }
+                playAudioWithString.playAudioNumber(numberAudio[index], numberTitle);
                 break;
 
             case R.id.btnNext :
-                if(studyBack.getVisibility()==View.INVISIBLE) {
-                    studyBack.setVisibility(View.VISIBLE);
+                if(numberBack.getVisibility()==View.INVISIBLE) {
+                    playAudioWithString.playAudioNumber(numberAudio[index], numberTitle);
+                    btnAudio.setVisibility(View.VISIBLE);
+                    numberBack.setVisibility(View.VISIBLE);
                     btnNext.setText(getString(R.string.NEXT));
+
                 } else {
-                    studyBack.setVisibility(View.INVISIBLE);
+                    numberBack.setVisibility(View.INVISIBLE);
+                    btnAudio.setVisibility(View.GONE);
                     btnNext.setText(getString(R.string.ANSWER));
 
                     if(randomBtnClicked) {
                         numberStudyRandom();
+
                     } else {
+                        if(index < number.getFront().length-1) {
+                            index++;
+                        } else {
+                            index = 0;
+                        }
                         numberStudyInOrder();
                     }
                 }

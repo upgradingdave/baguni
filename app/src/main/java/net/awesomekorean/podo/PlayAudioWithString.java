@@ -28,8 +28,13 @@ public class PlayAudioWithString {
             folder = "lesson/" + unitId;
             findFromStorage(folder, audioFile);
         }
-        System.out.println(audioFile);
-        System.out.println(unitId);
+    }
+
+    public void playAudioNumber(String audioFile, String unitId) {
+        if(audioFile != null) {
+            folder = "lesson/number/" + unitId;
+            findFromStorage(folder, audioFile);
+        }
     }
 
     public void playAudioReading(String audioFile, String unitId) {
