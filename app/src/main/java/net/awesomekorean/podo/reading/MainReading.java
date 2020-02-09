@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.reading.readings.Reading08;
@@ -62,7 +63,7 @@ public class MainReading extends Fragment {
     ArrayList<Reading> list;
     ReadingAdapter adapter;
 
-    UserInformation userInformation = MainActivity.userInformation;
+    UserInformation userInformation;
 
 
     public MainReading(MainActivity mainActivity) {
@@ -79,6 +80,10 @@ public class MainReading extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.main_reading, container, false);
+
+        context = getContext();
+
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         list = new ArrayList<>();
 
@@ -123,8 +128,6 @@ public class MainReading extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        context = getContext();
-
         return view;
     }
 
@@ -133,6 +136,7 @@ public class MainReading extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK) {
+            userInformation = SharedPreferencesInfo.getUserInfo(context);
             setUnlockedReadings();
         }
     }

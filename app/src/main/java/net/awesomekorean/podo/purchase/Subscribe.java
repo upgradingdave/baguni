@@ -167,7 +167,7 @@ public class Subscribe extends AppCompatActivity implements Button.OnClickListen
                 break;
 
             case R.id.btnPremium :
-                if(MainActivity.userInformation.getIsPremium()) {
+                if(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getIsPremium()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.ALREADY_SUBSCRIBE), Toast.LENGTH_LONG).show();
                 } else {
                     bp.purchase(this, "Sku아이디넣기");

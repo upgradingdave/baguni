@@ -37,6 +37,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.collection.CollectionEntity;
 import net.awesomekorean.podo.collection.CollectionRepository;
@@ -94,7 +95,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         progressBar.setIndeterminate(true);
         progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 
-        holdingPoints.setText(String.valueOf(MainActivity.userInformation.getPoints()));
+        holdingPoints.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();

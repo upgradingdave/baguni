@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static String userName = "userName";
     public static Uri userImage;
 
-    public static UserInformation userInformation;
+    UserInformation userInformation;
 
     LinearLayout confirmQuit;
     Button btnYes;

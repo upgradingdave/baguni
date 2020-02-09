@@ -851,8 +851,10 @@ conjugate '아요/어요' : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' 
 conjugate '아서/어서' : '바빠요' -> '바빠' + '아서' = '바빠아서' -> '바빠서'"</string>
     <string name="L_08_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_10">"conjugate '아요/어요' : '일어나다' -> '알어나' + '아요' = '일어나아요' -> '일어나요'"</string>
-    <string name="L_08_SENTENCE_EXPLAIN_11">"'안' : do not
-'못' : can not"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_11">"안' : do not
+'못' : can not
+
+'못 일어나요 ' -> [몬 이러나요]"</string>
     <string name="L_08_SENTENCE_EXPLAIN_12">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_13">"시간 + '에'
 (See the special lesson '에 vs. 에서')"</string>

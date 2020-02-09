@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.purchase.TopUp;
+import net.awesomekorean.podo.reading.MainReading;
 
 public class UnlockActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,6 +55,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     int readingPrice = 50;
     int unlockPrice;
 
+    String extra;
 
     Intent intent;
 
@@ -83,7 +85,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
         rewardedAd = createAndLoadRewardedAd();
 
-        String extra = getIntent().getStringExtra("unlock");
+        extra = getIntent().getStringExtra("unlock");
         if(extra.equals("specialLesson")) {
             unlockPrice = specialLessonPrice;
         } else {
@@ -137,9 +139,12 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
                     // 포인트 차감하고 specialLessonUnlock 에 레슨아이디 추가, 해당 레슨에 unlock = true 세팅
                     int newPoint = userPoint - unlockPrice;
-                    String lessonId = MainLesson.lessonUnit.getLessonId();
                     userInformation.setPoints(newPoint);
-                    userInformation.addSpecialLessonUnlock(lessonId);
+                    if(extra.equals("specialLesson")) {
+                        userInformation.addSpecialLessonUnlock(MainLesson.lessonUnit.getLessonId());
+                    } else {
+                        userInformation.addReadingUnlock(MainReading.readingUnit.getReadingId());
+                    }
 
                     DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
                     informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {

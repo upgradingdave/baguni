@@ -83,7 +83,7 @@ public class MainLesson extends Fragment{
     ArrayList<LessonItem> list;
     LessonAdapter adapter;
 
-    UserInformation userInformation = MainActivity.userInformation;
+    UserInformation userInformation;
 
 
     public MainLesson(MainActivity mainActivity) {
@@ -101,6 +101,9 @@ public class MainLesson extends Fragment{
 
         view = inflater.inflate(R.layout.main_lesson, container, false);
 
+        context = getContext();
+
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         list = new ArrayList<>();
 
@@ -178,8 +181,6 @@ public class MainLesson extends Fragment{
 
         recyclerView.setAdapter(adapter);
 
-        context = getContext();
-
         return view;
     }
 
@@ -188,6 +189,7 @@ public class MainLesson extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK) {
+            userInformation = SharedPreferencesInfo.getUserInfo(context);
             setUnlockedLessons();
         }
     }
