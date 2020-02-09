@@ -29,7 +29,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem {
             "밥을 먹기 30분 전에 먹어요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "감기에 걸렸어요.",
             "이 약을 먹어요.",
             "어떻게 먹어요?",
@@ -70,8 +70,8 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

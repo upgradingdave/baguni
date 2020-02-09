@@ -38,7 +38,7 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem {
             "아침에 일찍 못 일어나서 아침도 못 먹어요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "요즘 너무 바빠요.",
             "그래서 많이 피곤해요.",
             "아침에 일찍 못 일어나요.",
@@ -79,8 +79,8 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

@@ -37,7 +37,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
             "BTS는 노래를 잘 부르고 춤도 잘 춰요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "K-pop을 좋아해요?",
             "네, 저는 BTS를 제일 좋아해요.",
             "BTS를 왜 좋아해요?",
@@ -78,8 +78,8 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

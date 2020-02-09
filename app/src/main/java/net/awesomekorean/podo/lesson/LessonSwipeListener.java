@@ -1,21 +1,10 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.LessonClause;
-import net.awesomekorean.podo.lesson.LessonFrame;
-import net.awesomekorean.podo.lesson.LessonSentence;
-import net.awesomekorean.podo.lesson.LessonWord;
-import net.awesomekorean.podo.lesson.LessonWordQuiz1;
-import net.awesomekorean.podo.lesson.LessonWordQuiz2;
-import net.awesomekorean.podo.lesson.LessonWordQuiz3;
-
-import org.w3c.dom.ls.LSException;
 
 public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -68,7 +57,7 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
 
                     // 마지막 단어 아니면 다음 단어 표시
                     } else {
-                        lessonWord.displayWord(context);
+                        lessonWord.displayWord();
                     }
 
                 // 오른쪽으로 스와이프 할 떄
@@ -78,7 +67,7 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
                         LessonWord.lessonCount--;
                         LessonFrame.progressCount--;
                     }
-                    lessonWord.displayWord(context);
+                    lessonWord.displayWord();
                 }
 
                 // 스와이프가 발생할 때마다 프로그레스바 상태 계산
@@ -94,9 +83,9 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
 
                     if(LessonWord.lessonCount == LessonWord.lessonSentenceLength) {
                         LessonWord.lessonCount = 0;
-                        ((LessonFrame)context).replaceFragment(LessonClause.newInstance());
+                        ((LessonFrame)context).replaceFragment(LessonDialog.newInstance());
                     } else {
-                        lessonSentence.displaySentence(context);
+                        lessonSentence.displaySentence();
                     }
                 } else {
 
@@ -104,7 +93,7 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
                         LessonWord.lessonCount--;
                         LessonFrame.progressCount--;
                     }
-                    lessonSentence.displaySentence(context);
+                    lessonSentence.displaySentence();
                 }
 
                 LessonFrame.progressCount();

@@ -35,7 +35,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem {
             "눈은 별로 안 와요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "한국 날씨가 어때요?",
             "여기는 겨울이에요.",
             "조금 추워요.",
@@ -77,8 +77,8 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

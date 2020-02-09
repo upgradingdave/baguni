@@ -11,21 +11,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.awesomekorean.podo.MainActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import net.awesomekorean.podo.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class LessonClause extends Fragment implements Button.OnClickListener {
+public class LessonDialog extends Fragment implements Button.OnClickListener {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     View view;
 
@@ -38,12 +42,12 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
     MediaPlayer mp;
 
-    String[] clauses =  LessonWord.sentenceClause;
-    String[] clausesAudio = LessonWord.sentenceAudio;
+    String[] dialog =  LessonWord.dialog;
+    String[] dialogAudio = LessonWord.dialogAudio;
     int[] peopleImage = LessonWord.peopleImage; // 사람이미지 2개
     int[] arrayPeopleImage; // 대화 개수에 맞게 사람이미지를 array 로 만듦
 
-    ArrayList<LessonClauseItems> list = new ArrayList<>();
+    ArrayList<LessonDialogItems> list = new ArrayList<>();
 
     Context context;
 
@@ -53,20 +57,21 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
     LinearLayout layoutPlay;
     LinearLayout layoutStop;
 
-    public static LessonClause newInstance() {
-        return new LessonClause();
+    String folder;
+
+    public static LessonDialog newInstance() {
+        return new LessonDialog();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_clause, container, false);
+        view = inflater.inflate(R.layout.lesson_dialog, container, false);
         context = getContext();
 
         index = 0;
-        length = clausesAudio.length;
-
+        length = dialogAudio.length;
 
         layoutPlay = view.findViewById(R.id.layoutPlay);
         layoutStop = view.findViewById(R.id.layoutStop);
@@ -82,31 +87,31 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        int clausesLength = LessonWord.lessonClauseLength;
+        int clausesLength = LessonWord.lessonDialogLength;
 
         getPeopleImage(peopleImage);
 
         for(int i=0; i<clausesLength; i++) {
-            LessonClauseItems item = new LessonClauseItems();
+            LessonDialogItems item = new LessonDialogItems();
             item.setPeopleImage(arrayPeopleImage[i]);
-            item.setClause(clauses[i]);
+            item.setClause(dialog[i]);
             if(i % 2 == 0) {
                 item.setAOrB(1);
             }else {
                 item.setAOrB(0);
             }
-            item.setClauseAudio(clausesAudio[i]);
+            item.setClauseAudio(dialogAudio[i]);
             list.add(item);
         }
 
 
-        LessonClauseAdapter adapter = new LessonClauseAdapter(list);
-        adapter.setOnItemClickListener(new LessonClauseAdapter.OnItemClickListener() {
+        LessonDialogAdapter adapter = new LessonDialogAdapter(list);
+        adapter.setOnItemClickListener(new LessonDialogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
 
                 final ToggleButton button = (ToggleButton) v;
-                playAudio(button, context, clausesAudio[pos]);
+                playAudio(button, dialogAudio[pos]);
                 layoutPlay.setVisibility(View.VISIBLE);
                 layoutStop.setVisibility(View.GONE);
 
@@ -115,14 +120,16 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
 
         recyclerView.setAdapter(adapter);
 
+        folder = "lesson/" + MainLesson.lessonUnit;
+
         return view;
     }
 
     public void getPeopleImage(int[] peopleImage) {
         String packageName = context.getPackageName();
-        arrayPeopleImage = new int[clauses.length];
+        arrayPeopleImage = new int[dialog.length];
         int count = 0;
-        for(int i=0; i<clauses.length; i++) {
+        for(int i=0; i<dialog.length; i++) {
             String stringPeopleImage;
             if(count == 0) {
                 stringPeopleImage = "people" + peopleImage[0];
@@ -137,7 +144,39 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
     }
 
     // 오디오 재생 메소드
-    public void playAudio(final ToggleButton button, Context context, String audioFile) {
+    public void playAudio(final ToggleButton button, String audioFile) {
+
+        StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                if(mp != null) {
+                    mp.release();
+                }
+                String url = uri.toString();
+                mp = new MediaPlayer();
+                try {
+                    mp.setDataSource(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mp.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                        button.setChecked(false);
+                    }
+                });
+            }
+        });
+
+        /*
         if(context != null) {
             if(mp != null) {
                 mp.release();
@@ -157,10 +196,54 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
             }
             catch (Exception e) {}
         }
+
+         */
     }
 
     // 전체 오디오 재생 메소드
     public void playAudioAll(String audioFile) {
+
+        StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
+        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                if(mp != null) {
+                    mp.release();
+                }
+                String url = uri.toString();
+                mp = new MediaPlayer();
+                try {
+                    mp.setDataSource(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mp.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mp.start();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        index++;
+                        // 마지막 오디오 재생 끝났으면
+                        if(index == length) {
+                            mp.release();
+                            index = 0;
+                            layoutPlay.setVisibility(View.VISIBLE);
+                            layoutStop.setVisibility(View.GONE);
+                        }else{
+                            mp.release();
+                            playAudioAll(dialogAudio[index]);
+                        }
+                    }
+                });
+            }
+        });
+
+
+        /*
         if(context != null) {
             if(mp != null) {
                 mp.release();
@@ -182,13 +265,15 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
                             layoutStop.setVisibility(View.GONE);
                         }else{
                             mp.release();
-                            playAudioAll(clausesAudio[index]);
+                            playAudioAll(dialogAudio[index]);
                         }
                     }
                 });
             }
             catch (Exception e) {}
         }
+
+         */
     }
 
 
@@ -207,7 +292,7 @@ public class LessonClause extends Fragment implements Button.OnClickListener {
                 layoutPlay.setVisibility(View.GONE);
                 layoutStop.setVisibility(View.VISIBLE);
                 index = 0;
-                playAudioAll(clausesAudio[0]);
+                playAudioAll(dialogAudio[0]);
                 break;
 
             case R.id.btnStop :

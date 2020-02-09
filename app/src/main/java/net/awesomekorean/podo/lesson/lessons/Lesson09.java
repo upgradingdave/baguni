@@ -31,7 +31,7 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem {
             "30분 걸려요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "집에서 회사까지 어떻게 가요?",
             "지하철을 타요.",
             "얼마나 걸려요?",
@@ -72,8 +72,8 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

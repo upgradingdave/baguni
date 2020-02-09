@@ -31,7 +31,7 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
             "쇼핑 했어요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "어제 집에 있었어요?",
             "아니요.",
             "어제 뭐 했어요?",
@@ -72,8 +72,8 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

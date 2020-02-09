@@ -29,7 +29,7 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem {
             "12시 반부터 1시 반까지예요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "몇 시간 일해요?",
             "오전 9시부터 오후 6시까지 일해요.",
             "점심 시간은 언제예요?",
@@ -70,8 +70,8 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

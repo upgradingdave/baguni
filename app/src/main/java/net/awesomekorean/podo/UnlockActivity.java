@@ -166,7 +166,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.btnPurchasePoints :
-                unlockSecond.setVisibility(View.GONE);
+                finish();
                 intent = new Intent(getApplicationContext(), TopUp.class);
                 startActivity(intent);
                 break;

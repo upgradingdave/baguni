@@ -31,7 +31,7 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem {
             "그래서 5,000(오천)원이에요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "이거 얼마예요?",
             "10,000(만)원이에요.",
             "저거는요?",
@@ -72,8 +72,8 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

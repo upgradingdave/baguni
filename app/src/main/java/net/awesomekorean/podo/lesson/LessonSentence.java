@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.PlayAudioWithString;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
@@ -41,8 +42,6 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
     LinearLayout collectResult;
 
-    Context context;
-
 
         // fragment 간 전환을 위해 만듦
     public static LessonSentence newInstance() {
@@ -55,7 +54,6 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
-        context = getContext();
 
         LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
@@ -69,18 +67,17 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
-        displaySentence(context);
+        displaySentence();
 
         return view;
 
     }
 
-    public static void displaySentence(Context context) {
-
+    public static void displaySentence() {
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
-        playAudioWithString.playAudio(context, sentenceAudio[lessonCount]);
+        playAudioWithString.playAudioLesson(sentenceAudio[lessonCount], MainLesson.lessonUnit.getLessonId().toLowerCase());
     }
 
 
@@ -90,7 +87,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playAudioWithString.playAudio(context, sentenceAudio[lessonCount]);
+                playAudioWithString.playAudioLesson(sentenceAudio[lessonCount], MainLesson.lessonUnit.getLessonId().toLowerCase());
                 break;
 
             case R.id.btnCollect :

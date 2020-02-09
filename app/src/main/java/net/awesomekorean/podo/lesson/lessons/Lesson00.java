@@ -24,7 +24,7 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem {
             "다음에 또 봐요.",
             "안녕히 가세요 / 안녕히 계세요 / 안녕~"};
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "안녕하세요?",
             "반가워요.",
             "오랜만이에요.",
@@ -66,8 +66,8 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

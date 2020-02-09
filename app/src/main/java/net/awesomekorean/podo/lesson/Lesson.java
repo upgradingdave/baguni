@@ -12,7 +12,7 @@ public interface Lesson {
 
     String[] getSentenceFront();
 
-    String[] getSentenceClause();
+    String[] getDialog();
 
     int[] getPeopleImage();
 }

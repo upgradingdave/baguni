@@ -41,7 +41,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static int lessonCount;
     static int lessonWordLength = 0;
     static int lessonSentenceLength = 0;
-    static int lessonClauseLength = 0;
+    static int lessonDialogLength = 0;
 
     static String[] wordFront;
     static String[] wordBack;
@@ -53,7 +53,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] sentenceBack;
     static String[] sentenceExplain;
     static String[] sentenceAudio;
-    static String[] sentenceClause;
+    static String[] dialog;
+    static String[] dialogAudio;
     static int[] peopleImage;
 
     Context context;
@@ -98,7 +99,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
-        lessonClauseLength = lesson.getSentenceClause().length;
+        lessonDialogLength = lesson.getDialog().length;
 
         String packageName = context.getPackageName();
         wordBack = new String[lessonWordLength];
@@ -128,36 +129,37 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         wordAntonyms = lesson.getWordAntonyms();
 
         sentenceFront = lesson.getSentenceFront();
-        sentenceClause = lesson.getSentenceClause();
+        dialog = lesson.getDialog();
         peopleImage = lesson.getPeopleImage();
-
-
 
 
         LessonFrame.totalPageNo = lessonWordLength * 3 + 1 + lessonSentenceLength + 2;
 
         wordAudio = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
-            wordAudio[i] = "word_" + lessonId.toLowerCase() + "_" + i;
+            wordAudio[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
         }
         sentenceAudio = new String[lessonSentenceLength];
         for(int j=0; j<lessonSentenceLength; j++) {
-            sentenceAudio[j] = "sentence_" + lessonId.toLowerCase() + "_" + j;
+            sentenceAudio[j] = lessonId.toLowerCase() + "_sentence_" + j + ".mp3";
+        }
+        dialogAudio = new String[lessonDialogLength];
+        for(int k=0; k<lessonDialogLength; k++) {
+            dialogAudio[k] = lessonId.toLowerCase() + "_dialog_" + k + ".mp3";
         }
 
-
-            displayWord(context);
+        displayWord();
     }
 
 
-    public void displayWord(Context context) {
+    public void displayWord() {
         LessonFrame.progressCount();
         tvWordFront.setText(wordFront[lessonCount]);
         tvWordBack.setText(wordBack[lessonCount]);
         tvWordPronunciation.setText(wordPronunciation[lessonCount]);
         tvWordSynonyms.setText(wordSynonyms[lessonCount]);
         tvWordAntonyms.setText(wordAntonyms[lessonCount]);
-        playAudioWithString.playAudio(context, wordAudio[lessonCount]);
+        playAudioWithString.playAudioLesson(wordAudio[lessonCount], MainLesson.lessonUnit.getLessonId().toLowerCase());
     }
 
 
@@ -168,7 +170,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
             case R.id.btnAudio :
                 String audioFile = wordAudio[lessonCount];
-                playAudioWithString.playAudio(context, audioFile);
+                playAudioWithString.playAudioLesson(audioFile, lessonId.toLowerCase());
                 break;
 
             case R.id.btnCollect :

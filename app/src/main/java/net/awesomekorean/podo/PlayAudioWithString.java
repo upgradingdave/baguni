@@ -23,6 +23,15 @@ public class PlayAudioWithString {
         }
     }
 
+    public void playAudioLesson(String audioFile, String unitId) {
+        if(audioFile != null) {
+            folder = "lesson/" + unitId;
+            findFromStorage(folder, audioFile);
+        }
+        System.out.println(audioFile);
+        System.out.println(unitId);
+    }
+
     public void playAudioReading(String audioFile, String unitId) {
         if(audioFile != null) {
             folder = "reading/" + unitId;

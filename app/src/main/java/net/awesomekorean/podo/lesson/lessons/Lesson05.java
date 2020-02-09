@@ -33,7 +33,7 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem {
             "재미있는 영화를 볼 거예요."
     };
 
-    final static String[] sentenceClause = {
+    final static String[] dialog = {
             "내일 뭐 할 거예요?",
             "친구랑 한국 식당에 갈 거예요.",
             "주말에는요?",
@@ -74,8 +74,8 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem {
     }
 
     @Override
-    public String[] getSentenceClause() {
-        return sentenceClause;
+    public String[] getDialog() {
+        return dialog;
     }
 
     @Override

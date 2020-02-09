@@ -6,15 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import net.awesomekorean.podo.R;
 import java.util.ArrayList;
 
-public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapter.ViewHolder> {
+public class LessonDialogAdapter extends RecyclerView.Adapter<LessonDialogAdapter.ViewHolder> {
 
     // 아이템 클릭 이벤트를 MainLesson 에서 처리하기 위한 인터페이스
     public interface OnItemClickListener {
@@ -30,9 +28,9 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
 
     MediaPlayer mp;
 
-    private ArrayList<LessonClauseItems> list;
+    private ArrayList<LessonDialogItems> list;
 
-    public LessonClauseAdapter(ArrayList<LessonClauseItems> list) {
+    public LessonDialogAdapter(ArrayList<LessonDialogItems> list) {
         this.list = list;
     }
 
@@ -82,18 +80,18 @@ public class LessonClauseAdapter extends RecyclerView.Adapter<LessonClauseAdapte
         View view;
 
         if(viewType == 0) {
-            view = inflater.inflate(R.layout.lesson_clause_item_a, parent, false);
+            view = inflater.inflate(R.layout.lesson_dialog_item_a, parent, false);
         } else {
-            view = inflater.inflate(R.layout.lesson_clause_item_b, parent, false);
+            view = inflater.inflate(R.layout.lesson_dialog_item_b, parent, false);
         }
 
-        LessonClauseAdapter.ViewHolder holder = new LessonClauseAdapter.ViewHolder(view);
+        LessonDialogAdapter.ViewHolder holder = new LessonDialogAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        LessonClauseItems items = list.get(position);
+        LessonDialogItems items = list.get(position);
 
         holder.peopleImage.setImageResource(items.getPeopleImage());
         holder.tbClause.setText(items.getClause());

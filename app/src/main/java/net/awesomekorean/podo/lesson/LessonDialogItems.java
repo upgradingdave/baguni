@@ -1,6 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
-public class LessonClauseItems {
+public class LessonDialogItems {
 
     private int peopleImage;
     private String clause;
