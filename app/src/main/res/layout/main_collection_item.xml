@@ -42,8 +42,14 @@
     <ImageView
         android:id="@+id/btnAudio"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:src="@drawable/audio_small_blue" />
+    <ImageView
+        android:id="@+id/btnAudioDiable"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/audio_small_grey" />
 
 </LinearLayout>

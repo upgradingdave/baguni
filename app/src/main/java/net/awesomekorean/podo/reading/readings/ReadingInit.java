@@ -3,7 +3,7 @@ package net.awesomekorean.podo.reading.readings;
 public class ReadingInit {
 
     private boolean isCompleted = false;
-    private boolean isLock = true;
+    private boolean isLock = false;
 
     public boolean getIsCompleted() {
         return this.isCompleted;

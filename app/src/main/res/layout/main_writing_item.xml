@@ -88,7 +88,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/avenir_bold"
-                android:text="@string/CORRECTED"
+                android:text="@string/REVIEWED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />
         </LinearLayout>

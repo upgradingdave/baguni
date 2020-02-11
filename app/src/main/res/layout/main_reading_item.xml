@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@drawable/close_black"
+                    android:src="@drawable/rocket1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -66,11 +66,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@drawable/red_dot"
+                    android:src="@drawable/rocket2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:src="@drawable/red_dot"
+                    android:src="@drawable/rocket2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -83,15 +83,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:src="@drawable/tip"
+                    android:src="@drawable/rocket3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:src="@drawable/tip"
+                    android:src="@drawable/rocket3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:src="@drawable/tip"
+                    android:src="@drawable/rocket3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

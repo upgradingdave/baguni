@@ -139,7 +139,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="LETTERS">letters</string>
     <string name="TIPS">Tips</string>
     <string name="WRITE_HERE">Write here</string>
-    <string name="CORRECTED">Corrected</string>
+    <string name="REVIEWED">Reviewed</string>
     <string name="REVIEWING">Reviewing</string>
     <string name="REQUEST_RESULT">Request is submitted. You\'ll get the feedback in 2days.</string>
     <string name="ORIGINAL_WRITING">Original Writing</string>
@@ -149,6 +149,11 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="GIVE_US_FEEDBACK">Give us your feedback</string>
     <string name="THANKYOU_FEEDBACK">Thank you for your feedback</string>
     <string name="SEND">Send</string>
+    <string name="TIPS_CORRECTION">
+        You can ask for a correction from a native Korean teacher by using 30 points.
+        Feedback will be provided in 100% Korean.
+        (Inappropriate writing such as abusive language may be rejected)
+    </string>
 
 
     <!--    컬렉션-->
@@ -161,13 +166,10 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="RANDOM">Random</string>
     <string name="RECENT_WORD">Recent word</string>
     <string name="NO_COLLECTION">There is no collection</string>
-    <string name="TIPS_CORRECTION">
-        You can ask for a correction from a native Korean teacher by using 30 points. See a sample.
-        (Inappropriate writing such as abusive language may be rejected)
-    </string>
     <string name="FRONT">Front</string>
     <string name="BACK">Back</string>
     <string name="COLLECTION_SAVED">Collection is saved</string>
+    <string name="COLLECTION_SYNCHRONISED">Collection is synchronized</string>
 
 
     <!--    프로필/옵션-->
@@ -177,6 +179,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="EDIT_NAME">Edit Name</string>
     <string name="PURCHASE_PACKAGE">Purchase package</string>
     <string name="EVALUATION_APP">Evaluate this app</string>
+    <string name="HISTORY">History of requests</string>
     <string name="RECOMMEND">Recommend this app</string>
     <string name="GET_POINTS_BY_AD">Get points by watching ads</string>
     <string name="AD_LOAD_FAILED">Failed to load ad. Please try it again.</string>
@@ -1152,6 +1155,7 @@ ex) '운동' + '하다' = '운동하다' (o)
     <string name="DB_INFORMATION">information</string>
     <string name="DB_COLLECTIONS">collections</string>
     <string name="DB_MESSAGES">messages</string>
+    <string name="DB_REQUESTS">requests</string>
     <string name="DB_TEACHERS_WRITINGS">android/podo/teachers/requests/writings</string>
     <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
     <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>

@@ -412,6 +412,32 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/history"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:padding="3dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/history" />
+
+                <TextView
+                    android:text="@string/HISTORY"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:src="@drawable/arrow_right_grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
 
             <LinearLayout
@@ -480,7 +506,7 @@
                     android:padding="3dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/recommend" />
+                    android:src="@drawable/sendbug" />
 
                 <TextView
                     android:text="@string/BUG_REPORT"
@@ -507,7 +533,7 @@
                     android:padding="3dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/recommend" />
+                    android:src="@drawable/getpoint" />
 
                 <TextView
                     android:text="@string/GET_POINTS_BY_AD"

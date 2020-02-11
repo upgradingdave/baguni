@@ -59,6 +59,7 @@ public class CollectionAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.checkBox = view.findViewById(R.id.checkBox);
             holder.btnAudio = view.findViewById(R.id.btnAudio);
+            holder.btnAudioDisable = view.findViewById(R.id.btnAudioDiable);
             holder.collectionFront = view.findViewById(R.id.collectionFront);
             holder.collectionBack = view.findViewById(R.id.collectionBack);
             view.setTag(holder);
@@ -74,8 +75,13 @@ public class CollectionAdapter extends BaseAdapter {
         holder.checkBox.setChecked(items.getIsChecked());
         if(items.getIsVisible()) { holder.checkBox.setVisibility(View.VISIBLE);
         } else{holder.checkBox.setVisibility(View.INVISIBLE);}
-        if(items.getAudio() == null) { holder.btnAudio.setVisibility(View.INVISIBLE);
-        } else{holder.btnAudio.setVisibility(View.VISIBLE);}
+        if(items.getAudio() == null) {
+            holder.btnAudio.setVisibility(View.GONE);
+            holder.btnAudioDisable.setVisibility(View.VISIBLE);
+        } else {
+            holder.btnAudio.setVisibility(View.VISIBLE);
+            holder.btnAudioDisable.setVisibility(View.GONE);
+        }
 
         holder.checkBox.setTag(i);
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +113,7 @@ public class CollectionAdapter extends BaseAdapter {
             public void onClick(View v) {
                 System.out.println("Audio button clicked");
                 String audioFile = items.getAudio();
-                playAudioWithString.playAudio(context, audioFile);
+                playAudioWithString.playAudioCollection(audioFile);
             }
         });
         return view;
@@ -118,6 +124,7 @@ public class CollectionAdapter extends BaseAdapter {
     static class ViewHolder {
         CheckBox checkBox;
         ImageView btnAudio;
+        ImageView btnAudioDisable;
         TextView collectionFront;
         TextView collectionBack;
     }

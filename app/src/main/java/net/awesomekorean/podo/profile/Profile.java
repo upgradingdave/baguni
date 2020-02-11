@@ -87,6 +87,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     LinearLayout layoutThai;
 
     LinearLayout evaluation;
+    LinearLayout history;
     LinearLayout recommend;
     LinearLayout report;
     LinearLayout getPointByAd;
@@ -139,6 +140,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         layoutThai = findViewById(R.id.layoutThai);
 
         evaluation = findViewById(R.id.evaluation);
+        history = findViewById(R.id.history);
         recommend = findViewById(R.id.recommend);
         report = findViewById(R.id.report);
         getPointByAd = findViewById(R.id.getPointsByAd);
@@ -158,6 +160,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         layoutJapanese.setOnClickListener(this);
         layoutThai.setOnClickListener(this);
         evaluation.setOnClickListener(this);
+        history.setOnClickListener(this);
         recommend.setOnClickListener(this);
         report.setOnClickListener(this);
         getPointByAd.setOnClickListener(this);
@@ -293,6 +296,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 System.out.println("일주일 모두 출석! DB의 출석부를 초기화 했습니다");
 
                 intent = new Intent(this, LessonFinish.class);
+                intent.putExtra("isReward", true);
                 startActivity(intent);
                 break;
 
@@ -357,6 +361,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.evaluation :
                 // 다운로드 링크로 연결
+                break;
+
+            case R.id.history :
+                intent = new Intent(getApplicationContext(), History.class);
+                startActivity(intent);
                 break;
 
             case R.id.recommend :

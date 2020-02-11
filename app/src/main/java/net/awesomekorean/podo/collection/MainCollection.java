@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -547,6 +548,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 // 동기화 날짜 업데이트
                 Long timeNow = UnixTimeStamp.getTimeNow();
                 SharedPreferencesInfo.setDateLastSync(getContext(), timeNow);
+                Toast.makeText(getContext(), getString(R.string.COLLECTION_SYNCHRONISED), Toast.LENGTH_LONG).show();
                 break;
         }
     }

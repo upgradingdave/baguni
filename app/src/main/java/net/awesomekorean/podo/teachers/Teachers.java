@@ -41,6 +41,7 @@ import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.collection.CollectionEntity;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.profile.Requests;
 import net.awesomekorean.podo.purchase.TopUp;
 import net.awesomekorean.podo.writing.WritingEntity;
 import net.awesomekorean.podo.writing.WritingRepository;
@@ -51,6 +52,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class Teachers extends AppCompatActivity implements View.OnClickListener {
 
@@ -177,11 +179,12 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     WritingRepository repository = new WritingRepository(this);
                     repository.update(requestWriting);
 
-                    // 교정요청 DB 에 저장하기
+                    // 교정요청 DB(teacher-request)에 저장하기
                     db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
                             .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            System.out.println("teacher-Requests 에 저장했습니다.");
                             requestResult.setVisibility(View.VISIBLE);
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
@@ -194,6 +197,23 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                             }, 3000);
                         }
                     });
+
+
+                    // 교정요청 DB(user-request)에 저장하기
+                    Requests requests = new Requests();
+                    requests.setRequestId(requestWriting.getGuid());
+                    requests.setRequestDate(requestWriting.getDateRequest());
+                    requests.setIsCorrection(true);
+                    requests.setWriting(requestWriting.getContents());
+                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail)
+                            .collection(getString(R.string.DB_REQUESTS)).document(requestWriting.getGuid())
+                            .set(requests).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            System.out.println("User-Requests 에 저장했습니다.");
+                        }
+                    });
+
 
                     // 녹음요청일 떄
                 } else if(code.equals("record")) {
@@ -225,7 +245,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     request.put("userEmail", MainActivity.userEmail);
                     request.put("userName", MainActivity.userName);
 
-                    db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document()
+                    db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document(UUID.randomUUID().toString())
                             .set(request)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

@@ -56,6 +56,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     // 단어를 클릭하면 컬렉션 할 때 들어갈 문자열 저장
     String front;
     String back;
+    String audioFileWord;
 
     LinearLayout collectResult;
 
@@ -180,7 +181,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                             isPlaying = false;
                         }
 
-                        String audioFileWord = unitId + "_" + popUpIndex + ".mp3";
+                        audioFileWord = unitId + "_" + popUpIndex + ".mp3";
                         playAudioWithString.playAudioReading(audioFileWord, unitId);
                     }
 
@@ -221,7 +222,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnCollect:
                 CollectionRepository repository = new CollectionRepository(this);
-                repository.insert(front, back, null);
+                repository.insert(front, back, audioFileWord);
 
                 collectResult.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,10 +47,33 @@ public class PlayAudioWithString {
         }
     }
 
+    public void playAudioCollection(String audioFile) {
+        if(audioFile != null) {
+            String unitId = getUnitId(audioFile);
+            String isFromLesson = unitId.substring(0,1);
+            if(isFromLesson.equals("l")) {
+                folder = "lesson/" + unitId;
+            } else if(isFromLesson.equals("r")) {
+                folder = "reading/" + unitId;
+            }
+            findFromStorage(folder, audioFile);
+        }
+    }
+
+    private String getUnitId(String audioFile) {
+        String[] audioFileSplit = audioFile.split("_");
+        String split1 = audioFileSplit[0];
+        String split2 = audioFileSplit[1];
+        String unitId = split1 + "_" + split2;
+        return unitId;
+    }
+
 
 
     // 저장소에서 오디오 재생하기
     private void findFromStorage(String folder, String audioFile) {
+        System.out.println(folder);
+        System.out.println(audioFile);
         StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -68,6 +94,11 @@ public class PlayAudioWithString {
                     e.printStackTrace();
                 }
                 mp.start();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("FAILED: "+e);
             }
         });
     }

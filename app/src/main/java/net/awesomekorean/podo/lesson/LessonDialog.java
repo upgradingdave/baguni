@@ -120,7 +120,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
         recyclerView.setAdapter(adapter);
 
-        folder = "lesson/" + MainLesson.lessonUnit;
+        folder = "lesson/" + MainLesson.lessonUnit.getLessonId().toLowerCase();
 
         return view;
     }
@@ -175,29 +175,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 });
             }
         });
-
-        /*
-        if(context != null) {
-            if(mp != null) {
-                mp.release();
-            }
-            String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audioFile;
-            Uri uri = Uri.parse(uriPath);
-            mp = MediaPlayer.create(context, uri);
-            try {
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                        button.setChecked(false);
-                    }
-                });
-            }
-            catch (Exception e) {}
-        }
-
-         */
     }
 
     // 전체 오디오 재생 메소드
@@ -241,39 +218,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 });
             }
         });
-
-
-        /*
-        if(context != null) {
-            if(mp != null) {
-                mp.release();
-            }
-            String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audioFile;
-            Uri uri = Uri.parse(uriPath);
-            mp = MediaPlayer.create(context, uri);
-            try {
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        index++;
-                        // 마지막 오디오 재생 끝났으면
-                        if(index == length) {
-                            mp.release();
-                            index = 0;
-                            layoutPlay.setVisibility(View.VISIBLE);
-                            layoutStop.setVisibility(View.GONE);
-                        }else{
-                            mp.release();
-                            playAudioAll(dialogAudio[index]);
-                        }
-                    }
-                });
-            }
-            catch (Exception e) {}
-        }
-
-         */
     }
 
 
