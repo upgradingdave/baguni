@@ -231,13 +231,14 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                         back.add(entity.getBack());
                     }
 
-                    // 녹음요청 DB 에 저장하기
+                    // 녹음요청 DB(teacher-request) 에 저장하기
                     Map<String, Object> request = new HashMap<>();
                     request.put("guid", guid);
                     request.put("front", front);
                     request.put("back", back);
                     request.put("audio", audio);
-                    request.put("dateRequest", UnixTimeStamp.getTimeNow());
+                    Long timeNow = UnixTimeStamp.getTimeNow();
+                    request.put("dateRequest", timeNow);
                     request.put("dateAnswer", "");
                     request.put("status", 1);
                     request.put("teacherId", teacherId);
@@ -245,7 +246,9 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     request.put("userEmail", MainActivity.userEmail);
                     request.put("userName", MainActivity.userName);
 
-                    db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document(UUID.randomUUID().toString())
+                    String requestGuid = UUID.randomUUID().toString();
+
+                    db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document(requestGuid)
                             .set(request)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -262,6 +265,25 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                                     }, 3000);
                                 }
                             });
+
+                    // 녹음요청 DB(user-request)에 저장하기
+                    Requests requests = new Requests();
+                    requests.setRequestId(requestGuid);
+                    requests.setRequestDate(timeNow);
+                    requests.setIsCorrection(false);
+                    requests.setGuid(guid);
+                    requests.setFront(front);
+                    requests.setBack(back);
+
+                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail)
+                            .collection(getString(R.string.DB_REQUESTS)).document(requests.getRequestId())
+                            .set(requests).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            System.out.println("User-Requests 에 저장했습니다.");
+                        }
+                    });
+
                     break;
                 }
         }

@@ -132,6 +132,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             } else{
                 // 녹음요청내역 세팅하기
             }
+
         }
     }
 

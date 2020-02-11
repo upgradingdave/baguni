@@ -290,14 +290,16 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnGetPoint :
                 // 일주일 모두 출석했으면 오늘 출석만 남기고 다 초기화
                 Calendar cal = Calendar.getInstance();
-                int today = cal.get(Calendar.DAY_OF_WEEK); // 1:일요일 ~ 7:토요일
+                int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
                 userInformation.resetDays(today);
-                db.collection(getString(R.string.DB_INFORMATION)).document(MainActivity.userEmail).set(userInformation);
+                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
                 System.out.println("일주일 모두 출석! DB의 출석부를 초기화 했습니다");
+                SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                System.out.println(userInformation.getAttendance());
 
                 intent = new Intent(this, LessonFinish.class);
                 intent.putExtra("isReward", true);
-                startActivity(intent);
+                startActivityForResult(intent, 200);
                 break;
 
             case R.id.layoutEditName :

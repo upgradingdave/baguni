@@ -1,5 +1,7 @@
 package net.awesomekorean.podo.profile;
 
+import java.util.List;
+
 public class Requests {
 
     private String requestId;
@@ -9,9 +11,10 @@ public class Requests {
     private int status; // 1:검토중, 2:교정됨, 99:거부됨
 
     private String writing;
-    private String[] front;
-    private String[] back;
-    private String[] audio;
+    private List<String> guid;
+    private List<String> front;
+    private List<String> back;
+    private List<String> audio;
 
     public Requests() {
         this.status = 1;
@@ -41,15 +44,19 @@ public class Requests {
         return writing;
     }
 
-    public String[] getFront() {
+    public List<String> getGuid() {
+        return guid;
+    }
+
+    public List<String> getFront() {
         return front;
     }
 
-    public String[] getBack() {
+    public List<String> getBack() {
         return back;
     }
 
-    public String[] getAudio() {
+    public List<String> getAudio() {
         return audio;
     }
 
@@ -77,15 +84,19 @@ public class Requests {
         this.writing = writing;
     }
 
-    public void setFront(String[] front) {
+    public void setGuid(List<String> guid) {
+        this.guid = guid;
+    }
+
+    public void setFront(List<String> front) {
         this.front = front;
     }
 
-    public void setBack(String[] back) {
+    public void setBack(List<String> back) {
         this.back = back;
     }
 
-    public void setAudio(String[] audio) {
+    public void setAudio(List<String> audio) {
         this.audio = audio;
     }
 }
