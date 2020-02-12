@@ -96,7 +96,6 @@ public class MainReading extends Fragment {
         }
 
         list.get(0).setIsLocked(false);
-        list.get(1).setIsLocked(false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

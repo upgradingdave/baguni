@@ -18,7 +18,7 @@
         app:layout_constraintStart_toEndOf="@id/senderImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Received 100 points of Sign up gift.\n\n  - Things you can do with points\n 1. Lesson: Unlocking Special Lessons\n 2. Reading: Unlock Readings\n 3. Writing: Ask a native speaker for correction\n\n  - How to collect points\n 1. Completing General Lessons\n 2. Watching ads\n 3. Purchasing"
+        android:text="@string/WELCOME_MSG"
         android:textSize="15dp"
         android:textColor="@color/BLACK"
         android:paddingTop="10dp"

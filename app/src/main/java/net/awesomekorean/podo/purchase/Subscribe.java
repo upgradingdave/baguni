@@ -89,7 +89,7 @@ public class Subscribe extends AppCompatActivity implements Button.OnClickListen
         // productId: 구매한 sku (ex) no_ads)
         // details: 결제 관련 정보
         if(productId.equals("Sku아이디넣기")) {
-            Toast.makeText(getApplicationContext(), getString(R.string.THANKS_SUBSCRIBE), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.THANKS_PURCHASING), Toast.LENGTH_LONG).show();
 
             long unixTime = System.currentTimeMillis() / 1000L;
             final UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
@@ -122,7 +122,7 @@ public class Subscribe extends AppCompatActivity implements Button.OnClickListen
         // * 구매 오류시 호출
         // errorCode == Constants.BILLING_RESPONSE_RESULT_USER_CANCELED 일때는
         // 사용자가 단순히 구매 창을 닫은것임으로 이것 제외하고 핸들링하기.
-        Toast.makeText(getApplicationContext(), getString(R.string.THANKS_SUBSCRIBE), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.THANKS_PURCHASING), Toast.LENGTH_LONG).show();
     }
 
     @Override

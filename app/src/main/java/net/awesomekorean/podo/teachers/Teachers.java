@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -39,6 +41,7 @@ import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
+import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionEntity;
 import net.awesomekorean.podo.collection.CollectionRepository;
 import net.awesomekorean.podo.profile.Requests;
@@ -63,6 +66,9 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
     TextView holdingPoints;
     Button btnTopUp;
     Button btnSubmit;
+
+    int pointsHave;
+    int pointsNeed;
 
     Intent intent;
     String teacherName;
@@ -97,7 +103,13 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         progressBar.setIndeterminate(true);
         progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 
-        holdingPoints.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
+        intent = getIntent();
+        WritingEntity entity = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
+        pointsNeed = entity.getLetters();
+        pointsHave = SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints();
+        requiredPoints.setText(Integer.toString(pointsNeed));
+        holdingPoints.setText(String.valueOf(pointsHave));
+
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();
@@ -128,7 +140,10 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 adapter.setOnItemClickListener(new TeachersAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int pos) {
-                        btnSubmit.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_30));
+                        if(pointsHave >= pointsNeed) {
+                            btnSubmit.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_30));
+                            btnSubmit.setEnabled(true);
+                        }
                         teacherName = list.get(pos).getName();
                         teacherId = list.get(pos).getId();
                     }
@@ -139,7 +154,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 progressBarLayout.setVisibility(View.GONE);
             }
         });
-
     }
 
 
@@ -161,9 +175,21 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
             case R.id.btnSubmit :
                 btnSubmit.setEnabled(false);
 
-                Intent intent = getIntent();
                 String code = intent.getStringExtra("code");
 
+                int newPoints = pointsHave - pointsNeed;
+
+                final UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+                userInformation.setPoints(newPoints);
+
+                DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                        System.out.println("포인트를 업데이트 했습니다.");
+                    }
+                });
 
                 // 교정요청일 때
                 if(code.equals("correction")) {

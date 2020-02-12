@@ -101,7 +101,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()) {
-/*
+
             case R.id.btnGetPoint :
 
                 // 포인트 합산하기
@@ -148,7 +148,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                         });
                 break;
 
- */
+
 
             default:
                 // 포인트 랜덤으로 가져오기

@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -118,7 +118,7 @@
 
     <Button
         android:id="@+id/btnSubmit"
-        android:enabled="true"
+        android:enabled="false"
         android:text="@string/SUBMITE"
         android:textAllCaps="false"
         android:background="@drawable/bg_grey_30"

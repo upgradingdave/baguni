@@ -64,24 +64,19 @@
         android:layout_height="0dp">
 
         <LinearLayout
-            android:id="@+id/corrected"
+            android:id="@+id/reviewed"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="5dp"
             android:background="@drawable/bg_green_15"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/check_white" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,20 +90,24 @@
 
         <LinearLayout
             android:id="@+id/reviewing"
+            android:visibility="visible"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
             android:background="@drawable/bg_blue_15"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/check_white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/avenir_bold"
                 android:text="@string/REVIEWING"
@@ -118,27 +117,31 @@
 
         <LinearLayout
             android:id="@+id/rejected"
+            android:visibility="visible"
             android:orientation="horizontal"
+            android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="5dp"
             android:background="@drawable/bg_red_15"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/check_white" />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/avenir_bold"
-                android:gravity="center_vertical"
                 android:text="@string/REJECTED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />
         </LinearLayout>
-
 
 
         <LinearLayout

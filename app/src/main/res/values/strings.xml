@@ -6,17 +6,18 @@
 
     <!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
-    <string name="WELCOME_MSG">Received 20 points as a sign up gift.\n\n
+    <string name="WELCOME_MSG">"Received 20 points as a sign up gift.
 
-- Things you can do with points\n
-1. Lesson: Unlocking Special Lessons\n
-2. Reading: Unlock Readings\n
-3. Writing: Ask a native speaker for correction\n\n
+- Things you can do with points
+1. Lesson: Unlock Special Lessons
+2. Reading: Unlock Readings
+3. Writing: Ask a native speaker for correction
 
-- How to collect points\n
-1. Completing General Lessons\n
-2. Watching ads\n
-3. Purchasing</string>
+- How to collect points
+1. Complete General Lessons
+2. Watch video ads (in profile page)
+3. Attend for 7 days in a row
+4. Purchase"</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
     <string name="PASSWORD_SIX_CHARACTERS_LONG">Should be at least 6 characters</string>
@@ -36,9 +37,7 @@
     <string name="NAME">Name</string>
     <string name="CONFIRM_PASS">Confirm Password</string>
     <string name="ALREADY_HAVE_ACCOUNT"> Already have an account?</string>
-    <string name="GOOGLE_SUCCEED">Google sign in succeeded</string>
     <string name="GOOGLE_FAILED">Google sign in failed</string>
-    <string name="FACEBOOK_SUCCEED">Facebook sign in succeeded</string>
     <string name="FACEBOOK_FAILED">Facebook sign in failed</string>
     <string name="SIGNUP_SUCCEED">Sign up succeeded</string>
     <string name="SIGNUP_FAILED">Sign up failed</string>
@@ -150,7 +149,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="THANKYOU_FEEDBACK">Thank you for your feedback</string>
     <string name="SEND">Send</string>
     <string name="TIPS_CORRECTION">
-        You can ask for a correction from a native Korean teacher by using 30 points.
+        You can ask for a correction from a native Korean teacher by using 1 point per 1 letter.
         Feedback will be provided in 100% Korean.
         (Inappropriate writing such as abusive language may be rejected)
     </string>
@@ -195,7 +194,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <!--    구매-->
     <string name="GO_PREMIUM">Go Premium</string>
     <string name="ALREADY_SUBSCRIBE">You are already subscribed.</string>
-    <string name="THANKS_SUBSCRIBE">Thank you for your subscription.</string>
+    <string name="THANKS_PURCHASING">Thank you for your purchasing.</string>
     <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
         Subscription will be automatically renewed as soon as your subscription expires.
         If you don\'t want to renew your subscription, you can manage it from Google account settings.
@@ -1133,6 +1132,7 @@ ex) '운동' + '하다' = '운동하다' (o)
     <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~4016696435</string>
     <string name="ADMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ADMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="STATUS">status</string>
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>
     <string name="REQUEST_EDIT">edit</string>
@@ -1160,6 +1160,9 @@ ex) '운동' + '하다' = '운동하다' (o)
     <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
     <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>
     <string name="LOADING">Loading</string>
+    <string name="SKU_100">podo_point_100</string>
+    <string name="SKU_500">podo_point_500</string>
+    <string name="SKU_1000">podo_point_1000</string>
 
 
     <!--지울것-->

@@ -56,7 +56,7 @@ public class WritingAdapter extends BaseAdapter {
             holder.writingDate = view.findViewById(R.id.writingDate);
             holder.letters = view.findViewById(R.id.letters);
             holder.article = view.findViewById(R.id.article);
-            holder.corrected = view.findViewById(R.id.corrected);
+            holder.reviewed = view.findViewById(R.id.reviewed);
             holder.reviewing = view.findViewById(R.id.reviewing);
             holder.rejected = view.findViewById(R.id.rejected);
             holder.btnDelete = view.findViewById(R.id.btnDelete);
@@ -69,7 +69,7 @@ public class WritingAdapter extends BaseAdapter {
         final WritingEntity items = list.get(i);
 
         holder.writingDate.setText(UnixTimeStamp.unixTimeFormat(items.getWritingDate()));
-        holder.letters.setText(items.getLetters());
+        holder.letters.setText(Integer.toString(items.getLetters()) + " letters");
         holder.article.setText(items.getContents());
 
         if(items.getStatus() == 0) {
@@ -94,7 +94,7 @@ public class WritingAdapter extends BaseAdapter {
 
     private void setVisibility(ViewHolder holder, int reviewing, int corrected, int rejected) {
         holder.reviewing.setVisibility(reviewing);
-        holder.corrected.setVisibility(corrected);
+        holder.reviewed.setVisibility(corrected);
         holder.rejected.setVisibility(rejected);
     }
 
@@ -104,7 +104,7 @@ public class WritingAdapter extends BaseAdapter {
         TextView writingDate;
         TextView letters;
         TextView article;
-        LinearLayout corrected;
+        LinearLayout reviewed;
         LinearLayout reviewing;
         LinearLayout rejected;
         ImageView btnDelete;

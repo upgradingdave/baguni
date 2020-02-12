@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -201,6 +202,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                     Intent intent = new Intent(getContext(), WritingFrame.class);
                     intent.putExtra(getString(R.string.EXTRA_ENTITY), item);
                     intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
+                    intent.putExtra(getString(R.string.STATUS), item.getStatus());
                     startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
                 }
             }

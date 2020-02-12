@@ -29,6 +29,7 @@
 
     <LinearLayout
         android:id="@+id/selectLanguage"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/welcome"
         android:layout_marginLeft="25dp"

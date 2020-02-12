@@ -54,7 +54,7 @@ public class WritingRepository {
         }.execute();
     }
 
-    public void editByGuid(final String guid, final String article, final String letters) {
+    public void editByGuid(final String guid, final String article, final int letters) {
 
         new AsyncTask<Void, Void, WritingEntity>() {
             @Override

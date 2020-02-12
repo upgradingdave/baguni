@@ -22,7 +22,7 @@ public class WritingEntity implements Serializable {
     private String userEmail;
     private String userName;
     private String contents;
-    private String letters;
+    private int letters;
     private Long writingDate;
     private int status = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
 
@@ -39,7 +39,7 @@ public class WritingEntity implements Serializable {
     @Ignore
     public WritingEntity() {}
 
-    public WritingEntity(String contents, String letters) {
+    public WritingEntity(String contents, int letters) {
         this.guid = UUID.randomUUID().toString();
         this.userEmail = MainActivity.userEmail;
         this.userName = MainActivity.userName;
@@ -137,11 +137,11 @@ public class WritingEntity implements Serializable {
         this.writingDate = date;
     }
 
-    public String getLetters() {
+    public int getLetters() {
         return letters;
     }
 
-    public void setLetters(String letters) {
+    public void setLetters(int letters) {
         this.letters = letters;
     }
 

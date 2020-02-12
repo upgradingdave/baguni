@@ -180,19 +180,16 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // 페이스북 로그인 성공, 출석부 있는지 확인
-                            final String userEmail = accessToken.getUserId();
-                            System.out.println("USERID?:"+userEmail);
-                            // 로그인 성공
-                            intent = new Intent(getApplicationContext(), MainActivity.class);
-                            finish();
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_SUCCEED), Toast.LENGTH_LONG).show();
-                        } else {
-                            System.out.println("페이스북 로그인 실패");
+                            // 페이스북 로그인 성공
+                            final String userEmail = task.getResult().getUser().getEmail();
 
+                            //출석부 확인 후 메인페이지로 넘어가기
+                            getUserInfoAndGoToMain(userEmail);
+
+                        } else {
                             // 로그인 실패
                             Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_FAILED), Toast.LENGTH_LONG).show();
+                            progressBarLayout.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -265,7 +262,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     intent = new Intent(getApplicationContext(), MainActivity.class);
                     finish();
                     startActivity(intent);
-                    Toast.makeText(getApplicationContext(), getString(R.string.GOOGLE_SUCCEED), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
 
                 } else {
                     System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");

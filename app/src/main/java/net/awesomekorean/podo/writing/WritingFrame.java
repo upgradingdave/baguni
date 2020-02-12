@@ -19,11 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.teachers.Teachers;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class WritingFrame extends AppCompatActivity implements View.OnClickListener {
+public class WritingFrame extends AppCompatActivity implements View.OnClickListener, Serializable {
 
     TextView textCount; // 글자 수 표시
     EditText editText; // 쓰기 입력
@@ -31,7 +32,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
     public static String guid;
     String contents;
-    String letters;
+    int letters;
 
     ImageView btnBack;
     Button btnSave;
@@ -67,6 +68,13 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
         intent = getIntent();
         code = intent.getExtras().getString(getString(R.string.REQUEST));
+        int status = intent.getExtras().getInt(getString(R.string.STATUS));
+        if(status == 1) {
+            btnSave.setVisibility(View.GONE);
+            btnCorrection.setVisibility(View.GONE);
+            tips.setVisibility(View.GONE);
+            editText.setFocusable(false);
+        }
 
         // EDIT 일 때, 기존의 글을 출력
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
@@ -75,12 +83,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             contents = editWriting.getContents();
             letters = editWriting.getLetters();
             editText.setText(contents);
-            textCount.setText(letters);
-//            guid = intent.getExtras().getString(getString(R.string.EXTRA_GUID));
-//            article = intent.getExtras().getString(getString(R.string.EXTRA_ARTICLE));
-//            letters = intent.getExtras().getString(getString(R.string.EXTRA_LETTERS));
-//            editText.setText(article);
-//            textCount.setText(letters);
+            textCount.setText(letters + "letters");
         }
 
         // 글을 쓸 때 바로바로 글자수를 가져옴
@@ -90,8 +93,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String input = editText.getText().toString();
-                textCount.setText(input.length() + " " + getString(R.string.LETTERS));
+                letters = editText.getText().toString().length();
+                textCount.setText(letters + " " + getString(R.string.LETTERS));
             }
 
             @Override
@@ -160,7 +163,6 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
     private WritingEntity saveWriting() {
         contents = editText.getText().toString();
-        letters = textCount.getText().toString();
 
         if(code.equals(getString(R.string.REQUEST_ADD))) {
             WritingEntity entity = new WritingEntity(contents, letters);

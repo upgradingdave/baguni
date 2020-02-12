@@ -19,7 +19,7 @@ public class UserInformation {
         for(int i=0; i<7; i++) {
             this.attendance.add(false);
         }
-        this.points = 0;
+        this.points = 20;
         this.isPremium = false;
     }
 

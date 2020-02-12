@@ -316,7 +316,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
         selectAll.setVisibility(setSelectAll);
         btnStudy.setVisibility(setStudy);
         btnDelete.setVisibility(setBtns);
-        btnRecord.setVisibility(setBtns);
+        //btnRecord.setVisibility(setBtns);
     }
 
 

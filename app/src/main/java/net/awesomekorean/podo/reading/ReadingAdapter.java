@@ -67,7 +67,6 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION) {
-                        Reading item = list.get(position);
 
                         // 아이템 클릭 이벤트
                         if(listener != null) {
