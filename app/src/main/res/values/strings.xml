@@ -6,7 +6,7 @@
 
     <!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
-    <string name="WELCOME_MSG">Received 100 points of Sign up gift.\n\n
+    <string name="WELCOME_MSG">Received 20 points as a sign up gift.\n\n
 
 - Things you can do with points\n
 1. Lesson: Unlocking Special Lessons\n
@@ -222,11 +222,11 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     </string>
     <string name="PURCHASE_POINTS">Purchase Points</string>
     <string name="POINT_OPTION_A">100 points</string>
-    <string name="POINT_OPTION_B">500 points</string>
-    <string name="POINT_OPTION_C">1,000 points</string>
-    <string name="POINT_OPTION_A_PRICE">$3</string>
-    <string name="POINT_OPTION_B_PRICE">$20</string>
-    <string name="POINT_OPTION_C_PRICE">$80</string>
+    <string name="POINT_OPTION_B">1,000 points</string>
+    <string name="POINT_OPTION_C">500 points</string>
+    <string name="POINT_OPTION_A_PRICE">$2</string>
+    <string name="POINT_OPTION_B_PRICE">$18</string>
+    <string name="POINT_OPTION_C_PRICE">$10</string>
     <string name="POINT_POLICY">Your Google account will be charged at confirmation of purchase.
         This purchase is one-time purchase. Points that have already been paid are not refundable.
     </string>

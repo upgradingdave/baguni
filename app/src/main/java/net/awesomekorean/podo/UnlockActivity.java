@@ -51,8 +51,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     UserInformation userInformation;
     int userPoint; // 유저 포인트
 
-    int specialLessonPrice = 100;
-    int readingPrice = 50;
+    int specialLessonPrice = 15;
+    int readingPrice = 15;
     int unlockPrice;
 
     String extra;

@@ -9,11 +9,10 @@ public class RandomRewards {
 
         Random random = new Random();
 
-        int reward1 = 1;    // 55%
-        int reward2 = 5;    // 30%
-        int reward3 = 10;   // 10%
-        int reward4 = 20;   // 3%
-        int reward5 = 30;   // 2%
+        int reward1 = 2;    // 82%
+        int reward2 = 5;   // 10%
+        int reward3 = 7;   // 6%
+        int reward4 = 10;   // 2%
 
         int reward = 0;
 
@@ -21,19 +20,17 @@ public class RandomRewards {
         System.out.println("select: " + select);
 
         if (select >= 0 && select <= 1) {
-            reward = reward5;
-
-        } else if (select >= 2 && select <= 4) {
             reward = reward4;
 
-        } else if (select >= 5 && select <= 14) {
+        } else if (select >= 2 && select <= 7) {
             reward = reward3;
 
-        } else if (select >= 15 && select <= 44) {
+        } else if (select >= 8 && select <= 17) {
             reward = reward2;
 
-        } else if (select >= 45 && select <= 99) {
+        } else if (select >= 18 && select <= 99) {
             reward = reward1;
+
         }
         return reward;
     }
