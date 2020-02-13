@@ -181,6 +181,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 페이스북 로그인 성공
+                            progressBarLayout.setVisibility(View.VISIBLE);
+
                             final String userEmail = task.getResult().getUser().getEmail();
 
                             //출석부 확인 후 메인페이지로 넘어가기
@@ -231,6 +233,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         if (task.isSuccessful()) {
 
                             // 구글 로그인 성공
+                            progressBarLayout.setVisibility(View.VISIBLE);
+
                             final String userEmail = account.getEmail();
 
                             // 출석부 확인 후 메인페이지로 넘어가기
@@ -269,11 +273,13 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                     MakeNewDb makeNewDb = new MakeNewDb();
                     makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
                 }
+                progressBarLayout.setVisibility(View.GONE);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 System.out.println("유저정보 불러오기를 실패했습니다: " + e);
+                progressBarLayout.setVisibility(View.GONE);
             }
         });
     }
@@ -325,30 +331,32 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
 
             case R.id.btnSignIn :
-                progressBarLayout.setVisibility(View.VISIBLE);
-
                 final String userEmail = email.getText().toString();
                 final String userPass = password.getText().toString();
 
-                firebaseAuth.signInWithEmailAndPassword(userEmail, userPass)
-                        .addOnSuccessListener(SignIn.this, new OnSuccessListener<AuthResult>() {
-                            @Override
-                            public void onSuccess(AuthResult authResult) {
-                                System.out.println("로그인에 성공했습니다");
+                if(userEmail.getBytes().length > 0 && userPass.getBytes().length > 0) {
 
-                                getUserInfoAndGoToMain(userEmail);
-                            }
-                        })
+                    firebaseAuth.signInWithEmailAndPassword(userEmail, userPass)
+                            .addOnSuccessListener(SignIn.this, new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    System.out.println("로그인에 성공했습니다");
+                                    progressBarLayout.setVisibility(View.VISIBLE);
+                                    getUserInfoAndGoToMain(userEmail);
+                                }
+                            })
 
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                System.out.println("로그인에 실패했습니다" + e.getMessage());
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(getApplicationContext(), e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    System.out.println("로그인에 실패했습니다" + e.getMessage());
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(getApplicationContext(), e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+
                 break;
 
             case R.id.forgotPassword :
@@ -369,13 +377,11 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 break;
 
             case R.id.btnSignInGoogle :
-                progressBarLayout.setVisibility(View.VISIBLE);
                 intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
                 break;
 
             case R.id.btnSignInFacebook :
-                progressBarLayout.setVisibility(View.VISIBLE);
                 LoginManager loginManager = LoginManager.getInstance();
                 loginManager.logInWithReadPermissions(SignIn.this, Arrays.asList("public_profile", "email"));
                 loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -401,7 +407,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
             case R.id.btnSignUp :
                 intent = new Intent(this, SignUp.class);
-                finish();
                 startActivity(intent);
                 break;
 

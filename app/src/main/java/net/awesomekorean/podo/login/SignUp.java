@@ -51,8 +51,8 @@ public class SignUp extends AppCompatActivity {
 
     Boolean condition = false;
     Boolean userEmailOk = false;
-    Boolean userEmailDuplicateOk = true;
     Boolean userPassOk = false;
+    Boolean userPassConfirmOk = false;
 
     TextView btnSignIn;
 
@@ -94,32 +94,34 @@ public class SignUp extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBarLayout.setVisibility(View.VISIBLE);
+                if(userEmailOk.equals(true) && userPassConfirmOk.equals(true) && userPassOk.equals(true)) {
 
-                userEmail = email.getText().toString();
-                userPass = password.getText().toString();
+                    userEmail = email.getText().toString();
+                    userPass = password.getText().toString();
 
-                firebaseAuth.createUserWithEmailAndPassword(userEmail, userPass)
-                        .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    System.out.println("회원가입에 성공했습니다");
+                    firebaseAuth.createUserWithEmailAndPassword(userEmail, userPass)
+                            .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        System.out.println("회원가입에 성공했습니다");
+                                        progressBarLayout.setVisibility(View.VISIBLE);
 
-                                    MakeNewDb makeNewDb = new MakeNewDb();
-                                    makeNewDb.makeNewDb(SignUp.this, getApplicationContext(), userEmail);
+                                        MakeNewDb makeNewDb = new MakeNewDb();
+                                        makeNewDb.makeNewDb(SignUp.this, getApplicationContext(), userEmail);
 
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    System.out.println("회원가입에 실패했습니다");
-                                    Toast.makeText(getApplicationContext(), getString(R.string.EMAIL_EXIST),
-                                            Toast.LENGTH_SHORT).show();
-                                    progressBarLayout.setVisibility(View.GONE);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        System.out.println("회원가입에 실패했습니다");
+                                        Toast.makeText(getApplicationContext(), getString(R.string.EMAIL_EXIST),
+                                                Toast.LENGTH_SHORT).show();
+                                        progressBarLayout.setVisibility(View.GONE);
 
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
@@ -134,9 +136,7 @@ public class SignUp extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignIn.class);
                 finish();
-                startActivity(intent);
             }
         });
 
@@ -194,24 +194,21 @@ public class SignUp extends AppCompatActivity {
                 case R.id.passwordConfirm :
                     userPassConfirm = passwordConfirm.getText().toString();
                     condition = userPassConfirm.equals(userPass);
-                    userPassOk = conditionCheck(condition, passwordConfirm);
-                    if(userPassOk) {
+                    userPassConfirmOk = conditionCheck(condition, passwordConfirm);
+                    if(userPassConfirmOk) {
                         passwordConfirm.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgreen, 0);
                     }else {
                         passwordConfirm.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.successgrey, 0);
                     }
                     break;
             }
-
-            if(userEmailOk.equals(true) && userEmailDuplicateOk.equals(true) && userPassOk.equals(true)) {
-                btnSignUp.setEnabled(true);
-            }else {
-                btnSignUp.setEnabled(false);
-            }
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
+            System.out.println("EMAIL: "+userEmailOk);
+            System.out.println("PASS: "+userPassOk);
+            System.out.println("PASSCONFIRM: "+userPassConfirmOk);
 
         }
     };
