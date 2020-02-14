@@ -91,46 +91,21 @@
         android:layout_marginLeft="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnGetPoint"
-        app:layout_constraintTop_toBottomOf="@id/attendance"
->    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@id/attendance">    </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/btnGetPoint"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/getpodo_grey"
+
+        app:layout_constraintEnd_toEndOf="@+id/scrollView"
         app:layout_constraintTop_toTopOf="@id/recyclerView"
-        app:layout_constraintBottom_toBottomOf="@id/recyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/bg_white_5_stroke_purple"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/GET"
-            android:textColor="@color/PURPLE"
-            android:textSize="15dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/point_small" />
-    </LinearLayout>
+        android:layout_height="wrap_content"/>
 
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:elevation="1dp"
         android:background="@drawable/bg_white_10"
         android:layout_margin="20dp"
@@ -148,6 +123,7 @@
             android:layout_height="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -156,14 +132,13 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
+                        android:padding="3dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@drawable/profile" />
 
                     <TextView

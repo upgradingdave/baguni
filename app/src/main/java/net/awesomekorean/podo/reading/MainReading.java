@@ -48,8 +48,6 @@ import static net.awesomekorean.podo.MainActivity.btnReading;
 
 public class MainReading extends Fragment {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     public static Reading readingUnit;
 
     Context context;

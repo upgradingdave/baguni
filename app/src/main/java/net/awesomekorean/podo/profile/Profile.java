@@ -28,6 +28,7 @@ import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,7 +67,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     TextView userName;
     TextView userPoint;
 
-    LinearLayout btnGetPoint;
+    ImageView btnGetPoint;
 
     LinearLayout layoutEditName;
     LinearLayout layoutEditNameOpen;
@@ -99,7 +100,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     Intent intent;
 
     AttendanceAdapter adapter;
-    List<DayOfWeekItem> list = new ArrayList<>();
+    List<DayOfWeekItem> list;
 
     int attendanceCount = 0; // 출석체크 카운트 (연속출석 7번 했는지 확인)
 
@@ -108,6 +109,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     Bitmap bitmap;
 
     UserInformation userInformation;
+
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +153,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         arrowLanguage = findViewById(R.id.arrowLanguage);
 
         btnBack.setOnClickListener(this);
+        btnGetPoint.setOnClickListener(this);
         layoutEditName.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         purchase.setOnClickListener(this);
@@ -204,11 +208,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
 
         setAttendance(userInformation.getAttendance());
+
+        rewardedAd = createAndLoadRewardedAd();
     }
 
 
     // 출석체크 리사이클러뷰 세팅
     private void setAttendance(List<Boolean> attendance) {
+
+        list = new ArrayList<>();
 
         for(int i=0; i<7; i++) {
             boolean isChecked = attendance.get(i);
@@ -239,14 +247,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new AttendanceAdapter(list);
         recyclerView.setAdapter(adapter);
-
-        rewardedAd = createAndLoadRewardedAd();
     }
 
     // 리워드 광고 로드하기
@@ -274,7 +280,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         // 일주일 출석 개근일 때 Get 버튼 활성화
         if(attendanceCount == 7) {
-            btnGetPoint.setOnClickListener(this);
+            btnGetPoint.setImageResource(R.drawable.getpodo);
+            btnGetPoint.setEnabled(true);
+        } else {
+            btnGetPoint.setImageResource(R.drawable.getpodo_grey);
+            btnGetPoint.setEnabled(false);
         }
     }
 
@@ -288,18 +298,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btnGetPoint :
-                // 일주일 모두 출석했으면 오늘 출석만 남기고 다 초기화
-                Calendar cal = Calendar.getInstance();
-                int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
-                userInformation.resetDays(today);
-                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
-                System.out.println("일주일 모두 출석! DB의 출석부를 초기화 했습니다");
-                SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                System.out.println(userInformation.getAttendance());
-
                 intent = new Intent(this, LessonFinish.class);
                 intent.putExtra("isReward", true);
-                startActivityForResult(intent, 200);
+                startActivityForResult(intent, 100);
                 break;
 
             case R.id.layoutEditName :
@@ -309,7 +310,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnSave :
                 final String newName = editName.getText().toString();
 
-                if(newName != null) {
+                if(newName.getBytes().length > 0) {
                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(newName)
@@ -432,18 +433,49 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             }
                         })
                         .show();
+                finish();
                 break;
         }
     }
 
     // 광고 보고 포인트 받아 왔을 때 userPoint 에 최신 포인트 반영
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(final int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 200) {
-            userPoint.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
+
+        int newPoints = data.getIntExtra("newPoint", userInformation.getPoints());
+        userInformation.setPoints(newPoints);
+
+        // 일주일 출석 보상일 때
+        if(requestCode == 100) {
+            // 오늘 출석만 남기고 다 초기화
+            Calendar cal = Calendar.getInstance();
+            int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
+            userInformation.resetDays(today);
+            System.out.println("출석부를 초기화 했습니다");
         }
+
+        // DB 에 유저 정보 업데이드 하기
+        db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
+                .set(userInformation)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                        userPoint.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
+                        if(requestCode == 100) {
+                            setAttendance(userInformation.getAttendance());
+                        }
+                        System.out.println("유저 정보를 업데이트 했습니다.");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("유저 정보 업데이트를 실패 했습니다.");
+            }
+        });
     }
+
 
     // editProfile 이랑 language 펼치기/접기 메소드
     private void setExtendableButton(ImageView arrow, LinearLayout closedLayout) {

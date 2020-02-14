@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class MyQuestions extends Fragment {
 
     View view;
-    Intent intent;
 
     LinearLayout noQuestion;
 

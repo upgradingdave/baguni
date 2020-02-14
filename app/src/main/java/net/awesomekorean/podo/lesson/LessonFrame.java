@@ -32,8 +32,6 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
     Button btnNo;
     Button btnYes;
 
-    Intent intent;
-
     private GestureDetectorCompat gestureDetectorCompat = null;
 
     public static String swipePage;

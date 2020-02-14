@@ -99,7 +99,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
     public static TextView collectionNo;
 
-    int index;  // 클릭 한 리스트 뷰의 인덱스
     public static int isChecked = 0; // 클릭된 아이템이 있는지 확인하기 위한 변수
     public static int size; //  컬렉션 개수
 
@@ -406,8 +405,10 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnStudy:
-                intent = new Intent(getContext(), CollectionStudy.class);
-                startActivity(intent);
+                if(!listAllData.isEmpty()) {
+                    intent = new Intent(getContext(), CollectionStudy.class);
+                    startActivity(intent);
+                }
                 break;
 
             case R.id.btnDelete:

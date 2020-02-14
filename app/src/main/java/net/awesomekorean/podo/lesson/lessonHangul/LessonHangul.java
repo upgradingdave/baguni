@@ -44,12 +44,17 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     ImageView btnAudio;
     LinearLayout btnWriting;
     LinearLayout btnHint;
+    ImageView iconWriting;
+    ImageView iconHint;
     Button btnIntro;
     ImageView btnBack;
 
     PlayAudioWithString playAudioWithString =  new PlayAudioWithString();
 
     Context context;
+
+    int resIDWriting;
+    int resIDHint;
 
 
     @Override
@@ -68,6 +73,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         btnAudio = findViewById(R.id.btnAudio);
         btnWriting = findViewById(R.id.btnWriting);
         btnHint = findViewById(R.id.btnHint);
+        iconWriting = findViewById(R.id.iconWriting);
+        iconHint = findViewById(R.id.iconHint);
         btnIntro = findViewById(R.id.btnIntro);
         btnBack = findViewById(R.id.btnBack);
         btnAudio.setOnClickListener(this);
@@ -108,6 +115,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                     currentHangul--;
                 }
                 setHangul(hangul, hangulExplain);
+                setHintIcons();
                 if(imageViewHangul != null) {
                     visible(VISIBLE, GONE);
                 }
@@ -120,14 +128,45 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                     currentHangul++;
                 }
                 setHangul(hangul, hangulExplain);
+                setHintIcons();
                 if(imageViewHangul != null) {
                     visible(VISIBLE, GONE);
                 }
             }
         });
 
+        setHintIcons();
         audioPlay();
+    }
 
+
+    // writing 이랑 hint 아이콘 설정하기
+    private void setHintIcons() {
+        String packName = getApplicationContext().getPackageName();
+        String resNameWriting = "@drawable/w" + conVowBat + currentHangul;
+        resIDWriting = getResources().getIdentifier(resNameWriting, "drawable", packName);
+
+        System.out.println("NAME:"+resNameWriting);
+
+        if(resIDWriting == 0) {
+            iconWriting.setImageResource(R.drawable.hangul_writing_grey);
+            btnWriting.setEnabled(false);
+        } else {
+            iconWriting.setImageResource(R.drawable.hangul_writing);
+            btnWriting.setEnabled(true);
+        }
+
+
+        String resNameHint = "@drawable/h" + conVowBat + currentHangul;
+        resIDHint = getResources().getIdentifier(resNameHint, "drawable", packName);
+
+        if(resIDHint == 0) {
+            iconHint.setImageResource(R.drawable.hint_grey);
+            btnHint.setEnabled(false);
+        } else {
+            iconHint.setImageResource(R.drawable.hint);
+            btnHint.setEnabled(true);
+        }
     }
 
     @Override
@@ -141,13 +180,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnWriting :
                 if(writingBtnClicked == 0) {
-
-                    String resName = "@drawable/w" + conVowBat + currentHangul;
-                    String packName = getApplicationContext().getPackageName();
-                    int resID = getResources().getIdentifier(resName, "drawable", packName);
-
                     imageViewHangul = findViewById(R.id.imageViewHangul);
-                    imageViewHangul.setImageResource(resID);
+                    imageViewHangul.setImageResource(resIDWriting);
 
                     visible(GONE, VISIBLE);
                     writingBtnClicked = 1;
@@ -157,18 +191,12 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                     visible(VISIBLE, GONE);
                     writingBtnClicked = 0;
                 }
-
                 break;
 
             case R.id.btnHint :
                 if(hintBtnClicked == 0) {
-
-                    String resName = "@drawable/h" + conVowBat + currentHangul;
-                    String packName = getApplicationContext().getPackageName();
-                    int resID = getResources().getIdentifier(resName, "drawable", packName);
-
                     imageViewHangul = findViewById(R.id.imageViewHangul);
-                    imageViewHangul.setImageResource(resID);
+                    imageViewHangul.setImageResource(resIDHint);
 
                     visible(GONE, VISIBLE);
                     hintBtnClicked = 1;
@@ -178,7 +206,6 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                     visible(VISIBLE, GONE);
                     hintBtnClicked = 0;
                 }
-
                 break;
 
             case R.id.btnIntro :
@@ -204,7 +231,6 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         textViewIntro.setText(hangulIntro);
         textViewIntro.setMovementMethod(new ScrollingMovementMethod());
         setInitial();
-
     }
 
     private void visible(int textView, int imageView) {

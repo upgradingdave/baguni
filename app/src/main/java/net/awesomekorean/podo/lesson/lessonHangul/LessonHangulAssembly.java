@@ -23,12 +23,8 @@ import static android.view.View.VISIBLE;
 
 public class LessonHangulAssembly extends AppCompatActivity implements View.OnClickListener {
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-
     TextView textViewIntro;
     TextView assemblyTextView;
-
-    int introVisible = 0;
 
     ImageView cvH;
     ImageView cvV;
@@ -72,10 +68,10 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     String[] batchim = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
     String assemblyIntro = "We have finished learning every Hangul!\n" +
                     "Now let's make every character by yourself.\n" +
-                    "We have people4 ways to make characters.\n" +
-                    "There are people2 rules when making characters.\n" +
-                    "people1. The first Hangul should be a consonant.\n" +
-                    "people2. A consonant and vowel should be used alternately.\n" +
+                    "We have 4 ways to make characters.\n" +
+                    "There are 2 rules when making characters.\n" +
+                    "1. The first Hangul should be a consonant.\n" +
+                    "2. A consonant and vowel should be used alternately.\n" +
                     "Note)\n" +
                     "You'll see some words that have a double Batchim later.\n" +
                     "But don't worry.\n" +

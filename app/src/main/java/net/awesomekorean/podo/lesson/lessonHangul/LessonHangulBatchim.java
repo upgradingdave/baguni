@@ -35,15 +35,15 @@ class LessonHangulBatchim implements Hangul{
             "Great!",
             "Same one more.",
             "Now we can have a question. Why we should use different character even there are lots of same movement? It seems more simple if we use only one Batchim.",
-            "However, every languages have some words that have same pronunciation but different meaning. It will help flag_america to reduce the number of audio_small_blue that we should make. Even though it has same audio_small_blue, we can know enough its different meanings with spelling and the situation.",
+            "However, every languages have some words that have same pronunciation but different meaning. It will help you to reduce the number of sound that we should make. Even though it has same sound, we can know enough its different meanings with spelling and the situation.",
             "After a long time, it's different movement.",
             "It has also similar tongue position with 'ㄴ'. But the air is getting out through mouth.",
-            "Some Korean learners who are native English speaker, tends to roll up their tongue like [r] audio_small_blue. But the correct position is behind of upper teeth.",
+            "Some Korean learners who are native English speaker, tends to roll up their tongue like [r] sound. But the correct position is behind of upper teeth.",
             "Your lips closed.",
-            "And you can feel the audio_small_blue trembled in your mouth.",
+            "And you can feel the sound trembled in your mouth.",
             "And the air is getting out through your nose.",
             "Your lips closed like 'ㅁ'.",
-            "But the audio_small_blue not trembled.",
+            "But the sound not trembled.",
             "It's easy.",
             "This is same with 'ㅂ'.",
             "Totally same.",
@@ -54,15 +54,15 @@ class LessonHangulBatchim implements Hangul{
     };
 
     String hangulIntro =
-            "We call last consonant to 'Batchim'." +
-            "It's the consonant that is placed in under part of Hangul." +
-            "When I teach Korean I could find a lot of students who feel difficult in Batchim." +
-            "Especially the students who studied Batchim as a audio_small_blue like" +
-            "'ㄱ' = [k], 'ㄴ' = [n]..." +
-            "It because they think the audio_small_blue of consonant is different when they are Batchim." +
-            "I want to say the Batchim is not a audio_small_blue but the movement of our articulator like mouth, tongue, throat etc..." +
-            "And I can also say we already finished learning Batchim when we learn consonants." +
-            "Can you believe this?";
+            "We call last consonant a 'Batchim'.\n" +
+                    "It's the last consonant that is placed in the under part of the Hangul.\n" +
+                    "When I teach Korean, I found a lot of students feel that Batchim is difficult.\n" +
+                    "They usually studied Batchim to sound like\n" +
+                    "'ㄱ' = [k], 'ㄴ' = [n]...\n" +
+                    "And they think the sound of the consonant changes when they are a Batchim.\n" +
+                    "I want to say the Batchim is not a sound but the movement of our articulator, like the mouth, tongue, throat etc...\n" +
+                    "Also, we have already learned about Batchim when we learned about consonants.\n" +
+                    "Isn't it cool? Let's check it out.";
 
     @Override
     public String[] getHangul() {

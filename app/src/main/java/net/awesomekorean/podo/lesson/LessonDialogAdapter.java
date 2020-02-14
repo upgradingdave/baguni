@@ -25,9 +25,6 @@ public class LessonDialogAdapter extends RecyclerView.Adapter<LessonDialogAdapte
         this.listener = listener;
     }
 
-
-    MediaPlayer mp;
-
     private ArrayList<LessonDialogItems> list;
 
     public LessonDialogAdapter(ArrayList<LessonDialogItems> list) {

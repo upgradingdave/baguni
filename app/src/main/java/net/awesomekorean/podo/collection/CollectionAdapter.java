@@ -22,8 +22,6 @@ public class CollectionAdapter extends BaseAdapter {
 
     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
-    MediaPlayer mp;
-
     public CollectionAdapter(Context context, List<CollectionEntity> list) {
 
         this.context = context;

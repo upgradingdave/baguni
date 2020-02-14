@@ -17,7 +17,6 @@ public class Logo extends AppCompatActivity {
     public static final String WIFI_STATE = "WIFE";
     public static final String MOBILE_STATE = "MOBILE";
     public static final String NONE_STATE = "NONE";
-    public static final String CONNECTION_CONFIRM_CLIENT_URL = "http://clients3.google.com/generate_204";
 
 
     @Override

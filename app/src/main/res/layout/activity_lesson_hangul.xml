@@ -118,9 +118,10 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/iconWriting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/writing_active" />
+                    android:src="@drawable/hangul_writing" />
 
                 <TextView
                     android:layout_marginLeft="10dp"
@@ -145,6 +146,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/iconHint"
                     android:layout_gravity="center"
                     android:src="@drawable/hint"
                     android:layout_width="wrap_content"

@@ -35,7 +35,6 @@ import net.awesomekorean.podo.UserInformation;
 public class SignUp extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ImageView btnBack;
     EditText email;

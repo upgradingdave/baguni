@@ -64,7 +64,6 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DayOfWeekItem item = list.get(position);
-
         holder.day.setText(item.getDay());
     }
 

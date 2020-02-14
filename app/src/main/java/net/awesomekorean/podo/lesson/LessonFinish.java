@@ -110,7 +110,13 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                 int newPoints = oldPoints + reward;
                 userInformation.setPoints(newPoints);
 
-                if(!isFromProfile) {
+                if(isFromProfile) {
+                    Intent intent = new Intent();
+                    intent.putExtra("newPoint", newPoints);
+                    setResult(RESULT_OK, intent);
+                    finish();
+
+                } else {
                     // 레슨완료 정보 업데이트 하기
                     String lessonId = MainLesson.lessonUnit.getLessonId();
                     if (!userInformation.getLessonComplete().contains(lessonId)) {
@@ -118,23 +124,16 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     } else {
                         System.out.println("이미 완료된 Lesson 입니다.");
                     }
-                }
 
-                // DB 에 유저 정보 업데이드 하기
-                SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
-                        .set(userInformation)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                System.out.println("DB에 유저 정보를 업데이트 했습니다.");
+                    // DB 에 유저 정보 업데이드 하기
+                    SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
+                            .set(userInformation)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    System.out.println("DB에 유저 정보를 업데이트 했습니다.");
 
-                                if(isFromProfile) {
-                                    Intent intent = new Intent();
-                                    setResult(RESULT_OK, intent);
-                                    finish();
-
-                                } else {
                                     // 애드몹 광고 보여주기
                                     if(interstitialAd.isLoaded()) {
                                         interstitialAd.show();
@@ -144,8 +143,9 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                                         startActivity(intent);
                                     }
                                 }
-                            }
-                        });
+                            });
+                }
+
                 break;
 
 

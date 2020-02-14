@@ -18,7 +18,6 @@ public class SharedPreferencesInfo {
         SharedPreferences sp = context.getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("info", stringToSP);
-//        editor.clear();
         editor.commit();
     }
 
@@ -28,14 +27,6 @@ public class SharedPreferencesInfo {
         String stringFromSP = sp.getString("info", "");
         UserInformation userInformation = gson.fromJson(stringFromSP, UserInformation.class);
         return userInformation;
-    }
-
-    // 모든 데이터 지우기 (개발용)
-    public static void deleteUserInfo(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("user", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.clear();
-        editor.commit();
     }
 
     // 마지막 동기화 날짜(UNIX 타임스탬프) 불러오기
