@@ -69,17 +69,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     EditText editName;
     Button btnSave;
 
-    LinearLayout layoutLanguage;
-    ImageView ivFlag;
-    TextView tvLanguage;
-
-    LinearLayout layoutLanguageOpen;
-    LinearLayout layoutEnglish;
-    LinearLayout layoutKorean;
-    LinearLayout layoutChinese;
-    LinearLayout layoutJapanese;
-    LinearLayout layoutThai;
-
     LinearLayout evaluation;
     LinearLayout recommend;
     LinearLayout report;
@@ -121,17 +110,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         editName = findViewById(R.id.editName);
         btnSave = findViewById(R.id.btnSave);
 
-        layoutLanguage = findViewById(R.id.layoutLanguage);
-        ivFlag = findViewById(R.id.ivFlag);
-        tvLanguage = findViewById(R.id.tvLanguage);
-
-        layoutLanguageOpen = findViewById(R.id.layoutLanguageOpen);
-        layoutEnglish = findViewById(R.id.layoutEnglish);
-        layoutKorean = findViewById(R.id.layoutKorean);
-        layoutChinese = findViewById(R.id.layoutChinese);
-        layoutJapanese = findViewById(R.id.layoutJapanese);
-        layoutThai = findViewById(R.id.layoutThai);
-
         evaluation = findViewById(R.id.evaluation);
         recommend = findViewById(R.id.recommend);
         report = findViewById(R.id.report);
@@ -139,18 +117,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         logout = findViewById(R.id.logout);
 
         arrowEditProfile = findViewById(R.id.arrowEditProfile);
-        arrowLanguage = findViewById(R.id.arrowLanguage);
 
         btnBack.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
         layoutEditName.setOnClickListener(this);
         btnSave.setOnClickListener(this);
-        layoutLanguage.setOnClickListener(this);
-        layoutEnglish.setOnClickListener(this);
-        layoutKorean.setOnClickListener(this);
-        layoutChinese.setOnClickListener(this);
-        layoutJapanese.setOnClickListener(this);
-        layoutThai.setOnClickListener(this);
         evaluation.setOnClickListener(this);
         recommend.setOnClickListener(this);
         report.setOnClickListener(this);
@@ -320,31 +291,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 setExtendableButton(arrowEditProfile, layoutEditNameOpen);
                 break;
 
-
-            case R.id.layoutLanguage :
-                setExtendableButton(arrowLanguage, layoutLanguageOpen);
-                break;
-
-            case R.id.layoutEnglish :
-                setLanguage(R.drawable.en, R.string.ENGLISH);
-                break;
-
-            case R.id.layoutKorean :
-                setLanguage(R.drawable.kr, R.string.KOREAN);
-                break;
-
-            case R.id.layoutChinese :
-                setLanguage(R.drawable.cn, R.string.CHINESE);
-                break;
-
-            case R.id.layoutJapanese :
-                setLanguage(R.drawable.jp, R.string.JAPANESE);
-                break;
-
-            case R.id.layoutThai :
-                setLanguage(R.drawable.th, R.string.THAI);
-                break;
-
             case R.id.evaluation :
                 // 다운로드 링크로 연결
                 break;
@@ -403,6 +349,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(intent);
                                 FirebaseAuth.getInstance().signOut();
+                                finish();
                             }
                         })
                         .setNegativeButton(getString(R.string.CANCEL), new DialogInterface.OnClickListener() {
@@ -411,7 +358,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             }
                         })
                         .show();
-                finish();
                 break;
         }
     }
@@ -467,13 +413,4 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             btnExtendClicked = false;
         }
     }
-
-    // 언어 선택 메소드
-    private void setLanguage(int flag, int language) {
-        ivFlag.setImageResource(flag);
-        tvLanguage.setText(getString(language));
-        layoutLanguageOpen.setVisibility(View.GONE);
-        setExtendableButton(arrowLanguage, layoutLanguageOpen);
-    }
-
 }

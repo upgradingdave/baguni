@@ -84,7 +84,7 @@
 
             <ImageView
                 android:id="@+id/btnStop"
-                android:src="@drawable/pause"
+                android:src="@drawable/stop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView

@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".purchase.Subscribe">
+    tools:context=".purchase.TopUp">
 
     <LinearLayout
+        android:id="@+id/title"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideLine40"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:weightSum="1"
         android:paddingTop="50dp"
-        android:paddingBottom="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:background="@color/FOGGY">
@@ -22,23 +24,42 @@
             android:textSize="20dp"
             android:textColor="@color/NAVY"
             android:textStyle="bold"
+            android:layout_weight="0.19"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"/>
         <ImageView
-            android:src="@drawable/no_ads"
+            android:src="@drawable/topup"
+            android:layout_weight="0.39"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"/>
         <TextView
             android:text="@string/GET_PODO_POINTS_DETAIL"
-            android:textSize="15dp"
             android:textColor="@color/GREY_TEXT"
+            android:layout_weight="0.42"
             android:gravity="center"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"/>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
+
+
 
     <ImageView
         android:id="@+id/btnClose"
@@ -52,12 +73,13 @@
 
     <LinearLayout
         android:id="@+id/price"
+        android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/btnGetPoint"
+        app:layout_constraintTop_toBottomOf="@+id/guideLine40"
+        app:layout_constraintBottom_toTopOf="@id/guideLine75"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <LinearLayout
             android:id="@+id/pointA"
@@ -71,6 +93,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/FOGGY"
@@ -78,10 +101,11 @@
                 android:textColor="@color/GREY_TEXT" />
 
             <TextView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/POINT_OPTION_A_PRICE"
                 android:textStyle="bold"
                 android:textColor="@color/BLACK"
@@ -89,23 +113,24 @@
 
             <ImageView
                 android:id="@+id/checkPointA"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/check_blue"
-                android:visibility="gone" />
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/pointB"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:paddingBottom="20dp"
             android:background="@drawable/bg_grey_10_stroke_navy"
             android:gravity="center_horizontal"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent">
+
             <TextView
                 android:background="@drawable/bg_navy_10_top"
                 android:text="@string/BEST_VALUE"
@@ -116,28 +141,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:background="@color/FOGGY"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/GREY_TEXT"
-                android:text="@string/POINT_OPTION_B" />
-            <TextView
-                android:text="@string/POINT_OPTION_B_PRICE"
-                android:textColor="@color/BLACK"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
+            <LinearLayout
+                android:layout_weight="1"
                 android:layout_marginBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/checkPointB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/check_blue" />
+                <TextView
+                    android:layout_weight="1"
+                    android:background="@color/FOGGY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/GREY_TEXT"
+                    android:text="@string/POINT_OPTION_B" />
+                <TextView
+                    android:layout_weight="1"
+                    android:text="@string/POINT_OPTION_B_PRICE"
+                    android:textColor="@color/BLACK"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"/>
+
+                <ImageView
+                    android:id="@+id/checkPointB"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:src="@drawable/check_blue" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -152,54 +191,68 @@
             android:padding="20dp">
 
             <TextView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@color/FOGGY"
                 android:text="@string/POINT_OPTION_C"
                 android:textColor="@color/GREY_TEXT" />
 
             <TextView
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/POINT_OPTION_C_PRICE"
                 android:textColor="@color/BLACK"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <ImageView
+                android:layout_weight="1"
                 android:id="@+id/checkPointC"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:src="@drawable/check_blue"
-                android:visibility="gone" />
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnGetPoint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_purple_10"
-        android:text="@string/PURCHASE_POINTS"
-        android:textAllCaps="false"
-        android:textColor="@color/WHITE"
-        app:layout_constraintBottom_toTopOf="@id/policy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/policy"
-        android:layout_margin="20dp"
-        android:text="@string/POINT_POLICY"
-        android:textSize="15dp"
-        android:textColor="@color/GREY_TEXT"
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideLine75"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/btnGetPoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_purple_10"
+            android:text="@string/PURCHASE_POINTS"
+            android:textAllCaps="false"
+            android:textColor="@color/WHITE"/>
+
+        <TextView
+            android:id="@+id/policy"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/POINT_POLICY"
+            android:textColor="@color/GREY_TEXT"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

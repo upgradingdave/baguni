@@ -58,17 +58,17 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
     // 랜덤 학습 모드
     public void randomStudy() {
-        repository.getRandomForStudy(getApplicationContext());
+        repository.getRandomForStudy();
     }
 
 
     // 최신부터 학습 모드
     public void newCollectionFirstStudy() {
         if(index < MainCollection.size) {
-            repository.getDescForStudy(getApplicationContext(), index);
+            repository.getDescForStudy(index);
             index++;
         } else {
-            repository.getDescForStudy(getApplicationContext(), 0);
+            repository.getDescForStudy(0);
             index = 1;
         }
     }
@@ -103,7 +103,7 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
             case R.id.btnAudio :
                 if(studyAudio != null) {
                     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
-                    playAudioWithString.playAudio(getApplicationContext(), studyAudio);
+                    playAudioWithString.playAudioCollection(studyAudio);
                 }
                 break;
 

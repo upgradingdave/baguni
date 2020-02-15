@@ -55,17 +55,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    LinearLayout selectLanguage;
-    ImageView flag;
-    TextView nation;
-
-    LinearLayout selectLanguageList;
-    LinearLayout selectEnglish;
-    LinearLayout selectChinese;
-    LinearLayout selectJapanese;
-    LinearLayout selectThai;
-    LinearLayout selectKorean;
-
     EditText email;
     EditText password;
     TextView wrongEmail;
@@ -116,26 +105,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
         SettingStatusBar.setStatusBar(this);
 
-        selectLanguage = findViewById(R.id.selectLanguage);
-        flag = findViewById(R.id.flag);
-        nation = findViewById(R.id.nation);
-
-        selectLanguageList = findViewById(R.id.selectLanguageList);
-        selectEnglish = findViewById(R.id.selectEnglish);
-        selectChinese = findViewById(R.id.selectChinese);
-        selectJapanese = findViewById(R.id.selectJapanese);
-        selectThai = findViewById(R.id.selectThai);
-        selectKorean = findViewById(R.id.selectKorean);
         progressBarLayout = findViewById(R.id.progressBarLayout);
         progressBar = findViewById(R.id.progressBar);
-
-        selectLanguage.setOnClickListener(this);
-        selectEnglish.setOnClickListener(this);
-        selectChinese.setOnClickListener(this);
-        selectJapanese.setOnClickListener(this);
-        selectThai.setOnClickListener(this);
-        selectKorean.setOnClickListener(this);
-
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         wrongEmail = findViewById(R.id.wrongEmail);
@@ -291,45 +262,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
         switch (view.getId()) {
 
-            case R.id.selectLanguage :
-                if(selectLanguageList.getVisibility() == View.GONE) {
-                    selectLanguageList.setVisibility(View.VISIBLE);
-                } else {
-                    selectLanguageList.setVisibility(View.GONE);
-                }
-                break;
-
-            case R.id.selectEnglish :
-                flag.setImageDrawable(getDrawable(R.drawable.en_outline));
-                nation.setText(R.string.ENGLISH);
-                selectLanguageList.setVisibility(View.GONE);
-                break;
-
-            case R.id.selectChinese :
-                flag.setImageDrawable(getDrawable(R.drawable.cn_outline));
-                nation.setText(R.string.CHINESE);
-                selectLanguageList.setVisibility(View.GONE);
-                break;
-
-            case R.id.selectJapanese :
-                flag.setImageDrawable(getDrawable(R.drawable.jp_outline));
-                nation.setText(R.string.JAPANESE);
-                selectLanguageList.setVisibility(View.GONE);
-                break;
-
-            case R.id.selectThai :
-                flag.setImageDrawable(getDrawable(R.drawable.th_outline));
-                nation.setText(R.string.THAI);
-                selectLanguageList.setVisibility(View.GONE);
-                break;
-
-            case R.id.selectKorean :
-                flag.setImageDrawable(getDrawable(R.drawable.kr_outline));
-                nation.setText(R.string.KOREAN);
-                selectLanguageList.setVisibility(View.GONE);
-                break;
-
-
             case R.id.btnSignIn :
                 final String userEmail = email.getText().toString();
                 final String userPass = password.getText().toString();
@@ -356,7 +288,6 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                 }
                             });
                 }
-
                 break;
 
             case R.id.forgotPassword :

@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
+import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.PlayAudioWithString;
 
@@ -149,7 +150,7 @@ public class CollectionRepository {
     }
 
     // 컬렉션 스터디에서 랜덤 플래시 카드 불러오기
-    public void getRandomForStudy(final Context context) {
+    public void getRandomForStudy() {
         new AsyncTask<Void, Void, CollectionEntity>() {
             @Override
             protected CollectionEntity doInBackground(Void... voids) {
@@ -161,13 +162,13 @@ public class CollectionRepository {
 
             @Override
             protected void onPostExecute(CollectionEntity entity) {
-                setCollectionStudy(context, entity);
+                setCollectionStudy(entity);
             }
         }.execute();
     }
 
     // 컬렉션 스터디에서 최신 컬렉션 순으로 불러오기
-    public void getDescForStudy(final Context context, final int index) {
+    public void getDescForStudy(final int index) {
         new AsyncTask<Void, Void, CollectionEntity>() {
             @Override
             protected CollectionEntity doInBackground(Void... voids) {
@@ -179,16 +180,16 @@ public class CollectionRepository {
 
             @Override
             protected void onPostExecute(CollectionEntity entity) {
-                setCollectionStudy(context, entity);
+                setCollectionStudy(entity);
             }
         }.execute();
     }
 
-    private void setCollectionStudy(Context context, CollectionEntity entity) {
+    private void setCollectionStudy(CollectionEntity entity) {
         String studyAudio = entity.getAudio();
         if(studyAudio != null) {
             playAudioWithString = new PlayAudioWithString();
-            playAudioWithString.playAudio(context, studyAudio);
+            playAudioWithString.playAudioCollection(studyAudio);
             CollectionStudy.btnAudio.setVisibility(View.VISIBLE);
         } else {
             CollectionStudy.btnAudio.setVisibility(View.GONE);

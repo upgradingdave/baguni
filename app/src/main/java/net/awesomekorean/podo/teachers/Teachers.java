@@ -5,18 +5,14 @@ import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -24,18 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Transaction;
-import com.google.firebase.firestore.WriteBatch;
-import com.google.firebase.storage.FirebaseStorage;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -43,15 +33,11 @@ import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionEntity;
-import net.awesomekorean.podo.collection.CollectionRepository;
-import net.awesomekorean.podo.profile.Requests;
 import net.awesomekorean.podo.purchase.TopUp;
 import net.awesomekorean.podo.writing.WritingEntity;
 import net.awesomekorean.podo.writing.WritingRepository;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -205,12 +191,12 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     WritingRepository repository = new WritingRepository(this);
                     repository.update(requestWriting);
 
-                    // 교정요청 DB(teacher-request)에 저장하기
+                    // 교정요청 DB에 저장하기
                     db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
                             .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            System.out.println("teacher-Requests 에 저장했습니다.");
+                            System.out.println("교정요청을 DB에 저장했습니다.");
                             requestResult.setVisibility(View.VISIBLE);
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
@@ -221,22 +207,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                                     startActivity(intent);
                                 }
                             }, 3000);
-                        }
-                    });
-
-
-                    // 교정요청 DB(user-request)에 저장하기
-                    Requests requests = new Requests();
-                    requests.setRequestId(requestWriting.getGuid());
-                    requests.setRequestDate(requestWriting.getDateRequest());
-                    requests.setIsCorrection(true);
-                    requests.setWriting(requestWriting.getContents());
-                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail)
-                            .collection(getString(R.string.DB_REQUESTS)).document(requestWriting.getGuid())
-                            .set(requests).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            System.out.println("User-Requests 에 저장했습니다.");
                         }
                     });
 
@@ -257,7 +227,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                         back.add(entity.getBack());
                     }
 
-                    // 녹음요청 DB(teacher-request) 에 저장하기
+                    // 녹음요청 DB에 저장하기
                     Map<String, Object> request = new HashMap<>();
                     request.put("guid", guid);
                     request.put("front", front);
@@ -291,25 +261,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                                     }, 3000);
                                 }
                             });
-
-                    // 녹음요청 DB(user-request)에 저장하기
-                    Requests requests = new Requests();
-                    requests.setRequestId(requestGuid);
-                    requests.setRequestDate(timeNow);
-                    requests.setIsCorrection(false);
-                    requests.setGuid(guid);
-                    requests.setFront(front);
-                    requests.setBack(back);
-
-                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail)
-                            .collection(getString(R.string.DB_REQUESTS)).document(requests.getRequestId())
-                            .set(requests).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            System.out.println("User-Requests 에 저장했습니다.");
-                        }
-                    });
-
                     break;
                 }
         }
