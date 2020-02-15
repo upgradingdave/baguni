@@ -134,8 +134,8 @@
         android:background="@drawable/bg_purple_30"
         android:layout_margin="20dp"
         android:drawableLeft="@drawable/star_white"
-        android:drawablePadding="-110dp"
-        android:paddingLeft="110dp"
+        android:drawablePadding="-90dp"
+        android:paddingLeft="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -21,32 +21,33 @@
 
             <LinearLayout
                 android:layout_weight="1"
-                android:padding="15dp"
                 android:background="@drawable/bg_white_30_stroke_grey"
                 android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp">
 
                 <ImageView
                     android:src="@drawable/search"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
 
                 <EditText
                     android:id="@+id/searchCollection"
                     android:background="@drawable/bg_transparent"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="Search"
                     android:textSize="15dp"
-                    android:paddingLeft="10dp"/>
+                    android:layout_marginLeft="15dp"/>
 
                 <ImageView
                     android:id="@+id/searchCancel"
                     android:visibility="invisible"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/close_red" />
 
             </LinearLayout>

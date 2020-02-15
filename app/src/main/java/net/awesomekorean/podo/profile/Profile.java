@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,13 +28,11 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.eventbus.Subscribe;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
@@ -44,8 +41,6 @@ import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.login.SignIn;
-import net.awesomekorean.podo.message.MessageAdapter;
-import net.awesomekorean.podo.purchase.Subscribe;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,8 +69,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     EditText editName;
     Button btnSave;
 
-    LinearLayout purchase;
-
     LinearLayout layoutLanguage;
     ImageView ivFlag;
     TextView tvLanguage;
@@ -88,7 +81,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     LinearLayout layoutThai;
 
     LinearLayout evaluation;
-    LinearLayout history;
     LinearLayout recommend;
     LinearLayout report;
     LinearLayout getPointByAd;
@@ -129,8 +121,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         editName = findViewById(R.id.editName);
         btnSave = findViewById(R.id.btnSave);
 
-        purchase = findViewById(R.id.purchase);
-
         layoutLanguage = findViewById(R.id.layoutLanguage);
         ivFlag = findViewById(R.id.ivFlag);
         tvLanguage = findViewById(R.id.tvLanguage);
@@ -143,7 +133,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         layoutThai = findViewById(R.id.layoutThai);
 
         evaluation = findViewById(R.id.evaluation);
-        history = findViewById(R.id.history);
         recommend = findViewById(R.id.recommend);
         report = findViewById(R.id.report);
         getPointByAd = findViewById(R.id.getPointsByAd);
@@ -156,7 +145,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         btnGetPoint.setOnClickListener(this);
         layoutEditName.setOnClickListener(this);
         btnSave.setOnClickListener(this);
-        purchase.setOnClickListener(this);
         layoutLanguage.setOnClickListener(this);
         layoutEnglish.setOnClickListener(this);
         layoutKorean.setOnClickListener(this);
@@ -164,7 +152,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         layoutJapanese.setOnClickListener(this);
         layoutThai.setOnClickListener(this);
         evaluation.setOnClickListener(this);
-        history.setOnClickListener(this);
         recommend.setOnClickListener(this);
         report.setOnClickListener(this);
         getPointByAd.setOnClickListener(this);
@@ -333,10 +320,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 setExtendableButton(arrowEditProfile, layoutEditNameOpen);
                 break;
 
-            case R.id.purchase :
-                intent = new Intent(this, Subscribe.class);
-                startActivity(intent);
-                break;
 
             case R.id.layoutLanguage :
                 setExtendableButton(arrowLanguage, layoutLanguageOpen);
@@ -364,11 +347,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.evaluation :
                 // 다운로드 링크로 연결
-                break;
-
-            case R.id.history :
-                intent = new Intent(getApplicationContext(), History.class);
-                startActivity(intent);
                 break;
 
             case R.id.recommend :

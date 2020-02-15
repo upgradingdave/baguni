@@ -17,7 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".profile.History"></activity>
         <activity
             android:name=".UnlockActivity"
             android:theme="@style/DialogFullScreen" />
@@ -51,12 +50,9 @@
         </activity>
         <activity android:name=".writing.WritingCorrection" />
         <activity android:name=".purchase.TopUp" />
-        <activity android:name=".purchase.Subscribe" />
         <activity android:name=".profile.Profile" />
         <activity android:name=".message.Message" />
         <activity android:name=".lesson.LessonFinish" />
-        <activity android:name=".qna.QnaDetail" />
-        <activity android:name=".qna.AskQuestion" />
         <activity android:name=".Logo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
