@@ -170,7 +170,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
             case R.id.btnAudio :
                 String audioFile = wordAudio[lessonCount];
-                playAudioWithString.playAudioLesson(audioFile, lessonId.toLowerCase());
+                playAudioWithString.repeatAudio();
                 break;
 
             case R.id.btnCollect :

@@ -57,6 +57,8 @@
     <string name="COLLECTION">Collection</string>
     <string name="PROFILE_OPTION">Profile/Option</string>
     <string name="MESSAGE">Message</string>
+    <string name="CONFIRM_EXIT">Do you want to exit podo?</string>
+
 
 
     <!--    주요버튼-->
@@ -111,8 +113,6 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="SYNONYMS">Synonyms: </string>
     <string name="USES_IN_SENTENCE">Uses in sentence: </string>
     <string name="ADD_COLLECTION">Add Collection</string>
-    <string name="CHOOSE_CORRECT_WORD">Choose the correct word</string>
-    <string name="LISTEN_AND_ANSWER">Listen &amp; Answer</string>
     <string name="RETURN">Return</string>
     <string name="PLAY">Play</string>
     <string name="STOP">Stop</string>

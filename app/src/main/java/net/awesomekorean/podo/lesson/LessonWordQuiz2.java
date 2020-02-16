@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -37,9 +39,11 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     String[] wordBack = LessonWord.wordBack;
     String[] wordAudio = LessonWord.wordAudio;
 
-    MediaPlayer mp;
-
     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlaySoundPool playSoundPool;
+
+    ConstraintLayout totalPage;
+
 
     int[] checkAnswer = new int[2];
 
@@ -59,9 +63,17 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         flex1 = view.findViewById(R.id.flex1);
         flex2 = view.findViewById(R.id.flex2);
-
+        totalPage = view.findViewById(R.id.totalPage);
+        totalPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         makeQuiz(); // 퀴즈 버튼 만들기
+
+        playSoundPool = new PlaySoundPool(getContext());
 
         return view;
     }
@@ -143,8 +155,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
             if(checkAnswer[0] == checkAnswer[1]) {  // 정답
 
-                mp = MediaPlayer.create(getContext(), R.raw.correct);
-                mp.start();
+                playSoundPool.playSoundPool(0);
 
                 Drawable transparent = ContextCompat.getDrawable(getContext(), R.drawable.bg_transparent);
 
@@ -157,15 +168,13 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
-                playAudioWithString.playAudio(getContext(), wordAudio[checkAnswer[0]-1]);
-
+                playAudioWithString.playAudioLesson(wordAudio[checkAnswer[0]-1], MainLesson.lessonUnit.getLessonId().toLowerCase());
 
                 isCorrectAll();
 
             } else {  // 오답
 
-                mp = MediaPlayer.create(getContext(), R.raw.wrong);
-                mp.start();
+                playSoundPool.playSoundPool(1);
 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);

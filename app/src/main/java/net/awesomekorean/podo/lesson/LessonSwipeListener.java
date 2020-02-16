@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 

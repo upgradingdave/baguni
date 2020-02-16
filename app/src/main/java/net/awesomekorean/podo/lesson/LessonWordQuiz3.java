@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -44,9 +46,12 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
     ImageView btnAudio;
     ImageView btnReset;
 
+    ConstraintLayout totalPage;
+
     int quizCount = 0; // 단어퀴즈 순서
 
     MediaPlayer mp;
+    PlaySoundPool playSoundPool;
     PlayAudioWithString playAudioWithString = new PlayAudioWithString();
 
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
@@ -70,9 +75,17 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         flexboxLayout = view.findViewById(R.id.flexboxLayout);
         btnAudio = view.findViewById(R.id.btnAudio);
         btnReset = view.findViewById(R.id.btnReset);
+        totalPage = view.findViewById(R.id.totalPage);
         btnAudio.setOnClickListener(this);
         btnReset.setOnClickListener(this);
+        totalPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
+        playSoundPool = new PlaySoundPool(getContext());
 
         selectorButtonClick = new View.OnClickListener() {
 
@@ -90,16 +103,12 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
                     if(tvAnswer.getText().toString().equals(word)) { // 정답
 
-                        answer.setText(LessonWord.wordBack[quizCount]);
-                        answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10_stroke_purple));
-                        mp = MediaPlayer.create(getContext(), R.raw.correct);
-                        mp.start();
 
+                        answer.setText(LessonWord.wordBack[quizCount]);
+                        answered(selectedBtn, 0, R.drawable.bg_white_10_stroke_purple);
 
                     } else {  // 오답
-                        answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10_stroke_red));
-                        mp = MediaPlayer.create(getContext(), R.raw.wrong);
-                        mp.start();
+                        answered(selectedBtn, 1, R.drawable.bg_white_10_stroke_red);
                     }
 
                     Handler handler = new Handler();
@@ -137,6 +146,13 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         return view;
     }
 
+    private void answered(Button selectedBtn, int sound, int outline) {
+
+        playSoundPool.playSoundPool(sound);
+        answerLayout.setBackground(ContextCompat.getDrawable(getContext(), outline));
+    }
+
+
 
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
     public void makeQuiz() {
@@ -168,7 +184,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             flexboxLayout.addView(btnSelector);
         }
 
-        playAudioWithString.playAudio(getContext(), wordAudio[quizCount]);
+        playAudioWithString.playAudioLesson(wordAudio[quizCount], MainLesson.lessonUnit.getLessonId().toLowerCase());
 
     }
 
@@ -183,7 +199,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnAudio :
-                playAudioWithString.playAudio(getContext(), wordAudio[quizCount]);
+                playAudioWithString.playAudioLesson(wordAudio[quizCount], MainLesson.lessonUnit.getLessonId().toLowerCase());
                 break;
         }
     }

@@ -33,7 +33,6 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
     Button btnYes;
 
     private GestureDetectorCompat gestureDetectorCompat = null;
-
     public static String swipePage;
 
     FragmentManager fm;

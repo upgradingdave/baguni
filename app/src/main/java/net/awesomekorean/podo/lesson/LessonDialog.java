@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,6 +61,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     String folder;
 
+    ConstraintLayout totalPage;
+
     public static LessonDialog newInstance() {
         return new LessonDialog();
     }
@@ -83,6 +87,13 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         btnStop.setOnClickListener(this);
         btnFinish = view.findViewById(R.id.btnFinish);
         btnFinish.setOnClickListener(this);
+        totalPage = view.findViewById(R.id.totalPage);
+        totalPage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

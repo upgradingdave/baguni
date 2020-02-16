@@ -11,13 +11,20 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+
+import static com.facebook.FacebookSdk.getCacheDir;
 
 public class PlayAudioWithString {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     MediaPlayer mp;
 
     String folder;
+
+    byte[] bytesThis;
 
     public void playAudioHangul(String audioFile, String hangul) {
         if(audioFile != null) {
@@ -72,58 +79,53 @@ public class PlayAudioWithString {
 
     // 저장소에서 오디오 재생하기
     private void findFromStorage(String folder, String audioFile) {
-        System.out.println(folder);
-        System.out.println(audioFile);
+        mp = new MediaPlayer();
+
+        if (mp.isPlaying()) {
+            mp.release();
+        }
         StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
-        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
-            public void onSuccess(Uri uri) {
-                if(mp != null) {
-                    mp.release();
-                }
-                String url = uri.toString();
-                mp = new MediaPlayer();
+            public void onSuccess(byte[] bytes) {
                 try {
-                    mp.setDataSource(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
+                    bytesThis = new byte[bytes.length];
+                    for(int i=0; i<bytes.length; i++) {
+                        bytesThis[i] = bytes[i];
+                    }
+
+                    File tempMp3 = File.createTempFile("audio", "mp3", getCacheDir());
+                    tempMp3.deleteOnExit();
+                    FileOutputStream fos = new FileOutputStream(tempMp3);
+                    fos.write(bytes);
+                    fos.close();
+
+                    mp.reset();
+                    FileInputStream fis = new FileInputStream(tempMp3);
+                    mp.setDataSource(fis.getFD());
+
                     mp.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    mp.start();
+                    System.out.println("MP1: "+mp);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                mp.start();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                System.out.println("FAILED: "+e);
+                System.out.println("FAIED:" + e);
             }
         });
     }
 
-
-    // 앱 내부 오디오 재생 메소드
-    public void playAudio(Context context, String audioFile) {
-        if(audioFile != null && context != null) {
-            if(mp != null) {
-                mp.release();
-            }
-            String uriPath = "android.resource://" + context.getPackageName() + "/raw/" + audioFile;
-            System.out.println("URIPATH:"+uriPath);
-            Uri uri = Uri.parse(uriPath);
-            mp = MediaPlayer.create(context, uri);
-            try {
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                    }
-                });
-            }
-            catch (Exception e) {}
+    // 오디오 다시 재생하기
+    public void repeatAudio() {
+        if (mp.isPlaying()) {
+            mp.stop();
         }
+        mp.start();
+        System.out.println("MP2: "+mp);
     }
 }
