@@ -46,6 +46,7 @@
 
         <ImageView
             android:id="@+id/btnAudio"
+            android:visibility="gone"
             android:src="@drawable/audio_small_blue"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"

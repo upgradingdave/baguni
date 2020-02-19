@@ -1,6 +1,5 @@
 package net.awesomekorean.podo.lesson;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
@@ -19,8 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.MainActivity;
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
@@ -49,7 +47,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     static Map<Integer, byte[]> audiosSentence;
 
 
-    static PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    static PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
 
     LinearLayout collectResult;
 
@@ -133,7 +131,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
-        playAudioWithString.playAudioInByte(audiosSentence.get(lessonCount));
+        playAudioMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
     }
 
 
@@ -143,7 +141,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playAudioWithString.playAudioInByte(audiosSentence.get(lessonCount));
+                playAudioMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
                 break;
 
             case R.id.btnCollect :

@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.flexbox.FlexboxLayout;
 
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
 
@@ -52,7 +52,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     MediaPlayer mp;
     PlaySoundPool playSoundPool;
-    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
 
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
 
@@ -184,7 +184,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             flexboxLayout.addView(btnSelector);
         }
 
-        playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(quizCount));
+        playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizCount));
 
     }
 
@@ -199,10 +199,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnAudio :
-                playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(quizCount));
+                playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizCount));
                 break;
         }
     }
-
-
 }

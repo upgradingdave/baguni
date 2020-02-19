@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -23,15 +22,12 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LessonWord extends Fragment implements Button.OnClickListener {
@@ -68,13 +64,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] wordAudio;
 
     Context context;
-    PlayAudioWithString playAudioWithString = PlayAudioWithString.getInstance();
+    PlayAudioMediaPlayer playAudioMediaPlayer = PlayAudioMediaPlayer.getInstance();
 
-    final long ONE_MEGABYTE = 1024 * 1024;
 
     static Map<Integer, byte[]> audiosWord = new HashMap<>();
-
-    String dir;
 
     boolean isFirstAudio;
 
@@ -108,7 +101,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         lesson = (Lesson) MainLesson.lessonUnit;
         lessonId = MainLesson.lessonUnit.getLessonId();
         folder = "lesson/" + lessonId.toLowerCase();
-        dir = "podo_collection";
 
         readyForLesson();
 
@@ -141,13 +133,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         wordAudio = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
-
             final Integer audioIndexWord = i;
-
             wordAudio[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
-
             StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[i]);
-
+            final long ONE_MEGABYTE = 1024 * 1024;
             storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
@@ -171,7 +160,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordSynonyms.setText(wordSynonyms[lessonCount]);
         tvWordAntonyms.setText(wordAntonyms[lessonCount]);
         if(audiosWord.get(lessonCount) != null && audiosWord.get(lessonCount).length > 0) {
-            playAudioWithString.playAudioInByte(audiosWord.get(lessonCount));
+            playAudioMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
         }
     }
 
@@ -182,7 +171,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (v.getId()) {
 
             case R.id.btnAudio :
-                playAudioWithString.playAudioInByte(audiosWord.get(lessonCount));
+                playAudioMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
                 break;
 
             case R.id.btnCollect :
@@ -194,12 +183,12 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[lessonCount]);
 
                 try {
-                    final File localFile = File.createTempFile(dir, wordAudio[lessonCount]);
+                    final File file = new File(getContext().getFilesDir(), wordAudio[lessonCount]);
 
-                    storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    storageRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            System.out.println("오디오파일 다운로드를 성공 했습니다.: " + localFile.getPath());
+                            System.out.println("오디오파일 다운로드를 성공 했습니다.: " + file.getPath());
                         }
 
                     }).addOnFailureListener(new OnFailureListener() {
@@ -208,7 +197,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                             System.out.println("오디오파일 다운로드를 실패 했습니다.: "+e);
                         }
                     });
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

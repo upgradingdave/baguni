@@ -8,7 +8,7 @@ public class S_Lesson02 extends S_LessonInit implements LessonItem {
     private String lessonId = "SL_02";
     private int title = R.string.SL_02_TITLE;
     private String subTitle = "Don't be confused anymore";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.numbers;
 
     @Override
     public String getLessonId() {

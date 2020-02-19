@@ -3,7 +3,6 @@ package net.awesomekorean.podo.lesson;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.flexbox.FlexboxLayout;
 
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
 
@@ -39,7 +38,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     String[] wordBack = LessonWord.wordBack;
     String[] wordAudio = LessonWord.wordAudio;
 
-    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
     PlaySoundPool playSoundPool;
 
     ConstraintLayout totalPage;
@@ -168,7 +167,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
-                playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
+                playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
 
                 isCorrectAll();
 

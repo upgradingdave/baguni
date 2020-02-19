@@ -63,7 +63,6 @@
 
         <TextView
             android:id="@+id/textViewHangul"
-            android:text="ㄱ"
             android:textSize="70dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -71,8 +70,8 @@
 
         <TextView
             android:id="@+id/textViewHangulExplain"
-            android:text="기역"
             android:textSize="20dp"
+
             android:layout_margin="10dp"
             android:gravity="center"
             android:layout_width="match_parent"

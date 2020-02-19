@@ -10,8 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberAge;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberMoney;
@@ -19,9 +23,13 @@ import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberNative;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberSino;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberTime;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class LessonNumber extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     TextView numberFront;
     TextView numberBack;
@@ -44,7 +52,11 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
     Random random = new Random();
 
-    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+
+    Map<Integer, byte[]> audiosNumber = new HashMap<>();
+    boolean isFirstAudio = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,18 +112,35 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
                 setNumbers(numberTitle);
                 break;
         }
-
         numberBack.setVisibility(View.INVISIBLE);
-        numberStudyInOrder();
+        displayNumber();
     }
 
     private void setNumbers(String numberTitle) {
         numberLength = number.getFront().length;
         numberAudio = new String[numberLength];
+        String folder = "lesson/number/" + numberTitle;
+
         for(int i=0; i<numberLength; i++) {
+            final Integer audioIndex = i;
             numberAudio[i] = "number_" + numberTitle + "_" + i + ".mp3";
+            StorageReference storageRef = storage.getReference().child(folder).child(numberAudio[i]);
+            final long ONE_MEGABYTE = 1024 * 1024;
+            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    System.out.println("오디오를 로드했습니다.");
+                    audiosNumber.put(audioIndex, bytes);
+                    if(audioIndex == 0) {
+                        displayNumber();
+                        isFirstAudio = false;
+                    }
+                }
+            });
+
         }
     }
+
 
     // 랜덤학습 시작
     public void numberStudyRandom() {
@@ -120,10 +149,6 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
         displayNumber();
     }
 
-    // 최신부터 학습 모드
-    public void numberStudyInOrder() {
-        displayNumber();
-    }
 
     private void displayNumber() {
         numberFront.setText(number.getFront()[index]);
@@ -155,16 +180,20 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
                 btnInOrder.setBackgroundResource(R.drawable.bg_purple_20_left);
                 index = 0;
                 randomBtnClicked = false;
-                numberStudyInOrder();
+                displayNumber();
                 break;
 
             case R.id.btnAudio :
-                playAudioWithString.playAudioNumber(numberAudio[index], numberTitle);
+                if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
+                    playAudioMediaPlayer.playAudioInByte(audiosNumber.get(index));
+                }
                 break;
 
             case R.id.btnNext :
                 if(numberBack.getVisibility()==View.INVISIBLE) {
-                    playAudioWithString.playAudioNumber(numberAudio[index], numberTitle);
+                    if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
+                        playAudioMediaPlayer.playAudioInByte(audiosNumber.get(index));
+                    }
                     btnAudio.setVisibility(View.VISIBLE);
                     numberBack.setVisibility(View.VISIBLE);
                     btnNext.setText(getString(R.string.NEXT));
@@ -183,7 +212,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
                         } else {
                             index = 0;
                         }
-                        numberStudyInOrder();
+                        displayNumber();
                     }
                 }
                 break;

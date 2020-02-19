@@ -1,10 +1,5 @@
 package net.awesomekorean.podo.lesson;
 
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -20,7 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
@@ -49,7 +44,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     Boolean solveWrongQuizAgain = false;
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
 
-    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
     PlaySoundPool playSoundPool;
 
     ConstraintLayout totalPage;
@@ -118,7 +113,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btn3.setText(answerArray[2]);
         btn4.setText(answerArray[3]);
 
-        playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
+        playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
     }
 
 
@@ -172,7 +167,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         switch (view.getId()) {
 
             case(R.id.btnAudio) :
-                playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
+                playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
                 break;
 
             default :

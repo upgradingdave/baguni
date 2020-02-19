@@ -29,7 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.MainActivity;
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
@@ -78,7 +78,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     SpannableStringBuilder span = new SpannableStringBuilder();
 
-    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
 
 
     class MyThread extends Thread {
@@ -182,7 +182,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         }
 
                         audioFileWord = unitId + "_" + popUpIndex + ".mp3";
-                        playAudioWithString.playAudioReading(audioFileWord, unitId);
+                        playAudioMediaPlayer.playAudioReading(audioFileWord, unitId);
                     }
 
                     @Override

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {
 
@@ -102,8 +102,8 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
             case R.id.btnAudio :
                 if(studyAudio != null) {
-                    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
-                    playAudioWithString.playAudioCollection(studyAudio);
+                    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+                    playAudioMediaPlayer.playAudioCollection(studyAudio);
                 }
                 break;
 

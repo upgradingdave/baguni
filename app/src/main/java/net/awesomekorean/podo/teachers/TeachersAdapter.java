@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
@@ -173,6 +174,12 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(context).load(uri).into(holder.teacherImage);
+                System.out.println("선생님 이미지 로드를 성공 했습니다: " + uri);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("선생님 이미지 로드를 실패 했습니다: "+e);
             }
         });
     }

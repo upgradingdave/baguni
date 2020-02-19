@@ -13,13 +13,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class LessonHangul extends AppCompatActivity implements Button.OnClickListener {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     Hangul thisHangul;
 
@@ -49,13 +58,17 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     Button btnIntro;
     ImageView btnBack;
 
-    PlayAudioWithString playAudioWithString =  new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer =  new PlayAudioMediaPlayer();
 
     Context context;
 
     int resIDWriting;
     int resIDHint;
 
+    Map<Integer, byte[]> audiosHangul = new HashMap<>();
+    boolean isFirstAudio = true;
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,26 +97,27 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         btnClose.setOnClickListener(this);
         btnBack.setOnClickListener(this);
 
-        Intent intent = getIntent();
+        intent = getIntent();
+        String hangulName = intent.getExtras().getString("conVowBat");
 
-        switch (intent.getExtras().getString("conVowBat")) {
+        switch (hangulName) {
 
             case "consonant" :
 
                 thisHangul = new LessonHangulConsonant();
-                getThisHangul("con");
+                getThisHangul("con", hangulName);
                 break;
 
             case "vowel" :
 
                 thisHangul = new LessonHangulVowel();
-                getThisHangul("vow");
+                getThisHangul("vow", hangulName);
                 break;
 
             case "batchim" :
 
                 thisHangul = new LessonHangulBatchim();
-                getThisHangul("bat");
+                getThisHangul("bat", hangulName);
                 break;
         }
 
@@ -114,7 +128,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 } else {
                     currentHangul--;
                 }
-                setHangul(hangul, hangulExplain);
+                setHangul();
                 setHintIcons();
                 if(imageViewHangul != null) {
                     visible(VISIBLE, GONE);
@@ -127,7 +141,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 } else {
                     currentHangul++;
                 }
-                setHangul(hangul, hangulExplain);
+                setHangul();
                 setHintIcons();
                 if(imageViewHangul != null) {
                     visible(VISIBLE, GONE);
@@ -136,7 +150,47 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         });
 
         setHintIcons();
-        audioPlay();
+    }
+
+    public void getThisHangul(String comVowBat, String hangulName) {
+        conVowBat = comVowBat;
+        hangul = thisHangul.getHangul();
+        hangulExplain = thisHangul.getHangulExplain();
+        hangulIntro = thisHangul.getHangulIntro();
+        textViewIntro.setText(hangulIntro);
+        textViewIntro.setMovementMethod(new ScrollingMovementMethod());
+
+        // 한글오디오 불러오기
+        int length = thisHangul.getHangul().length;
+        String[] hangulAudio = new String[length];
+        String folder = "hangul/" + conVowBat;
+
+        for(int i=0; i<length; i++) {
+            final Integer audioIndexHangul = i;
+            hangulAudio[i] = hangulName + "_" + i + ".mp3";
+            StorageReference storageRef = storage.getReference().child(folder).child(hangulAudio[i]);
+            final long ONE_MEGABYTE = 1024 * 1024;
+            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    System.out.println("오디오를 로드했습니다.");
+                    audiosHangul.put(audioIndexHangul, bytes);
+                    if(audioIndexHangul == 0) {
+                        setHangul();
+                        isFirstAudio = false;
+                    }
+                }
+            });
+        }
+    }
+
+
+    public void setHangul() {
+        textViewHangul.setText(hangul[currentHangul]);
+        textViewHangulExplain.setText(hangulExplain[currentHangul]);
+        if(audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
+            playAudioMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
+        }
     }
 
 
@@ -169,13 +223,18 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
+    private void visible(int textView, int imageView) {
+        imageViewHangul.setVisibility(imageView);
+        textViewHangul.setVisibility(textView);
+    }
+
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                audioPlay();
+                playAudioMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
                 break;
 
             case R.id.btnWriting :
@@ -220,44 +279,5 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 finish();
                 break;
         }
-    }
-
-    public void getThisHangul(String comVowBat) {
-
-        conVowBat = comVowBat;
-        hangul = thisHangul.getHangul();
-        hangulExplain = thisHangul.getHangulExplain();
-        hangulIntro = thisHangul.getHangulIntro();
-        textViewIntro.setText(hangulIntro);
-        textViewIntro.setMovementMethod(new ScrollingMovementMethod());
-        setInitial();
-    }
-
-    private void visible(int textView, int imageView) {
-        imageViewHangul.setVisibility(imageView);
-        textViewHangul.setVisibility(textView);
-
-    }
-
-    private void setInitial() {
-
-        textViewHangul.setText(hangul[0]);
-        textViewHangulExplain.setText(hangulExplain[0]);
-    }
-
-
-
-    public void audioPlay() {
-
-        String audioFile = thisHangul.getHangulAudio(currentHangul) + ".mp3";
-        playAudioWithString.playAudioHangul(audioFile, conVowBat);
-    }
-
-
-    public void setHangul(String[] conVow, String[] conVowExplain) {
-
-        textViewHangul.setText(conVow[currentHangul]);
-        textViewHangulExplain.setText(conVowExplain[currentHangul]);
-        audioPlay();
     }
 }

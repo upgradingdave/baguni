@@ -13,10 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
-import com.google.firebase.storage.FirebaseStorage;
-
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioWithString;
+import net.awesomekorean.podo.PlayAudioMediaPlayer;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -84,7 +82,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     String audioFile;
 
-    PlayAudioWithString playAudioWithString =  new PlayAudioWithString();
+    PlayAudioMediaPlayer playAudioMediaPlayer =  new PlayAudioMediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,12 +147,12 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                 if(consonantSelected == true && vowelSelected == true && batchimSelected == false) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel);
                     audioFile = hangul.getAudioFile();
-                    playAudioWithString.playAudioHangul(audioFile, "assy");
+                    playAudioMediaPlayer.playAudioHangul(audioFile, "assy");
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else if(consonantSelected == true && vowelSelected == true && batchimSelected == true) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel, selectedBatchim);
                     audioFile = hangul.getAudioFile();
-                    playAudioWithString.playAudioHangul(audioFile, "assy");
+                    playAudioMediaPlayer.playAudioHangul(audioFile, "assy");
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else {
                     assemblyTextView.setText(selectedHangul);
@@ -173,7 +171,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             case R.id.btnAudio :
                 if(audioFile != null) {
-                    playAudioWithString.playAudioHangul(audioFile, "assy");
+                    playAudioMediaPlayer.playAudioHangul(audioFile, "assy");
                 }
                 break;
 
