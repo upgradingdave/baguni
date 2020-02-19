@@ -91,9 +91,9 @@ public class LessonDialogAdapter extends RecyclerView.Adapter<LessonDialogAdapte
         LessonDialogItems items = list.get(position);
 
         holder.peopleImage.setImageResource(items.getPeopleImage());
-        holder.tbClause.setText(items.getClause());
-        holder.tbClause.setTextOn(items.getClause());
-        holder.tbClause.setTextOff(items.getClause());
+        holder.tbClause.setText(items.getDialog());
+        holder.tbClause.setTextOn(items.getDialog());
+        holder.tbClause.setTextOff(items.getDialog());
     }
 
     @Override

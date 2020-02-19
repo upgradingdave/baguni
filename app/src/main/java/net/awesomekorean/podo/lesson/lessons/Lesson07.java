@@ -43,7 +43,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem {
             "눈은 별로 안 와요."
     };
 
-    final static int[] peopleImage = {5,6};
+    final static int[] peopleImage = {1,2};
 
 
     @Override

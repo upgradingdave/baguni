@@ -3,8 +3,7 @@ package net.awesomekorean.podo.lesson;
 public class LessonDialogItems {
 
     private int peopleImage;
-    private String clause;
-    private String clauseAudio;
+    private String dialog;
     private int aOrB;
 
     public int getPeopleImage() {
@@ -15,20 +14,12 @@ public class LessonDialogItems {
         this.peopleImage = peopleImage;
     }
 
-    public String getClause() {
-        return clause;
+    public String getDialog() {
+        return dialog;
     }
 
-    public void setClause(String clause) {
-        this.clause = clause;
-    }
-
-    public String getClauseAudio() {
-        return clauseAudio;
-    }
-
-    public void setClauseAudio(String clauseAudio) {
-        this.clauseAudio = clauseAudio;
+    public void setDialog(String dialog) {
+        this.dialog = dialog;
     }
 
     public int getAOrB() {

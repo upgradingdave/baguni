@@ -36,7 +36,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem {
             "밥을 먹기 30분 전에 먹어요."
     };
 
-    final static int[] peopleImage = {5,6};
+    final static int[] peopleImage = {1,2};
 
 
     @Override

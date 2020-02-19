@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 
 import net.awesomekorean.podo.R;
 
+import org.w3c.dom.ls.LSException;
+
 public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener {
 
     //Minimal x and y axis swipe distance
@@ -27,6 +29,14 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
     }
 
     //This method is invoked when a swipe gesture happened
+    LessonWord lessonWord;
+    LessonSentence lessonSentence;
+
+    public LessonSwipeListener(LessonWord lessonWord, LessonSentence lessonSentence) {
+        super();
+        this.lessonWord = lessonWord;
+        this.lessonSentence = lessonSentence;
+    }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -39,11 +49,10 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
         if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
 
             Context context = getActivity();
-            LessonWord lessonWord = new LessonWord();
-            LessonSentence lessonSentence = new LessonSentence();
 
             // 현재페이지가 LessonWord 일 때 동작
             if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONWORD))) {
+
 
                 // 왼쪽으로 스와이프 할 때
                 if(deltaX > 0) {
@@ -54,7 +63,7 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
                     // 마지막 단어이면 LessonWordQuiz1 로 넘어감
                     if(LessonWord.lessonCount == LessonWord.lessonWordLength) {
                         LessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
+                        ((LessonFrame) context).replaceFragment(LessonSentence.newInstance());
 
                     // 마지막 단어 아니면 다음 단어 표시
                     } else {

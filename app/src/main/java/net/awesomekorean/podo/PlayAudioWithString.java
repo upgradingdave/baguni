@@ -15,16 +15,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Map;
 
 import static com.facebook.FacebookSdk.getCacheDir;
 
 public class PlayAudioWithString {
+
+    private static PlayAudioWithString instance;
+
+    public static PlayAudioWithString getInstance() {
+        if(instance == null) {
+            instance = new PlayAudioWithString();
+        }
+        return instance;
+    }
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     MediaPlayer mp;
 
     String folder;
-
-    byte[] bytesThis;
 
     public void playAudioHangul(String audioFile, String hangul) {
         if(audioFile != null) {
@@ -82,6 +91,7 @@ public class PlayAudioWithString {
         mp = new MediaPlayer();
 
         if (mp.isPlaying()) {
+            mp.stop();
             mp.release();
         }
         StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
@@ -90,11 +100,6 @@ public class PlayAudioWithString {
             @Override
             public void onSuccess(byte[] bytes) {
                 try {
-                    bytesThis = new byte[bytes.length];
-                    for(int i=0; i<bytes.length; i++) {
-                        bytesThis[i] = bytes[i];
-                    }
-
                     File tempMp3 = File.createTempFile("audio", "mp3", getCacheDir());
                     tempMp3.deleteOnExit();
                     FileOutputStream fos = new FileOutputStream(tempMp3);
@@ -105,9 +110,14 @@ public class PlayAudioWithString {
                     FileInputStream fis = new FileInputStream(tempMp3);
                     mp.setDataSource(fis.getFD());
 
+                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mediaPlayer) {
+                            mediaPlayer.start();
+                        }
+                    });
+
                     mp.prepare();
-                    mp.start();
-                    System.out.println("MP1: "+mp);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -120,12 +130,92 @@ public class PlayAudioWithString {
         });
     }
 
-    // 오디오 다시 재생하기
-    public void repeatAudio() {
+
+    // 바이트로 오디오 재생하기
+    public void playAudioInByte(byte[] b) {
+        mp = new MediaPlayer();
+
         if (mp.isPlaying()) {
             mp.stop();
+            mp.release();
         }
-        mp.start();
-        System.out.println("MP2: "+mp);
+
+        try {
+
+            File tempMp3 = File.createTempFile("audio", "mp3");
+            tempMp3.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempMp3);
+            fos.write(b);
+            fos.close();
+
+            //mp.reset();
+            FileInputStream fis = new FileInputStream(tempMp3);
+            mp.setDataSource(fis.getFD());
+
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
+                }
+            });
+
+            mp.prepare();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
+
+    int dialogIndex = 0;
+
+    // 바이트로 대화 오디오 전체 재생하기
+    public void playDialogAudioInByte(final Map<Integer, byte[]> dialogAudio) {
+
+        final int dialogLength = dialogAudio.size();
+
+        mp = new MediaPlayer();
+
+        if (mp.isPlaying()) {
+            mp.stop();
+            mp.release();
+        }
+
+        try {
+
+            File tempMp3 = File.createTempFile("audio", "mp3", getCacheDir());
+            tempMp3.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempMp3);
+            fos.write(dialogAudio.get(dialogIndex));
+            fos.close();
+
+            mp.reset();
+            FileInputStream fis = new FileInputStream(tempMp3);
+            mp.setDataSource(fis.getFD());
+
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
+                }
+            });
+
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    dialogIndex ++;
+                    if(dialogIndex < dialogLength) {
+                        playAudioInByte(dialogAudio.get(dialogIndex));
+                    } else {
+                        dialogIndex = 0;
+                    }
+                }
+            });
+
+            mp.prepare();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
 }

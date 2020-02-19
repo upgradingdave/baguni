@@ -168,7 +168,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
-                playAudioWithString.playAudioLesson(wordAudio[checkAnswer[0]-1], MainLesson.lessonUnit.getLessonId().toLowerCase());
+                playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
 
                 isCorrectAll();
 

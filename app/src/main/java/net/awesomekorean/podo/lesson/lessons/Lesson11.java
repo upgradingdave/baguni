@@ -44,7 +44,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
             "BTS는 노래를 잘 불러요. 그리고 춤도 잘 춰요."
     };
 
-    final static int[] peopleImage = {5,6};
+    final static int[] peopleImage = {9,10};
 
 
     @Override

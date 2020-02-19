@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Bundle;
 
@@ -16,16 +17,32 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import net.awesomekorean.podo.PlayAudioWithString;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class LessonWord extends Fragment implements Button.OnClickListener {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     View view;
 
-    Lesson lesson;
-    String lessonId;
+    static Lesson lesson;
+    static String lessonId;
+    static String folder;
 
     Button btnCollect;
 
@@ -49,16 +66,17 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] wordAntonyms;
     static String[] wordSynonyms;
     static String[] wordAudio;
-    static String[] sentenceFront;
-    static String[] sentenceBack;
-    static String[] sentenceExplain;
-    static String[] sentenceAudio;
-    static String[] dialog;
-    static String[] dialogAudio;
-    static int[] peopleImage;
 
     Context context;
-    PlayAudioWithString playAudioWithString = new PlayAudioWithString();
+    PlayAudioWithString playAudioWithString = PlayAudioWithString.getInstance();
+
+    final long ONE_MEGABYTE = 1024 * 1024;
+
+    static Map<Integer, byte[]> audiosWord = new HashMap<>();
+
+    String dir;
+
+    boolean isFirstAudio;
 
 
     public static LessonWord newInstance() {
@@ -89,6 +107,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
         lesson = (Lesson) MainLesson.lessonUnit;
         lessonId = MainLesson.lessonUnit.getLessonId();
+        folder = "lesson/" + lessonId.toLowerCase();
+        dir = "podo_collection";
+
         readyForLesson();
 
         return view;
@@ -101,7 +122,12 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         lessonSentenceLength = lesson.getSentenceFront().length;
         lessonDialogLength = lesson.getDialog().length;
 
+        LessonFrame.totalPageNo = lessonWordLength * 3 + 1 + lessonSentenceLength + 2;
+
         String packageName = context.getPackageName();
+
+        wordFront = lesson.getWordFront();
+
         wordBack = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
             String stringWordBack = lessonId + "_WORD_BACK_" + i;
@@ -109,46 +135,31 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
             wordBack[i] = getString(intWordBack);
         }
 
-        sentenceBack = new String[lessonSentenceLength];
-        for(int i=0; i<lessonSentenceLength; i++) {
-            String stringSentenceBack = lessonId + "_SENTENCE_BACK_" + i;
-            int intSentenceBack = getResources().getIdentifier(stringSentenceBack, "string", packageName);
-            sentenceBack[i] = getString(intSentenceBack);
-        }
-
-        sentenceExplain = new String[lessonSentenceLength];
-        for(int i=0; i<lessonSentenceLength; i++) {
-            String stringSentenceExplain = lessonId + "_SENTENCE_EXPLAIN_" + i;
-            int intSentenceExplain = getResources().getIdentifier(stringSentenceExplain, "string", packageName);
-            sentenceExplain[i] = getString(intSentenceExplain);
-        }
-
-        wordFront = lesson.getWordFront();
         wordPronunciation = lesson.getWordPronunciation();
         wordSynonyms = lesson.getWordSynonyms();
         wordAntonyms = lesson.getWordAntonyms();
 
-        sentenceFront = lesson.getSentenceFront();
-        dialog = lesson.getDialog();
-        peopleImage = lesson.getPeopleImage();
-
-
-        LessonFrame.totalPageNo = lessonWordLength * 3 + 1 + lessonSentenceLength + 2;
-
         wordAudio = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
-            wordAudio[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
-        }
-        sentenceAudio = new String[lessonSentenceLength];
-        for(int j=0; j<lessonSentenceLength; j++) {
-            sentenceAudio[j] = lessonId.toLowerCase() + "_sentence_" + j + ".mp3";
-        }
-        dialogAudio = new String[lessonDialogLength];
-        for(int k=0; k<lessonDialogLength; k++) {
-            dialogAudio[k] = lessonId.toLowerCase() + "_dialog_" + k + ".mp3";
-        }
 
-        displayWord();
+            final Integer audioIndexWord = i;
+
+            wordAudio[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
+
+            StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[i]);
+
+            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    System.out.println("오디오를 로드했습니다.");
+                    audiosWord.put(audioIndexWord, bytes);
+                    if(audioIndexWord == 0) {
+                        displayWord();
+                        isFirstAudio = false;
+                    }
+                }
+            });
+        }
     }
 
 
@@ -159,7 +170,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordPronunciation.setText(wordPronunciation[lessonCount]);
         tvWordSynonyms.setText(wordSynonyms[lessonCount]);
         tvWordAntonyms.setText(wordAntonyms[lessonCount]);
-        playAudioWithString.playAudioLesson(wordAudio[lessonCount], MainLesson.lessonUnit.getLessonId().toLowerCase());
+        if(audiosWord.get(lessonCount) != null && audiosWord.get(lessonCount).length > 0) {
+            playAudioWithString.playAudioInByte(audiosWord.get(lessonCount));
+        }
     }
 
 
@@ -169,14 +182,36 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (v.getId()) {
 
             case R.id.btnAudio :
-                String audioFile = wordAudio[lessonCount];
-                playAudioWithString.repeatAudio();
+                playAudioWithString.playAudioInByte(audiosWord.get(lessonCount));
                 break;
 
             case R.id.btnCollect :
                 String front = wordFront[lessonCount];
                 String back = wordBack[lessonCount];
                 String audio = wordAudio[lessonCount];
+
+                // 오디오파일 다운로드 하기
+                StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[lessonCount]);
+
+                try {
+                    final File localFile = File.createTempFile(dir, wordAudio[lessonCount]);
+
+                    storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            System.out.println("오디오파일 다운로드를 성공 했습니다.: " + localFile.getPath());
+                        }
+
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println("오디오파일 다운로드를 실패 했습니다.: "+e);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
 
                 CollectionRepository repository = new CollectionRepository(getContext());
                 repository.insert(front, back, audio);

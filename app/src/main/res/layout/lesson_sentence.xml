@@ -44,7 +44,6 @@
         <TextView
             android:id="@+id/tvSentenceFront"
             android:gravity="center"
-            android:text="친구랑 한국 식당에\n 갈 거예요"
             android:textSize="30dp"
             android:textColor="@color/BLACK"
             android:textStyle="bold"
@@ -57,7 +56,6 @@
         <TextView
             android:id="@+id/tvSentenceBack"
             android:gravity="center"
-            android:text="student"
             android:textSize="20dp"
             android:textColor="@color/GREY_TEXT"
             android:layout_width="match_parent"
@@ -65,7 +63,6 @@
 
         <TextView
             android:id="@+id/tvSentenceExplain"
-            android:text="친구랑 한국 식당에 갈 거예요는 블라블라블라..."
             android:textSize="15dp"
             android:textColor="@color/BLACK"
             android:scrollbars="vertical"

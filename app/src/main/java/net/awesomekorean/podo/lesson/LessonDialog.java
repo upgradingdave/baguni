@@ -3,7 +3,6 @@ package net.awesomekorean.podo.lesson;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,11 +22,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import net.awesomekorean.podo.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LessonDialog extends Fragment implements Button.OnClickListener {
 
@@ -44,24 +47,18 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     MediaPlayer mp;
 
-    String[] dialog =  LessonWord.dialog;
-    String[] dialogAudio = LessonWord.dialogAudio;
-    int[] peopleImage = LessonWord.peopleImage; // 사람이미지 2개
-    int[] arrayPeopleImage; // 대화 개수에 맞게 사람이미지를 array 로 만듦
-
-    ArrayList<LessonDialogItems> list = new ArrayList<>();
-
     Context context;
 
     int index; // 전체 오디오 재생 카운트
-    int length; // 전체 오디오 개수
 
     LinearLayout layoutPlay;
     LinearLayout layoutStop;
 
-    String folder;
-
     ConstraintLayout totalPage;
+
+    static Map<Integer, byte[]> audiosDialog;
+
+    int dialogLength;
 
     public static LessonDialog newInstance() {
         return new LessonDialog();
@@ -73,10 +70,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.lesson_dialog, container, false);
         context = getContext();
-
-        index = 0;
-        length = dialogAudio.length;
-
         layoutPlay = view.findViewById(R.id.layoutPlay);
         layoutStop = view.findViewById(R.id.layoutStop);
         btnReturn = view.findViewById(R.id.btnReturn);
@@ -94,53 +87,45 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 return true;
             }
         });
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        index = 0;
 
-        int clausesLength = LessonWord.lessonDialogLength;
-
-        getPeopleImage(peopleImage);
-
-        for(int i=0; i<clausesLength; i++) {
-            LessonDialogItems item = new LessonDialogItems();
-            item.setPeopleImage(arrayPeopleImage[i]);
-            item.setClause(dialog[i]);
-            if(i % 2 == 0) {
-                item.setAOrB(1);
-            }else {
-                item.setAOrB(0);
-            }
-            item.setClauseAudio(dialogAudio[i]);
-            list.add(item);
-        }
-
-
-        LessonDialogAdapter adapter = new LessonDialogAdapter(list);
-        adapter.setOnItemClickListener(new LessonDialogAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int pos) {
-
-                final ToggleButton button = (ToggleButton) v;
-                playAudio(button, dialogAudio[pos]);
-                layoutPlay.setVisibility(View.VISIBLE);
-                layoutStop.setVisibility(View.GONE);
-
-            }
-        });
-
-        recyclerView.setAdapter(adapter);
-
-        folder = "lesson/" + MainLesson.lessonUnit.getLessonId().toLowerCase();
+        readyForLesson();
 
         return view;
     }
 
-    public void getPeopleImage(int[] peopleImage) {
+    private void readyForLesson() {
+        dialogLength = LessonWord.lessonDialogLength;
+        String[] dialogAudio = new String[dialogLength];
+        int[] peopleImage = LessonWord.lesson.getPeopleImage(); // 사람이미지 2개
+        String lessonId = LessonWord.lessonId;
+        String folder = LessonWord.folder;
         String packageName = context.getPackageName();
-        arrayPeopleImage = new int[dialog.length];
+
+        String[] dialog =  LessonWord.lesson.getDialog();
+
+        // 저장소에서 대화오디오 가져오기
+        audiosDialog = new HashMap<>();
+        for(int i=0; i<dialogLength; i++) {
+            final Integer audioIndexDialog = i;
+            dialogAudio[i] = lessonId.toLowerCase() + "_dialog_" + i + ".mp3";
+            StorageReference storageRef = storage.getReference().child(folder).child(dialogAudio[i]);
+            final long ONE_MEGABYTE = 1024 * 1024;
+            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    System.out.println("오디오를 로드했습니다.");
+                    audiosDialog.put(audioIndexDialog, bytes);
+                }
+            });
+        }
+
+        // 대화 개수에 맞게 사람이미지를 array 로 만듦
+        int[] arrayPeopleImage = new int[dialogLength];
         int count = 0;
-        for(int i=0; i<dialog.length; i++) {
+        for(int i=0; i<dialogLength; i++) {
             String stringPeopleImage;
             if(count == 0) {
                 stringPeopleImage = "people" + peopleImage[0];
@@ -152,83 +137,125 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             int intPeopleImage = getResources().getIdentifier(stringPeopleImage, "drawable", packageName);
             arrayPeopleImage[i] = intPeopleImage;
         }
-    }
 
-    // 오디오 재생 메소드
-    public void playAudio(final ToggleButton button, String audioFile) {
+        // 대화아이템 세팅
+        ArrayList<LessonDialogItems> list = new ArrayList<>();
+        for(int i=0; i<dialogLength; i++) {
+            LessonDialogItems item = new LessonDialogItems();
+            item.setPeopleImage(arrayPeopleImage[i]);
+            item.setDialog(dialog[i]);
+            if(i % 2 == 0) {
+                item.setAOrB(1);
+            }else {
+                item.setAOrB(0);
+            }
+            list.add(item);
+        }
 
-        StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
-        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        LessonDialogAdapter adapter = new LessonDialogAdapter(list);
+        adapter.setOnItemClickListener(new LessonDialogAdapter.OnItemClickListener() {
             @Override
-            public void onSuccess(Uri uri) {
-                if(mp != null) {
-                    mp.release();
-                }
-                String url = uri.toString();
-                mp = new MediaPlayer();
-                try {
-                    mp.setDataSource(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    mp.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                        button.setChecked(false);
-                    }
-                });
+            public void onItemClick(View v, int pos) {
+                final ToggleButton button = (ToggleButton) v;
+                playAudio(button, audiosDialog.get(pos));
+                layoutPlay.setVisibility(View.VISIBLE);
+                layoutStop.setVisibility(View.GONE);
+
             }
         });
+
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    // 오디오 재생 메소드
+    public void playAudio(final ToggleButton button, byte[] audioFile) {
+        mp = new MediaPlayer();
+
+        if (mp.isPlaying()) {
+            mp.stop();
+            mp.release();
+        }
+
+        try {
+            File tempMp3 = File.createTempFile("audio", "mp3");
+            tempMp3.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempMp3);
+            fos.write(audioFile);
+            fos.close();
+
+            mp.reset();
+            FileInputStream fis = new FileInputStream(tempMp3);
+            mp.setDataSource(fis.getFD());
+
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
+                }
+            });
+
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mp.release();
+                    button.setChecked(false);
+                }
+            });
+
+            mp.prepare();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     // 전체 오디오 재생 메소드
-    public void playAudioAll(String audioFile) {
+    public void playAudioAll(byte[] audioFile) {
+        mp = new MediaPlayer();
 
-        StorageReference storageRef = storage.getReference().child(folder).child(audioFile);
-        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                if(mp != null) {
-                    mp.release();
+        if (mp.isPlaying()) {
+            mp.stop();
+            mp.release();
+        }
+
+        try {
+            File tempMp3 = File.createTempFile("audio", "mp3");
+            tempMp3.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempMp3);
+            fos.write(audioFile);
+            fos.close();
+
+            mp.reset();
+            FileInputStream fis = new FileInputStream(tempMp3);
+            mp.setDataSource(fis.getFD());
+
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
                 }
-                String url = uri.toString();
-                mp = new MediaPlayer();
-                try {
-                    mp.setDataSource(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    mp.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        index++;
-                        // 마지막 오디오 재생 끝났으면
-                        if(index == length) {
-                            mp.release();
-                            index = 0;
-                            layoutPlay.setVisibility(View.VISIBLE);
-                            layoutStop.setVisibility(View.GONE);
-                        }else{
-                            mp.release();
-                            playAudioAll(dialogAudio[index]);
-                        }
+            });
+
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    index++;
+                    // 마지막 오디오 재생 끝났으면
+                    if(index == dialogLength) {
+                        mp.release();
+                        index = 0;
+                        layoutPlay.setVisibility(View.VISIBLE);
+                        layoutStop.setVisibility(View.GONE);
+                    }else{
+                        mp.release();
+                        playAudioAll(audiosDialog.get(index));
                     }
-                });
-            }
-        });
+                }
+            });
+            mp.prepare();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -247,7 +274,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 layoutPlay.setVisibility(View.GONE);
                 layoutStop.setVisibility(View.VISIBLE);
                 index = 0;
-                playAudioAll(dialogAudio[0]);
+                playAudioAll(audiosDialog.get(0));
                 break;
 
             case R.id.btnStop :

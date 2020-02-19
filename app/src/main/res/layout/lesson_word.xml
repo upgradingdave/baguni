@@ -44,7 +44,6 @@
         <TextView
             android:id="@+id/tvWordFront"
             android:gravity="center"
-            android:text="학생"
             android:textSize="50dp"
             android:textColor="@color/BLACK"
             android:textStyle="bold"
@@ -56,7 +55,6 @@
         <TextView
             android:id="@+id/tvWordBack"
             android:gravity="center"
-            android:text="student"
             android:textSize="20dp"
             android:textColor="@color/GREY_TEXT"
             android:layout_width="match_parent"
@@ -78,7 +76,6 @@
 
             <TextView
                 android:id="@+id/tvWordPronunciation"
-                android:text="hello"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/GREY_TEXT"
@@ -102,7 +99,6 @@
 
             <TextView
                 android:id="@+id/tvWordSynonyms"
-                android:text="hello"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/GREY_TEXT"
@@ -126,7 +122,6 @@
 
             <TextView
                 android:id="@+id/tvWordAntonyms"
-                android:text="hello"
                 android:textSize="15dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/GREY_TEXT"

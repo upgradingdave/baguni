@@ -38,6 +38,7 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
     FragmentManager fm;
     FragmentTransaction ft;
     LessonWord lessonWord = new LessonWord();
+    LessonSentence lessonSentence = new LessonSentence();
 
 
     @Override
@@ -68,7 +69,7 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
 
     public void replaceFragment(Fragment fragment) {
 
-        LessonSwipeListener gestureListener = new LessonSwipeListener();
+        LessonSwipeListener gestureListener = new LessonSwipeListener(lessonWord, lessonSentence);
         gestureListener.setActivity(this);
         gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 

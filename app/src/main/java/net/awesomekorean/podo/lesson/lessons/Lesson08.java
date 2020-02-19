@@ -45,7 +45,7 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem {
             "그래서 아침도 못 먹어요."
     };
 
-    final static int[] peopleImage = {5,6};
+    final static int[] peopleImage = {4,3};
 
 
     @Override

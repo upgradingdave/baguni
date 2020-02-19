@@ -38,7 +38,7 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
             "쇼핑 했어요."
     };
 
-    final static int[] peopleImage = {5,6};
+    final static int[] peopleImage = {7,8};
 
 
     @Override

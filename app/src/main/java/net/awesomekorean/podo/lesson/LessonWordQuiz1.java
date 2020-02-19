@@ -118,7 +118,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btn3.setText(answerArray[2]);
         btn4.setText(answerArray[3]);
 
-        playAudioWithString.playAudioLesson(wordAudio[quizNoNow], MainLesson.lessonUnit.getLessonId().toLowerCase());
+        playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
     }
 
 
@@ -172,7 +172,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         switch (view.getId()) {
 
             case(R.id.btnAudio) :
-                playAudioWithString.playAudioLesson(wordAudio[quizNoNow], MainLesson.lessonUnit.getLessonId().toLowerCase());
+                playAudioWithString.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
                 break;
 
             default :

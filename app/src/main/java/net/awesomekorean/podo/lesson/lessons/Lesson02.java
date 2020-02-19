@@ -38,7 +38,7 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem {
             "저거는 50% 세일이에요.\n 그래서 5,000(오천)원이에요."
     };
 
-    final static int[] peopleImage = {5,6};
+    final static int[] peopleImage = {4,3};
 
 
     @Override

@@ -34,7 +34,7 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem {
             "어느 나라 사람이에요?",
             "한국 사람이에요."};
 
-    final static int[] peopleImage = {3,4};
+    final static int[] peopleImage = {2,1};
 
 
     @Override
