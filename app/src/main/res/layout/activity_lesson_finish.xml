@@ -76,7 +76,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/selectResult"
-        android:visibility="gone"
+        android:visibility="visible"
         android:elevation="1dp"
         android:background="@drawable/bg_white_10"
         android:padding="20dp"
@@ -93,6 +93,10 @@
             android:id="@+id/textView"
             android:text="@string/CONGRATULATION"
             android:textSize="25dp"
+            android:autoSizeMaxTextSize="25dp"
+            android:autoSizeMinTextSize="15dp"
+            android:autoSizeStepGranularity="2dp"
+            android:autoSizeTextType="uniform"
             android:textColor="@color/YELLOW"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="@id/selectResult"
@@ -130,6 +134,10 @@
             <TextView
                 android:id="@+id/tvPoints"
                 android:textSize="40dp"
+                android:autoSizeMaxTextSize="40dp"
+                android:autoSizeMinTextSize="20dp"
+                android:autoSizeStepGranularity="5dp"
+                android:autoSizeTextType="uniform"
                 android:textColor="@color/PURPLE"
                 android:textStyle="bold"
                 android:layout_marginLeft="10dp"

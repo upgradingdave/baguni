@@ -15,13 +15,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class PlayAudioMediaPlayer {
+public class PlayMediaPlayer {
 
-    private static PlayAudioMediaPlayer instance;
+    private static PlayMediaPlayer instance;
 
-    public static PlayAudioMediaPlayer getInstance() {
+    public static PlayMediaPlayer getInstance() {
         if(instance == null) {
-            instance = new PlayAudioMediaPlayer();
+            instance = new PlayMediaPlayer();
         }
         return instance;
     }
@@ -34,42 +34,20 @@ public class PlayAudioMediaPlayer {
     public void playAudioHangul(String audioFile, String hangul) {
         if(audioFile != null) {
             folder = "hangul/" + hangul;
-            findFromStorage(folder, audioFile);
+            playAudioInStorage(folder, audioFile);
         }
     }
 
     public void playAudioReading(String audioFile, String unitId) {
         if(audioFile != null) {
             folder = "reading/" + unitId;
-            findFromStorage(folder, audioFile);
+            playAudioInStorage(folder, audioFile);
         }
     }
 
-    public void playAudioCollection(String audioFile) {
-        if(audioFile != null) {
-            String unitId = getUnitId(audioFile);
-            String isFromLesson = unitId.substring(0,1);
-            if(isFromLesson.equals("l")) {
-                folder = "lesson/" + unitId;
-            } else if(isFromLesson.equals("r")) {
-                folder = "reading/" + unitId;
-            }
-            findFromStorage(folder, audioFile);
-        }
-    }
 
-    private String getUnitId(String audioFile) {
-        String[] audioFileSplit = audioFile.split("_");
-        String split1 = audioFileSplit[0];
-        String split2 = audioFileSplit[1];
-        String unitId = split1 + "_" + split2;
-        return unitId;
-    }
-
-
-
-    // 저장소에서 오디오 재생하기
-    private void findFromStorage(String folder, String audioFile) {
+    // firebase 저장소에서 오디오 재생하기
+    private void playAudioInStorage(String folder, String audioFile) {
         if (mp != null) {
             mp.release();
         }
@@ -159,26 +137,4 @@ public class PlayAudioMediaPlayer {
         }
     }
 
-    /*
-    // Uri로 오디오 재생하기
-    public void playAudioInUri(Uri uri) {
-        if(mp != null) {
-            mp.release();
-        }
-        String url = uri.toString();
-        mp = new MediaPlayer();
-        try {
-            mp.setDataSource(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            mp.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        mp.start();
-    }
-
-     */
 }

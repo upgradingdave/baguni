@@ -15,7 +15,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberAge;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberMoney;
@@ -52,7 +52,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
     Random random = new Random();
 
-    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
 
     Map<Integer, byte[]> audiosNumber = new HashMap<>();
     boolean isFirstAudio = true;
@@ -185,14 +185,14 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnAudio :
                 if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
-                    playAudioMediaPlayer.playAudioInByte(audiosNumber.get(index));
+                    playMediaPlayer.playAudioInByte(audiosNumber.get(index));
                 }
                 break;
 
             case R.id.btnNext :
                 if(numberBack.getVisibility()==View.INVISIBLE) {
                     if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
-                        playAudioMediaPlayer.playAudioInByte(audiosNumber.get(index));
+                        playMediaPlayer.playAudioInByte(audiosNumber.get(index));
                     }
                     btnAudio.setVisibility(View.VISIBLE);
                     numberBack.setVisibility(View.VISIBLE);

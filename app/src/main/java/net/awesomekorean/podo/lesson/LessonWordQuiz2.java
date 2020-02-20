@@ -20,7 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.flexbox.FlexboxLayout;
 
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
+import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
 
@@ -38,7 +39,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     String[] wordBack = LessonWord.wordBack;
     String[] wordAudio = LessonWord.wordAudio;
 
-    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
     PlaySoundPool playSoundPool;
 
     ConstraintLayout totalPage;
@@ -154,7 +155,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
             if(checkAnswer[0] == checkAnswer[1]) {  // 정답
 
-                playSoundPool.playSoundPool(0);
+                playSoundPool.playSoundQuiz(0);
 
                 Drawable transparent = ContextCompat.getDrawable(getContext(), R.drawable.bg_transparent);
 
@@ -167,13 +168,13 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
-                playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
+                playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
 
                 isCorrectAll();
 
             } else {  // 오답
 
-                playSoundPool.playSoundPool(1);
+                playSoundPool.playSoundQuiz(1);
 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);

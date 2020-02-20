@@ -16,17 +16,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.DownloadAudio;
+import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,8 +62,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
     static String[] wordAudio;
 
     Context context;
-    PlayAudioMediaPlayer playAudioMediaPlayer = PlayAudioMediaPlayer.getInstance();
-
+    PlayMediaPlayer playMediaPlayer = PlayMediaPlayer.getInstance();
 
     static Map<Integer, byte[]> audiosWord = new HashMap<>();
 
@@ -160,7 +157,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         tvWordSynonyms.setText(wordSynonyms[lessonCount]);
         tvWordAntonyms.setText(wordAntonyms[lessonCount]);
         if(audiosWord.get(lessonCount) != null && audiosWord.get(lessonCount).length > 0) {
-            playAudioMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
+            playMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
         }
     }
 
@@ -171,7 +168,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         switch (v.getId()) {
 
             case R.id.btnAudio :
-                playAudioMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
+                playMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
                 break;
 
             case R.id.btnCollect :
@@ -179,28 +176,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
                 String back = wordBack[lessonCount];
                 String audio = wordAudio[lessonCount];
 
-                // 오디오파일 다운로드 하기
-                StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[lessonCount]);
-
-                try {
-                    final File file = new File(getContext().getFilesDir(), wordAudio[lessonCount]);
-
-                    storageRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            System.out.println("오디오파일 다운로드를 성공 했습니다.: " + file.getPath());
-                        }
-
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            System.out.println("오디오파일 다운로드를 실패 했습니다.: "+e);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+                DownloadAudio downloadAudio = new DownloadAudio(context, folder, audio);
+                downloadAudio.downloadAudio();
 
                 CollectionRepository repository = new CollectionRepository(getContext());
                 repository.insert(front, back, audio);

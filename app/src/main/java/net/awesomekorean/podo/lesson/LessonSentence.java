@@ -18,7 +18,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.DownloadAudio;
+import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
@@ -47,7 +48,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     static Map<Integer, byte[]> audiosSentence;
 
 
-    static PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+    static PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
 
     LinearLayout collectResult;
 
@@ -131,7 +132,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
-        playAudioMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
+        playMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
     }
 
 
@@ -141,13 +142,18 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playAudioMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
+                playMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
                 break;
 
             case R.id.btnCollect :
                 String front = sentenceFront[lessonCount];
                 String back = sentenceBack[lessonCount];
                 String audio = sentenceAudio[lessonCount];
+                String folder = "lesson/" + MainLesson.lessonUnit.getLessonId().toLowerCase();;
+
+                DownloadAudio downloadAudio = new DownloadAudio(getContext(), folder, audio);
+                downloadAudio.downloadAudio();
+
                 CollectionRepository repository = new CollectionRepository(getContext());
                 repository.insert(front, back, audio);
 

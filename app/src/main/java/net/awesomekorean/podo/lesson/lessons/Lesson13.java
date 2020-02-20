@@ -9,7 +9,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem {
     private String lessonId = "L_13";
     private int title = R.string.L_13_TITLE;
     private String subTitle = "밥을 먹기 30분 전에 약을 먹어요";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.timeexpression1;
 
     final static String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
     final static String[] wordPronunciation = {"-", "[먹따]", "-", "-", "-"};

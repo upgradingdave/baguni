@@ -274,18 +274,26 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             .setDisplayName(newName)
                             .build();
 
-                    user.updateProfile(profileUpdates)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()) {
-                                        System.out.println("userName을 업데이트 했습니다");
-                                        Toast.makeText(getApplicationContext(), getString(R.string.UPDATED_USERNAME), Toast.LENGTH_SHORT).show();
-                                        MainActivity.userName = user.getDisplayName();
-                                        userName.setText(newName);
+                    if(user != null) {
+                        user.updateProfile(profileUpdates)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()) {
+                                            System.out.println("userName을 업데이트 했습니다");
+                                            Toast.makeText(getApplicationContext(), getString(R.string.UPDATED_USERNAME), Toast.LENGTH_SHORT).show();
+                                            MainActivity.userName = user.getDisplayName();
+                                            userName.setText(newName);
+                                        }
                                     }
-                                }
-                            });
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                System.out.println("userName을 업데이트를 실패 했습니다" + e);
+                                Toast.makeText(getApplicationContext(), getString(R.string.UPDATED_USERNAME_FAILED), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
 
                 setExtendableButton(arrowEditProfile, layoutEditNameOpen);

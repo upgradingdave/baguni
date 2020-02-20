@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.collection;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +10,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +33,10 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
     int index = 0; // 최신 플래시 카드부터 공부할 때의 인덱스
 
+    PlaySoundPool playSoundPool;
+
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +55,12 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
         btnAudio.setOnClickListener(this);
         btnNext.setOnClickListener(this);
 
+        context = getApplicationContext();
+        playSoundPool = new PlaySoundPool(context);
+
         repository = new CollectionRepository(getApplicationContext());
         studyBack.setVisibility(View.INVISIBLE);
         randomStudy(); // 디폴트로 랜덤모드 실행
-
-
     }
 
     // 랜덤 학습 모드
@@ -102,8 +109,7 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
             case R.id.btnAudio :
                 if(studyAudio != null) {
-                    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
-                    playAudioMediaPlayer.playAudioCollection(studyAudio);
+                    playSoundPool.playSoundCollection(context.getFilesDir() + "/" + studyAudio);
                 }
                 break;
 

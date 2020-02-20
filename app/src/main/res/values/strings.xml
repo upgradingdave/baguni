@@ -187,6 +187,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="LOG_OUT">Log out</string>
     <string name="SAVE_NEW_NAME">Saved new name</string>
     <string name="UPDATED_USERNAME">Updated user name</string>
+    <string name="UPDATED_USERNAME_FAILED">User name update failed</string>
     <string name="SIGN_OUT">Sign Out</string>
     <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
 
@@ -216,7 +217,7 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
     <string name="UNLIMITED_COLLECTIONS_DETAIL">You can collect unlimited flash cards.</string>
     <string name="GET_PODO_POINTS">Get podo points</string>
     <string name="GET_PODO_POINTS_DETAIL">
-        You can use points to unlock the special lessons and readings or to ask Korean native teachers to correct your Korean writing or to correct your Korean writing.
+        You can use points to unlock the special lessons and readings or to ask Korean native teachers to correct your Korean writing.
     </string>
     <string name="PURCHASE_POINTS">Purchase Points</string>
     <string name="POINT_OPTION_A">100 points</string>

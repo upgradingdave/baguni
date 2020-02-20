@@ -15,7 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
+import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     Boolean solveWrongQuizAgain = false;
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
 
-    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
     PlaySoundPool playSoundPool;
 
     ConstraintLayout totalPage;
@@ -113,7 +114,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btn3.setText(answerArray[2]);
         btn4.setText(answerArray[3]);
 
-        playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
+        playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
     }
 
 
@@ -167,7 +168,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         switch (view.getId()) {
 
             case(R.id.btnAudio) :
-                playAudioMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
+                playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
                 break;
 
             default :
@@ -188,7 +189,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
 
     private void answered(Button selectedBtn, int sound, int outline) {
-        playSoundPool.playSoundPool(sound);
+        playSoundPool.playSoundQuiz(sound);
         selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), outline));
         answer.setVisibility(View.VISIBLE);
         btnAudio.setVisibility(View.GONE);

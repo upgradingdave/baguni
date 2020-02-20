@@ -18,7 +18,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +58,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     Button btnIntro;
     ImageView btnBack;
 
-    PlayAudioMediaPlayer playAudioMediaPlayer =  new PlayAudioMediaPlayer();
+    PlayMediaPlayer playMediaPlayer =  new PlayMediaPlayer();
 
     Context context;
 
@@ -189,7 +189,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         textViewHangul.setText(hangul[currentHangul]);
         textViewHangulExplain.setText(hangulExplain[currentHangul]);
         if(audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
-            playAudioMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
+            playMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
         }
     }
 
@@ -234,7 +234,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playAudioMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
+                playMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
                 break;
 
             case R.id.btnWriting :

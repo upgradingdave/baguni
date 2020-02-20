@@ -9,7 +9,7 @@ public class S_Lesson03 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_03";
     private int title = R.string.SL_03_TITLE;
     private String subTitle = "The most important '아요/어요'";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.conjugation2;
 
     private int contents = R.string.SL_03_CONTENTS;
 

@@ -28,14 +28,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.MainActivity;
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
@@ -71,14 +74,15 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     MediaPlayer mediaPlayer;
     Integer playingPosition = null; // 오디오 재생 멈춘 지점
     int playingTime; // 오디오 길이
-    String audioFile;
     String unitId;
 
     Context context;
 
     SpannableStringBuilder span = new SpannableStringBuilder();
 
-    PlayAudioMediaPlayer playAudioMediaPlayer = new PlayAudioMediaPlayer();
+    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
+
+    Map<Integer, byte[]> audiosWord = new HashMap<>();
 
 
     class MyThread extends Thread {
@@ -155,8 +159,30 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         readyForReading();
     }
 
-    public void readyForReading() {  // 글 생성
+    public void readyForReading() {
+        unitId = reading.getReadingId().toLowerCase();
+        int wordLength = reading.getPopUpFront().length;
+        String wordAudio[] = new String[wordLength];
+        String folder = "reading/" + unitId;
 
+
+        // 단어오디오 미리 가져오기
+        for(int i=0; i<wordLength; i++) {
+            final Integer audioIndexWord = i;
+            wordAudio[i] = unitId + "_" + i + ".mp3";
+            StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[i]);
+            final long ONE_MEGABYTE = 1024 * 1024;
+            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    System.out.println("오디오를 로드했습니다.");
+                    audiosWord.put(audioIndexWord, bytes);
+                }
+            });
+        }
+
+
+        // 글 생성
         readingTitle.setText(reading.getTitle());
         for(int i=0; i<reading.getArticle().length; i++) {
             SpannableStringBuilder ssb = new SpannableStringBuilder(reading.getArticle()[i]);
@@ -180,9 +206,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                             setVisibility(View.VISIBLE, View.GONE);
                             isPlaying = false;
                         }
-
                         audioFileWord = unitId + "_" + popUpIndex + ".mp3";
-                        playAudioMediaPlayer.playAudioReading(audioFileWord, unitId);
+                        playMediaPlayer.playAudioInByte(audiosWord.get(popUpIndex));
                     }
 
                     @Override
@@ -207,8 +232,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             }
         });
 
-        unitId = reading.getReadingId().toLowerCase();
-        audioFile = unitId + ".mp3";
     }
 
     @Override
@@ -221,6 +244,11 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnCollect:
+                String folder = "reading/" + MainReading.readingUnit.getReadingId().toLowerCase();
+
+                DownloadAudio downloadAudio = new DownloadAudio(context, folder, audioFileWord);
+                downloadAudio.downloadAudio();
+
                 CollectionRepository repository = new CollectionRepository(this);
                 repository.insert(front, back, audioFileWord);
 
@@ -246,7 +274,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                     // 최초 플레이 or 다시 플레이 시
                 } else {
-                    StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(audioFile);
+                    StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(unitId+".mp3");
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {

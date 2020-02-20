@@ -154,7 +154,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
         repository = new CollectionRepository(getContext());
 
         //repository.deleteAll();
-        //repository.deleteDateLastSync();
 
         setListViewFooter();
 

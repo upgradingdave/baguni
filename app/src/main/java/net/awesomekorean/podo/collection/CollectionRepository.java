@@ -7,8 +7,9 @@ import android.view.View;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
+import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.UnixTimeStamp;
-import net.awesomekorean.podo.PlayAudioMediaPlayer;
+import net.awesomekorean.podo.PlayMediaPlayer;
 
 import java.util.List;
 
@@ -20,11 +21,13 @@ public class CollectionRepository {
     private String front; // 플래시 카드 앞면
     private String back; // 플래시 카드 뒷면
 
-    PlayAudioMediaPlayer playAudioMediaPlayer;
+    PlaySoundPool playSoundPool;
 
+    Context context;
 
     public CollectionRepository(Context context) {
 
+        this.context = context;
         db = Room.databaseBuilder(context, CollectionDb.class, DB_NAME).build();
     }
 
@@ -187,8 +190,8 @@ public class CollectionRepository {
     private void setCollectionStudy(CollectionEntity entity) {
         String studyAudio = entity.getAudio();
         if(studyAudio != null) {
-            playAudioMediaPlayer = new PlayAudioMediaPlayer();
-            playAudioMediaPlayer.playAudioCollection(studyAudio);
+            playSoundPool = new PlaySoundPool(context);
+            playSoundPool.playSoundCollection(context.getFilesDir() + "/" + studyAudio);
             CollectionStudy.btnAudio.setVisibility(View.VISIBLE);
         } else {
             CollectionStudy.btnAudio.setVisibility(View.GONE);
