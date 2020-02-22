@@ -81,13 +81,14 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
                 @Override
                 public void onAdFailedToLoad(int i) {
-                    System.out.println("광고가 로드에 실패했습니다.");
+                    System.out.println("광고 로드에 실패했습니다.");
                 }
 
                 @Override
                 public void onAdClosed() {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
         }

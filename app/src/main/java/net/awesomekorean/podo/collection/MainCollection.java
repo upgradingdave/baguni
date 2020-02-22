@@ -186,7 +186,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 if (collectionEntities.size() > 10) {
                     list = new ArrayList<>(listAllData.subList(0, 10));
                 } else {
-                    list = listAllData;
+                    list = new ArrayList<>();
+                    list.addAll(listAllData);
                     progressBar.setVisibility(View.GONE);
                 }
 
@@ -359,7 +360,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
     // 검색 뷰에 입력한 내용을 listAllData 와 비교해서 출력
     public void search(String text) {
-
         list.clear(); // 입력이 발생하면 리스트를 지움.
 
         if (text.length() == 0) {
@@ -367,7 +367,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             list.addAll(listCopy); // 입력을 지우면 원래 리스트 출력
 
         } else {
-
             for (int i = 0; i < listAllData.size(); i++) {
                 String front = listAllData.get(i).getFront();
                 String back = listAllData.get(i).getBack();

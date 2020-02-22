@@ -32,6 +32,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     Hangul thisHangul;
 
+    TextView title;
     LinearLayout layoutHangul;
     TextView textViewHangul;
     TextView textViewHangulExplain;
@@ -77,6 +78,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         context = getApplicationContext();
 
+        title = findViewById(R.id.title);
         layoutHangul = findViewById(R.id.layoutHangul);
         textViewHangul = findViewById(R.id.textViewHangul);
         textViewHangulExplain = findViewById(R.id.textViewHangulExplain);
@@ -103,19 +105,19 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         switch (hangulName) {
 
             case "consonant" :
-
+                title.setText("Consonant");
                 thisHangul = new LessonHangulConsonant();
                 getThisHangul("con", hangulName);
                 break;
 
             case "vowel" :
-
+                title.setText("Vowel");
                 thisHangul = new LessonHangulVowel();
                 getThisHangul("vow", hangulName);
                 break;
 
             case "batchim" :
-
+                title.setText("Batchim");
                 thisHangul = new LessonHangulBatchim();
                 getThisHangul("bat", hangulName);
                 break;

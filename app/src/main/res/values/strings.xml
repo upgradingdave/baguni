@@ -11,7 +11,7 @@
 - Things you can do with points
 1. Lesson: Unlock Special Lessons
 2. Reading: Unlock Readings
-3. Writing: Ask a native speaker for correction
+3. Writing: Ask a Korean teacher for correction
 
 - How to collect points
 1. Complete General Lessons
@@ -60,7 +60,6 @@
     <string name="CONFIRM_EXIT">Do you want to exit podo?</string>
 
 
-
     <!--    주요버튼-->
     <string name="YES">Yes</string>
     <string name="NO">No</string>
@@ -77,24 +76,25 @@
     <string name="ASSEMBLY">Assembly</string>
     <string name="NUMBERS">Numbers</string>
     <string name="NUMBERS_INTRO_TITLE">How to say numbers in Korean</string>
-    <string name="NUMBERS_INTRO">Many Korean learners think Korean numbers are really difficult.
-Because there are two systems of Korean numbers
-(Sino-Korean number / Native-Korean number) and you should
-use each number system depending on what the number is used for.
-Therefore whenever students say numbers, they are confused about
-which system of number to use.
+    <string name="NUMBERS_INTRO">"Many Korean learners think Korean numbers are really difficult.
+Because there are two systems of Korean numbers(Sino-Korean number / Native-Korean number) and you should use each number system depending on what the number is used for.
+Therefore whenever students say numbers, they are confused about which system of number to use.
+
 In general, each number system is used in the following situations:
+
 1.Sino-Korean number: Number itself
 2.Native-Korean number: Counting numbers
+
 But when you learn Korean numbers, you can see that this rule is not always correct.
-(For example, why the hour is Native-Korean number
- but the minute is Sino-Korean number?)
+(For example, why the hour is Native-Korean number but the minute is Sino-Korean number?)
+
 So I suggest to students
-\"Just listen and follow the correct number a lot.
-Then you will feel something strange right before you try to use the wrong number.\"
+'Just listen and follow the correct number a lot. Then you will feel something strange right before you try to use the wrong number.'
+
 This lesson is designed to learn Sino-Korean number and Native-Korean number
 as well as to practice the numbers repeatedly in different situations.
-Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
+
+Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="SINO_NUMBER">Sino-Korean number</string>
     <string name="NATIVE_NUMBER">Native-Korean number (1~99)</string>
     <string name="PRACTICE">Practice</string>
@@ -246,11 +246,9 @@ Let\'s practice until \"일시 오분\" and \"십살\" seem strange!</string>
 
     <string name="SL_01_TITLE">Conjugation</string>
     <string name="SL_01_CONTENTS">"All Korean verbs and adjectives have a base form.
-It means things that end with '~다'
-, such as '먹다 (to eat)', '가다 (to go)' and '사다 (to buy)'.
+It means things that end with '~다', such as '먹다 (to eat)', '가다 (to go)' and '사다 (to buy)'.
 
-You'll use base forms when looking for a word on dictionary, but you should change
-the base form to the form that you want to use when talking or writing.
+You'll use base forms when looking for a word on dictionary, but you should change the base form to the form that you want to use when talking or writing.
 For example, '먹다 (to eat)' changes as followed.
 
 - 먹다 (to eat) : base form
@@ -259,23 +257,20 @@ For example, '먹다 (to eat)' changes as followed.
 - 먹어서 (because I eat)
 - 먹고 (after I eat)
 
-For most of the words base forms you only need to change ""다"" to other forms
+For most of the words base forms you only need to change ""다"" to other forms.
 But sometimes there are irregular words that change parts that are not '다' as well.
 For example...
 
-- 듣다 (to listen / base form)
+- 듣다 (to listen) : base form
 - 들어요 (I listen)
 - 들으면 (If I listen)
 - 들어서(because I listen)
 - 듣고(after I listen)
 
-Many students think that irregular words are difficult,
-but you don't need to worry about that.
+Many students think that irregular words are difficult, but you don't need to worry about that.
 Because most of irregular forms are for easier pronunciation.
-In the example above, you can pronounce easier
-by changing irregularly to '들어요[드러요]' instead of '듣어요[드더요]'.
-Therefore, if you use it several times through speaking practice,
-you will naturally be able to remember irregular words."</string>
+In the example above, you can pronounce easier by changing irregularly to '들어요[드러요]' instead of '듣어요[드더요]'.
+Therefore, if you use it several times through speaking practice, you will naturally be able to remember irregular words."</string>
 
     <string name="SL_02_TITLE">Numbers</string>
 
@@ -286,7 +281,7 @@ Let's call it '아/어요' for short.
 Therefore, it is most often used in everyday conversations.
 
 There are three rules for converting the base form to '아/어요'.
-Let's take a look with an example. (You don't need to know the meaning of the words
+Let's take a look with an example.(You don't need to know the meaning of the words
 in the example right now. Let's focus on the process of changing the base form into '아/어요'.)
 
 1.
@@ -337,10 +332,10 @@ I'm going to say one more interesting thing and finish this lesson.
 The '아/어요' is so powerful that it can have a variety meanings depending on how you speak or what's the situation.
 
 For example, let's see the word '먹어요'.
-a. ""먹어요."" (You eat)
-b. ""먹어요?"" (Do you eat?)
-c. ""먹어요!!"" (You must to eat!)
-There are many other meanings, but let's just remember two things of 'a' and 'b'.\"</string>
+a. '먹어요.' (You eat)
+b. '먹어요?' (Do you eat?)
+c. '먹어요!!' (You must to eat!)
+There are many other meanings, but let's just remember two things of 'a' and 'b'."</string>
 
     <string name="SL_04_TITLE">Particles</string>
     <string name="SL_04_CONTENTS">"Students who use a language without particles have a lot of difficulty with particles in Korean.
@@ -348,21 +343,23 @@ The most difficult are '은/는', '이/가' and '을/를'.
 We'll learn each particle later and I'm going to explain why we use the particles in this lesson.
 
 There are two sentences in English.
+
 1. I eat lion.
 2. Lion eat I. (Of course,'The lion eats me' is correct but ignore it now)
 
 The subject of sentence 1 is 'I' and the object is 'lion'.
 However, the subject of sentence 2 is 'lion' and the object is 'I'.
-In other words, depending on the position of the word,
-the subject and the object are determined and the meaning of sentence becomes completely different.
+In other words, depending on the position of the word, the subject and the object are determined and the meaning of sentence becomes completely different.
 
 Now let's look at the Korean sentence using particles.
+
 1. 나는 사자를 먹어요
 2. 사자를 나는 먹어요
+
 '나' meaning 'I' is added subject particle '는'
 and '사자' meaning 'lion' is added object particle '를'.
-When you use particles, the role of the word is fixed
-so the sentence always has the same meaning no matter where the word is.
+When you use particles, the role of the word is fixed.
+So the sentence always has the same meaning no matter where the word is.
 Therefore, sentence 1 and 2 is totally same meaning as 'I eat lion'.
 
 This is the difference between a language that uses particles and a language that does not.
@@ -373,19 +370,22 @@ so it would be better to follow this order."</string>
     <string name="SL_05_TITLE">Speaking Naturally</string>
     <string name="SL_05_CONTENTS">"There are 2 basic tips to make your pronunciation better.
 
-1. The consonant (not batchim) 'ㅇ' is a kind of an empty place because it has no sound.
-Therefore, when there is a batchim before the consonant 'ㅇ',
-you can put this batchim into the place of the consonant 'ㅇ' for reading naturally.
-For example, '사람이에요' has a batchim 'ㅁ' in the letter '람' and the next letter of '이' has
-a consonant 'ㅇ' that is an empty place.
-So it is good to read [사라미에요].""
+1.
 
-2. batchim 'ㅎ' makes following consonants stronger.
+ The consonant (not batchim) 'ㅇ' is a kind of an empty place because it has no sound.
+Therefore, when there is a batchim before the consonant 'ㅇ', you can put this batchim into the place of the consonant 'ㅇ' for reading naturally.
+For example, '사람이에요' has a batchim 'ㅁ' in the letter '람' and the next letter of '이' has a consonant 'ㅇ' that is an empty place.
+So it is good to read [사라미에요].
+
+2.
+
+ batchim 'ㅎ' makes following consonants stronger.
 If the consonants 'ㄱ', 'ㄷ', 'ㅈ' comes after batchim 'ㅎ', they sound each 'ㅋ', 'ㅌ', 'ㅊ'.
+
 ex)
-- 좋다 -> [조타]
-- 놓고 -> [노코]
-- 많지 -> [만치]
+- '좋다' -> [조타]
+- '놓고' -> [노코]
+- '많지' -> [만치]
 "</string>
 
     <string name="SL_06_TITLE">Confusing expression</string>
@@ -405,7 +405,7 @@ ex)
 
 2.
 
-Use '에서' after the noun to indicate the place
+Use '에서' after the noun to indicate the place.
 
 ex)
 - 학교에서 한국어를 공부해요.
@@ -445,8 +445,8 @@ but sometimes use '에' after the noun that indicating the place according to ve
 
 Is that right?
 
-You can say '식당' when you talk about a restaurant,
-but native speakers often say the 'food' + '집'(house).
+You can say '식당' when you talk about a restaurant.
+But native speakers often say the 'food' + '집'(house).
 So the restaurants above could be
 
 - 비빔밥집
@@ -461,12 +461,12 @@ Therefore, you can say '한식집' or '한식당'. "</string>
     <string name="SL_08_TITLE">Conjugation</string>
     <string name="SL_08_CONTENTS">"1.
 
-As we learned in Lesson 8, '아서/어서' is used as a reason or cause.
+As we learned in previous lesson, '아서/어서' is used as a reason or cause.
 
 ex)
-- 만나서 반가워요. (만나다 -> 만나서)
-- 저거는 50% 세일이어서 5,000원이에요. (이다 -> 이어서)
-- 겨울이어서 날씨가 추워요. (이다 -> 이어서)
+- 만나서 반가워요. ('만나다' -> '만나서')
+- 저거는 50% 세일이어서 5,000원이에요. ('이다' -> '이어서')
+- 겨울이어서 날씨가 추워요. ('이다' -> '이어서')
 
 '이다 -> 이어서' is better to say '이라서' in the conversation.
 So in the real conversation the above are ...
@@ -477,8 +477,7 @@ So in the real conversation the above are ...
 2.
 
 We also use '아서/어서' to refer to the relationship between time.
-At this time, there must be a close connection between
-what happened before and what happened afterwards.
+At this time, there must be a close connection between what happened before and what happened afterwards.
 
 ex)
 - 한국에 가서 한국어를 배워요.
@@ -487,29 +486,34 @@ ex)
 "</string>
 
     <string name="SL_09_TITLE">Newly-coined word</string>
-    <string name="SL_09_CONTENTS">"Newly-coined word' is a new word made popular by young people.
+    <string name="SL_09_CONTENTS">"'Newly-coined word' is a new word made popular by young people.
 Some people say it's better not to use it because it's not a standard language.
 But I think it is helpful to foreigners to make learning korean more fun.
 However, it is recommended not to use it in formal situations.
 
-Wll, let's look at some of the most common new words used in 2019.
+Well, let's look at some of the most common new words used in 2019.
 
 1. 인플루언서
+
 : Korean pronunciation of English 'influencer'.
 It means the people who have a large number of followers In social media and influence the public.
 
 2. 편스토랑
+
 : A combination of '편의점 (convenience store)' and '레스토랑 (restaurant)'.
 It means a convenience store where you can have a good meal like a restaurant.
 
 3. 소떡소떡
+
 : It's a snack that '소시지 (sausage)' and '떡 (rice cake)' are alternately sticked and baked.
 That's why it is called '소떡소떡'.
 
 4. 스포
+
 : It's from English 'spoiler'. The act of telling others about the contents of a movie in advance.
 
 5. 꾸안꾸
+
 : It is made up of shortened '꾸민 듯 안 꾸민 듯 (like not put makeup)'.
 It means that you put on makeup naturally, as if you did not do makeup."</string>
 
@@ -526,16 +530,13 @@ It means that you put on makeup naturally, as if you did not do makeup."</string
     <string name="L_00_SENTENCE_BACK_4">See you again</string>
     <string name="L_00_SENTENCE_BACK_5">Good bye</string>
     <string name="L_00_SENTENCE_EXPLAIN_0">"No matter in the morning, afternoon, evening, we say hello like this.
-You can just say '안녕' to your close friend (friend means same age)
-or a close sister/brother (It means a close friend that is younger than you)"</string>
+You can just say '안녕' to your close friend (friend means same age) or a close sister/brother (It means a close friend that is younger than you)"</string>
     <string name="L_00_SENTENCE_EXPLAIN_1">We say this to someone who met for the first time or after a long time.</string>
     <string name="L_00_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_00_SENTENCE_EXPLAIN_3">Conventionally asking if nothing has happened so far.</string>
     <string name="L_00_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_00_SENTENCE_EXPLAIN_5">"가세요' is from 'to go' and '계세요' is from 'to stay'.
-Therefore, if the other person will 'go' from here after saying goodbye,
-we say '안녕히 가세요' and if the other person will 'stay' here after saying goodbye,
-we say '안녕히 계세요'.
+Therefore, if the other person will 'go' from here after saying goodbye, we say '안녕히 가세요' and if the other person will 'stay' here after saying goodbye, we say '안녕히 계세요'.
 If they are close friends or younger friends, you can just say goodbye like this '안녕'."</string>
 
     <string name="L_01_TITLE">self-introduction</string>
@@ -556,19 +557,17 @@ If they are close friends or younger friends, you can just say goodbye like this
     <string name="L_01_SENTENCE_BACK_8">It’s a person</string>
     <string name="L_01_SENTENCE_BACK_9">I’m Korean</string>
     <string name="L_01_SENTENCE_EXPLAIN_0">-</string>
-    <string name="L_01_SENTENCE_EXPLAIN_1">"We have a lot of questions because we have just started studying Korean.
-This expression is very useful when you have questions.
+    <string name="L_01_SENTENCE_EXPLAIN_1">"This expression is very useful when you have questions.
 You can point your finger at something you don't know and say ‘이거 뭐예요?’ (what's this?)
 When you point something out a little farther away, you can say '저거 뭐예요?' (what's that?)"</string>
     <string name="L_01_SENTENCE_EXPLAIN_2">"You may be wondering what '이' is after '이름'.
-This is the main challenge for Korean language learners, called 'subject particle'
-but don't struggle to know it now.
+This is the main challenge for Korean language learners, called 'subject particle' but don't struggle to know it now.
 Just remember that you can also say '이름 뭐예요?' but '이름이 뭐예요?' is a better expression.
 It is important to get used to it in this level.
 (See the special lesson ‘particles 1 : Why we use particles?)"</string>
-    <string name="L_01_SENTENCE_EXPLAIN_3">"How to use '예요 / 이에요'?
-If there isn't a batchim (last consonant) in the previous letter, we use ‘예요’.
-If there is a batchim in the previous letter, we use ‘이에요’."</string>
+    <string name="L_01_SENTENCE_EXPLAIN_3">"If there isn't a batchim (last consonant) in the previous letter, we use ‘예요’.
+
+        If there is a batchim in the previous letter, we use ‘이에요’."</string>
     <string name="L_01_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_6">"사람이에요 [사라미에요]
@@ -597,12 +596,12 @@ If there is a batchim in the previous letter, we use ‘이에요’."</string>
     <string name="L_02_SENTENCE_BACK_11">So, it’s 5,000 won</string>
     <string name="L_02_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_1">-</string>
-    <string name="L_02_SENTENCE_EXPLAIN_2">"‘이거’ is used a lot in the conversational language
-and you should say ‘이것‘ in the formal situation."</string>
+    <string name="L_02_SENTENCE_EXPLAIN_2">"‘이거’ is used a lot in the conversational language.
+        And you should say ‘이것‘ in the formal situation."</string>
     <string name="L_02_SENTENCE_EXPLAIN_3">-</string>
-    <string name="L_02_SENTENCE_EXPLAIN_4">"‘저거’ is used a lot in the conversational language
-and you should say ‘저것‘ in the formal situation."</string>
-    <string name="L_02_SENTENCE_EXPLAIN_5">You can say like this for short of \'저거는 얼마예요?\'</string>
+    <string name="L_02_SENTENCE_EXPLAIN_4">"‘저거’ is used a lot in the conversational language.
+        And you should say ‘저것‘ in the formal situation."</string>
+    <string name="L_02_SENTENCE_EXPLAIN_5">"You can say like this for short of '저거는 얼마예요?'"</string>
     <string name="L_02_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_8">-</string>
@@ -631,10 +630,12 @@ and you should say ‘저것‘ in the formal situation."</string>
     <string name="L_03_SENTENCE_EXPLAIN_0">"You can say this when you 'have' something or someone 'exists'.
 In Korean, we don't consider singular and plural that much
 and the meaning of 'There isn't' is '없다'."</string>
-    <string name="L_03_SENTENCE_EXPLAIN_1">"When you conjugate verbs or adjectives to the form of '아요/어요',
-If you say it with a lower intonation , its a statement.
-But If you raise the intonation at the end , it becomes a question.
-ex) '있어요?' : is there? / '있어요.' : there is"</string>
+    <string name="L_03_SENTENCE_EXPLAIN_1">"When you conjugate verbs or adjectives to the form of '아요/어요', if you say it with a lower intonation, it's a statement.
+But if you raise the intonation at the end, it becomes a question.
+
+ex)
+'있어요?' : is there?
+'있어요.' : there is."</string>
     <string name="L_03_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_03_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_03_SENTENCE_EXPLAIN_4">yes : \'네\' / no : \'아니요\'</string>
@@ -645,7 +646,7 @@ Just remember to use '명' for people and '개' for things."</string>
     <string name="L_03_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_03_SENTENCE_EXPLAIN_8">The words that describe the place should be followed by the place particle \'에서\'.</string>
     <string name="L_03_SENTENCE_EXPLAIN_9">kakao talk: Messenger name used by most Koreans</string>
-    <string name="L_03_SENTENCE_EXPLAIN_10">Because KakaoTalk is used as a place, \'에서\' is added.</string>
+    <string name="L_03_SENTENCE_EXPLAIN_10">"Because KakaoTalk is used as a place, '에서' is added."</string>
     <string name="L_03_SENTENCE_EXPLAIN_11">-</string>
 
     <string name="L_04_TITLE">past tense</string>
@@ -666,7 +667,9 @@ Just remember to use '명' for people and '개' for things."</string>
     <string name="L_04_SENTENCE_BACK_10">What did you do yesterday?</string>
     <string name="L_04_SENTENCE_BACK_11">I went shopping.</string>
     <string name="L_04_SENTENCE_EXPLAIN_0">-</string>
-    <string name="L_04_SENTENCE_EXPLAIN_1">"conjugate '아요/어요' : '있다' -> '있' + '어요'  '있어요'"</string>
+    <string name="L_04_SENTENCE_EXPLAIN_1">
+        "conjugate '아요/어요'
+: '있다' -> '있' + '어요' = '있어요'"</string>
     <string name="L_04_SENTENCE_EXPLAIN_2">"When you say past tense, you only need to put 'ㅆ어' into the form of '아요/어요'.
 Therefore, we can call the past tense to '았어요/었어요' form.
 '있어요' -> '있어(ㅆ어)요' = '있었어요'"</string>
@@ -674,7 +677,9 @@ Therefore, we can call the past tense to '았어요/었어요' form.
     <string name="L_04_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_6">-</string>
-    <string name="L_04_SENTENCE_EXPLAIN_7">"conjugate '아요/어요' : '하다' -> '해요'"</string>
+    <string name="L_04_SENTENCE_EXPLAIN_7">
+        "conjugate '아요/어요'
+: '하다' -> '해요'"</string>
     <string name="L_04_SENTENCE_EXPLAIN_8">"해요' -> '해(ㅆ어)요' = '했어요'"</string>
     <string name="L_04_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_10">-</string>
@@ -704,20 +709,25 @@ Therefore, we can call the past tense to '았어요/었어요' form.
     <string name="L_05_SENTENCE_EXPLAIN_1">"When we say future tense, we conjugate 'ㄹ 거예요/을 거예요' form.
 If there is no batchim, add 'ㄹ 거예요'.
 If there is a batchim, add '을 거예요'.
-conjugate 'ㄹ 거예요/을 거예요' : '하다' -> '하' + 'ㄹ 거예요' = '할 거예요'"</string>
+
+conjugate 'ㄹ 거예요/을 거예요'
+: '하다' -> '하' + 'ㄹ 거예요' = '할 거예요'"</string>
     <string name="L_05_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_4">-</string>
-    <string name="L_05_SENTENCE_EXPLAIN_5">"conjugate 'ㄹ 거예요/을 거예요' : '가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'"</string>
-    <string name="L_05_SENTENCE_EXPLAIN_6">"If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)
-we add '에' after the noun that is the destination.
+    <string name="L_05_SENTENCE_EXPLAIN_5">
+        "conjugate 'ㄹ 거예요/을 거예요'
+: '가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'"
+    </string>
+    <string name="L_05_SENTENCE_EXPLAIN_6">"If you use verbs related to movement ('가다', '오다', '들어가다' etc ...) we add '에' after the noun that is the destination.
 We can also omit '에' in the conversation.
 (See the special lesson '에 vs. 에서')"</string>
     <string name="L_05_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_8">"We can say ‘랑/이랑’ for the conversational language."</string>
     <string name="L_05_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_10">-</string>
-    <string name="L_05_SENTENCE_EXPLAIN_11">"conjugate 'ㄹ 거예요/을 거예요' : '보다' -> '보' + 'ㄹ 거예요' = '볼 거예요'"</string>
+    <string name="L_05_SENTENCE_EXPLAIN_11">"conjugate 'ㄹ 거예요/을 거예요'
+: '보다' -> '보' + 'ㄹ 거예요' = '볼 거예요'"</string>
     <string name="L_05_SENTENCE_EXPLAIN_12">"Object particle is used.
 However, we can omit object particles when speaking.
 '영화를 볼 거예요' -> '영화 볼 거예요'"</string>
@@ -744,19 +754,22 @@ However, we can omit object particles when speaking.
     <string name="L_06_SENTENCE_EXPLAIN_1">-</string>
     <string name="L_06_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_06_SENTENCE_EXPLAIN_3">-</string>
-    <string name="L_06_SENTENCE_EXPLAIN_4">"conjugate '고 있다' : '가다' -> '가' + '고 있다' = '가고 있다'
-conjugate '아요/어요' : '가고 있다' -> '가고 있' + '어요' = '가고 있어요'"</string>
+    <string name="L_06_SENTENCE_EXPLAIN_4">"conjugate '고 있다'
+: '가다' -> '가' + '고 있다' = '가고 있다'
+conjugate '아요/어요'
+: '가고 있다' -> '가고 있' + '어요' = '가고 있어요'"</string>
     <string name="L_06_SENTENCE_EXPLAIN_5">"If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)
 we add '에' after the noun that is the destination.
 We can also omit ""에"" when speaking
 (See the special lesson '에 vs. 에서')"</string>
     <string name="L_06_SENTENCE_EXPLAIN_6">-</string>
-    <string name="L_06_SENTENCE_EXPLAIN_7">"conjugate '아요/어요' : '가다' -> '가' + '아요' = '가아요' -> '가요'"</string>
+    <string name="L_06_SENTENCE_EXPLAIN_7">"conjugate '아요/어요'
+: '가다' -> '가' + '아요' = '가아요' -> '가요'"</string>
     <string name="L_06_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_06_SENTENCE_EXPLAIN_9">"You can also use '랑/이랑' that we learned in the previous lesson.
-'저' (a polite expression of 'me', to most people except closed friends and brothers/sisters (close friends that are younger than you))
- + '랑' = '저랑 헬스장에 가요'
-Or you can also use '랑/이랑' with '같이' means together. '저랑 같이 헬스장에 가요'"</string>
+'저' (a polite expression of 'me') + '랑' = '저랑 헬스장에 가요'
+Or you can also use '랑/이랑' with '같이' means together.
+'저랑 같이 헬스장에 가요'"</string>
     <string name="L_06_SENTENCE_EXPLAIN_10">"When you want to express a short time within a few hours, use '이따' or '이따가'.
 It's for conversational speaking."</string>
     <string name="L_06_SENTENCE_EXPLAIN_11">-</string>
@@ -794,17 +807,18 @@ It's for conversational speaking."</string>
     <string name="L_07_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_6">-</string>
-    <string name="L_07_SENTENCE_EXPLAIN_7">"conjugate '아요/어요' : '춥다' -> '춥' + '어요' = '춥어요' -> '추워요' (exception)
+    <string name="L_07_SENTENCE_EXPLAIN_7">"conjugate '아요/어요'
+: '춥다' -> '춥' + '어요' = '춥어요' -> '추워요' (exception)
 Most exceptions are for ease of pronunciation.
 '추워요' is more comfortable and natural to pronounce than '춥어요'."</string>
     <string name="L_07_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_9">-</string>
-    <string name="L_07_SENTENCE_EXPLAIN_10">"conjugate '아요/어요' : '오다' -> '오' + '아요' = '오아요' -> '와요'"</string>
+    <string name="L_07_SENTENCE_EXPLAIN_10">"conjugate '아요/어요'
+: '오다' -> '오' + '아요' = '오아요' -> '와요'"</string>
     <string name="L_07_SENTENCE_EXPLAIN_11">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_12">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_13">"You can make negative forms by using '안' before a verb or adjective.
-When a verb composed of 'noun + 하다' is made into a negative sentence,
-it should be written as 'noun + 안 + 하다'.
+When a verb composed of 'noun + 하다' is made into a negative sentence, it should be written as 'noun + 안 + 하다'.
 ex) '얘기하다' -> '얘기 안 하다'
 Negative sentences using '안' are direct expressions.
 If you want to express it indirectly, use '~지 않다'.
@@ -841,7 +855,8 @@ ex) '얘기하다' -> '얘기하지 않다'"</string>
     <string name="L_08_SENTENCE_BACK_17">So I can\'t have breakfast as well</string>
     <string name="L_08_SENTENCE_BACK_18">I can\'t have breakfast as well because I can\'t wake up early in the morning.</string>
     <string name="L_08_SENTENCE_EXPLAIN_0">-</string>
-    <string name="L_08_SENTENCE_EXPLAIN_1">"conjugate '아요/어요' : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_1">"conjugate '아요/어요'
+: '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'"</string>
     <string name="L_08_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_4">-</string>
@@ -849,10 +864,13 @@ ex) '얘기하다' -> '얘기하지 않다'"</string>
     <string name="L_08_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_8">"Use '아서/어서' to combine two sentences together using '그래서'.
-conjugate '아요/어요' : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'
-conjugate '아서/어서' : '바빠요' -> '바빠' + '아서' = '바빠아서' -> '바빠서'"</string>
+conjugate '아요/어요'
+: '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'
+conjugate '아서/어서'
+: '바빠요' -> '바빠' + '아서' = '바빠아서' -> '바빠서'"</string>
     <string name="L_08_SENTENCE_EXPLAIN_9">-</string>
-    <string name="L_08_SENTENCE_EXPLAIN_10">"conjugate '아요/어요' : '일어나다' -> '알어나' + '아요' = '일어나아요' -> '일어나요'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_10">"conjugate '아요/어요'
+: '일어나다' -> '알어나' + '아요' = '일어나아요' -> '일어나요'"</string>
     <string name="L_08_SENTENCE_EXPLAIN_11">"안' : do not
 '못' : can not
 
@@ -861,12 +879,14 @@ conjugate '아서/어서' : '바빠요' -> '바빠' + '아서' = '바빠아서' 
     <string name="L_08_SENTENCE_EXPLAIN_13">"시간 + '에'
 (See the special lesson '에 vs. 에서')"</string>
     <string name="L_08_SENTENCE_EXPLAIN_14">-</string>
-    <string name="L_08_SENTENCE_EXPLAIN_15">"conjugate '아요/어요' : '먹다' -> '먹' + '어요' = '먹어요'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_15">"conjugate '아요/어요'
+: '먹다' -> '먹' + '어요' = '먹어요'"</string>
     <string name="L_08_SENTENCE_EXPLAIN_16">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_17">"We can use '도' to mean 'also'.
 '아침/점심/저녁' means 'morning / noon / night' respectively.
 Also, they have the meaning of 'breakfast / lunch / dinner.'"</string>
-    <string name="L_08_SENTENCE_EXPLAIN_18">"conjugate '아서/어서' : '일어나요' -> '일어나' + '아서' = '일어나서'"</string>
+    <string name="L_08_SENTENCE_EXPLAIN_18">"conjugate '아서/어서'
+: '일어나요' -> '일어나' + '아서' = '일어나서'"</string>
 
     <string name="L_09_TITLE">range1 (for place)</string>
     <string name="L_09_WORD_BACK_0">company</string>
@@ -923,7 +943,7 @@ Also, they have the meaning of 'breakfast / lunch / dinner.'"</string>
     <string name="L_10_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_10_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_10_SENTENCE_EXPLAIN_5">"When referring to a range of time, use '~부터 ~까지'.
-Its okay to use ""~에서 ~ 까지"" for a range of places"</string>
+Its also okay to use ""~에서 ~ 까지"" like a range of places"</string>
     <string name="L_10_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_10_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_10_SENTENCE_EXPLAIN_8">-</string>
@@ -1017,9 +1037,11 @@ ex) '어렵다' -> '어렵' + '지만' = '어렵지만'"</string>
     <string name="L_12_SENTENCE_EXPLAIN_11">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_12">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_13">"When you change a verb to a noun, you can use '~기' like '~ing' in English.
-ex) 말하다 -> 말하기 / speak -> speaking
-쓰다 -> 쓰기 / write -> writing
-읽다 -> 읽기 / read -> reading"</string>
+
+ex)
+'말하다' -> '말하기' (speak -> speaking)
+'쓰다' -> '쓰기' (write -> writing)
+'읽다'-> '읽기' (read -> reading)"</string>
     <string name="L_12_SENTENCE_EXPLAIN_14">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_15">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_16">-</string>
@@ -1070,8 +1092,7 @@ ex)
     <string name="L_14_WORD_BACK_4">after</string>
     <string name="L_14_WORD_BACK_5">family</string>
     <string name="L_14_WORD_BACK_6">drama</string>
-    <string name="L_14_WORD_BACK_7">to see / watch</string>
-    <string name="L_14_WORD_BACK_8">recommend</string>
+    <string name="L_14_WORD_BACK_7">recommend</string>
     <string name="L_14_SENTENCE_BACK_0">What do you do?</string>
     <string name="L_14_SENTENCE_BACK_1">What do you do at night?</string>
     <string name="L_14_SENTENCE_BACK_2">What will you do at night today?</string>
@@ -1095,7 +1116,7 @@ ex)
     <string name="L_14_SENTENCE_BACK_20">Please recommend me too.</string>
     <string name="L_14_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_14_SENTENCE_EXPLAIN_1">-</string>
-    <string name="L_14_SENTENCE_EXPLAIN_2">"You can also say '뭐 할거예요?' when using future tense like you learned in Lesson 5.
+    <string name="L_14_SENTENCE_EXPLAIN_2">"You can also say '뭐 할거예요?' when using future tense like you learned in previous lesson.
 But in situations where the content of the future is clear, such as 'tonight',
 you can use the present tense."</string>
     <string name="L_14_SENTENCE_EXPLAIN_3">-</string>

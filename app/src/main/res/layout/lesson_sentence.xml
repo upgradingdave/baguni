@@ -51,10 +51,6 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:textSize="30dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="30dp"
-                android:autoSizeMinTextSize="20dp"
-                android:autoSizeStepGranularity="1dp"
                 android:textColor="@color/BLACK"
                 android:textStyle="bold"
                 android:lineSpacingExtra="10dp"
@@ -67,29 +63,26 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="20dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMaxTextSize="20dp"
-                android:autoSizeMinTextSize="10dp"
-                android:autoSizeStepGranularity="1dp"
                 android:textColor="@color/GREY_TEXT"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvSentenceExplain"
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_marginTop="30dp"
             android:layout_weight="3"
-            android:textSize="15dp"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMaxTextSize="15dp"
-            android:autoSizeMinTextSize="10dp"
-            android:autoSizeStepGranularity="1dp"
-            android:textColor="@color/BLACK"
-            android:scrollbars="vertical"
-            android:lineSpacingExtra="5dp"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp">
+            <TextView
+                android:id="@+id/tvSentenceExplain"
+                android:textSize="18dp"
+                android:textColor="@color/BLACK"
+                android:lineSpacingExtra="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </ScrollView>
 
     </LinearLayout>
 

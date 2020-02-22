@@ -58,6 +58,7 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson06;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson07;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson08;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson09;
 import net.awesomekorean.podo.profile.Profile;
 import net.awesomekorean.podo.purchase.TopUp;
 
@@ -112,7 +113,7 @@ public class MainLesson extends Fragment{
                 new Lesson02(), new S_Lesson03(), new Lesson03(), new S_Lesson04(), new Lesson04(),
                 new S_Lesson05(), new Lesson05(), new S_Lesson06(), new Lesson06(), new S_Lesson07(),
                 new Lesson07(), new Lesson08(), new S_Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(),
-                new Lesson12(), new Lesson13(), new Lesson14()
+                new S_Lesson09(), new Lesson12(), new Lesson13(), new Lesson14()
         };
 
         for(LessonItem item : items) {
@@ -123,6 +124,9 @@ public class MainLesson extends Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new LessonAdapter(list);
+
+        // 가장 최근 클릭한 아이템 위치로 이동
+        recyclerView.scrollToPosition(SharedPreferencesInfo.getLastClickItem(context, true));
 
         setCompletedLessons();
         setUnlockedLessons();
@@ -149,11 +153,13 @@ public class MainLesson extends Fragment{
                                 break;
 
                             default :
+                                SharedPreferencesInfo.setLastClickItem(context, true, pos);
                                 intent = new Intent(context, LessonSpecialFrame.class);
                                 startActivity(intent);
                                 break;
                         }
                     } else {
+                        SharedPreferencesInfo.setLastClickItem(context, true, pos);
                         intent = new Intent(context, LessonFrame.class);
                         startActivity(intent);
                     }
@@ -163,17 +169,6 @@ public class MainLesson extends Fragment{
                     intent = new Intent(context, UnlockActivity.class);
                     intent.putExtra("unlock", "specialLesson");
                     startActivityForResult(intent, 200);
-/*
-                    point = userInformation.getPoints();
-                    if(point < specialLessonPrice) {
-                        pointHave.setTextColor(Color.RED);
-                        btnYes.setEnabled(false);
-                    }
-                    pointHave.setText(String.valueOf(point));
-                    unlockFirst.setVisibility(View.VISIBLE);
-                    unlockSecond.setVisibility(View.GONE);
-
- */
                 }
 
             }

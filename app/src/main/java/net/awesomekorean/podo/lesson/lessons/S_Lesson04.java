@@ -9,7 +9,7 @@ public class S_Lesson04 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_04";
     private int title = R.string.SL_04_TITLE;
     private String subTitle = "Why we use it?";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.particles1;
 
     private int contents = R.string.SL_04_CONTENTS;
 

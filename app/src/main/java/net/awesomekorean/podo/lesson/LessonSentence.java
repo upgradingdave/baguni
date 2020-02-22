@@ -1,17 +1,21 @@
 package net.awesomekorean.podo.lesson;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,7 +58,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
     boolean isFirstAudio = true;
 
+    ScrollView scrollView;
 
+    private GestureDetectorCompat gestureDetectorCompat = null;
 
     // fragment 간 전환을 위해 만듦
     public static LessonSentence newInstance() {
@@ -73,12 +79,25 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         tvSentenceFront = view.findViewById(R.id.tvSentenceFront);
         tvSentenceBack = view.findViewById(R.id.tvSentenceBack);
         tvSentenceExplain = view.findViewById(R.id.tvSentenceExplain);
-        tvSentenceExplain.setMovementMethod(new ScrollingMovementMethod());
         collectResult = view.findViewById(R.id.collectResult);
         btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
+        scrollView = view.findViewById(R.id.scrollView);
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
+
+        LessonSwipeListener gestureListener = new LessonSwipeListener();
+        LessonFrame lessonFrame = (LessonFrame)getActivity();
+        gestureListener.setActivity(lessonFrame);
+        gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.getApplicationContext(), gestureListener);
+
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetectorCompat.onTouchEvent(event);
+                return false;
+            }
+        });
 
         readyForLesson();
 
@@ -86,6 +105,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     }
 
     private void readyForLesson() {
+        if(getActivity() != null) {
+            ((LessonFrame)getActivity()).onLoadingLayout(true);
+        }
         int sentenceLength = LessonWord.lessonSentenceLength;
         sentenceAudio = new String[sentenceLength];
         String lessonId = LessonWord.lessonId;
@@ -128,7 +150,10 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         }
     }
 
-    public static void displaySentence() {
+    public void displaySentence() {
+        if(getActivity() != null) {
+            ((LessonFrame)getActivity()).onLoadingLayout(false);
+        }
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);

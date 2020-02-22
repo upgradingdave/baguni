@@ -35,7 +35,7 @@ class LessonHangulBatchim implements Hangul{
             "Great!",
             "Same one more.",
             "Now we can have a question. Why we should use different character even there are lots of same movement? It seems more simple if we use only one Batchim.",
-            "However, every languages have some words that have same pronunciation but different meaning. It will help you to reduce the number of sound that we should make. Even though it has same sound, we can know enough its different meanings with spelling and the situation.",
+            "However, it will help you to reduce the number of sound that we should make. We can know enough its different meanings with spelling and the situation.",
             "After a long time, it's different movement.",
             "It has also similar tongue position with 'ㄴ'. But the air is getting out through mouth.",
             "Some Korean learners who are native English speaker, tends to roll up their tongue like [r] sound. But the correct position is behind of upper teeth.",

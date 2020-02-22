@@ -76,7 +76,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/selectResult"
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="1dp"
         android:background="@drawable/bg_white_10"
         android:padding="20dp"

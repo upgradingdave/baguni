@@ -53,7 +53,7 @@
         <activity android:name=".profile.Profile" />
         <activity android:name=".message.Message" />
         <activity android:name=".lesson.LessonFinish" />
-        <activity android:name=".Logo" >
+        <activity android:name=".Logo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,9 +62,7 @@
         </activity>
         <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
-        <activity android:name=".login.SignIn">
-
-        </activity>
+        <activity android:name=".login.SignIn"></activity>
         <activity android:name=".collection.CollectionStudy" />
         <activity android:name=".collection.CollectionFlashCard" />
         <activity
@@ -78,6 +76,7 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing">
+
         </activity>
     </application>
 

@@ -76,7 +76,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     LinearLayout logout;
 
     ImageView arrowEditProfile;
-    ImageView arrowLanguage;
 
     Intent intent;
 
@@ -309,7 +308,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 String title = "앱 다운 링크"; // <-- 앱 다운 링크 넣기
                 intent.putExtra(Intent.EXTRA_TEXT, title);
 
-                Intent chooser = Intent.createChooser(intent, "친구에게 공유!");
+                Intent chooser = Intent.createChooser(intent, "Recommend podo to your friends");
                 startActivity(chooser);
                 break;
 

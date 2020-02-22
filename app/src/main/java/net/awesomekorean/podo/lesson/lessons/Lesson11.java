@@ -41,7 +41,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
             "K-pop을 좋아해요?",
             "네, 저는 BTS를 제일 좋아해요.",
             "BTS를 왜 좋아해요?",
-            "BTS는 노래를 잘 불러요. 그리고 춤도 잘 춰요."
+            "BTS는 노래를 잘 불러요.\n그리고 춤도 잘 춰요."
     };
 
     final static int[] peopleImage = {9,10};

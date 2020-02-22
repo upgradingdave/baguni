@@ -32,15 +32,15 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
     LessonWord lessonWord;
     LessonSentence lessonSentence;
 
-    public LessonSwipeListener(LessonWord lessonWord, LessonSentence lessonSentence) {
+    public LessonSwipeListener() {
         super();
-        this.lessonWord = lessonWord;
-        this.lessonSentence = lessonSentence;
+        this.lessonWord = new LessonWord();
+        this.lessonSentence = new LessonSentence();
     }
+
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
         float deltaX = e1.getX() - e2.getX();
 
         float deltaXAbs = Math.abs(deltaX);

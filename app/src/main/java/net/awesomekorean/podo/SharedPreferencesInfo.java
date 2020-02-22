@@ -58,4 +58,30 @@ public class SharedPreferencesInfo {
         boolean isSignIn = sp.getBoolean("isSignIn", false);
         return isSignIn;
     }
+
+    // Lesson 이랑 Reading 에서 마지막으로 클릭한 위치 저장하기
+    public static void setLastClickItem(Context context, boolean isLesson, int pos) {
+        SharedPreferences sp = context.getSharedPreferences("lastClickedItem", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        if(isLesson) { // 레슨위치 저장
+            editor.putInt("lesson", pos);
+        } else {
+            editor.putInt("reading", pos);
+        }
+        editor.commit();
+        System.out.println("클릭 위치를 저장했습니다: "+pos);
+    }
+
+    public static int getLastClickItem(Context context, boolean isLesson) {
+        SharedPreferences sp = context.getSharedPreferences("lastClickedItem", MODE_PRIVATE);
+        int lastPos;
+        if(isLesson) {
+            lastPos = sp.getInt("lesson", 0);
+        } else {
+            lastPos = sp.getInt("reading", 0);
+        }
+        System.out.println("클릭 위치를 불러옵니다: "+lastPos);
+
+        return lastPos;
+    }
 }

@@ -38,7 +38,8 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
     FragmentManager fm;
     FragmentTransaction ft;
     LessonWord lessonWord = new LessonWord();
-    LessonSentence lessonSentence = new LessonSentence();
+
+    LinearLayout loadingLayout;
 
 
     @Override
@@ -53,6 +54,7 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
         btnNo = findViewById(R.id.btnNo);
         btnYes = findViewById(R.id.btnYes);
         btnClose = findViewById(R.id.btnClose);
+        loadingLayout = findViewById(R.id.loadingLayout);
         btnClose.setOnClickListener(this);
         btnNo.setOnClickListener(this);
         btnYes.setOnClickListener(this);
@@ -67,9 +69,10 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
         return true;
     }
 
-    public void replaceFragment(Fragment fragment) {
 
-        LessonSwipeListener gestureListener = new LessonSwipeListener(lessonWord, lessonSentence);
+
+    public void replaceFragment(Fragment fragment) {
+        LessonSwipeListener gestureListener = new LessonSwipeListener();
         gestureListener.setActivity(this);
         gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 
@@ -83,6 +86,14 @@ public class LessonFrame extends AppCompatActivity implements Button.OnClickList
     public static void progressCount() {
         progressBar.setProgress(progressCount*100/totalPageNo);
         progressTextView.setText(progressCount + " / " + totalPageNo);
+    }
+
+    public void onLoadingLayout(boolean b) {
+        if(b) {
+            loadingLayout.setVisibility(View.VISIBLE);
+        } else {
+            loadingLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -6,14 +6,17 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -68,7 +71,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     boolean isFirstAudio;
 
-
     public static LessonWord newInstance() {
         return new LessonWord();
     }
@@ -106,6 +108,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
 
     public void readyForLesson() {
+        if(getActivity() != null) {
+            ((LessonFrame)getActivity()).onLoadingLayout(true);
+        }
 
         lessonWordLength = lesson.getWordFront().length;
         lessonSentenceLength = lesson.getSentenceFront().length;
@@ -150,6 +155,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
 
     public void displayWord() {
+        if(getActivity() != null) {
+            ((LessonFrame)getActivity()).onLoadingLayout(false);
+        }
         LessonFrame.progressCount();
         tvWordFront.setText(wordFront[lessonCount]);
         tvWordBack.setText(wordBack[lessonCount]);

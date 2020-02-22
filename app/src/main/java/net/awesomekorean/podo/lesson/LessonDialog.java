@@ -97,6 +97,9 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
     }
 
     private void readyForLesson() {
+        if(getActivity() != null) {
+            ((LessonFrame)getActivity()).onLoadingLayout(true);
+        }
         dialogLength = LessonWord.lessonDialogLength;
         String[] dialogAudio = new String[dialogLength];
         int[] peopleImage = LessonWord.lesson.getPeopleImage(); // 사람이미지 2개
@@ -118,6 +121,9 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 public void onSuccess(byte[] bytes) {
                     System.out.println("오디오를 로드했습니다.");
                     audiosDialog.put(audioIndexDialog, bytes);
+                    if(getActivity() != null) {
+                        ((LessonFrame)getActivity()).onLoadingLayout(false);
+                    }
                 }
             });
         }
@@ -291,6 +297,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             case R.id.btnFinish :
                 Intent intent = new Intent(getContext(), LessonFinish.class);
                 startActivity(intent);
+                getActivity().finish();
                 break;
         }
     }

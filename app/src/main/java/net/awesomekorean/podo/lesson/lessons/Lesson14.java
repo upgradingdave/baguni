@@ -11,10 +11,10 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem {
     private String subTitle = "저녁을 먹은 후에 드라마를 볼 거예요";
     private int lessonImage = R.drawable.timeexpression2;
 
-    final static String[] wordFront = {"오늘", "저녁", "일", "끝나다", "후", "가족", "드라마", "보다", "추천하다"};
-    final static String[] wordPronunciation = {"-", "-", "-", "[끈나다]", "-", "-", "-", "-", "-"};
-    final static String[] wordSynonyms = {"-", "밤", "-", "다하다", "-", "식구", "-", "-", "소개하다"};
-    final static String[] wordAntonyms = {"-", "아침", "-", "시작하다", "전", "-", "-", "-", "-"};
+    final static String[] wordFront = {"오늘", "저녁", "일", "끝나다", "후", "가족", "드라마", "추천하다"};
+    final static String[] wordPronunciation = {"-", "-", "-", "[끈나다]", "-", "-", "-", "-"};
+    final static String[] wordSynonyms = {"-", "밤", "-", "다하다", "-", "식구", "-", "소개하다"};
+    final static String[] wordAntonyms = {"-", "아침", "-", "시작하다", "전", "-", "-", "-"};
 
     final static String[] sentenceFront = {
             "뭐 해요?",

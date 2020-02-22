@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/textView1"
             app:layout_constraintBottom_toBottomOf="parent"
             android:orientation="vertical"
@@ -34,15 +34,18 @@
             android:layout_height="0dp">
 
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flex1"
+            <ScrollView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                app:flexWrap="wrap_reverse"
-                app:justifyContent="center"
                 android:layout_height="0dp">
-
-            </com.google.android.flexbox.FlexboxLayout>
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/flex1"
+                    android:layout_width="match_parent"
+                    app:flexWrap="wrap_reverse"
+                    app:justifyContent="center"
+                    android:layout_height="0dp">
+                </com.google.android.flexbox.FlexboxLayout>
+            </ScrollView>
 
 
             <View
@@ -53,15 +56,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flex2"
+            <ScrollView
                 android:layout_weight="1"
-                app:flexWrap="wrap"
-                app:justifyContent="center"
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
-
-            </com.google.android.flexbox.FlexboxLayout>
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/flex2"
+                    app:flexWrap="wrap"
+                    app:justifyContent="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.google.android.flexbox.FlexboxLayout>
+            </ScrollView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
