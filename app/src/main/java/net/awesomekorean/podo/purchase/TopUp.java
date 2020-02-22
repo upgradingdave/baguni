@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.purchase;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.Constants;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -69,6 +72,7 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
 
         bp = new BillingProcessor(this, KEY, this);
         bp.initialize();
+        setPurchase(pointB, checkPointB, getString(R.string.SKU_1000));
 
     }
 
@@ -99,12 +103,19 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
                     public void onSuccess(Void aVoid) {
                         SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("DB에 구매한 포인트 저장을 실패했습니다.: " +  e);
+                Toast.makeText(getApplicationContext(), getString(R.string.ERROR_SAVE_POINT_DB) + e, Toast.LENGTH_LONG).show();
+            }
+        });
 
         Toast.makeText(getApplicationContext(), getString(R.string.THANKS_PURCHASING), Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        bp.consumePurchase(productId);
+
+        finish();
     }
 
     @Override
@@ -118,8 +129,11 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
     public void onBillingError(int errorCode, Throwable error) {
         // * 구매 오류시 호출
         // errorCode == Constants.BILLING_RESPONSE_RESULT_USER_CANCELED 일때는
-        // 사용자가 단순히 구매 창을 닫은것임으로 이것 제외하고 핸들링하기.
-
+        // 사용자가 단순히 구매 창을 닫은것이으로 이것 제외하고 핸들링하기.
+        if(errorCode != Constants.BILLING_RESPONSE_RESULT_USER_CANCELED) {
+            System.out.println("구매 오류가 발생했습니다." +  errorCode);
+            Toast.makeText(getApplicationContext(), "FAILED Purchasing: "+errorCode, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -137,6 +151,9 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
 
     @Override
     protected void onDestroy() {
+        if(bp != null) {
+            bp.release();
+        }
         super.onDestroy();
     }
 
@@ -154,11 +171,11 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
                 break;
 
             case R.id.pointB :
-                setPurchase(pointB, checkPointB, getString(R.string.SKU_500));
+                setPurchase(pointB, checkPointB, getString(R.string.SKU_1000));
                 break;
 
             case R.id.pointC :
-                setPurchase(pointC, checkPointC, getString(R.string.SKU_1000));
+                setPurchase(pointC, checkPointC, getString(R.string.SKU_500));
                 break;
 
             case R.id.btnGetPoint :
@@ -181,5 +198,4 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
         purchase.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_grey_10_stroke_navy));
         check.setVisibility(View.VISIBLE);
     }
-
 }

@@ -9,7 +9,7 @@ public class S_Lesson06 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_06";
     private int title = R.string.SL_06_TITLE;
     private String subTitle = "에 vs. 에서";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.confusingexpression;
 
     private int contents = R.string.SL_06_CONTENTS;
 

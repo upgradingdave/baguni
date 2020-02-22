@@ -87,6 +87,7 @@
 
         <LinearLayout
             android:id="@+id/pointA"
+            android:paddingTop="5dp"
             android:background="@drawable/bg_grey_10"
             android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
@@ -146,6 +147,7 @@
 
             <LinearLayout
                 android:layout_weight="1"
+                android:paddingTop="5dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -182,6 +184,7 @@
 
         <LinearLayout
             android:id="@+id/pointC"
+            android:paddingTop="5dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"

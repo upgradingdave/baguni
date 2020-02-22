@@ -113,7 +113,7 @@ public class MainLesson extends Fragment{
                 new Lesson02(), new S_Lesson03(), new Lesson03(), new S_Lesson04(), new Lesson04(),
                 new S_Lesson05(), new Lesson05(), new S_Lesson06(), new Lesson06(), new S_Lesson07(),
                 new Lesson07(), new Lesson08(), new S_Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(),
-                new S_Lesson09(), new Lesson12(), new Lesson13(), new Lesson14()
+                new Lesson12(), new Lesson13(), new Lesson14()
         };
 
         for(LessonItem item : items) {

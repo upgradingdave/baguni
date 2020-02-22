@@ -196,6 +196,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="GO_PREMIUM">Go Premium</string>
     <string name="ALREADY_SUBSCRIBE">You are already subscribed.</string>
     <string name="THANKS_PURCHASING">Thank you for your purchasing.</string>
+    <string name="ERROR_SAVE_POINT_DB">Failed to save new points on database</string>
     <string name="PREMIUM_POLICY">Your Google account will be charged at confirmation of purchase.
         Subscription will be automatically renewed as soon as your subscription expires.
         If you don\'t want to renew your subscription, you can manage it from Google account settings.
@@ -1153,6 +1154,8 @@ ex) '운동' + '하다' = '운동하다' (o)
     <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~4016696435</string>
     <string name="ADMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ADMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="ADMOB_ID_FULL_SCREEN">ca-app-pub-7371634469098812/2867266295</string>
+    <string name="ADMOB_ID_REWARDED">ca-app-pub-7371634469098812/7909987210</string>
     <string name="STATUS">status</string>
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>

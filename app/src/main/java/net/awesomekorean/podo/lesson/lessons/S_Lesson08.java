@@ -9,7 +9,7 @@ public class S_Lesson08 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_08";
     private int title = R.string.SL_08_TITLE;
     private String subTitle = "2 meanings of '아서/어서' ";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.conjugation3;
 
     private int contents = R.string.SL_08_CONTENTS;
 

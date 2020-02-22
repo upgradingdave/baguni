@@ -9,7 +9,7 @@ public class S_Lesson05 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_05";
     private int title = R.string.SL_05_TITLE;
     private String subTitle = "Basic pronunciation rule";
-    private int lessonImage = R.drawable.hangul;
+    private int lessonImage = R.drawable.speakingnaturally1;
 
     private int contents = R.string.SL_05_CONTENTS;
 

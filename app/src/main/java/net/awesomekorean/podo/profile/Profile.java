@@ -214,7 +214,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     // 리워드 광고 로드하기
     public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
+        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_ID_REWARDED));
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
@@ -299,13 +299,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.evaluation :
-                // 다운로드 링크로 연결
+                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=net.awesomekorean.podo");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 break;
 
             case R.id.recommend :
                 intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                String title = "앱 다운 링크"; // <-- 앱 다운 링크 넣기
+                String title = "https://play.google.com/store/apps/details?id=net.awesomekorean.podo"; // <-- 앱 다운 링크 넣기
                 intent.putExtra(Intent.EXTRA_TEXT, title);
 
                 Intent chooser = Intent.createChooser(intent, "Recommend podo to your friends");
@@ -313,8 +315,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.report :
-                Uri uri = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
+                Uri uriGoogle = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
+                intent = new Intent(Intent.ACTION_VIEW, uriGoogle);
                 startActivity(intent);
                 break;
 

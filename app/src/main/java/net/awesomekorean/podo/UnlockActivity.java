@@ -98,7 +98,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
     // 리워드 광고 로드하기
     public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
+        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_ID_REWARDED));
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {

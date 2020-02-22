@@ -70,7 +70,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
             // 애드몹 전면광고 로드하기
             MobileAds.initialize(getApplicationContext(), getString(R.string.ADMOB_APP_ID));
             interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId(getString(R.string.ADMOB_TEST_ID_FULL_SCREEN));
+            interstitialAd.setAdUnitId(getString(R.string.ADMOB_ID_FULL_SCREEN));
             interstitialAd.loadAd(new AdRequest.Builder().build());
             interstitialAd.setAdListener(new AdListener() {
 
