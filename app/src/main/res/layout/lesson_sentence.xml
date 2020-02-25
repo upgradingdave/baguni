@@ -50,7 +50,7 @@
                 android:id="@+id/tvSentenceFront"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:textColor="@color/BLACK"
                 android:textStyle="bold"
                 android:lineSpacingExtra="10dp"
@@ -62,7 +62,7 @@
                 android:id="@+id/tvSentenceBack"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textColor="@color/GREY_TEXT"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />

@@ -22,7 +22,7 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem {
             "오랜만이에요",
             "잘 지냈어요?",
             "다음에 또 봐요.",
-            "안녕히 가세요 / 안녕히 계세요 / 안녕~"};
+            "안녕히 가세요/안녕히 계세요"};
 
     final static String[] dialog = {
             "안녕하세요?",

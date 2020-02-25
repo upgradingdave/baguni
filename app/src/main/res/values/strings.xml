@@ -1151,11 +1151,11 @@ ex) '운동' + '하다' = '운동하다' (o)
     <!--번역 필요 없는 부분-->
     <string name="facebook_app_id">3034621716562505</string>
     <string name="fb_login_protocol_scheme">fb3034621716562505</string>
-    <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~4016696435</string>
-    <string name="ADMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ADMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="ADMOB_ID_FULL_SCREEN">ca-app-pub-7371634469098812/2867266295</string>
-    <string name="ADMOB_ID_REWARDED">ca-app-pub-7371634469098812/7909987210</string>
+    <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~7867291008</string>
+    <string name="DMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="DMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="ADMOB_ID_FULL_SCREEN">ca-app-pub-7371634469098812/6205713214</string>
+    <string name="ADMOB_ID_REWARDED">ca-app-pub-7371634469098812/2074896515</string>
     <string name="STATUS">status</string>
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>
