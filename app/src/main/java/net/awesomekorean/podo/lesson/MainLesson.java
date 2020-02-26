@@ -136,6 +136,7 @@ public class MainLesson extends Fragment{
             public void onItemClick(View v, int pos) {
 
                 lessonUnit = list.get(pos);
+                SharedPreferencesInfo.setLastClickItem(context, true, pos);
 
                 if(!lessonUnit.getIsLock()) {
 
@@ -153,13 +154,11 @@ public class MainLesson extends Fragment{
                                 break;
 
                             default :
-                                SharedPreferencesInfo.setLastClickItem(context, true, pos);
                                 intent = new Intent(context, LessonSpecialFrame.class);
                                 startActivity(intent);
                                 break;
                         }
                     } else {
-                        SharedPreferencesInfo.setLastClickItem(context, true, pos);
                         intent = new Intent(context, LessonFrame.class);
                         startActivity(intent);
                     }

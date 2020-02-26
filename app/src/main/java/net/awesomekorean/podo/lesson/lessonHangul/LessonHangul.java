@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GestureDetectorCompat;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -71,6 +73,9 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     Intent intent;
 
+    View swipeView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +97,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         iconHint = findViewById(R.id.iconHint);
         btnIntro = findViewById(R.id.btnIntro);
         btnBack = findViewById(R.id.btnBack);
+        swipeView = findViewById(R.id.swipeView);
         btnAudio.setOnClickListener(this);
         btnWriting.setOnClickListener(this);
         btnHint.setOnClickListener(this);
@@ -123,7 +129,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 break;
         }
 
-        layoutHangul.setOnTouchListener(new OnSwipeTouchListener(this) {
+        swipeView.setOnTouchListener(new HangulSwipeListener(this) {
             public void onSwipeRight() {
                 if(currentHangul == 0) {
                     currentHangul = hangul.length-1;

@@ -5,11 +5,11 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class OnSwipeTouchListener implements View.OnTouchListener {
+public class HangulSwipeListener implements View.OnTouchListener {
 
     GestureDetector gestureDetector;
 
-    public OnSwipeTouchListener (Context context) {
+    public HangulSwipeListener(Context context) {
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 

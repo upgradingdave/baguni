@@ -376,37 +376,39 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     protected void onActivityResult(final int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        int newPoints = data.getIntExtra("newPoint", userInformation.getPoints());
-        userInformation.setPoints(newPoints);
+        if(resultCode == RESULT_OK) {
+            int newPoints = data.getIntExtra("newPoint", userInformation.getPoints());
+            userInformation.setPoints(newPoints);
 
-        // 일주일 출석 보상일 때
-        if(requestCode == 100) {
-            // 오늘 출석만 남기고 다 초기화
-            Calendar cal = Calendar.getInstance();
-            int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
-            userInformation.resetDays(today);
-            System.out.println("출석부를 초기화 했습니다");
-        }
-
-        // DB 에 유저 정보 업데이드 하기
-        db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
-                .set(userInformation)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                        userPoint.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
-                        if(requestCode == 100) {
-                            setAttendance(userInformation.getAttendance());
-                        }
-                        System.out.println("유저 정보를 업데이트 했습니다.");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println("유저 정보 업데이트를 실패 했습니다.");
+            // 일주일 출석 보상일 때
+            if(requestCode == 100) {
+                // 오늘 출석만 남기고 다 초기화
+                Calendar cal = Calendar.getInstance();
+                int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
+                userInformation.resetDays(today);
+                System.out.println("출석부를 초기화 했습니다");
             }
-        });
+
+            // DB 에 유저 정보 업데이드 하기
+            db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
+                    .set(userInformation)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+                            userPoint.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
+                            if(requestCode == 100) {
+                                setAttendance(userInformation.getAttendance());
+                            }
+                            System.out.println("유저 정보를 업데이트 했습니다.");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println("유저 정보 업데이트를 실패 했습니다.");
+                }
+            });
+        }
     }
 
 

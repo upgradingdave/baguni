@@ -167,7 +167,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         switch (view.getId()) {
 
-            case(R.id.btnAudio) :
+            case R.id.btnAudio :
                 playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
                 break;
 

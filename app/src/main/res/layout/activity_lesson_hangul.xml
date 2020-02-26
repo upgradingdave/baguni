@@ -63,22 +63,21 @@
         <TextView
             android:id="@+id/textViewHangul"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="40dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
             android:gravity="center"
+            android:textSize="50dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewHangulExplain"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_margin="10dp"
-            android:autoSizeMaxTextSize="20dp"
-            android:autoSizeMinTextSize="10dp"
-            android:autoSizeStepGranularity="2dp"
-            android:autoSizeTextType="uniform"
+            android:textSize="20dp"
+            android:scrollbars="vertical"
             android:gravity="center"
             />
 
@@ -259,5 +258,13 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <View
+        android:id="@+id/swipeView"
+        app:layout_constraintTop_toTopOf="@+id/layoutHangul"
+        app:layout_constraintBottom_toBottomOf="@+id/layoutHangul"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

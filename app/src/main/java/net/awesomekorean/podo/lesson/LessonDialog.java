@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import net.awesomekorean.podo.R;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -176,40 +179,43 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     // 오디오 재생 메소드
     public void playAudio(final ToggleButton button, byte[] audioFile) {
-        mp = new MediaPlayer();
-
-        if (mp.isPlaying()) {
-            mp.stop();
+        if (mp != null) {
             mp.release();
         }
+
+        mp = new MediaPlayer();
 
         try {
             File tempMp3 = File.createTempFile("audio", "mp3");
             tempMp3.deleteOnExit();
             FileOutputStream fos = new FileOutputStream(tempMp3);
-            fos.write(audioFile);
+            BufferedOutputStream bfos = new BufferedOutputStream(fos);
+            bfos.write(audioFile);
             fos.close();
 
-            mp.reset();
             FileInputStream fis = new FileInputStream(tempMp3);
-            mp.setDataSource(fis.getFD());
+            BufferedInputStream bfis = new BufferedInputStream(fis);
 
-            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    mediaPlayer.start();
-                }
-            });
+            if(bfis.read(audioFile) != -1) {
+                mp.setDataSource(fis.getFD());
 
-            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    mp.release();
-                    button.setChecked(false);
-                }
-            });
+                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        mediaPlayer.start();
+                    }
+                });
 
-            mp.prepare();
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.release();
+                        button.setChecked(false);
+                    }
+                });
+
+                mp.prepare();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -217,48 +223,52 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     // 전체 오디오 재생 메소드
     public void playAudioAll(byte[] audioFile) {
-        mp = new MediaPlayer();
-
-        if (mp.isPlaying()) {
-            mp.stop();
+        if (mp != null) {
             mp.release();
         }
+
+        mp = new MediaPlayer();
 
         try {
             File tempMp3 = File.createTempFile("audio", "mp3");
             tempMp3.deleteOnExit();
             FileOutputStream fos = new FileOutputStream(tempMp3);
-            fos.write(audioFile);
+            BufferedOutputStream bfos = new BufferedOutputStream(fos);
+            bfos.write(audioFile);
             fos.close();
 
-            mp.reset();
             FileInputStream fis = new FileInputStream(tempMp3);
-            mp.setDataSource(fis.getFD());
+            BufferedInputStream bfis = new BufferedInputStream(fis);
 
-            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    mediaPlayer.start();
-                }
-            });
+            if(bfis.read(audioFile) != -1) {
+                mp.setDataSource(fis.getFD());
 
-            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    index++;
-                    // 마지막 오디오 재생 끝났으면
-                    if(index == dialogLength) {
-                        mp.release();
-                        index = 0;
-                        layoutPlay.setVisibility(View.VISIBLE);
-                        layoutStop.setVisibility(View.GONE);
-                    }else{
-                        mp.release();
-                        playAudioAll(audiosDialog.get(index));
+                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        mediaPlayer.start();
                     }
-                }
-            });
-            mp.prepare();
+                });
+
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        index++;
+                        // 마지막 오디오 재생 끝났으면
+                        if(index == dialogLength) {
+                            mp.release();
+                            index = 0;
+                            layoutPlay.setVisibility(View.VISIBLE);
+                            layoutStop.setVisibility(View.GONE);
+                        }else{
+                            mp.release();
+                            playAudioAll(audiosDialog.get(index));
+                        }
+                    }
+                });
+                mp.prepare();
+            }
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -271,16 +281,27 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnReturn :
+                if (mp != null) {
+                    mp.release();
+                }
+
                 LessonFrame.progressCount = 0;
                 LessonFrame.progressCount();
                 ((LessonFrame)getActivity()).replaceFragment(LessonWord.newInstance());
                 break;
 
             case R.id.btnPlay :
+                if (mp != null) {
+                    mp.release();
+                }
                 layoutPlay.setVisibility(View.GONE);
                 layoutStop.setVisibility(View.VISIBLE);
                 index = 0;
-                playAudioAll(audiosDialog.get(0));
+                if(!audiosDialog.isEmpty()) {
+                    playAudioAll(audiosDialog.get(0));
+                } else  {
+                    Toast.makeText(context, "The audio is not loaded yet. Please try it again.", Toast.LENGTH_LONG).show();
+                }
                 break;
 
             case R.id.btnStop :
@@ -295,6 +316,10 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnFinish :
+                if (mp != null) {
+                    mp.release();
+                }
+
                 Intent intent = new Intent(getContext(), LessonFinish.class);
                 startActivity(intent);
                 getActivity().finish();
