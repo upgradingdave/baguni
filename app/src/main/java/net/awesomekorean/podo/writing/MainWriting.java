@@ -38,6 +38,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static net.awesomekorean.podo.MainActivity.btnWriting;
+import static net.awesomekorean.podo.MainActivity.textWriting;
 import static net.awesomekorean.podo.MainActivity.userEmail;
 
 public class MainWriting extends Fragment implements View.OnClickListener {
@@ -69,6 +70,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     public MainWriting(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
+    public MainWriting(){}
 
     public static MainWriting newInstance(MainActivity mainActivity) {
         return new MainWriting(mainActivity);
@@ -292,7 +294,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            mainActivity.setMainBtns(btnWriting, R.drawable.writing_active, R.string.WRITING);
+            mainActivity.setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
         }
     }
 }

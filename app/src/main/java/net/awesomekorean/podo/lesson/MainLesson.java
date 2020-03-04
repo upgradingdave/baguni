@@ -67,6 +67,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static net.awesomekorean.podo.MainActivity.btnLesson;
+import static net.awesomekorean.podo.MainActivity.textLesson;
 
 public class MainLesson extends Fragment{
 
@@ -90,7 +91,7 @@ public class MainLesson extends Fragment{
     public MainLesson(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
-    public MainLesson() {};
+    public MainLesson() {}
 
     public static MainLesson newInstance(MainActivity mainActivity) {
         return new MainLesson(mainActivity);
@@ -223,7 +224,7 @@ public class MainLesson extends Fragment{
         super.setUserVisibleHint(isVisibleToUser);
 
         if (isVisibleToUser) {
-            mainActivity.setMainBtns(btnLesson, R.drawable.lesson_active, R.string.LESSON);
+            mainActivity.setMainBtns(btnLesson, textLesson, R.drawable.lesson_active, R.string.LESSON);
         }
     }
 }

@@ -155,7 +155,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
             if(checkAnswer[0] == checkAnswer[1]) {  // 정답
 
-                playSoundPool.playSoundQuiz(0);
+                playSoundPool.playSoundLesson(0);
 
                 Drawable transparent = ContextCompat.getDrawable(getContext(), R.drawable.bg_transparent);
 
@@ -174,7 +174,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
             } else {  // 오답
 
-                playSoundPool.playSoundQuiz(1);
+                playSoundPool.playSoundLesson(1);
 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);

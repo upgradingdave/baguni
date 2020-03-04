@@ -54,6 +54,7 @@ import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 import static net.awesomekorean.podo.MainActivity.btnCollection;
+import static net.awesomekorean.podo.MainActivity.textCollection;
 
 public class MainCollection extends Fragment implements Button.OnClickListener {
 
@@ -111,6 +112,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
     public MainCollection(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
+    public MainCollection(){}
 
     public static MainCollection newInstance(MainActivity mainActivity) {
         return new MainCollection(mainActivity);
@@ -564,7 +566,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            mainActivity.setMainBtns(btnCollection, R.drawable.collection_active, R.string.COLLECTION);
+            mainActivity.setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
         }
     }
 }

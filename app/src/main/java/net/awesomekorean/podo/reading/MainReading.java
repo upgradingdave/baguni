@@ -45,6 +45,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static net.awesomekorean.podo.MainActivity.btnReading;
+import static net.awesomekorean.podo.MainActivity.textReading;
 
 public class MainReading extends Fragment {
 
@@ -67,6 +68,7 @@ public class MainReading extends Fragment {
     public MainReading(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
+    public MainReading() {}
 
     public static MainReading newInstance(MainActivity mainActivity) {
         return new MainReading(mainActivity);
@@ -178,7 +180,7 @@ public class MainReading extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            mainActivity.setMainBtns(btnReading, R.drawable.reading_active, R.string.READING);
+            mainActivity.setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
         }
     }
 }

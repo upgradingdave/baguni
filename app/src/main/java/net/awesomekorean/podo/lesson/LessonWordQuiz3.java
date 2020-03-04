@@ -149,7 +149,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     private void answered(Button selectedBtn, int sound, int outline) {
 
-        playSoundPool.playSoundQuiz(sound);
+        playSoundPool.playSoundLesson(sound);
         answerLayout.setBackground(ContextCompat.getDrawable(getContext(), outline));
     }
 

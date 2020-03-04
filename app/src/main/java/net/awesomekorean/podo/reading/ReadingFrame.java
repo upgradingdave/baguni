@@ -90,7 +90,14 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         // 쓰레드가 시작되면 콜백되는 매서드, 시크바를 조금씩 움직이게 해줌
         public void run() {
             while(isPlaying) {
-                seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                Integer currentPosition = null;
+                try {
+                    currentPosition = mediaPlayer.getCurrentPosition();
+                } catch (IllegalStateException e) {
+                    mediaPlayer.reset();
+                    currentPosition = mediaPlayer.getCurrentPosition();
+                }
+                seekBar.setProgress(currentPosition);
             }
         }
     }

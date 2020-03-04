@@ -126,7 +126,11 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
             @Override
             public void run() {
 
-                selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                try {
+                    selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                } catch (NullPointerException e) {
+                    System.out.println(e);
+                }
                 answer.setVisibility(View.GONE);
                 btnAudio.setVisibility(View.VISIBLE);
 
@@ -189,7 +193,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
 
     private void answered(Button selectedBtn, int sound, int outline) {
-        playSoundPool.playSoundQuiz(sound);
+        playSoundPool.playSoundLesson(sound);
         selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), outline));
         answer.setVisibility(View.VISIBLE);
         btnAudio.setVisibility(View.GONE);

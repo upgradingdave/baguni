@@ -34,7 +34,7 @@ public class PlaySoundPool {
 
 
     // 퀴즈 정답/오답 플레이
-    public void playSoundQuiz(int sound) {
+    public void playSoundLesson(int sound) {
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
@@ -49,6 +49,10 @@ public class PlaySoundPool {
 
             case 1 :
                 soundId = soundPool.load(context, R.raw.wrong, 1);
+                break;
+
+            case 2 :
+                soundId = soundPool.load(context, R.raw.getpoint, 1);
                 break;
         }
     }

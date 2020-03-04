@@ -66,48 +66,88 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/btnLesson"
-            android:src="@drawable/lesson_active"
-            android:padding="15dp"
+        <LinearLayout
             android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/btnReading"
-            android:src="@drawable/reading"
-            android:padding="15dp"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/btnWriting"
-            android:src="@drawable/writing"
-            android:padding="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/WRITING" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnLesson"
+                android:src="@drawable/lesson_active"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textLesson"
+                android:text="@string/LESSON"
+                android:textColor="@color/PURPLE"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/btnCollection"
-            android:src="@drawable/collection"
-            android:padding="15dp"
+        <LinearLayout
             android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnReading"
+                android:src="@drawable/reading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textReading"
+                android:text="@string/READING"
+                android:textColor="@color/GREY_DARK"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/btnQnA"
-            android:visibility="gone"
-            android:src="@drawable/qna"
-            android:padding="15dp"
+        <LinearLayout
             android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnWriting"
+                android:src="@drawable/writing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textWriting"
+                android:text="@string/WRITING"
+                android:textColor="@color/GREY_DARK"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnCollection"
+                android:src="@drawable/collection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textCollection"
+                android:text="@string/COLLECTION"
+                android:textColor="@color/GREY_DARK"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

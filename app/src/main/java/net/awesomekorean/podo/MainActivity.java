@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -54,7 +55,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public static ImageView btnReading;
     public static ImageView btnWriting;
     public static ImageView btnCollection;
-    public static ImageView btnQnA;
+    public static TextView textLesson;
+    public static TextView textReading;
+    public static TextView textWriting;
+    public static TextView textCollection;
+
 
     Intent intent;
 
@@ -88,7 +93,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading = findViewById(R.id.btnReading);
         btnWriting = findViewById(R.id.btnWriting);
         btnCollection = findViewById(R.id.btnCollection);
-        btnQnA = findViewById(R.id.btnQnA);
+        textLesson = findViewById(R.id.textLesson);
+        textReading = findViewById(R.id.textReading);
+        textWriting = findViewById(R.id.textWriting);
+        textCollection = findViewById(R.id.textCollection);
         confirmQuit = findViewById(R.id.confirmQuit);
         btnYes = findViewById(R.id.btnYes);
         btnNo = findViewById(R.id.btnNo);
@@ -98,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading.setOnClickListener(this);
         btnWriting.setOnClickListener(this);
         btnCollection.setOnClickListener(this);
-        btnQnA.setOnClickListener(this);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
 
@@ -206,28 +213,23 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnLesson:
-                setMainBtns(btnLesson, R.drawable.lesson_active, R.string.LESSON);
+                setMainBtns(btnLesson, textLesson, R.drawable.lesson_active, R.string.LESSON);
                 viewPager.setCurrentItem(0);
                 break;
 
             case R.id.btnReading:
-                setMainBtns(btnReading, R.drawable.reading_active, R.string.READING);
+                setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
                 viewPager.setCurrentItem(1);
                 break;
 
             case R.id.btnWriting:
-                setMainBtns(btnWriting, R.drawable.writing_active, R.string.WRITING);
+                setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
                 viewPager.setCurrentItem(2);
                 break;
 
             case R.id.btnCollection:
-                setMainBtns(btnCollection, R.drawable.collection_active, R.string.COLLECTION);
+                setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
                 viewPager.setCurrentItem(3);
-                break;
-
-            case R.id.btnQnA:
-                setMainBtns(btnQnA, R.drawable.qna_active, R.string.QNA);
-                viewPager.setCurrentItem(4);
                 break;
 
             case R.id.btnYes :
@@ -243,14 +245,18 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
-    public void setMainBtns(ImageView btn, int active, int title) {
+    public void setMainBtns(ImageView btn, TextView text, int active, int title) {
         btnLesson.setImageResource(R.drawable.lesson);
         btnReading.setImageResource(R.drawable.reading);
         btnWriting.setImageResource(R.drawable.writing);
         btnCollection.setImageResource(R.drawable.collection);
-        btnQnA.setImageResource(R.drawable.qna);
+        textLesson.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
+        textReading.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
+        textWriting.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
+        textCollection.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
 
         btn.setImageResource(active);
+        text.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.PURPLE));
         tvTitle.setText(getString(title));
     }
 

@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
@@ -47,6 +48,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     boolean isFromProfile;
 
+    PlaySoundPool playSoundPool;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         box2.setOnClickListener(this);
         box3.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
+
+        playSoundPool = new PlaySoundPool(getApplicationContext());
 
         isFromProfile = getIntent().getBooleanExtra("isReward", false);
 
@@ -157,6 +162,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                 tvPoints.setText(String.valueOf(reward));
                 selectBox.setVisibility(View.GONE);
                 selectResult.setVisibility(View.VISIBLE);
+                playSoundPool.playSoundLesson(2);
                 break;
         }
     }
