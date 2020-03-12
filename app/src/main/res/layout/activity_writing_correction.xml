@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/avenir_bold"
+            android:textStyle="bold"
             android:text="@string/ORIGINAL_WRITING"
             android:textSize="15dp" />
         <TextView
@@ -63,7 +63,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/CORRECTED_WRITING"
             android:textSize="15dp"
-            android:fontFamily="@font/avenir_bold"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -81,7 +81,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/FEEDBACK"
             android:textSize="15dp"
-            android:fontFamily="@font/avenir_bold"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -184,7 +184,7 @@
                 android:text="@string/THANKYOU_FEEDBACK"
                 android:textSize="25dp"
                 android:textColor="@color/BLACK"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 android:layout_marginTop="50dp"
                 />
         </LinearLayout>

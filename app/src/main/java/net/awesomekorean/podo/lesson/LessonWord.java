@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,7 +33,7 @@ import net.awesomekorean.podo.collection.CollectionRepository;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LessonWord extends Fragment implements Button.OnClickListener {
+public class LessonWord extends Fragment implements Button.OnClickListener{
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -45,6 +47,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
 
     LinearLayout collectResult;
 
+    static View viewLeft;
+    static View viewRight;
+    static LinearLayout lessonLayout;
     static TextView tvWordFront;
     static TextView tvWordBack;
     static TextView tvWordPronunciation;
@@ -75,6 +80,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         return new LessonWord();
     }
 
+    private GestureDetectorCompat gestureDetectorCompat = null;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,6 +92,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         LessonFrame.swipePage = getString(R.string.LESSONWORD);
         lessonCount = 0; // 레슨진도초기화 -> 저장하고 exit 했을 때는 lessonCount 를 DB에 저장해야함
 
+        viewLeft = view.findViewById(R.id.viewLeft);
+        viewRight = view.findViewById(R.id.viewRight);
+        lessonLayout = view.findViewById(R.id.lessonLayout);
         btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
         collectResult = view.findViewById(R.id.collectResult);
@@ -98,14 +108,32 @@ public class LessonWord extends Fragment implements Button.OnClickListener {
         btnCollect.setOnClickListener(this);
 
         lesson = (Lesson) MainLesson.lessonUnit;
-        lessonId = MainLesson.lessonUnit.getLessonId();
+
+        if(MainLesson.lessonUnit != null) {
+            lessonId = MainLesson.lessonUnit.getLessonId();
+            System.out.println("LessonUnit is:" + lessonId);
+
+        } else {
+            System.out.println("unable to find the lessonUnit");
+        }
         folder = "lesson/" + lessonId.toLowerCase();
+
+        LessonSwipeListener gestureListener = new LessonSwipeListener();
+        LessonFrame lessonFrame = (LessonFrame)getActivity();
+        gestureListener.setActivity(lessonFrame);
+        gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.getApplicationContext(), gestureListener);
+        lessonLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetectorCompat.onTouchEvent(event);
+                return false;
+            }
+        });
 
         readyForLesson();
 
         return view;
     }
-
 
     public void readyForLesson() {
         if(getActivity() != null) {

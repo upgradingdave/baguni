@@ -9,6 +9,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.MobileAds;
 
 import net.awesomekorean.podo.login.SignIn;
 
@@ -24,6 +27,9 @@ public class Logo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logo);
 
+        // 애드몹 초기화
+        MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -34,6 +40,9 @@ public class Logo extends AppCompatActivity {
                 if(isSignIn) {
                     if(getWhatKindOfNetwork(getApplicationContext()) != NONE_STATE) {
                         intent = new Intent(getApplicationContext(), MainActivity.class);
+                    } else {
+                        intent = new Intent(getApplicationContext(), SignIn.class);
+                        Toast.makeText(getApplicationContext(), "Internet connection required.", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     intent = new Intent(getApplicationContext(), SignIn.class);

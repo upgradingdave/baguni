@@ -41,6 +41,7 @@ import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.login.SignIn;
+import net.awesomekorean.podo.purchase.TopUp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,6 +74,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     LinearLayout recommend;
     LinearLayout report;
     LinearLayout getPointByAd;
+    LinearLayout getPointByPurchasing;
     LinearLayout logout;
 
     ImageView arrowEditProfile;
@@ -113,6 +115,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         recommend = findViewById(R.id.recommend);
         report = findViewById(R.id.report);
         getPointByAd = findViewById(R.id.getPointsByAd);
+        getPointByPurchasing = findViewById(R.id.getPointsByPurchasing);
         logout = findViewById(R.id.logout);
 
         arrowEditProfile = findViewById(R.id.arrowEditProfile);
@@ -125,6 +128,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         recommend.setOnClickListener(this);
         report.setOnClickListener(this);
         getPointByAd.setOnClickListener(this);
+        getPointByPurchasing.setOnClickListener(this);
         logout.setOnClickListener(this);
 
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
@@ -157,7 +161,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             mThread.start();
 
             try {
-                mThread.join();
+                mThread.join(3000);
                 userImage.setImageBitmap(bitmap);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -327,7 +331,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                             System.out.println("보상을 받습니다.");
-                            Intent intent = new Intent(Profile.this, LessonFinish.class);
+                            intent = new Intent(Profile.this, LessonFinish.class);
                             intent.putExtra("isReward", true);
                             startActivityForResult(intent, 200);
                         }
@@ -346,6 +350,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 } else {
                     Toast.makeText(getApplicationContext(), getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
                 }
+                break;
+
+            case R.id.getPointsByPurchasing :
+                intent = new Intent(Profile.this, TopUp.class);
+                startActivity(intent);
                 break;
 
             case R.id.logout :

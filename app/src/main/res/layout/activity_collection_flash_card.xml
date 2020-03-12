@@ -43,7 +43,6 @@
         <TextView
             android:text="@string/FRONT"
             android:textSize="15dp"
-            android:fontFamily="@font/avenir_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -62,7 +61,6 @@
             android:layout_marginTop="30dp"
             android:text="@string/BACK"
             android:textSize="15dp"
-            android:fontFamily="@font/avenir_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -121,7 +119,7 @@
                 android:text="@string/COLLECTION_SAVED"
                 android:textSize="25dp"
                 android:textColor="@color/BLACK"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 android:layout_marginTop="50dp"
                 />
         </LinearLayout>

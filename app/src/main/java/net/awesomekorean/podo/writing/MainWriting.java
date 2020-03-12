@@ -294,7 +294,15 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            mainActivity.setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
+            if(mainActivity != null) {
+                mainActivity.setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
+            } else {
+                if(getActivity() != null) {
+                    ((MainActivity)getActivity()).setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
+                } else {
+                    System.out.println("MainActivity is null inside mainWriting.");
+                }
+            }
         }
     }
 }

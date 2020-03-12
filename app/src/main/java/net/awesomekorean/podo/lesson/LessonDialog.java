@@ -124,8 +124,10 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 public void onSuccess(byte[] bytes) {
                     System.out.println("오디오를 로드했습니다.");
                     audiosDialog.put(audioIndexDialog, bytes);
-                    if(getActivity() != null) {
-                        ((LessonFrame)getActivity()).onLoadingLayout(false);
+                    if(audiosDialog.size() == dialogLength) {
+                        if(getActivity() != null) {
+                            ((LessonFrame)getActivity()).onLoadingLayout(false);
+                        }
                     }
                 }
             });
@@ -305,8 +307,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnStop :
-                if(mp.isPlaying()) {
-                    mp.stop();
+                if (mp != null) {
                     mp.release();
                 }
                 index = 0;

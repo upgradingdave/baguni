@@ -127,7 +127,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
             public void run() {
 
                 try {
-                    selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                    selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.ripple_custom));
                 } catch (NullPointerException e) {
                     System.out.println(e);
                 }

@@ -80,7 +80,7 @@
                 android:gravity="center_vertical"
                 android:text="TEST"
                 android:textSize="15dp"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -113,6 +113,19 @@
                 app:layout_constraintBottom_toBottomOf="@+id/listViewCollection"
                 android:src="@drawable/add"
                 />
+
+            <TextView
+                android:id="@+id/msgNoCollection"
+                android:visibility="visible"
+                android:gravity="center"
+                android:text="@string/NO_COLLECTION"
+                android:textSize="16dp"
+                android:lineSpacingExtra="8dp"
+                android:padding="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -190,7 +203,7 @@
             android:text="@string/COLLECTION_DELETE"
             android:textSize="20dp"
             android:textColor="@color/BLACK"
-            android:fontFamily="@font/avenir_bold"
+            android:textStyle="bold"
             android:layout_marginTop="50dp"
             />
 
@@ -221,17 +234,4 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/msgNoCollection"
-        android:visibility="visible"
-        android:gravity="center"
-        android:text="@string/NO_COLLECTION"
-        android:textSize="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

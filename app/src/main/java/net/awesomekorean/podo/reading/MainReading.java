@@ -179,8 +179,17 @@ public class MainReading extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
         if (isVisibleToUser) {
-            mainActivity.setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
+            if(mainActivity != null) {
+                mainActivity.setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
+            } else {
+                if(getActivity() != null) {
+                    ((MainActivity)getActivity()).setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
+                } else {
+                    System.out.println("MainActivity is null inside mainReading.");
+                }
+            }
         }
     }
 }

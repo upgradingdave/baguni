@@ -14,6 +14,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
 
@@ -50,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     ImageView btnProfile;
     ImageView btnMessage;
     ImageView redDot;
+
+    LinearLayout layoutLesson;
+    LinearLayout layoutReading;
+    LinearLayout layoutWriting;
+    LinearLayout layoutCollection;
 
     public static ImageView btnLesson;
     public static ImageView btnReading;
@@ -73,11 +81,15 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     Button btnYes;
     Button btnNo;
 
+    Animation animation;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainLesson.lessonUnit = null;
 
         SettingStatusBar.setStatusBar(this);
 
@@ -89,6 +101,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnProfile = findViewById(R.id.btnProfile);
         btnMessage = findViewById(R.id.btnMessage);
         redDot = findViewById(R.id.redDot);
+        layoutLesson = findViewById(R.id.layoutLesson);
+        layoutReading = findViewById(R.id.layoutReading);
+        layoutWriting = findViewById(R.id.layoutWriting);
+        layoutCollection = findViewById(R.id.layoutCollection);
         btnLesson = findViewById(R.id.btnLesson);
         btnReading = findViewById(R.id.btnReading);
         btnWriting = findViewById(R.id.btnWriting);
@@ -102,12 +118,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnNo = findViewById(R.id.btnNo);
         btnProfile.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
-        btnLesson.setOnClickListener(this);
-        btnReading.setOnClickListener(this);
-        btnWriting.setOnClickListener(this);
-        btnCollection.setOnClickListener(this);
+        layoutLesson.setOnClickListener(this);
+        layoutReading.setOnClickListener(this);
+        layoutWriting.setOnClickListener(this);
+        layoutCollection.setOnClickListener(this);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
+
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click_scale);
 
 
         // 유저정보 가져오기 (Email, Name, Image)
@@ -212,22 +230,22 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 startActivity(intent);
                 break;
 
-            case R.id.btnLesson:
+            case R.id.layoutLesson:
                 setMainBtns(btnLesson, textLesson, R.drawable.lesson_active, R.string.LESSON);
                 viewPager.setCurrentItem(0);
                 break;
 
-            case R.id.btnReading:
+            case R.id.layoutReading:
                 setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
                 viewPager.setCurrentItem(1);
                 break;
 
-            case R.id.btnWriting:
+            case R.id.layoutWriting:
                 setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
                 viewPager.setCurrentItem(2);
                 break;
 
-            case R.id.btnCollection:
+            case R.id.layoutCollection:
                 setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
                 viewPager.setCurrentItem(3);
                 break;
@@ -257,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         btn.setImageResource(active);
         text.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.PURPLE));
+        btn.startAnimation(animation);
         tvTitle.setText(getString(title));
     }
 

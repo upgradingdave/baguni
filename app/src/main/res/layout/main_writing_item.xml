@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 android:text="@string/REVIEWED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 android:text="@string/REVIEWING"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 android:text="@string/REJECTED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />

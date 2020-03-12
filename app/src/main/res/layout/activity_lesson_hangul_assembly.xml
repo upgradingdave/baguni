@@ -300,7 +300,7 @@
                 android:text="@string/INTRO"
                 android:textSize="25dp"
                 android:textColor="@color/PURPLE"
-                android:fontFamily="@font/avenir_bold"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -309,7 +309,6 @@
                 android:textSize="20dp"
                 android:lineSpacingExtra="7dp"
                 android:scrollbars="vertical"
-                android:fontFamily="@font/avenir_light"
                 android:layout_marginTop="25dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

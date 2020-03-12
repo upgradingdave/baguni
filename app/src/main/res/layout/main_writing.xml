@@ -24,8 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/NO_WRITTING"
-        android:textSize="20dp"
+        android:text="@string/TIPS_CORRECTION"
+        android:textSize="16dp"
+        android:lineSpacingExtra="8dp"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +71,7 @@
             android:text="@string/WRITING_DELETE"
             android:textSize="20dp"
             android:textColor="@color/BLACK"
-            android:fontFamily="@font/avenir_bold"
+            android:textStyle="bold"
             android:layout_marginTop="50dp"
             />
 

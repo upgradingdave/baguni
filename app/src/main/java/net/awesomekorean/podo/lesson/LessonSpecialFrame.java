@@ -59,6 +59,9 @@ public class LessonSpecialFrame extends AppCompatActivity {
         });
 
         lessonSpecial = (LessonSpecial) MainLesson.lessonUnit;
+        if(lessonSpecial == null) {
+            System.out.println("lessonSpecial is NULL!");
+        }
         readyForLesson();
     }
 

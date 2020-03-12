@@ -317,7 +317,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/evaluation"
+                android:id="@+id/getPointsByPurchasing"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
@@ -328,10 +328,10 @@
                     android:padding="3dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/evaluation" />
+                    android:src="@drawable/purchase" />
 
                 <TextView
-                    android:text="@string/EVALUATION_APP"
+                    android:text="@string/GET_POINTS_BY_PURCHASING"
                     android:textSize="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
@@ -369,6 +369,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/evaluation"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:padding="3dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/evaluation" />
+
+                <TextView
+                    android:text="@string/EVALUATION_APP"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:src="@drawable/arrow_right_grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/logout"

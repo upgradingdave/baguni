@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
@@ -51,6 +53,9 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     int correctCount = 0;
 
+    Animation animation;
+
+
     public static LessonWordQuiz2 newInstance() {
         return new LessonWordQuiz2();
     }
@@ -70,6 +75,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 return true;
             }
         });
+
+        animation = AnimationUtils.loadAnimation(getContext(), R.anim.click_scale);
 
         makeQuiz(); // 퀴즈 버튼 만들기
 
@@ -134,6 +141,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         justSelectedBtn = (ToggleButton) view;
         justSelectedBtn.setTextColor(Color.WHITE);
+
+        view.setAnimation(animation);
 
         String selectedText = justSelectedBtn.getText().toString();
 

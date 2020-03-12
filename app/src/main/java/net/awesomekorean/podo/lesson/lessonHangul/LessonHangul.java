@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,6 +78,12 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     View swipeView;
 
+    Animation animation1;
+    Animation animation2;
+    String stringLeft = "left";
+    String stringRight = "right";
+    int deviceWidth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,11 +145,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 } else {
                     currentHangul--;
                 }
-                setHangul();
-                setHintIcons();
-                if(imageViewHangul != null) {
-                    visible(VISIBLE, GONE);
-                }
+                swipeAnimationStart(stringRight);
             }
 
             public void onSwipeLeft() {
@@ -149,16 +154,45 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 } else {
                     currentHangul++;
                 }
-                setHangul();
-                setHintIcons();
-                if(imageViewHangul != null) {
-                    visible(VISIBLE, GONE);
-                }
+                swipeAnimationStart(stringLeft);
             }
         });
 
         setHintIcons();
     }
+
+    // 스와이프 애니메이션 실행
+    public void swipeAnimationStart(final String swipeDirection) {
+        if(swipeDirection == stringLeft) {
+            animation1 = AnimationUtils.loadAnimation(this.getApplicationContext(), R.anim.move_left1);
+            animation2 = AnimationUtils.loadAnimation(this.getApplicationContext(), R.anim.move_left2);
+
+        }else {
+            animation1 = AnimationUtils.loadAnimation(this.getApplicationContext(), R.anim.move_right1);
+            animation2 = AnimationUtils.loadAnimation(this.getApplicationContext(), R.anim.move_right2);
+        }
+
+        layoutHangul.startAnimation(animation1);
+
+        animation1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                setHangul();
+                setHintIcons();
+                if(imageViewHangul != null) {
+                    visible(VISIBLE, GONE);
+                }
+                layoutHangul.startAnimation(animation2);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+    }
+
 
     public void getThisHangul(String comVowBat, String hangulName) {
         conVowBat = comVowBat;

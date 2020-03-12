@@ -179,7 +179,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             params.bottomMargin = gap10;
 
             btnSelector.setLayoutParams(params);
-            btnSelector.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+            btnSelector.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.ripple_custom));
             btnSelector.setText(syllables[i]);
             btnSelector.setOnClickListener(selectorButtonClick);
             flexboxLayout.addView(btnSelector);

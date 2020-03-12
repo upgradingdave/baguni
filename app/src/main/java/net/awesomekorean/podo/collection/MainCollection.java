@@ -169,13 +169,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 repository.getCount();
                 listAllData = new ArrayList<>();
 
-                // 컬렉션이 하나도 없을 때 메시지 표시
-                if (collectionEntities.size() == 0) {
-                    msgNoCollection.setVisibility(View.VISIBLE);
-                } else {
-                    msgNoCollection.setVisibility(View.GONE);
-                }
-
                 DescendingObj descendingObj = new DescendingObj();
                 Collections.sort(collectionEntities, descendingObj);
 
@@ -183,6 +176,13 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                     if (entity.getDeleted() != 1) {
                         listAllData.add(entity);
                     }
+                }
+
+                // 컬렉션이 하나도 없을 때 메시지 표시
+                if (listAllData.size() == 0) {
+                    msgNoCollection.setVisibility(View.VISIBLE);
+                } else {
+                    msgNoCollection.setVisibility(View.GONE);
                 }
 
                 if (collectionEntities.size() > 10) {
@@ -366,7 +366,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
         if (text.length() == 0) {
             searchCancel.setVisibility(View.GONE);
-            list.addAll(listCopy); // 입력을 지우면 원래 리스트 출력
+            if(listCopy != null) {
+                list.addAll(listCopy); // 입력을 지우면 원래 리스트 출력
+            }
 
         } else {
             for (int i = 0; i < listAllData.size(); i++) {
@@ -566,7 +568,15 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser) {
-            mainActivity.setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
+            if(mainActivity != null) {
+                mainActivity.setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
+            } else {
+                if(getActivity() != null) {
+                    ((MainActivity)getActivity()).setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
+                } else {
+                    System.out.println("MainActivity is null inside mainCollection.");
+                }
+            }
         }
     }
 }

@@ -94,6 +94,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 try {
                     currentPosition = mediaPlayer.getCurrentPosition();
                 } catch (IllegalStateException e) {
+                    System.out.println(e);
                     mediaPlayer.reset();
                     currentPosition = mediaPlayer.getCurrentPosition();
                 }
@@ -287,6 +288,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         public void onSuccess(Uri uri) {
                             if(mediaPlayer != null) {
                                 mediaPlayer.release();
+                                mediaPlayer = null;
                             }
                             String url = uri.toString();
                             mediaPlayer = new MediaPlayer();
@@ -369,6 +371,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         isPlaying = false;
         if(mediaPlayer != null) {
             mediaPlayer.release();
+            mediaPlayer = null;
         }
         setVisibility(View.VISIBLE, View.GONE);
     }

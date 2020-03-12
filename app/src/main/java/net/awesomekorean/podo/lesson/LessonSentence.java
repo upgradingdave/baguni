@@ -32,7 +32,7 @@ import java.util.Map;
 
 import static net.awesomekorean.podo.lesson.LessonWord.lessonCount;
 
-public class LessonSentence extends Fragment implements Button.OnClickListener {
+public class LessonSentence extends Fragment implements Button.OnClickListener, View.OnTouchListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -41,6 +41,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
     ImageView btnAudio;
     Button btnCollect;
 
+    static View viewLeft;
+    static View viewRight;
+    static LinearLayout lessonLayout;
     static TextView tvSentenceFront;
     static TextView tvSentenceBack;
     static TextView tvSentenceExplain;
@@ -76,6 +79,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
 
         LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
+        viewLeft = view.findViewById(R.id.viewLeft);
+        viewRight = view.findViewById(R.id.viewRight);
+        lessonLayout = view.findViewById(R.id.lessonLayout);
         tvSentenceFront = view.findViewById(R.id.tvSentenceFront);
         tvSentenceBack = view.findViewById(R.id.tvSentenceBack);
         tvSentenceExplain = view.findViewById(R.id.tvSentenceExplain);
@@ -91,17 +97,18 @@ public class LessonSentence extends Fragment implements Button.OnClickListener {
         gestureListener.setActivity(lessonFrame);
         gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.getApplicationContext(), gestureListener);
 
-        scrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                gestureDetectorCompat.onTouchEvent(event);
-                return false;
-            }
-        });
+        lessonLayout.setOnTouchListener(this);
+        scrollView.setOnTouchListener(this);
 
         readyForLesson();
 
         return view;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        gestureDetectorCompat.onTouchEvent(event);
+        return false;
     }
 
     private void readyForLesson() {
