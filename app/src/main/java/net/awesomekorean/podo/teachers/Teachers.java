@@ -59,6 +59,9 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
     Intent intent;
     String teacherName;
     String teacherId;
+    String teacherEmail;
+    String userName;
+    String userEmail;
 
     LinearLayout requestResult;
 
@@ -84,6 +87,9 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         btnBack.setOnClickListener(this);
         btnTopUp.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
+
+        userName = MainActivity.userName;
+        userEmail = MainActivity.userEmail;
 
         int color = ContextCompat.getColor(this, R.color.PURPLE);
         progressBar.setIndeterminate(true);
@@ -132,6 +138,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                         }
                         teacherName = list.get(pos).getName();
                         teacherId = list.get(pos).getId();
+                        teacherEmail = list.get(pos).getEmail();
                     }
                 });
 
@@ -181,8 +188,8 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 if(code.equals("correction")) {
                     WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
 
-                    requestWriting.setUserEmail(MainActivity.userEmail);
-                    requestWriting.setUserName(MainActivity.userName);
+                    requestWriting.setUserEmail(userEmail);
+                    requestWriting.setUserName(userName);
                     requestWriting.setTeacherName(teacherName);
                     requestWriting.setTeacherId(teacherId);
                     requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
@@ -239,8 +246,8 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     request.put("status", 1);
                     request.put("teacherId", teacherId);
                     request.put("teacherName", teacherName);
-                    request.put("userEmail", MainActivity.userEmail);
-                    request.put("userName", MainActivity.userName);
+                    request.put("userEmail", userEmail);
+                    request.put("userName", userName);
 
                     String requestGuid = UUID.randomUUID().toString();
 
@@ -261,8 +268,9 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                                     }, 3000);
                                 }
                             });
-                    break;
                 }
+
+                break;
         }
     }
 }

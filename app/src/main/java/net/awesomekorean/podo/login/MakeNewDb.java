@@ -3,12 +3,14 @@ package net.awesomekorean.podo.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,7 +28,7 @@ public class MakeNewDb {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    public void makeNewDb(final Activity activity, final Context context, final String userEmail) {
+    public void makeNewDb(final Activity activity, final Context context, final String userEmail, final String method) {
         final UserInformation userInformation = new UserInformation();
         CollectionReference userRef = db.collection(activity.getString(R.string.DB_USERS)).document(userEmail).collection(activity.getString(R.string.DB_INFORMATION));
         userRef.document(activity.getString(R.string.DB_INFORMATION)).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -51,6 +53,13 @@ public class MakeNewDb {
                         MainActivity.userEmail = userEmail;
                         activity.finish();
                         activity.startActivity(intent);
+
+
+                        // SignUp 로그 이벤트 얻기
+                        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(FirebaseAnalytics.Param.METHOD, method);
+                        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
                     }
                 });
             }

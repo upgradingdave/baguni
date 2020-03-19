@@ -35,7 +35,7 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem {
 
     final static String[] dialog = {
             "다음 주에 저 부산 여행 가요.\n호텔 예약 좀 도와주세요.",
-            "정말요?\n부산에 처음 가요?",
+            "부산에 처음 가요?",
             "네.",
             "아마 재미있을 거예요.\n지금 예약할게요.\n조금 기다려주세요."
     };

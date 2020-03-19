@@ -142,35 +142,6 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                     }
                 }
 
-                    /*
-                    if(items.getStatus() == 1) {
-                        final DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(items.getGuid());
-                        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                                @Nullable FirebaseFirestoreException e) {
-                                if (e != null) {
-                                    Log.w(TAG, "Listen failed.", e);
-                                    return;
-                                }
-
-                                if (snapshot != null && snapshot.exists()) {
-                                    WritingEntity download = snapshot.toObject(WritingEntity.class);
-                                    System.out.println("완료된 글쓰기 교정이 없습니다.");
-
-                                    if(download.getStatus() > 1) {
-                                        System.out.println("글쓰기 교정이 완료되었습니다");
-                                        WritingRepository repository = new WritingRepository(getContext());
-                                        repository.update(download);
-                                        repository.getAll().observe(getViewLifecycleOwner(), observer);
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                     */
-
                 if(entities.size()>10) {
                     list = new ArrayList<>(listAllData.subList(0,10));
                 }else {

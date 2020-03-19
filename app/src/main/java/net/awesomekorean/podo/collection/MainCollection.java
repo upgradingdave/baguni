@@ -382,7 +382,9 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 }
             }
         }
-        adapter.notifyDataSetChanged();
+        if(adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
 

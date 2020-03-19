@@ -108,7 +108,7 @@ public class SignUp extends AppCompatActivity {
                                         progressBarLayout.setVisibility(View.VISIBLE);
 
                                         MakeNewDb makeNewDb = new MakeNewDb();
-                                        makeNewDb.makeNewDb(SignUp.this, getApplicationContext(), userEmail);
+                                        makeNewDb.makeNewDb(SignUp.this, getApplicationContext(), userEmail, "Email");
 
                                     } else {
                                         // If sign in fails, display a message to the user.

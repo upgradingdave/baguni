@@ -24,6 +24,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -156,6 +157,15 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             finish();
                             System.out.println("레슨/읽기를 포인트로 구매했습니다.");
                             Toast.makeText(getApplicationContext(), getString(R.string.UNLOCK_SUCCEEDED), Toast.LENGTH_LONG).show();
+
+                            // analytics 로그 이벤트 얻기
+                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "points");
+                            bundle.putDouble(FirebaseAnalytics.Param.VALUE, unlockPrice);
+                            bundle.putString(FirebaseAnalytics.Param.VIRTUAL_CURRENCY_NAME, extra);
+                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SPEND_VIRTUAL_CURRENCY, bundle);
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

@@ -311,7 +311,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.recommend :
                 intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                String title = "https://play.google.com/store/apps/details?id=net.awesomekorean.podo"; // <-- 앱 다운 링크 넣기
+                String title = "https://play.google.com/store/apps/details?id=net.awesomekorean.podo";
                 intent.putExtra(Intent.EXTRA_TEXT, title);
 
                 Intent chooser = Intent.createChooser(intent, "Recommend podo to your friends");
@@ -321,7 +321,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.report :
                 Uri uriGoogle = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
                 intent = new Intent(Intent.ACTION_VIEW, uriGoogle);
-                startActivity(intent);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                }
                 break;
 
             case R.id.getPointsByAd :

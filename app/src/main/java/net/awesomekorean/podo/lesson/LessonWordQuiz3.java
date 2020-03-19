@@ -135,7 +135,11 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                             answer.setText("");
                             tvAnswer.setText("");
                             btnReset.setVisibility(View.GONE);
-                            answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                            try {
+                                answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                            } catch (NullPointerException e) {
+                                System.out.println("NullPointerException inside LWQ3");
+                            }
                         }
                     }, 2000);
                 }

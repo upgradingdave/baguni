@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.teachers;
 
 
-import android.graphics.drawable.Drawable;
 
 public class TeachersItems {
 
@@ -11,6 +10,7 @@ public class TeachersItems {
     private String id;
     private String name;
     private String tag;
+    private String email;
     private Boolean isChecked = false;
 
 
@@ -60,6 +60,14 @@ public class TeachersItems {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Boolean getIsChecked() {

@@ -84,21 +84,25 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     Map<Integer, byte[]> audiosWord = new HashMap<>();
 
+    String url;
+
 
     class MyThread extends Thread {
         @Override
         // 쓰레드가 시작되면 콜백되는 매서드, 시크바를 조금씩 움직이게 해줌
         public void run() {
             while(isPlaying) {
-                Integer currentPosition = null;
-                try {
-                    currentPosition = mediaPlayer.getCurrentPosition();
-                } catch (IllegalStateException e) {
-                    System.out.println(e);
-                    mediaPlayer.reset();
-                    currentPosition = mediaPlayer.getCurrentPosition();
+                if(mediaPlayer != null) {
+                    Integer currentPosition = null;
+                    try {
+                        currentPosition = mediaPlayer.getCurrentPosition();
+                    } catch (IllegalStateException e) {
+                        System.out.println(e);
+                        mediaPlayer.reset();
+                        currentPosition = mediaPlayer.getCurrentPosition();
+                    }
+                    seekBar.setProgress(currentPosition);
                 }
-                seekBar.setProgress(currentPosition);
             }
         }
     }
@@ -271,17 +275,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnPlay:
-                // 뭠췄다가 플레이 시
-                if (playingPosition != null) {
-                    mediaPlayer.seekTo(playingPosition);
-                    mediaPlayer.start();
-                    setVisibility(View.GONE, View.VISIBLE);
-                    isPlaying = true;
-                    new MyThread().start();
-                    playingPosition = null;
-
-                    // 최초 플레이 or 다시 플레이 시
-                } else {
+                // 최초 플레이 or 다시 플레이 시
+                if (playingPosition == null || mediaPlayer == null) {
                     StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(unitId+".mp3");
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
@@ -290,7 +285,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                                 mediaPlayer.release();
                                 mediaPlayer = null;
                             }
-                            String url = uri.toString();
+                            url = uri.toString();
                             mediaPlayer = new MediaPlayer();
                             try {
                                 mediaPlayer.setDataSource(url);
@@ -310,6 +305,15 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                             setVisibility(View.GONE, View.VISIBLE);
                         }
                     });
+
+                    // 뭠췄다가 플레이 시
+                } else {
+                    mediaPlayer.seekTo(playingPosition);
+                    mediaPlayer.start();
+                    setVisibility(View.GONE, View.VISIBLE);
+                    isPlaying = true;
+                    new MyThread().start();
+                    playingPosition = null;
                 }
                 break;
 

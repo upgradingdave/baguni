@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,6 +64,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     ImageView iconHint;
     Button btnIntro;
     ImageView btnBack;
+    ScrollView scrollView;
 
     PlayMediaPlayer playMediaPlayer =  new PlayMediaPlayer();
 
@@ -82,7 +84,6 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     Animation animation2;
     String stringLeft = "left";
     String stringRight = "right";
-    int deviceWidth;
 
 
     @Override
@@ -106,6 +107,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         iconHint = findViewById(R.id.iconHint);
         btnIntro = findViewById(R.id.btnIntro);
         btnBack = findViewById(R.id.btnBack);
+        scrollView = findViewById(R.id.svHangulExplain);
         swipeView = findViewById(R.id.swipeView);
         btnAudio.setOnClickListener(this);
         btnWriting.setOnClickListener(this);
@@ -138,7 +140,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 break;
         }
 
-        swipeView.setOnTouchListener(new HangulSwipeListener(this) {
+        View.OnTouchListener swipeListener = new HangulSwipeListener(this) {
+            @Override
             public void onSwipeRight() {
                 if(currentHangul == 0) {
                     currentHangul = hangul.length-1;
@@ -148,6 +151,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 swipeAnimationStart(stringRight);
             }
 
+            @Override
             public void onSwipeLeft() {
                 if(currentHangul == hangul.length-1) {
                     currentHangul = 0;
@@ -156,7 +160,10 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 }
                 swipeAnimationStart(stringLeft);
             }
-        });
+        };
+
+        swipeView.setOnTouchListener(swipeListener);
+        scrollView.setOnTouchListener(swipeListener);
 
         setHintIcons();
     }

@@ -636,7 +636,7 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_00_SENTENCE_BACK_5">Good bye</string>
     <string name="L_00_SENTENCE_EXPLAIN_0">
         "No matter in the morning, afternoon, evening, we say hello like this.
-        You can just say '안녕' to your close friend (friend means same age) or a close sister/brother (It means a close friend that is younger than you)"
+You can just say '안녕' to your close friend (friend means same age) or a close sister/brother (It means a close friend that is younger than you)"
     </string>
     <string name="L_00_SENTENCE_EXPLAIN_1">We say this to someone who met for the first time or after a long time.</string>
     <string name="L_00_SENTENCE_EXPLAIN_2">-</string>
@@ -644,8 +644,8 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_00_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_00_SENTENCE_EXPLAIN_5">
         "가세요' is from 'to go' and '계세요' is from 'to stay'.
-        Therefore, if the other person will 'go' from here after saying goodbye, we say '안녕히 가세요' and if the other person will 'stay' here after saying goodbye, we say '안녕히 계세요'.
-        If they are close friends or younger friends, you can just say goodbye like this '안녕'."
+Therefore, if the other person will 'go' from here after saying goodbye, we say '안녕히 가세요' and if the other person will 'stay' here after saying goodbye, we say '안녕히 계세요'.
+If they are close friends or younger friends, you can just say goodbye like this '안녕'."
     </string>
 
     <string name="L_01_TITLE">Self-introduction</string>
@@ -668,26 +668,26 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_01_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_1">
         "This expression is very useful when you have questions.
-        You can point your finger at something you don't know and say ‘이거 뭐예요?’ (what's this?)
-        When you point something out a little farther away, you can say '저거 뭐예요?' (what's that?)"
+You can point your finger at something you don't know and say ‘이거 뭐예요?’ (what's this?)
+When you point something out a little farther away, you can say '저거 뭐예요?' (what's that?)"
     </string>
     <string name="L_01_SENTENCE_EXPLAIN_2">
         "You may be wondering what '이' is after '이름'.
-        This is the main challenge for Korean language learners, called 'subject particle' but don't struggle to know it now.
-        Just remember that you can also say '이름 뭐예요?' but '이름이 뭐예요?' is a better expression.
-        It is important to get used to it in this level.
-        (See the special lesson ‘particles 1 : Why we use particles?)"
+This is the main challenge for Korean language learners, called 'subject particle' but don't struggle to know it now.
+Just remember that you can also say '이름 뭐예요?' but '이름이 뭐예요?' is a better expression.
+It is important to get used to it in this level.
+(See the special lesson ‘particles 1 : Why we use particles?)"
     </string>
     <string name="L_01_SENTENCE_EXPLAIN_3">
         "If there isn't a batchim (last consonant) in the previous letter, we use ‘예요’.
 
-        If there is a batchim in the previous letter, we use ‘이에요’."
+If there is a batchim in the previous letter, we use ‘이에요’."
     </string>
     <string name="L_01_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_6">
         "사람이에요 [사라미에요]
-        (See the special lesson 'Speaking Naturally 1 : Pronunciation rule')"
+(See the special lesson 'Speaking Naturally 1 : Pronunciation rule')"
     </string>
     <string name="L_01_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_01_SENTENCE_EXPLAIN_8">-</string>
@@ -715,12 +715,12 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_02_SENTENCE_EXPLAIN_1">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_2">
         "‘이거’ is used a lot in the conversational language.
-        And you should say ‘이것‘ in the formal situation."
+And you should say ‘이것‘ in the formal situation."
     </string>
     <string name="L_02_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_02_SENTENCE_EXPLAIN_4">
         "‘저거’ is used a lot in the conversational language.
-        And you should say ‘저것‘ in the formal situation."
+And you should say ‘저것‘ in the formal situation."
     </string>
     <string name="L_02_SENTENCE_EXPLAIN_5">"You can say like this for short of '저거는 얼마예요?'"</string>
     <string name="L_02_SENTENCE_EXPLAIN_6">-</string>
@@ -750,24 +750,24 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_03_SENTENCE_BACK_11">We talk in Kakao talk.</string>
     <string name="L_03_SENTENCE_EXPLAIN_0">
         "You can say this when you 'have' something or someone 'exists'.
-        In Korean, we don't consider singular and plural that much
-        and the meaning of 'There isn't' is '없다'."
+In Korean, we don't consider singular and plural that much
+and the meaning of 'There isn't' is '없다'."
     </string>
     <string name="L_03_SENTENCE_EXPLAIN_1">
         "When you conjugate verbs or adjectives to the form of '아요/어요', if you say it with a lower intonation, it's a statement.
-        But if you raise the intonation at the end, it becomes a question.
+But if you raise the intonation at the end, it becomes a question.
 
-        ex)
-        '있어요?' : is there?
-        '있어요.' : there is."
+    ex)
+    '있어요?' : is there?
+    '있어요.' : there is."
     </string>
     <string name="L_03_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_03_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_03_SENTENCE_EXPLAIN_4">yes : \'네\' / no : \'아니요\'</string>
     <string name="L_03_SENTENCE_EXPLAIN_5">
         "There are lots of unit nouns in Korean.
-        Don't try to learn all at once.
-        Just remember to use '명' for people and '개' for things."
+Don't try to learn all at once.
+Just remember to use '명' for people and '개' for things."
     </string>
     <string name="L_03_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_03_SENTENCE_EXPLAIN_7">-</string>
@@ -796,12 +796,12 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_04_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_1">
         "conjugate '아요/어요'
-        : '있다' -> '있' + '어요' = '있어요'"
+: '있다' -> '있' + '어요' = '있어요'"
     </string>
     <string name="L_04_SENTENCE_EXPLAIN_2">
         "When you say past tense, you only need to put 'ㅆ어' into the form of '아요/어요'.
-        Therefore, we can call the past tense to '았어요/었어요' form.
-        '있어요' -> '있어(ㅆ어)요' = '있었어요'"
+Therefore, we can call the past tense to '았어요/었어요' form.
+'있어요' -> '있어(ㅆ어)요' = '있었어요'"
     </string>
     <string name="L_04_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_4">-</string>
@@ -809,7 +809,8 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_04_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_7">
         "conjugate '아요/어요'
-        : '하다' -> '해요'"</string>
+: '하다' -> '해요'"
+    </string>
     <string name="L_04_SENTENCE_EXPLAIN_8">"해요' -> '해(ㅆ어)요' = '했어요'"</string>
     <string name="L_04_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_04_SENTENCE_EXPLAIN_10">-</string>
@@ -838,23 +839,23 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_05_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_1">
         "When we say future tense, we conjugate 'ㄹ 거예요/을 거예요' form.
-        If there is no batchim, add 'ㄹ 거예요'.
-        If there is a batchim, add '을 거예요'.
+If there is no batchim, add 'ㄹ 거예요'.
+If there is a batchim, add '을 거예요'.
 
-        conjugate 'ㄹ 거예요/을 거예요'
-        : '하다' -> '하' + 'ㄹ 거예요' = '할 거예요'"
+conjugate 'ㄹ 거예요/을 거예요'
+: '하다' -> '하' + 'ㄹ 거예요' = '할 거예요'"
     </string>
     <string name="L_05_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_5">
         "conjugate 'ㄹ 거예요/을 거예요'
-        : '가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'"
+: '가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'"
     </string>
     <string name="L_05_SENTENCE_EXPLAIN_6">
         "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...) we add '에' after the noun that is the destination.
-        We can also omit '에' in the conversation.
-        (See the special lesson '에 vs. 에서')"
+We can also omit '에' in the conversation.
+(See the special lesson '에 vs. 에서')"
     </string>
     <string name="L_05_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_8">"We can say ‘랑/이랑’ for the conversational language."</string>
@@ -862,12 +863,12 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_05_SENTENCE_EXPLAIN_10">-</string>
     <string name="L_05_SENTENCE_EXPLAIN_11">
         "conjugate 'ㄹ 거예요/을 거예요'
-        : '보다' -> '보' + 'ㄹ 거예요' = '볼 거예요'"
+: '보다' -> '보' + 'ㄹ 거예요' = '볼 거예요'"
     </string>
     <string name="L_05_SENTENCE_EXPLAIN_12">
         "Object particle is used.
-        However, we can omit object particles when speaking.
-        '영화를 볼 거예요' -> '영화 볼 거예요'"
+However, we can omit object particles when speaking.
+'영화를 볼 거예요' -> '영화 볼 거예요'"
     </string>
     <string name="L_05_SENTENCE_EXPLAIN_13">-</string>
 
@@ -894,31 +895,31 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_06_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_06_SENTENCE_EXPLAIN_4">
         "conjugate '고 있다'
-        : '가다' -> '가' + '고 있다' = '가고 있다'
-        conjugate '아요/어요'
-        : '가고 있다' -> '가고 있' + '어요' = '가고 있어요'"
+: '가다' -> '가' + '고 있다' = '가고 있다'
+conjugate '아요/어요'
+: '가고 있다' -> '가고 있' + '어요' = '가고 있어요'"
     </string>
     <string name="L_06_SENTENCE_EXPLAIN_5">
         "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)
-        we add '에' after the noun that is the destination.
-        We can also omit ""에"" when speaking
-        (See the special lesson '에 vs. 에서')"
+we add '에' after the noun that is the destination.
+We can also omit ""에"" when speaking
+(See the special lesson '에 vs. 에서')"
     </string>
     <string name="L_06_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_06_SENTENCE_EXPLAIN_7">
         "conjugate '아요/어요'
-        : '가다' -> '가' + '아요' = '가아요' -> '가요'"
+: '가다' -> '가' + '아요' = '가아요' -> '가요'"
     </string>
     <string name="L_06_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_06_SENTENCE_EXPLAIN_9">
         "You can also use '랑/이랑' that we learned in the previous lesson.
-        '저' (a polite expression of 'me') + '랑' = '저랑 헬스장에 가요'
-        Or you can also use '랑/이랑' with '같이' means together.
-        '저랑 같이 헬스장에 가요'"
+'저' (a polite expression of 'me') + '랑' = '저랑 헬스장에 가요'
+Or you can also use '랑/이랑' with '같이' means together.
+'저랑 같이 헬스장에 가요'"
     </string>
     <string name="L_06_SENTENCE_EXPLAIN_10">
         "When you want to express a short time within a few hours, use '이따' or '이따가'.
-        It's for conversational speaking."
+It's for conversational speaking."
     </string>
     <string name="L_06_SENTENCE_EXPLAIN_11">-</string>
 
@@ -957,25 +958,30 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_07_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_7">
         "conjugate '아요/어요'
-        : '춥다' -> '춥' + '어요' = '춥어요' -> '추워요' (exception)
-        Most exceptions are for ease of pronunciation.
-        '추워요' is more comfortable and natural to pronounce than '춥어요'."
+: '춥다' -> '춥' + '어요' = '춥어요' -> '추워요' (exception)
+
+Most exceptions are for ease of pronunciation.
+'추워요' is more comfortable and natural to pronounce than '춥어요'."
     </string>
     <string name="L_07_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_10">
         "conjugate '아요/어요'
-        : '오다' -> '오' + '아요' = '오아요' -> '와요'"
+: '오다' -> '오' + '아요' = '오아요' -> '와요'"
     </string>
     <string name="L_07_SENTENCE_EXPLAIN_11">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_12">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_13">
         "You can make negative forms by using '안' before a verb or adjective.
-        When a verb composed of 'noun + 하다' is made into a negative sentence, it should be written as 'noun + 안 + 하다'.
-        ex) '얘기하다' -> '얘기 안 하다'
-        Negative sentences using '안' are direct expressions.
-        If you want to express it indirectly, use '~지 않다'.
-        ex) '얘기하다' -> '얘기하지 않다'"
+When a verb composed of 'noun + 하다' is made into a negative sentence, it should be written as 'noun + 안 + 하다'.
+
+    ex) '얘기하다' -> '얘기 안 하다'
+
+Negative sentences using '안' are direct expressions.
+If you want to express it indirectly, use '~지 않다'.
+
+    ex) '얘기하다' -> '얘기하지 않다'"
+
     </string>
     <string name="L_07_SENTENCE_EXPLAIN_14">-</string>
     <string name="L_07_SENTENCE_EXPLAIN_15">-</string>
@@ -1011,7 +1017,7 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_08_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_1">
         "conjugate '아요/어요'
-        : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'"
+: '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_2">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_3">-</string>
@@ -1021,41 +1027,41 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_08_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_8">
         "Use '아서/어서' to combine two sentences together using '그래서'.
-        conjugate '아요/어요'
-        : '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'
-        conjugate '아서/어서'
-        : '바빠요' -> '바빠' + '아서' = '바빠아서' -> '바빠서'"
+conjugate '아요/어요'
+: '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'
+conjugate '아서/어서'
+: '바빠요' -> '바빠' + '아서' = '바빠아서' -> '바빠서'"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_10">
         "conjugate '아요/어요'
-        : '일어나다' -> '알어나' + '아요' = '일어나아요' -> '일어나요'"
+: '일어나다' -> '알어나' + '아요' = '일어나아요' -> '일어나요'"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_11">
         "안' : do not
-        '못' : can not
+'못' : can not
 
-        '못 일어나요 ' -> [몬 이러나요]"
+'못 일어나요 ' -> [몬 이러나요]"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_12">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_13">
         "시간 + '에'
-        (See the special lesson '에 vs. 에서')"
+(See the special lesson '에 vs. 에서')"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_14">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_15">
         "conjugate '아요/어요'
-        : '먹다' -> '먹' + '어요' = '먹어요'"
+: '먹다' -> '먹' + '어요' = '먹어요'"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_16">-</string>
     <string name="L_08_SENTENCE_EXPLAIN_17">
         "We can use '도' to mean 'also'.
-        '아침/점심/저녁' means 'morning / noon / night' respectively.
-        Also, they have the meaning of 'breakfast / lunch / dinner.'"
+'아침/점심/저녁' means 'morning / noon / night' respectively.
+Also, they have the meaning of 'breakfast / lunch / dinner.'"
     </string>
     <string name="L_08_SENTENCE_EXPLAIN_18">
         "conjugate '아서/어서'
-        : '일어나요' -> '일어나' + '아서' = '일어나서'"
+: '일어나요' -> '일어나' + '아서' = '일어나서'"
     </string>
 
     <string name="L_09_TITLE">Range1 (for place)</string>
@@ -1114,7 +1120,7 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_10_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_10_SENTENCE_EXPLAIN_5">
         "When referring to a range of time, use '~부터 ~까지'.
-        It\'s also okay to use '~에서 ~ 까지' like a range of places"
+It\'s also okay to use '~에서 ~ 까지' like a range of places"
     </string>
     <string name="L_10_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_10_SENTENCE_EXPLAIN_7">-</string>
@@ -1167,7 +1173,8 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_11_SENTENCE_EXPLAIN_16">"Use '그리고' to list sentences."</string>
     <string name="L_11_SENTENCE_EXPLAIN_17">
         "Use '~고' to combine two sentences together using '그리고'.
-        ex) '부르다' -> '부르' + '고' = '부르고'"
+
+    ex) '부르다' -> '부르' + '고' = '부르고'"
     </string>
 
     <string name="L_12_TITLE">Contrast</string>
@@ -1206,7 +1213,8 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_12_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_8">
         "Use '~지만' to combine two sentences together using '하지만'.
-        ex) '어렵다' -> '어렵' + '지만' = '어렵지만'"
+
+    ex) '어렵다' -> '어렵' + '지만' = '어렵지만'"
     </string>
     <string name="L_12_SENTENCE_EXPLAIN_9">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_10">-</string>
@@ -1215,10 +1223,10 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_12_SENTENCE_EXPLAIN_13">
         "When you change a verb to a noun, you can use '~기' like '~ing' in English.
 
-        ex)
-        '말하다' -> '말하기' (speak -> speaking)
-        '쓰다' -> '쓰기' (write -> writing)
-        '읽다'-> '읽기' (read -> reading)"
+    ex)
+    '말하다' -> '말하기' (speak -> speaking)
+    '쓰다' -> '쓰기' (write -> writing)
+    '읽다'-> '읽기' (read -> reading)"
     </string>
     <string name="L_12_SENTENCE_EXPLAIN_14">-</string>
     <string name="L_12_SENTENCE_EXPLAIN_15">-</string>
@@ -1252,15 +1260,16 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_13_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_13_SENTENCE_EXPLAIN_8">
         "You can also use 'N + 전에' instead of 'V + 기 전에'
-        However, only nouns that can be used as 'N + 하다'
-        (nouns that represent actions) are possible.
-        ex)
-        '식사' + '하다' = '식사하다' (o)
-        식사 하기 전에~
-        식사 전에~
-        '쇼핑' + '하다' = '쇼핑하다' (o)
-        쇼핑 하기 전에~
-        쇼핑 전에 ~"
+However, only nouns that can be used as 'N + 하다'
+(nouns that represent actions) are possible.
+
+    ex)
+    '식사' + '하다' = '식사하다' (o)
+    식사 하기 전에~
+    식사 전에~
+    '쇼핑' + '하다' = '쇼핑하다' (o)
+    쇼핑 하기 전에~
+    쇼핑 전에 ~"
     </string>
     <string name="L_13_SENTENCE_EXPLAIN_9">-</string>
 
@@ -1298,19 +1307,20 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_14_SENTENCE_EXPLAIN_1">-</string>
     <string name="L_14_SENTENCE_EXPLAIN_2">
         "You can also say '뭐 할거예요?' when using future tense like you learned in previous lesson.
-        But in situations where the content of the future is clear, such as 'tonight',
-        you can use the present tense."
+But in situations where the content of the future is clear, such as 'tonight',
+you can use the present tense."
     </string>
     <string name="L_14_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_14_SENTENCE_EXPLAIN_4">
         "If the verb doesn't have a batchim, use 'V-ㄴ 후에' and use 'V-은 후에' when it has a batchim.
-        '끝나다' -> '끝나' + 'ㄴ 후에' = '끝난 후에'
-        You can also use 'N + 후에' instead.
-        Of course, nouns that can only be uses as 'N + 하다'
-        (nouns that represent actions) are possible like 'N + 전에'.
-        ex) '운동' + '하다' = '운동하다' (o)
-        운동 한 후에~
-        운동 후에~"
+'끝나다' -> '끝나' + 'ㄴ 후에' = '끝난 후에'
+You can also use 'N + 후에' instead.
+Of course, nouns that can only be uses as 'N + 하다'
+(nouns that represent actions) are possible like 'N + 전에'.
+
+    ex) '운동' + '하다' = '운동하다' (o)
+    운동 한 후에~
+    운동 후에~"
     </string>
     <string name="L_14_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_14_SENTENCE_EXPLAIN_6">-</string>
@@ -1328,7 +1338,7 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_14_SENTENCE_EXPLAIN_18">-</string>
     <string name="L_14_SENTENCE_EXPLAIN_19">
         "When you ask something, you can use '~아/어 주세요'.
-        '추천하다' -> 추천해요' -> '추천해' + '주세요' = '추천해 주세요'"
+'추천하다' -> 추천해요' -> '추천해' + '주세요' = '추천해 주세요'"
     </string>
     <string name="L_14_SENTENCE_EXPLAIN_20">-</string>
 
@@ -1362,15 +1372,15 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_15_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_15_SENTENCE_EXPLAIN_8">
         "Use it when you have the ability to do something.
-        On the contrary, when you don't have an ability to do something, you can say 'V-(으)ㄹ 수 없다'.
-        You can also use '못' learned from 'negative2'.
+On the contrary, when you don't have an ability to do something, you can say 'V-(으)ㄹ 수 없다'.
+You can also use '못' learned from 'negative2'.
 
-        conjugate 'V-(으)ㄹ 수 있다/없다'
-        : '이해하다' -> '이해하' + 'ㄹ 수 있다' = '이해할 수 있다'
-        : '이해하다' ->' 이해하' + 'ㄹ 수 없다' = '이해할 수 없다'
+conjugate 'V-(으)ㄹ 수 있다/없다'
+: '이해하다' -> '이해하' + 'ㄹ 수 있다' = '이해할 수 있다'
+: '이해하다' ->' 이해하' + 'ㄹ 수 없다' = '이해할 수 없다'
 
-        negative '못'
-        : '이해하다' -> '이해 못 하다'"
+negative '못'
+: '이해하다' -> '이해 못 하다'"
     </string>
     <string name="L_15_SENTENCE_EXPLAIN_9">It can be used when it\'s not very good but not that bad.</string>
     <string name="L_15_SENTENCE_EXPLAIN_10">-</string>
@@ -1409,49 +1419,49 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_16_SENTENCE_EXPLAIN_0">We\'ve learned in the last lesson that this means "ability"</string>
     <string name="L_16_SENTENCE_EXPLAIN_1">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_2">-</string>
-    <string name="L_16_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_16_SENTENCE_EXPLAIN_3">"(See the special lesson 'Simple Chinese character1-人')"</string>
     <string name="L_16_SENTENCE_EXPLAIN_4">
         "progressive form
-        : '배우다' -> '배우' + '고 있다' = '배우고 있다'"
+: '배우다' -> '배우' + '고 있다' = '배우고 있다'"
     </string>
     <string name="L_16_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_6">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_8">
         "언어 : language
-        교환 : exchange"
+교환 : exchange"
     </string>
-    <string name="L_16_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_16_SENTENCE_EXPLAIN_9">"(See the special lesson 'Confusing expression2 - 좋아요 vs. 좋아해요')"</string>
     <string name="L_16_SENTENCE_EXPLAIN_10">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_11">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_12">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_13">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_14">
         "We can use 'A-(으)ㄴ' form when the adjective modifies a noun.
-        '비슷하다' -> '비슷하' + 'ㄴ' = '비슷한'"
+'비슷하다' -> '비슷하' + 'ㄴ' = '비슷한'"
     </string>
     <string name="L_16_SENTENCE_EXPLAIN_15">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_16">-</string>
     <string name="L_16_SENTENCE_EXPLAIN_17">
         "We've learned that we can use 'V-(으)ㄹ 수 있다' form when it means an ability to do something in the previous lesson.
-        But one more meaning can be used, which is the 'possibility'.
-        When it means possibility, you can use adjectives as well as verbs.
+But one more meaning can be used, which is the 'possibility'.
+When it means possibility, you can use adjectives as well as verbs.
 
-        conjugate 'A/V-(으)ㄹ 수 있다'
-        '쉽다' -> '쉽' + '을 수 있다' = '쉽을 수 있다' -> '쉬울 수 있다' (irregular)"
+conjugate 'A/V-(으)ㄹ 수 있다'
+'쉽다' -> '쉽' + '을 수 있다' = '쉽을 수 있다' -> '쉬울 수 있다' (irregular)"
     </string>
     <string name="L_16_SENTENCE_EXPLAIN_18">"When comparing, use '~보다'."</string>
 
 
     <string name="L_17_TITLE">Hope</string>
-    <string name="L_17_WORD_BACK_0">in the past</string>
-    <string name="L_17_WORD_BACK_1">to live</string>
-    <string name="L_17_WORD_BACK_2">language exchange</string>
-    <string name="L_17_WORD_BACK_3">to learn</string>
-    <string name="L_17_WORD_BACK_4">good, nice</string>
-    <string name="L_17_WORD_BACK_5">thank you</string>
-    <string name="L_17_WORD_BACK_6">similar</string>
-    <string name="L_17_WORD_BACK_7">vocabulary</string>
+    <string name="L_17_WORD_BACK_0">this time</string>
+    <string name="L_17_WORD_BACK_1">vacation</string>
+    <string name="L_17_WORD_BACK_2">travel</string>
+    <string name="L_17_WORD_BACK_3">food</string>
+    <string name="L_17_WORD_BACK_4">practice</string>
+    <string name="L_17_WORD_BACK_5">so far</string>
+    <string name="L_17_WORD_BACK_6">study</string>
+    <string name="L_17_WORD_BACK_7">hardly</string>
     <string name="L_17_SENTENCE_BACK_0">I want to go.</string>
     <string name="L_17_SENTENCE_BACK_1">I want to travel to Korea.</string>
     <string name="L_17_SENTENCE_BACK_2">I want to travel to Korea on this vacation.</string>
@@ -1471,24 +1481,24 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_17_SENTENCE_EXPLAIN_0">
         "Use the 'V-고 싶다' form to tell the wishes or hopes of the speaker.
 
-        conjugate 'V-고 싶다'
-        '가다' -> '가' + '고 싶다' = '가고 싶다'"
+conjugate 'V-고 싶다'
+'가다' -> '가' + '고 싶다' = '가고 싶다'"
     </string>
     <string name="L_17_SENTENCE_EXPLAIN_1">-</string>
     <string name="L_17_SENTENCE_EXPLAIN_2">
         "이번 : this time
-        저번 : last time
-        다음 : next time"
+저번 : last time
+다음 : next time"
     </string>
     <string name="L_17_SENTENCE_EXPLAIN_3">
         "conjugate 'V-고 싶다'
-        '하다' -> '하' + '고 싶다' = '하고 싶다'"
+'하다' -> '하' + '고 싶다' = '하고 싶다'"
     </string>
     <string name="L_17_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_17_SENTENCE_EXPLAIN_5">-</string>
     <string name="L_17_SENTENCE_EXPLAIN_6">
         "conjugate 'V-고 싶다'
-        '먹다' -> '먹' + '고 싶다' = '먹고 싶다'"
+'먹다' -> '먹' + '고 싶다' = '먹고 싶다'"
     </string>
     <string name="L_17_SENTENCE_EXPLAIN_7">"한국 음식' can be shortened to '한식'."</string>
     <string name="L_17_SENTENCE_EXPLAIN_8">-</string>
@@ -1499,9 +1509,10 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_17_SENTENCE_EXPLAIN_13">"Used future tense to express the speaker's expectations."</string>
     <string name="L_17_SENTENCE_EXPLAIN_14">
         "Use the 'A/V-(으)니까' form to tell the 'reason'.
-        You can also use the 'A/V-아/어서' form that you learned in the 'negative2' lesson.
+You can also use the 'A/V-아/어서' form that you learned in the 'negative2' lesson.
 
-        '공부 열심히 했으니까' = '공부 열심히 해서'"
+'공부 열심히 했으니까' = '공부 열심히 해서'
+(See the special lesson 'Confusing expression3 - ~아/어서 vs. ~으니까')"
     </string>
     <string name="L_17_SENTENCE_EXPLAIN_15">-</string>
 
@@ -1519,22 +1530,27 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_18_SENTENCE_BACK_2">Help me.</string>
     <string name="L_18_SENTENCE_BACK_3">Please help me.</string>
     <string name="L_18_SENTENCE_BACK_4">Please help me book a hotel</string>
-    <string name="L_18_SENTENCE_BACK_5">Really?</string>
-    <string name="L_18_SENTENCE_BACK_6">Is it the first time?</string>
-    <string name="L_18_SENTENCE_BACK_7">Is it your first time to go to Busan?</string>
-    <string name="L_18_SENTENCE_BACK_8">Yes.</string>
-    <string name="L_18_SENTENCE_BACK_9">"It'll be interesting."</string>
-    <string name="L_18_SENTENCE_BACK_10">"Maybe it'll be interesting."</string>
-    <string name="L_18_SENTENCE_BACK_11">"I'll book a hotel now."</string>
-    <string name="L_18_SENTENCE_BACK_12">Please wait.</string>
-    <string name="L_18_SENTENCE_BACK_13">Please wait a minute.</string>
+    <string name="L_18_SENTENCE_BACK_5">Is it the first time?</string>
+    <string name="L_18_SENTENCE_BACK_6">Is it your first time to go to Busan?</string>
+    <string name="L_18_SENTENCE_BACK_7">Yes.</string>
+    <string name="L_18_SENTENCE_BACK_8">"It'll be interesting."</string>
+    <string name="L_18_SENTENCE_BACK_9">"Maybe it'll be interesting."</string>
+    <string name="L_18_SENTENCE_BACK_10">"I'll book a hotel now."</string>
+    <string name="L_18_SENTENCE_BACK_11">Please wait.</string>
+    <string name="L_18_SENTENCE_BACK_12">Please wait a minute.</string>
     <string name="L_18_SENTENCE_EXPLAIN_0">"Use '저' instead of '나' when you speak honorific."</string>
     <string name="L_18_SENTENCE_EXPLAIN_1">
         "이번 주 : this week
-        저번 주: last week
-        다음 주: next week"
+저번 주: last week
+다음 주: next week"
     </string>
-    <string name="L_18_SENTENCE_EXPLAIN_2">"Use the 'V-아/어 주세요' form to ask something."</string>
+    <string name="L_18_SENTENCE_EXPLAIN_2">
+        "Use the 'V-아/어 주세요' form to ask something.
+
+conjugate 'V-아/어 주세요'
+'돕다' -> '돕아요' -> '도와요' (irregular)
+'도와요' -> '도와' + '주세요' = '도와주세요'"
+    </string>
     <string name="L_18_SENTENCE_EXPLAIN_3">"Using '좀' means 'a little' when asking for help in more polite expressions."</string>
     <string name="L_18_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_18_SENTENCE_EXPLAIN_5">-</string>
@@ -1542,21 +1558,20 @@ Usually, you can use '아/어서' and use '으니까' only when expressing 'orde
     <string name="L_18_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_18_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_18_SENTENCE_EXPLAIN_9">-</string>
-    <string name="L_18_SENTENCE_EXPLAIN_10">-</string>
-    <string name="L_18_SENTENCE_EXPLAIN_11">
+    <string name="L_18_SENTENCE_EXPLAIN_10">
         "In English, there are many forms like 'reservation', 'booking' and 'appointment' but they are all '예약' in Korean.
 
-        ex)
-        호텔예약 : booking
-        식당예약 : reservation
-        병원예약 : appointment"
+    ex)
+    호텔예약 : booking
+    식당예약 : reservation
+    병원예약 : appointment"
     </string>
-    <string name="L_18_SENTENCE_EXPLAIN_12">
+    <string name="L_18_SENTENCE_EXPLAIN_11">
         "conjugate 'V-아/어 주세요'
-        '기다리다' -> '기다리' + '어요' = '기다리어요' -> '기다려요'
-        '기다려요' -> '기다려' + '주세요' = '기다려 주세요'"
+'기다리다' -> '기다리' + '어요' = '기다리어요' -> '기다려요'
+'기다려요' -> '기다려' + '주세요' = '기다려 주세요'"
     </string>
-    <string name="L_18_SENTENCE_EXPLAIN_13">-</string>
+    <string name="L_18_SENTENCE_EXPLAIN_12">-</string>
 
 
 

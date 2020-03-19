@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import net.awesomekorean.podo.R;
@@ -220,6 +221,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException npe) {
+            System.out.println("NullPointerException on LessonDialog");
         }
     }
 
@@ -324,6 +327,12 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 Intent intent = new Intent(getContext(), LessonFinish.class);
                 startActivity(intent);
                 getActivity().finish();
+
+                // analytics 로그 이벤트 얻기
+                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Lesson");
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, bundle);
                 break;
         }
     }

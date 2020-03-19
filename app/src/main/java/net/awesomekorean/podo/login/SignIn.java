@@ -157,7 +157,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                             final String userEmail = task.getResult().getUser().getEmail();
 
                             //출석부 확인 후 메인페이지로 넘어가기
-                            getUserInfoAndGoToMain(userEmail);
+                            getUserInfoAndGoToMain(userEmail, "Facebook");
 
                         } else {
                             // 로그인 실패
@@ -209,7 +209,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                             final String userEmail = account.getEmail();
 
                             // 출석부 확인 후 메인페이지로 넘어가기
-                            getUserInfoAndGoToMain(userEmail);
+                            getUserInfoAndGoToMain(userEmail, "Google");
 
                         } else {
                             // 로그인 실패
@@ -220,7 +220,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 });
     }
 
-    private void getUserInfoAndGoToMain(final String userEmail) {
+    private void getUserInfoAndGoToMain(final String userEmail, final String method) {
         DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
         informationRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -242,7 +242,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                 } else {
                     System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
                     MakeNewDb makeNewDb = new MakeNewDb();
-                    makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail);
+                    makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail, method);
                 }
                 progressBarLayout.setVisibility(View.GONE);
             }
@@ -274,7 +274,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                                 public void onSuccess(AuthResult authResult) {
                                     System.out.println("로그인에 성공했습니다");
                                     progressBarLayout.setVisibility(View.VISIBLE);
-                                    getUserInfoAndGoToMain(userEmail);
+                                    getUserInfoAndGoToMain(userEmail, "Email");
                                 }
                             })
 

@@ -112,24 +112,29 @@
 
         <TextView
             android:id="@+id/textViewHangul"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:paddingTop="20dp"
-            android:gravity="center"
-            android:textSize="50dp"
+            android:gravity="center|bottom"
+            android:textSize="80dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewHangulExplain"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <ScrollView
+            android:id="@+id/svHangulExplain"
+            android:layout_weight="5"
             android:layout_margin="10dp"
-            android:textSize="20dp"
-            android:scrollbars="vertical"
-            android:gravity="center"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:id="@+id/textViewHangulExplain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+        </ScrollView>
 
     </LinearLayout>
 
