@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,16 +30,20 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         this.listener = listener;
     }
 
-
+    Context context;
+    Animation animation;
 
     private ArrayList<LessonItem> list;
 
-    public LessonAdapter(ArrayList<LessonItem> list) {
+    public LessonAdapter(Context context, ArrayList<LessonItem> list) {
         this.list = list;
+        this.animation = AnimationUtils.loadAnimation(context, R.anim.move_left_reading_item);
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout lessonItem;
         TextView title;
         TextView subTitle;
         ImageView lessonImage;
@@ -48,6 +54,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         ViewHolder(View itemView) {
             super(itemView);
 
+            lessonItem = itemView.findViewById(R.id.lessonItem);
             title = itemView.findViewById(R.id.title);
             subTitle = itemView.findViewById(R.id.subTitle);
             lessonImage = itemView.findViewById(R.id.lessonImage);
@@ -106,7 +113,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         int viewType = holder.getItemViewType();
 
         if(viewType==0) {
-            holder.title.setText(items.getTitle());
             if(items.getIsSpecial()) { holder.textSpecial.setVisibility(View.VISIBLE);
             } else{holder.textSpecial.setVisibility(View.INVISIBLE);}
             if(items.getIsLock()) { holder.iconLock.setVisibility(View.VISIBLE);
@@ -118,6 +124,8 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         holder.lessonImage.setImageResource(items.getLessonImage());
         if(items.getIsCompleted()) { holder.layoutCompleted.setVisibility(View.VISIBLE);
         } else{holder.layoutCompleted.setVisibility(View.INVISIBLE);}
+
+        holder.lessonItem.startAnimation(animation);
     }
 
     @Override

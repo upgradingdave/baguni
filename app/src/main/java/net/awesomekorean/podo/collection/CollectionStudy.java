@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.PlayMediaPlayer;
@@ -57,6 +59,11 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
         context = getApplicationContext();
         playSoundPool = new PlaySoundPool(context);
+
+        // analytics 로그 이벤트 얻기
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+        Bundle bundle = new Bundle();
+        firebaseAnalytics.logEvent("collection_study", bundle);
 
         repository = new CollectionRepository(getApplicationContext());
         studyBack.setVisibility(View.INVISIBLE);

@@ -21,11 +21,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,11 +38,11 @@ import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
 
     FragmentPagerAdapter adapterViewPager;
 
@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             }
             userImage = user.getPhotoUrl();
         }
+        crashlytics.setCustomKey("userEmail", userEmail);
+        crashlytics.setCustomKey("userName", userName);
 
 
         // 알림 메시지 실시간 리스너

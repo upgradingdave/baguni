@@ -19,6 +19,7 @@ import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -99,6 +100,12 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
         lessonLayout.setOnTouchListener(this);
         scrollView.setOnTouchListener(this);
+
+        // analytics 로그 이벤트 얻기
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        Bundle bundle = new Bundle();
+        firebaseAnalytics.logEvent("lesson_sentence", bundle);
+
 
         readyForLesson();
 

@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,9 +31,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.eventbus.Subscribe;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
@@ -218,7 +221,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     // 리워드 광고 로드하기
     public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_ID_REWARDED));
+        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
@@ -311,7 +314,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             case R.id.recommend :
                 intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                String title = "https://play.google.com/store/apps/details?id=net.awesomekorean.podo";
+                String title = "https://awesomekorean.page.link/Sohr";
                 intent.putExtra(Intent.EXTRA_TEXT, title);
 
                 Intent chooser = Intent.createChooser(intent, "Recommend podo to your friends");
@@ -338,6 +341,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             intent = new Intent(Profile.this, LessonFinish.class);
                             intent.putExtra("isReward", true);
                             startActivityForResult(intent, 200);
+
+                            // analytics 로그 이벤트 얻기
+                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                            Bundle bundle = new Bundle();
+                            firebaseAnalytics.logEvent("reward_watch", bundle);
                         }
 
                         @Override
@@ -403,7 +411,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             }
 
             // DB 에 유저 정보 업데이드 하기
-            db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
+            String userEmail = MainActivity.userEmail;
+
+            FirebaseCrashlytics.getInstance().log("userEmail : " + userEmail);
+            db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
                     .set(userInformation)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

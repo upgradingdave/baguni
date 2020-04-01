@@ -1,17 +1,21 @@
 package net.awesomekorean.podo.lesson;
 
+import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -87,6 +91,16 @@ public class MainLesson extends Fragment{
         return new MainLesson(mainActivity);
     }
 
+    LessonItem[] items = {
+            new S_Lesson00(), new Lesson00(), new S_Lesson01(), new Lesson01(), new S_Lesson02(),
+            new Lesson02(), new S_Lesson03(), new Lesson03(), new S_Lesson04(), new Lesson04(),
+            new S_Lesson05(), new Lesson05(), new S_Lesson06(), new Lesson06(), new S_Lesson07(),
+            new Lesson07(), new Lesson08(), new S_Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(),
+            new S_Lesson10(), new Lesson12(), new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson15(),
+            new Lesson16(), new S_Lesson12(), new Lesson17(), new Lesson18()
+    };
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -99,14 +113,6 @@ public class MainLesson extends Fragment{
 
         list = new ArrayList<>();
 
-        LessonItem[] items = {
-                new S_Lesson00(), new Lesson00(), new S_Lesson01(), new Lesson01(), new S_Lesson02(),
-                new Lesson02(), new S_Lesson03(), new Lesson03(), new S_Lesson04(), new Lesson04(),
-                new S_Lesson05(), new Lesson05(), new S_Lesson06(), new Lesson06(), new S_Lesson07(),
-                new Lesson07(), new Lesson08(), new S_Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(),
-                new S_Lesson10(), new Lesson12(), new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson15(),
-                new Lesson16(), new S_Lesson12(), new Lesson17(), new Lesson18()
-        };
 
         for(LessonItem item : items) {
             list.add(item);
@@ -115,7 +121,6 @@ public class MainLesson extends Fragment{
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new LessonAdapter(list);
 
         // 가장 최근 클릭한 아이템 위치로 이동
         recyclerView.scrollToPosition(SharedPreferencesInfo.getLastClickItem(context, true));
@@ -128,6 +133,8 @@ public class MainLesson extends Fragment{
             public void onItemClick(View v, int pos) {
 
                 lessonUnit = list.get(pos);
+
+                FirebaseCrashlytics.getInstance().setCustomKey("lessonId : ", lessonUnit.getLessonId());
                 SharedPreferencesInfo.setLastClickItem(context, true, pos);
 
                 if(!lessonUnit.getIsLock()) {

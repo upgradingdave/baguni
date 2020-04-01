@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.database.collection.LLRBBlackValueNode;
 
 import net.awesomekorean.podo.R;
@@ -32,17 +35,20 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
     }
 
     Context context;
+    Animation animation;
 
     private ArrayList<Reading> list;
 
     public ReadingAdapter(Context context, ArrayList<Reading> list) {
         this.context = context;
         this.list = list;
+        this.animation = AnimationUtils.loadAnimation(context, R.anim.move_left_reading_item);
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout readingItem;
         TextView title;
         ImageView readingImage;
         ImageView iconLock;
@@ -54,6 +60,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         ViewHolder(View itemView) {
             super(itemView);
 
+            readingItem = itemView.findViewById(R.id.readingItem);
             title = itemView.findViewById(R.id.title);
             readingImage = itemView.findViewById(R.id.readingImage);
             iconLock = itemView.findViewById(R.id.iconLock);
@@ -94,7 +101,12 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         Reading items = list.get(position);
 
         holder.title.setText(items.getTitle());
-        holder.readingImage.setImageResource(items.getReadingImage());
+        // outOfMemoryError 방지용
+        try {
+            holder.readingImage.setImageResource(items.getReadingImage());
+        } catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+        }
         if (items.getIsCompleted()) {
             holder.layoutCompleted.setVisibility(View.VISIBLE);
         } else {
@@ -114,6 +126,8 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         } else if(readingLevel == 3) {
             setLevel(View.GONE, View.GONE, View.VISIBLE, holder);
         }
+
+        holder.readingItem.startAnimation(animation);
     }
 
     private void setLevel(int rocket1, int rocket2, int rocket3, ViewHolder holder) {

@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
@@ -64,6 +67,13 @@ public class MainReading extends Fragment {
 
     UserInformation userInformation;
 
+    Button btnGetReading;
+    boolean isClicked = false;
+
+    Reading[] items = {
+            new Reading00(), new Reading01(), new Reading02(), new Reading03(), new Reading04(), new Reading05(), new Reading06(), new Reading07(), new Reading08(), new Reading09(), new Reading10(), new Reading11(), new Reading12(), new Reading13(), new Reading14(), new Reading15(), new Reading16(), new Reading17(), new Reading18()
+    };
+
 
     public MainReading(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -87,32 +97,28 @@ public class MainReading extends Fragment {
 
         list = new ArrayList<>();
 
-        Reading[] items = {
-                new Reading00(), new Reading01(), new Reading02(), new Reading03(), new Reading04(), new Reading05(), new Reading06(), new Reading07(), new Reading08(), new Reading09(), new Reading10(), new Reading11(), new Reading12(), new Reading13(), new Reading14(), new Reading15(), new Reading16(), new Reading17(), new Reading18()
-        };
 
-        for(Reading item : items) {
-            list.add(item);
-        }
-
-        list.get(0).setIsLocked(false);
-        list.get(1).setIsLocked(false);
-        list.get(2).setIsLocked(false);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        adapter = new ReadingAdapter(getContext(), list);
+        items[0].setIsLocked(false);
+        items[1].setIsLocked(false);
 
         setCompletedReadings();
         setUnlockedReadings();
+
+        for(Reading item : items) {
+            if(!item.getIsLock()) {
+                list.add(item);
+            }
+        }
+
+
+        adapter = new ReadingAdapter(getContext(), list);
 
         adapter.setOnItemClickListener(new ReadingAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
 
                 readingUnit = list.get(pos);
-
+                FirebaseCrashlytics.getInstance().setCustomKey("readingId", readingUnit.getReadingId());
                 if(!readingUnit.getIsLock()) {
                     intent = new Intent(context, ReadingFrame.class);
                     startActivity(intent);
@@ -127,7 +133,41 @@ public class MainReading extends Fragment {
             }
         });
 
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         recyclerView.setAdapter(adapter);
+
+
+        btnGetReading = view.findViewById(R.id.btnGetReading);
+        btnGetReading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.clear();
+                if(!isClicked) {
+                    for(Reading item : items) {
+                        if(item.getIsLock()) {
+                            list.add(item);
+                        }
+                    }
+                    btnGetReading.setText(getText(R.string.GO_BACK_MY_READING));
+                    btnGetReading.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_white_30_stroke_purple));
+                    btnGetReading.setTextColor(ContextCompat.getColorStateList(context, R.color.PURPLE));
+                    isClicked = true;
+                } else {
+                    for(Reading item : items) {
+                        if(!item.getIsLock()) {
+                            list.add(item);
+                        }
+                    }
+                    btnGetReading.setText(getText(R.string.GET_MORE_READING));
+                    btnGetReading.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_purple_30));
+                    btnGetReading.setTextColor(ContextCompat.getColorStateList(context, R.color.WHITE));
+                    isClicked = false;
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         return view;
     }
@@ -139,6 +179,8 @@ public class MainReading extends Fragment {
         if(requestCode == 200 && resultCode == RESULT_OK) {
             userInformation = SharedPreferencesInfo.getUserInfo(context);
             setUnlockedReadings();
+            isClicked = true;
+            btnGetReading.performClick();
         }
     }
 
@@ -150,12 +192,11 @@ public class MainReading extends Fragment {
         System.out.println("READING_COMPLETE:" + readingComplete);
 
         if(readingComplete != null) {
-            for(int i=0; i<list.size(); i++) {
-                if(readingComplete.contains(list.get(i).getReadingId())) {
-                    list.get(i).setIsCompleted(true);
+            for(int i=0; i<items.length; i++) {
+                if(readingComplete.contains(items[i].getReadingId())) {
+                    items[i].setIsCompleted(true);
                 }
             }
-            adapter.notifyDataSetChanged();
         }
     }
 
@@ -165,12 +206,11 @@ public class MainReading extends Fragment {
         System.out.println("READING_UNLOCK:" + readingUnlock);
 
         if(readingUnlock != null) {
-            for(int i=0; i<list.size(); i++) {
-                if(readingUnlock.contains(list.get(i).getReadingId())) {
-                    list.get(i).setIsLocked(false);
+            for(int i=0; i<items.length; i++) {
+                if(readingUnlock.contains(items[i].getReadingId())) {
+                    items[i].setIsLocked(false);
                 }
             }
-            adapter.notifyDataSetChanged();
         }
     }
 
@@ -183,9 +223,13 @@ public class MainReading extends Fragment {
         if (isVisibleToUser) {
             if(mainActivity != null) {
                 mainActivity.setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
+                isClicked = true;
+                btnGetReading.performClick();
             } else {
                 if(getActivity() != null) {
                     ((MainActivity)getActivity()).setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
+                    isClicked = true;
+                    btnGetReading.performClick();
                 } else {
                     System.out.println("MainActivity is null inside mainReading.");
                 }

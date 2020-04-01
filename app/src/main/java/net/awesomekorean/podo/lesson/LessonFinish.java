@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,8 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
@@ -25,7 +28,6 @@ import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.profile.Profile;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
@@ -75,7 +77,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
             // 애드몹 전면광고 로드하기
             MobileAds.initialize(getApplicationContext(), getString(R.string.ADMOB_APP_ID));
             interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId(getString(R.string.ADMOB_ID_FULL_SCREEN));
+            interstitialAd.setAdUnitId(getString(R.string.ADMOB_TEST_ID_FULL_SCREEN));
             interstitialAd.loadAd(new AdRequest.Builder().build());
             interstitialAd.setAdListener(new AdListener() {
 
@@ -123,8 +125,16 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     finish();
 
                 } else {
-                    // 레슨완료 정보 업데이트 하기
+                    FirebaseCrashlytics.getInstance().log("lessonId : " + MainLesson.lessonUnit.getLessonId());
                     String lessonId = MainLesson.lessonUnit.getLessonId();
+
+                    // analytics 로그 이벤트 얻기
+                    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("lessonId", lessonId);
+                    firebaseAnalytics.logEvent("lesson_finish", bundle);
+
+                    // 레슨완료 정보 업데이트 하기
                     if (!userInformation.getLessonComplete().contains(lessonId)) {
                         userInformation.addLessonComplete(lessonId);
                     } else {

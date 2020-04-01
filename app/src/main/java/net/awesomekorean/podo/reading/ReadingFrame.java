@@ -11,6 +11,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +25,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -86,6 +89,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     String url;
 
+    MediaPlayerManager mediaPlayerManager;
+
 
     class MyThread extends Thread {
         @Override
@@ -106,6 +111,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             }
         }
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,6 +179,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     }
 
     public void readyForReading() {
+        FirebaseCrashlytics.getInstance().log("readingId : " + reading.getReadingId());
         unitId = reading.getReadingId().toLowerCase();
         int wordLength = reading.getPopUpFront().length;
         String wordAudio[] = new String[wordLength];
@@ -276,52 +284,31 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnPlay:
                 // 최초 플레이 or 다시 플레이 시
+                mediaPlayerManager = MediaPlayerManager.getInstance();
                 if (playingPosition == null || mediaPlayer == null) {
                     StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(unitId+".mp3");
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            if(mediaPlayer != null) {
-                                mediaPlayer.release();
-                                mediaPlayer = null;
-                            }
                             url = uri.toString();
-                            mediaPlayer = new MediaPlayer();
-                            try {
-                                mediaPlayer.setDataSource(url);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                mediaPlayer.prepare();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            mediaPlayer.start();
-                            playingTime = mediaPlayer.getDuration(); // 노래 재생시간
+                            mediaPlayerManager.setMediaPlayer(url);
+                            playingTime = mediaPlayerManager.getDuration(); // 노래 재생시간
                             seekBar.setMax(playingTime);
-                            new MyThread().start();
-                            isPlaying = true;
+                            mediaPlayerManager.playMediaPlayer(seekBar);
                             setVisibility(View.GONE, View.VISIBLE);
                         }
                     });
 
                     // 뭠췄다가 플레이 시
                 } else {
-                    mediaPlayer.seekTo(playingPosition);
-                    mediaPlayer.start();
+                    mediaPlayerManager.playMediaPlayer(seekBar);
                     setVisibility(View.GONE, View.VISIBLE);
-                    isPlaying = true;
-                    new MyThread().start();
-                    playingPosition = null;
                 }
                 break;
 
             case R.id.btnPause :
-                playingPosition = mediaPlayer.getCurrentPosition();
-                mediaPlayer.pause();
+                mediaPlayerManager.stopMediaPlayer();
                 setVisibility(View.VISIBLE, View.GONE);
-                isPlaying = false;
                 break;
 
             case R.id.btnNormal :

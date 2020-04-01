@@ -18,6 +18,7 @@ import com.anjlab.android.iab.v3.Constants;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
@@ -47,6 +48,8 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
 
     String skuId;
 
+    FirebaseAnalytics firebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,12 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
         pointB.setOnClickListener(this);
         pointC.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
+
+        // analytics 로그 이벤트 얻기
+        Bundle params = new Bundle();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+        firebaseAnalytics.logEvent("purchase_page_open", params);
+
 
         bp = new BillingProcessor(this, KEY, this);
         bp.initialize();
@@ -110,6 +119,11 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
         });
 
         Toast.makeText(getApplicationContext(), getString(R.string.THANKS_PURCHASING), Toast.LENGTH_LONG).show();
+
+        // analytics 로그 이벤트 얻기
+        Bundle bundle = new Bundle();
+        bundle.putString("productId", productId);
+        firebaseAnalytics.logEvent("purchase", bundle);
 
         bp.consumePurchase(productId);
 

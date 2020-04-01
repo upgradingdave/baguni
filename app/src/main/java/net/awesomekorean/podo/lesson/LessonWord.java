@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -33,9 +36,11 @@ import net.awesomekorean.podo.collection.CollectionRepository;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class LessonWord extends Fragment implements Button.OnClickListener{
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+
 
     View view;
 
@@ -103,19 +108,20 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         tvWordPronunciation = view.findViewById(R.id.tvWordPronunciation);
         tvWordSynonyms = view.findViewById(R.id.tvWordSynonyms);
         tvWordAntonyms = view.findViewById(R.id.tvWordAntonyms);
-
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
+        // analytics 로그 이벤트 얻기
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        Bundle bundle = new Bundle();
+        firebaseAnalytics.logEvent("lesson_word", bundle);
+
+
         lesson = (Lesson) MainLesson.lessonUnit;
 
-        if(MainLesson.lessonUnit != null) {
-            lessonId = MainLesson.lessonUnit.getLessonId();
-            System.out.println("LessonUnit is:" + lessonId);
+        lessonId = MainLesson.lessonUnit.getLessonId();
+        FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
 
-        } else {
-            System.out.println("unable to find the lessonUnit");
-        }
         folder = "lesson/" + lessonId.toLowerCase();
 
         LessonSwipeListener gestureListener = new LessonSwipeListener();

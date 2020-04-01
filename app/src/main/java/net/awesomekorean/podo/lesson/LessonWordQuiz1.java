@@ -15,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
@@ -81,6 +83,12 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                 return true;
             }
         });
+
+        // analytics 로그 이벤트 얻기
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        Bundle bundle = new Bundle();
+        firebaseAnalytics.logEvent("lesson_quiz1", bundle);
+
 
         makeQuiz(quizNoNow);
 

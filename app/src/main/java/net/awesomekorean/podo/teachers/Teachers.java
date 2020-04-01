@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -216,6 +217,12 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                             }, 3000);
                         }
                     });
+
+                    // analytics 로그 이벤트 얻기
+                    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "correction");
+                    firebaseAnalytics.logEvent("point_use", bundle);
 
 
                     // 녹음요청일 떄

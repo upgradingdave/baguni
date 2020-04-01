@@ -99,7 +99,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
     // 리워드 광고 로드하기
     public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_ID_REWARDED));
+        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
@@ -161,10 +161,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             // analytics 로그 이벤트 얻기
                             FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
                             Bundle bundle = new Bundle();
-                            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "points");
-                            bundle.putDouble(FirebaseAnalytics.Param.VALUE, unlockPrice);
-                            bundle.putString(FirebaseAnalytics.Param.VIRTUAL_CURRENCY_NAME, extra);
-                            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SPEND_VIRTUAL_CURRENCY, bundle);
+                            bundle.putString("type", extra);
+                            firebaseAnalytics.logEvent("point_use", bundle);
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -196,6 +194,11 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             Intent intent = new Intent(UnlockActivity.this, LessonFinish.class);
                             intent.putExtra("isReward", true);
                             startActivityForResult(intent, 200);
+
+                            // analytics 로그 이벤트 얻기
+                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                            Bundle bundle = new Bundle();
+                            firebaseAnalytics.logEvent("reward_watch", bundle);
                         }
 
                         @Override

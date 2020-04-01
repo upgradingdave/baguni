@@ -3,7 +3,7 @@ package net.awesomekorean.podo.reading.readings;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.reading.Reading;
 
-public class Reading08 implements Reading {
+public class Reading08 extends ReadingInit implements Reading {
 
     String readingId = "R_08";
     int readingLevel = 1;
@@ -32,8 +32,6 @@ public class Reading08 implements Reading {
     final String[] popUpBack = {"sound", "meaning", "first", "short", "the other side person", "long", "agree"};
 
     private int readingImage = R.drawable.yesyesyes;
-    private boolean isCompleted = false;
-    private boolean isLock = false;
 
     @Override
     public String getReadingId() {
@@ -63,26 +61,6 @@ public class Reading08 implements Reading {
     @Override
     public int getReadingImage() {
         return this.readingImage;
-    }
-
-    @Override
-    public boolean getIsLock() {
-        return isLock;
-    }
-
-    @Override
-    public boolean getIsCompleted() {
-        return isCompleted;
-    }
-
-    @Override
-    public void setIsCompleted(boolean b) {
-        this.isCompleted = b;
-    }
-
-    @Override
-    public void setIsLocked(boolean b) {
-        this.isLock = b;
     }
 
     @Override

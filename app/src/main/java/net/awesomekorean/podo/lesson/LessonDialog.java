@@ -95,6 +95,12 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         index = 0;
 
+        // analytics 로그 이벤트 얻기
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        Bundle bundle = new Bundle();
+        firebaseAnalytics.logEvent("lesson_dialog", bundle);
+
+
         readyForLesson();
 
         return view;
@@ -327,12 +333,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 Intent intent = new Intent(getContext(), LessonFinish.class);
                 startActivity(intent);
                 getActivity().finish();
-
-                // analytics 로그 이벤트 얻기
-                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Lesson");
-                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, bundle);
                 break;
         }
     }

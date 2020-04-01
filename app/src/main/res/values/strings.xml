@@ -126,6 +126,8 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
 
 
     <!--    읽기-->
+    <string name="GET_MORE_READING">Get more readings</string>
+    <string name="GO_BACK_MY_READING">Go back to my readings</string>
     <string name="NORMAL">Normal</string>
     <string name="SPEED">Speed x0.8</string>
 
@@ -242,6 +244,20 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
 
 
     <!--    레슨내용현지화-->
+    <string name="MAIN_00_TITLE">Hangul</string>
+    <string name="MAIN_01_TITLE">Greetings</string>
+    <string name="MAIN_02_TITLE">Conjugation</string>
+    <string name="MAIN_03_TITLE">Numbers</string>
+    <string name="MAIN_04_TITLE">Tenses</string>
+    <string name="MAIN_05_TITLE">TEST</string>
+    <string name="MAIN_06_TITLE">Negative</string>
+    <string name="MAIN_07_TITLE">Range</string>
+    <string name="MAIN_08_TITLE">Listing/Contrast</string>
+    <string name="MAIN_09_TITLE">Ability</string>
+    <string name="MAIN_10_TITLE">Hope</string>
+    <string name="MAIN_11_TITLE">TEST</string>
+    <string name="MAIN_12_TITLE">Request</string>
+
     <string name="SL_00_TITLE">Start of learning Korean</string>
 
     <string name="SL_01_TITLE">Conjugation</string>
@@ -1572,8 +1588,6 @@ conjugate 'V-아/어 주세요'
 '기다려요' -> '기다려' + '주세요' = '기다려 주세요'"
     </string>
     <string name="L_18_SENTENCE_EXPLAIN_12">-</string>
-
-
 
 
     <!--번역 필요 없는 부분-->

@@ -2,10 +2,13 @@ package net.awesomekorean.podo.collection;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.UnixTimeStamp;
@@ -73,6 +76,12 @@ public class CollectionRepository {
             protected Void doInBackground(Void... voids) {
                 entity.setAudio(audio);
                 db.collectionDao().insert(entity);
+
+                // analytics 로그 이벤트 얻기
+                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                Bundle bundle = new Bundle();
+                firebaseAnalytics.logEvent("collection_save", bundle);
+
                 return null;
             }
         }.execute();
