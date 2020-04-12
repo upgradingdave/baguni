@@ -1,29 +1,30 @@
 package net.awesomekorean.podo.lesson;
 
-import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
-import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulMenu;
-import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
+import net.awesomekorean.podo.lesson.lessons.HangulAssembly;
+import net.awesomekorean.podo.lesson.lessons.HangulBatchim;
+import net.awesomekorean.podo.lesson.lessons.HangulConsonant;
+import net.awesomekorean.podo.lesson.lessons.HangulVowel;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
 import net.awesomekorean.podo.lesson.lessons.Lesson03;
@@ -36,16 +37,16 @@ import net.awesomekorean.podo.lesson.lessons.Lesson09;
 import net.awesomekorean.podo.lesson.lessons.Lesson10;
 import net.awesomekorean.podo.lesson.lessons.Lesson11;
 import net.awesomekorean.podo.lesson.lessons.Lesson12;
-import net.awesomekorean.podo.lesson.lessons.Lesson13;
-import net.awesomekorean.podo.lesson.lessons.Lesson14;
 import net.awesomekorean.podo.lesson.lessons.Lesson15;
 import net.awesomekorean.podo.lesson.lessons.Lesson16;
 import net.awesomekorean.podo.lesson.lessons.Lesson17;
 import net.awesomekorean.podo.lesson.lessons.Lesson18;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.Lesson00;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
+import net.awesomekorean.podo.lesson.lessons.NumberNative;
+import net.awesomekorean.podo.lesson.lessons.NumberPractice;
+import net.awesomekorean.podo.lesson.lessons.NumberSino;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson02;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson03;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson04;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
@@ -56,48 +57,49 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
 import static net.awesomekorean.podo.MainActivity.btnLesson;
 import static net.awesomekorean.podo.MainActivity.textLesson;
 
 public class MainLesson extends Fragment{
 
-    public static LessonItem lessonUnit;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     Context context;
 
     View view;
 
-    Intent intent;
-
-    MainActivity mainActivity;
-
-    ArrayList<LessonItem> list;
-    LessonAdapter adapter;
-
     UserInformation userInformation;
 
+    TextView userPoint;
 
-    public MainLesson(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-    public MainLesson() {}
+    ExpandableListView listView;
 
-    public static MainLesson newInstance(MainActivity mainActivity) {
-        return new MainLesson(mainActivity);
-    }
+    LessonAdapterGroup adapter;
 
-    LessonItem[] items = {
-            new S_Lesson00(), new Lesson00(), new S_Lesson01(), new Lesson01(), new S_Lesson02(),
-            new Lesson02(), new S_Lesson03(), new Lesson03(), new S_Lesson04(), new Lesson04(),
-            new S_Lesson05(), new Lesson05(), new S_Lesson06(), new Lesson06(), new S_Lesson07(),
-            new Lesson07(), new Lesson08(), new S_Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(),
-            new S_Lesson10(), new Lesson12(), new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson15(),
-            new Lesson16(), new S_Lesson12(), new Lesson17(), new Lesson18()
+    int lastExpandedPosition = -1;
+
+    String[] groupList = {
+            "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Negative", "Range", "Listing/Contrast",
+            "Ability", "Hope", "Requests"
+    };
+
+    int[] groupProcess = new int[groupList.length];
+
+    LessonItem[][] childList = {
+            {new HangulConsonant(), new HangulVowel(), new HangulBatchim(), new HangulAssembly()},
+            {new Lesson00()},
+            {new S_Lesson01(), new Lesson01(), new S_Lesson03(), new Lesson02(), new Lesson03()},
+            {new NumberSino(), new NumberNative(), new NumberPractice()},
+            {new S_Lesson04(), new Lesson04(), new Lesson05(), new Lesson06(), new S_Lesson06()},
+            {new Lesson07(), new Lesson08(), new S_Lesson08()},
+            {new Lesson09(), new Lesson10(), new S_Lesson05()},
+            {new Lesson11(), new Lesson12(), new S_Lesson10()},
+            {new Lesson15(), new Lesson16(), new S_Lesson11()},
+            {new Lesson17(), new S_Lesson12()},
+            {new Lesson18(), new S_Lesson07()}
     };
 
 
@@ -111,81 +113,48 @@ public class MainLesson extends Fragment{
 
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
-        list = new ArrayList<>();
+        userPoint = view.findViewById(R.id.userPoint);
 
+        userPoint.setText(String.valueOf(userInformation.getPoints()));
 
-        for(LessonItem item : items) {
-            list.add(item);
-        }
-
-
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // 가장 최근 클릭한 아이템 위치로 이동
-        recyclerView.scrollToPosition(SharedPreferencesInfo.getLastClickItem(context, true));
 
         setCompletedLessons();
+
         setUnlockedLessons();
 
-        adapter.setOnItemClickListener(new LessonAdapter.OnItemClickListener() {
+        adapter = new LessonAdapterGroup(context, groupList, groupProcess, childList);
+
+        listView = view.findViewById(R.id.listView);
+
+        listView.setAdapter(adapter);
+
+        listView.setDivider(null);
+
+        listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
             @Override
-            public void onItemClick(View v, int pos) {
+            public void onGroupExpand(int groupPosition) {
 
-                lessonUnit = list.get(pos);
+                if(lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
 
-                FirebaseCrashlytics.getInstance().setCustomKey("lessonId : ", lessonUnit.getLessonId());
-                SharedPreferencesInfo.setLastClickItem(context, true, pos);
-
-                if(!lessonUnit.getIsLock()) {
-
-                    if(lessonUnit.getIsSpecial()) {
-
-                        switch (lessonUnit.getLessonId()) {
-                            case "SL_00" :
-                                intent = new Intent(context, LessonHangulMenu.class);
-                                startActivity(intent);
-                                break;
-
-                            case "SL_02" :
-                                intent = new Intent(context, LessonNumberMenu.class);
-                                startActivity(intent);
-                                break;
-
-                            default :
-                                intent = new Intent(context, LessonSpecialFrame.class);
-                                startActivity(intent);
-                                break;
-                        }
-                    } else {
-                        intent = new Intent(context, LessonFrame.class);
-                        startActivity(intent);
-                    }
-
-                } else {
-                    // 포인트 사용 확인창 띄우기
-                    intent = new Intent(context, UnlockActivity.class);
-                    intent.putExtra("unlock", "specialLesson");
-                    startActivityForResult(intent, 200);
+                    listView.collapseGroup(lastExpandedPosition);
                 }
 
+                SharedPreferencesInfo.setLastClickItem(context, true, groupPosition);
+
+                lastExpandedPosition = groupPosition;
             }
         });
 
-        recyclerView.setAdapter(adapter);
+        int lastClickItem = SharedPreferencesInfo.getLastClickItem(context, true);
+
+        listView.setSelection(lastClickItem);
+
+        listView.expandGroup(lastClickItem);
 
         return view;
     }
 
-    // 스페셜 레슨 구매 성공
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 200 && resultCode == RESULT_OK) {
-            userInformation = SharedPreferencesInfo.getUserInfo(context);
-            setUnlockedLessons();
-        }
-    }
 
     // 완료된 레슨 세팅하기
     private void setCompletedLessons() {
@@ -193,44 +162,96 @@ public class MainLesson extends Fragment{
         System.out.println("LESSON_COMPLETE:" + lessonComplete);
 
         if(lessonComplete != null) {
-            for(int i=0; i<list.size(); i++) {
-                if(lessonComplete.contains(list.get(i).getLessonId())) {
-                    list.get(i).setIsCompleted(true);
+
+            // 완료레슨 번호 변경 (L_00 -> L_00%100)
+            if(!lessonComplete.get(0).contains("%")) {
+
+                for(int i=0; i<lessonComplete.size(); i++) {
+
+                    String newLessonComplete = lessonComplete.get(i) + "%100";
+
+                    lessonComplete.set(i, newLessonComplete);
                 }
+
+                userInformation.setLessonComplete(lessonComplete);
+
+                SharedPreferencesInfo.setUserInfo(context, userInformation);
+
+                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
+                        .set(userInformation)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                System.out.println("DB에 lessonComplete 를 신규 번호로 변경했습니다.");
+                            }
+                        });
+
             }
-            adapter.notifyDataSetChanged();
+
+            // 레슨 진도율 계산하기
+            LessonProgressInfo lessonProgressInfo = new LessonProgressInfo(context);
+
+            String lessonId;
+
+            int sumOfComplete = 0;  // 카테고리 진도율
+
+
+            for(int i=0; i<groupList.length; i++) {
+
+                for(int j=0; j<childList[i].length; j++) {
+
+                    lessonId = childList[i][j].getLessonId();
+
+                    int progress = lessonProgressInfo.getProgress(lessonId);
+
+                    if(progress != -1) {
+
+                        childList[i][j].setLessonProgress(progress);
+
+                        sumOfComplete += progress;
+                    }
+                }
+
+                groupProcess[i] = Math.round(sumOfComplete / childList[i].length);
+
+                sumOfComplete = 0;
+            }
         }
     }
+
 
     // 구매된 스페셜 레슨 세팅하기
     private void setUnlockedLessons() {
+
         List<String> lessonUnlock = userInformation.getSpecialLessonUnlock();
+
         System.out.println("LESSON_UNLOCK:" + lessonUnlock);
 
         if(lessonUnlock != null) {
-            for(int i=0; i<list.size(); i++) {
-                if(lessonUnlock.contains(list.get(i).getLessonId())) {
-                    list.get(i).setIsLocked(false);
+
+            for(int i=0; i<groupList.length; i++) {
+
+                for(int j=0; j<childList[i].length; j++) {
+
+                    if(lessonUnlock.contains(childList[i][j].getLessonId())) {
+
+                        childList[i][j].setIsLocked(false);
+                    }
                 }
             }
-            adapter.notifyDataSetChanged();
         }
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
 
-        if (isVisibleToUser) {
-            if(mainActivity != null) {
-                mainActivity.setMainBtns(btnLesson, textLesson, R.drawable.lesson_active, R.string.LESSON);
-            } else {
-                if(getActivity() != null) {
-                    ((MainActivity)getActivity()).setMainBtns(btnLesson, textLesson, R.drawable.lesson_active, R.string.LESSON);
-                } else {
-                    System.out.println("MainActivity is null inside mainLesson.");
-                }
-            }
+    @Override
+    public void onResume() {
+        super.onResume();
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
+
+        if(adapter != null) {
+            setCompletedLessons();
+            setUnlockedLessons();
+            adapter.notifyDataSetChanged();
         }
     }
 }

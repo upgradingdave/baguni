@@ -1,15 +1,14 @@
 package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.Lesson;
-import net.awesomekorean.podo.lesson.LessonItem;
 
 public class S_Lesson00 implements LessonItem {
 
     private String lessonId = "SL_00";
-    private int title = R.string.SL_00_TITLE;
+    private String title = "Start of learning Korean";
     private String subTitle = "한글(Hangul)";
     private int lessonImage = R.drawable.hangul;
+    private int lessonProgress = 0;
     private Boolean isSpecial = true;
     private Boolean isLock = false;
     private Boolean isCompleted = false;
@@ -20,7 +19,7 @@ public class S_Lesson00 implements LessonItem {
     }
 
     @Override
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -32,6 +31,16 @@ public class S_Lesson00 implements LessonItem {
     @Override
     public int getLessonImage() {
         return lessonImage;
+    }
+
+    @Override
+    public int getLessonProgress() {
+        return lessonProgress;
+    }
+
+    @Override
+    public void setLessonProgress(int progress) {
+        this.lessonProgress = progress;
     }
 
     @Override

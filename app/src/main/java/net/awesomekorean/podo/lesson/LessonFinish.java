@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,15 +25,17 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 
-public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
+import java.util.Arrays;
+import java.util.List;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
     InterstitialAd interstitialAd;
 
@@ -52,10 +56,14 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     PlaySoundPool playSoundPool;
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_finish);
+
+        context = getApplicationContext();
 
         selectBox = findViewById(R.id.selectBox);
         selectResult = findViewById(R.id.selectResult);
@@ -69,36 +77,10 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         box3.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
 
-        playSoundPool = new PlaySoundPool(getApplicationContext());
+        playSoundPool = new PlaySoundPool(context);
 
         isFromProfile = getIntent().getBooleanExtra("isReward", false);
 
-        if(!isFromProfile) {
-            // 애드몹 전면광고 로드하기
-            MobileAds.initialize(getApplicationContext(), getString(R.string.ADMOB_APP_ID));
-            interstitialAd = new InterstitialAd(getApplicationContext());
-            interstitialAd.setAdUnitId(getString(R.string.ADMOB_TEST_ID_FULL_SCREEN));
-            interstitialAd.loadAd(new AdRequest.Builder().build());
-            interstitialAd.setAdListener(new AdListener() {
-
-                @Override
-                public void onAdLoaded() {
-                    System.out.println("광고가 로드되었습니다");
-                }
-
-                @Override
-                public void onAdFailedToLoad(int i) {
-                    System.out.println("광고 로드에 실패했습니다.");
-                }
-
-                @Override
-                public void onAdClosed() {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        }
     }
 
 
@@ -113,7 +95,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
             case R.id.btnGetPoint :
 
                 // 포인트 합산하기
-                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
                 int oldPoints = userInformation.getPoints();
                 int newPoints = oldPoints + reward;
                 userInformation.setPoints(newPoints);
@@ -125,8 +107,9 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     finish();
 
                 } else {
-                    FirebaseCrashlytics.getInstance().log("lessonId : " + MainLesson.lessonUnit.getLessonId());
-                    String lessonId = MainLesson.lessonUnit.getLessonId();
+                    FirebaseCrashlytics.getInstance().log("lessonId : " + LessonAdapterChild.lessonItem.getLessonId());
+                    String lessonId = LessonAdapterChild.lessonItem.getLessonId();
+
 
                     // analytics 로그 이벤트 얻기
                     FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -134,36 +117,17 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     bundle.putString("lessonId", lessonId);
                     firebaseAnalytics.logEvent("lesson_finish", bundle);
 
+
                     // 레슨완료 정보 업데이트 하기
-                    if (!userInformation.getLessonComplete().contains(lessonId)) {
-                        userInformation.addLessonComplete(lessonId);
-                    } else {
-                        System.out.println("이미 완료된 Lesson 입니다.");
+                    userInformation.updateLessonComplete(context, lessonId, 100);
+
+                    // 애드몹 광고 보여주기
+                    if(!isFromProfile) {
+
+                        AdsLoad.getInstance().playAds(this);
                     }
-
-                    // DB 에 유저 정보 업데이드 하기
-                    SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
-                            .set(userInformation)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    System.out.println("DB에 유저 정보를 업데이트 했습니다.");
-
-                                    // 애드몹 광고 보여주기
-                                    if(interstitialAd.isLoaded()) {
-                                        interstitialAd.show();
-                                    } else {
-                                        System.out.println("The interstitial ads wasn't loaded yet.");
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }
-                            });
                 }
-
                 break;
-
 
 
             default:

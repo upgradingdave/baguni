@@ -18,11 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ConfirmQuit"
+            android:theme="@style/DialogFullScreen" />
+        <activity
             android:name=".UnlockActivity"
             android:theme="@style/DialogFullScreen" />
-        <activity android:name=".lesson.lessonNumber.LessonNumberPracticeMenu" />
-        <activity android:name=".lesson.lessonNumber.LessonNumber" />
         <activity android:name=".lesson.lessonNumber.LessonNumberMenu" />
+        <activity android:name=".lesson.lessonNumber.LessonNumber" />
         <activity android:name=".lesson.LessonSpecialFrame" />
 
         <meta-data
@@ -54,7 +56,11 @@
         <activity android:name=".message.Message" />
         <activity android:name=".lesson.LessonFinish" />
         <activity android:name=".Logo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".login.SignUp" />
         <activity android:name=".teachers.Teachers" />
@@ -68,17 +74,9 @@
         <activity android:name=".lesson.LessonFrame" />
         <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulMenu" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:windowSoftInputMode="adjustNothing"></activity>
     </application>
 
 </manifest>

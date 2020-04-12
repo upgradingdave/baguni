@@ -1,4 +1,4 @@
-package net.awesomekorean.podo.lesson;
+package net.awesomekorean.podo.lesson.lessons;
 
 public interface Lesson {
 

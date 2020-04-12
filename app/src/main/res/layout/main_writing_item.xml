@@ -46,6 +46,7 @@
     <TextView
         android:id="@+id/article"
         android:textSize="15dp"
+        android:fontFamily="@font/nanumgothic_regular"
         android:background="@drawable/bg_underline"
         android:padding="10dp"
         android:maxLines="4"

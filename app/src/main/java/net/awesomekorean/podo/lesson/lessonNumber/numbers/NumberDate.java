@@ -1,8 +1,16 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-import net.awesomekorean.podo.lesson.lessonNumber.Number;
+import net.awesomekorean.podo.R;
 
-public class NumberDate implements Number {
+public class NumberDate implements Number, NumberPractice{
+
+    String lessonId = "N_date";
+
+    String practiceTitle = "date";
+
+    int practiceImage = R.drawable.numberdate;
+
+    int practiceProgress = 0;
 
     String[] front = {
             "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월",
@@ -20,6 +28,20 @@ public class NumberDate implements Number {
             "십일월 이십이일", "십이월 사일", "십이월 이십오일"
     };
 
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getPracticeTitle() {
+        return practiceTitle;
+    }
+
+    @Override
+    public int getPracticeImage() {
+        return practiceImage;
+    }
 
     @Override
     public String[] getFront() {
@@ -29,5 +51,15 @@ public class NumberDate implements Number {
     @Override
     public String[] getBack() {
         return back;
+    }
+
+    @Override
+    public int getPracticeProgress() {
+        return practiceProgress;
+    }
+
+    @Override
+    public void setPracticeProgress(int progress) {
+        this.practiceProgress = progress;
     }
 }

@@ -1,8 +1,16 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-import net.awesomekorean.podo.lesson.lessonNumber.Number;
+import net.awesomekorean.podo.R;
 
-public class NumberAge implements Number {
+public class NumberAge implements Number, NumberPractice {
+
+    String lessonId = "N_age";
+
+    String practiceTitle = "age";
+
+    int practiceImage = R.drawable.numberage;
+
+    int practiceProgress = 0;
 
     String[] front = {
             "1살", "2살", "3살", "4살", "5살", "6살", "7살", "8살", "9살", "10살", "11살", "12살", "13살", "14살",
@@ -17,6 +25,20 @@ public class NumberAge implements Number {
             "스물 아홉살", "서른살", "마흔살", "쉰살", "예순살", "일흔살", "여든살", "아흔살", "백살"
     };
 
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getPracticeTitle() {
+        return practiceTitle;
+    }
+
+    @Override
+    public int getPracticeImage() {
+        return practiceImage;
+    }
 
     @Override
     public String[] getFront() {
@@ -26,5 +48,15 @@ public class NumberAge implements Number {
     @Override
     public String[] getBack() {
         return back;
+    }
+
+    @Override
+    public int getPracticeProgress() {
+        return practiceProgress;
+    }
+
+    @Override
+    public void setPracticeProgress(int progress) {
+        this.practiceProgress = progress;
     }
 }

@@ -1,7 +1,5 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-import net.awesomekorean.podo.lesson.lessonNumber.Number;
-
 public class NumberSino implements Number {
 
     String[] front = {

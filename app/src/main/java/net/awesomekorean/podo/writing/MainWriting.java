@@ -65,17 +65,6 @@ public class MainWriting extends Fragment implements View.OnClickListener {
     Button btnYes;
     Button btnNo;
 
-    MainActivity mainActivity;
-
-    public MainWriting(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-    public MainWriting(){}
-
-    public static MainWriting newInstance(MainActivity mainActivity) {
-        return new MainWriting(mainActivity);
-    }
-
 
     @Nullable
     @Override
@@ -258,22 +247,6 @@ public class MainWriting extends Fragment implements View.OnClickListener {
             case R.id.btnNo :
                 msgDelete.setVisibility(View.GONE);
                 break;
-        }
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
-            if(mainActivity != null) {
-                mainActivity.setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
-            } else {
-                if(getActivity() != null) {
-                    ((MainActivity)getActivity()).setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
-                } else {
-                    System.out.println("MainActivity is null inside mainWriting.");
-                }
-            }
         }
     }
 }

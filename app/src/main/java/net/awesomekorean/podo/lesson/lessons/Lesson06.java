@@ -1,13 +1,11 @@
 package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.Lesson;
-import net.awesomekorean.podo.lesson.LessonItem;
 
 public class Lesson06 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_06";
-    private int title = R.string.L_06_TITLE;
+    private String title = "Progressive form";
     private String subTitle = "집에 가고 있어요";
     private int lessonImage = R.drawable.progressive;
 
@@ -85,7 +83,7 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem {
     // 레슨어뎁터 아이템
 
     @Override
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 

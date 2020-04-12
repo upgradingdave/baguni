@@ -86,6 +86,7 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:paddingLeft="60dp"
+                    android:fontFamily="@font/nanumgothic_regular"
                     android:textColor="@color/BLACK" />
 
                 <ImageView

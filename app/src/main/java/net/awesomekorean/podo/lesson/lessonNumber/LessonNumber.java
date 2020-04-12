@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson.lessonNumber;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -8,14 +9,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.PlayMediaPlayer;
+import net.awesomekorean.podo.lesson.lessonNumber.numbers.Number;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberAge;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberMoney;
@@ -31,10 +35,13 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    ImageView btnClose;
+    ProgressBar progressBar;
+    TextView progressTextView;
+
     TextView numberFront;
     TextView numberBack;
 
-    ImageView btnBack;
     TextView btnRandom;
     TextView btnInOrder;
     ImageView btnAudio;
@@ -57,20 +64,24 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     Map<Integer, byte[]> audiosNumber = new HashMap<>();
     boolean isFirstAudio = true;
 
+    boolean[] checkProgress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_number_frame);
 
-        btnBack = findViewById(R.id.btnBack);
+        btnClose = findViewById(R.id.btnClose);
+        progressBar = findViewById(R.id.progressBar);
+        progressTextView = findViewById(R.id.progressTextView);
         btnRandom = findViewById(R.id.btnRandom);
         btnInOrder = findViewById(R.id.btnInOrder);
         btnAudio = findViewById(R.id.btnAudio);
         btnNext = findViewById(R.id.btnNext);
         numberFront = findViewById(R.id.numberFront);
         numberBack = findViewById(R.id.numberBack);
-        btnBack.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
         btnRandom.setOnClickListener(this);
         btnInOrder.setOnClickListener(this);
         btnAudio.setOnClickListener(this);
@@ -78,7 +89,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = getIntent();
 
-        numberTitle = intent.getExtras().getString("extra");
+        numberTitle = intent.getExtras().getString(getString(R.string.EXTRA_ID));
 
         switch (numberTitle) {
 
@@ -117,8 +128,12 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setNumbers(String numberTitle) {
+
         numberLength = number.getFront().length;
         numberAudio = new String[numberLength];
+
+        checkProgress = new boolean[numberLength];
+
         String folder = "lesson/number/" + numberTitle;
 
         for(int i=0; i<numberLength; i++) {
@@ -142,6 +157,31 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    private void displayNumber() {
+
+        numberFront.setText(number.getFront()[index]);
+
+        numberBack.setText(number.getBack()[index]);
+
+        checkProgress[index] = true;
+
+        int count = 0;
+
+        for(int i=0; i<numberLength; i++) {
+
+            if(checkProgress[i]) {
+
+                count++;
+            }
+        }
+
+        progressBar.setProgress(count * 100 / numberLength);
+
+        progressTextView.setText(count + "/" + numberLength);
+    }
+
+
+
     // 랜덤학습 시작
     public void numberStudyRandom() {
         int randomIndex = random.nextInt(number.getFront().length);
@@ -150,9 +190,28 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void displayNumber() {
-        numberFront.setText(number.getFront()[index]);
-        numberBack.setText(number.getBack()[index]);
+    public void openConfirmQuit() {
+
+        Intent intent = new Intent(getApplicationContext(), ConfirmQuit.class);
+
+        intent.putExtra("progress", progressBar.getProgress());
+
+        if(!numberTitle.equals(getString(R.string.SINO)) && !numberTitle.equals(getString(R.string.NATIVE))) {
+
+            intent.putExtra("isNumberPractice", true);
+        }
+
+        startActivityForResult(intent, 200);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+            finish();
+        }
     }
 
 
@@ -160,8 +219,8 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btnBack :
-                finish();
+            case R.id.btnClose :
+                openConfirmQuit();
                 break;
 
             case R.id.btnRandom :
@@ -218,5 +277,11 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        openConfirmQuit();
     }
 }

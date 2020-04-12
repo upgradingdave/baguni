@@ -1,8 +1,16 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-import net.awesomekorean.podo.lesson.lessonNumber.Number;
+import net.awesomekorean.podo.R;
 
-public class NumberMoney implements Number {
+public class NumberMoney implements Number, NumberPractice {
+
+    String lessonId = "N_money";
+
+    String practiceTitle = "money";
+
+    int practiceImage = R.drawable.numbermoney;
+
+    int practiceProgress = 0;
 
     String[] front = {
             "100 원", "150 원", "230 원", "260 원", "330 원", "390 원", "410 원", "460 원", "530 원", "580 원",
@@ -24,6 +32,20 @@ public class NumberMoney implements Number {
             "칠만 천 원", "팔만 이천 원", "팔만 육천 원", "구만 사천 원", "구만 구천 원", "십만 원[심마눤]"
     };
 
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getPracticeTitle() {
+        return practiceTitle;
+    }
+
+    @Override
+    public int getPracticeImage() {
+        return practiceImage;
+    }
 
     @Override
     public String[] getFront() {
@@ -33,5 +55,15 @@ public class NumberMoney implements Number {
     @Override
     public String[] getBack() {
         return back;
+    }
+
+    @Override
+    public int getPracticeProgress() {
+        return practiceProgress;
+    }
+
+    @Override
+    public void setPracticeProgress(int progress) {
+        this.practiceProgress = progress;
     }
 }

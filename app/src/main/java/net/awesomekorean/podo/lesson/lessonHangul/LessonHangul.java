@@ -12,9 +12,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
@@ -23,8 +25,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.AdsLoad;
+import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.PlayMediaPlayer;
+import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
+import net.awesomekorean.podo.lesson.LessonAdapterChild;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,18 +45,22 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     Hangul thisHangul;
 
-    TextView title;
+    ProgressBar progressBar;
+    TextView progressTextView;
+
+    LinearLayout loadingLayout;
     LinearLayout layoutHangul;
     TextView textViewHangul;
     TextView textViewHangulExplain;
     ConstraintLayout layoutIntro; // 인트로 버튼 눌렀을 때 뷰
     TextView textViewIntro; // 인트로 텍스트
-    ImageView btnClose; // 인트로뷰 닫기 버튼
+    ImageView btnCloseIntro; // 인트로뷰 닫기 버튼
 
     ImageView imageViewHangul;
 
     String[] hangul;
     String[] hangulExplain;
+    int hangulLength;
     String hangulIntro;
     String conVowBat;
 
@@ -57,13 +68,15 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     int writingBtnClicked = 0;
     int hintBtnClicked = 0;
 
+    boolean[] checkProgress;
+
     ImageView btnAudio;
     LinearLayout btnWriting;
     LinearLayout btnHint;
     ImageView iconWriting;
     ImageView iconHint;
     Button btnIntro;
-    ImageView btnBack;
+    ImageView btnClose;
     ScrollView scrollView;
 
     PlayMediaPlayer playMediaPlayer =  new PlayMediaPlayer();
@@ -74,7 +87,6 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     int resIDHint;
 
     Map<Integer, byte[]> audiosHangul = new HashMap<>();
-    boolean isFirstAudio = true;
 
     Intent intent;
 
@@ -93,28 +105,32 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         context = getApplicationContext();
 
-        title = findViewById(R.id.title);
+        loadingLayout = findViewById(R.id.loadingLayout);
+        progressBar = findViewById(R.id.progressBar);
+        progressTextView = findViewById(R.id.progressTextView);
         layoutHangul = findViewById(R.id.layoutHangul);
         textViewHangul = findViewById(R.id.textViewHangul);
         textViewHangulExplain = findViewById(R.id.textViewHangulExplain);
         layoutIntro = findViewById(R.id.layoutIntro);
         textViewIntro = findViewById(R.id.textViewIntro);
-        btnClose = findViewById(R.id.btnClose);
+        btnCloseIntro = findViewById(R.id.btnCloseIntro);
         btnAudio = findViewById(R.id.btnAudio);
         btnWriting = findViewById(R.id.btnWriting);
         btnHint = findViewById(R.id.btnHint);
         iconWriting = findViewById(R.id.iconWriting);
         iconHint = findViewById(R.id.iconHint);
         btnIntro = findViewById(R.id.btnIntro);
-        btnBack = findViewById(R.id.btnBack);
+        btnClose = findViewById(R.id.btnClose);
         scrollView = findViewById(R.id.svHangulExplain);
         swipeView = findViewById(R.id.swipeView);
         btnAudio.setOnClickListener(this);
         btnWriting.setOnClickListener(this);
         btnHint.setOnClickListener(this);
         btnIntro.setOnClickListener(this);
+        btnCloseIntro.setOnClickListener(this);
         btnClose.setOnClickListener(this);
-        btnBack.setOnClickListener(this);
+
+        onLoadingLayout(true);
 
         intent = getIntent();
         String hangulName = intent.getExtras().getString("conVowBat");
@@ -122,19 +138,16 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         switch (hangulName) {
 
             case "consonant" :
-                title.setText("Consonant");
                 thisHangul = new LessonHangulConsonant();
                 getThisHangul("con", hangulName);
                 break;
 
             case "vowel" :
-                title.setText("Vowel");
                 thisHangul = new LessonHangulVowel();
                 getThisHangul("vow", hangulName);
                 break;
 
             case "batchim" :
-                title.setText("Batchim");
                 thisHangul = new LessonHangulBatchim();
                 getThisHangul("bat", hangulName);
                 break;
@@ -202,19 +215,22 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
 
     public void getThisHangul(String comVowBat, String hangulName) {
+
         conVowBat = comVowBat;
         hangul = thisHangul.getHangul();
         hangulExplain = thisHangul.getHangulExplain();
+        hangulLength = hangul.length;
         hangulIntro = thisHangul.getHangulIntro();
         textViewIntro.setText(hangulIntro);
         textViewIntro.setMovementMethod(new ScrollingMovementMethod());
 
+        checkProgress = new boolean[hangulLength];
+
         // 한글오디오 불러오기
-        int length = thisHangul.getHangul().length;
-        String[] hangulAudio = new String[length];
+        String[] hangulAudio = new String[hangulLength];
         String folder = "hangul/" + conVowBat;
 
-        for(int i=0; i<length; i++) {
+        for(int i=0; i<hangulLength; i++) {
             final Integer audioIndexHangul = i;
             hangulAudio[i] = hangulName + "_" + i + ".mp3";
             StorageReference storageRef = storage.getReference().child(folder).child(hangulAudio[i]);
@@ -226,7 +242,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                     audiosHangul.put(audioIndexHangul, bytes);
                     if(audioIndexHangul == 0) {
                         setHangul();
-                        isFirstAudio = false;
+                        onLoadingLayout(false);
                     }
                 }
             });
@@ -235,9 +251,29 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
 
     public void setHangul() {
+
+        checkProgress[currentHangul] = true;
+
+        int count = 0;
+
+        for(int i=0; i<hangulLength; i++) {
+
+            if(checkProgress[i]) {
+
+                count++;
+            }
+        }
+
+        progressBar.setProgress(count * 100 /hangulLength);
+
         textViewHangul.setText(hangul[currentHangul]);
+
         textViewHangulExplain.setText(hangulExplain[currentHangul]);
+
+        progressTextView.setText(count + "/" + hangulLength);
+
         if(audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
+
             playMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
         }
     }
@@ -276,6 +312,28 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         imageViewHangul.setVisibility(imageView);
         textViewHangul.setVisibility(textView);
     }
+
+
+    private void onLoadingLayout(boolean b) {
+        if(b) {
+            loadingLayout.setVisibility(View.VISIBLE);
+        } else {
+            loadingLayout.setVisibility(View.GONE);
+        }
+    }
+
+
+    public void openConfirmQuit() {
+
+        Intent intent = new Intent(context, ConfirmQuit.class);
+
+        intent.putExtra("isHangul", true);
+
+        intent.putExtra("progress", progressBar.getProgress());
+
+        startActivityForResult(intent, 200);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -320,13 +378,30 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 layoutIntro.setVisibility(VISIBLE);
                 break;
 
-            case R.id.btnClose :
+            case R.id.btnCloseIntro :
                 layoutIntro.setVisibility(GONE);
                 break;
 
-            case R.id.btnBack :
-                finish();
+
+            case R.id.btnClose :
+                openConfirmQuit();
                 break;
         }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+            finish();
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        openConfirmQuit();
     }
 }

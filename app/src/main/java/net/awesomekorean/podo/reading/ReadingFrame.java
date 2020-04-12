@@ -73,9 +73,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     TextView btnSlow;
     Button btnFinish;
 
-    boolean isPlaying = false;
-    MediaPlayer mediaPlayer;
-    Integer playingPosition = null; // 오디오 재생 멈춘 지점
     int playingTime; // 오디오 길이
     String unitId;
 
@@ -90,28 +87,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     String url;
 
     MediaPlayerManager mediaPlayerManager;
-
-
-    class MyThread extends Thread {
-        @Override
-        // 쓰레드가 시작되면 콜백되는 매서드, 시크바를 조금씩 움직이게 해줌
-        public void run() {
-            while(isPlaying) {
-                if(mediaPlayer != null) {
-                    Integer currentPosition = null;
-                    try {
-                        currentPosition = mediaPlayer.getCurrentPosition();
-                    } catch (IllegalStateException e) {
-                        System.out.println(e);
-                        mediaPlayer.reset();
-                        currentPosition = mediaPlayer.getCurrentPosition();
-                    }
-                    seekBar.setProgress(currentPosition);
-                }
-            }
-        }
-    }
-
+    MediaPlayerManager singleMediaPlayerManager;
 
 
     @Override
@@ -149,28 +125,19 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if(seekBar.getMax()==progress) {
                     setVisibility(View.VISIBLE, View.GONE);
-                    isPlaying = false;
-                    mediaPlayer.stop();
+                    mediaPlayerManager.stopMediaPlayer();
                 }
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                isPlaying = false;
-                if(mediaPlayer != null && mediaPlayer.isPlaying()){
-                    mediaPlayer.pause();
-                }
+                mediaPlayerManager.stopMediaPlayer();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if(mediaPlayer != null) {
-                    isPlaying = true;
-                    int position = seekBar.getProgress(); // 유저가 움직여 놓은 위치
-                    mediaPlayer.seekTo(position);
-                    mediaPlayer.start();
-                    new MyThread().start();
-                }
+                mediaPlayerManager.seek(seekBar.getProgress());
+                mediaPlayerManager.playMediaPlayer();
             }
         });
 
@@ -220,14 +187,13 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         popUpLayout.setVisibility(View.VISIBLE);
 
                         // 단어 오디오 재생
-                        if(mediaPlayer != null ) {
-                            playingPosition = mediaPlayer.getCurrentPosition();
-                            mediaPlayer.pause();
-                            setVisibility(View.VISIBLE, View.GONE);
-                            isPlaying = false;
-                        }
-                        audioFileWord = unitId + "_" + popUpIndex + ".mp3";
-                        playMediaPlayer.playAudioInByte(audiosWord.get(popUpIndex));
+//                        audioFileWord = unitId + "_" + popUpIndex + ".mp3";
+//                        playMediaPlayer.playAudioInByte(audiosWord.get(popUpIndex));
+
+                        singleMediaPlayerManager = MediaPlayerManager.getInstance();
+                        singleMediaPlayerManager.setMediaPlayerByte(audiosWord.get(popUpIndex));
+                        singleMediaPlayerManager.playMediaPlayer();
+                        setVisibility(View.VISIBLE, View.GONE);
                     }
 
                     @Override
@@ -284,24 +250,24 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnPlay:
                 // 최초 플레이 or 다시 플레이 시
-                mediaPlayerManager = MediaPlayerManager.getInstance();
-                if (playingPosition == null || mediaPlayer == null) {
+                if (mediaPlayerManager == null) {
                     StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(unitId+".mp3");
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            mediaPlayerManager = MediaPlayerManager.getInstance(seekBar);
                             url = uri.toString();
-                            mediaPlayerManager.setMediaPlayer(url);
+                            mediaPlayerManager.setMediaPlayerUrl(url);
                             playingTime = mediaPlayerManager.getDuration(); // 노래 재생시간
                             seekBar.setMax(playingTime);
-                            mediaPlayerManager.playMediaPlayer(seekBar);
+                            mediaPlayerManager.playMediaPlayer();
                             setVisibility(View.GONE, View.VISIBLE);
                         }
                     });
 
                     // 뭠췄다가 플레이 시
                 } else {
-                    mediaPlayerManager.playMediaPlayer(seekBar);
+                    mediaPlayerManager.playMediaPlayer();
                     setVisibility(View.GONE, View.VISIBLE);
                 }
                 break;
@@ -314,23 +280,18 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             case R.id.btnNormal :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
-                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(1f));
-                }
+                mediaPlayerManager.setSpeed(1f);
                 break;
 
             case R.id.btnSlow :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
-                if(mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(0.8f));
-                }
+                mediaPlayerManager.setSpeed(0.8f);
             break;
 
             case R.id.btnFinish :
-                if(mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
-                }
+/*
+                mediaPlayerManager.stopMediaPlayer();
 
                 setVisibility(View.VISIBLE, View.GONE);
                 seekBar.setProgress(0);
@@ -348,22 +309,31 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                     System.out.println("이미 완료된 Reading 입니다.");
                 }
 
-                Intent intent = new Intent(context, MainActivity.class);
-                startActivity(intent);
+
+ */
                 finish();
                 break;
 
         }
+
+
     }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        isPlaying = false;
-        if(mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
+//        isPlaying = false;
+//        if(mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer = null;
+//        }
         setVisibility(View.VISIBLE, View.GONE);
     }
 

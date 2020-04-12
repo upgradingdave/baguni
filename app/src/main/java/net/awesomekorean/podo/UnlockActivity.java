@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,10 +26,12 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import net.awesomekorean.podo.lesson.LessonAdapterChild;
 import net.awesomekorean.podo.lesson.LessonFinish;
-import net.awesomekorean.podo.lesson.MainLesson;
+import net.awesomekorean.podo.lesson.LessonSpecialFrame;
 import net.awesomekorean.podo.purchase.TopUp;
 import net.awesomekorean.podo.reading.MainReading;
+import net.awesomekorean.podo.reading.ReadingFrame;
 
 public class UnlockActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,11 +60,15 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
     Intent intent;
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_unlock);
+
+        context = getApplicationContext();
 
         unlockFirst = findViewById(R.id.unlockFirst);
         unlockSecond = findViewById(R.id.unlockSecond);
@@ -81,7 +85,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         btnWatchAds.setOnClickListener(this);
         btnClose.setOnClickListener(this);
 
-        userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
         userPoint = userInformation.getPoints();
 
         rewardedAd = createAndLoadRewardedAd();
@@ -116,7 +120,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK) {
-            userPoint = SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints();
+            userPoint = SharedPreferencesInfo.getUserInfo(context).getPoints();
             if(userPoint >= unlockPrice) {
                 unlockFirst.setVisibility(View.VISIBLE);
                 unlockSecond.setVisibility(View.GONE);
@@ -142,24 +146,32 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     int newPoint = userPoint - unlockPrice;
                     userInformation.setPoints(newPoint);
                     if(extra.equals("specialLesson")) {
-                        userInformation.addSpecialLessonUnlock(MainLesson.lessonUnit.getLessonId());
+
+                        userInformation.addSpecialLessonUnlock(LessonAdapterChild.lessonItem.getLessonId());
+
+                        intent = new Intent(context, LessonSpecialFrame.class);
+
+
                     } else {
+
                         userInformation.addReadingUnlock(MainReading.readingUnit.getReadingId());
+
+                        intent = new Intent(context, ReadingFrame.class);
                     }
+
+                    startActivity(intent);
 
                     DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
                     informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                            intent = new Intent();
-                            setResult(RESULT_OK, intent);
+                            SharedPreferencesInfo.setUserInfo(context, userInformation);
                             finish();
                             System.out.println("레슨/읽기를 포인트로 구매했습니다.");
-                            Toast.makeText(getApplicationContext(), getString(R.string.UNLOCK_SUCCEEDED), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, getString(R.string.UNLOCK_SUCCEEDED), Toast.LENGTH_LONG).show();
 
                             // analytics 로그 이벤트 얻기
-                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
                             Bundle bundle = new Bundle();
                             bundle.putString("type", extra);
                             firebaseAnalytics.logEvent("point_use", bundle);
@@ -168,7 +180,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.UNLOCK_FAILED), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, getString(R.string.UNLOCK_FAILED), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
@@ -180,7 +192,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.btnPurchasePoints :
                 finish();
-                intent = new Intent(getApplicationContext(), TopUp.class);
+                intent = new Intent(context, TopUp.class);
                 startActivity(intent);
                 break;
 
@@ -196,14 +208,14 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             startActivityForResult(intent, 200);
 
                             // analytics 로그 이벤트 얻기
-                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
                             Bundle bundle = new Bundle();
                             firebaseAnalytics.logEvent("reward_watch", bundle);
                         }
 
                         @Override
                         public void onRewardedAdFailedToShow(int i) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.AD_DISPLAY_FAILED), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, getString(R.string.AD_DISPLAY_FAILED), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -213,7 +225,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     };
                     rewardedAd.show(UnlockActivity.this, adCallback);
                 } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
                 }
                 break;
 

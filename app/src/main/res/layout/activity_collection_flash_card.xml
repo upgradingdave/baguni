@@ -55,6 +55,7 @@
             android:maxLength="100"
             android:background="@drawable/bg_white_30_stroke_grey"
             android:paddingLeft="15dp"
+            android:fontFamily="@font/nanumgothic_regular"
             android:textSize="30dp" />
 
         <TextView

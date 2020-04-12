@@ -1,5 +1,15 @@
 package net.awesomekorean.podo;
 
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import net.awesomekorean.podo.lesson.LessonProgressInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +53,58 @@ public class UserInformation {
         return lessonComplete;
     }
 
-    public void addLessonComplete(String lessonId) {
-        this.lessonComplete.add(lessonId);
+    // 신규 lessonComplete 변경을 위해 만듦 (L_00 --> L_00%100)
+    public void setLessonComplete(List<String> lessonComplete) {
+        this.lessonComplete = lessonComplete;
+    }
+
+
+    // 레슨완료 업데이트하고 앱이랑 DB도 바로 업데이트 함
+    public void updateLessonComplete(Context context, String lessonId, int thisProgress) {
+
+        LessonProgressInfo lessonProgressInfo = new LessonProgressInfo(context);
+
+        int previousProgress = lessonProgressInfo.getProgress(lessonId);
+
+        System.out.println("레슨 아이디 : " + lessonId);
+
+        System.out.println("기존 진행률 : " + previousProgress);
+
+        System.out.println("현재 진행률 : " + thisProgress);
+
+
+        if(thisProgress > previousProgress) {
+
+            if(previousProgress == -1) {
+
+                lessonComplete.add(lessonId + "%" + thisProgress);
+
+            } else {
+
+                int index = lessonProgressInfo.getIndex(lessonId);
+
+                lessonComplete.set(index, lessonId + "%" + thisProgress);
+            }
+
+            SharedPreferencesInfo.setUserInfo(context, this);
+
+            // DB 에 유저 정보 업데이드 하기
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            db.collection(context.getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(context.getString(R.string.DB_INFORMATION)).document(context.getString(R.string.DB_INFORMATION))
+                    .set(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            System.out.println("DB에 유저 정보를 업데이트 했습니다.");
+                            System.out.println(lessonComplete);
+                        }
+                    });
+
+        } else {
+
+            System.out.println("기존 진행률이 더 높습니다. DB에 유저 정보를 업데이트하지 않습니다.");
+        }
     }
 
     public List<String> getReadingComplete() {

@@ -49,15 +49,15 @@
         android:layout_height="wrap_content"/>
 
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@id/btnProfile"
         app:layout_constraintBottom_toTopOf="@id/btns"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-    </androidx.viewpager.widget.ViewPager>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/btns"

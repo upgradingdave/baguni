@@ -46,6 +46,7 @@
             android:textSize="20dp"
             android:textColor="@color/BLACK"
             android:textStyle="bold"
+            android:fontFamily="@font/nanumgothic_regular"
             android:background="@drawable/bg_underline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -74,6 +75,7 @@
     에르미타주 박물관에서는 앞으로 상트페테르부르크에서 열리는 경기에만 '아킬레스'의 능력을 사용하기로 했다.
     '아킬레스'는 22일 상트페테르부르크에서 열리는 브라질과 코스타리카의 경기 전에 네 번째 예언을 할 예정이다."
                 android:textSize="20dp"
+                android:fontFamily="@font/nanumgothic_regular"
                 android:textColor="@color/BLACK"/>
         </ScrollView>
 

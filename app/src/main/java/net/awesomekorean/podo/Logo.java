@@ -38,6 +38,10 @@ public class Logo extends AppCompatActivity {
         // 애드몹 초기화
         MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
 
+        // 광고 미리 로드하기
+        AdsLoad.getInstance().setAds(this);
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -63,7 +67,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 2);
 
     }
 

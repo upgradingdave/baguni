@@ -9,17 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,10 +24,12 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -117,9 +115,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         firebaseAnalytics.logEvent("lesson_word", bundle);
 
 
-        lesson = (Lesson) MainLesson.lessonUnit;
+        lesson = (Lesson) LessonAdapterChild.lessonItem;
 
-        lessonId = MainLesson.lessonUnit.getLessonId();
+        lessonId = LessonAdapterChild.lessonItem.getLessonId();
         FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
 
         folder = "lesson/" + lessonId.toLowerCase();

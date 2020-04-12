@@ -107,17 +107,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
     ArrayList<CollectionEntity> checkedList;
 
-    MainActivity mainActivity;
-
-    public MainCollection(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-    public MainCollection(){}
-
-    public static MainCollection newInstance(MainActivity mainActivity) {
-        return new MainCollection(mainActivity);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -563,22 +552,6 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
         @Override
         public int compare(CollectionEntity c1, CollectionEntity c2) {
             return c2.getDateNew().compareTo(c1.getDateNew());
-        }
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser) {
-            if(mainActivity != null) {
-                mainActivity.setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
-            } else {
-                if(getActivity() != null) {
-                    ((MainActivity)getActivity()).setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
-                } else {
-                    System.out.println("MainActivity is null inside mainCollection.");
-                }
-            }
         }
     }
 }

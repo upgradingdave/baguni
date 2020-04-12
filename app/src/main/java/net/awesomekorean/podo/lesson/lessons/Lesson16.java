@@ -1,13 +1,11 @@
 package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.Lesson;
-import net.awesomekorean.podo.lesson.LessonItem;
 
 public class Lesson16 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_16";
-    private int title = R.string.L_16_TITLE;
+    private String title = "Possibility";
     private String subTitle = "쉬울 수 있어요";
     private int lessonImage = R.drawable.posibility;
 
@@ -94,7 +92,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem {
     // 레슨어뎁터 아이템
 
     @Override
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 

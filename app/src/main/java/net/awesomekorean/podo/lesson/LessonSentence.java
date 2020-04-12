@@ -1,9 +1,8 @@
 package net.awesomekorean.podo.lesson;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +22,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
@@ -36,6 +36,8 @@ import static net.awesomekorean.podo.lesson.LessonWord.lessonCount;
 public class LessonSentence extends Fragment implements Button.OnClickListener, View.OnTouchListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+
+    Context context;
 
     View view;
 
@@ -78,6 +80,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
 
+        context = getContext();
+
         LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
         viewLeft = view.findViewById(R.id.viewLeft);
@@ -96,13 +100,13 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         LessonSwipeListener gestureListener = new LessonSwipeListener();
         LessonFrame lessonFrame = (LessonFrame)getActivity();
         gestureListener.setActivity(lessonFrame);
-        gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.getApplicationContext(), gestureListener);
+        gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.context, gestureListener);
 
         lessonLayout.setOnTouchListener(this);
         scrollView.setOnTouchListener(this);
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_sentence", bundle);
 
@@ -126,7 +130,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         sentenceAudio = new String[sentenceLength];
         String lessonId = LessonWord.lessonId;
         String folder = LessonWord.folder;
-        String packageName = getContext().getPackageName();
+        String packageName = context.getPackageName();
 
         sentenceFront = LessonWord.lesson.getSentenceFront();
 
@@ -188,12 +192,12 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
                 String front = sentenceFront[lessonCount];
                 String back = sentenceBack[lessonCount];
                 String audio = sentenceAudio[lessonCount];
-                String folder = "lesson/" + MainLesson.lessonUnit.getLessonId().toLowerCase();;
+                String folder = "lesson/" + LessonAdapterChild.lessonItem.getLessonId().toLowerCase();;
 
-                DownloadAudio downloadAudio = new DownloadAudio(getContext(), folder, audio);
+                DownloadAudio downloadAudio = new DownloadAudio(context, folder, audio);
                 downloadAudio.downloadAudio();
 
-                CollectionRepository repository = new CollectionRepository(getContext());
+                CollectionRepository repository = new CollectionRepository(context);
                 repository.insert(front, back, audio);
 
                 collectResult.setVisibility(View.VISIBLE);

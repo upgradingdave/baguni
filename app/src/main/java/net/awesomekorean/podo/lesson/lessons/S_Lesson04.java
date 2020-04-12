@@ -1,13 +1,11 @@
 package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.LessonItem;
-import net.awesomekorean.podo.lesson.LessonSpecial;
 
 public class S_Lesson04 extends S_LessonInit implements LessonItem, LessonSpecial {
 
     private String lessonId = "SL_04";
-    private int title = R.string.SL_04_TITLE;
+    private String title = "Particles";
     private String subTitle = "Why we use it?";
     private int lessonImage = R.drawable.particles1;
 
@@ -19,7 +17,7 @@ public class S_Lesson04 extends S_LessonInit implements LessonItem, LessonSpecia
     }
 
     @Override
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 

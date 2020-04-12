@@ -1,10 +1,5 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-import net.awesomekorean.podo.lesson.lessonNumber.Number;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class NumberNative implements Number {
 
     String[] front = {

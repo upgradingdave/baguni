@@ -107,6 +107,7 @@
             android:text="ㄱ"
             android:textSize="70dp"
             android:textStyle="bold"
+            android:fontFamily="@font/nanumgothic_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

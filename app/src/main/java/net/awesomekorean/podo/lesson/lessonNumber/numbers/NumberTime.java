@@ -1,8 +1,16 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-import net.awesomekorean.podo.lesson.lessonNumber.Number;
+import net.awesomekorean.podo.R;
 
-public class NumberTime implements Number {
+public class NumberTime implements Number, NumberPractice {
+
+    String lessonId = "N_time";
+
+    String practiceTitle = "time";
+
+    int practiceImage = R.drawable.numbertime;
+
+    int practiceProgress = 0;
 
     String[] front = {
             "1시","2시","3시","4시","5시","6시","7시","8시","9시","10시","11시","12시",
@@ -15,6 +23,20 @@ public class NumberTime implements Number {
             "아홉시 십육분[심뉵분]", "열시 사십구분", "열두시 십이분[시비분]"
     };
 
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getPracticeTitle() {
+        return practiceTitle;
+    }
+
+    @Override
+    public int getPracticeImage() {
+        return practiceImage;
+    }
 
     @Override
     public String[] getFront() {
@@ -24,5 +46,15 @@ public class NumberTime implements Number {
     @Override
     public String[] getBack() {
         return back;
+    }
+
+    @Override
+    public int getPracticeProgress() {
+        return practiceProgress;
+    }
+
+    @Override
+    public void setPracticeProgress(int progress) {
+        this.practiceProgress = progress;
     }
 }

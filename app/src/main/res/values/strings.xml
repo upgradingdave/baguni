@@ -68,7 +68,8 @@
 
 
     <!--    레슨-->
-    <string name="CONFIRM_QUIT">"Do you want to go back to main?\n(You can be rewarded points when you finish the lesson)"</string>
+    <string name="CONFIRM_QUIT_LESSON">"Do you want to go back to main?\n(You can be rewarded points when you finish the lesson)"</string>
+    <string name="CONFIRM_QUIT">"Do you want to go back to main?"</string>
     <string name="HANGUL">Hangul</string>
     <string name="CONSONANT">Consonant</string>
     <string name="VOWEL">Vowel</string>
@@ -98,11 +99,12 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="SINO_NUMBER">Sino-Korean number</string>
     <string name="NATIVE_NUMBER">Native-Korean number (1~99)</string>
     <string name="PRACTICE">Practice</string>
-    <string name="TIME">Time</string>
-    <string name="MONEY">Money</string>
-    <string name="DATE">Date</string>
-    <string name="PHONE_NUMBER">Phone number</string>
-    <string name="AGE">Age</string>
+    <string name="SINO">sino</string>
+    <string name="NATIVE">native</string>
+    <string name="TIME">time</string>
+    <string name="MONEY">money</string>
+    <string name="DATE">date</string>
+    <string name="AGE">age</string>
     <string name="IN_ORDER">In order</string>
     <string name="INTRO">Intro</string>
     <string name="HINT">Hint</string>

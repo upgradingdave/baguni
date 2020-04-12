@@ -1,10 +1,14 @@
-package net.awesomekorean.podo.lesson;
+package net.awesomekorean.podo.lesson.lessons;
 
 public interface LessonItem {
 
     String getLessonId();
 
-    int getTitle();
+    int getLessonProgress();
+
+    void setLessonProgress(int progress);
+
+    String getTitle();
 
     String getSubTitle();
 

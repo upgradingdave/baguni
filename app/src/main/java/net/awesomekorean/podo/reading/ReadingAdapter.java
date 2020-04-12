@@ -2,6 +2,8 @@ package net.awesomekorean.podo.reading;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +37,12 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
     }
 
     Context context;
-    Animation animation;
 
     private ArrayList<Reading> list;
 
     public ReadingAdapter(Context context, ArrayList<Reading> list) {
         this.context = context;
         this.list = list;
-        this.animation = AnimationUtils.loadAnimation(context, R.anim.move_left_reading_item);
     }
 
 
@@ -57,6 +57,9 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         LinearLayout levelRocket3;
         LinearLayout layoutCompleted;
 
+        private ColorMatrixColorFilter filterGrey;
+        private ColorMatrixColorFilter filterNormal;
+
         ViewHolder(View itemView) {
             super(itemView);
 
@@ -68,6 +71,16 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             levelRocket2 = itemView.findViewById(R.id.levelRocket2);
             levelRocket3 = itemView.findViewById(R.id.levelRocket3);
             layoutCompleted = itemView.findViewById(R.id.layoutCompleted);
+
+            ColorMatrix matrix = new ColorMatrix();
+
+            matrix.setSaturation(0);
+
+            filterGrey = new ColorMatrixColorFilter(matrix);
+
+            matrix.setSaturation(1);
+
+            filterNormal = new ColorMatrixColorFilter(matrix);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,6 +111,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         Reading items = list.get(position);
 
         holder.title.setText(items.getTitle());
@@ -113,8 +127,10 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             holder.layoutCompleted.setVisibility(View.INVISIBLE);
         }
         if (items.getIsLock()) {
+            holder.readingImage.setColorFilter(holder.filterGrey);
             holder.iconLock.setVisibility(View.VISIBLE);
         } else {
+            holder.readingImage.setColorFilter(holder.filterNormal);
             holder.iconLock.setVisibility(View.INVISIBLE);
         }
 
@@ -126,8 +142,6 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         } else if(readingLevel == 3) {
             setLevel(View.GONE, View.GONE, View.VISIBLE, holder);
         }
-
-        holder.readingItem.startAnimation(animation);
     }
 
     private void setLevel(int rocket1, int rocket2, int rocket3, ViewHolder holder) {

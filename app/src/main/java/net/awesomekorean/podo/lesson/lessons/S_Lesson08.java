@@ -1,13 +1,11 @@
 package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.LessonItem;
-import net.awesomekorean.podo.lesson.LessonSpecial;
 
 public class S_Lesson08 extends S_LessonInit implements LessonItem, LessonSpecial {
 
     private String lessonId = "SL_08";
-    private int title = R.string.SL_08_TITLE;
+    private String title = "Conjugation";
     private String subTitle = "2 meanings of '아서/어서' ";
     private int lessonImage = R.drawable.conjugation3;
 
@@ -19,7 +17,7 @@ public class S_Lesson08 extends S_LessonInit implements LessonItem, LessonSpecia
     }
 
     @Override
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 

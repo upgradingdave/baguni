@@ -125,6 +125,7 @@
             android:layout_weight="1"
             android:text="Reading Title"
             android:textSize="20dp"
+            android:fontFamily="@font/nanumgothic_regular"
             android:paddingBottom="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"

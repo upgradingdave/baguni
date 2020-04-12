@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/title"
         android:gravity="center"
-        android:text="@string/NUMBERS"
+        android:text="@string/PRACTICE"
         android:textSize="18dp"
         android:textColor="@color/BLACK"
         android:background="@color/WHITE"
@@ -42,96 +42,19 @@
         android:layout_width="80dp"
         android:layout_height="40dp"/>
 
-    <ScrollView
-        android:padding="20dp"
+
+    <ListView
+        android:id="@+id/listView"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:listSelector="@color/FOGGY"
         app:layout_constraintTop_toBottomOf="@id/btnIntro"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <LinearLayout
-                android:id="@+id/sinoNumber"
-                android:background="@drawable/bg_white_10_stroke_grey"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
-
-                <ImageView
-                    android:src="@drawable/sinokoreannumber"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="40dp"
-                    android:text="@string/SINO_NUMBER"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/nativeNumber"
-                android:background="@drawable/bg_white_10_stroke_grey"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
-
-                <ImageView
-                    android:src="@drawable/nativekoreannumber"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="40dp"
-                    android:text="@string/NATIVE_NUMBER"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/practice"
-                android:background="@drawable/bg_white_10_stroke_grey"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp">
-
-                <ImageView
-                    android:src="@drawable/numberpractice"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_marginLeft="40dp"
-                    android:text="@string/PRACTICE"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+    </ListView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutIntro"
@@ -185,7 +108,5 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

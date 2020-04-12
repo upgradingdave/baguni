@@ -15,6 +15,9 @@ import androidx.core.content.ContextCompat;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.PlayMediaPlayer;
+import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
+import net.awesomekorean.podo.lesson.LessonAdapterChild;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -267,9 +270,22 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.btnBack :
-                finish();
+                setLessonComplete();
                 break;
         }
+    }
+
+
+    private void setLessonComplete() {
+
+        // 레슨완료리스트에 업데이트
+        String lessonId = LessonAdapterChild.lessonItem.getLessonId();
+
+        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+
+        userInformation.updateLessonComplete(context, lessonId, 100);
+
+        finish();
     }
 
     private void setAssemblyBtns(ImageView assembly, int active) {
@@ -406,6 +422,10 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         batchimBoxLayout3.setVisibility(batchimBoxLayout);
     }
 
+    @Override
+    public void onBackPressed() {
+        setLessonComplete();
+    }
 }
 
 

@@ -23,6 +23,7 @@
         android:ellipsize="end"
         android:gravity="left|center_vertical"
         android:maxLines="1"
+        android:fontFamily="@font/nanumgothic_regular"
         android:text="사과"
         android:textSize="20dp" />
 

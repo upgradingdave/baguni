@@ -60,29 +60,17 @@ public class MainReading extends Fragment {
 
     Intent intent;
 
-    MainActivity mainActivity;
-
     ArrayList<Reading> list;
     ReadingAdapter adapter;
 
     UserInformation userInformation;
 
     Button btnGetReading;
-    boolean isClicked = false;
+    boolean isClicked;  // 읽기 구매리스트 전환 버튼
 
     Reading[] items = {
             new Reading00(), new Reading01(), new Reading02(), new Reading03(), new Reading04(), new Reading05(), new Reading06(), new Reading07(), new Reading08(), new Reading09(), new Reading10(), new Reading11(), new Reading12(), new Reading13(), new Reading14(), new Reading15(), new Reading16(), new Reading17(), new Reading18()
     };
-
-
-    public MainReading(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-    public MainReading() {}
-
-    public static MainReading newInstance(MainActivity mainActivity) {
-        return new MainReading(mainActivity);
-    }
 
 
     @Nullable
@@ -97,6 +85,7 @@ public class MainReading extends Fragment {
 
         list = new ArrayList<>();
 
+        isClicked = false;
 
         items[0].setIsLocked(false);
         items[1].setIsLocked(false);
@@ -127,8 +116,7 @@ public class MainReading extends Fragment {
                     // 포인트 사용 확인창 띄우기
                     intent = new Intent(context, UnlockActivity.class);
                     intent.putExtra("unlock", "reading");
-                    startActivityForResult(intent, 200);
-
+                    startActivity(intent);
                 }
             }
         });
@@ -144,6 +132,7 @@ public class MainReading extends Fragment {
             @Override
             public void onClick(View v) {
                 list.clear();
+
                 if(!isClicked) {
                     for(Reading item : items) {
                         if(item.getIsLock()) {
@@ -172,6 +161,7 @@ public class MainReading extends Fragment {
         return view;
     }
 
+
     // 읽기 구매 성공
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -183,7 +173,6 @@ public class MainReading extends Fragment {
             btnGetReading.performClick();
         }
     }
-
 
 
     // 완료된 읽기 세팅하기
@@ -209,29 +198,6 @@ public class MainReading extends Fragment {
             for(int i=0; i<items.length; i++) {
                 if(readingUnlock.contains(items[i].getReadingId())) {
                     items[i].setIsLocked(false);
-                }
-            }
-        }
-    }
-
-
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if (isVisibleToUser) {
-            if(mainActivity != null) {
-                mainActivity.setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
-                isClicked = true;
-                btnGetReading.performClick();
-            } else {
-                if(getActivity() != null) {
-                    ((MainActivity)getActivity()).setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
-                    isClicked = true;
-                    btnGetReading.performClick();
-                } else {
-                    System.out.println("MainActivity is null inside mainReading.");
                 }
             }
         }

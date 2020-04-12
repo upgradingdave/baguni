@@ -9,7 +9,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,9 +37,13 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import net.awesomekorean.podo.collection.MainCollection;
+import net.awesomekorean.podo.lesson.LessonAdapterChild;
 import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
+import net.awesomekorean.podo.reading.MainReading;
+import net.awesomekorean.podo.writing.MainWriting;
 
 import java.util.Calendar;
 
@@ -44,9 +52,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
 
-    FragmentPagerAdapter adapterViewPager;
-
-    ViewPager viewPager;
+    FragmentManager fm;
+    FragmentTransaction tran;
+    Fragment mainLesson;
+    Fragment mainReading;
+    Fragment mainWriting;
+    Fragment mainCollection;
 
     TextView tvTitle;
 
@@ -89,13 +100,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainLesson.lessonUnit = null;
+        LessonAdapterChild.lessonItem = null;
 
         SettingStatusBar.setStatusBar(this);
-
-        viewPager = findViewById(R.id.viewPager);
-        adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager(), this);
-        viewPager.setAdapter(adapterViewPager);
 
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
@@ -124,6 +131,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         layoutCollection.setOnClickListener(this);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
+
+
+        mainLesson = new MainLesson();
+        mainReading = new MainReading();
+        mainWriting = new MainWriting();
+        mainCollection = new MainCollection();
+        setFrag(mainLesson);
+
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click_scale);
 
@@ -233,23 +248,23 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.layoutLesson:
+                setFrag(mainLesson);
                 setMainBtns(btnLesson, textLesson, R.drawable.lesson_active, R.string.LESSON);
-                viewPager.setCurrentItem(0);
                 break;
 
             case R.id.layoutReading:
+                setFrag(mainReading);
                 setMainBtns(btnReading, textReading, R.drawable.reading_active, R.string.READING);
-                viewPager.setCurrentItem(1);
                 break;
 
             case R.id.layoutWriting:
+                setFrag(mainWriting);
                 setMainBtns(btnWriting, textWriting, R.drawable.writing_active, R.string.WRITING);
-                viewPager.setCurrentItem(2);
                 break;
 
             case R.id.layoutCollection:
+                setFrag(mainCollection);
                 setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
-                viewPager.setCurrentItem(3);
                 break;
 
             case R.id.btnYes :
@@ -264,6 +279,19 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         }
     }
+
+
+    public void setFrag(Fragment frag) {
+
+        fm = getSupportFragmentManager();
+
+        tran = fm.beginTransaction();
+
+        tran.replace(R.id.frameLayout, frag);
+
+        tran.commit();
+    }
+
 
     public void setMainBtns(ImageView btn, TextView text, int active, int title) {
         btnLesson.setImageResource(R.drawable.lesson);
