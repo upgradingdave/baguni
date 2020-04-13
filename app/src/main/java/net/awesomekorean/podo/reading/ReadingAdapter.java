@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,10 +53,9 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         TextView title;
         ImageView readingImage;
         ImageView iconLock;
-        LinearLayout levelRocket1;
-        LinearLayout levelRocket2;
-        LinearLayout levelRocket3;
-        LinearLayout layoutCompleted;
+        ImageView rocket;
+        ProgressBar progressBar;
+        ImageView complete;
 
         private ColorMatrixColorFilter filterGrey;
         private ColorMatrixColorFilter filterNormal;
@@ -67,10 +67,10 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             title = itemView.findViewById(R.id.title);
             readingImage = itemView.findViewById(R.id.readingImage);
             iconLock = itemView.findViewById(R.id.iconLock);
-            levelRocket1 = itemView.findViewById(R.id.levelRocket1);
-            levelRocket2 = itemView.findViewById(R.id.levelRocket2);
-            levelRocket3 = itemView.findViewById(R.id.levelRocket3);
-            layoutCompleted = itemView.findViewById(R.id.layoutCompleted);
+            rocket = itemView.findViewById(R.id.rocket);
+            progressBar = itemView.findViewById(R.id.progressBar);
+            complete = itemView.findViewById(R.id.complete);
+
 
             ColorMatrix matrix = new ColorMatrix();
 
@@ -121,33 +121,40 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
         }
-        if (items.getIsCompleted()) {
-            holder.layoutCompleted.setVisibility(View.VISIBLE);
+
+        if (items.getReadingProgress() == 100) {
+            holder.progressBar.setVisibility(View.INVISIBLE);
+            holder.complete.setVisibility(View.VISIBLE);
+
         } else {
-            holder.layoutCompleted.setVisibility(View.INVISIBLE);
+            holder.progressBar.setProgress(items.getReadingProgress());
+            holder.progressBar.setVisibility(View.VISIBLE);
+            holder.complete.setVisibility(View.INVISIBLE);
         }
+
         if (items.getIsLock()) {
+            holder.progressBar.setVisibility(View.INVISIBLE);
             holder.readingImage.setColorFilter(holder.filterGrey);
+            holder.rocket.setColorFilter(holder.filterGrey);
             holder.iconLock.setVisibility(View.VISIBLE);
+
         } else {
             holder.readingImage.setColorFilter(holder.filterNormal);
+            holder.rocket.setColorFilter(holder.filterNormal);
             holder.iconLock.setVisibility(View.INVISIBLE);
         }
 
         int readingLevel = items.getReadingLevel();
-        if(readingLevel == 1) {
-            setLevel(View.VISIBLE, View.GONE, View.GONE, holder);
-        } else if(readingLevel == 2) {
-            setLevel(View.GONE, View.VISIBLE, View.GONE, holder);
-        } else if(readingLevel == 3) {
-            setLevel(View.GONE, View.GONE, View.VISIBLE, holder);
-        }
-    }
 
-    private void setLevel(int rocket1, int rocket2, int rocket3, ViewHolder holder) {
-        holder.levelRocket1.setVisibility(rocket1);
-        holder.levelRocket2.setVisibility(rocket2);
-        holder.levelRocket3.setVisibility(rocket3);
+        if(readingLevel == 1) {
+            holder.rocket.setImageResource(R.drawable.rocket1);
+
+        } else if(readingLevel == 2) {
+            holder.rocket.setImageResource(R.drawable.rocket2);
+
+        } else if(readingLevel == 3) {
+            holder.rocket.setImageResource(R.drawable.rocket3);
+        }
     }
 
 

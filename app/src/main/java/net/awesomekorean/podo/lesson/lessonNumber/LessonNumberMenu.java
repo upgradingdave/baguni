@@ -2,8 +2,6 @@ package net.awesomekorean.podo.lesson.lessonNumber;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,21 +11,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.LessonProgressInfo;
+import net.awesomekorean.podo.UnitProgressInfo;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberAge;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberMoney;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberTime;
-
-import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -125,7 +120,7 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
 
     private void setCompletedLessons() {
 
-        LessonProgressInfo lessonProgressInfo = new LessonProgressInfo(context);
+        UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, false);
 
         int sumOfNumberPractice = 0;  // 레슨연습 전체 진도율
 
@@ -135,7 +130,7 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
 
             lessonId = numberPractices[i].getLessonId();
 
-            int progress = lessonProgressInfo.getProgress(lessonId);
+            int progress = unitProgressInfo.getProgress(lessonId);
 
             if(progress != -1) {
 
@@ -151,7 +146,7 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
 
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
-        userInformation.updateLessonComplete(context, "N_practice", totalProgress);
+        userInformation.updateCompleteList(context, "N_practice", totalProgress, false);
     }
 
 

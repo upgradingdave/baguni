@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import net.awesomekorean.podo.lesson.LessonAdapterChild;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
+import net.awesomekorean.podo.reading.MainReading;
 
 public class ConfirmQuit extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +27,8 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
     boolean isHangul = false;
 
     boolean isNumberPractice = false;
+
+    boolean isReading = false;
 
 
     @Override
@@ -51,6 +54,8 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         isHangul = intent.getExtras().getBoolean("isHangul");
 
         isNumberPractice = intent.getExtras().getBoolean("isNumberPractice");
+
+        isReading = intent.getExtras().getBoolean("isReading");
     }
 
 
@@ -71,23 +76,27 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
             case R.id.btnYes :
 
-                String lessonId;
+                String unitId;
 
                 if(progress != null) {
 
                     if(isNumberPractice) {
 
-                        lessonId = LessonNumberMenu.numberPractice.getLessonId();
+                        unitId = LessonNumberMenu.numberPractice.getLessonId();
+
+                    } else if (isReading) {
+
+                        unitId = MainReading.readingUnit.getReadingId();
 
                     } else {
 
-                        lessonId = LessonAdapterChild.lessonItem.getLessonId();
+                        unitId = LessonAdapterChild.lessonItem.getLessonId();
                     }
 
-                    // 레슨완료리스트에 업데이트
+                    // 완료리스트에 업데이트
                     UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
 
-                    userInformation.updateLessonComplete(context, lessonId, progress);
+                    userInformation.updateCompleteList(context, unitId, progress, isReading);
 
 
                     // 진도율 50% 이상이면 광고 재생 (한글)

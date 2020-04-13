@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import net.awesomekorean.podo.UnitProgressInfo;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -57,11 +57,7 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
 
-import java.util.Arrays;
 import java.util.List;
-
-import static net.awesomekorean.podo.MainActivity.btnLesson;
-import static net.awesomekorean.podo.MainActivity.textLesson;
 
 public class MainLesson extends Fragment{
 
@@ -156,40 +152,15 @@ public class MainLesson extends Fragment{
     }
 
 
-    // 완료된 레슨 세팅하기
+    // 레슨 진도율 세팅하기
     private void setCompletedLessons() {
         List<String> lessonComplete = userInformation.getLessonComplete();
         System.out.println("LESSON_COMPLETE:" + lessonComplete);
 
         if(lessonComplete != null) {
 
-            // 완료레슨 번호 변경 (L_00 -> L_00%100)
-            if(!lessonComplete.get(0).contains("%")) {
-
-                for(int i=0; i<lessonComplete.size(); i++) {
-
-                    String newLessonComplete = lessonComplete.get(i) + "%100";
-
-                    lessonComplete.set(i, newLessonComplete);
-                }
-
-                userInformation.setLessonComplete(lessonComplete);
-
-                SharedPreferencesInfo.setUserInfo(context, userInformation);
-
-                db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
-                        .set(userInformation)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                System.out.println("DB에 lessonComplete 를 신규 번호로 변경했습니다.");
-                            }
-                        });
-
-            }
-
-            // 레슨 진도율 계산하기
-            LessonProgressInfo lessonProgressInfo = new LessonProgressInfo(context);
+            // 레슨 진도율 가져오기
+            UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, false);
 
             String lessonId;
 
@@ -202,7 +173,7 @@ public class MainLesson extends Fragment{
 
                     lessonId = childList[i][j].getLessonId();
 
-                    int progress = lessonProgressInfo.getProgress(lessonId);
+                    int progress = unitProgressInfo.getProgress(lessonId);
 
                     if(progress != -1) {
 

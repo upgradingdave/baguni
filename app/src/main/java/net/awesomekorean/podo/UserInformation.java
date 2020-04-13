@@ -8,8 +8,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import net.awesomekorean.podo.lesson.LessonProgressInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,20 +51,23 @@ public class UserInformation {
         return lessonComplete;
     }
 
-    // 신규 lessonComplete 변경을 위해 만듦 (L_00 --> L_00%100)
+    // 신규 완료정보 변경을 위해 만듦 (L_00 --> L_00%100)
     public void setLessonComplete(List<String> lessonComplete) {
         this.lessonComplete = lessonComplete;
     }
+    public void setReadingComplete(List<String> readingComplete) {
+        this.readingComplete = readingComplete;
+    }
 
 
-    // 레슨완료 업데이트하고 앱이랑 DB도 바로 업데이트 함
-    public void updateLessonComplete(Context context, String lessonId, int thisProgress) {
+    // 완료리스트 업데이트하고 앱이랑 DB도 바로 업데이트 함
+    public void updateCompleteList(Context context, String unitId, int thisProgress, boolean isReading) {
 
-        LessonProgressInfo lessonProgressInfo = new LessonProgressInfo(context);
+        UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, isReading);
 
-        int previousProgress = lessonProgressInfo.getProgress(lessonId);
+        int previousProgress = unitProgressInfo.getProgress(unitId);
 
-        System.out.println("레슨 아이디 : " + lessonId);
+        System.out.println("유닛 아이디 : " + unitId);
 
         System.out.println("기존 진행률 : " + previousProgress);
 
@@ -77,13 +78,29 @@ public class UserInformation {
 
             if(previousProgress == -1) {
 
-                lessonComplete.add(lessonId + "%" + thisProgress);
+                // 기존진행률이 0일 때 -> 완료리스트에 추가
+                if(isReading) {
 
+                    readingComplete.add(unitId + "%" + thisProgress);
+
+                } else {
+
+                    lessonComplete.add(unitId + "%" + thisProgress);
+                }
+
+                // 기존진행률이 있을 때 -> 완료리스트 수정
             } else {
 
-                int index = lessonProgressInfo.getIndex(lessonId);
+                int index = unitProgressInfo.getIndex(unitId);
 
-                lessonComplete.set(index, lessonId + "%" + thisProgress);
+                if(isReading) {
+
+                    readingComplete.set(index, unitId + "%" + thisProgress);
+
+                } else {
+
+                    lessonComplete.set(index, unitId + "%" + thisProgress);
+                }
             }
 
             SharedPreferencesInfo.setUserInfo(context, this);
@@ -98,6 +115,7 @@ public class UserInformation {
                         public void onComplete(@NonNull Task<Void> task) {
                             System.out.println("DB에 유저 정보를 업데이트 했습니다.");
                             System.out.println(lessonComplete);
+                            System.out.println(readingComplete);
                         }
                     });
 

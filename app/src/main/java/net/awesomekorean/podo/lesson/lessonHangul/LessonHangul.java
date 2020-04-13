@@ -133,7 +133,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         onLoadingLayout(true);
 
         intent = getIntent();
-        String hangulName = intent.getExtras().getString("conVowBat");
+        String hangulName = intent.getExtras().getString("conVowBat").toLowerCase();
 
         switch (hangulName) {
 
@@ -324,6 +324,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
 
     public void openConfirmQuit() {
+
+        // 오디오 끄기
 
         Intent intent = new Intent(context, ConfirmQuit.class);
 

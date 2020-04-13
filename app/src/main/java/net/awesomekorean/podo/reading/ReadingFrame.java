@@ -21,6 +21,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.MediaPlayerManager;
@@ -80,14 +82,14 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     SpannableStringBuilder span = new SpannableStringBuilder();
 
-    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
-
     Map<Integer, byte[]> audiosWord = new HashMap<>();
 
     String url;
 
     MediaPlayerManager mediaPlayerManager;
     MediaPlayerManager singleMediaPlayerManager;
+
+    int readingProgress = 0;
 
 
     @Override
@@ -123,6 +125,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                readingProgress = progress * 100 / seekBar.getMax();
+
                 if(seekBar.getMax()==progress) {
                     setVisibility(View.VISIBLE, View.GONE);
                     mediaPlayerManager.stopMediaPlayer();
@@ -311,18 +316,40 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
 
  */
-                finish();
+                openConfirmQuit();
                 break;
 
         }
+    }
 
 
+    public void openConfirmQuit() {
+
+        mediaPlayerManager.stopMediaPlayer();
+
+        Intent intent = new Intent(context, ConfirmQuit.class);
+
+        intent.putExtra("progress", readingProgress);
+
+        intent.putExtra("isReading", true);
+
+        startActivityForResult(intent, 200);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+            finish();
+        }
     }
 
 
     @Override
     public void onBackPressed() {
-        finish();
+        openConfirmQuit();
     }
 
 

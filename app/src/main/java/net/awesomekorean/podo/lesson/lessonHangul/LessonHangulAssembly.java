@@ -283,7 +283,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
 
-        userInformation.updateLessonComplete(context, lessonId, 100);
+        userInformation.updateCompleteList(context, lessonId, 100, false);
 
         finish();
     }

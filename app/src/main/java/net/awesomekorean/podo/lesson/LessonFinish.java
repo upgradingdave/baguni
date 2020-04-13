@@ -119,7 +119,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
 
                     // 레슨완료 정보 업데이트 하기
-                    userInformation.updateLessonComplete(context, lessonId, 100);
+                    userInformation.updateCompleteList(context, lessonId, 100, false);
 
                     // 애드몹 광고 보여주기
                     if(!isFromProfile) {

@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UnitProgressInfo;
 import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.reading.readings.Reading08;
@@ -175,19 +176,32 @@ public class MainReading extends Fragment {
     }
 
 
-    // 완료된 읽기 세팅하기
+    // 읽기 진도율 세팅하기
     private void setCompletedReadings() {
         List<String> readingComplete = userInformation.getReadingComplete();
         System.out.println("READING_COMPLETE:" + readingComplete);
 
         if(readingComplete != null) {
+
+            // 읽기 진도율 가져오기
+            UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, true);
+
+            String readingId;
+
             for(int i=0; i<items.length; i++) {
-                if(readingComplete.contains(items[i].getReadingId())) {
-                    items[i].setIsCompleted(true);
+
+                readingId = items[i].getReadingId();
+
+                int progress = unitProgressInfo.getProgress(readingId);
+
+                if(progress != -1) {
+
+                    items[i].setReadingProgress(progress);
                 }
             }
         }
     }
+
 
     // 구매된 읽기 세팅하기
     private void setUnlockedReadings() {
@@ -200,6 +214,19 @@ public class MainReading extends Fragment {
                     items[i].setIsLocked(false);
                 }
             }
+        }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
+
+        if(adapter != null) {
+            setCompletedReadings();
+            setUnlockedReadings();
+            adapter.notifyDataSetChanged();
         }
     }
 }
