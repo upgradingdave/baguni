@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.lesson.lessonNumber;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 public class LessonNumberMenuAdapter extends BaseAdapter {
 
-    private NumberPractice[] numbers;
+    private LessonItem[] numbers;
 
-    private NumberPractice number;
+    private LessonItem number;
 
     private Context context;
 
@@ -25,7 +25,7 @@ public class LessonNumberMenuAdapter extends BaseAdapter {
     private LayoutInflater inflater;
 
 
-    public LessonNumberMenuAdapter(Context context, NumberPractice[] numbers) {
+    public LessonNumberMenuAdapter(Context context, LessonItem[] numbers) {
 
         super();
 
@@ -81,11 +81,11 @@ public class LessonNumberMenuAdapter extends BaseAdapter {
 
         number = numbers[position];
 
-        holder.numberImage.setImageResource(number.getPracticeImage());
+        holder.numberImage.setImageResource(number.getLessonImage());
 
-        holder.numberTitle.setText(number.getPracticeTitle());
+        holder.numberTitle.setText(number.getLessonTitle());
 
-        int progress = number.getPracticeProgress();
+        int progress = number.getLessonProgress();
 
         if(progress == 100) {
 
@@ -95,9 +95,9 @@ public class LessonNumberMenuAdapter extends BaseAdapter {
 
             setNumberStatus(holder, View.VISIBLE, View.VISIBLE, View.GONE);
 
-            holder.numberProgress.setProgress(number.getPracticeProgress());
+            holder.numberProgress.setProgress(number.getLessonProgress());
 
-            holder.numberProgressText.setText(number.getPracticeProgress() + "%");
+            holder.numberProgressText.setText(number.getLessonProgress() + "%");
         }
 
         return view;

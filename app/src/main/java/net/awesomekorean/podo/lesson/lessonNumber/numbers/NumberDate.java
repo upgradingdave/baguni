@@ -1,25 +1,25 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.LessonInit;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
-public class NumberDate implements Number, NumberPractice{
+public class NumberDate extends LessonInit implements Number, LessonItem {
 
-    String lessonId = "N_date";
+    private String lessonId = "N_date";
 
-    String practiceTitle = "date";
+    private String lessonTitle = "date";
 
-    int practiceImage = R.drawable.numberdate;
+    private int lessonImage = R.drawable.numberdate;
 
-    int practiceProgress = 0;
-
-    String[] front = {
+    private String[] front = {
             "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월",
             "1월 1일", "1월 23일", "2월 14일", "2월 20일", "3월 3일", "3월 19일", "4월 17일", "4월 30일",
             "5월 8일", "5월 31일", "6월 6일", "6월 27일", "7월 2일", "7월 11일", "8월 1일", "8월 15일",
             "9월 7일", "9월 28일", "10월 8일", "10월 10일", "11월 11일", "11월 22일", "12월 4일", "12월 25일"
     };
 
-    String[] back = {
+    private String[] back = {
             "일월[이뤌]", "이월", "삼월", "사월", "오월", "유월[육월x]", "칠월", "팔월", "구월", "시월[십월x]",
             "십일월[시비뤌]", "십이월[시비월]",
             "일월 일일[이릴]", "일월 이십삼일", "이월 십사일", "이월 이십일", "삼월 삼일", "삼월 십구일", "사월 십칠일",
@@ -34,13 +34,13 @@ public class NumberDate implements Number, NumberPractice{
     }
 
     @Override
-    public String getPracticeTitle() {
-        return practiceTitle;
+    public String getLessonTitle() {
+        return lessonTitle;
     }
 
     @Override
-    public int getPracticeImage() {
-        return practiceImage;
+    public int getLessonImage() {
+        return lessonImage;
     }
 
     @Override
@@ -51,15 +51,5 @@ public class NumberDate implements Number, NumberPractice{
     @Override
     public String[] getBack() {
         return back;
-    }
-
-    @Override
-    public int getPracticeProgress() {
-        return practiceProgress;
-    }
-
-    @Override
-    public void setPracticeProgress(int progress) {
-        this.practiceProgress = progress;
     }
 }

@@ -23,15 +23,16 @@ import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberMoney;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberTime;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class LessonNumberMenu extends AppCompatActivity implements View.OnClickListener {
 
-    public static NumberPractice numberPractice;
+    public static LessonItem numberPractice;
 
-    NumberPractice[] numberPractices = {
+    LessonItem[] numberPractices = {
             new NumberDate(), new NumberAge(), new NumberMoney(), new NumberTime()
     };
 
@@ -81,9 +82,9 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                numberPractice = (NumberPractice) parent.getItemAtPosition(position);
+                numberPractice = (LessonItem) parent.getItemAtPosition(position);
 
-                switch (numberPractice.getPracticeTitle()) {
+                switch (numberPractice.getLessonTitle()) {
 
                     case "time" :
                         openLessonNumber(getString(R.string.TIME));
@@ -134,7 +135,7 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
 
             if(progress != -1) {
 
-                numberPractices[i].setPracticeProgress(progress);
+                numberPractices[i].setLessonProgress(progress);
 
                 sumOfNumberPractice += progress;
             }

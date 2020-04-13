@@ -1,18 +1,18 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.LessonInit;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
-public class NumberMoney implements Number, NumberPractice {
+public class NumberMoney extends LessonInit implements Number, LessonItem {
 
-    String lessonId = "N_money";
+    private String lessonId = "N_money";
 
-    String practiceTitle = "money";
+    private String lessonTitle = "money";
 
-    int practiceImage = R.drawable.numbermoney;
+    private int lessonImage = R.drawable.numbermoney;
 
-    int practiceProgress = 0;
-
-    String[] front = {
+    private String[] front = {
             "100 원", "150 원", "230 원", "260 원", "330 원", "390 원", "410 원", "460 원", "530 원", "580 원",
             "600 원", "690 원", "740 원", "810 원", "890 원", "930 원", "990 원", "1,000 원", "1,200 원", "2,500 원",
             "2,900 원", "3,300 원", "3,700 원", "4,100 원", "4,200 원", "5,000 원", "5,600 원", "6,200 원", "6,900 원",
@@ -21,7 +21,7 @@ public class NumberMoney implements Number, NumberPractice {
             "70,000 원", "71,000 원", "82,000 원", "86,000 원", "94,000 원", "99,000 원", "100,000 원"
     };
 
-    String[] back = {
+    private String[] back = {
             "백 원[배권]", "백 오십 원", "이백 삼십 원", "이백 육십 원", "삼백 삼십 원", "삼백 구십 원", "사백 십 원",
             "사백 육십 원", "오백 삼십 원", "오백 팔십 원", "육백 원", "육백 구십 원", "칠백 사십 원", "팔백 십 원",
             "팔백 구십 원", "구백 삼십 원", "구백 구십 원", "천 원", "천 이백 원", "이천 오백 원", "이천 구백 원",
@@ -38,13 +38,13 @@ public class NumberMoney implements Number, NumberPractice {
     }
 
     @Override
-    public String getPracticeTitle() {
-        return practiceTitle;
+    public String getLessonTitle() {
+        return lessonTitle;
     }
 
     @Override
-    public int getPracticeImage() {
-        return practiceImage;
+    public int getLessonImage() {
+        return lessonImage;
     }
 
     @Override
@@ -55,15 +55,5 @@ public class NumberMoney implements Number, NumberPractice {
     @Override
     public String[] getBack() {
         return back;
-    }
-
-    @Override
-    public int getPracticeProgress() {
-        return practiceProgress;
-    }
-
-    @Override
-    public void setPracticeProgress(int progress) {
-        this.practiceProgress = progress;
     }
 }

@@ -5,8 +5,7 @@ import net.awesomekorean.podo.R;
 public class Lesson01 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_01";
-    private String title = "Self-introduction";
-    private String subTitle = "제 이름은 데니예요";
+    private String lessonTitle = "Self-introduction";
     private int lessonImage = R.drawable.selfintroduction;
 
     final static String[] wordFront = {"이름", "뭐", "어느", "나라", "사람", "한국"};
@@ -79,13 +78,8 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem {
     // 레슨어뎁터 아이템
 
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getSubTitle() {
-        return subTitle;
+    public String getLessonTitle() {
+        return lessonTitle;
     }
 
     @Override

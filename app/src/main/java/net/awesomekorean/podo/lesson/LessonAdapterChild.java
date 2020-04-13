@@ -220,7 +220,7 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
         LessonItem lessonItem = lessonItems[position];
 
-        holder.lessonTitle.setText(lessonItem.getTitle());
+        holder.lessonTitle.setText(lessonItem.getLessonTitle());
 
         holder.lessonImage.setImageResource(lessonItem.getLessonImage());
 

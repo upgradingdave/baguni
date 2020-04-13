@@ -5,8 +5,7 @@ import net.awesomekorean.podo.R;
 public class Lesson04 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_04";
-    private String title = "Past tense";
-    private String subTitle = "어제 뭐 했어요?";
+    private String lessonTitle = "Past tense";
     private int lessonImage = R.drawable.pasttense;
 
     final static String[] wordFront = {"어제", "집", "아니요", "쇼핑"};
@@ -83,13 +82,8 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
     // 레슨어뎁터 아이템
 
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getSubTitle() {
-        return subTitle;
+    public String getLessonTitle() {
+        return lessonTitle;
     }
 
     @Override

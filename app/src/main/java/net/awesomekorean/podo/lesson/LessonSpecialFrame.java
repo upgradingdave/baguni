@@ -61,7 +61,7 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
     }
 
     private void readyForLesson() {
-        title.setText(lessonSpecial.getTitle());
+        title.setText(lessonSpecial.getLessonTitle());
         contents.setText(lessonSpecial.getContents());
     }
 

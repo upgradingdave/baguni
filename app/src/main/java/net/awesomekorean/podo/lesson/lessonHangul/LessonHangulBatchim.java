@@ -1,10 +1,20 @@
 package net.awesomekorean.podo.lesson.lessonHangul;
 
-class LessonHangulBatchim implements Hangul{
+import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
+import net.awesomekorean.podo.lesson.lessons.S_LessonInit_Unlock;
 
-    String[] hangul = { "ㄱ", "역", "박", "ㄲ", "밖", "ㅋ", "읔", "밬", "ㄴ", "은", "안", "ㄷ", "귿", "낟", "ㅌ", "읕", "낱", "ㅅ", "옷", "낫", "ㅆ", "났", "ㅈ", "읒", "낮", "ㅊ", "읓", "낯", "ㅎ", "읗", "낳", "ㄹ", "을", "달", "ㅁ", "음", "잠", "ㅂ", "읍", "밥", "ㅍ", "읖", "앞", "ㅇ", "응", "강"};
+public class LessonHangulBatchim extends S_LessonInit_Unlock implements Hangul, LessonItem {
 
-    String[] hangulExplain = {
+    private String lessonId = "H_batchim";
+
+    private String lessonTitle = "batchim";
+
+    private int lessonImage = R.drawable.hangul_menu_batchim;
+
+    private String[] hangul = { "ㄱ", "역", "박", "ㄲ", "밖", "ㅋ", "읔", "밬", "ㄴ", "은", "안", "ㄷ", "귿", "낟", "ㅌ", "읕", "낱", "ㅅ", "옷", "낫", "ㅆ", "났", "ㅈ", "읒", "낮", "ㅊ", "읓", "낯", "ㅎ", "읗", "낳", "ㄹ", "을", "달", "ㅁ", "음", "잠", "ㅂ", "읍", "밥", "ㅍ", "읖", "앞", "ㅇ", "응", "강"};
+
+    private String[] hangulExplain = {
             "We can find how our articulator moves when we reading each name of consonants slowly.",
             "Can you feel your throat closed when you pronounce Batchim 'ㄱ'? (I'll leave 'Batchim' out from now.)",
             "Let's practice another character with 'ㄱ'.",
@@ -53,7 +63,7 @@ class LessonHangulBatchim implements Hangul{
             "Perfect! Now you can reading all of Hangul. Repeat the lesson several times and practice in the next stage."
     };
 
-    String hangulIntro =
+    private String hangulIntro =
             "We call last consonant a 'Batchim'.\n" +
                     "It's the last consonant that is placed in the under part of the Hangul.\n" +
                     "When I teach Korean, I found a lot of students feel that Batchim is difficult.\n" +
@@ -63,6 +73,22 @@ class LessonHangulBatchim implements Hangul{
                     "I want to say the Batchim is not a sound but the movement of our articulator, like the mouth, tongue, throat etc...\n" +
                     "Also, we have already learned about Batchim when we learned about consonants.\n" +
                     "Isn't it cool? Let's check it out.";
+
+
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getLessonTitle() {
+        return lessonTitle;
+    }
+
+    @Override
+    public int getLessonImage() {
+        return lessonImage;
+    }
 
     @Override
     public String[] getHangul() {

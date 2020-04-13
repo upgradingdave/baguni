@@ -1,18 +1,43 @@
 package net.awesomekorean.podo.lesson.lessonNumber.numbers;
 
-public class NumberNative implements Number {
+import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
+import net.awesomekorean.podo.lesson.lessons.S_LessonInit_Unlock;
 
-    String[] front = {
+public class NumberNative extends S_LessonInit_Unlock implements Number, LessonItem {
+
+    private String lessonId = "N_native";
+
+    private String lessonTitle = "Native number";
+
+    private int lessonImage = R.drawable.nativekoreannumber;
+
+    private String[] front = {
             "1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",
             "30","40","50","60","70","80","90"
     };
 
-    String[] back = {
+    private String[] back = {
             "하나", "둘", "셋", "넷", "다섯", "여섯", "일곱", "여덟[여덜]", "아홉", "열", "열하나", "열둘", "열셋",
             "열넷", "열다섯", "열여섯", "열일곱", "열여덟[열여덜]", "열아홉", "스물", "서른", "마흔", "쉰", "예순",
             "일흔", "여든", "아흔"
     };
 
+
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getLessonTitle() {
+        return lessonTitle;
+    }
+
+    @Override
+    public int getLessonImage() {
+        return lessonImage;
+    }
 
     @Override
     public String[] getFront() {

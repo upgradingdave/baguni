@@ -12,19 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.UnitProgressInfo;
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.lessons.HangulAssembly;
-import net.awesomekorean.podo.lesson.lessons.HangulBatchim;
-import net.awesomekorean.podo.lesson.lessons.HangulConsonant;
-import net.awesomekorean.podo.lesson.lessons.HangulVowel;
+import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulAssembly;
+import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulBatchim;
+import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulConsonant;
+import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulVowel;
+import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberNative;
+import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberSino;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
 import net.awesomekorean.podo.lesson.lessons.Lesson03;
@@ -43,9 +42,7 @@ import net.awesomekorean.podo.lesson.lessons.Lesson17;
 import net.awesomekorean.podo.lesson.lessons.Lesson18;
 import net.awesomekorean.podo.lesson.lessons.Lesson00;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
-import net.awesomekorean.podo.lesson.lessons.NumberNative;
-import net.awesomekorean.podo.lesson.lessons.NumberPractice;
-import net.awesomekorean.podo.lesson.lessons.NumberSino;
+import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson03;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson04;
@@ -85,7 +82,7 @@ public class MainLesson extends Fragment{
     int[] groupProcess = new int[groupList.length];
 
     LessonItem[][] childList = {
-            {new HangulConsonant(), new HangulVowel(), new HangulBatchim(), new HangulAssembly()},
+            {new LessonHangulConsonant(), new LessonHangulVowel(), new LessonHangulBatchim(), new LessonHangulAssembly()},
             {new Lesson00()},
             {new S_Lesson01(), new Lesson01(), new S_Lesson03(), new Lesson02(), new Lesson03()},
             {new NumberSino(), new NumberNative(), new NumberPractice()},

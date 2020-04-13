@@ -8,9 +8,7 @@ public interface LessonItem {
 
     void setLessonProgress(int progress);
 
-    String getTitle();
-
-    String getSubTitle();
+    String getLessonTitle();
 
     int getLessonImage();
 
@@ -18,9 +16,5 @@ public interface LessonItem {
 
     boolean getIsLock();
 
-    boolean getIsCompleted();
-
-    void setIsCompleted(boolean b);
     void setIsLocked(boolean b);
-
 }

@@ -5,8 +5,7 @@ import net.awesomekorean.podo.R;
 public class S_Lesson07 extends S_LessonInit implements LessonItem, LessonSpecial {
 
     private String lessonId = "SL_07";
-    private String title = "Speaking naturally";
-    private String subTitle = "Another way to call a restaurant";
+    private String lessonTitle = "Speaking naturally";
     private int lessonImage = R.drawable.speakingnaturally2;
 
     private int contents = R.string.SL_07_CONTENTS;
@@ -17,13 +16,8 @@ public class S_Lesson07 extends S_LessonInit implements LessonItem, LessonSpecia
     }
 
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getSubTitle() {
-        return subTitle;
+    public String getLessonTitle() {
+        return lessonTitle;
     }
 
     @Override

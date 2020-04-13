@@ -18,11 +18,25 @@ import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.LessonAdapterChild;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class LessonHangulAssembly extends AppCompatActivity implements View.OnClickListener {
+public class LessonHangulAssembly extends AppCompatActivity implements View.OnClickListener, LessonItem {
+
+    private String lessonId = "H_assembly";
+
+    private String lessonTitle = "assembly";
+
+    private int lessonImage = R.drawable.hangul_menu_assembly;
+
+    private int lessonProgress = 0;
+
+    private boolean isSpecial = true;
+
+    private boolean isLock = true;
+
 
     TextView textViewIntro;
     TextView assemblyTextView;
@@ -425,6 +439,47 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     @Override
     public void onBackPressed() {
         setLessonComplete();
+    }
+
+
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public String getLessonTitle() {
+        return lessonTitle;
+    }
+
+    @Override
+    public int getLessonProgress() {
+        return lessonProgress;
+    }
+
+    @Override
+    public void setLessonProgress(int progress) {
+        this.lessonProgress = progress;
+    }
+
+    @Override
+    public int getLessonImage() {
+        return lessonImage;
+    }
+
+    @Override
+    public boolean getIsSpecial() {
+        return isSpecial;
+    }
+
+    @Override
+    public boolean getIsLock() {
+        return isLock;
+    }
+
+    @Override
+    public void setIsLocked(boolean isLock) {
+        this.isLock = isLock;
     }
 }
 
