@@ -10,6 +10,8 @@ public interface LessonItem {
 
     String getLessonTitle();
 
+    String getLessonSubTitle();
+
     int getLessonImage();
 
     boolean getIsSpecial();

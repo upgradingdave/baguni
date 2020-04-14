@@ -10,6 +10,8 @@ public class NumberDate extends LessonInit implements Number, LessonItem {
 
     private String lessonTitle = "date";
 
+    private String lessonSubTitle = "";
+
     private int lessonImage = R.drawable.numberdate;
 
     private String[] front = {
@@ -27,6 +29,11 @@ public class NumberDate extends LessonInit implements Number, LessonItem {
             "팔월 일일", "팔월 십오일", "구월 칠일", "구월 이십팔일", "시월 팔일", "시월 십일", "십일월 십일일",
             "십일월 이십이일", "십이월 사일", "십이월 이십오일"
     };
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

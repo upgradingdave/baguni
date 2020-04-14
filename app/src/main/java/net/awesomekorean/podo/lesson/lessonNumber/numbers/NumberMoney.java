@@ -10,6 +10,8 @@ public class NumberMoney extends LessonInit implements Number, LessonItem {
 
     private String lessonTitle = "money";
 
+    private String lessonSubTitle = "";
+
     private int lessonImage = R.drawable.numbermoney;
 
     private String[] front = {
@@ -31,6 +33,12 @@ public class NumberMoney extends LessonInit implements Number, LessonItem {
             "사만 오천 원", "오만 오천 원", "오만 팔천 원", "육만[융만] 육천 원", "육만[융만] 구천 원", "칠만 원",
             "칠만 천 원", "팔만 이천 원", "팔만 육천 원", "구만 사천 원", "구만 구천 원", "십만 원[심마눤]"
     };
+
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

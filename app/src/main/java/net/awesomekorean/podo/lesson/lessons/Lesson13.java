@@ -5,7 +5,8 @@ import net.awesomekorean.podo.R;
 public class Lesson13 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_13";
-    private String lessonTitle = "Time expression1";
+    private String lessonTitle = "before";
+    private String lessonSubTitle = "~전에";
     private int lessonImage = R.drawable.timeexpression1;
 
     final static String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
@@ -35,6 +36,11 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem {
 
     final static int[] peopleImage = {1,2};
 
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

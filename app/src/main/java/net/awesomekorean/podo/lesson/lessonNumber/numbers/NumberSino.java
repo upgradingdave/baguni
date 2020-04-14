@@ -8,7 +8,9 @@ public class NumberSino extends S_LessonInit_Unlock implements Number, LessonIte
 
     private String lessonId = "N_sino";
 
-    private String lessonTitle = "Sino number";
+    private String lessonTitle = "sino number";
+
+    private String lessonSubTitle = "일, 이, 삼...";
 
     private int lessonImage = R.drawable.sinokoreannumber;
 
@@ -23,6 +25,10 @@ public class NumberSino extends S_LessonInit_Unlock implements Number, LessonIte
             "팔십", "구십", "백", "천", "만", "십만[심만]", "백만[뱅만]", "천만", "억"
     };
 
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

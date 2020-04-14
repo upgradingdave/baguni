@@ -10,6 +10,8 @@ public class LessonHangulConsonant extends S_LessonInit_Unlock implements Hangul
 
     private String lessonTitle = "consonant";
 
+    private String lessonSubTitle = "ㄱ, ㄴ, ㄷ...";
+
     private int lessonImage = R.drawable.hangul_menu_consonant;
 
     private String[] hangul = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
@@ -25,6 +27,10 @@ public class LessonHangulConsonant extends S_LessonInit_Unlock implements Hangul
             "Your muscles in your mouth may not be strong enough to make that new sound yet.\n" +
             "Fortunately, we can train our muscles with practice.\nLet's warm up your mouth before we start.";
 
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

@@ -36,6 +36,8 @@ import net.awesomekorean.podo.lesson.lessons.Lesson09;
 import net.awesomekorean.podo.lesson.lessons.Lesson10;
 import net.awesomekorean.podo.lesson.lessons.Lesson11;
 import net.awesomekorean.podo.lesson.lessons.Lesson12;
+import net.awesomekorean.podo.lesson.lessons.Lesson13;
+import net.awesomekorean.podo.lesson.lessons.Lesson14;
 import net.awesomekorean.podo.lesson.lessons.Lesson15;
 import net.awesomekorean.podo.lesson.lessons.Lesson16;
 import net.awesomekorean.podo.lesson.lessons.Lesson17;
@@ -50,6 +52,7 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson06;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson07;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson08;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson09;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
@@ -57,8 +60,6 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
 import java.util.List;
 
 public class MainLesson extends Fragment{
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     Context context;
 
@@ -76,7 +77,7 @@ public class MainLesson extends Fragment{
 
     String[] groupList = {
             "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Negative", "Range", "Listing/Contrast",
-            "Ability", "Hope", "Requests"
+            "Time", "Ability", "Hope", "Requests"
     };
 
     int[] groupProcess = new int[groupList.length];
@@ -90,9 +91,10 @@ public class MainLesson extends Fragment{
             {new Lesson07(), new Lesson08(), new S_Lesson08()},
             {new Lesson09(), new Lesson10(), new S_Lesson05()},
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
-            {new Lesson15(), new Lesson16(), new S_Lesson11()},
-            {new Lesson17(), new S_Lesson12()},
-            {new Lesson18(), new S_Lesson07()}
+            {new Lesson13(), new Lesson14(), new S_Lesson11()},
+            {new Lesson15(), new Lesson16(), new S_Lesson12()},
+            {new Lesson17(), new S_Lesson07()},
+            {new Lesson18(), new S_Lesson09()}
     };
 
 

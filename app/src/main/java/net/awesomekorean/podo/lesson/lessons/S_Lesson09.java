@@ -6,9 +6,15 @@ public class S_Lesson09 extends S_LessonInit implements LessonItem, LessonSpecia
 
     private String lessonId = "SL_09";
     private String lessonTitle = "Newly-coined word";
-    private int lessonImage = R.drawable.hangul;
+    private String lessonSubTitle = "";
+    private int lessonImage = R.drawable.newlycoinedword;
 
     private int contents = R.string.SL_09_CONTENTS;
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

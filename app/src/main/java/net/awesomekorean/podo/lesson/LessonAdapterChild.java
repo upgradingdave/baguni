@@ -62,6 +62,8 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
         private TextView lessonTitle;
 
+        private TextView lessonSubTitle;
+
         private ImageView lessonComplete;
 
         private ImageView lessonImage;
@@ -76,6 +78,8 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
             super(view);
 
             lessonTitle = view.findViewById(R.id.lessonTitle);
+
+            lessonSubTitle = view.findViewById(R.id.lessonSubTitle);
 
             lessonComplete = view.findViewById(R.id.lessonComplete);
 
@@ -221,6 +225,8 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
         LessonItem lessonItem = lessonItems[position];
 
         holder.lessonTitle.setText(lessonItem.getLessonTitle());
+
+        holder.lessonSubTitle.setText(lessonItem.getLessonSubTitle());
 
         holder.lessonImage.setImageResource(lessonItem.getLessonImage());
 

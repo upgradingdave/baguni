@@ -5,10 +5,16 @@ import net.awesomekorean.podo.R;
 public class S_Lesson08 extends S_LessonInit implements LessonItem, LessonSpecial {
 
     private String lessonId = "SL_08";
-    private String lessonTitle = "Conjugation";
+    private String lessonTitle = "conjugation 2";
+    private String lessonSubTitle = "아/어서";
     private int lessonImage = R.drawable.conjugation3;
 
     private int contents = R.string.SL_08_CONTENTS;
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

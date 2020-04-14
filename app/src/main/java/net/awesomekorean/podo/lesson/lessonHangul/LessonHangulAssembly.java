@@ -29,6 +29,8 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     private String lessonTitle = "assembly";
 
+    private String lessonSubTitle = "";
+
     private int lessonImage = R.drawable.hangul_menu_assembly;
 
     private int lessonProgress = 0;
@@ -481,6 +483,12 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     public void setIsLocked(boolean isLock) {
         this.isLock = isLock;
     }
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
+
 }
 
 

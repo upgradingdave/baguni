@@ -10,8 +10,15 @@ public class NumberPractice extends S_LessonInit implements LessonItem {
 
     private String lessonTitle = "Practice";
 
+    private String lessonSubTitle = "time, date, age...";
+
     private int lessonImage = R.drawable.numberpractice;
 
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

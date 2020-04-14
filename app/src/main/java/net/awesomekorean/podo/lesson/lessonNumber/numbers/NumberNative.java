@@ -8,7 +8,9 @@ public class NumberNative extends S_LessonInit_Unlock implements Number, LessonI
 
     private String lessonId = "N_native";
 
-    private String lessonTitle = "Native number";
+    private String lessonTitle = "native number";
+
+    private String lessonSubTitle = "하나, 둘, 셋...";
 
     private int lessonImage = R.drawable.nativekoreannumber;
 
@@ -23,6 +25,10 @@ public class NumberNative extends S_LessonInit_Unlock implements Number, LessonI
             "일흔", "여든", "아흔"
     };
 
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

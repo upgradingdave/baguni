@@ -10,6 +10,8 @@ public class LessonHangulVowel extends S_LessonInit_Unlock implements Hangul, Le
 
     private String lessonTitle = "vowel";
 
+    private String lessonSubTitle = "ㅏ, ㅑ, ㅓ...";
+
     private int lessonImage = R.drawable.hangul_menu_vowel;
 
     private String[] hangul = {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ", "ㅘ", "ㅝ", "ㅙ", "ㅞ", "ㅚ", "ㅟ", "ㅢ"};
@@ -22,6 +24,10 @@ public class LessonHangulVowel extends S_LessonInit_Unlock implements Hangul, Le
             "So it's easier to make the sound compared to consonants.\n" +
             "I'll give you a tip. While you practice reading vowels, it would be helpful to think about the mouth shape and size.";
 
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

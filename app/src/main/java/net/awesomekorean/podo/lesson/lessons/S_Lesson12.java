@@ -5,10 +5,16 @@ import net.awesomekorean.podo.R;
 public class S_Lesson12 extends S_LessonInit implements LessonItem, LessonSpecial {
 
     private String lessonId = "SL_12";
-    private String lessonTitle = "Confusing expression 3";
+    private String lessonTitle = "confusing expression 3";
+    private String lessonSubTitle = "'아/어서' vs '으니까'";
     private int lessonImage = R.drawable.confusingexpression3;
 
     private int contents = R.string.SL_12_CONTENTS;
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

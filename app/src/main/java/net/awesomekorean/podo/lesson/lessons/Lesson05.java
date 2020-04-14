@@ -5,7 +5,8 @@ import net.awesomekorean.podo.R;
 public class Lesson05 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_05";
-    private String lessonTitle = "Future tense";
+    private String lessonTitle = "future";
+    private String lessonSubTitle = "~을 거예요";
     private int lessonImage = R.drawable.futuretense;
 
     final static String[] wordFront = {"내일", "식당", "주말", "재미있다", "영화"};
@@ -39,6 +40,11 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem {
 
     final static int[] peopleImage = {9,10};
 
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

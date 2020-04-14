@@ -10,6 +10,8 @@ public class LessonHangulBatchim extends S_LessonInit_Unlock implements Hangul, 
 
     private String lessonTitle = "batchim";
 
+    private String lessonSubTitle = "ㄱ, ㄴ, ㄷ...";
+
     private int lessonImage = R.drawable.hangul_menu_batchim;
 
     private String[] hangul = { "ㄱ", "역", "박", "ㄲ", "밖", "ㅋ", "읔", "밬", "ㄴ", "은", "안", "ㄷ", "귿", "낟", "ㅌ", "읕", "낱", "ㅅ", "옷", "낫", "ㅆ", "났", "ㅈ", "읒", "낮", "ㅊ", "읓", "낯", "ㅎ", "읗", "낳", "ㄹ", "을", "달", "ㅁ", "음", "잠", "ㅂ", "읍", "밥", "ㅍ", "읖", "앞", "ㅇ", "응", "강"};
@@ -74,6 +76,11 @@ public class LessonHangulBatchim extends S_LessonInit_Unlock implements Hangul, 
                     "Also, we have already learned about Batchim when we learned about consonants.\n" +
                     "Isn't it cool? Let's check it out.";
 
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {

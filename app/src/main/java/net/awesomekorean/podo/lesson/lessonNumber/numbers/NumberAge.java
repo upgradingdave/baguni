@@ -10,6 +10,8 @@ public class NumberAge extends LessonInit implements Number, LessonItem {
 
     private String lessonTitle = "age";
 
+    private String lessonSubTitle = "";
+
     private int lessonImage = R.drawable.numberage;
 
     private String[] front = {
@@ -24,6 +26,11 @@ public class NumberAge extends LessonInit implements Number, LessonItem {
             "스물 한살", "스물 두살", "스물 세살", "스물 네살", "스물 다섯살", "스물 여섯살", "스물 일곱살", "스물 여덟살",
             "스물 아홉살", "서른살", "마흔살", "쉰살", "예순살", "일흔살", "여든살", "아흔살", "백살"
     };
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
 
     @Override
     public String getLessonId() {
