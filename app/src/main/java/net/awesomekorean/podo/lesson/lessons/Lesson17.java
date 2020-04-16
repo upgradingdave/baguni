@@ -9,15 +9,15 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem {
     private String lessonSubTitle = "~고 싶어요";
     private int lessonImage = R.drawable.hope;
 
-    final static String[] wordFront = {"이번", "휴가", "여행", "음식", "연습", "그동안", "공부", "열심히"};
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-", "-"};
-    final static String[] wordSynonyms = {"-", "-", "-", "-", "-", "지금까지", "-", "-"};
-    final static String[] wordAntonyms = {"저번", "-", "-", "-", "-", "-", "-", "-"};
+    final static String[] wordFront = {"휴가", "여행", "음식", "연습", "그동안", "공부", "열심히"};
+    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
+    final static String[] wordSynonyms = {"-", "-", "-", "-", "지금까지", "-", "-"};
+    final static String[] wordAntonyms = {"-", "-", "-", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
             "가고 싶어요.",
             "한국 여행 가고 싶어요.",
-            "이번 휴가에 한국 여행 가고 싶어요.",
+            "다음 휴가 때 한국 여행 가고 싶어요.",
             "하고 싶어요?",
             "뭐 하고 싶어요?",
             "한국에서 뭐 하고 싶어요?",

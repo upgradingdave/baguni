@@ -9,10 +9,10 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem {
     private String lessonSubTitle = "~에서~까지";
     private int lessonImage = R.drawable.range1;
 
-    final static String[] wordFront = {"회사", "어떻게", "지하철", "얼마나", "걸리다"};
-    final static String[] wordPronunciation = {"-", "[어떠케]", "-", "-", "-"};
-    final static String[] wordSynonyms = {"-", "-", "-", "-", "-"};
-    final static String[] wordAntonyms = {"-", "-", "-", "-", "-"};
+    final static String[] wordFront = {"회사", "어떻게", "지하철", "걸리다"};
+    final static String[] wordPronunciation = {"-", "[어떠케]", "-", "-"};
+    final static String[] wordSynonyms = {"-", "-", "-", "-"};
+    final static String[] wordAntonyms = {"-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
             "가다",

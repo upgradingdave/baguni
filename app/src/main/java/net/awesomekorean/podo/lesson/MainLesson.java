@@ -56,6 +56,7 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson09;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson13;
 
 import java.util.List;
 
@@ -93,8 +94,8 @@ public class MainLesson extends Fragment{
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
             {new Lesson13(), new Lesson14(), new S_Lesson11()},
             {new Lesson15(), new Lesson16(), new S_Lesson12()},
-            {new Lesson17(), new S_Lesson07()},
-            {new Lesson18(), new S_Lesson09()}
+            {new Lesson17(), new S_Lesson13()},
+            {new Lesson18(), new S_Lesson07()}
     };
 
 

@@ -6,7 +6,7 @@ public class S_Lesson10 extends S_LessonInit implements LessonItem, LessonSpecia
 
     private String lessonId = "SL_10";
     private String lessonTitle = "simple Chinese 1";
-    private String lessonSubTitle = "'人'";
+    private String lessonSubTitle = "人";
     private int lessonImage = R.drawable.hanja1;
 
     private int contents = R.string.SL_10_CONTENTS;

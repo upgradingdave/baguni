@@ -6,13 +6,13 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_15";
     private String lessonTitle = "ability";
-    private String lessonSubTitle = "~을 수 있어요";
+    private String lessonSubTitle = "~(으)ㄹ 수 있어요";
     private int lessonImage = R.drawable.ability;
 
-    final static String[] wordFront = {"그런데", "아직", "자막", "이해하다", "괜찮다"};
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "[괜찬타]"};
-    final static String[] wordSynonyms = {"하지만", "-", "-", "알다", "-"};
-    final static String[] wordAntonyms = {"그리고", "이미, 벌써", "-", "-", "-"};
+    final static String[] wordFront = {"아직", "자막", "이해하다", "괜찮다"};
+    final static String[] wordPronunciation = {"-", "-", "-", "[괜찬타]"};
+    final static String[] wordSynonyms = {"-", "-", "알다", "-"};
+    final static String[] wordAntonyms = {"이미, 벌써", "-", "-", "-"};
 
     final static String[] sentenceFront = {
             "재미있어요.",

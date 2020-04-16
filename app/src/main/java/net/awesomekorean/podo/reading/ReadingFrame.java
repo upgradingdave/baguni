@@ -192,11 +192,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         popUpLayout.setVisibility(View.VISIBLE);
 
                         // 단어 오디오 재생
-//                        audioFileWord = unitId + "_" + popUpIndex + ".mp3";
-//                        playMediaPlayer.playAudioInByte(audiosWord.get(popUpIndex));
-
-                        singleMediaPlayerManager = MediaPlayerManager.getInstance();
+                        singleMediaPlayerManager = new MediaPlayerManager();
                         singleMediaPlayerManager.setMediaPlayerByte(audiosWord.get(popUpIndex));
+                        mediaPlayerManager.stopMediaPlayer();
                         singleMediaPlayerManager.playMediaPlayer();
                         setVisibility(View.VISIBLE, View.GONE);
                     }

@@ -539,7 +539,8 @@ It means that you put on makeup naturally, as if you did not do makeup."
 
     <string name="SL_10_TITLE">Simple Chinese Character1</string>
     <string name="SL_10_CONTENTS">
-        "Since Korea used Chinese characters in the past, there are lots of words made from Chinese characters.
+"You might wonder why there are Chinese character lesson.
+Since Korea used Chinese characters in the past, there are lots of words made from Chinese characters.
 
 Usually formal writing uses the words from Chinese character.
 Therefore, if you don't know the words from Chinese character, you could be overwhelmed because there are too many unknown words when you start reading Korean articles.
@@ -550,7 +551,7 @@ Therefore, let's pick only very easy Chinese characters and learn together.
 The first Chinese character we will learn is '人'(사람 인).
 This Chinese character has the meaning of '사람'(people) and the sound of '인'.
 The shape of this letter is also very interesting.
-It is a letter made of people walking as shown in the picture above.
+It is a letter made of people walking as shown in the picture of this lesson.
 Therefore, if there is a letter '인' in Korean word, we can guess that it is related to 'people'.
 
 ex)
@@ -638,6 +639,53 @@ There are three rules, but you don't have to remember them all.
 Usually, you can use '아/어서' and use '으니까' only when expressing 'order' or 'request'.
 "
     </string>
+
+
+    <string name="SL_13_TITLE">Confusing expression4</string>
+    <string name="SL_13_CONTENTS">
+        "여기 : here
+저기 : there
+거기 : there
+
+It's easy to know '여기' and '저기', but there are also a word '거기' in Korean.
+In English, '저기' and '거기' are translated as 'there'. What is the difference?
+
+1.
+
+It can be identified as the place of the speaker and listener.
+
+'여기': a place close to the speaker
+
+ex)
+- 여기로 오세요. : Come here.
+- 여기 앉으세요. : Sit down here.
+
+'저기': a place far away from both the speaker and the listener.
+In other words, the speaker and the listener are currently in the same place and talking about 'there(저기)' where is far from both speaker and listner.
+
+ex)
+- 저기에 뭐가 있어요? : What is there?
+- 저기로 가요 : Let's go there.
+
+'거기': A place close to the listener.
+In other words, the speaker and the listener are not in the same place and are talking about the 'there(거기)' where the listener is.
+
+ex)
+- 거기는 날씨가 어때요? : What's the weather there?
+- 거기에 어떻게 가요? : How can I get there?
+
+
+2.
+
+In addition, there is one more thing to know about '거기'.
+We use '거기' when we talk about a place that was once mentioned during a conversation.
+
+ex)
+- 저기에 가 보세요. 거기에 물이 있어요. : Go over there. There's some water.
+- 저기에서 기다리세요. 데니 씨가 거기로 갈 거예요. : Wait over there. Denny will be there.
+"
+    </string>
+
 
 
     <string name="L_00_TITLE">Greetings</string>
@@ -1086,8 +1134,7 @@ Also, they have the meaning of 'breakfast / lunch / dinner.'"
     <string name="L_09_WORD_BACK_0">company</string>
     <string name="L_09_WORD_BACK_1">how</string>
     <string name="L_09_WORD_BACK_2">subway</string>
-    <string name="L_09_WORD_BACK_3">how much / how many</string>
-    <string name="L_09_WORD_BACK_4">take time</string>
+    <string name="L_09_WORD_BACK_3">take time</string>
     <string name="L_09_SENTENCE_BACK_0">to go</string>
     <string name="L_09_SENTENCE_BACK_1">Do you go?</string>
     <string name="L_09_SENTENCE_BACK_2">How do you go?</string>
@@ -1110,7 +1157,7 @@ Also, they have the meaning of 'breakfast / lunch / dinner.'"
     <string name="L_09_SENTENCE_EXPLAIN_7">-</string>
     <string name="L_09_SENTENCE_EXPLAIN_8">-</string>
     <string name="L_09_SENTENCE_EXPLAIN_9">-</string>
-    <string name="L_09_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_09_SENTENCE_EXPLAIN_10">"When asking about the amount of something, use '얼마나'."</string>
     <string name="L_09_SENTENCE_EXPLAIN_11">-</string>
 
     <string name="L_10_TITLE">Range2 (for time)</string>
@@ -1294,12 +1341,11 @@ However, only nouns that can be used as 'N + 하다'
     <string name="L_14_TITLE">Time expression 2</string>
     <string name="L_14_WORD_BACK_0">today</string>
     <string name="L_14_WORD_BACK_1">night / dinner</string>
-    <string name="L_14_WORD_BACK_2">work</string>
-    <string name="L_14_WORD_BACK_3">finish</string>
-    <string name="L_14_WORD_BACK_4">after</string>
-    <string name="L_14_WORD_BACK_5">family</string>
-    <string name="L_14_WORD_BACK_6">drama</string>
-    <string name="L_14_WORD_BACK_7">recommend</string>
+    <string name="L_14_WORD_BACK_2">finish</string>
+    <string name="L_14_WORD_BACK_3">after</string>
+    <string name="L_14_WORD_BACK_4">family</string>
+    <string name="L_14_WORD_BACK_5">drama</string>
+    <string name="L_14_WORD_BACK_6">recommend</string>
     <string name="L_14_SENTENCE_BACK_0">What do you do?</string>
     <string name="L_14_SENTENCE_BACK_1">What do you do at night?</string>
     <string name="L_14_SENTENCE_BACK_2">What will you do at night today?</string>
@@ -1362,11 +1408,10 @@ Of course, nouns that can only be uses as 'N + 하다'
 
 
     <string name="L_15_TITLE">Ability</string>
-    <string name="L_15_WORD_BACK_0">however, by the way</string>
-    <string name="L_15_WORD_BACK_1">still</string>
-    <string name="L_15_WORD_BACK_2">subtitles</string>
-    <string name="L_15_WORD_BACK_3">understand</string>
-    <string name="L_15_WORD_BACK_4">all right, OK</string>
+    <string name="L_15_WORD_BACK_0">yet</string>
+    <string name="L_15_WORD_BACK_1">subtitles</string>
+    <string name="L_15_WORD_BACK_2">understand</string>
+    <string name="L_15_WORD_BACK_3">all right, OK</string>
     <string name="L_15_SENTENCE_BACK_0">It\'s interesting.</string>
     <string name="L_15_SENTENCE_BACK_1">This drama is interesting.</string>
     <string name="L_15_SENTENCE_BACK_2">However.</string>
@@ -1382,7 +1427,7 @@ Of course, nouns that can only be uses as 'N + 하다'
     <string name="L_15_SENTENCE_BACK_12">I\'ll watch it twice.</string>
     <string name="L_15_SENTENCE_EXPLAIN_0">-</string>
     <string name="L_15_SENTENCE_EXPLAIN_1">-</string>
-    <string name="L_15_SENTENCE_EXPLAIN_2">-</string>
+    <string name="L_15_SENTENCE_EXPLAIN_2">"same meaning with '하지만'"</string>
     <string name="L_15_SENTENCE_EXPLAIN_3">-</string>
     <string name="L_15_SENTENCE_EXPLAIN_4">-</string>
     <string name="L_15_SENTENCE_EXPLAIN_5">-</string>
@@ -1408,13 +1453,12 @@ negative '못'
 
     <string name="L_16_TITLE">Posibility</string>
     <string name="L_16_WORD_BACK_0">in the past</string>
-    <string name="L_16_WORD_BACK_1">to live</string>
-    <string name="L_16_WORD_BACK_2">language exchange</string>
-    <string name="L_16_WORD_BACK_3">to learn</string>
-    <string name="L_16_WORD_BACK_4">good, nice</string>
-    <string name="L_16_WORD_BACK_5">thank you</string>
-    <string name="L_16_WORD_BACK_6">similar</string>
-    <string name="L_16_WORD_BACK_7">vocabulary</string>
+    <string name="L_16_WORD_BACK_1">language exchange</string>
+    <string name="L_16_WORD_BACK_2">to learn</string>
+    <string name="L_16_WORD_BACK_3">good, nice</string>
+    <string name="L_16_WORD_BACK_4">thank you</string>
+    <string name="L_16_WORD_BACK_5">similar</string>
+    <string name="L_16_WORD_BACK_6">vocabulary</string>
     <string name="L_16_SENTENCE_BACK_0">Can you do it?</string>
     <string name="L_16_SENTENCE_BACK_1">Can you speak Korean?</string>
     <string name="L_16_SENTENCE_BACK_2">Yes, I\'m a Korean.</string>
@@ -1472,17 +1516,16 @@ conjugate 'A/V-(으)ㄹ 수 있다'
 
 
     <string name="L_17_TITLE">Hope</string>
-    <string name="L_17_WORD_BACK_0">this time</string>
-    <string name="L_17_WORD_BACK_1">vacation</string>
-    <string name="L_17_WORD_BACK_2">travel</string>
-    <string name="L_17_WORD_BACK_3">food</string>
-    <string name="L_17_WORD_BACK_4">practice</string>
-    <string name="L_17_WORD_BACK_5">so far</string>
-    <string name="L_17_WORD_BACK_6">study</string>
-    <string name="L_17_WORD_BACK_7">hardly</string>
+    <string name="L_17_WORD_BACK_0">vacation</string>
+    <string name="L_17_WORD_BACK_1">travel</string>
+    <string name="L_17_WORD_BACK_2">food</string>
+    <string name="L_17_WORD_BACK_3">practice</string>
+    <string name="L_17_WORD_BACK_4">so far</string>
+    <string name="L_17_WORD_BACK_5">study</string>
+    <string name="L_17_WORD_BACK_6">hardly</string>
     <string name="L_17_SENTENCE_BACK_0">I want to go.</string>
     <string name="L_17_SENTENCE_BACK_1">I want to travel to Korea.</string>
-    <string name="L_17_SENTENCE_BACK_2">I want to travel to Korea on this vacation.</string>
+    <string name="L_17_SENTENCE_BACK_2">I want to travel to Korea on next vacation.</string>
     <string name="L_17_SENTENCE_BACK_3">Do you want to do?</string>
     <string name="L_17_SENTENCE_BACK_4">What do you want to do?</string>
     <string name="L_17_SENTENCE_BACK_5">What do you want to do in Korea?</string>
@@ -1540,7 +1583,7 @@ You can also use the 'A/V-아/어서' form that you learned in the 'negative2' l
     <string name="L_18_WORD_BACK_1">hotel</string>
     <string name="L_18_WORD_BACK_2">reservation</string>
     <string name="L_18_WORD_BACK_3">to help</string>
-    <string name="L_18_WORD_BACK_4">first</string>
+    <string name="L_18_WORD_BACK_4">first time</string>
     <string name="L_18_WORD_BACK_5">maybe</string>
     <string name="L_18_WORD_BACK_6">to wait</string>
     <string name="L_18_SENTENCE_BACK_0">I am going to Busan.</string>

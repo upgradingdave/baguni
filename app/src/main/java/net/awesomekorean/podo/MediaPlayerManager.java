@@ -87,8 +87,8 @@ public class MediaPlayerManager {
         this.seekBar = seekBar;
     }
 
-    private void initialize() {
-        if(mediaPlayer == null) {
+    private void initialize(boolean isSinglePlayer) {
+        if(isSinglePlayer || mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
             isSet = false;
             isPlaying = false;
@@ -98,7 +98,7 @@ public class MediaPlayerManager {
 
 
     public void setMediaPlayerUrl(String audioUrl) {
-        initialize();
+        initialize(false);
         try {
             mediaPlayer.setDataSource(audioUrl);
             mediaPlayer.prepare();
@@ -125,8 +125,9 @@ public class MediaPlayerManager {
 
             FileInputStream fis = new FileInputStream(tempMp3);
 
-            initialize();
+            initialize(true);
             try {
+                mediaPlayer.reset();
                 mediaPlayer.setDataSource(fis.getFD());
                 mediaPlayer.prepare();
                 isSet = true;

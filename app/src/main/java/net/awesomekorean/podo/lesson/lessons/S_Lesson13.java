@@ -2,14 +2,14 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
-public class S_Lesson04 extends S_LessonInit implements LessonItem, LessonSpecial {
+public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecial {
 
-    private String lessonId = "SL_04";
-    private String lessonTitle = "particles";
-    private String lessonSubTitle = "why use it?";
-    private int lessonImage = R.drawable.particles1;
+    private String lessonId = "SL_13";
+    private String lessonTitle = "confusing expression 4";
+    private String lessonSubTitle = "'here' and 'there'";
+    private int lessonImage = R.drawable.confusingexpression3;
 
-    private int contents = R.string.SL_04_CONTENTS;
+    private int contents = R.string.SL_12_CONTENTS;
 
     @Override
     public String getLessonSubTitle() {
