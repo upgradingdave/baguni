@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
@@ -40,9 +41,9 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     String[] wordFront = LessonWord.wordFront;
     String[] wordBack = LessonWord.wordBack;
-    String[] wordAudio = LessonWord.wordAudio;
 
-    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
+    MediaPlayerManager mediaPlayerManager;
+
     PlaySoundPool playSoundPool;
 
     ConstraintLayout totalPage;
@@ -67,6 +68,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         view = inflater.inflate(R.layout.lesson_word_quiz2, container, false);
 
+        mediaPlayerManager = MediaPlayerManager.getInstance();
+
         flex1 = view.findViewById(R.id.flex1);
         flex2 = view.findViewById(R.id.flex2);
         totalPage = view.findViewById(R.id.totalPage);
@@ -89,6 +92,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         playSoundPool = new PlaySoundPool(getContext());
 
+        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationQuiz, R.drawable.bg_green_10);
+
         return view;
     }
 
@@ -103,8 +108,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
             mixedBack[i] = wordBack[i];
         }
 
-        RandomArray.randomArray(mixedFront);
-        RandomArray.randomArray(mixedBack);
+        RandomArray.randomArrayString(mixedFront);
+        RandomArray.randomArrayString(mixedBack);
 
         int j = 1;
 
@@ -184,7 +189,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
-                playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
+                mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
+                mediaPlayerManager.playMediaPlayer(false);
 
                 isCorrectAll();
 

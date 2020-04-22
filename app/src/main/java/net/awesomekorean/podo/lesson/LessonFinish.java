@@ -37,8 +37,6 @@ import java.util.List;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
-    InterstitialAd interstitialAd;
-
     LinearLayout selectBox;
     ConstraintLayout selectResult;
 

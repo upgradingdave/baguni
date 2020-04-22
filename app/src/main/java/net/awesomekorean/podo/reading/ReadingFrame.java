@@ -38,16 +38,17 @@ import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UnitProgressInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     Reading reading; // Reading 인스턴스
@@ -87,15 +88,16 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     String url;
 
     MediaPlayerManager mediaPlayerManager;
-    MediaPlayerManager singleMediaPlayerManager;
 
-    int readingProgress = 0;
+    int readingProgress;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading_frame);
+
+        readingProgress = 0;
 
         btnBack = findViewById(R.id.btnBack);
         readingTitle = findViewById(R.id.readingTitle);
@@ -126,23 +128,31 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                readingProgress = progress * 100 / seekBar.getMax();
+                readingProgress = Math.max(progress * 100 / seekBar.getMax(), readingProgress);
+
+                System.out.println("진행률 : " + readingProgress);
 
                 if(seekBar.getMax()==progress) {
                     setVisibility(View.VISIBLE, View.GONE);
-                    mediaPlayerManager.stopMediaPlayer();
+                    mediaPlayerManager.pauseMediaPlayer();
+                    mediaPlayerManager.resetPlayPosition();
                 }
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                mediaPlayerManager.stopMediaPlayer();
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.pauseMediaPlayer();
+                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayerManager.seek(seekBar.getProgress());
-                mediaPlayerManager.playMediaPlayer();
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.seek(seekBar.getProgress());
+                    mediaPlayerManager.playMediaPlayer(true);
+                    setVisibility(View.GONE, View.VISIBLE);
+                }
             }
         });
 
@@ -190,19 +200,23 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         popUpFront.setText(front);
                         popUpBack.setText(back);
                         popUpLayout.setVisibility(View.VISIBLE);
+                        audioFileWord = unitId + "_" + popUpIndex + ".mp3";
 
                         // 단어 오디오 재생
-                        singleMediaPlayerManager = new MediaPlayerManager();
-                        singleMediaPlayerManager.setMediaPlayerByte(audiosWord.get(popUpIndex));
-                        mediaPlayerManager.stopMediaPlayer();
-                        singleMediaPlayerManager.playMediaPlayer();
+                        mediaPlayerManager = MediaPlayerManager.getInstance();
+                        //singleMediaPlayerManager = new MediaPlayerManager();
+                        if(mediaPlayerManager != null) {
+                            mediaPlayerManager.pauseMediaPlayer();
+                        }
+                        mediaPlayerManager.setMediaPlayerByte(audiosWord.get(popUpIndex));
+
+                        mediaPlayerManager.playMediaPlayer(false);
                         setVisibility(View.VISIBLE, View.GONE);
                     }
 
                     @Override
                     public void updateDrawState(@NonNull TextPaint ds) {   // 하이라이트 디자인 설정
                         ds.setColor(ContextCompat.getColor(context, R.color.PURPLE));
-//                        ds.bgColor = ContextCompat.getColor(context, R.color.PURPLE_TRANSPARENT);
                     }
                 }, 0, reading.getArticle()[i].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);  // 하이라이트 위치 설정
 
@@ -229,6 +243,11 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnBack :
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.stopMediaPlayer();
+                }
+                setVisibility(View.VISIBLE, View.GONE);
+                seekBar.setProgress(0);
                 finish();
                 break;
 
@@ -253,77 +272,68 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnPlay:
                 // 최초 플레이 or 다시 플레이 시
-                if (mediaPlayerManager == null) {
+                if (mediaPlayerManager == null || url == null) {
                     StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(unitId+".mp3");
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             mediaPlayerManager = MediaPlayerManager.getInstance(seekBar);
                             url = uri.toString();
+                            mediaPlayerManager.resetPlayPosition();
                             mediaPlayerManager.setMediaPlayerUrl(url);
                             playingTime = mediaPlayerManager.getDuration(); // 노래 재생시간
                             seekBar.setMax(playingTime);
-                            mediaPlayerManager.playMediaPlayer();
+                            mediaPlayerManager.playMediaPlayer(true);
                             setVisibility(View.GONE, View.VISIBLE);
                         }
                     });
 
                     // 뭠췄다가 플레이 시
                 } else {
-                    mediaPlayerManager.playMediaPlayer();
+                    mediaPlayerManager.setMediaPlayerUrl(url);
+                    mediaPlayerManager.playMediaPlayer(true);
                     setVisibility(View.GONE, View.VISIBLE);
                 }
                 break;
 
             case R.id.btnPause :
-                mediaPlayerManager.stopMediaPlayer();
+                mediaPlayerManager.pauseMediaPlayer();
                 setVisibility(View.VISIBLE, View.GONE);
                 break;
 
             case R.id.btnNormal :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
-                mediaPlayerManager.setSpeed(1f);
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.setSpeed(1f);
+                }
                 break;
 
             case R.id.btnSlow :
                 btnSlow.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_purple_20_transparent));
                 btnNormal.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_20_stroke_purple));
-                mediaPlayerManager.setSpeed(0.8f);
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.setSpeed(0.8f);
+                }
             break;
 
             case R.id.btnFinish :
-/*
-                mediaPlayerManager.stopMediaPlayer();
 
                 setVisibility(View.VISIBLE, View.GONE);
                 seekBar.setProgress(0);
 
-                // 읽기완료 정보 업데이트 하기
-                String readingId = reading.getReadingId();
-                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                if(!userInformation.getReadingComplete().contains(readingId)) {
-                    userInformation.addReadingComplete(readingId);
-                    SharedPreferencesInfo.setUserInfo(context, userInformation);
-                    db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION)).set(userInformation);
-                    System.out.println("Reading 완료 리스트를 업데이트 했습니다.");
-
-                } else {
-                    System.out.println("이미 완료된 Reading 입니다.");
-                }
-
-
- */
                 openConfirmQuit();
                 break;
-
         }
     }
 
 
     public void openConfirmQuit() {
 
-        mediaPlayerManager.stopMediaPlayer();
+        if(mediaPlayerManager != null) {
+
+            mediaPlayerManager.pauseMediaPlayer();
+        }
 
         Intent intent = new Intent(context, ConfirmQuit.class);
 
@@ -340,6 +350,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
+            mediaPlayerManager.stopMediaPlayer();
             finish();
         }
     }
@@ -350,17 +361,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         openConfirmQuit();
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        isPlaying = false;
-//        if(mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//        }
-        setVisibility(View.VISIBLE, View.GONE);
-    }
 
     public void setVisibility(int a, int b) {
         btnPlay.setVisibility(a);

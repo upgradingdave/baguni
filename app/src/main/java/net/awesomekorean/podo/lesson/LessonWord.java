@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.DownloadAudio;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
@@ -38,7 +39,6 @@ import java.util.Map;
 public class LessonWord extends Fragment implements Button.OnClickListener{
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
 
     View view;
 
@@ -53,11 +53,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
     static View viewLeft;
     static View viewRight;
     static LinearLayout lessonLayout;
+    static ImageView ivWordImage;
     static TextView tvWordFront;
     static TextView tvWordBack;
     static TextView tvWordPronunciation;
-    static TextView tvWordSynonyms;
-    static TextView tvWordAntonyms;
     static ImageView btnAudio;
 
     static int lessonCount;
@@ -65,15 +64,13 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
     static int lessonSentenceLength = 0;
     static int lessonDialogLength = 0;
 
+    static int[] wordImage;
     static String[] wordFront;
     static String[] wordBack;
     static String[] wordPronunciation;
-    static String[] wordAntonyms;
-    static String[] wordSynonyms;
     static String[] wordAudio;
 
     Context context;
-    PlayMediaPlayer playMediaPlayer = PlayMediaPlayer.getInstance();
 
     static Map<Integer, byte[]> audiosWord = new HashMap<>();
 
@@ -84,6 +81,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
     }
 
     private GestureDetectorCompat gestureDetectorCompat = null;
+
+    MediaPlayerManager mediaPlayerManager;
+
 
     @Nullable
     @Override
@@ -101,11 +101,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         btnAudio = view.findViewById(R.id.btnAudio);
         btnCollect = view.findViewById(R.id.btnCollect);
         collectResult = view.findViewById(R.id.collectResult);
+        ivWordImage = view.findViewById(R.id.ivWordImage);
         tvWordFront = view.findViewById(R.id.tvWordFront);
         tvWordBack = view.findViewById(R.id.tvWordBack);
         tvWordPronunciation = view.findViewById(R.id.tvWordPronunciation);
-        tvWordSynonyms = view.findViewById(R.id.tvWordSynonyms);
-        tvWordAntonyms = view.findViewById(R.id.tvWordAntonyms);
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
@@ -136,6 +135,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         readyForLesson();
 
+        LessonFrame.setNavigationColor(context, LessonFrame.navigationWord, R.drawable.bg_yellow_10);
+
         return view;
     }
 
@@ -154,16 +155,22 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         wordFront = lesson.getWordFront();
 
+        wordImage = new int[lessonWordLength];
         wordBack = new String[lessonWordLength];
+
         for(int i=0; i<lessonWordLength; i++) {
+
+            String stringWordImage = lessonId.toLowerCase() + "_word_" + i;
             String stringWordBack = lessonId + "_WORD_BACK_" + i;
+
+            int intWordImage = getResources().getIdentifier(stringWordImage, "drawable", packageName);
             int intWordBack = getResources().getIdentifier(stringWordBack, "string", packageName);
+
+            wordImage[i] = intWordImage;
             wordBack[i] = getString(intWordBack);
         }
 
         wordPronunciation = lesson.getWordPronunciation();
-        wordSynonyms = lesson.getWordSynonyms();
-        wordAntonyms = lesson.getWordAntonyms();
 
         wordAudio = new String[lessonWordLength];
         for(int i=0; i<lessonWordLength; i++) {
@@ -191,13 +198,18 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
             ((LessonFrame)getActivity()).onLoadingLayout(false);
         }
         LessonFrame.progressCount();
+
+        ivWordImage.setImageResource(wordImage[lessonCount]);
         tvWordFront.setText(wordFront[lessonCount]);
         tvWordBack.setText(wordBack[lessonCount]);
         tvWordPronunciation.setText(wordPronunciation[lessonCount]);
-        tvWordSynonyms.setText(wordSynonyms[lessonCount]);
-        tvWordAntonyms.setText(wordAntonyms[lessonCount]);
         if(audiosWord.get(lessonCount) != null && audiosWord.get(lessonCount).length > 0) {
-            playMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
+            mediaPlayerManager = MediaPlayerManager.getInstance();
+            if(mediaPlayerManager != null) {
+                mediaPlayerManager.stopMediaPlayer();
+            }
+            mediaPlayerManager.setMediaPlayerByte(audiosWord.get(lessonCount));
+            mediaPlayerManager.playMediaPlayer(false);
         }
     }
 
@@ -208,7 +220,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         switch (v.getId()) {
 
             case R.id.btnAudio :
-                playMediaPlayer.playAudioInByte(audiosWord.get(lessonCount));
+                mediaPlayerManager.playMediaPlayer(false);
                 break;
 
             case R.id.btnCollect :

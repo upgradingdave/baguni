@@ -2,6 +2,7 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -13,6 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -24,6 +30,8 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class LessonHangulAssembly extends AppCompatActivity implements View.OnClickListener, LessonItem {
+
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private String lessonId = "H_assembly";
 
@@ -38,6 +46,10 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     private boolean isSpecial = true;
 
     private boolean isLock = true;
+
+    private MediaPlayerManager mediaPlayerManager;
+
+    private String url;
 
 
     TextView textViewIntro;
@@ -101,7 +113,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     String audioFile;
 
-    PlayMediaPlayer playMediaPlayer =  new PlayMediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +120,8 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_lesson_hangul_assembly);
 
         context = getApplicationContext();
+
+        mediaPlayerManager = MediaPlayerManager.getInstance();
 
         hangulBox = findViewById(R.id.hangulBox);
         consonantBoxLayout1 = findViewById(R.id.consonantBox1);
@@ -166,21 +179,38 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                 if(consonantSelected == true && vowelSelected == true && batchimSelected == false) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel);
                     audioFile = hangul.getAudioFile();
-                    playMediaPlayer.playAudioHangul(audioFile, "assy");
+                    playAudioAssy(audioFile);
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else if(consonantSelected == true && vowelSelected == true && batchimSelected == true) {
                     HangulUniCode hangul = new HangulUniCode(selectedConsonant, selectedVowel, selectedBatchim);
                     audioFile = hangul.getAudioFile();
-                    playMediaPlayer.playAudioHangul(audioFile, "assy");
+                    playAudioAssy(audioFile);
                     assemblyTextView.setText(hangul.getAssembledHangul());
                 } else {
                     assemblyTextView.setText(selectedHangul);
                 }
-
-
             }
         };
         cvH.callOnClick();
+    }
+
+
+    public void playAudioAssy(String audioFile) {
+
+        if(audioFile != null) {
+
+            if (mediaPlayerManager != null) {
+                StorageReference storageRef = storage.getReference().child("hangul/assy").child(audioFile);
+                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        url = uri.toString();
+                        mediaPlayerManager.setMediaPlayerUrl(url);
+                        mediaPlayerManager.playMediaPlayer(false);
+                    }
+                });
+            }
+        }
     }
 
 
@@ -190,7 +220,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
             case R.id.btnAudio :
                 if(audioFile != null) {
-                    playMediaPlayer.playAudioHangul(audioFile, "assy");
+                    mediaPlayerManager.playMediaPlayer(false);
                 }
                 break;
 

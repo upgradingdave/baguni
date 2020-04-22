@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +26,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -44,19 +50,14 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     RecyclerView recyclerView;
 
-    ImageView btnReturn;
-    ImageView btnPlay;
-    ImageView btnStop;
-    ImageView btnFinish;
+    static ImageView btnPlay;
+    static ImageView btnPause;
+    Button btnFinish;
 
-    MediaPlayer mp;
 
     Context context;
 
     int index; // 전체 오디오 재생 카운트
-
-    LinearLayout layoutPlay;
-    LinearLayout layoutStop;
 
     ConstraintLayout totalPage;
 
@@ -68,20 +69,24 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         return new LessonDialog();
     }
 
+    MediaPlayerManager mediaPlayerManager;
+
+    static ToggleButton toggleButton;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_dialog, container, false);
+
+        mediaPlayerManager = MediaPlayerManager.getInstance();
+
         context = getContext();
-        layoutPlay = view.findViewById(R.id.layoutPlay);
-        layoutStop = view.findViewById(R.id.layoutStop);
-        btnReturn = view.findViewById(R.id.btnReturn);
-        btnReturn.setOnClickListener(this);
         btnPlay = view.findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
-        btnStop = view.findViewById(R.id.btnStop);
-        btnStop.setOnClickListener(this);
+        btnPause = view.findViewById(R.id.btnPause);
+        btnPause.setOnClickListener(this);
         btnFinish = view.findViewById(R.id.btnFinish);
         btnFinish.setOnClickListener(this);
         totalPage = view.findViewById(R.id.totalPage);
@@ -100,8 +105,9 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_dialog", bundle);
 
-
         readyForLesson();
+
+        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationDialog, R.drawable.bg_purple_10);
 
         return view;
     }
@@ -116,8 +122,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         String lessonId = LessonWord.lessonId;
         String folder = LessonWord.folder;
         String packageName = context.getPackageName();
-
         String[] dialog =  LessonWord.lesson.getDialog();
+
 
         // 저장소에서 대화오디오 가져오기
         audiosDialog = new HashMap<>();
@@ -140,6 +146,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             });
         }
 
+
         // 대화 개수에 맞게 사람이미지를 array 로 만듦
         int[] arrayPeopleImage = new int[dialogLength];
         int count = 0;
@@ -156,6 +163,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             arrayPeopleImage[i] = intPeopleImage;
         }
 
+
         // 대화아이템 세팅
         ArrayList<LessonDialogItems> list = new ArrayList<>();
         for(int i=0; i<dialogLength; i++) {
@@ -171,118 +179,35 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         }
 
         LessonDialogAdapter adapter = new LessonDialogAdapter(list);
+
+        // 대화 아이템 클릭 이벤트
         adapter.setOnItemClickListener(new LessonDialogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                final ToggleButton button = (ToggleButton) v;
-                playAudio(button, audiosDialog.get(pos));
-                layoutPlay.setVisibility(View.VISIBLE);
-                layoutStop.setVisibility(View.GONE);
 
+                if(toggleButton != null) {
+                    setToggleBtnUnChecked();
+                }
+
+                toggleButton = (ToggleButton) v;
+                mediaPlayerManager.stopMediaPlayer();
+                mediaPlayerManager.setMediaPlayerByte(audiosDialog.get(pos));
+                mediaPlayerManager.playOneDialog();
+                setPlayBtn(View.VISIBLE, View.GONE);
             }
         });
 
         recyclerView.setAdapter(adapter);
     }
 
-
-    // 오디오 재생 메소드
-    public void playAudio(final ToggleButton button, byte[] audioFile) {
-        if (mp != null) {
-            mp.release();
-        }
-
-        mp = new MediaPlayer();
-
-        try {
-            File tempMp3 = File.createTempFile("audio", "mp3");
-            tempMp3.deleteOnExit();
-            FileOutputStream fos = new FileOutputStream(tempMp3);
-            BufferedOutputStream bfos = new BufferedOutputStream(fos);
-            bfos.write(audioFile);
-            fos.close();
-
-            FileInputStream fis = new FileInputStream(tempMp3);
-            BufferedInputStream bfis = new BufferedInputStream(fis);
-
-            if(bfis.read(audioFile) != -1) {
-                mp.setDataSource(fis.getFD());
-
-                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        mediaPlayer.start();
-                    }
-                });
-
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                        button.setChecked(false);
-                    }
-                });
-
-                mp.prepare();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (NullPointerException npe) {
-            System.out.println("NullPointerException on LessonDialog");
-        }
+    public static void setToggleBtnUnChecked() {
+        toggleButton.setChecked(false);
     }
 
-    // 전체 오디오 재생 메소드
-    public void playAudioAll(byte[] audioFile) {
-        if (mp != null) {
-            mp.release();
-        }
 
-        mp = new MediaPlayer();
-
-        try {
-            File tempMp3 = File.createTempFile("audio", "mp3");
-            tempMp3.deleteOnExit();
-            FileOutputStream fos = new FileOutputStream(tempMp3);
-            BufferedOutputStream bfos = new BufferedOutputStream(fos);
-            bfos.write(audioFile);
-            fos.close();
-
-            FileInputStream fis = new FileInputStream(tempMp3);
-            BufferedInputStream bfis = new BufferedInputStream(fis);
-
-            if(bfis.read(audioFile) != -1) {
-                mp.setDataSource(fis.getFD());
-
-                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        mediaPlayer.start();
-                    }
-                });
-
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        index++;
-                        // 마지막 오디오 재생 끝났으면
-                        if(index == dialogLength) {
-                            mp.release();
-                            index = 0;
-                            layoutPlay.setVisibility(View.VISIBLE);
-                            layoutStop.setVisibility(View.GONE);
-                        }else{
-                            mp.release();
-                            playAudioAll(audiosDialog.get(index));
-                        }
-                    }
-                });
-                mp.prepare();
-            }
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public static void setPlayBtn(int btnPlayVisible, int btnPauseVisible) {
+        btnPlay.setVisibility(btnPlayVisible);
+        btnPause.setVisibility(btnPauseVisible);
     }
 
 
@@ -291,44 +216,25 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
         switch (view.getId()) {
 
-            case R.id.btnReturn :
-                if (mp != null) {
-                    mp.release();
-                }
-
-                LessonFrame.progressCount = 0;
-                LessonFrame.progressCount();
-                ((LessonFrame)getActivity()).replaceFragment(LessonWord.newInstance());
-                break;
-
             case R.id.btnPlay :
-                if (mp != null) {
-                    mp.release();
+                if(toggleButton != null) {
+                    setToggleBtnUnChecked();
                 }
-                layoutPlay.setVisibility(View.GONE);
-                layoutStop.setVisibility(View.VISIBLE);
-                index = 0;
-                if(!audiosDialog.isEmpty()) {
-                    playAudioAll(audiosDialog.get(0));
-                } else  {
-                    Toast.makeText(context, "The audio is not loaded yet. Please try it again.", Toast.LENGTH_LONG).show();
-                }
+                setPlayBtn(View.GONE, View.VISIBLE);
+                mediaPlayerManager.setAndPlayAllDialog(audiosDialog);
                 break;
 
-            case R.id.btnStop :
-                if (mp != null) {
-                    mp.release();
-                }
-                index = 0;
-
-                layoutPlay.setVisibility(View.VISIBLE);
-                layoutStop.setVisibility(View.GONE);
+            case R.id.btnPause :
+                mediaPlayerManager.stopMediaPlayer();
+                setPlayBtn(View.VISIBLE, View.GONE);
                 break;
 
             case R.id.btnFinish :
-                if (mp != null) {
-                    mp.release();
-                }
+                mediaPlayerManager.stopMediaPlayer();
+
+                // 완료리스트에 업데이트
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+                userInformation.updateCompleteList(context, LessonAdapterChild.lessonItem.getLessonId(), 100, false);
 
                 Intent intent = new Intent(getContext(), LessonFinish.class);
                 startActivity(intent);

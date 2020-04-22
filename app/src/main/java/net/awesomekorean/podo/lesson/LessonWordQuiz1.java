@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
@@ -29,17 +31,22 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     View view;
 
     TextView answer;
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
+    ImageView btn1;
+    ImageView btn2;
+    ImageView btn3;
+    ImageView btn4;
+    TextView btnText1;
+    TextView btnText2;
+    TextView btnText3;
+    TextView btnText4;
     ImageView btnAudio;
 
 
+    int[] wordImage = LessonWord.wordImage;
     String[] wordFront = LessonWord.wordFront;
     String[] wordBack = LessonWord.wordBack;
     String[] wordAudio = LessonWord.wordAudio;
-    String[] answerArray = new String[4]; // 현재 퀴즈 array
+    int[] answerArray = new int[4]; // 현재 퀴즈 array
 
 
     int quizQuantity; // 문제 개수
@@ -47,7 +54,8 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     Boolean solveWrongQuizAgain = false;
     List<Integer> wrongQuizList; // 틀린 문제 번호를 이 list 에 추가
 
-    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
+    MediaPlayerManager mediaPlayerManager;
+
     PlaySoundPool playSoundPool;
 
     ConstraintLayout totalPage;
@@ -65,12 +73,18 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         quizQuantity = wordBack.length;
         wrongQuizList = new ArrayList<>();
 
+        mediaPlayerManager = MediaPlayerManager.getInstance();
+
         totalPage = view.findViewById(R.id.totalPage);
         answer = view.findViewById(R.id.answer);
         btn1 = view.findViewById(R.id.btn1);
         btn2 = view.findViewById(R.id.btn2);
         btn3 = view.findViewById(R.id.btn3);
         btn4 = view.findViewById(R.id.btn4);
+        btnText1 = view.findViewById(R.id.btnText1);
+        btnText2 = view.findViewById(R.id.btnText2);
+        btnText3 = view.findViewById(R.id.btnText3);
+        btnText4 = view.findViewById(R.id.btnText4);
         btnAudio = view.findViewById(R.id.btnAudio);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -89,17 +103,18 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_quiz1", bundle);
 
-
         makeQuiz(quizNoNow);
 
         // 정답, 오답 오디오 미리 로드해놓기
         playSoundPool = new PlaySoundPool(getContext());
 
+        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationQuiz, R.drawable.bg_green_10);
+
         return view;
     }
 
-    public void makeQuiz(int quizNoNow) {
 
+    public void makeQuiz(int quizNoNow) {
 
         answer.setText(wordFront[quizNoNow]);
         int j = 0;
@@ -107,27 +122,32 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         for(int i=0; i<4; i++) {
 
             // 단어 array 이에서 현재 단어포함해서 순서대로 4개의 단어를 보기로 제시함.
-            if(quizNoNow + i >= wordBack.length) {
-                answerArray[i] = wordBack[j];
+            if(quizNoNow + i >= wordImage.length) {
+                answerArray[i] = j;
                 j++;
             } else {
-                answerArray[i] = wordBack[quizNoNow + i];
+                answerArray[i] = quizNoNow + i;
             }
         }
 
-        RandomArray.randomArray(answerArray);
+        RandomArray.randomArrayInt(answerArray);
 
-        btn1.setText(answerArray[0]);
-        btn2.setText(answerArray[1]);
-        btn3.setText(answerArray[2]);
-        btn4.setText(answerArray[3]);
+        btn1.setImageResource(wordImage[answerArray[0]]);
+        btn2.setImageResource(wordImage[answerArray[1]]);
+        btn3.setImageResource(wordImage[answerArray[2]]);
+        btn4.setImageResource(wordImage[answerArray[3]]);
 
-        playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
+        btnText1.setText(wordBack[answerArray[0]]);
+        btnText2.setText(wordBack[answerArray[1]]);
+        btnText3.setText(wordBack[answerArray[2]]);
+        btnText4.setText(wordBack[answerArray[3]]);
+
+        mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(quizNoNow));
+        mediaPlayerManager.playMediaPlayer(false);
     }
 
 
-
-    public void makeNextQuiz(final Button selectedBtn) {
+    public void makeNextQuiz(final View selectedBtn) {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -180,32 +200,42 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizNoNow));
+                mediaPlayerManager.playMediaPlayer(false);
                 break;
 
-            default :
 
-                Button selectedBtn = (Button) view;
+            default:
 
-                if(wordBack[quizNoNow].equals(selectedBtn.getText().toString())) {
-                    // 정답소리 출력하고 선택박스에 파란색 테두리
-                    answered(selectedBtn, 0, R.drawable.bg_white_10_stroke_purple);
+                int selectedBtnNo;
 
+                if(view.getId() == R.id.btn1) {
+                    selectedBtnNo = 0;
+                } else if(view.getId() == R.id.btn2) {
+                    selectedBtnNo = 1;
+                } else if(view.getId() == R.id.btn3) {
+                    selectedBtnNo = 2;
                 } else {
-                    // 오답소리 출력하고 선택박스에 빨간색 테두리
-                    wrongQuizList.add(quizNoNow);
-                    answered(selectedBtn, 1, R.drawable.bg_white_10_stroke_red);
+                    selectedBtnNo = 3;
                 }
+
+                if(wordBack[quizNoNow].equals(wordBack[answerArray[selectedBtnNo]])) {
+                    answered(view, 0, R.drawable.bg_white_10_stroke_purple);
+                } else {
+                    wrongQuizList.add(quizNoNow);
+                    answered(view, 1, R.drawable.bg_white_10_stroke_red);
+                }
+                break;
         }
     }
 
 
-    private void answered(Button selectedBtn, int sound, int outline) {
+    // 정답/오답 소리 출력하고 선택한 이미지에 파란색/빨간색 테두리
+    private void answered(View view, int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
-        selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        view.setBackground(ContextCompat.getDrawable(getContext(), outline));
         answer.setVisibility(View.VISIBLE);
         btnAudio.setVisibility(View.GONE);
 
-        makeNextQuiz(selectedBtn);
+        makeNextQuiz(view);
     }
 }

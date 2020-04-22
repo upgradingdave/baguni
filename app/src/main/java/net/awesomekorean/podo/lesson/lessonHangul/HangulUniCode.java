@@ -37,7 +37,7 @@ public class HangulUniCode {
         cv = (char) assembledUniCode;
         assembledHangul = Character.toString(cv);
 
-        // 입력한 모음이 예외 모음에 해당되는지 확인
+        // 예외 모음에 포함되면 audioFileCorrected 생성
         if(Arrays.asList(jungException).contains(b)) {
             String b2 = "ㅚ";
             int indexJung2 = findIndex(b2, jung);
@@ -45,7 +45,6 @@ public class HangulUniCode {
             cv = (char) assembledUniCode;
             audioFileCorrected = cv + ".mp3";
 
-            // 예외 모음에 포함되면 audioFileCorrected 생성
         } else {
             audioFile = assembledHangul + ".mp3";
         }

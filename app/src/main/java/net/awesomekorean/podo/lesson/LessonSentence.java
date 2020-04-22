@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.DownloadAudio;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
@@ -57,9 +58,6 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
     String[] sentenceAudio;
     static Map<Integer, byte[]> audiosSentence;
 
-
-    static PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
-
     LinearLayout collectResult;
 
     boolean isFirstAudio = true;
@@ -72,6 +70,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
     public static LessonSentence newInstance() {
         return new LessonSentence();
     }
+
+    MediaPlayerManager mediaPlayerManager;
 
 
     @Nullable
@@ -110,8 +110,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_sentence", bundle);
 
-
         readyForLesson();
+
+        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationSentence, R.drawable.bg_blue_10);
 
         return view;
     }
@@ -175,7 +176,10 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
-        playMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
+
+        mediaPlayerManager = MediaPlayerManager.getInstance();
+        mediaPlayerManager.setMediaPlayerByte(audiosSentence.get(lessonCount));
+        mediaPlayerManager.playMediaPlayer(false);
     }
 
 
@@ -185,7 +189,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playMediaPlayer.playAudioInByte(audiosSentence.get(lessonCount));
+                mediaPlayerManager.playMediaPlayer(false);
                 break;
 
             case R.id.btnCollect :

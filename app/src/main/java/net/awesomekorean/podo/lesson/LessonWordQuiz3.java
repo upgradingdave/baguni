@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
@@ -29,14 +30,16 @@ import net.awesomekorean.podo.R;
 public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     View view;
-    String[] words = LessonWord.wordFront; // 단어 front array
-    String[] wordAudio = LessonWord.wordAudio;
+    String[] wordFront = LessonWord.wordFront; // 단어 front array
+    String[] wordBack = LessonWord.wordBack;
+    int[] wordImage = LessonWord.wordImage;
 
     String word; // 퀴즈용 단어 묶음에 있는 각 단어
 
     String[] syllables; // wordInIndex의 단어를 각 음절로 나눔
 
     TextView answer;
+    ImageView answerImage;
     LinearLayout answerLayout;
 
     TextView tvAnswer; // 입력한 정답이 표시되는 텍스트뷰
@@ -52,9 +55,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     int quizCount = 0; // 단어퀴즈 순서
 
-    MediaPlayer mp;
     PlaySoundPool playSoundPool;
-    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
+    MediaPlayerManager mediaPlayerManager;
 
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
 
@@ -71,7 +73,10 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
         view = inflater.inflate(R.layout.lesson_word_quiz3, container, false);
 
+        mediaPlayerManager = MediaPlayerManager.getInstance();
+
         answer = view.findViewById(R.id.answer);
+        answerImage = view.findViewById(R.id.answerImage);
         answerLayout = view.findViewById(R.id.answerLayout);
         tvAnswer = view.findViewById(R.id.tvAnswer);
         flexboxLayout = view.findViewById(R.id.flexboxLayout);
@@ -111,8 +116,6 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
                     if(tvAnswer.getText().toString().equals(word)) { // 정답
 
-
-                        answer.setText(LessonWord.wordBack[quizCount]);
                         answered(selectedBtn, 0, R.drawable.bg_white_10_stroke_purple);
 
                     } else {  // 오답
@@ -130,7 +133,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                                 LessonFrame.progressCount++;
                                 LessonFrame.progressCount();
 
-                                if (quizCount != words.length) {  // 문제가 남아있을 때
+                                if (quizCount != wordFront.length) {  // 문제가 남아있을 때
                                     flexboxLayout.removeAllViews();
                                     makeQuiz();
 
@@ -139,7 +142,6 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                                     ((LessonFrame) getActivity()).replaceFragment(LessonSentence.newInstance());
                                 }
                             }
-                            answer.setText("");
                             tvAnswer.setText("");
                             btnReset.setVisibility(View.GONE);
                             try {
@@ -152,24 +154,24 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 }
             }
         };
-
         makeQuiz();
+
+        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationQuiz, R.drawable.bg_green_10);
 
         return view;
     }
 
-    private void answered(Button selectedBtn, int sound, int outline) {
 
+    private void answered(Button selectedBtn, int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
         answerLayout.setBackground(ContextCompat.getDrawable(getContext(), outline));
     }
 
 
-
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
     public void makeQuiz() {
 
-        word = words[quizCount];
+        word = wordFront[quizCount];
 
         syllables = new String[word.length()];
 
@@ -177,7 +179,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             syllables[i] = word.substring(i, i+1);
         }
 
-        RandomArray.randomArray(syllables);
+        RandomArray.randomArrayString(syllables);
 
         for(int i=0; i<syllables.length; i++) {
 
@@ -196,9 +198,13 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             flexboxLayout.addView(btnSelector);
         }
 
-        playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizCount));
+        answer.setText(wordBack[quizCount]);
+        answerImage.setImageResource(wordImage[quizCount]);
 
+        mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(quizCount));
+        mediaPlayerManager.playMediaPlayer(false);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -211,7 +217,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnAudio :
-                playMediaPlayer.playAudioInByte(LessonWord.audiosWord.get(quizCount));
+                mediaPlayerManager.playMediaPlayer(false);
                 break;
         }
     }

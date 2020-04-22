@@ -163,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/play_outline" />
+            android:src="@drawable/play" />
 
         <ImageView
             android:id="@+id/btnPause"

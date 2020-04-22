@@ -6,11 +6,14 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,14 +29,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SettingStatusBar;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
-public class LessonFrame extends AppCompatActivity {
+import org.w3c.dom.ls.LSException;
+
+public class LessonFrame extends AppCompatActivity implements View.OnClickListener {
 
     public static int progressCount;
     public static int totalPageNo = 0;
@@ -43,12 +50,17 @@ public class LessonFrame extends AppCompatActivity {
 
     ImageView btnClose;
 
+    public static TextView navigationWord;
+    public static TextView navigationQuiz;
+    public static TextView navigationSentence;
+    public static TextView navigationDialog;
+
     private GestureDetectorCompat gestureDetectorCompat = null;
     public static String swipePage;
 
     FragmentManager fm;
     FragmentTransaction ft;
-    LessonWord lessonWord = new LessonWord();
+    LessonWord lessonWord = LessonWord.newInstance();
 
     LinearLayout loadingLayout;
 
@@ -60,6 +72,15 @@ public class LessonFrame extends AppCompatActivity {
         setContentView(R.layout.activity_lesson_frame);
 
         context = getApplicationContext();
+
+        navigationWord = findViewById(R.id.navigationWord);
+        navigationQuiz = findViewById(R.id.navigationQuiz);
+        navigationSentence = findViewById(R.id.navigationSentence);
+        navigationDialog = findViewById(R.id.navigationDialog);
+        navigationWord.setOnClickListener(this);
+        navigationQuiz.setOnClickListener(this);
+        navigationSentence.setOnClickListener(this);
+        navigationDialog.setOnClickListener(this);
 
         progressCount = 1;
         progressBar = findViewById(R.id.progressBar);
@@ -122,12 +143,62 @@ public class LessonFrame extends AppCompatActivity {
     }
 
 
+    // 네비게이션 배경색 변경
+    public static void setNavigationColor(Context context, TextView textView, int bg) {
+
+        navigationWord.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_grey_light_10));
+        navigationQuiz.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_grey_light_10));
+        navigationSentence.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_grey_light_10));
+        navigationDialog.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_grey_light_10));
+
+        textView.setBackground(ContextCompat.getDrawable(context, bg));
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
+            MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+            mediaPlayerManager.stopMediaPlayer();
             finish();
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.navigationWord :
+                setNavigationColor(context, navigationWord, R.drawable.bg_yellow_10);
+                replaceFragment(LessonWord.newInstance());
+                progressCount = 1;
+                progressCount();
+                break;
+
+            case R.id.navigationQuiz :
+                setNavigationColor(context, navigationQuiz, R.drawable.bg_green_10);
+                replaceFragment(LessonWordQuiz1.newInstance());
+                progressCount = 1 + LessonWord.lessonWordLength;
+                progressCount();
+                break;
+
+            case R.id.navigationSentence :
+                setNavigationColor(context, navigationSentence, R.drawable.bg_blue_10);
+                replaceFragment(LessonSentence.newInstance());
+                progressCount = 1 + LessonWord.lessonWordLength * 3 + 1;
+                progressCount();
+                break;
+
+            case R.id.navigationDialog :
+                setNavigationColor(context, navigationDialog, R.drawable.bg_purple_10);
+                replaceFragment(LessonDialog.newInstance());
+                progressCount = 1 + LessonWord.lessonWordLength * 3 + 1 + LessonSentence.sentenceFront.length;
+                progressCount();
+                break;
         }
     }
 

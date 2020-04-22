@@ -12,6 +12,7 @@
     <color name="GREY_TEXT">#4D0A2463</color>
     <color name="GREY">#E6E6E6</color>
     <color name="GREY_DARK">#979797</color>
+    <color name="GREY_LIGHT">#D6D7D7</color>
     <color name="YELLOW">#FFC300</color>
     <color name="RED">#FF5A5F</color>
     <color name="TRANSPARENT">#00000000</color>

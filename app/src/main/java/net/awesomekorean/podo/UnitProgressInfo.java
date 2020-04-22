@@ -63,6 +63,11 @@ public class UnitProgressInfo {
     }
 
 
+    public String[] getUnitIdArray() {
+        return unitIdArray;
+    }
+
+
     // 해당 유닛의 진행률을 반환 (완료리스트에 없으면 -1 반환)
     public int getProgress(String unitId) {
 
