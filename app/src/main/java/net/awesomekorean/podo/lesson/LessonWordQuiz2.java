@@ -24,7 +24,6 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.awesomekorean.podo.MediaPlayerManager;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
@@ -86,7 +85,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
         firebaseAnalytics.logEvent("lesson_quiz2", bundle);
 
 
-        animation = AnimationUtils.loadAnimation(getContext(), R.anim.click_scale);
+        animation = AnimationUtils.loadAnimation(getContext(), R.anim.scale_200);
 
         makeQuiz(); // 퀴즈 버튼 만들기
 

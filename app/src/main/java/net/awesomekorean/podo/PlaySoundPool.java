@@ -56,4 +56,16 @@ public class PlaySoundPool {
                 break;
         }
     }
+
+
+    // 예~ 플레이
+    public void playSoundYay() {
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(soundId, 1f, 1f, 0, 0, 1f);
+            }
+        });
+        soundId = soundPool.load(context, R.raw.yay, 1);
+    }
 }

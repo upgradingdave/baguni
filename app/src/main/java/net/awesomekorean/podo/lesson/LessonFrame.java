@@ -196,7 +196,7 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
             case R.id.navigationDialog :
                 setNavigationColor(context, navigationDialog, R.drawable.bg_purple_10);
                 replaceFragment(LessonDialog.newInstance());
-                progressCount = 1 + LessonWord.lessonWordLength * 3 + 1 + LessonSentence.sentenceFront.length;
+                progressCount = 1 + LessonWord.lessonWordLength * 3 + 1 + LessonWord.lessonSentenceLength;
                 progressCount();
                 break;
         }

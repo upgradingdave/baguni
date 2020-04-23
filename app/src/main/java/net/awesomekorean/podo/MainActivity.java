@@ -11,16 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -140,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         setFrag(mainLesson);
 
 
-        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.click_scale);
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
 
 
         // 유저정보 가져오기 (Email, Name, Image)

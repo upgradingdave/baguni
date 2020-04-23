@@ -119,7 +119,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="PLAY">Play</string>
     <string name="STOP">Stop</string>
     <string name="FINISH">Finish</string>
-    <string name="SELECT_BOX">Select a box to get the points</string>
+    <string name="SELECT_BOX">Select a box</string>
     <string name="CONGRATULATION">Congratulation</string>
     <string name="GET_POINT">Get the points</string>
     <string name="UNLOCK">Do you want to unlock this by using points?</string>
