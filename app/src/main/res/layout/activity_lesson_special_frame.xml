@@ -8,6 +8,7 @@
     android:background="@color/FOGGY">
 
     <LinearLayout
+        android:id="@+id/contentsLayout"
         android:background="@drawable/bg_white_10_stroke_grey"
         android:layout_margin="20dp"
         android:elevation="3dp"
@@ -48,6 +49,15 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <ImageView
+        android:src="@drawable/bg_speciallesson"
+        android:elevation="3dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/contentsLayout"
+        app:layout_constraintStart_toStartOf="@id/contentsLayout"
+        app:layout_constraintEnd_toEndOf="@id/contentsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnFinish"

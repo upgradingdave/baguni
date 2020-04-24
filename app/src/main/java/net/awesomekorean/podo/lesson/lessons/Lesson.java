@@ -6,10 +6,6 @@ public interface Lesson {
 
     String[] getWordPronunciation();
 
-    String[] getWordSynonyms();
-
-    String[] getWordAntonyms();
-
     String[] getSentenceFront();
 
     String[] getDialog();

@@ -2,33 +2,39 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
-public class Lesson00 extends LessonInit implements Lesson, LessonItem {
+public class Lesson21 extends LessonInit implements Lesson, LessonItem {
 
-    private String lessonId = "L_00";
-    private String lessonTitle = "greetings";
-    private String lessonSubTitle = "안녕하세요?";
-    private int lessonImage = R.drawable.greetings;
+    private String lessonId = "L_21";
+    private String lessonTitle = "assisting";
+    private String lessonSubTitle = "~아/어 줄게요";
+    private int lessonImage = R.drawable.thankyou;
 
-    final static String[] wordFront = {"안녕하세요", "다음", "또", "보다", "가다"};
+    final static String[] wordFront = {"글", "주다", "틀리다", "아주", "정말요?"};
     final static String[] wordPronunciation = {"-", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
-            "안녕하세요? / 안녕?",
-            "반가워요",
-            "오랜만이에요",
-            "잘 지냈어요?",
-            "다음에 또 봐요.",
-            "안녕히 가세요/안녕히 계세요"};
+            "썼어요",
+            "글을 썼어요.",
+            "한국어로 글을 썼어요.",
+            "제가 한국어로 글을 썼어요.",
+            "봐주세요.",
+            "한 번 봐주세요.",
+            "주세요.",
+            "제가 봐줄게요.",
+            "틀렸어요.",
+            "음... 조금 틀렸어요.",
+            "하지만 아주 잘했어요.",
+            "정말요? 고마워요."
+    };
 
     final static String[] dialog = {
-            "안녕하세요?",
-            "반가워요.",
-            "오랜만이에요.",
-            "잘 지냈어요?",
-            "다음에 또 봐요.",
-            "안녕히 가세요."};
+            "제가 한국어로 글을 썼어요. \n 한 번 봐주세요.",
+            "주세요. 제가 봐줄게요. \n 음... 조금 틀렸어요. \n 하지만 아주 잘했어요.",
+            "정말요? 고마워요."
+    };
 
     final static int[] peopleImage = {1,2};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -77,5 +83,4 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem {
     public int getLessonImage() {
         return lessonImage;
     }
-
 }

@@ -11,8 +11,6 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem {
 
     final static String[] wordFront = {"내일", "식당", "주말", "재미있다", "영화"};
     final static String[] wordPronunciation = {"-", "[식땅]", "-", "[재미읻따]", "-"};
-    final static String[] wordSynonyms = {"-", "-", "-", "-", "-"};
-    final static String[] wordAntonyms = {"어제", "-", "평일", "재미없다", "-"};
 
     final static String[] sentenceFront = {
             "하다",
@@ -59,16 +57,6 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem {
     @Override
     public String[] getWordPronunciation() {
         return wordPronunciation;
-    }
-
-    @Override
-    public String[] getWordSynonyms() {
-        return wordSynonyms;
-    }
-
-    @Override
-    public String[] getWordAntonyms() {
-        return wordAntonyms;
     }
 
     @Override

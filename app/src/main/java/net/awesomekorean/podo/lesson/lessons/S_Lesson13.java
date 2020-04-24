@@ -9,7 +9,7 @@ public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonSubTitle = "'here' and 'there'";
     private int lessonImage = R.drawable.confusingexpression3;
 
-    private int contents = R.string.SL_12_CONTENTS;
+    private int contents = R.string.SL_13_CONTENTS;
 
     @Override
     public String getLessonSubTitle() {

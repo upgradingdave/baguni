@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import net.awesomekorean.podo.UnitProgressInfo;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -43,6 +41,9 @@ import net.awesomekorean.podo.lesson.lessons.Lesson16;
 import net.awesomekorean.podo.lesson.lessons.Lesson17;
 import net.awesomekorean.podo.lesson.lessons.Lesson18;
 import net.awesomekorean.podo.lesson.lessons.Lesson00;
+import net.awesomekorean.podo.lesson.lessons.Lesson19;
+import net.awesomekorean.podo.lesson.lessons.Lesson20;
+import net.awesomekorean.podo.lesson.lessons.Lesson21;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
@@ -52,7 +53,6 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson06;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson07;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson08;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson09;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
@@ -85,7 +85,7 @@ public class MainLesson extends Fragment{
 
     LessonItem[][] childList = {
             {new LessonHangulConsonant(), new LessonHangulVowel(), new LessonHangulBatchim(), new LessonHangulAssembly()},
-            {new Lesson00()},
+            {new Lesson00(), new Lesson19()},
             {new S_Lesson01(), new Lesson01(), new S_Lesson03(), new Lesson02(), new Lesson03()},
             {new NumberSino(), new NumberNative(), new NumberPractice()},
             {new S_Lesson04(), new Lesson04(), new Lesson05(), new Lesson06(), new S_Lesson06()},
@@ -94,8 +94,8 @@ public class MainLesson extends Fragment{
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
             {new Lesson13(), new Lesson14(), new S_Lesson11()},
             {new Lesson15(), new Lesson16(), new S_Lesson12()},
-            {new Lesson17(), new S_Lesson13()},
-            {new Lesson18(), new S_Lesson07()}
+            {new Lesson17(), new Lesson20(), new S_Lesson13()},
+            {new Lesson18(), new Lesson21(), new S_Lesson07()}
     };
 
 

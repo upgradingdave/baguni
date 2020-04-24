@@ -687,6 +687,13 @@ ex)
     </string>
 
 
+    <string name="SL_14_CONTENTS"><![CDATA[
+    <b>hello</b>
+<a href="https://firebasestorage.googleapis.com/v0/b/podo-705c6.appspot.com/o/lesson%2Fl_01%2Fl_01_dialog_1.mp3?alt=media&token=e38317e1-c90a-44e8-aa6f-8e1e571c4cb1" target="_blank">오디오재생</a>
+
+]]></string>
+
+
 
     <string name="L_00_TITLE">Greetings</string>
     <string name="L_00_WORD_BACK_0">Hello</string>
@@ -1633,6 +1640,108 @@ conjugate 'V-아/어 주세요'
 '기다려요' -> '기다려' + '주세요' = '기다려 주세요'"
     </string>
     <string name="L_18_SENTENCE_EXPLAIN_12">-</string>
+
+
+    <string name="L_19_WORD_BACK_0">good night</string>
+    <string name="L_19_WORD_BACK_1">thank you</string>
+    <string name="L_19_WORD_BACK_2">sorry</string>
+    <string name="L_19_WORD_BACK_3">thank you (before having a meal)</string>
+    <string name="L_19_WORD_BACK_4">thank you for the meal</string>
+    <string name="L_19_SENTENCE_BACK_0">good night</string>
+    <string name="L_19_SENTENCE_BACK_1">thank you</string>
+    <string name="L_19_SENTENCE_BACK_2">sorry</string>
+    <string name="L_19_SENTENCE_BACK_3">thank you (before having a meal)</string>
+    <string name="L_19_SENTENCE_BACK_4">thank you for the meal</string>
+    <string name="L_19_SENTENCE_EXPLAIN_0">To close friends : "잘 자~"</string>
+    <string name="L_19_SENTENCE_EXPLAIN_1">"You can use whatever you want. It is 100% the same. (Refer to '고맙습니다 vs. 감사합니다' in the Reading)
+To close friends : "고마워~""</string>
+    <string name="L_19_SENTENCE_EXPLAIN_2">"It's good to use '죄송합니다' for someone older than me or with a higher social status.
+To close friends : ""미안~"""</string>
+    <string name="L_19_SENTENCE_EXPLAIN_3">"It's not in English. It's a greeting to the person who provided the meal for me.
+To close friends : ""잘 먹을게~"""</string>
+    <string name="L_19_SENTENCE_EXPLAIN_4">To close friends : "잘 먹었어~"</string>
+
+    <string name="L_20_WORD_BACK_0">hot</string>
+    <string name="L_20_WORD_BACK_1">cool</string>
+    <string name="L_20_WORD_BACK_2">place</string>
+    <string name="L_20_WORD_BACK_3">enter</string>
+    <string name="L_20_WORD_BACK_4">there</string>
+    <string name="L_20_WORD_BACK_5">big</string>
+    <string name="L_20_WORD_BACK_6">pretty</string>
+    <string name="L_20_WORD_BACK_7">famous</string>
+    <string name="L_20_WORD_BACK_8">to drink</string>
+    <string name="L_20_SENTENCE_BACK_0">"It's too hot."</string>
+    <string name="L_20_SENTENCE_BACK_1">"It's too hot here."</string>
+    <string name="L_20_SENTENCE_BACK_2">I want to enter.</string>
+    <string name="L_20_SENTENCE_BACK_3">I want to enter a cool place.</string>
+    <string name="L_20_SENTENCE_BACK_4">big shopping mall</string>
+    <string name="L_20_SENTENCE_BACK_5">"Let's go into the big shopping mall."</string>
+    <string name="L_20_SENTENCE_BACK_6">"Let's go into the big shopping mall there."</string>
+    <string name="L_20_SENTENCE_BACK_7">famous cafe</string>
+    <string name="L_20_SENTENCE_BACK_8">pretty and famous cafe</string>
+    <string name="L_20_SENTENCE_BACK_9">"There's a pretty and famous cafe."</string>
+    <string name="L_20_SENTENCE_BACK_10">"There's a pretty and famous cafe there."</string>
+    <string name="L_20_SENTENCE_BACK_11">cool juice</string>
+    <string name="L_20_SENTENCE_BACK_12">"Let's drink a cool juice."</string>
+    <string name="L_20_SENTENCE_BACK_13">"Let's drink a cool juice there."</string>
+    <string name="L_20_SENTENCE_BACK_14">"Great. Let's drink a cool juice there."</string>
+    <string name="L_20_SENTENCE_EXPLAIN_0">"덥다' -> '덥어요' -> '더워요' (irregular)"</string>
+    <string name="L_20_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_2">"conjugate 'V-았/었으면 좋겠어요'
+'들어가다' -> '들어갔다'
+'들어갔다' -> '들어갔' + '으면 좋겠어요' = '들어갔으면 좋겠어요'"</string>
+    <string name="L_20_SENTENCE_EXPLAIN_3">"We can use 'A-(으)ㄴ' form when the adjective modifies a noun.
+'시원하다' -> '시원하' + 'ㄴ' = '시원한'"</string>
+    <string name="L_20_SENTENCE_EXPLAIN_4">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_7">"유명하다' -> '유명하' + 'ㄴ' = '유명한'"</string>
+    <string name="L_20_SENTENCE_EXPLAIN_8">"~고' form is used."</string>
+    <string name="L_20_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_10">"여기 : here
+저기 : there
+거기 : there
+(See the special lesson 'confusing expression 4 : here and there')"</string>
+    <string name="L_20_SENTENCE_EXPLAIN_11">"시원하다' -> '시원하' + 'ㄴ' = '시원한'"</string>
+    <string name="L_20_SENTENCE_EXPLAIN_12">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_13">-</string>
+    <string name="L_20_SENTENCE_EXPLAIN_14">-</string>
+
+
+    <string name="L_21_WORD_BACK_0">article</string>
+    <string name="L_21_WORD_BACK_1">to give</string>
+    <string name="L_21_WORD_BACK_2">wrong</string>
+    <string name="L_21_WORD_BACK_3">very</string>
+    <string name="L_21_WORD_BACK_4">really?</string>
+    <string name="L_21_SENTENCE_BACK_0">I wrote it.</string>
+    <string name="L_21_SENTENCE_BACK_1">I wrote an article.</string>
+    <string name="L_21_SENTENCE_BACK_2">I wrote an article in Korean.</string>
+    <string name="L_21_SENTENCE_BACK_3">I wrote an article in Korean.</string>
+    <string name="L_21_SENTENCE_BACK_4">please take a look.</string>
+    <string name="L_21_SENTENCE_BACK_5">please take once a look.</string>
+    <string name="L_21_SENTENCE_BACK_6">give me.</string>
+    <string name="L_21_SENTENCE_BACK_7">"I'll take a look."</string>
+    <string name="L_21_SENTENCE_BACK_8">"It's wrong."</string>
+    <string name="L_21_SENTENCE_BACK_9">um... a lilttle wrong.</string>
+    <string name="L_21_SENTENCE_BACK_10">but very good.</string>
+    <string name="L_21_SENTENCE_BACK_11">really? thank you.</string>
+    <string name="L_21_SENTENCE_EXPLAIN_0">"쓰다' -> '썼어요' (past tense)"</string>
+    <string name="L_21_SENTENCE_EXPLAIN_1">-</string>
+    <string name="L_21_SENTENCE_EXPLAIN_2">"N(으)로' is used when expressing means of transport, tools, and materials used to make something."</string>
+    <string name="L_21_SENTENCE_EXPLAIN_3">-</string>
+    <string name="L_21_SENTENCE_EXPLAIN_4">"보다' -> '봐 주세요' (request)"</string>
+    <string name="L_21_SENTENCE_EXPLAIN_5">-</string>
+    <string name="L_21_SENTENCE_EXPLAIN_6">-</string>
+    <string name="L_21_SENTENCE_EXPLAIN_7">"When you are trying to do something for somebody, use the 'V-아/어 줄게요' form.
+
+conjugate 'V-아/어 줄게요'
+'보다' -> '봐요'
+'봐요' -> '봐' + '줄게요' = '봐 줄게요'
+"</string>
+    <string name="L_21_SENTENCE_EXPLAIN_8">"틀리다' -> '틀렸어요' (past tense)"</string>
+    <string name="L_21_SENTENCE_EXPLAIN_9">-</string>
+    <string name="L_21_SENTENCE_EXPLAIN_10">-</string>
+    <string name="L_21_SENTENCE_EXPLAIN_11">-</string>
 
 
     <!--번역 필요 없는 부분-->

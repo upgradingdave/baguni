@@ -2,37 +2,33 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
-public class Lesson13 extends LessonInit implements Lesson, LessonItem {
+public class Lesson19 extends LessonInit implements Lesson, LessonItem {
 
-    private String lessonId = "L_13";
-    private String lessonTitle = "before";
-    private String lessonSubTitle = "~전에";
-    private int lessonImage = R.drawable.timeexpression1;
+    private String lessonId = "L_19";
+    private String lessonTitle = "others";
+    private String lessonSubTitle = "고맙습니다";
+    private int lessonImage = R.drawable.thankyou;
 
-    final static String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
-    final static String[] wordPronunciation = {"-", "[먹따]", "-", "-", "-"};
+    final static String[] wordFront = {"안녕히 주무세요", "고맙습니다", "죄송합니다", "잘 먹겠습니다", "잘 먹었습니다"};
+    final static String[] wordPronunciation = {"-", "[고맙씀니다]", "-", "[잘 먹겓씀니다]", "[잘 머걷씀니다]"};
 
     final static String[] sentenceFront = {
-            "감기에 걸리다",
-            "감기에 걸렸어요.",
-            "먹다",
-            "먹어요",
-            "이 약을 먹어요.",
-            "어떻게 먹어요?",
-            "밥을 먹다",
-            "밥을 먹기",
-            "밥을 먹기 전에 먹어요.",
-            "밥을 먹기 30분 전에 먹어요."
+            "안녕히 주무세요.",
+            "고맙습니다 / 감사합니다",
+            "죄송합니다 / 미안합니다",
+            "잘 먹겠습니다",
+            "잘 먹었습니다"
     };
 
     final static String[] dialog = {
-            "감기에 걸렸어요.",
-            "이 약을 먹어요.",
-            "어떻게 먹어요?",
-            "밥을 먹기 30분 전에 먹어요."
+            "안녕히 주무세요.",
+            "고맙습니다 / 감사합니다",
+            "죄송합니다 / 미안합니다",
+            "잘 먹겠습니다",
+            "잘 먹었습니다"
     };
 
-    final static int[] peopleImage = {1,2};
+    final static int[] peopleImage = {9,10};
 
 
     @Override
