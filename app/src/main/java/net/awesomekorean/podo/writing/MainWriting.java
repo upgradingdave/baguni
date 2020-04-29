@@ -57,7 +57,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
     ProgressBar progressBar;
 
-    TextView msgNoWriting; // 아직 작성한 글이 없습니다.
+    LinearLayout msgNoWriting; // 아직 작성한 글이 없습니다.
 
     ImageButton btnAddWriting; // 플로팅 버튼
 

@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         mainCollection = new MainCollection();
         setFrag(mainLesson);
 
-
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
 
 

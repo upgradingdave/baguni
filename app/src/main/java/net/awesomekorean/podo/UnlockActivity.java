@@ -15,11 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.rewarded.RewardItem;
-import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -36,8 +33,6 @@ import net.awesomekorean.podo.reading.ReadingFrame;
 public class UnlockActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    RewardedAd rewardedAd;
 
     LinearLayout unlockFirst;
     LinearLayout unlockSecond;
@@ -62,6 +57,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
     Context context;
 
+    AdsManager adsManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +66,13 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_unlock);
 
         context = getApplicationContext();
+
+        adsManager = AdsManager.getInstance();
+
+        if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
+
+            adsManager.loadRewardAds(context);
+        }
 
         unlockFirst = findViewById(R.id.unlockFirst);
         unlockSecond = findViewById(R.id.unlockSecond);
@@ -88,8 +92,6 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         userInformation = SharedPreferencesInfo.getUserInfo(context);
         userPoint = userInformation.getPoints();
 
-        rewardedAd = createAndLoadRewardedAd();
-
         extra = getIntent().getStringExtra("unlock");
         if(extra.equals("specialLesson")) {
             unlockPrice = specialLessonPrice;
@@ -101,26 +103,14 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    // 리워드 광고 로드하기
-    public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
-            @Override
-            public void onRewardedAdLoaded() {
-                System.out.println("광고를 로드했습니다");
-            }
-        };
-        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
-        return rewardedAd;
-    }
-
-
     // 리워드 보상 포인트 반영
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK) {
-            userPoint = SharedPreferencesInfo.getUserInfo(context).getPoints();
+            userInformation = SharedPreferencesInfo.getUserInfo(context);
+            userPoint = userInformation.getPoints();
+
             if(userPoint >= unlockPrice) {
                 unlockFirst.setVisibility(View.VISIBLE);
                 unlockSecond.setVisibility(View.GONE);
@@ -196,37 +186,34 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
 
+
             case R.id.btnWatchAds :
-                if(rewardedAd.isLoaded()) {
-                    RewardedAdCallback adCallback = new RewardedAdCallback() {
+                RewardedAdCallback adCallback = new RewardedAdCallback() {
 
-                        @Override
-                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                            System.out.println("보상을 받습니다.");
-                            Intent intent = new Intent(UnlockActivity.this, LessonFinish.class);
-                            intent.putExtra("isReward", true);
-                            startActivityForResult(intent, 200);
+                    @Override
+                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                        System.out.println("보상을 받습니다.");
+                        Intent intent = new Intent(UnlockActivity.this, LessonFinish.class);
+                        intent.putExtra("isReward", true);
+                        startActivityForResult(intent, 200);
 
-                            // analytics 로그 이벤트 얻기
-                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                            Bundle bundle = new Bundle();
-                            firebaseAnalytics.logEvent("reward_watch", bundle);
-                        }
+                        // analytics 로그 이벤트 얻기
+                        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                        Bundle bundle = new Bundle();
+                        firebaseAnalytics.logEvent("reward_watch", bundle);
+                    }
 
-                        @Override
-                        public void onRewardedAdFailedToShow(int i) {
-                            Toast.makeText(context, getString(R.string.AD_DISPLAY_FAILED), Toast.LENGTH_LONG).show();
-                        }
+                    @Override
+                    public void onRewardedAdFailedToShow(int i) {
+                        Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
+                    }
 
-                        @Override
-                        public void onRewardedAdClosed() {
-                            rewardedAd = createAndLoadRewardedAd();
-                        }
-                    };
-                    rewardedAd.show(UnlockActivity.this, adCallback);
-                } else {
-                    Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
-                }
+                    @Override
+                    public void onRewardedAdClosed() {
+                        adsManager.loadRewardAds(context);
+                    }
+                };
+                adsManager.rewardedAd.show(UnlockActivity.this, adCallback);
                 break;
 
             default: // btnNo, btnClose

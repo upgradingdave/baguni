@@ -150,8 +150,9 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="GIVE_US_FEEDBACK">Give us your feedback</string>
     <string name="THANKYOU_FEEDBACK">Thank you for your feedback</string>
     <string name="SEND">Send</string>
+    <string name="TIPS_CORRECTION_TITLE">Write your story</string>
     <string name="TIPS_CORRECTION">
-        You can ask for a correction from a native Korean teacher by using 1 point per 1 letter.
+        You can practice writing and request a correction from a native Korean teacher by using 1 point per 1 letter.
         Feedback will be provided in 100% Korean.
         (Inappropriate writing such as abusive language may be rejected)
     </string>
@@ -185,7 +186,6 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="GET_POINTS_BY_AD">Get points by watching ads</string>
     <string name="GET_POINTS_BY_PURCHASING">Get points by purchasing</string>
     <string name="AD_LOAD_FAILED">Failed to load ad. Please try it again.</string>
-    <string name="AD_DISPLAY_FAILED">Failed to display ad</string>
     <string name="BUG_REPORT">Report bug or suggestions</string>
     <string name="LOG_OUT">Log out</string>
     <string name="SAVE_NEW_NAME">Saved new name</string>
@@ -1748,10 +1748,6 @@ conjugate 'V-아/어 줄게요'
     <string name="facebook_app_id">3034621716562505</string>
     <string name="fb_login_protocol_scheme">fb3034621716562505</string>
     <string name="ADMOB_APP_ID">ca-app-pub-7371634469098812~7867291008</string>
-    <string name="ADMOB_TEST_ID_FULL_SCREEN">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ADMOB_TEST_ID_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="ADMOB_ID_FULL_SCREEN">ca-app-pub-7371634469098812/6205713214</string>
-    <string name="ADMOB_ID_REWARDED">ca-app-pub-7371634469098812/2074896515</string>
     <string name="STATUS">status</string>
     <string name="REQUEST">request</string>
     <string name="REQUEST_ADD">add</string>

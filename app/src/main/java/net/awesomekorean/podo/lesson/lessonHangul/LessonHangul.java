@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,19 +17,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GestureDetectorCompat;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.PlayMediaPlayer;
-import net.awesomekorean.podo.SharedPreferencesInfo;
-import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.LessonAdapterChild;
 
 import java.util.HashMap;
 import java.util.Map;

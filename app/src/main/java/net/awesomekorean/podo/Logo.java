@@ -23,6 +23,8 @@ public class Logo extends AppCompatActivity {
 
     private FirebaseAnalytics firebaseAnalytics;
 
+    private AdsManager adsManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,9 @@ public class Logo extends AppCompatActivity {
         MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
 
         // 광고 미리 로드하기
-        AdsLoad.getInstance().setAds(this);
+        adsManager = AdsManager.getInstance();
+        adsManager.loadFullAds(this);
+        adsManager.loadRewardAds(this);
 
 
         Handler handler = new Handler();
@@ -67,7 +71,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2);
+        }, 2000);
 
     }
 

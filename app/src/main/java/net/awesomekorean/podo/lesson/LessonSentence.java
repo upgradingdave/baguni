@@ -22,10 +22,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.AdsLoad;
 import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.MediaPlayerManager;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
 

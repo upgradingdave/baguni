@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-import net.awesomekorean.podo.AdsLoad;
+import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -42,7 +42,9 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     Context context;
 
-    AdsLoad adsLoad;
+    AdsManager adsManager;
+
+    Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +53,10 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
         context = getApplicationContext();
 
-        adsLoad = AdsLoad.getInstance();
+        adsManager = AdsManager.getInstance();
 
-        if(adsLoad.interstitialAd == null || !adsLoad.interstitialAd.isLoaded()) {
-            adsLoad.setAds(context);
+        if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
+            adsManager.loadFullAds(context);
         }
 
         selectResult = findViewById(R.id.selectResult);
@@ -76,6 +78,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         Animation aniScale = AnimationUtils.loadAnimation(context, R.anim.scale_1000);
         finishPodo.startAnimation(aniScale);
         isFromProfile = getIntent().getBooleanExtra("isReward", false);
+
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
     }
 
 
@@ -93,8 +97,9 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                 userInformation.setPoints(newPoints);
 
                 if(isFromProfile) {
+                    SharedPreferencesInfo.setUserInfo(context, userInformation);
+                    userInformation.updateDb(context);
                     Intent intent = new Intent();
-                    intent.putExtra("newPoint", newPoints);
                     setResult(RESULT_OK, intent);
                     finish();
 
@@ -114,12 +119,15 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     userInformation.updateCompleteList(context, lessonId, 100, false);
 
                     // 애드몹 광고 보여주기
-                    AdsLoad.getInstance().playAds(this);
+                    if(adsManager.interstitialAd.isLoaded()) {
+                        adsManager.playFullAds(this);
+                    }
                 }
                 break;
 
 
             default:
+                v.startAnimation(animation);
                 // 포인트 랜덤으로 가져오기
                 reward = RandomRewards.randomRewards();
                 tvPoint.setText("+ " + String.valueOf(reward));

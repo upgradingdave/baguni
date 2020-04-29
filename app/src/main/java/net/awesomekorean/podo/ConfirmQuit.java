@@ -32,7 +32,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
     boolean isReading = false;
 
-    AdsLoad adsLoad;
+    AdsManager adsManager;
 
 
     @Override
@@ -43,10 +43,10 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
         context = getApplicationContext();
 
-        adsLoad = AdsLoad.getInstance();
+        adsManager = AdsManager.getInstance();
 
-        if(adsLoad.interstitialAd == null || !adsLoad.interstitialAd.isLoaded()) {
-            adsLoad.setAds(context);
+        if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
+            adsManager.loadFullAds(context);
         }
 
         btnYes = findViewById(R.id.btnYes);
@@ -116,7 +116,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
                         if(progress > 50) {
 
-                            adsLoad.playAds(this);
+                            adsManager.playFullAds(this);
                         }
                     }
 
@@ -126,7 +126,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
                         if(progress > 30) {
 
-                            adsLoad.playAds(this);
+                            adsManager.playFullAds(this);
                         }
                     }
                 }

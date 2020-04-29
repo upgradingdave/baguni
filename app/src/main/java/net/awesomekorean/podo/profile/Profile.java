@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,15 +22,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.rewarded.RewardItem;
-import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.common.eventbus.Subscribe;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,6 +34,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -58,8 +55,6 @@ import java.util.List;
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    RewardedAd rewardedAd;
 
     ImageView btnBack;
     ImageView userImage;
@@ -97,10 +92,23 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView recyclerView;
 
+    AdsManager adsManager;
+
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        context = getApplicationContext();
+
+        adsManager = AdsManager.getInstance();
+
+        if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
+
+            adsManager.loadRewardAds(context);
+        }
 
         btnBack = findViewById(R.id.btnBack);
         userImage = findViewById(R.id.userImage);
@@ -134,7 +142,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         getPointByPurchasing.setOnClickListener(this);
         logout.setOnClickListener(this);
 
-        userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         userName.setText(MainActivity.userName);
         userPoint.setText(String.valueOf(userInformation.getPoints()));
@@ -172,8 +180,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
 
         setAttendance(userInformation.getAttendance());
-
-        rewardedAd = createAndLoadRewardedAd();
     }
 
 
@@ -219,18 +225,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         recyclerView.setAdapter(adapter);
     }
 
-    // 리워드 광고 로드하기
-    public RewardedAd createAndLoadRewardedAd() {
-        rewardedAd = new RewardedAd(this, getString(R.string.ADMOB_TEST_ID_REWARDED));
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
-            @Override
-            public void onRewardedAdLoaded() {
-                System.out.println("광고를 로드했습니다");
-            }
-        };
-        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
-        return rewardedAd;
-    }
 
     // 출석부 세팅하기
     private void setItems(DayOfWeekItem item, String day, boolean isChecked) {
@@ -287,7 +281,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()) {
                                             System.out.println("userName을 업데이트 했습니다");
-                                            Toast.makeText(getApplicationContext(), getString(R.string.UPDATED_USERNAME), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, getString(R.string.UPDATED_USERNAME), Toast.LENGTH_SHORT).show();
                                             MainActivity.userName = user.getDisplayName();
                                             userName.setText(newName);
                                         }
@@ -296,7 +290,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 System.out.println("userName을 업데이트를 실패 했습니다" + e);
-                                Toast.makeText(getApplicationContext(), getString(R.string.UPDATED_USERNAME_FAILED), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, getString(R.string.UPDATED_USERNAME_FAILED), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -327,41 +321,37 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "", Toast.LENGTH_LONG).show();
                 }
                 break;
 
             case R.id.getPointsByAd :
-                if(rewardedAd.isLoaded()) {
-                    RewardedAdCallback adCallback = new RewardedAdCallback() {
+                RewardedAdCallback adCallback = new RewardedAdCallback() {
 
-                        @Override
-                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                            System.out.println("보상을 받습니다.");
-                            intent = new Intent(Profile.this, LessonFinish.class);
-                            intent.putExtra("isReward", true);
-                            startActivityForResult(intent, 200);
+                    @Override
+                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                        System.out.println("보상을 받습니다.");
+                        intent = new Intent(Profile.this, LessonFinish.class);
+                        intent.putExtra("isReward", true);
+                        startActivityForResult(intent, 200);
 
-                            // analytics 로그 이벤트 얻기
-                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
-                            Bundle bundle = new Bundle();
-                            firebaseAnalytics.logEvent("reward_watch", bundle);
-                        }
+                        // analytics 로그 이벤트 얻기
+                        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                        Bundle bundle = new Bundle();
+                        firebaseAnalytics.logEvent("reward_watch", bundle);
+                    }
 
-                        @Override
-                        public void onRewardedAdFailedToShow(int i) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.AD_DISPLAY_FAILED), Toast.LENGTH_LONG).show();
-                        }
+                    @Override
+                    public void onRewardedAdFailedToShow(int i) {
+                        Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
+                    }
 
-                        @Override
-                        public void onRewardedAdClosed() {
-                            rewardedAd = createAndLoadRewardedAd();
-                        }
-                    };
-                    rewardedAd.show(Profile.this, adCallback);
-                } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
-                }
+                    @Override
+                    public void onRewardedAdClosed() {
+                        adsManager.loadRewardAds(context);
+                    }
+                };
+                adsManager.rewardedAd.show(Profile.this, adCallback);
                 break;
 
             case R.id.getPointsByPurchasing :
@@ -374,8 +364,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                         .setTitle(getString(R.string.SIGN_OUT)).setMessage(getString(R.string.SIGN_OUT_MESSAGE))
                         .setPositiveButton(getString(R.string.SIGN_OUT), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                SharedPreferencesInfo.setSignIn(getApplicationContext(), false);
-                                intent = new Intent(getApplicationContext(), SignIn.class);
+                                SharedPreferencesInfo.setSignIn(context, false);
+                                intent = new Intent(context, SignIn.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(intent);
                                 FirebaseAuth.getInstance().signOut();
@@ -398,8 +388,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
-            int newPoints = data.getIntExtra("newPoint", userInformation.getPoints());
-            userInformation.setPoints(newPoints);
 
             // 일주일 출석 보상일 때
             if(requestCode == 100) {
@@ -407,31 +395,19 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 Calendar cal = Calendar.getInstance();
                 int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
                 userInformation.resetDays(today);
+                setAttendance(userInformation.getAttendance());
+                SharedPreferencesInfo.setUserInfo(context, userInformation);
+
+                userInformation.updateDb(context);
                 System.out.println("출석부를 초기화 했습니다");
+
+
+            // 광고 보상일 때
+            } else if(requestCode == 200) {
+
+                userInformation = SharedPreferencesInfo.getUserInfo(context);
+                userPoint.setText(String.valueOf(userInformation.getPoints()));
             }
-
-            // DB 에 유저 정보 업데이드 하기
-            String userEmail = MainActivity.userEmail;
-
-            FirebaseCrashlytics.getInstance().log("userEmail : " + userEmail);
-            db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
-                    .set(userInformation)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                            userPoint.setText(String.valueOf(SharedPreferencesInfo.getUserInfo(getApplicationContext()).getPoints()));
-                            if(requestCode == 100) {
-                                setAttendance(userInformation.getAttendance());
-                            }
-                            System.out.println("유저 정보를 업데이트 했습니다.");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    System.out.println("유저 정보 업데이트를 실패 했습니다.");
-                }
-            });
         }
     }
 

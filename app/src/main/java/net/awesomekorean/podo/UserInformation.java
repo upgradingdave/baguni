@@ -105,25 +105,31 @@ public class UserInformation {
 
             SharedPreferencesInfo.setUserInfo(context, this);
 
-            // DB 에 유저 정보 업데이드 하기
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            db.collection(context.getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(context.getString(R.string.DB_INFORMATION)).document(context.getString(R.string.DB_INFORMATION))
-                    .set(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            System.out.println("DB에 유저 정보를 업데이트 했습니다.");
-                            System.out.println(lessonComplete);
-                            System.out.println(readingComplete);
-                        }
-                    });
+            updateDb(context);
 
         } else {
 
             System.out.println("기존 진행률이 더 높습니다. DB에 유저 정보를 업데이트하지 않습니다.");
         }
     }
+
+
+    // DB 에 유저 정보 업데이드 하기
+    public void updateDb(final Context context) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection(context.getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(context.getString(R.string.DB_INFORMATION)).document(context.getString(R.string.DB_INFORMATION))
+                .set(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        SharedPreferencesInfo.setUserInfo(context, UserInformation.this);
+                        System.out.println("DB에 유저 정보를 업데이트 했습니다.");
+                    }
+                });
+    }
+
 
     public List<String> getReadingComplete() {
         return readingComplete;
