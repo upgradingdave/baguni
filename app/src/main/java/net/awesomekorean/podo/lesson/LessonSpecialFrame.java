@@ -24,6 +24,7 @@ import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
 public class LessonSpecialFrame extends AppCompatActivity implements Button.OnClickListener{
 
     TextView title;
+    TextView subTitle;
     TextView contents;
     Button btnFinish;
 
@@ -43,6 +44,7 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
         context = getApplicationContext();
 
         title = findViewById(R.id.title);
+        subTitle = findViewById(R.id.subTitle);
         contents = findViewById(R.id.contents);
         btnFinish = findViewById(R.id.btnFinish);
         confirmQuit = findViewById(R.id.confirmQuit);
@@ -52,16 +54,14 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
         btnNo.setOnClickListener(this);
         btnYes.setOnClickListener(this);
 
-        contents.setMovementMethod(new ScrollingMovementMethod());
         lessonSpecial = (LessonSpecial) LessonAdapterChild.lessonItem;
-        if(lessonSpecial == null) {
-            System.out.println("lessonSpecial is NULL!");
-        }
+
         readyForLesson();
     }
 
     private void readyForLesson() {
         title.setText(lessonSpecial.getLessonTitle());
+        subTitle.setText(lessonSpecial.getLessonSubTitle());
         contents.setText(lessonSpecial.getContents());
     }
 

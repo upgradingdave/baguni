@@ -49,7 +49,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     TextView progressTextView;
 
     LinearLayout loadingLayout;
-    LinearLayout layoutHangul;
+    ConstraintLayout layoutHangul;
     TextView textViewHangul;
     TextView textViewHangulExplain;
     ConstraintLayout layoutIntro; // 인트로 버튼 눌렀을 때 뷰
@@ -97,6 +97,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     String stringLeft = "left";
     String stringRight = "right";
 
+    Animation btnAnimation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         layoutHangul = findViewById(R.id.layoutHangul);
         textViewHangul = findViewById(R.id.textViewHangul);
         textViewHangulExplain = findViewById(R.id.textViewHangulExplain);
+        imageViewHangul = findViewById(R.id.imageViewHangul);
         layoutIntro = findViewById(R.id.layoutIntro);
         textViewIntro = findViewById(R.id.textViewIntro);
         btnCloseIntro = findViewById(R.id.btnCloseIntro);
@@ -129,6 +132,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         btnIntro.setOnClickListener(this);
         btnCloseIntro.setOnClickListener(this);
         btnClose.setOnClickListener(this);
+
+        btnAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
 
         onLoadingLayout(true);
 
@@ -183,6 +188,10 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
     // 스와이프 애니메이션 실행
     public void swipeAnimationStart(final String swipeDirection) {
+
+        hintBtnClicked = 0;
+        writingBtnClicked = 0;
+
         if(swipeDirection == stringLeft) {
             animation1 = AnimationUtils.loadAnimation(this.getApplicationContext(), R.anim.move_left1);
             animation2 = AnimationUtils.loadAnimation(this.getApplicationContext(), R.anim.move_left2);
@@ -347,8 +356,10 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnWriting :
+
+                iconWriting.startAnimation(btnAnimation);
+
                 if(writingBtnClicked == 0) {
-                    imageViewHangul = findViewById(R.id.imageViewHangul);
                     imageViewHangul.setImageResource(resIDWriting);
 
                     visible(GONE, VISIBLE);
@@ -362,8 +373,10 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnHint :
+
+                iconHint.startAnimation(btnAnimation);
+
                 if(hintBtnClicked == 0) {
-                    imageViewHangul = findViewById(R.id.imageViewHangul);
                     imageViewHangul.setImageResource(resIDHint);
 
                     visible(GONE, VISIBLE);

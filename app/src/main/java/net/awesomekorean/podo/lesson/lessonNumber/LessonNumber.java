@@ -199,6 +199,10 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
         if(!numberTitle.equals(getString(R.string.SINO)) && !numberTitle.equals(getString(R.string.NATIVE))) {
 
             intent.putExtra("isNumberPractice", true);
+
+        } else {
+
+            intent.putExtra("isNumber", true);
         }
 
         startActivityForResult(intent, 200);

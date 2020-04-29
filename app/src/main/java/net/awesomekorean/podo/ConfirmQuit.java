@@ -26,9 +26,13 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
     boolean isHangul = false;
 
+    boolean isNumber = false;
+
     boolean isNumberPractice = false;
 
     boolean isReading = false;
+
+    AdsLoad adsLoad;
 
 
     @Override
@@ -38,6 +42,12 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_confirm_quit);
 
         context = getApplicationContext();
+
+        adsLoad = AdsLoad.getInstance();
+
+        if(adsLoad.interstitialAd == null || !adsLoad.interstitialAd.isLoaded()) {
+            adsLoad.setAds(context);
+        }
 
         btnYes = findViewById(R.id.btnYes);
 
@@ -52,6 +62,8 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         progress = intent.getExtras().getInt("progress");
 
         isHangul = intent.getExtras().getBoolean("isHangul");
+
+        isNumber = intent.getExtras().getBoolean("isNumber");
 
         isNumberPractice = intent.getExtras().getBoolean("isNumberPractice");
 
@@ -104,11 +116,17 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
                         if(progress > 50) {
 
-                            AdsLoad.getInstance().playAds(this);
+                            adsLoad.playAds(this);
+                        }
+                    }
 
-                        } else {
 
-                            sendResultOk();
+                    // 진도율 30% 이상이면 광고 재생 (숫자)
+                    if(isNumber) {
+
+                        if(progress > 30) {
+
+                            adsLoad.playAds(this);
                         }
                     }
                 }

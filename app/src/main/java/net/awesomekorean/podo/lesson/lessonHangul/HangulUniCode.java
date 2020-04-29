@@ -38,8 +38,9 @@ public class HangulUniCode {
         assembledHangul = Character.toString(cv);
 
         // 예외 모음에 포함되면 audioFileCorrected 생성
+        String b2 = null;
         if(Arrays.asList(jungException).contains(b)) {
-            String b2 = "ㅚ";
+            b2 = "ㅚ";
             int indexJung2 = findIndex(b2, jung);
             assembledUniCode = 44032 + (indexCho*588) + indexJung2*28;
             cv = (char) assembledUniCode;
@@ -61,23 +62,32 @@ public class HangulUniCode {
         cvc = (char) assembledUniCode;
         assembledHangul = Character.toString(cvc);
 
+        // 입력한 모음이 예외 받침에 해당되는지 확인
+        String b2 = null;
+        if(Arrays.asList(jungException).contains(b)) {
+            b2 = "ㅚ";
+            indexJung = findIndex(b2, jung);
+        }
+
         // 입력한 받침이 예외 받침에 해당되는지 확인
         String c2 = null;
         if(Arrays.asList(jongException1).contains(c)) {
             c2 = "ㄱ";
+            indexJong = findIndex(c2, jong);
         } else if(Arrays.asList(jongException2).contains(c)) {
             c2 = "ㄷ";
+            indexJong = findIndex(c2, jong);
         } else if(Arrays.asList(jongException3).contains(c)) {
             c2 = "ㅂ";
+            indexJong = findIndex(c2, jong);
         }
 
-        if(c2 == null) {
+        if(b2 == null && c2 == null) {
             audioFile = assembledHangul + ".mp3";
 
-        // 예외 받침에 포함되면 audioFileCorrected 생성
+        // 예외 모음이나 받침에 포함되면 audioFileCorrected 생성
         } else {
-            int indexJong2 = findIndex(c2, jong);
-            assembledUniCode = 44032 + (indexCho*588) + indexJung*28 + indexJong2;
+            assembledUniCode = 44032 + (indexCho*588) + indexJung*28 + indexJong;
             cvc = (char) assembledUniCode;
             audioFileCorrected = cvc + ".mp3";
         }

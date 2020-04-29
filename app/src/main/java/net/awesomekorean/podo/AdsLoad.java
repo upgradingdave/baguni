@@ -15,7 +15,7 @@ public class AdsLoad {
 
     Activity activity;
 
-    InterstitialAd interstitialAd;
+    public InterstitialAd interstitialAd;
 
     private static AdsLoad instance = new AdsLoad();
 
@@ -64,7 +64,7 @@ public class AdsLoad {
 
         this.activity = activity;
 
-        if(interstitialAd.isLoaded()) {
+        if(interstitialAd != null && interstitialAd.isLoaded()) {
 
             interstitialAd.show();
 

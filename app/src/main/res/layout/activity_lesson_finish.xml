@@ -46,20 +46,20 @@
 
     <ImageView
         android:id="@+id/complete"
-        android:layout_marginTop="30dp"
+        android:layout_margin="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/finishPodo"
         app:layout_constraintBottom_toTopOf="@id/selectBox"
         android:src="@drawable/bg_finish"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"/>
 
     <LinearLayout
         android:id="@+id/selectBox"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:orientation="vertical"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -110,15 +110,14 @@
         android:id="@+id/selectResult"
         android:visibility="gone"
         android:background="@drawable/point_box_bg"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/complete"
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <TextView
             android:id="@+id/tvPoint"
-            android:text="+10"
             android:textSize="20dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -142,11 +141,9 @@
             android:src="@drawable/point_big_big"
             app:layout_constraintStart_toStartOf="@id/open"
             app:layout_constraintEnd_toEndOf="@id/open"
-            app:layout_constraintTop_toTopOf="@id/open"
-            app:layout_constraintBottom_toBottomOf="@id/open"
-            android:translationY="-50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"/>
+            app:layout_constraintTop_toBottomOf="@id/tvPoint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btnGetPoint"

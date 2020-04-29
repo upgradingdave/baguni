@@ -111,7 +111,7 @@
         android:layout_height="0dp"/>
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutHangul"
         android:elevation="1dp"
         android:layout_marginTop="20dp"
@@ -126,34 +126,51 @@
         android:layout_width="0dp"
         android:layout_height="0dp">
 
+        <ImageView
+            android:id="@+id/imageViewHangul"
+            android:elevation="1dp"
+            android:visibility="gone"
+            android:padding="50dp"
+            android:background="@drawable/bg_white_30_stroke_grey"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
         <TextView
             android:id="@+id/textViewHangul"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="50dp"
             android:gravity="center|bottom"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/nanumgothic_regular"
+            android:text="ㄹ"
             android:textSize="80dp"
             android:textStyle="bold" />
 
         <ScrollView
             android:id="@+id/svHangulExplain"
-            android:layout_weight="5"
             android:layout_margin="10dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewHangul"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <TextView
                 android:id="@+id/textViewHangulExplain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:text="리을"
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 />
         </ScrollView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/btnAudio"
@@ -237,19 +254,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageViewHangul"
-        android:elevation="1dp"
-        android:visibility="gone"
-        android:padding="50dp"
-        app:layout_constraintTop_toTopOf="@id/layoutHangul"
-        app:layout_constraintBottom_toBottomOf="@id/layoutHangul"
-        app:layout_constraintStart_toStartOf="@id/layoutHangul"
-        app:layout_constraintEnd_toEndOf="@id/layoutHangul"
-        android:background="@drawable/bg_white_30_stroke_grey"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutIntro"

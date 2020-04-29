@@ -91,6 +91,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
     int readingProgress;
 
+    boolean slowBtnClicked = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +206,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                         // 단어 오디오 재생
                         mediaPlayerManager = MediaPlayerManager.getInstance();
-                        //singleMediaPlayerManager = new MediaPlayerManager();
+
                         if(mediaPlayerManager != null) {
                             mediaPlayerManager.pauseMediaPlayer();
                         }
@@ -212,6 +214,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                         mediaPlayerManager.playMediaPlayer(false);
                         setVisibility(View.VISIBLE, View.GONE);
+
+                        // 프로그레스바 잠그기
+                        seekBar.setEnabled(false);
                     }
 
                     @Override
@@ -283,6 +288,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                             mediaPlayerManager.setMediaPlayerUrl(url);
                             playingTime = mediaPlayerManager.getDuration(); // 노래 재생시간
                             seekBar.setMax(playingTime);
+                            if(slowBtnClicked) {
+                                mediaPlayerManager.setSpeed(0.8f);
+                            }
                             mediaPlayerManager.playMediaPlayer(true);
                             setVisibility(View.GONE, View.VISIBLE);
                         }
@@ -291,9 +299,15 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                     // 뭠췄다가 플레이 시
                 } else {
                     mediaPlayerManager.setMediaPlayerUrl(url);
+                    if(slowBtnClicked) {
+                        mediaPlayerManager.setSpeed(0.8f);
+                    }
                     mediaPlayerManager.playMediaPlayer(true);
                     setVisibility(View.GONE, View.VISIBLE);
                 }
+
+                seekBar.setEnabled(true);
+
                 break;
 
             case R.id.btnPause :
@@ -307,6 +321,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 if(mediaPlayerManager != null) {
                     mediaPlayerManager.setSpeed(1f);
                 }
+                slowBtnClicked = false;
                 break;
 
             case R.id.btnSlow :
@@ -315,7 +330,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 if(mediaPlayerManager != null) {
                     mediaPlayerManager.setSpeed(0.8f);
                 }
-            break;
+                slowBtnClicked = true;
+                break;
 
             case R.id.btnFinish :
 

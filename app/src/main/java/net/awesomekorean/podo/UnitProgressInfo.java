@@ -49,7 +49,7 @@ public class UnitProgressInfo {
 
         this.unitProgressArray = new String[completeInfo.size()];
 
-        if(completeInfo != null) {
+        if(completeInfo.size() > 0) {
 
             for(int i=0; i<completeInfo.size(); i++) {
 
@@ -96,7 +96,7 @@ public class UnitProgressInfo {
     // 완료아이템 표기 변경 (L_00 -> L_00%100)
     private void setCompleteInfoToNewMark(boolean isReading) {
 
-        if(completeInfo != null) {
+        if(completeInfo.size() > 0) {
 
             if(!completeInfo.get(0).contains("%")) {
 

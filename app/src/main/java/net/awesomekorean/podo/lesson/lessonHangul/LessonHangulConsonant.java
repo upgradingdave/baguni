@@ -16,9 +16,12 @@ public class LessonHangulConsonant extends S_LessonInit_Unlock implements Hangul
 
     private String[] hangul = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
 
-    private String[] hangulExplain = {"기역", "니은", "디귿", "리을", "미음", "비읍", "시옷", "이응, No sound", "지읒", "치읓", "키읔", "티읕", "피읖", "히읗", "쌍기역", "쌍디귿", "쌍비읍", "쌍시옷", "쌍지읒"};
+    private String[] hangulExplain = {"기역", "니은", "디귿", "리을", "미음", "비읍", "시옷", "이응, No sound", "지읒", "치읓", "키읔", "티읕", "피읖", "히읗", "쌍기역 \n '쌍' means double.", "쌍디귿", "쌍비읍", "쌍시옷", "쌍지읒"};
 
-    private String hangulIntro = "Korean only has 14 consonants and 5 double consonants.\n" +
+    private String hangulIntro =
+            "CAUTION) \nIf you want to speak to Korean as like a native speaker, it is not recommended to match the pronunciation of Hangul with the English alphabet. " +
+            "However, this lesson provides hints with pictures and alphabet pronunciation to make it easier to remember Hangul but that doesn't mean it's the same pronunciation.\n\n" +
+            "Korean only has 14 consonants and 5 double consonants.\n" +
             "We can make the sound of each consonant by using articulators like the lips, tongue, mouth, throat and nose.\n" +
             "That's why we should think about the correct position of each articulator.\n" +
             "This will make you pronounce Korean like a native Korean.\n" +

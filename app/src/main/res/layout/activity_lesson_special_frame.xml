@@ -7,55 +7,76 @@
     android:layout_height="match_parent"
     android:background="@color/FOGGY">
 
-    <LinearLayout
-        android:id="@+id/contentsLayout"
-        android:background="@drawable/bg_white_10_stroke_grey"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:fillViewport="true"
         android:layout_margin="20dp"
-        android:elevation="3dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="50dp"
+        android:elevation="1dp"
+        android:background="@drawable/bg_white_10_stroke_grey"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btnFinish"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:gravity="center"
-            android:text="친구랑 한국 식당에\n 갈 거예요"
-            android:textSize="30dp"
-            android:textColor="@color/BLACK"
-            android:textStyle="bold"
-            android:fontFamily="@font/nanumgothic_regular"
-            android:lineSpacingExtra="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+        <LinearLayout
+            android:id="@+id/contentsLayout"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="50dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/contents"
-            android:layout_weight="1"
-            android:text="친구랑 한국 식당에 갈 거예요는 블라블라블라..."
-            android:textSize="20dp"
-            android:textColor="@color/BLACK"
-            android:scrollbars="vertical"
-            android:lineSpacingExtra="5dp"
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/BLACK"
+                android:textStyle="bold"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:lineSpacingExtra="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/subTitle"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/contents"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:lineSpacingExtra="5dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/BLACK"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subTitle"
+                app:layout_constraintVertical_bias="0.0" />
+        </LinearLayout>
+    </ScrollView>
 
     <ImageView
         android:src="@drawable/bg_speciallesson"
         android:elevation="3dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@id/contentsLayout"
-        app:layout_constraintStart_toStartOf="@id/contentsLayout"
-        app:layout_constraintEnd_toEndOf="@id/contentsLayout"
+        app:layout_constraintBottom_toBottomOf="@id/scrollView"
+        app:layout_constraintStart_toStartOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="@id/scrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
 

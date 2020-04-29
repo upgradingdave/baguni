@@ -40,7 +40,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     TextView answer;
     ImageView answerImage;
-    LinearLayout answerLayout;
+    ConstraintLayout answerLayout;
 
     TextView tvAnswer; // 입력한 정답이 표시되는 텍스트뷰
 
@@ -51,7 +51,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
     ImageView btnAudio;
     ImageView btnReset;
 
-    ConstraintLayout totalPage;
+    LinearLayout totalPage;
 
     int quizCount = 0; // 단어퀴즈 순서
 

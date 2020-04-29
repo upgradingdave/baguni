@@ -38,19 +38,23 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iconLock"
-                android:src="@drawable/lock"
+            <TextView
+                android:id="@+id/readingId"
+                android:text="01"
                 android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
-
+                android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/rocket"
                 android:src="@drawable/rocket1"
+                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/iconLock"
+                android:src="@drawable/lock"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <LinearLayout
                 android:id="@+id/layoutCompleted"

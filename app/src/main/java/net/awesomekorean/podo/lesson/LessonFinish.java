@@ -42,12 +42,20 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     Context context;
 
+    AdsLoad adsLoad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_finish);
 
         context = getApplicationContext();
+
+        adsLoad = AdsLoad.getInstance();
+
+        if(adsLoad.interstitialAd == null || !adsLoad.interstitialAd.isLoaded()) {
+            adsLoad.setAds(context);
+        }
 
         selectResult = findViewById(R.id.selectResult);
         box1 = findViewById(R.id.box1);
@@ -106,10 +114,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     userInformation.updateCompleteList(context, lessonId, 100, false);
 
                     // 애드몹 광고 보여주기
-                    if(!isFromProfile) {
-
-                        AdsLoad.getInstance().playAds(this);
-                    }
+                    AdsLoad.getInstance().playAds(this);
                 }
                 break;
 

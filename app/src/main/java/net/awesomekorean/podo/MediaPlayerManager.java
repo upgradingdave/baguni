@@ -181,14 +181,17 @@ public class MediaPlayerManager {
 
         playMediaPlayer(false);
 
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
+        if(mediaPlayer != null) {
 
-                lessonDialog = LessonDialog.newInstance();
-                lessonDialog.setToggleBtnUnChecked();
-            }
-        });
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+
+                    lessonDialog = LessonDialog.newInstance();
+                    lessonDialog.setToggleBtnUnChecked();
+                }
+            });
+        }
     }
 
 
@@ -199,26 +202,29 @@ public class MediaPlayerManager {
 
         playMediaPlayer(false);
 
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
+        if(mediaPlayer != null) {
 
-                dialogIndex++;
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
 
-                mp.reset();
+                    dialogIndex++;
 
-                // 마지막 오디오 재생 끝났으면
-                if(dialogIndex == audiosDialog.size()) {
-                    dialogIndex = 0;
+                    mp.reset();
 
-                    lessonDialog = LessonDialog.newInstance();
-                    lessonDialog.setPlayBtn(View.VISIBLE, View.GONE);
+                    // 마지막 오디오 재생 끝났으면
+                    if(dialogIndex == audiosDialog.size()) {
+                        dialogIndex = 0;
 
-                } else {
-                    setAndPlayAllDialog(audiosDialog);
+                        lessonDialog = LessonDialog.newInstance();
+                        lessonDialog.setPlayBtn(View.VISIBLE, View.GONE);
+
+                    } else {
+                        setAndPlayAllDialog(audiosDialog);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
 
@@ -304,33 +310,4 @@ public class MediaPlayerManager {
             mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(speed));
         }
     }
-
-
-    public int getPlayingPosition() {
-        return playingPosition;
-    }
-
-    // when we do mediaPlayer.stop() also call .release();
-
-
-//    public void setMediaPlayerState(String stringNextState, String audioUrl) {
-//        if(mediaPlayer == null) {
-//            mediaPlayer = createAndSetMediaPlayer(mediaPlayer, audioUrl);
-//
-//            // this is when we want to play but the mediaPlayer is not created
-//            if(stringNextState.equals("play")) {
-//                mediaPlayer = playMediaPlayer(mediaPlayer);
-//            }
-//
-//        } else {
-//            // this is when we want to play and mediaPlayer is already created
-//            mediaPlayer.stop();
-//            if(stringNextState.equals("play")) {
-//                mediaPlayer = null;
-//                mediaPlayer = createAndSetMediaPlayer(mediaPlayer, audioUrl);
-//                mediaPlayer = playMediaPlayer(mediaPlayer);
-//            }
-//        }
-//    }
-
 }

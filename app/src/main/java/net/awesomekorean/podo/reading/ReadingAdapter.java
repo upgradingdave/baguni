@@ -52,6 +52,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         LinearLayout readingItem;
         TextView title;
         ImageView readingImage;
+        TextView readingId;
         ImageView iconLock;
         ImageView rocket;
         ProgressBar progressBar;
@@ -66,6 +67,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             readingItem = itemView.findViewById(R.id.readingItem);
             title = itemView.findViewById(R.id.title);
             readingImage = itemView.findViewById(R.id.readingImage);
+            readingId = itemView.findViewById(R.id.readingId);
             iconLock = itemView.findViewById(R.id.iconLock);
             rocket = itemView.findViewById(R.id.rocket);
             progressBar = itemView.findViewById(R.id.progressBar);
@@ -121,6 +123,8 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
         }
+
+        holder.readingId.setText(items.getReadingId().substring(2));
 
         if (items.getReadingProgress() == 100) {
             holder.progressBar.setVisibility(View.INVISIBLE);
