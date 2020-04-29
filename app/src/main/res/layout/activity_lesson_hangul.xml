@@ -139,20 +139,26 @@
         <TextView
             android:id="@+id/textViewHangul"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            android:gravity="center|bottom"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:fontFamily="@font/nanumgothic_regular"
-            android:text="ㄹ"
-            android:textSize="80dp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="60dp"
+            android:autoSizeMinTextSize="40dp"
+            android:autoSizeStepGranularity="5dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <ScrollView
             android:id="@+id/svHangulExplain"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
+            android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/textViewHangul"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -163,11 +169,8 @@
                 android:id="@+id/textViewHangulExplain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="리을"
                 android:textSize="20dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                />
+                android:gravity="center|top" />
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
