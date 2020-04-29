@@ -9,7 +9,7 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem {
     private String lessonSubTitle = "~아/어 주세요";
     private int lessonImage = R.drawable.request;
 
-    final static String[] wordFront = {"주", "호텔", "예약", "도와주다", "처음", "아마", "기다리다"};
+    final static String[] wordFront = {"주", "호텔", "예약", "돕다", "처음", "아마", "기다리다"};
     final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
