@@ -366,7 +366,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
-            mediaPlayerManager.stopMediaPlayer();
+            if(mediaPlayerManager != null ) {
+                mediaPlayerManager.stopMediaPlayer();
+            }
             finish();
         }
     }
