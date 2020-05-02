@@ -10,6 +10,9 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.timeexpression2;
 
     final static String[] wordFront = {"오늘", "저녁", "끝나다", "후", "가족", "드라마", "추천하다"};
+
+    final static String[] wordBack = {"today", "night / dinner", "finish", "after", "family", "drama", "recommend"};
+
     final static String[] wordPronunciation = {"-", "-", "[끈나다]", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
@@ -36,6 +39,54 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem {
             "저도 추천해 주세요."
     };
 
+    final static String[] sentenceBack = {
+            "What do you do?",
+            "What do you do at night?",
+            "What will you do at night today?",
+            "finish",
+            "after finishing",
+            "after finishing work",
+            "I'll have a dinner after finishing work.",
+            "I'll have a dinner after finishing work with my family.",
+            "to eat",
+            "after having",
+            "after having dinner",
+            "I watch a drama after having dinner.",
+            "I'll watch a drama after having dinner.",
+            "to watch",
+            "Do you watch?",
+            "Do you watch dramas?",
+            "Did you watch any dramas recently?",
+            "recommend",
+            "I recommend.",
+            "Please recommend.",
+            "Please recommend me too."
+    };
+
+    final static String[] sentenceExplain = {
+            "-",
+            "-",
+            "You can also say '뭐 할거예요?' when using future tense like you learned in previous lesson.\nBut in situations where the content of the future is clear, such as 'tonight',\nyou can use the present tense.",
+            "-",
+            "If the verb doesn't have a batchim, use 'V-ㄴ 후에' and use 'V-은 후에' when it has a batchim.\n'끝나다' -> '끝나' + 'ㄴ 후에' = '끝난 후에'\nYou can also use 'N + 후에' instead.\nOf course, nouns that can only be uses as 'N + 하다'\n(nouns that represent actions) are possible like 'N + 전에'.\n\nex) '운동' + '하다' = '운동하다' (o)\n운동 한 후에~\n운동 후에~",
+            "-",
+            "-",
+            "-",
+            "-",
+            "먹다' -> '먹' + '은 후에' = '먹은 후에'",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "When you ask something, you can use '~아/어 주세요'.\n'추천하다' -> 추천해요' -> '추천해' + '주세요' = '추천해 주세요'",
+            "-"
+    };
+
     final static String[] dialog = {
             "일이 끝난 후에 가족이랑 저녁을 먹어요.",
             "저녁을 먹은 후에 드라마를 볼 거예요.",
@@ -44,6 +95,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static int[] peopleImage = {4,3};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -78,6 +130,21 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

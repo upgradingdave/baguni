@@ -10,6 +10,9 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.listing;
 
     final static String[] wordFront = {"좋아하다", "네", "제일", "왜", "그리고", "잘", "노래를 부르다", "춤을 추다"};
+
+    final static String[] wordBack = {"to like", "yes", "the most", "why", "and", "well", "sing a song", "dance"};
+
     final static String[] wordPronunciation = {"[조아하다]", "-", "-", "-", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
@@ -33,6 +36,48 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
             "BTS는 노래를 잘 부르고 춤도 잘 춰요."
     };
 
+    final static String[] sentenceBack = {
+            "to like",
+            "Do you like?",
+            "Do you like K-pop?",
+            "Yes",
+            "Yes, I like it.",
+            "Yes, I like BTS.",
+            "Yes, I like BTS the most.",
+            "Why do you like BTS?",
+            "sing a song",
+            "sing a song.",
+            "good at singing.",
+            "BTS sings a song well.",
+            "dance",
+            "dance",
+            "good at dancing.",
+            "good at dancing as well.",
+            "BTS is good at singing and dancing as well.",
+            "BTS is good at singing and dancing as well."
+    };
+
+    final static String[] sentenceExplain = {
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "부르다' -> '부르' + '어요' = '부르어요' -> '불러요' (exception)",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "We can use '도' to mean 'also'.",
+            "Use '그리고' to list sentences.",
+            "Use '~고' to combine two sentences together using '그리고'.\n\nex) '부르다' -> '부르' + '고' = '부르고'"
+    };
+
     final static String[] dialog = {
             "K-pop을 좋아해요?",
             "네, 저는 BTS를 제일 좋아해요.",
@@ -41,6 +86,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static int[] peopleImage = {9,10};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -77,6 +123,20 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
         return peopleImage;
     }
 
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
+    }
 
     // 레슨어뎁터 아이템
 

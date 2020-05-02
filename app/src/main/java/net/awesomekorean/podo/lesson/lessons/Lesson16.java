@@ -2,6 +2,8 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
+import javax.annotation.meta.When;
+
 public class Lesson16 extends LessonInit implements Lesson, LessonItem {
 
     private String lessonId = "L_16";
@@ -10,6 +12,9 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.posibility;
 
     final static String[] wordFront = {"예전에", "언어교환", "배우다", "좋다", "비슷하다", "단어"};
+
+    final static String[] wordBack = {"in the past", "language exchange", "to learn", "good, nice", "similar", "vocabulary"};
+
     final static String[] wordPronunciation = {"[예저네]", "[어너교환]", "-", "[조타]", "[비스타다]", "[다너]"};
 
     final static String[] sentenceFront = {
@@ -34,6 +39,50 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem {
             "그래서 다른 언어보다 쉬울 수 있어요."
     };
 
+    final static String[] sentenceBack = {
+            "Can you do it?",
+            "Can you speak Korean?",
+            "Yes, I'm a Korean.",
+            "I'm a Japanese.",
+            "I'm learning.",
+            "I'm learning Korean.",
+            "I'm learning Korean recently.",
+            "Can you do it?",
+            "Can you exchange language?",
+            "Nice",
+            "I'm learning Japanese too.",
+            "How's it?",
+            "How's learning Korean?",
+            "There's a lot.",
+            "There's a lot of similar words.",
+            "There's a lot of similar words with Japanese.",
+            "There's a lot of similar words with Japanese in Korean.",
+            "It could be easy.",
+            "Therefore, it could be easier than other languages."
+    };
+
+    final static String[] sentenceExplain = {
+            "We've learned in the last lesson that this means 'ability'.",
+            "-",
+            "-",
+            "(See the special lesson 'Simple Chinese character1-人')",
+            "progressive form\n: '배우다' -> '배우' + '고 있다' = '배우고 있다'",
+            "-",
+            "-",
+            "-",
+            "언어 : language\n교환 : exchange",
+            "(See the special lesson 'Confusing expression2 - 좋아요 vs. 좋아해요')",
+            "-",
+            "-",
+            "-",
+            "-",
+            "We can use 'A-(으)ㄴ' form when the adjective modifies a noun.\n'비슷하다' -> '비슷하' + 'ㄴ' = '비슷한'",
+            "-",
+            "-",
+            "We've learned that we can use 'V-(으)ㄹ 수 있다' form when it means an ability to do something in the previous lesson.\nBut one more meaning can be used, which is the 'possibility'.\nWhen it means possibility, you can use adjectives as well as verbs.\n\nconjugate 'A/V-(으)ㄹ 수 있다'\n'쉽다' -> '쉽' + '을 수 있다' = '쉽을 수 있다' -> '쉬울 수 있다' (irregular)",
+            "When comparing, use '~보다'."
+    };
+
     final static String[] dialog = {
             "한국어 할 수 있어요?",
             "네, 저는 한국 사람이에요.",
@@ -44,6 +93,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static int[] peopleImage = {2,1};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -78,6 +128,21 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

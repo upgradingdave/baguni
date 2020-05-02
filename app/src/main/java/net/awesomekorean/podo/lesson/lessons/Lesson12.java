@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.reading.Reading;
 
 public class Lesson12 extends LessonInit implements Lesson, LessonItem {
 
@@ -10,6 +11,9 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.contrast;
 
     final static String[] wordFront = {"어렵다", "말하다", "쓰다", "하지만", "읽다", "쉽다"};
+
+    final static String[] wordBack = {"difficult", "to speak", "to write", "but", "to read", "easy"};
+
     final static String[] wordPronunciation = {"[어렵따]", "-", "-", "-", "[익따]", "[쉽따]"};
 
     final static String[] sentenceFront = {
@@ -34,6 +38,50 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem {
             "말하기랑 쓰기가 어렵지만 읽기는 쉬워요."
     };
 
+    final static String[] sentenceBack = {
+            "How is it?",
+            "How's learnining Korean?",
+            "difficult",
+            "It's difficult.",
+            "Korean is difficult.",
+            "interesting",
+            "It's interesting.",
+            "Korean is difficult but interesting.",
+            "Korean is difficult but interesting.",
+            "Is it difficult?",
+            "What is difficult?",
+            "What is the most difficult?",
+            "It's difficult.",
+            "Speaking is difficult.",
+            "Speaking and writing are difficult.",
+            "It's easy.",
+            "Reading is easy.",
+            "Speaking and writing are difficult but reading is easy.",
+            "Speaking and writing are difficult but reading is easy."
+    };
+
+    final static String[] sentenceExplain = {
+            "-",
+            "-",
+            "-",
+            "어렵다' -> '어렵' + '어요' = '어렵어요' -> '어려워요' (exception)",
+            "-",
+            "-",
+            "-",
+            "-",
+            "Use '~지만' to combine two sentences together using '하지만'.\n\nex) '어렵다' -> '어렵' + '지만' = '어렵지만'",
+            "-",
+            "-",
+            "-",
+            "-",
+            "When you change a verb to a noun, you can use '~기' like '~ing' in English.\n\nex)\n'말하다' -> '말하기' (speak -> speaking)\n'쓰다' -> '쓰기' (write -> writing)\n'읽다'-> '읽기' (read -> reading)",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+    };
+
     final static String[] dialog = {
             "한국어 공부 어때요?",
             "한국어는 어려워요. 하지만 재미있어요.",
@@ -42,6 +90,7 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static int[] peopleImage = {12,11};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -76,6 +125,21 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

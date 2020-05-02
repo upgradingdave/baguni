@@ -10,6 +10,9 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.progressive;
 
     final static String[] wordFront = {"지금", "이따", "같이", "헬스장"};
+
+    final static String[] wordBack = {"now", "later (short time)", "together", "gym (weight training)"};
+
     final static String[] wordPronunciation = {"-", "-", "[가치]", "[헬쓰장]"};
 
     final static String[] sentenceFront = {
@@ -27,6 +30,36 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem {
             "좋아요."
     };
 
+    final static String[] sentenceBack = {
+            "where",
+            "Where are you?",
+            "Where are you now?",
+            "to go",
+            "I'm going.",
+            "I'm going home.",
+            "to go",
+            "I go.",
+            "I go to the gym.",
+            "Let's go to the gym together.",
+            "Let's go the gym together later.",
+            "Good."
+    };
+
+    final static String[] sentenceExplain = {
+            "-",
+            "-",
+            "-",
+            "-",
+            "conjugate '고 있다'\n: '가다' -> '가' + '고 있다' = '가고 있다'\nconjugate '아요/어요'\n: '가고 있다' -> '가고 있' + '어요' = '가고 있어요'",
+            "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)\nwe add '에' after the noun that is the destination.\nWe can also omit \"\"에\"\" when speaking\n(See the special lesson '에 vs. 에서')",
+            "-",
+            "conjugate '아요/어요'\n: '가다' -> '가' + '아요' = '가아요' -> '가요'",
+            "-",
+            "You can also use '랑/이랑' that we learned in the previous lesson.\n'저' (a polite expression of 'me') + '랑' = '저랑 헬스장에 가요'\nOr you can also use '랑/이랑' with '같이' means together.\n'저랑 같이 헬스장에 가요'",
+            "When you want to express a short time within a few hours, use '이따' or '이따가'.\nIt's for conversational speaking.",
+            "-"
+    };
+
     final static String[] dialog = {
             "지금 어디예요?",
             "집에 가고 있어요.",
@@ -35,6 +68,7 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static int[] peopleImage = {12,11};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -70,6 +104,21 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

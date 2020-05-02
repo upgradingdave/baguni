@@ -153,19 +153,17 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         wordFront = lesson.getWordFront();
 
+        wordBack = lesson.getWordBack();
+
         wordImage = new int[lessonWordLength];
-        wordBack = new String[lessonWordLength];
 
         for(int i=0; i<lessonWordLength; i++) {
 
             String stringWordImage = lessonId.toLowerCase() + "_word_" + i;
-            String stringWordBack = lessonId + "_WORD_BACK_" + i;
 
             int intWordImage = getResources().getIdentifier(stringWordImage, "drawable", packageName);
-            int intWordBack = getResources().getIdentifier(stringWordBack, "string", packageName);
 
             wordImage[i] = intWordImage;
-            wordBack[i] = getString(intWordBack);
         }
 
         wordPronunciation = lesson.getWordPronunciation();
@@ -218,7 +216,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         switch (v.getId()) {
 
             case R.id.btnAudio :
-                mediaPlayerManager.playMediaPlayer(false);
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.playMediaPlayer(false);
+                }
                 break;
 
             case R.id.btnCollect :

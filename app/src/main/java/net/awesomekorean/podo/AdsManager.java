@@ -2,6 +2,7 @@ package net.awesomekorean.podo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -9,6 +10,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class AdsManager {
 
@@ -43,7 +45,7 @@ public class AdsManager {
 
         interstitialAd = new InterstitialAd(context);
 
-        interstitialAd.setAdUnitId(ADMOB_ID_FULL_SCREEN);
+        interstitialAd.setAdUnitId(ADMOB_TEST_ID_FULL_SCREEN);
 
         interstitialAd.loadAd(new AdRequest.Builder().build());
 
@@ -81,6 +83,13 @@ public class AdsManager {
 
             System.out.println("전면 광고를 재생합니다.");
 
+            // analytics 로그 이벤트 얻기
+            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity.getApplicationContext());
+
+            Bundle bundle = new Bundle();
+
+            firebaseAnalytics.logEvent("full_watch", bundle);
+
         } else {
 
             System.out.println("The interstitial ads wasn't loaded yet.");
@@ -93,7 +102,7 @@ public class AdsManager {
     // 리워드 광고 로드하기
     public RewardedAd loadRewardAds(Context context) {
 
-        rewardedAd = new RewardedAd(context, ADMOB_ID_REWARDED);
+        rewardedAd = new RewardedAd(context, ADMOB_TEST_ID_REWARDED);
 
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
 

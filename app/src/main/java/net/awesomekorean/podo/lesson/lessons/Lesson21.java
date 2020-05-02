@@ -10,6 +10,9 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.thankyou;
 
     final static String[] wordFront = {"글", "주다", "틀리다", "아주", "정말요?"};
+
+    final static String[] wordBack = {"article", "to give", "wrong", "very", "really?"};
+
     final static String[] wordPronunciation = {"-", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
@@ -25,6 +28,36 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem {
             "음... 조금 틀렸어요.",
             "하지만 아주 잘했어요.",
             "정말요? 고마워요."
+    };
+
+    final static String[] sentenceBack = {
+            "I wrote it.",
+            "I wrote an article.",
+            "I wrote an article in Korean.",
+            "I wrote an article in Korean.",
+            "please take a look.",
+            "please take once a look.",
+            "give me.",
+            "I'll take a look.",
+            "It's wrong.",
+            "um... a little wrong.",
+            "but very good.",
+            "really? thank you."
+    };
+
+    final static String[] sentenceExplain = {
+            "쓰다' -> '썼어요' (past tense)",
+            "-",
+            "N(으)로' is used when expressing means of transport, tools, and materials used to make something.",
+            "-",
+            "보다' -> '봐 주세요' (request)",
+            "-",
+            "-",
+            "When you are trying to do something for somebody, use the 'V-아/어 줄게요' form.\n\nconjugate 'V-아/어 줄게요'\n'보다' -> '봐요'\n'봐요' -> '봐' + '줄게요' = '봐 줄게요'",
+            "틀리다' -> '틀렸어요' (past tense)",
+            "-",
+            "-",
+            "-"
     };
 
     final static String[] dialog = {
@@ -69,6 +102,21 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

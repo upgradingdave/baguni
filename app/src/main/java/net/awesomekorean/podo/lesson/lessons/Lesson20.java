@@ -10,6 +10,9 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.thankyou;
 
     final static String[] wordFront = {"덥다", "시원하다", "곳", "들어가다", "저기", "크다", "예쁘다", "유명하다", "마시다"};
+
+    final static String[] wordBack = {"hot", "cool", "place", "enter", "there", "big", "pretty", "famous", "to drink"};
+
     final static String[] wordPronunciation = {"[덥따]", "-", "[곧]", "[드러가다]", "-", "-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
@@ -28,6 +31,42 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem {
             "시원한 주스 마셔요.",
             "거기에서 시원한 주스 마셔요.",
             "좋아요. 거기에서 시원한 주스 마셔요."
+    };
+
+    final static String[] sentenceBack = {
+            "It's too hot.",
+            "It's too hot here.",
+            "I want to enter.",
+            "I want to enter a cool place.",
+            "big shopping mall",
+            "Let's go into the big shopping mall.",
+            "Let's go into the big shopping mall there.",
+            "famous cafe",
+            "pretty and famous cafe",
+            "There's a pretty and famous cafe.",
+            "There's a pretty and famous cafe there.",
+            "cool juice",
+            "Let's drink a cool juice.",
+            "Let's drink a cool juice there.",
+            "Great. Let's drink a cool juice there."
+    };
+
+    final static String[] sentenceExplain = {
+            "덥다' -> '덥어요' -> '더워요' (irregular)",
+            "-",
+            "conjugate 'V-았/었으면 좋겠어요'\n'들어가다' -> '들어갔다'\n'들어갔다' -> '들어갔' + '으면 좋겠어요' = '들어갔으면 좋겠어요'",
+            "We can use 'A-(으)ㄴ' form when the adjective modifies a noun.\n'시원하다' -> '시원하' + 'ㄴ' = '시원한'",
+            "-",
+            "-",
+            "-",
+            "유명하다' -> '유명하' + 'ㄴ' = '유명한'",
+            "~고' form is used.",
+            "-",
+            "여기 : here\n저기 : there\n거기 : there\n(See the special lesson 'confusing expression 4 : here and there')",
+            "시원하다' -> '시원하' + 'ㄴ' = '시원한'",
+            "-",
+            "-",
+            "-"
     };
 
     final static String[] dialog = {
@@ -72,6 +111,21 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

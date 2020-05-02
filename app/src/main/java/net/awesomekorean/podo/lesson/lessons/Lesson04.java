@@ -10,6 +10,9 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.pasttense;
 
     final static String[] wordFront = {"어제", "집", "아니요", "쇼핑"};
+
+    final static String[] wordBack = {"yesterday", "home", "no", "shopping"};
+
     final static String[] wordPronunciation = {"-", "-", "-", "-"};
 
     final static String[] sentenceFront = {
@@ -27,6 +30,36 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
             "쇼핑 했어요."
     };
 
+    final static String[] sentenceBack = {
+            "to be",
+            "to be",
+            "were you?",
+            "Were you at home?",
+            "Were you at home yesterday?",
+            "no",
+            "to do",
+            "do",
+            "Did you do it?",
+            "What did you do?",
+            "What did you do yesterday?",
+            "I went shopping."
+    };
+
+    final static String[] sentenceExplain = {
+            "-",
+            "conjugate '아요/어요'\n: '있다' -> '있' + '어요' = '있어요'",
+            "When you say past tense, you only need to put 'ㅆ어' into the form of '아요/어요'.\nTherefore, we can call the past tense to '았어요/었어요' form.\n'있어요' -> '있어(ㅆ어)요' = '있었어요'",
+            "-",
+            "-",
+            "-",
+            "-",
+            "conjugate '아요/어요'\n: '하다' -> '해요'",
+            "해요' -> '해(ㅆ어)요' = '했어요'",
+            "-",
+            "-",
+            "-"
+    };
+
     final static String[] dialog = {
             "어제 집에 있었어요?",
             "아니요.",
@@ -35,6 +68,7 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static int[] peopleImage = {7,8};
+
 
     @Override
     public String getLessonSubTitle() {
@@ -69,6 +103,21 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 

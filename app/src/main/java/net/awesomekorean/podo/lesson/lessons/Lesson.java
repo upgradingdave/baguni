@@ -4,9 +4,15 @@ public interface Lesson {
 
     String[] getWordFront();
 
+    String[] getWordBack();
+
     String[] getWordPronunciation();
 
     String[] getSentenceFront();
+
+    String[] getSentenceBack();
+
+    String[] getSentenceExplain();
 
     String[] getDialog();
 

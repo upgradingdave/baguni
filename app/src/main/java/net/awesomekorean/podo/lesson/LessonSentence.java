@@ -30,6 +30,7 @@ import net.awesomekorean.podo.collection.CollectionRepository;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.awesomekorean.podo.lesson.LessonWord.lesson;
 import static net.awesomekorean.podo.lesson.LessonWord.lessonCount;
 
 public class LessonSentence extends Fragment implements Button.OnClickListener, View.OnTouchListener {
@@ -129,23 +130,12 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         sentenceAudio = new String[sentenceLength];
         String lessonId = LessonWord.lessonId;
         String folder = LessonWord.folder;
-        String packageName = context.getPackageName();
 
         sentenceFront = LessonWord.lesson.getSentenceFront();
 
-        sentenceBack = new String[sentenceLength];
-        for(int i=0; i<sentenceLength; i++) {
-            String stringSentenceBack = lessonId + "_SENTENCE_BACK_" + i;
-            int intSentenceBack = getResources().getIdentifier(stringSentenceBack, "string", packageName);
-            sentenceBack[i] = getString(intSentenceBack);
-        }
+        sentenceBack = LessonWord.lesson.getSentenceBack();
 
-        sentenceExplain = new String[sentenceLength];
-        for(int i=0; i<sentenceLength; i++) {
-            String stringSentenceExplain = lessonId + "_SENTENCE_EXPLAIN_" + i;
-            int intSentenceExplain = getResources().getIdentifier(stringSentenceExplain, "string", packageName);
-            sentenceExplain[i] = getString(intSentenceExplain);
-        }
+        sentenceExplain = LessonWord.lesson.getSentenceExplain();
 
         audiosSentence = new HashMap<>();
         for(int i=0; i<sentenceLength; i++) {

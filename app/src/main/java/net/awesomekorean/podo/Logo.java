@@ -50,7 +50,7 @@ public class Logo extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent();
+                Intent intent;
 
                 boolean isSignIn = SharedPreferencesInfo.getSignIn(getApplicationContext());
                 if(isSignIn) {
@@ -71,7 +71,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 2);
 
     }
 

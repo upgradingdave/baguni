@@ -10,6 +10,9 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem {
     private int lessonImage = R.drawable.range1;
 
     final static String[] wordFront = {"회사", "어떻게", "지하철", "걸리다"};
+
+    final static String[] wordBack = {"company", "how", "subway", "take time"};
+
     final static String[] wordPronunciation = {"-", "[어떠케]", "-", "-"};
 
     final static String[] sentenceFront = {
@@ -26,6 +29,37 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem {
             "얼마나 걸려요?",
             "30분 걸려요."
     };
+
+    final static String[] sentenceBack = {
+            "to go",
+            "Do you go?",
+            "How do you go?",
+            "How do you get to the company.",
+            "How do you get to the company from home.",
+            "to take / to ride",
+            "I take.",
+            "I take a subway.",
+            "It takes (time)",
+            "Does it take?",
+            "How long does it take?",
+            "It takes 30 mins."
+    };
+
+    final static String[] sentenceExplain = {
+            "-",
+            "-",
+            "-",
+            "-",
+            "When referring to a range of places, use '~에서 ~까지'.",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "When asking about the amount of something, use '얼마나'.",
+            "-"
+    };
+
 
     final static String[] dialog = {
             "집에서 회사까지 어떻게 가요?",
@@ -70,6 +104,21 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem {
     @Override
     public int[] getPeopleImage() {
         return peopleImage;
+    }
+
+    @Override
+    public String[] getWordBack() {
+        return wordBack;
+    }
+
+    @Override
+    public String[] getSentenceBack() {
+        return sentenceBack;
+    }
+
+    @Override
+    public String[] getSentenceExplain() {
+        return sentenceExplain;
     }
 
 
