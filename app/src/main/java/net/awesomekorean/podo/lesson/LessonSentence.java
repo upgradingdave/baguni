@@ -26,6 +26,7 @@ import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -131,11 +132,17 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         String lessonId = LessonWord.lessonId;
         String folder = LessonWord.folder;
 
-        sentenceFront = LessonWord.lesson.getSentenceFront();
+        Lesson lesson = LessonWord.lesson;
 
-        sentenceBack = LessonWord.lesson.getSentenceBack();
+        if(lesson == null) {
+            lesson = (Lesson) LessonAdapterChild.lessonItem;
+        }
 
-        sentenceExplain = LessonWord.lesson.getSentenceExplain();
+        sentenceFront = lesson.getSentenceFront();
+
+        sentenceBack = lesson.getSentenceBack();
+
+        sentenceExplain = lesson.getSentenceExplain();
 
         audiosSentence = new HashMap<>();
         for(int i=0; i<sentenceLength; i++) {

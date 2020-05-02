@@ -56,82 +56,87 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        float deltaX = e1.getX() - e2.getX();
 
-        float deltaXAbs = Math.abs(deltaX);
+        if(e1 != null && e2 != null) {
 
-        //Only when swipe distance between minimal and maximal distance value. It's effective swipe
-        if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
+            float deltaX = e1.getX() - e2.getX();
 
-            Context context = getActivity();
+            float deltaXAbs = Math.abs(deltaX);
 
-            // 현재페이지가 LessonWord 일 때 동작
-            if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONWORD))) {
+            //Only when swipe distance between minimal and maximal distance value. It's effective swipe
+            if((deltaXAbs >= MIN_SWIPE_DISTANCE_X) && (deltaXAbs <= MAX_SWIPE_DISTANCE_X)) {
 
+                Context context = getActivity();
 
-                // 왼쪽으로 스와이프 할 때
-                if(deltaX > 0) {
-                    lessonWord.lessonCount++;
-                    LessonFrame.progressCount++;
+                // 현재페이지가 LessonWord 일 때 동작
+                if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONWORD))) {
 
 
-                    // 마지막 단어이면 LessonWordQuiz1 로 넘어감
-                    if(lessonWord.lessonCount == lessonWord.lessonWordLength) {
-                        lessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
-                        ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
+                    // 왼쪽으로 스와이프 할 때
+                    if(deltaX > 0) {
+                        lessonWord.lessonCount++;
+                        LessonFrame.progressCount++;
 
-                    // 마지막 단어 아니면 다음 단어 표시
+
+                        // 마지막 단어이면 LessonWordQuiz1 로 넘어감
+                        if(lessonWord.lessonCount == lessonWord.lessonWordLength) {
+                            lessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
+                            ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
+
+                            // 마지막 단어 아니면 다음 단어 표시
+                        } else {
+                            swipeAnimationStart(stringWord, stringLeft);
+                        }
+
+                        // 오른쪽으로 스와이프 할 떄
                     } else {
-                        swipeAnimationStart(stringWord, stringLeft);
+                        // 맨 처음 단어가 아니면 이전 단어를 표시
+                        if(lessonWord.lessonCount != 0) {
+                            lessonWord.lessonCount--;
+                            LessonFrame.progressCount--;
+                            swipeAnimationStart(stringWord, stringRight);
+                        }
                     }
 
-                // 오른쪽으로 스와이프 할 떄
-                } else {
-                    // 맨 처음 단어가 아니면 이전 단어를 표시
-                    if(lessonWord.lessonCount != 0) {
-                        lessonWord.lessonCount--;
-                        LessonFrame.progressCount--;
-                        swipeAnimationStart(stringWord, stringRight);
-                    }
+                    // 스와이프가 발생할 때마다 프로그레스바 상태 계산
+                    LessonFrame.progressCount();
                 }
 
-                // 스와이프가 발생할 때마다 프로그레스바 상태 계산
-                LessonFrame.progressCount();
-            }
+                // 현재페이지가 LessonSentence 일 때 동작
+                if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONSENTENCE))) {
 
-            // 현재페이지가 LessonSentence 일 때 동작
-            if(LessonFrame.swipePage.equals(context.getString(R.string.LESSONSENTENCE))) {
+                    // 왼쪽으로 스와이프 할 때
+                    if(deltaX > 0) {
 
-                // 왼쪽으로 스와이프 할 때
-                if(deltaX > 0) {
+                        lessonWord.lessonCount++;
+                        LessonFrame.progressCount++;
 
-                    lessonWord.lessonCount++;
-                    LessonFrame.progressCount++;
+                        // 마지막 문장이면 LessonDialog 로 넘어감
+                        if(lessonWord.lessonCount == lessonWord.lessonSentenceLength) {
+                            lessonWord.lessonCount = 0;
+                            ((LessonFrame)context).replaceFragment(LessonDialog.newInstance());
 
-                    // 마지막 문장이면 LessonDialog 로 넘어감
-                    if(lessonWord.lessonCount == lessonWord.lessonSentenceLength) {
-                        lessonWord.lessonCount = 0;
-                        ((LessonFrame)context).replaceFragment(LessonDialog.newInstance());
+                            // 마지막 문장 아니면 다음 문장 표시
+                        } else {
+                            swipeAnimationStart(stringSentence, stringLeft);
+                        }
 
-                        // 마지막 문장 아니면 다음 문장 표시
+                        // 오른쪽으로 스와이프 할 떄
                     } else {
-                        swipeAnimationStart(stringSentence, stringLeft);
-                    }
+                        // 맨 처음 문장이 아니면 이전 문장을 표시
+                        if(lessonWord.lessonCount != 0) {
+                            lessonWord.lessonCount--;
+                            LessonFrame.progressCount--;
 
-                // 오른쪽으로 스와이프 할 떄
-                } else {
-                    // 맨 처음 문장이 아니면 이전 문장을 표시
-                    if(lessonWord.lessonCount != 0) {
-                        lessonWord.lessonCount--;
-                        LessonFrame.progressCount--;
-
-                        swipeAnimationStart(stringSentence, stringRight);
+                            swipeAnimationStart(stringSentence, stringRight);
+                        }
                     }
+                    // 스와이프가 발생할 때마다 프로그레스바 상태 계산
+                    LessonFrame.progressCount();
                 }
-                // 스와이프가 발생할 때마다 프로그레스바 상태 계산
-                LessonFrame.progressCount();
             }
         }
+
         return true;
     }
 

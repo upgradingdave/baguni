@@ -170,7 +170,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                     if(wrongQuizList.size() > 0) {
                         makeWrongQuiz(wrongQuizList.get(0));
                     } else {
-                        // Sentence Lesson
+                        // 퀴즈2로 넘어가기
                         ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
                     }
                 } else {
