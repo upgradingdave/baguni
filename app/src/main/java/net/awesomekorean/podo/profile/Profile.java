@@ -70,7 +70,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout evaluation;
     LinearLayout recommend;
-    LinearLayout report;
     LinearLayout getPointByAd;
     LinearLayout getPointByPurchasing;
     LinearLayout logout;
@@ -124,7 +123,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         evaluation = findViewById(R.id.evaluation);
         recommend = findViewById(R.id.recommend);
-        report = findViewById(R.id.report);
         getPointByAd = findViewById(R.id.getPointsByAd);
         getPointByPurchasing = findViewById(R.id.getPointsByPurchasing);
         logout = findViewById(R.id.logout);
@@ -137,7 +135,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         btnSave.setOnClickListener(this);
         evaluation.setOnClickListener(this);
         recommend.setOnClickListener(this);
-        report.setOnClickListener(this);
         getPointByAd.setOnClickListener(this);
         getPointByPurchasing.setOnClickListener(this);
         logout.setOnClickListener(this);
@@ -315,15 +312,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(chooser);
                 break;
 
-            case R.id.report :
-                Uri uriGoogle = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
-                intent = new Intent(Intent.ACTION_VIEW, uriGoogle);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(context, "", Toast.LENGTH_LONG).show();
-                }
-                break;
 
             case R.id.getPointsByAd :
                 RewardedAdCallback adCallback = new RewardedAdCallback() {

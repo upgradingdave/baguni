@@ -58,6 +58,8 @@
     <string name="PROFILE_OPTION">Profile/Option</string>
     <string name="MESSAGE">Message</string>
     <string name="CONFIRM_EXIT">Do you want to exit podo?</string>
+    <string name="CONFIRM_REPORT">Do you have something to tell \'podo\'? \n (bug report or suggestions)</string>
+
 
 
     <!--    주요버튼-->

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     TextView tvTitle;
 
     ImageView btnProfile;
+    ImageView btnBugReport;
     ImageView btnMessage;
     ImageView redDot;
 
@@ -85,7 +87,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     UserInformation userInformation;
 
-    LinearLayout confirmQuit;
+    LinearLayout confirmWindow;
+    TextView confirmText;
     Button btnYes;
     Button btnNo;
 
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
+        btnBugReport = findViewById(R.id.btnBugReport);
         btnMessage = findViewById(R.id.btnMessage);
         redDot = findViewById(R.id.redDot);
         layoutLesson = findViewById(R.id.layoutLesson);
@@ -117,10 +121,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         textReading = findViewById(R.id.textReading);
         textWriting = findViewById(R.id.textWriting);
         textCollection = findViewById(R.id.textCollection);
-        confirmQuit = findViewById(R.id.confirmQuit);
+        confirmWindow = findViewById(R.id.confirmWindow);
+        confirmText = findViewById(R.id.confirmText);
         btnYes = findViewById(R.id.btnYes);
         btnNo = findViewById(R.id.btnNo);
         btnProfile.setOnClickListener(this);
+        btnBugReport.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
         layoutLesson.setOnClickListener(this);
         layoutReading.setOnClickListener(this);
@@ -237,6 +243,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 startActivity(intent);
                 break;
 
+            case R.id.btnBugReport :
+                confirmText.setText(getResources().getString(R.string.CONFIRM_REPORT));
+                confirmWindow.setVisibility(View.VISIBLE);
+                break;
+
             case R.id.btnMessage:
                 redDot.setVisibility(View.GONE);
                 intent = new Intent(this, Message.class);
@@ -264,13 +275,25 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnYes :
-                finishAffinity();
-                System.runFinalization();
-                System.exit(0);
+                if(confirmText.getText().equals(getResources().getString(R.string.CONFIRM_REPORT))) {
+                    Uri uriGoogle = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
+                    intent = new Intent(Intent.ACTION_VIEW, uriGoogle);
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                    }
+                    confirmWindow.setVisibility(View.GONE);
+
+                } else {
+                    finishAffinity();
+                    System.runFinalization();
+                    System.exit(0);
+                }
                 break;
 
             case R.id.btnNo :
-                confirmQuit.setVisibility(View.GONE);
+                confirmWindow.setVisibility(View.GONE);
                 break;
 
         }
@@ -307,7 +330,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     @Override
     public void onBackPressed() {
-        confirmQuit.setVisibility(View.VISIBLE);
+        confirmText.setText(getResources().getString(R.string.CONFIRM_EXIT));
+        confirmWindow.setVisibility(View.VISIBLE);
     }
 }
 
