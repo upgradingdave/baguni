@@ -4,7 +4,9 @@ import android.os.Messenger;
 
 import net.awesomekorean.podo.R;
 
-public class Lesson03 extends LessonInit implements Lesson, LessonItem {
+import java.io.Serializable;
+
+public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_03";
     private String lessonTitle = "possession/existence";

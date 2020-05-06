@@ -4,7 +4,9 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessons.S_LessonInit_Unlock;
 
-public class LessonHangulVowel extends S_LessonInit_Unlock implements Hangul, LessonItem {
+import java.io.Serializable;
+
+public class LessonHangulVowel extends S_LessonInit_Unlock implements Hangul, LessonItem, Serializable {
 
     private String lessonId = "H_vowel";
 

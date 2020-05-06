@@ -32,8 +32,6 @@ public class Message extends AppCompatActivity {
 
     MessageAdapter adapter;
 
-    String userEmail = MainActivity.userEmail;
-
     List<MessageItems> list;
 
 
@@ -42,6 +40,8 @@ public class Message extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+
+        final String userEmail = getIntent().getStringExtra(getResources().getString(R.string.EMAIL));
 
         list = new ArrayList<>();
 

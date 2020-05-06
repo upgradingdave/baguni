@@ -40,9 +40,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
     View view;
 
-    static Lesson lesson;
-    static String lessonId;
-    static String folder;
+    Lesson lesson;
+    String lessonId;
+    String folder;
 
     Button btnCollect;
 
@@ -58,9 +58,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
     static ImageView btnAudio;
 
     static int lessonCount;
-    static int lessonWordLength = 0;
-    static int lessonSentenceLength = 0;
-    static int lessonDialogLength = 0;
+    int lessonWordLength = 0;
 
     static int[] wordImage;
     static String[] wordFront;
@@ -106,18 +104,17 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
+        lesson = LessonFrame.lesson;
+        lessonId = lesson.getLessonId();
+        folder = "lesson/" + lessonId.toLowerCase();
+
         // analytics 로그 이벤트 얻기
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_word", bundle);
 
 
-        lesson = (Lesson) LessonAdapterChild.lessonItem;
-
-        lessonId = LessonAdapterChild.lessonItem.getLessonId();
         FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
-
-        folder = "lesson/" + lessonId.toLowerCase();
 
         LessonSwipeListener gestureListener = new LessonSwipeListener();
         LessonFrame lessonFrame = (LessonFrame)getActivity();
@@ -144,10 +141,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         }
 
         lessonWordLength = lesson.getWordFront().length;
-        lessonSentenceLength = lesson.getSentenceFront().length;
-        lessonDialogLength = lesson.getDialog().length;
-
-        LessonFrame.totalPageNo = lessonWordLength * 3 + 1 + lessonSentenceLength + 2;
 
         String packageName = context.getPackageName();
 
@@ -222,8 +215,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
                 break;
 
             case R.id.btnCollect :
-                String front = wordFront[lessonCount];
-                String back = wordBack[lessonCount];
+                String front = lesson.getWordFront()[lessonCount];
+                String back = lesson.getWordBack()[lessonCount];
                 String audio = wordAudio[lessonCount];
 
                 DownloadAudio downloadAudio = new DownloadAudio(context, folder, audio);

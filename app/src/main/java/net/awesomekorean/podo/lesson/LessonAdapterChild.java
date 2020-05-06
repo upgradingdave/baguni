@@ -26,13 +26,15 @@ import net.awesomekorean.podo.lesson.lessonNumber.LessonNumber;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
+import java.io.Serializable;
+
 public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.HorizontalViewHolder> {
 
     private Context context;
 
     private LessonItem[] lessonItems;
 
-    public static LessonItem lessonItem;
+    private LessonItem lessonItem;
 
     // 화면밀도 구하기
     private DisplayMetrics displayMetrics;
@@ -103,14 +105,11 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                     if(position != RecyclerView.NO_POSITION) {
 
-                        FirebaseCrashlytics.getInstance().setCustomKey("lessonId : ", lessonItem.getLessonId());
-
                         if(!lessonItem.getIsLock()) {
 
                             if(lessonItem.getIsSpecial()) {
 
                                 String lessonId = lessonItem.getLessonId();
-                                System.out.println("LessonId : "+lessonId);
 
                                 switch (lessonId) {
 
@@ -144,12 +143,19 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                                     default :
                                         intent = new Intent(context, LessonSpecialFrame.class);
+
+                                        intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
+
                                         context.startActivity(intent);
                                         break;
                                 }
 
                             } else {
+
                                 intent = new Intent(context, LessonFrame.class);
+
+                                intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
+
                                 context.startActivity(intent);
                             }
 
@@ -158,7 +164,11 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                             intent = new Intent(context, UnlockActivity.class);
 
-                            intent.putExtra("unlock", "specialLesson");
+                            intent.putExtra(context.getResources().getString(R.string.EXTRA_ID), context.getResources().getString(R.string.SPECIAL_LESSON));
+
+                            intent.putExtra(context.getResources().getString(R.string.LESSON_ID), lessonItem.getLessonId());
+
+                            intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
 
                             context.startActivity(intent);
                         }
@@ -195,7 +205,9 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                         intent = new Intent(context, LessonHangul.class);
 
-                        intent.putExtra("conVowBat", hangul);
+                        intent.putExtra(context.getResources().getString(R.string.CONVOWBAT), hangul);
+
+                        intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
                     }
 
                     context.startActivity(intent);
@@ -237,6 +249,10 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
         } else if(lessonItem.getLessonProgress() == 100) {
 
             setLessonStatus(holder, false, View.VISIBLE, View.GONE);
+
+        } else if(lessonItem.getLessonSubTitle().equals("quiz")) {
+
+            setLessonStatus(holder, false, View.GONE, View.GONE);
 
         } else {
 

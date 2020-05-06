@@ -31,7 +31,6 @@ import net.awesomekorean.podo.lesson.lessons.Lesson;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.awesomekorean.podo.lesson.LessonWord.lesson;
 import static net.awesomekorean.podo.lesson.LessonWord.lessonCount;
 
 public class LessonSentence extends Fragment implements Button.OnClickListener, View.OnTouchListener {
@@ -73,6 +72,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
     MediaPlayerManager mediaPlayerManager;
 
+    Lesson lesson;
+    String folder;
+
 
     @Nullable
     @Override
@@ -96,6 +98,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         scrollView = view.findViewById(R.id.scrollView);
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
+
+        lesson = LessonFrame.lesson;
+        folder = "lesson/" + lesson.getLessonId().toLowerCase();
 
         LessonSwipeListener gestureListener = new LessonSwipeListener();
         LessonFrame lessonFrame = (LessonFrame)getActivity();
@@ -123,20 +128,13 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         return false;
     }
 
+
     private void readyForLesson() {
         if(getActivity() != null) {
             ((LessonFrame)getActivity()).onLoadingLayout(true);
         }
-        int sentenceLength = LessonWord.lessonSentenceLength;
+        int sentenceLength = lesson.getSentenceFront().length;
         sentenceAudio = new String[sentenceLength];
-        String lessonId = LessonWord.lessonId;
-        String folder = LessonWord.folder;
-
-        Lesson lesson = LessonWord.lesson;
-
-        if(lesson == null) {
-            lesson = (Lesson) LessonAdapterChild.lessonItem;
-        }
 
         sentenceFront = lesson.getSentenceFront();
 
@@ -147,7 +145,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         audiosSentence = new HashMap<>();
         for(int i=0; i<sentenceLength; i++) {
             final Integer audioIndexSentence = i;
-            sentenceAudio[i] = lessonId.toLowerCase() + "_sentence_" + i + ".mp3";
+            sentenceAudio[i] = lesson.getLessonId().toLowerCase() + "_sentence_" + i + ".mp3";
             StorageReference storageRef = storage.getReference().child(folder).child(sentenceAudio[i]);
             final long ONE_MEGABYTE = 1024 * 1024;
             storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -184,14 +182,16 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                mediaPlayerManager.playMediaPlayer(false);
+                if(mediaPlayerManager != null) {
+                    mediaPlayerManager.playMediaPlayer(false);
+                }
                 break;
 
             case R.id.btnCollect :
                 String front = sentenceFront[lessonCount];
                 String back = sentenceBack[lessonCount];
                 String audio = sentenceAudio[lessonCount];
-                String folder = "lesson/" + LessonAdapterChild.lessonItem.getLessonId().toLowerCase();;
+                String folder = "lesson/" + lesson.getLessonId().toLowerCase();;
 
                 DownloadAudio downloadAudio = new DownloadAudio(context, folder, audio);
                 downloadAudio.downloadAudio();

@@ -30,9 +30,14 @@ import net.awesomekorean.podo.lesson.lessonHangul.LessonHangul;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulAssembly;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumber;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
+import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
 import net.awesomekorean.podo.purchase.TopUp;
 import net.awesomekorean.podo.reading.MainReading;
+import net.awesomekorean.podo.reading.Reading;
 import net.awesomekorean.podo.reading.ReadingFrame;
+
+import java.io.Serializable;
 
 public class UnlockActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -96,8 +101,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         userInformation = SharedPreferencesInfo.getUserInfo(context);
         userPoint = userInformation.getPoints();
 
-        extra = getIntent().getStringExtra("unlock");
-        if(extra.equals("specialLesson")) {
+        extra = getIntent().getStringExtra(getResources().getString(R.string.EXTRA_ID));
+        if(extra.equals(getResources().getString(R.string.SPECIAL_LESSON))) {
             unlockPrice = specialLessonPrice;
         } else {
             unlockPrice = readingPrice;
@@ -128,42 +133,6 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    // 숫자 레슨 시작하기
-    private void startLearningNumber(String number) {
-
-        if(number.equals(context.getString(R.string.PRACTICE))) {
-
-            intent = new Intent(context, LessonNumberMenu.class);
-
-        } else {
-
-            intent = new Intent(context, LessonNumber.class);
-        }
-
-        intent.putExtra(context.getString(R.string.EXTRA_ID), number);
-
-        startActivity(intent);
-    }
-
-
-    // 한글 레슨 시작하기
-    private void startLearningHangul(String hangul) {
-
-        if(hangul.equals(context.getString(R.string.ASSEMBLY))) {
-
-            intent = new Intent(context, LessonHangulAssembly.class);
-
-        } else {
-
-            intent = new Intent(context, LessonHangul.class);
-
-            intent.putExtra("conVowBat", hangul);
-        }
-
-        startActivity(intent);
-    }
-
-
     @Override
     public void onClick(View v) {
 
@@ -176,42 +145,59 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     // 포인트 차감하고 specialLessonUnlock 에 레슨아이디 추가, 해당 레슨에 unlock = true 세팅
                     int newPoint = userPoint - unlockPrice;
                     userInformation.setPoints(newPoint);
-                    if(extra.equals("specialLesson")) {
+                    if(extra.equals(getResources().getString(R.string.SPECIAL_LESSON))) {
 
-                        String lessonId = LessonAdapterChild.lessonItem.getLessonId();
+                        String lessonId = getIntent().getStringExtra(getResources().getString(R.string.LESSON_ID));
 
                         switch (lessonId) {
 
                             case "H_assembly" :
-                                startLearningHangul(context.getString(R.string.ASSEMBLY));
+
+                                intent = new Intent(context, LessonHangulAssembly.class);
+
                                 break;
 
                             case "N_practice" :
-                                startLearningNumber(context.getString(R.string.PRACTICE));
+
+                                intent = new Intent(context, LessonNumberMenu.class);
+
                                 break;
 
                             default :
+
+                                LessonSpecial lesson = (LessonSpecial) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+
                                 intent = new Intent(context, LessonSpecialFrame.class);
-                                startActivity(intent);
+
+                                intent.putExtra(getResources().getString(R.string.LESSON), (Serializable) lesson);
+
                                 break;
                         }
 
-                        userInformation.addSpecialLessonUnlock(LessonAdapterChild.lessonItem.getLessonId());
+                        userInformation.addSpecialLessonUnlock(lessonId);
+
+                        startActivity(intent);
+
 
                     } else {
 
-                        userInformation.addReadingUnlock(MainReading.readingUnit.getReadingId());
+                        Reading reading = (Reading) getIntent().getSerializableExtra(getResources().getString(R.string.READING));
+
+                        userInformation.addReadingUnlock(reading.getReadingId());
 
                         intent = new Intent(context, ReadingFrame.class);
 
+                        intent.putExtra(getResources().getString(R.string.READING), (Serializable) reading);
+
                         startActivity(intent);
                     }
+
+                    SharedPreferencesInfo.setUserInfo(context, userInformation);
 
                     DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
                     informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            SharedPreferencesInfo.setUserInfo(context, userInformation);
                             finish();
                             System.out.println("레슨/읽기를 포인트로 구매했습니다.");
                             Toast.makeText(context, getString(R.string.UNLOCK_SUCCEEDED), Toast.LENGTH_LONG).show();
@@ -234,6 +220,9 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     unlockSecond.setVisibility(View.VISIBLE);
                     pointHave.setText(String.valueOf(userPoint));
                 }
+
+                finish();
+
                 break;
 
             case R.id.btnPurchasePoints :

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -46,6 +47,8 @@ import net.awesomekorean.podo.lesson.lessons.Lesson20;
 import net.awesomekorean.podo.lesson.lessons.Lesson21;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
+import net.awesomekorean.podo.lesson.lessons.QuizSentence00;
+import net.awesomekorean.podo.lesson.lessons.QuizWord00;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson03;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson04;
@@ -76,12 +79,18 @@ public class MainLesson extends Fragment{
 
     int lastExpandedPosition = -1;
 
-    String[] groupList = {
-            "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Negative", "Range", "Listing/Contrast",
-            "Time", "Ability", "Hope", "Requests"
+    String[] groupTitle = {
+            "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Negative",
+            "Range", "Listing/Contrast", "Time", "Ability", "Hope",
+            "Requests"
     };
 
-    int[] groupProcess = new int[groupList.length];
+    String[] groupSubTitle = {
+            "Lesson 0", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5", "Lesson 6",
+            "Lesson 7", "Lesson 8", "Lesson 9", "Lesson 10", "Lesson 11"
+    };
+
+    int[] groupProcess = new int[groupTitle.length];
 
     LessonItem[][] childList = {
             {new LessonHangulConsonant(), new LessonHangulVowel(), new LessonHangulBatchim(), new LessonHangulAssembly()},
@@ -107,18 +116,15 @@ public class MainLesson extends Fragment{
 
         context = getContext();
 
-        userInformation = SharedPreferencesInfo.getUserInfo(context);
-
         userPoint = view.findViewById(R.id.userPoint);
 
-        userPoint.setText(String.valueOf(userInformation.getPoints()));
-
+        setUserPoint();
 
         setCompletedLessons();
 
         setUnlockedLessons();
 
-        adapter = new LessonAdapterGroup(context, groupList, groupProcess, childList);
+        adapter = new LessonAdapterGroup(context, groupTitle, groupSubTitle, groupProcess, childList);
 
         listView = view.findViewById(R.id.listView);
 
@@ -152,6 +158,15 @@ public class MainLesson extends Fragment{
     }
 
 
+    // 유저 포인트 세팅하기
+    private void setUserPoint() {
+
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
+
+        userPoint.setText(String.valueOf(userInformation.getPoints()));
+    }
+
+
     // 레슨 진도율 세팅하기
     private void setCompletedLessons() {
         List<String> lessonComplete = userInformation.getLessonComplete();
@@ -167,7 +182,7 @@ public class MainLesson extends Fragment{
             int sumOfComplete = 0;  // 카테고리 진도율
 
 
-            for(int i=0; i<groupList.length; i++) {
+            for(int i=0; i<groupTitle.length; i++) {
 
                 for(int j=0; j<childList[i].length; j++) {
 
@@ -183,7 +198,15 @@ public class MainLesson extends Fragment{
                     }
                 }
 
-                groupProcess[i] = Math.round(sumOfComplete / childList[i].length);
+                // 단어 테스트일 때
+                if(childList[i].length == 0) {
+
+                    groupProcess[i] = 0;
+
+                } else {
+
+                    groupProcess[i] = Math.round(sumOfComplete / childList[i].length);
+                }
 
                 sumOfComplete = 0;
             }
@@ -200,7 +223,7 @@ public class MainLesson extends Fragment{
 
         if(lessonUnlock != null) {
 
-            for(int i=0; i<groupList.length; i++) {
+            for(int i=0; i<groupTitle.length; i++) {
 
                 for(int j=0; j<childList[i].length; j++) {
 
@@ -220,6 +243,8 @@ public class MainLesson extends Fragment{
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         if(adapter != null) {
+            System.out.println("하이");
+            setUserPoint();
             setCompletedLessons();
             setUnlockedLessons();
             adapter.notifyDataSetChanged();

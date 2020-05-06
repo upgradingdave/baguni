@@ -3,7 +3,9 @@ package net.awesomekorean.podo.reading.readings;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.reading.Reading;
 
-public class Reading10 extends ReadingInit implements Reading {
+import java.io.Serializable;
+
+public class Reading10 extends ReadingInit implements Reading, Serializable {
 
     String readingId = "R_10";
     int readingLevel = 2;

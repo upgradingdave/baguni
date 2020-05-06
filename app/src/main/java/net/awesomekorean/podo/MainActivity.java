@@ -100,8 +100,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LessonAdapterChild.lessonItem = null;
-
         SettingStatusBar.setStatusBar(this);
 
         tvTitle = findViewById(R.id.tvTitle);
@@ -135,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
 
-
         mainLesson = new MainLesson();
         mainReading = new MainReading();
         mainWriting = new MainWriting();
@@ -157,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             }
             userImage = user.getPhotoUrl();
         }
+        crashlytics.log("setting CustomKey");
         crashlytics.setCustomKey("userEmail", userEmail);
         crashlytics.setCustomKey("userName", userName);
 
@@ -251,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             case R.id.btnMessage:
                 redDot.setVisibility(View.GONE);
                 intent = new Intent(this, Message.class);
+                intent.putExtra(getResources().getString(R.string.EMAIL), userEmail);
                 startActivity(intent);
                 break;
 
@@ -332,6 +331,24 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     public void onBackPressed() {
         confirmText.setText(getResources().getString(R.string.CONFIRM_EXIT));
         confirmWindow.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        crashlytics.log("메인액티비티 Pause!!");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        crashlytics.log("메인액티비티 Stop!!");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        crashlytics.log("메인액티비티 Destroy!!");
     }
 }
 

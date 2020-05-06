@@ -131,7 +131,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         onLoadingLayout(true);
 
         intent = getIntent();
-        String hangulName = intent.getExtras().getString("conVowBat").toLowerCase();
+        String hangulName = intent.getExtras().getString(getResources().getString(R.string.CONVOWBAT)).toLowerCase();
 
         switch (hangulName) {
 
@@ -333,7 +333,9 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         intent.putExtra("isHangul", true);
 
-        intent.putExtra("progress", progressBar.getProgress());
+        intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
+
+        intent.putExtra(getResources().getString(R.string.LESSON_ID), thisHangul.getLessonId());
 
         startActivityForResult(intent, 200);
     }

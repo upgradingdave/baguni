@@ -19,6 +19,7 @@ import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +46,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
     AdsManager adsManager;
 
     Animation animation;
+
+    Lesson lesson = LessonFrame.lesson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,22 +93,24 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnGetPoint :
 
+                System.out.println("리워드 : " + reward);
+
                 // 포인트 합산하기
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
                 int oldPoints = userInformation.getPoints();
                 int newPoints = oldPoints + reward;
                 userInformation.setPoints(newPoints);
+                SharedPreferencesInfo.setUserInfo(context, userInformation);
+                userInformation.updateDb(context);
 
                 if(isFromProfile) {
-                    SharedPreferencesInfo.setUserInfo(context, userInformation);
-                    userInformation.updateDb(context);
                     Intent intent = new Intent();
                     setResult(RESULT_OK, intent);
                     finish();
 
                 } else {
-                    FirebaseCrashlytics.getInstance().log("lessonId : " + LessonAdapterChild.lessonItem.getLessonId());
-                    String lessonId = LessonAdapterChild.lessonItem.getLessonId();
+                    FirebaseCrashlytics.getInstance().log("lessonId : " + lesson.getLessonId());
+                    String lessonId = lesson.getLessonId();
 
 
                     // analytics 로그 이벤트 얻기

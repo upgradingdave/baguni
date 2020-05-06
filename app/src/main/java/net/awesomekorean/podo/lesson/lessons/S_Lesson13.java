@@ -2,7 +2,9 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
-public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecial {
+import java.io.Serializable;
+
+public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecial, Serializable {
 
     private String lessonId = "SL_13";
     private String lessonTitle = "confusing expression 4";

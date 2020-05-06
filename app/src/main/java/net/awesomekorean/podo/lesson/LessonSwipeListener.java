@@ -79,7 +79,7 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
 
 
                         // 마지막 단어이면 LessonWordQuiz1 로 넘어감
-                        if(lessonWord.lessonCount == lessonWord.lessonWordLength) {
+                        if(lessonWord.lessonCount == LessonFrame.lesson.getWordFront().length) {
                             lessonWord.lessonCount = 0; // LessonSentence를 위해 lessonCount 초기화
                             ((LessonFrame) context).replaceFragment(LessonWordQuiz1.newInstance());
 
@@ -112,7 +112,7 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
                         LessonFrame.progressCount++;
 
                         // 마지막 문장이면 LessonDialog 로 넘어감
-                        if(lessonWord.lessonCount == lessonWord.lessonSentenceLength) {
+                        if(lessonWord.lessonCount == LessonFrame.lesson.getSentenceFront().length) {
                             lessonWord.lessonCount = 0;
                             ((LessonFrame)context).replaceFragment(LessonDialog.newInstance());
 
@@ -156,14 +156,14 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
             lessonLayout.startAnimation(animation1);
             viewLeft = lessonWord.viewLeft;
             viewRight = lessonWord.viewRight;
-            lessonLength = lessonWord.lessonWordLength;
+            lessonLength = LessonFrame.lesson.getWordFront().length;
 
         } else {
             lessonLayout = lessonSentence.lessonLayout;
             lessonLayout.startAnimation(animation1);
             viewLeft = lessonSentence.viewLeft;
             viewRight = lessonSentence.viewRight;
-            lessonLength = lessonWord.lessonSentenceLength;
+            lessonLength = LessonFrame.lesson.getSentenceFront().length;
         }
 
         animation1.setAnimationListener(new Animation.AnimationListener() {

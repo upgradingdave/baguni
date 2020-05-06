@@ -59,7 +59,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
         intent = getIntent();
 
-        progress = intent.getExtras().getInt("progress");
+        progress = intent.getExtras().getInt(getResources().getString(R.string.PROGRESS));
 
         isHangul = intent.getExtras().getBoolean("isHangul");
 
@@ -67,7 +67,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
         isNumberPractice = intent.getExtras().getBoolean("isNumberPractice");
 
-        isReading = intent.getExtras().getBoolean("isReading");
+        isReading = intent.getExtras().getBoolean(getResources().getString(R.string.IS_READING));
     }
 
 
@@ -92,17 +92,13 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
                 if(progress != null) {
 
-                    if(isNumberPractice) {
+                    if (isReading) {
 
-                        unitId = LessonNumberMenu.numberPractice.getLessonId();
-
-                    } else if (isReading) {
-
-                        unitId = MainReading.readingUnit.getReadingId();
+                        unitId = intent.getStringExtra(getResources().getString(R.string.READING_ID));
 
                     } else {
 
-                        unitId = LessonAdapterChild.lessonItem.getLessonId();
+                        unitId = intent.getStringExtra(getResources().getString(R.string.LESSON_ID));
                     }
 
                     // 완료리스트에 업데이트

@@ -42,6 +42,8 @@ import org.w3c.dom.ls.LSException;
 
 public class LessonFrame extends AppCompatActivity implements View.OnClickListener {
 
+    static Lesson lesson;
+
     public static int progressCount;
     public static int totalPageNo = 0;
 
@@ -94,8 +96,13 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
             }
         });
 
+        lesson = (Lesson) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+
+        totalPageNo = lesson.getWordFront().length * 3 + 1 + lesson.getSentenceFront().length + 2;
+
         replaceFragment(lessonWord);
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -137,7 +144,9 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
         Intent intent = new Intent(context, ConfirmQuit.class);
 
-        intent.putExtra("progress", progressBar.getProgress());
+        intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
+
+        intent.putExtra(getResources().getString(R.string.LESSON_ID), lesson.getLessonId());
 
         startActivityForResult(intent, 200);
     }
@@ -182,21 +191,21 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
             case R.id.navigationQuiz :
                 setNavigationColor(context, navigationQuiz, R.drawable.bg_green_10);
                 replaceFragment(LessonWordQuiz1.newInstance());
-                progressCount = 1 + LessonWord.lessonWordLength;
+                progressCount = 1 + lesson.getWordFront().length;
                 progressCount();
                 break;
 
             case R.id.navigationSentence :
                 setNavigationColor(context, navigationSentence, R.drawable.bg_blue_10);
                 replaceFragment(LessonSentence.newInstance());
-                progressCount = 1 + LessonWord.lessonWordLength * 3 + 1;
+                progressCount = 1 + lesson.getWordFront().length * 3 + 1;
                 progressCount();
                 break;
 
             case R.id.navigationDialog :
                 setNavigationColor(context, navigationDialog, R.drawable.bg_purple_10);
                 replaceFragment(LessonDialog.newInstance());
-                progressCount = 1 + LessonWord.lessonWordLength * 3 + 1 + LessonWord.lessonSentenceLength;
+                progressCount = 1 + lesson.getWordFront().length * 3 + 1 + lesson.getSentenceFront().length;
                 progressCount();
                 break;
         }

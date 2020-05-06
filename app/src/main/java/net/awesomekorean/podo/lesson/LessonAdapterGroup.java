@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.VocabularyQuiz;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
+
+import java.util.Arrays;
 
 public class LessonAdapterGroup extends BaseExpandableListAdapter {
 
     private Context context;
 
-    private String[] groupList;
+    private String[] groupTitle;
+
+    private String[] groupSubTitle;
 
     private int[] groupProcess;
 
@@ -32,7 +38,7 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
     private ViewHolder holder;
 
 
-    public LessonAdapterGroup(Context context, String[] groupList, int[] groupProcess, LessonItem[][] childList) {
+    public LessonAdapterGroup(Context context, String[] groupTitle, String[] groupSubTitle, int[] groupProcess, LessonItem[][] childList) {
 
         super();
 
@@ -40,7 +46,9 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
 
         this.inflater = LayoutInflater.from(context);
 
-        this.groupList = groupList;
+        this.groupTitle = groupTitle;
+
+        this.groupSubTitle = groupSubTitle;
 
         this.groupProcess = groupProcess;
 
@@ -101,7 +109,7 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
         }
 
 
-        if(isExpanded) {
+        if (isExpanded) {
 
             holder.groupView.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_purple_10_transparent));
 
@@ -114,11 +122,35 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
             holder.lessonArrow.setImageResource(R.drawable.arrow_right_grey_full);
         }
 
-        holder.lessonCategoryTitle.setText(groupList[groupPosition]);
 
-        holder.lessonNumber.setText("Lesson " + groupPosition);
+        holder.lessonCategoryTitle.setText(groupTitle[groupPosition]);
 
-        if(groupProcess[groupPosition] == 100) {
+        holder.lessonNumber.setText(groupSubTitle[groupPosition]);
+
+        holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.BLACK));
+
+        holder.lessonNumber.setTextColor(ContextCompat.getColor(context, R.color.GREY_DARK));
+
+
+        // 단어 테스트 타이틀
+        if (groupTitle[groupPosition].equals("Quiz")) {
+
+            holder.lessonCategoryTitle.setText("Vocabulary Quiz");
+
+            holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
+
+            holder.lessonNumber.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
+
+            holder.lessonProgress.setVisibility(View.GONE);
+
+            holder.lessonProgressPercent.setVisibility(View.GONE);
+
+            holder.lessonComplete.setVisibility(View.GONE);
+
+            holder.lessonArrow.setVisibility(View.GONE);
+
+
+        } else if (groupProcess[groupPosition] == 100) {
 
             holder.lessonProgress.setVisibility(View.GONE);
 
@@ -146,14 +178,14 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
     @Override
     public String getGroup(int groupPosition) {
 
-        return groupList[groupPosition];
+        return groupTitle[groupPosition];
     }
 
 
     @Override
     public int getGroupCount() {
 
-        return groupList.length;
+        return groupTitle.length;
     }
 
 

@@ -4,7 +4,9 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessons.S_LessonInit;
 
-public class NumberPractice extends S_LessonInit implements LessonItem {
+import java.io.Serializable;
+
+public class NumberPractice extends S_LessonInit implements LessonItem, Serializable {
 
     private String lessonId = "N_practice";
 

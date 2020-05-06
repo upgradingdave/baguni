@@ -50,6 +50,7 @@ import java.util.Map;
 public class ReadingFrame extends AppCompatActivity implements Button.OnClickListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
 
     Reading reading; // Reading 인스턴스
 
@@ -134,7 +135,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                 System.out.println("진행률 : " + readingProgress);
 
-                if(seekBar.getMax()==progress) {
+                if(mediaPlayerManager != null && seekBar.getMax()==progress) {
                     setVisibility(View.VISIBLE, View.GONE);
                     mediaPlayerManager.pauseMediaPlayer();
                     mediaPlayerManager.resetPlayPosition();
@@ -158,12 +159,15 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             }
         });
 
-        reading = MainReading.readingUnit;
+        reading = (Reading) getIntent().getSerializableExtra(getResources().getString(R.string.READING));
+
         readyForReading();
     }
 
+
     public void readyForReading() {
-        FirebaseCrashlytics.getInstance().log("readingId : " + reading.getReadingId());
+
+        crashlytics.log("readingId : " + reading.getReadingId());
         unitId = reading.getReadingId().toLowerCase();
         int wordLength = reading.getPopUpFront().length;
         String wordAudio[] = new String[wordLength];
@@ -257,7 +261,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnCollect:
-                String folder = "reading/" + MainReading.readingUnit.getReadingId().toLowerCase();
+                String folder = "reading/" + reading.getReadingId().toLowerCase();
 
                 DownloadAudio downloadAudio = new DownloadAudio(context, folder, audioFileWord);
                 downloadAudio.downloadAudio();
@@ -353,9 +357,11 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
         Intent intent = new Intent(context, ConfirmQuit.class);
 
-        intent.putExtra("progress", readingProgress);
+        intent.putExtra(getResources().getString(R.string.PROGRESS), readingProgress);
 
-        intent.putExtra("isReading", true);
+        intent.putExtra(getResources().getString(R.string.IS_READING), true);
+
+        intent.putExtra(getResources().getString(R.string.READING_ID), reading.getReadingId());
 
         startActivityForResult(intent, 200);
     }

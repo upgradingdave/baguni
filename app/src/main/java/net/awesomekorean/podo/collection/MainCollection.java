@@ -113,9 +113,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
         view = inflater.inflate(R.layout.main_collection, container, false);
 
-
         userEmail = MainActivity.userEmail;
-        //listenToDocumentLocal();
 
         selectAll = view.findViewById(R.id.checkBoxSelectAll);
         btnStudy = view.findViewById(R.id.btnStudy);

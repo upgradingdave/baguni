@@ -61,7 +61,6 @@
     <string name="CONFIRM_REPORT">Do you have something to tell \'podo\'? \n (bug report or suggestions)</string>
 
 
-
     <!--    주요버튼-->
     <string name="YES">Yes</string>
     <string name="NO">No</string>
@@ -696,7 +695,6 @@ ex)
 ]]></string>
 
 
-
     <!--번역 필요 없는 부분-->
     <string name="facebook_app_id">3034621716562505</string>
     <string name="fb_login_protocol_scheme">fb3034621716562505</string>
@@ -732,6 +730,14 @@ ex)
     <string name="SKU_100">podo_point_100</string>
     <string name="SKU_500">podo_point_500</string>
     <string name="SKU_1000">podo_point_1000</string>
+
+    <string name="LESSON_ID">lessonId</string>
+    <string name="READING_ID">readingId</string>
+    <string name="IS_READING">isReading</string>
+    <string name="PROGRESS">progress</string>
+    <string name="CONVOWBAT">conVowBat</string>
+
+
 
 
     <!--지울것-->

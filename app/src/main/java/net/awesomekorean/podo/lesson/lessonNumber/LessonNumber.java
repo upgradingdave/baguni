@@ -194,7 +194,9 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = new Intent(getApplicationContext(), ConfirmQuit.class);
 
-        intent.putExtra("progress", progressBar.getProgress());
+        intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
+
+        intent.putExtra(getResources().getString(R.string.LESSON_ID), number.getLessonId());
 
         if(!numberTitle.equals(getString(R.string.SINO)) && !numberTitle.equals(getString(R.string.NATIVE))) {
 

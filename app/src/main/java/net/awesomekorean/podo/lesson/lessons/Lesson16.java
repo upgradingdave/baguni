@@ -2,9 +2,11 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
+import java.io.Serializable;
+
 import javax.annotation.meta.When;
 
-public class Lesson16 extends LessonInit implements Lesson, LessonItem {
+public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_16";
     private String lessonTitle = "possibility";

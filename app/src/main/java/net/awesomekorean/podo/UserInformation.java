@@ -124,7 +124,6 @@ public class UserInformation {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        SharedPreferencesInfo.setUserInfo(context, UserInformation.this);
                         System.out.println("DB에 유저 정보를 업데이트 했습니다.");
                     }
                 });

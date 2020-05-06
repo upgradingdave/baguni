@@ -2,6 +2,8 @@ package net.awesomekorean.podo.lesson.lessons;
 
 public interface Lesson {
 
+    String getLessonId();
+
     String[] getWordFront();
 
     String[] getWordBack();

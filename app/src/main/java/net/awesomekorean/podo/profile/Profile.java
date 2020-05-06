@@ -377,6 +377,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         if(resultCode == RESULT_OK) {
 
+            userInformation = SharedPreferencesInfo.getUserInfo(context);
+
             // 일주일 출석 보상일 때
             if(requestCode == 100) {
                 // 오늘 출석만 남기고 다 초기화
@@ -391,11 +393,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
             // 광고 보상일 때
-            } else if(requestCode == 200) {
-
-                userInformation = SharedPreferencesInfo.getUserInfo(context);
-                userPoint.setText(String.valueOf(userInformation.getPoints()));
             }
+
+            userPoint.setText(String.valueOf(userInformation.getPoints()));
         }
     }
 

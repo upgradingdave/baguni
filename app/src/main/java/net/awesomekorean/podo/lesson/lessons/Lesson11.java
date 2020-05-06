@@ -2,7 +2,9 @@ package net.awesomekorean.podo.lesson.lessons;
 
 import net.awesomekorean.podo.R;
 
-public class Lesson11 extends LessonInit implements Lesson, LessonItem {
+import java.io.Serializable;
+
+public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_11";
     private String lessonTitle = "and";
@@ -11,7 +13,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
 
     final static String[] wordFront = {"좋아하다", "네", "제일", "왜", "그리고", "잘", "노래를 부르다", "춤을 추다"};
 
-    final static String[] wordBack = {"to like", "yes", "the most", "why", "and", "well", "sing a song", "dance"};
+    final static String[] wordBack = {"like", "yes", "the most", "why", "and", "well", "sing a song", "dance"};
 
     final static String[] wordPronunciation = {"[조아하다]", "-", "-", "-", "-", "-", "-", "-"};
 
@@ -37,7 +39,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem {
     };
 
     final static String[] sentenceBack = {
-            "to like",
+            "like",
             "Do you like?",
             "Do you like K-pop?",
             "Yes",

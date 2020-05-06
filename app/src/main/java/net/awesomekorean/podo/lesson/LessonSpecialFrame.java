@@ -21,6 +21,8 @@ import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
 
+import java.io.Serializable;
+
 public class LessonSpecialFrame extends AppCompatActivity implements Button.OnClickListener{
 
     TextView title;
@@ -54,7 +56,7 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
         btnNo.setOnClickListener(this);
         btnYes.setOnClickListener(this);
 
-        lessonSpecial = (LessonSpecial) LessonAdapterChild.lessonItem;
+        lessonSpecial = (LessonSpecial) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
 
         readyForLesson();
     }
@@ -70,7 +72,9 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
 
         Intent intent = new Intent(context, ConfirmQuit.class);
 
-        intent.putExtra("progress", 100);
+        intent.putExtra(getResources().getString(R.string.PROGRESS), 100);
+
+        intent.putExtra(getResources().getString(R.string.LESSON_ID), lessonSpecial.getLessonId());
 
         startActivityForResult(intent, 200);
     }
@@ -102,7 +106,7 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
             case R.id.btnYes :
 
                 // 레슨완료 정보 업데이트 하기
-                String lessonId = LessonAdapterChild.lessonItem.getLessonId();
+                String lessonId = lessonSpecial.getLessonId();
 
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
 

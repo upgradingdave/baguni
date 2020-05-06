@@ -26,12 +26,14 @@ import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     View view;
-    String[] wordFront = LessonWord.wordFront; // 단어 front array
-    String[] wordBack = LessonWord.wordBack;
+
+    Lesson lesson;
+
     int[] wordImage = LessonWord.wordImage;
 
     String word; // 퀴즈용 단어 묶음에 있는 각 단어
@@ -72,6 +74,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_word_quiz3, container, false);
+
+        lesson = LessonFrame.lesson;
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
@@ -133,7 +137,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                                 LessonFrame.progressCount++;
                                 LessonFrame.progressCount();
 
-                                if (quizCount != wordFront.length) {  // 문제가 남아있을 때
+                                if (quizCount != lesson.getWordFront().length) {  // 문제가 남아있을 때
                                     flexboxLayout.removeAllViews();
                                     makeQuiz();
 
@@ -171,7 +175,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
     public void makeQuiz() {
 
-        word = wordFront[quizCount];
+        word = lesson.getWordFront()[quizCount];
 
         syllables = new String[word.length()];
 
@@ -198,7 +202,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             flexboxLayout.addView(btnSelector);
         }
 
-        answer.setText(wordBack[quizCount]);
+        answer.setText(lesson.getWordBack()[quizCount]);
         answerImage.setImageResource(wordImage[quizCount]);
 
         mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(quizCount));

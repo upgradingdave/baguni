@@ -4,7 +4,9 @@ import com.google.rpc.Help;
 
 import net.awesomekorean.podo.R;
 
-public class Lesson18 extends LessonInit implements Lesson, LessonItem {
+import java.io.Serializable;
+
+public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_18";
     private String lessonTitle = "request";

@@ -44,6 +44,7 @@ import net.awesomekorean.podo.reading.readings.Reading16;
 import net.awesomekorean.podo.reading.readings.Reading17;
 import net.awesomekorean.podo.reading.readings.Reading18;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,7 @@ import static net.awesomekorean.podo.MainActivity.textReading;
 
 public class MainReading extends Fragment {
 
-    public static Reading readingUnit;
+    Reading readingUnit;
 
     Context context;
 
@@ -108,17 +109,25 @@ public class MainReading extends Fragment {
             public void onItemClick(View v, int pos) {
 
                 readingUnit = list.get(pos);
+
                 FirebaseCrashlytics.getInstance().setCustomKey("readingId", readingUnit.getReadingId());
+
                 if(!readingUnit.getIsLock()) {
+
                     intent = new Intent(context, ReadingFrame.class);
-                    startActivity(intent);
+
 
                 } else {
+
                     // 포인트 사용 확인창 띄우기
                     intent = new Intent(context, UnlockActivity.class);
-                    intent.putExtra("unlock", "reading");
-                    startActivity(intent);
+
+                    intent.putExtra(getResources().getString(R.string.EXTRA_ID), getResources().getString(R.string.READING));
                 }
+
+                intent.putExtra(getResources().getString(R.string.READING), (Serializable) readingUnit);
+
+                startActivity(intent);
             }
         });
 
@@ -160,19 +169,6 @@ public class MainReading extends Fragment {
         });
 
         return view;
-    }
-
-
-    // 읽기 구매 성공
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 200 && resultCode == RESULT_OK) {
-            userInformation = SharedPreferencesInfo.getUserInfo(context);
-            setUnlockedReadings();
-            isClicked = true;
-            btnGetReading.performClick();
-        }
     }
 
 
@@ -226,6 +222,8 @@ public class MainReading extends Fragment {
         if(adapter != null) {
             setCompletedReadings();
             setUnlockedReadings();
+            isClicked = true;
+            btnGetReading.performClick();
             adapter.notifyDataSetChanged();
         }
     }

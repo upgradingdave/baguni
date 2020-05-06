@@ -325,11 +325,9 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     private void setLessonComplete() {
 
         // 레슨완료리스트에 업데이트
-        String lessonId = LessonAdapterChild.lessonItem.getLessonId();
-
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
 
-        userInformation.updateCompleteList(context, lessonId, 100, false);
+        userInformation.updateCompleteList(context, "H_assembly", 100, false);
 
         finish();
     }

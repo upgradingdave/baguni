@@ -31,6 +31,7 @@ import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -72,6 +73,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
     MediaPlayerManager mediaPlayerManager;
 
     static ToggleButton toggleButton;
+
+    Lesson lesson = LessonFrame.lesson;
 
 
     @Nullable
@@ -116,13 +119,14 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         if(getActivity() != null) {
             ((LessonFrame)getActivity()).onLoadingLayout(true);
         }
-        dialogLength = LessonWord.lessonDialogLength;
+        dialogLength = lesson.getDialog().length;
         String[] dialogAudio = new String[dialogLength];
-        int[] peopleImage = LessonWord.lesson.getPeopleImage(); // 사람이미지 2개
-        String lessonId = LessonWord.lessonId;
-        String folder = LessonWord.folder;
+        int[] peopleImage = lesson.getPeopleImage(); // 사람이미지 2개
+        String lessonId = lesson.getLessonId();
+        String folder = "lesson/" + lessonId.toLowerCase();
+
         String packageName = context.getPackageName();
-        String[] dialog =  LessonWord.lesson.getDialog();
+        String[] dialog = lesson.getDialog();
 
 
         // 저장소에서 대화오디오 가져오기
@@ -234,7 +238,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
                 // 완료리스트에 업데이트
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                userInformation.updateCompleteList(context, LessonAdapterChild.lessonItem.getLessonId(), 100, false);
+                userInformation.updateCompleteList(context, lesson.getLessonId(), 100, false);
 
                 Intent intent = new Intent(getContext(), LessonFinish.class);
                 startActivity(intent);

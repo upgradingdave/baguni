@@ -22,6 +22,7 @@ import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     ImageView btnAudio;
 
 
-    int[] wordImage = LessonWord.wordImage;
-    String[] wordFront = LessonWord.wordFront;
-    String[] wordBack = LessonWord.wordBack;
-    String[] wordAudio = LessonWord.wordAudio;
+    int[] wordImage;
     int[] answerArray = new int[4]; // 현재 퀴즈 array
 
 
@@ -60,6 +58,8 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
     ConstraintLayout totalPage;
 
+    Lesson lesson;
+
     public static LessonWordQuiz1 newInstance() {
         return new LessonWordQuiz1();
     }
@@ -70,7 +70,11 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         view = inflater.inflate(R.layout.lesson_word_quiz1, container, false);
 
-        quizQuantity = wordBack.length;
+        lesson = LessonFrame.lesson;
+
+        wordImage = LessonWord.wordImage;
+
+        quizQuantity = lesson.getWordBack().length;
         wrongQuizList = new ArrayList<>();
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
@@ -116,7 +120,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
     public void makeQuiz(int quizNoNow) {
 
-        answer.setText(wordFront[quizNoNow]);
+        answer.setText(lesson.getWordFront()[quizNoNow]);
         int j = 0;
 
         for(int i=0; i<4; i++) {
@@ -137,10 +141,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btn3.setImageResource(wordImage[answerArray[2]]);
         btn4.setImageResource(wordImage[answerArray[3]]);
 
-        btnText1.setText(wordBack[answerArray[0]]);
-        btnText2.setText(wordBack[answerArray[1]]);
-        btnText3.setText(wordBack[answerArray[2]]);
-        btnText4.setText(wordBack[answerArray[3]]);
+        btnText1.setText(lesson.getWordBack()[answerArray[0]]);
+        btnText2.setText(lesson.getWordBack()[answerArray[1]]);
+        btnText3.setText(lesson.getWordBack()[answerArray[2]]);
+        btnText4.setText(lesson.getWordBack()[answerArray[3]]);
 
         mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(quizNoNow));
         mediaPlayerManager.playMediaPlayer(false);
@@ -218,7 +222,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                     selectedBtnNo = 3;
                 }
 
-                if(wordBack[quizNoNow].equals(wordBack[answerArray[selectedBtnNo]])) {
+                if(lesson.getWordBack()[quizNoNow].equals(lesson.getWordBack()[answerArray[selectedBtnNo]])) {
                     answered(view, 0, R.drawable.bg_white_10_stroke_purple);
                 } else {
                     wrongQuizList.add(quizNoNow);

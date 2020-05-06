@@ -27,6 +27,7 @@ import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener {
 
@@ -38,9 +39,6 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     ToggleButton firstSelectedBtn;
     ToggleButton justSelectedBtn;
 
-    String[] wordFront = LessonWord.wordFront;
-    String[] wordBack = LessonWord.wordBack;
-
     MediaPlayerManager mediaPlayerManager;
 
     PlaySoundPool playSoundPool;
@@ -50,11 +48,13 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     int[] checkAnswer = new int[2];
 
-    int wordNo = wordFront.length; // 단어 개수
+    int wordNo; // 단어 개수
 
     int correctCount = 0;
 
     Animation animation;
+
+    Lesson lesson;
 
 
     public static LessonWordQuiz2 newInstance() {
@@ -66,6 +66,10 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_word_quiz2, container, false);
+
+        lesson = LessonFrame.lesson;
+
+        wordNo = lesson.getWordFront().length;
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
@@ -103,8 +107,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
         String[] mixedBack = new String[wordNo];
 
         for(int i=0; i<wordNo; i++) {
-            mixedFront[i] = wordFront[i];
-            mixedBack[i] = wordBack[i];
+            mixedFront[i] = lesson.getWordFront()[i];
+            mixedBack[i] = lesson.getWordBack()[i];
         }
 
         RandomArray.randomArrayString(mixedFront);
@@ -160,11 +164,11 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         for(int i=0; i<wordNo; i++) {
 
-            if(wordFront[i].equals(selectedText)) {
+            if(lesson.getWordFront()[i].equals(selectedText)) {
 
                 checkAnswer[0] = i+1;
 
-            } else if(wordBack[i].equals(selectedText)) {
+            } else if(lesson.getWordBack()[i].equals(selectedText)) {
 
                 checkAnswer[1] = i+1;
             }
