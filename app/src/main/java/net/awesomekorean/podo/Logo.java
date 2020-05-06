@@ -71,7 +71,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2);
+        }, 2000);
 
     }
 
