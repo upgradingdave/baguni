@@ -168,7 +168,10 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                             intent.putExtra(context.getResources().getString(R.string.LESSON_ID), lessonItem.getLessonId());
 
-                            intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
+                            if(lessonItem.getLessonId() != "H_assembly") {
+
+                                intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
+                            }
 
                             context.startActivity(intent);
                         }

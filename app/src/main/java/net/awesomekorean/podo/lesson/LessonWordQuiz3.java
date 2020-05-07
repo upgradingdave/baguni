@@ -112,7 +112,11 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                 Button selectedBtn = (Button) view;
 
                 String selectedBtnText = selectedBtn.getText().toString();
-                tvAnswer.append(selectedBtnText);
+
+                if(tvAnswer.getText().length() != word.length()) {
+
+                    tvAnswer.append(selectedBtnText);
+                }
 
                 btnReset.setVisibility(View.VISIBLE);
 
