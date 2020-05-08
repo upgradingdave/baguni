@@ -344,7 +344,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.getPointsByPurchasing :
                 intent = new Intent(Profile.this, TopUp.class);
-                startActivity(intent);
+                startActivityForResult(intent, 300);
                 break;
 
             case R.id.logout :

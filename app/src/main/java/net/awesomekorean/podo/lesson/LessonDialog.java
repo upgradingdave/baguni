@@ -56,8 +56,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
     Button btnFinish;
 
 
-    Context context;
-
     int index; // 전체 오디오 재생 카운트
 
     ConstraintLayout totalPage;
@@ -76,6 +74,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     Lesson lesson = LessonFrame.lesson;
 
+    private LessonFrame activity;
+
 
     @Nullable
     @Override
@@ -85,7 +85,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
-        context = getContext();
         btnPlay = view.findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(this);
         btnPause = view.findViewById(R.id.btnPause);
@@ -100,24 +99,24 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             }
         });
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         index = 0;
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_dialog", bundle);
 
         readyForLesson();
 
-        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationDialog, R.drawable.bg_purple_10);
+        LessonFrame.setNavigationColor(activity, LessonFrame.navigationDialog, R.drawable.bg_purple_10);
 
         return view;
     }
 
     private void readyForLesson() {
-        if(getActivity() != null) {
-            ((LessonFrame)getActivity()).onLoadingLayout(true);
+        if(activity != null) {
+            activity.onLoadingLayout(true);
         }
         dialogLength = lesson.getDialog().length;
         String[] dialogAudio = new String[dialogLength];
@@ -125,7 +124,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         String lessonId = lesson.getLessonId();
         String folder = "lesson/" + lessonId.toLowerCase();
 
-        String packageName = context.getPackageName();
+        String packageName = activity.getPackageName();
         String[] dialog = lesson.getDialog();
 
 
@@ -142,8 +141,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                     System.out.println("오디오를 로드했습니다.");
                     audiosDialog.put(audioIndexDialog, bytes);
                     if(audiosDialog.size() == dialogLength) {
-                        if(getActivity() != null) {
-                            ((LessonFrame)getActivity()).onLoadingLayout(false);
+                        if(activity != null) {
+                            activity.onLoadingLayout(false);
                         }
                     }
                 }
@@ -237,13 +236,22 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 mediaPlayerManager.stopMediaPlayer();
 
                 // 완료리스트에 업데이트
-                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                userInformation.updateCompleteList(context, lesson.getLessonId(), 100, false);
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(activity);
+                userInformation.updateCompleteList(activity, lesson.getLessonId(), 100, false);
 
-                Intent intent = new Intent(getContext(), LessonFinish.class);
+                Intent intent = new Intent(activity, LessonFinish.class);
                 startActivity(intent);
-                getActivity().finish();
+                activity.finish();
                 break;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonFrame) {
+            activity = (LessonFrame) context;
         }
     }
 }

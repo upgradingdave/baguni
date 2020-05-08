@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -56,6 +57,8 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
     Lesson lesson;
 
+    private LessonFrame activity;
+
 
     public static LessonWordQuiz2 newInstance() {
         return new LessonWordQuiz2();
@@ -84,18 +87,18 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
         });
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_quiz2", bundle);
 
 
-        animation = AnimationUtils.loadAnimation(getContext(), R.anim.scale_200);
+        animation = AnimationUtils.loadAnimation(activity, R.anim.scale_200);
 
         makeQuiz(); // 퀴즈 버튼 만들기
 
-        playSoundPool = new PlaySoundPool(getContext());
+        playSoundPool = new PlaySoundPool(activity);
 
-        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationQuiz, R.drawable.bg_green_10);
+        LessonFrame.setNavigationColor(activity, LessonFrame.navigationQuiz, R.drawable.bg_green_10);
 
         return view;
     }
@@ -118,7 +121,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
         for(int i=0; i<wordNo*2; i++) {
 
-            ToggleButton button = new ToggleButton(getContext());
+            ToggleButton button = new ToggleButton(activity);
 
             int gap20 = DpToPx.getDpToPx(getResources(), 20);
             int gap10 = DpToPx.getDpToPx(getResources(), 10);
@@ -131,7 +134,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
             button.setOnClickListener(this);
             button.setTextColor(Color.BLACK);
             button.setPadding(gap10, gap20, gap10, gap20);
-            button.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.toggle_white_purple));
+            button.setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.toggle_white_purple));
             button.setTag("button"+i);
             button.setChecked(false);
 
@@ -181,7 +184,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
 
                 playSoundPool.playSoundLesson(0);
 
-                Drawable transparent = ContextCompat.getDrawable(getContext(), R.drawable.bg_transparent);
+                Drawable transparent = ContextCompat.getDrawable(activity, R.drawable.bg_transparent);
 
                 firstSelectedBtn.setBackgroundDrawable(transparent);
                 justSelectedBtn.setBackgroundDrawable(transparent);
@@ -246,10 +249,20 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 public void run() {
                     LessonFrame.progressCount++;
                     LessonFrame.progressCount();
-                    ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz3.newInstance());
+                    activity.replaceFragment(LessonWordQuiz3.newInstance());
                 }
             }, 1000);
 
+        }
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonFrame) {
+            activity = (LessonFrame) context;
         }
     }
 }

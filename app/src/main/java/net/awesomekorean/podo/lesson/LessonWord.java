@@ -66,8 +66,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
     static String[] wordPronunciation;
     static String[] wordAudio;
 
-    Context context;
-
     static Map<Integer, byte[]> audiosWord = new HashMap<>();
 
     boolean isFirstAudio;
@@ -80,13 +78,14 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
     MediaPlayerManager mediaPlayerManager;
 
+    private LessonFrame activity;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
-        context = getContext();
 
         LessonFrame.swipePage = getString(R.string.LESSONWORD);
         lessonCount = 0; // 레슨진도초기화 -> 저장하고 exit 했을 때는 lessonCount 를 DB에 저장해야함
@@ -109,7 +108,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         folder = "lesson/" + lessonId.toLowerCase();
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_word", bundle);
 
@@ -117,9 +116,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
 
         LessonSwipeListener gestureListener = new LessonSwipeListener();
-        LessonFrame lessonFrame = (LessonFrame)getActivity();
-        gestureListener.setActivity(lessonFrame);
-        gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.getApplicationContext(), gestureListener);
+        gestureListener.setActivity(activity);
+        gestureDetectorCompat = new GestureDetectorCompat(activity, gestureListener);
         lessonLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -130,19 +128,19 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         readyForLesson();
 
-        LessonFrame.setNavigationColor(context, LessonFrame.navigationWord, R.drawable.bg_yellow_10);
+        LessonFrame.setNavigationColor(activity, LessonFrame.navigationWord, R.drawable.bg_yellow_10);
 
         return view;
     }
 
     public void readyForLesson() {
-        if(getActivity() != null) {
-            ((LessonFrame)getActivity()).onLoadingLayout(true);
+        if(activity != null) {
+            activity.onLoadingLayout(true);
         }
 
         lessonWordLength = lesson.getWordFront().length;
 
-        String packageName = context.getPackageName();
+        String packageName = activity.getPackageName();
 
         wordFront = lesson.getWordFront();
 
@@ -183,8 +181,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
 
     public void displayWord() {
-        if(getActivity() != null) {
-            ((LessonFrame)getActivity()).onLoadingLayout(false);
+        if(activity != null) {
+            activity.onLoadingLayout(false);
         }
         LessonFrame.progressCount();
 
@@ -219,10 +217,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
                 String back = lesson.getWordBack()[lessonCount];
                 String audio = wordAudio[lessonCount];
 
-                DownloadAudio downloadAudio = new DownloadAudio(context, folder, audio);
+                DownloadAudio downloadAudio = new DownloadAudio(activity, folder, audio);
                 downloadAudio.downloadAudio();
 
-                CollectionRepository repository = new CollectionRepository(getContext());
+                CollectionRepository repository = new CollectionRepository(activity);
                 repository.insert(front, back, audio);
 
                 collectResult.setVisibility(View.VISIBLE);
@@ -235,6 +233,15 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
                 }, 1000);
 
                 break;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonFrame) {
+            activity = (LessonFrame) context;
         }
     }
 }

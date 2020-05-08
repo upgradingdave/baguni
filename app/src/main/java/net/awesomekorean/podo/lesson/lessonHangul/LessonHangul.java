@@ -64,6 +64,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     boolean[] checkProgress;
 
     ImageView btnAudio;
+    LinearLayout btns;
     LinearLayout btnWriting;
     LinearLayout btnHint;
     ImageView iconWriting;
@@ -111,6 +112,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         textViewIntro = findViewById(R.id.textViewIntro);
         btnCloseIntro = findViewById(R.id.btnCloseIntro);
         btnAudio = findViewById(R.id.btnAudio);
+        btns = findViewById(R.id.btns);
         btnWriting = findViewById(R.id.btnWriting);
         btnHint = findViewById(R.id.btnHint);
         iconWriting = findViewById(R.id.iconWriting);
@@ -148,6 +150,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
             case "batchim" :
                 thisHangul = new LessonHangulBatchim();
                 getThisHangul("bat", hangulName);
+                btns.setVisibility(GONE);
                 break;
         }
 

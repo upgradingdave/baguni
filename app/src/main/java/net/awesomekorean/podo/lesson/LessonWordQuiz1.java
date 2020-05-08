@@ -1,5 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -64,6 +67,8 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         return new LessonWordQuiz1();
     }
 
+    private LessonFrame activity;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -103,16 +108,16 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         });
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_quiz1", bundle);
 
         makeQuiz(quizNoNow);
 
         // 정답, 오답 오디오 미리 로드해놓기
-        playSoundPool = new PlaySoundPool(getContext());
+        playSoundPool = new PlaySoundPool(activity);
 
-        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationQuiz, R.drawable.bg_green_10);
+        LessonFrame.setNavigationColor(activity, LessonFrame.navigationQuiz, R.drawable.bg_green_10);
 
         return view;
     }
@@ -159,7 +164,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
             public void run() {
 
                 try {
-                    selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.ripple_custom));
+                    selectedBtn.setBackground(ContextCompat.getDrawable(activity, R.drawable.ripple_custom));
                 } catch (NullPointerException e) {
                     System.out.println(e);
                 }
@@ -175,7 +180,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                         makeWrongQuiz(wrongQuizList.get(0));
                     } else {
                         // 퀴즈2로 넘어가기
-                        ((LessonFrame)getActivity()).replaceFragment(LessonWordQuiz2.newInstance());
+                        activity.replaceFragment(LessonWordQuiz2.newInstance());
                     }
                 } else {
 
@@ -236,10 +241,20 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     // 정답/오답 소리 출력하고 선택한 이미지에 파란색/빨간색 테두리
     private void answered(View view, int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
-        view.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        view.setBackground(ContextCompat.getDrawable(activity, outline));
         answer.setVisibility(View.VISIBLE);
         btnAudio.setVisibility(View.GONE);
 
         makeNextQuiz(view);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonFrame) {
+            activity = (LessonFrame) context;
+        }
     }
 }

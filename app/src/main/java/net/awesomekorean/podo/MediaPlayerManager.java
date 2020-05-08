@@ -4,6 +4,8 @@ import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.SeekBar;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import net.awesomekorean.podo.lesson.LessonDialog;
 
 import java.io.BufferedInputStream;
@@ -126,6 +128,13 @@ public class MediaPlayerManager {
 
         } catch (IOException e) {
             e.printStackTrace();
+
+        } catch (IllegalStateException e) {
+            if(audioUrl == null) {
+                audioUrl = "null";
+            }
+            FirebaseCrashlytics.getInstance().log("illegalStateException : " + e);
+            FirebaseCrashlytics.getInstance().log("attempting to play : " + audioUrl);
         }
     }
 

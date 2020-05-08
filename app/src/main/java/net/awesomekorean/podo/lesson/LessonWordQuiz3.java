@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,7 +35,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     Lesson lesson;
 
-    int[] wordImage = LessonWord.wordImage;
+    int[] wordImage;
 
     String word; // 퀴즈용 단어 묶음에 있는 각 단어
 
@@ -68,6 +69,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         return new LessonWordQuiz3();
     }
 
+    private LessonFrame activity;
+
 
     @Nullable
     @Override
@@ -76,6 +79,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         view = inflater.inflate(R.layout.lesson_word_quiz3, container, false);
 
         lesson = LessonFrame.lesson;
+
+        wordImage = LessonWord.wordImage;
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
@@ -97,12 +102,12 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         });
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_quiz3", bundle);
 
 
-        playSoundPool = new PlaySoundPool(getContext());
+        playSoundPool = new PlaySoundPool(activity);
 
         selectorButtonClick = new View.OnClickListener() {
 
@@ -147,13 +152,13 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
                                 } else {  // 문제 다 풀었을 때
                                     quizCount = 0;
-                                    ((LessonFrame) getActivity()).replaceFragment(LessonSentence.newInstance());
+                                    activity.replaceFragment(LessonSentence.newInstance());
                                 }
                             }
                             tvAnswer.setText("");
                             btnReset.setVisibility(View.GONE);
                             try {
-                                answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                                answerLayout.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_white_10));
                             } catch (NullPointerException e) {
                                 System.out.println("NullPointerException inside LWQ3");
                             }
@@ -164,7 +169,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         };
         makeQuiz();
 
-        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationQuiz, R.drawable.bg_green_10);
+        LessonFrame.setNavigationColor(activity, LessonFrame.navigationQuiz, R.drawable.bg_green_10);
 
         return view;
     }
@@ -172,7 +177,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
     private void answered(Button selectedBtn, int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
-        answerLayout.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        answerLayout.setBackground(ContextCompat.getDrawable(activity, outline));
     }
 
 
@@ -191,7 +196,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
         for(int i=0; i<syllables.length; i++) {
 
-            btnSelector = new Button(getContext());
+            btnSelector = new Button(activity);
 
             int gap10 = DpToPx.getDpToPx(getResources(), 10);
 
@@ -200,7 +205,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             params.bottomMargin = gap10;
 
             btnSelector.setLayoutParams(params);
-            btnSelector.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.ripple_custom));
+            btnSelector.setBackground(ContextCompat.getDrawable(activity, R.drawable.ripple_custom));
             btnSelector.setText(syllables[i]);
             btnSelector.setOnClickListener(selectorButtonClick);
             flexboxLayout.addView(btnSelector);
@@ -227,6 +232,16 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             case R.id.btnAudio :
                 mediaPlayerManager.playMediaPlayer(false);
                 break;
+        }
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonFrame) {
+            activity = (LessonFrame) context;
         }
     }
 }

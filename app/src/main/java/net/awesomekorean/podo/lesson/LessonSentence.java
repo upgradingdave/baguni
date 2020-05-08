@@ -37,8 +37,6 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    Context context;
-
     View view;
 
     ImageView btnAudio;
@@ -75,14 +73,14 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
     Lesson lesson;
     String folder;
 
+    private LessonFrame activity;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
-
-        context = getContext();
 
         LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
@@ -103,21 +101,20 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         folder = "lesson/" + lesson.getLessonId().toLowerCase();
 
         LessonSwipeListener gestureListener = new LessonSwipeListener();
-        LessonFrame lessonFrame = (LessonFrame)getActivity();
-        gestureListener.setActivity(lessonFrame);
-        gestureDetectorCompat = new GestureDetectorCompat(lessonFrame.context, gestureListener);
+        gestureListener.setActivity(activity);
+        gestureDetectorCompat = new GestureDetectorCompat(activity, gestureListener);
 
         lessonLayout.setOnTouchListener(this);
         scrollView.setOnTouchListener(this);
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_sentence", bundle);
 
         readyForLesson();
 
-        LessonFrame.setNavigationColor(getContext(), LessonFrame.navigationSentence, R.drawable.bg_blue_10);
+        LessonFrame.setNavigationColor(activity, LessonFrame.navigationSentence, R.drawable.bg_blue_10);
 
         return view;
     }
@@ -130,8 +127,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
 
     private void readyForLesson() {
-        if(getActivity() != null) {
-            ((LessonFrame)getActivity()).onLoadingLayout(true);
+        if(activity != null) {
+            activity.onLoadingLayout(true);
         }
         int sentenceLength = lesson.getSentenceFront().length;
         sentenceAudio = new String[sentenceLength];
@@ -163,8 +160,8 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
     }
 
     public void displaySentence() {
-        if(getActivity() != null) {
-            ((LessonFrame)getActivity()).onLoadingLayout(false);
+        if(activity != null) {
+            activity.onLoadingLayout(false);
         }
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
@@ -193,10 +190,10 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
                 String audio = sentenceAudio[lessonCount];
                 String folder = "lesson/" + lesson.getLessonId().toLowerCase();;
 
-                DownloadAudio downloadAudio = new DownloadAudio(context, folder, audio);
+                DownloadAudio downloadAudio = new DownloadAudio(activity, folder, audio);
                 downloadAudio.downloadAudio();
 
-                CollectionRepository repository = new CollectionRepository(context);
+                CollectionRepository repository = new CollectionRepository(activity);
                 repository.insert(front, back, audio);
 
                 collectResult.setVisibility(View.VISIBLE);
@@ -208,6 +205,15 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
                     }
                 }, 1000);
                 break;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonFrame) {
+            activity = (LessonFrame) context;
         }
     }
 }

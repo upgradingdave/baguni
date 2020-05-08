@@ -31,7 +31,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
             "조금 추워요.",
             "오다",
             "와요?",
-            "눈이 와요?.",
+            "눈이 와요?",
             "와요.",
             "안 와요.",
             "눈은 안 와요.",
@@ -78,8 +78,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
 
     final static String[] dialog = {
             "한국 날씨가 어때요?",
-            "여기는 겨울이에요.",
-            "조금 추워요.",
+            "여기는 겨울이에요.\n조금 추워요.",
             "눈이 와요?",
             "눈은 별로 안 와요."
     };

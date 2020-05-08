@@ -5,9 +5,8 @@
     android:layout_height="180dp"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="@drawable/bg_white_15_stroke_grey"
+    android:background="@drawable/bg_white_10"
     android:descendantFocusability="blocksDescendants"
-    android:elevation="1dp"
     >
 
     <LinearLayout

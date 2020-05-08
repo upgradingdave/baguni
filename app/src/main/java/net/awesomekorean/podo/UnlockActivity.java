@@ -116,13 +116,14 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 200 && resultCode == RESULT_OK) {
+        if(resultCode == RESULT_OK) {
             userInformation = SharedPreferencesInfo.getUserInfo(context);
             userPoint = userInformation.getPoints();
 
             if(userPoint >= unlockPrice) {
                 unlockFirst.setVisibility(View.VISIBLE);
                 unlockSecond.setVisibility(View.GONE);
+                btnYes.performClick();
 
             } else {
                 unlockFirst.setVisibility(View.GONE);
@@ -220,15 +221,11 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     unlockSecond.setVisibility(View.VISIBLE);
                     pointHave.setText(String.valueOf(userPoint));
                 }
-
-                finish();
-
                 break;
 
             case R.id.btnPurchasePoints :
-                finish();
                 intent = new Intent(context, TopUp.class);
-                startActivity(intent);
+                startActivityForResult(intent, 300);
                 break;
 
 
@@ -238,7 +235,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                         System.out.println("보상을 받습니다.");
-                        Intent intent = new Intent(UnlockActivity.this, LessonFinish.class);
+                        Intent intent = new Intent(context, LessonFinish.class);
                         intent.putExtra("isReward", true);
                         startActivityForResult(intent, 200);
 
