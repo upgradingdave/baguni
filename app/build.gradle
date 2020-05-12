@@ -61,5 +61,3 @@ dependencies {
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
 }
-
-apply plugin: 'com.google.gms.google-services'

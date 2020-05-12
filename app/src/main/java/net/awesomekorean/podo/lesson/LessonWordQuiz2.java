@@ -195,7 +195,7 @@ public class LessonWordQuiz2 extends Fragment implements Button.OnClickListener 
                 firstSelectedBtn.setTextColor(Color.BLACK);
                 justSelectedBtn.setTextColor(Color.BLACK);
 
-                mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(checkAnswer[0]-1));
+                mediaPlayerManager.setMediaPlayerByte(activity.wordAudioByte.get(checkAnswer[0]-1));
                 mediaPlayerManager.playMediaPlayer(false);
 
                 isCorrectAll();

@@ -1,6 +1,5 @@
 package net.awesomekorean.podo.lesson;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,12 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.awesomekorean.podo.MediaPlayerManager;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
@@ -77,7 +73,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
         lesson = LessonFrame.lesson;
 
-        wordImage = LessonWord.wordImage;
+        wordImage = activity.wordImage;
 
         quizQuantity = lesson.getWordBack().length;
         wrongQuizList = new ArrayList<>();
@@ -151,7 +147,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btnText3.setText(lesson.getWordBack()[answerArray[2]]);
         btnText4.setText(lesson.getWordBack()[answerArray[3]]);
 
-        mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(quizNoNow));
+        mediaPlayerManager.setMediaPlayerByte(activity.wordAudioByte.get(quizNoNow));
         mediaPlayerManager.playMediaPlayer(false);
     }
 

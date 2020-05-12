@@ -36,8 +36,6 @@ import java.util.Map;
 
 public class LessonWord extends Fragment implements Button.OnClickListener{
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-
     View view;
 
     Lesson lesson;
@@ -60,15 +58,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
     static int lessonCount;
     int lessonWordLength = 0;
 
-    static int[] wordImage;
     static String[] wordFront;
     static String[] wordBack;
     static String[] wordPronunciation;
-    static String[] wordAudio;
-
-    static Map<Integer, byte[]> audiosWord = new HashMap<>();
-
-    boolean isFirstAudio;
 
     public static LessonWord newInstance() {
         return new LessonWord();
@@ -87,8 +79,8 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
-        LessonFrame.swipePage = getString(R.string.LESSONWORD);
-        lessonCount = 0; // 레슨진도초기화 -> 저장하고 exit 했을 때는 lessonCount 를 DB에 저장해야함
+        activity.swipePage = getString(R.string.LESSONWORD);
+        lessonCount = 0; // 레슨진도초기화
 
         viewLeft = view.findViewById(R.id.viewLeft);
         viewRight = view.findViewById(R.id.viewRight);
@@ -103,8 +95,10 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         btnAudio.setOnClickListener(this);
         btnCollect.setOnClickListener(this);
 
-        lesson = LessonFrame.lesson;
+        lesson = activity.lesson;
+
         lessonId = lesson.getLessonId();
+
         folder = "lesson/" + lessonId.toLowerCase();
 
         // analytics 로그 이벤트 얻기
@@ -116,8 +110,11 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
 
         LessonSwipeListener gestureListener = new LessonSwipeListener();
+
         gestureListener.setActivity(activity);
+
         gestureDetectorCompat = new GestureDetectorCompat(activity, gestureListener);
+
         lessonLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -128,74 +125,48 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         readyForLesson();
 
-        LessonFrame.setNavigationColor(activity, LessonFrame.navigationWord, R.drawable.bg_yellow_10);
+        activity.setNavigationColor(activity, activity.navigationWord, R.drawable.bg_yellow_10);
 
         return view;
     }
 
     public void readyForLesson() {
-        if(activity != null) {
-            activity.onLoadingLayout(true);
-        }
 
         lessonWordLength = lesson.getWordFront().length;
-
-        String packageName = activity.getPackageName();
 
         wordFront = lesson.getWordFront();
 
         wordBack = lesson.getWordBack();
 
-        wordImage = new int[lessonWordLength];
-
-        for(int i=0; i<lessonWordLength; i++) {
-
-            String stringWordImage = lessonId.toLowerCase() + "_word_" + i;
-
-            int intWordImage = getResources().getIdentifier(stringWordImage, "drawable", packageName);
-
-            wordImage[i] = intWordImage;
-        }
-
         wordPronunciation = lesson.getWordPronunciation();
 
-        wordAudio = new String[lessonWordLength];
-        for(int i=0; i<lessonWordLength; i++) {
-            final Integer audioIndexWord = i;
-            wordAudio[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
-            StorageReference storageRef = storage.getReference().child(folder).child(wordAudio[i]);
-            final long ONE_MEGABYTE = 1024 * 1024;
-            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                @Override
-                public void onSuccess(byte[] bytes) {
-                    System.out.println("오디오를 로드했습니다.");
-                    audiosWord.put(audioIndexWord, bytes);
-                    if(audioIndexWord == 0) {
-                        displayWord();
-                        isFirstAudio = false;
-                    }
-                }
-            });
-        }
+        displayWord();
     }
 
 
     public void displayWord() {
-        if(activity != null) {
-            activity.onLoadingLayout(false);
-        }
+
         LessonFrame.progressCount();
 
-        ivWordImage.setImageResource(wordImage[lessonCount]);
+        ivWordImage.setImageResource(LessonFrame.wordImage[lessonCount]);
+
         tvWordFront.setText(wordFront[lessonCount]);
+
         tvWordBack.setText(wordBack[lessonCount]);
+
         tvWordPronunciation.setText(wordPronunciation[lessonCount]);
-        if(audiosWord.get(lessonCount) != null && audiosWord.get(lessonCount).length > 0) {
+
+        if(LessonFrame.wordAudioByte.get(lessonCount) != null && LessonFrame.wordAudioByte.get(lessonCount).length > 0) {
+
             mediaPlayerManager = MediaPlayerManager.getInstance();
+
             if(mediaPlayerManager != null) {
+
                 mediaPlayerManager.stopMediaPlayer();
             }
-            mediaPlayerManager.setMediaPlayerByte(audiosWord.get(lessonCount));
+
+            mediaPlayerManager.setMediaPlayerByte(LessonFrame.wordAudioByte.get(lessonCount));
+
             mediaPlayerManager.playMediaPlayer(false);
         }
     }
@@ -215,7 +186,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
             case R.id.btnCollect :
                 String front = lesson.getWordFront()[lessonCount];
                 String back = lesson.getWordBack()[lessonCount];
-                String audio = wordAudio[lessonCount];
+                String audio = activity.wordAudioString[lessonCount];
 
                 DownloadAudio downloadAudio = new DownloadAudio(activity, folder, audio);
                 downloadAudio.downloadAudio();

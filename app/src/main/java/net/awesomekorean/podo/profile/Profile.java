@@ -54,8 +54,6 @@ import java.util.List;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     ImageView btnBack;
     ImageView userImage;
     TextView userName;

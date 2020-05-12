@@ -2,7 +2,6 @@ package net.awesomekorean.podo.reading;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -27,23 +25,15 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.DownloadAudio;
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.MediaPlayerManager;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.SharedPreferencesInfo;
-import net.awesomekorean.podo.UnitProgressInfo;
-import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.collection.CollectionRepository;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -211,9 +201,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                         // 단어 오디오 재생
                         mediaPlayerManager = MediaPlayerManager.getInstance();
 
-                        if(mediaPlayerManager != null) {
-                            mediaPlayerManager.pauseMediaPlayer();
-                        }
+                        mediaPlayerManager.pauseMediaPlayer();
+
                         mediaPlayerManager.setMediaPlayerByte(audiosWord.get(popUpIndex));
 
                         mediaPlayerManager.playMediaPlayer(false);

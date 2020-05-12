@@ -24,8 +24,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.ConfirmQuit;
 import net.awesomekorean.podo.MainActivity;
@@ -40,7 +43,12 @@ import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import org.w3c.dom.ls.LSException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LessonFrame extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     static Lesson lesson;
 
@@ -67,6 +75,13 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     LinearLayout loadingLayout;
 
     Context context;
+
+    static int[] wordImage;
+
+    static String[] wordAudioString;
+
+    static Map<Integer, byte[]> wordAudioByte = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +115,62 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
         totalPageNo = lesson.getWordFront().length * 3 + 1 + lesson.getSentenceFront().length + 2;
 
-        replaceFragment(lessonWord);
+        readyForImageAndAudio();
+    }
+
+    // DB에서 레슨 오디오랑 이미지 불러오기
+    private void readyForImageAndAudio() {
+
+        onLoadingLayout(true);
+
+        int lessonWordLength = lesson.getWordFront().length;
+
+        String lessonId = lesson.getLessonId();
+
+        String folder = "lesson/" + lessonId.toLowerCase();
+
+        wordImage = new int[lessonWordLength];
+
+
+        for(int i=0; i<lessonWordLength; i++) {
+
+            String stringWordImage = lessonId.toLowerCase() + "_word_" + i;
+
+            int intWordImage = getResources().getIdentifier(stringWordImage, "drawable", getPackageName());
+
+            wordImage[i] = intWordImage;
+        }
+
+
+        wordAudioString = new String[lessonWordLength];
+
+        for(int i=0; i<lessonWordLength; i++) {
+
+            final Integer index = i;
+
+            wordAudioString[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
+
+            StorageReference storageRef = storage.getReference().child(folder).child(wordAudioString[i]);
+
+            final long ONE_MEGABYTE = 1024 * 1024;
+
+            storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+
+                    System.out.println("오디오를 로드했습니다.");
+
+                    wordAudioByte.put(index, bytes);
+
+                    if(index == 0) {
+
+                        onLoadingLayout(false);
+
+                        replaceFragment(lessonWord);
+                    }
+                }
+            });
+        }
     }
 
 

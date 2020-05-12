@@ -11,14 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.ConfirmQuit;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.Number;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberAge;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberDate;
@@ -59,7 +60,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
     Random random = new Random();
 
-    PlayMediaPlayer playMediaPlayer = new PlayMediaPlayer();
+    MediaPlayerManager mediaPlayerManager;
 
     Map<Integer, byte[]> audiosNumber = new HashMap<>();
     boolean isFirstAudio = true;
@@ -71,6 +72,8 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_number_frame);
+
+        mediaPlayerManager = MediaPlayerManager.getInstance();
 
         btnClose = findViewById(R.id.btnClose);
         progressBar = findViewById(R.id.progressBar);
@@ -250,15 +253,24 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnAudio :
                 if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
-                    playMediaPlayer.playAudioInByte(audiosNumber.get(index));
+
+                    mediaPlayerManager.playMediaPlayer(false);
                 }
                 break;
 
             case R.id.btnNext :
                 if(numberBack.getVisibility()==View.INVISIBLE) {
-                    if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
-                        playMediaPlayer.playAudioInByte(audiosNumber.get(index));
+                    if(mediaPlayerManager != null && audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
+
+                        mediaPlayerManager.setMediaPlayerByte(audiosNumber.get(index));
+
+                        mediaPlayerManager.playMediaPlayer(false);
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), getString(R.string.AUDIO_LOADING), Toast.LENGTH_LONG).show();
                     }
+
                     btnAudio.setVisibility(View.VISIBLE);
                     numberBack.setVisibility(View.VISIBLE);
                     btnNext.setText(getString(R.string.NEXT));

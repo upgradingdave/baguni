@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.collection;
 
 import android.content.Context;
-import android.media.SoundPool;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayMediaPlayer;
 
 import java.util.List;
 

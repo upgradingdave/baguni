@@ -108,12 +108,12 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
                     // 왼쪽으로 스와이프 할 때
                     if(deltaX > 0) {
 
-                        lessonWord.lessonCount++;
+                        lessonSentence.lessonCount++;
                         LessonFrame.progressCount++;
 
                         // 마지막 문장이면 LessonDialog 로 넘어감
-                        if(lessonWord.lessonCount == LessonFrame.lesson.getSentenceFront().length) {
-                            lessonWord.lessonCount = 0;
+                        if(lessonSentence.lessonCount == LessonFrame.lesson.getSentenceFront().length) {
+                            lessonSentence.lessonCount = 0;
                             ((LessonFrame)context).replaceFragment(LessonDialog.newInstance());
 
                             // 마지막 문장 아니면 다음 문장 표시
@@ -124,8 +124,8 @@ public class LessonSwipeListener extends GestureDetector.SimpleOnGestureListener
                         // 오른쪽으로 스와이프 할 떄
                     } else {
                         // 맨 처음 문장이 아니면 이전 문장을 표시
-                        if(lessonWord.lessonCount != 0) {
-                            lessonWord.lessonCount--;
+                        if(lessonSentence.lessonCount != 0) {
+                            lessonSentence.lessonCount--;
                             LessonFrame.progressCount--;
 
                             swipeAnimationStart(stringSentence, stringRight);

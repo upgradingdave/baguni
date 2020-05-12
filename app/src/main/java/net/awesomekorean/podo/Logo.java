@@ -23,6 +23,8 @@ public class Logo extends AppCompatActivity {
 
     private FirebaseAnalytics firebaseAnalytics;
 
+    private FirebaseCrashlytics crashlytics;
+
     private AdsManager adsManager;
 
     @Override
@@ -31,11 +33,12 @@ public class Logo extends AppCompatActivity {
         setContentView(R.layout.activity_logo);
 
         // Crashlytics 초기화
-        FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
-        crashlytics.setCrashlyticsCollectionEnabled(true);
+        crashlytics = FirebaseCrashlytics.getInstance();
+        crashlytics.setCrashlyticsCollectionEnabled(false);
 
         // 애널리스트 초기화
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        firebaseAnalytics.setAnalyticsCollectionEnabled(false);
 
         // 애드몹 초기화
         MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
@@ -71,7 +74,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 2);
 
     }
 

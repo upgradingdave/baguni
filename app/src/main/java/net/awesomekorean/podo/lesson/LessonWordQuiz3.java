@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.awesomekorean.podo.MediaPlayerManager;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.R;
@@ -80,7 +78,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
         lesson = LessonFrame.lesson;
 
-        wordImage = LessonWord.wordImage;
+        wordImage = activity.wordImage;
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
@@ -198,7 +196,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
             btnSelector = new Button(activity);
 
-            int gap10 = DpToPx.getDpToPx(getResources(), 10);
+            int gap10 = DpToPx.getDpToPx(activity.getResources(), 10);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.rightMargin = gap10;
@@ -214,7 +212,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         answer.setText(lesson.getWordBack()[quizCount]);
         answerImage.setImageResource(wordImage[quizCount]);
 
-        mediaPlayerManager.setMediaPlayerByte(LessonWord.audiosWord.get(quizCount));
+        mediaPlayerManager.setMediaPlayerByte(activity.wordAudioByte.get(quizCount));
         mediaPlayerManager.playMediaPlayer(false);
     }
 

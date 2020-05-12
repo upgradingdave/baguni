@@ -337,18 +337,23 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     protected void onPause() {
         super.onPause();
         crashlytics.log("메인액티비티 Pause!!");
+        System.out.println("메인액티비티 Pause!!");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         crashlytics.log("메인액티비티 Stop!!");
+        System.out.println("메인액티비티 Stop!!");
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         crashlytics.log("메인액티비티 Destroy!!");
+        System.out.println("메인액티비티 Destroy!!");
+
     }
 }
 

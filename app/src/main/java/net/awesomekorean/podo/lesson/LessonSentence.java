@@ -31,7 +31,6 @@ import net.awesomekorean.podo.lesson.lessons.Lesson;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.awesomekorean.podo.lesson.LessonWord.lessonCount;
 
 public class LessonSentence extends Fragment implements Button.OnClickListener, View.OnTouchListener {
 
@@ -53,7 +52,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
     static String[] sentenceBack;
     static String[] sentenceExplain;
     String[] sentenceAudio;
-    static Map<Integer, byte[]> audiosSentence;
+    static Map<Integer, byte[]> sentenceAudioByte;
 
     LinearLayout collectResult;
 
@@ -75,12 +74,16 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
     private LessonFrame activity;
 
+    static int lessonCount;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.lesson_sentence, container, false);
+
+        lessonCount = 0;
 
         LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
 
@@ -130,6 +133,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         if(activity != null) {
             activity.onLoadingLayout(true);
         }
+
         int sentenceLength = lesson.getSentenceFront().length;
         sentenceAudio = new String[sentenceLength];
 
@@ -139,7 +143,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
         sentenceExplain = lesson.getSentenceExplain();
 
-        audiosSentence = new HashMap<>();
+        sentenceAudioByte = new HashMap<>();
         for(int i=0; i<sentenceLength; i++) {
             final Integer audioIndexSentence = i;
             sentenceAudio[i] = lesson.getLessonId().toLowerCase() + "_sentence_" + i + ".mp3";
@@ -149,7 +153,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
                 @Override
                 public void onSuccess(byte[] bytes) {
                     System.out.println("오디오를 로드했습니다.");
-                    audiosSentence.put(audioIndexSentence, bytes);
+                    sentenceAudioByte.put(audioIndexSentence, bytes);
                     if(audioIndexSentence == 0) {
                         displaySentence();
                         isFirstAudio = false;
@@ -168,7 +172,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
-        mediaPlayerManager.setMediaPlayerByte(audiosSentence.get(lessonCount));
+        mediaPlayerManager.setMediaPlayerByte(sentenceAudioByte.get(lessonCount));
         mediaPlayerManager.playMediaPlayer(false);
     }
 

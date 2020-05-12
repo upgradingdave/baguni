@@ -20,10 +20,8 @@ import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayMediaPlayer;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.LessonAdapterChild;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import static android.view.View.GONE;

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +24,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.ConfirmQuit;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayMediaPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     ImageView btnClose;
     ScrollView scrollView;
 
-    PlayMediaPlayer playMediaPlayer =  new PlayMediaPlayer();
+    MediaPlayerManager mediaPlayerManager;
 
     Context context;
 
@@ -100,6 +101,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         setContentView(R.layout.activity_lesson_hangul);
 
         context = getApplicationContext();
+
+        mediaPlayerManager = MediaPlayerManager.getInstance();
 
         loadingLayout = findViewById(R.id.loadingLayout);
         progressBar = findViewById(R.id.progressBar);
@@ -277,9 +280,15 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         progressTextView.setText(count + "/" + hangulLength);
 
-        if(audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
+        if(mediaPlayerManager != null && audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
 
-            playMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
+            mediaPlayerManager.setMediaPlayerByte(audiosHangul.get(currentHangul));
+
+            mediaPlayerManager.playMediaPlayer(false);
+
+        } else {
+
+            Toast.makeText(getApplicationContext(), getString(R.string.AUDIO_LOADING), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -350,7 +359,10 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
         switch (view.getId()) {
 
             case R.id.btnAudio :
-                playMediaPlayer.playAudioInByte(audiosHangul.get(currentHangul));
+                if(mediaPlayerManager != null) {
+
+                    mediaPlayerManager.playMediaPlayer(false);
+                }
                 break;
 
             case R.id.btnWriting :

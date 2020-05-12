@@ -122,7 +122,7 @@ public class MediaPlayerManager {
 
         try {
             mediaPlayer.setDataSource(audioUrl);
-            mediaPlayer.prepare();
+            mediaPlayer.prepareAsync();
             isSet = true;
             isPlaying = false;
 

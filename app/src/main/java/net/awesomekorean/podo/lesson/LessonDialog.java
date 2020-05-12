@@ -72,8 +72,6 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
     static ToggleButton toggleButton;
 
-    Lesson lesson = LessonFrame.lesson;
-
     private LessonFrame activity;
 
 
@@ -118,14 +116,14 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         if(activity != null) {
             activity.onLoadingLayout(true);
         }
-        dialogLength = lesson.getDialog().length;
+        dialogLength = activity.lesson.getDialog().length;
         String[] dialogAudio = new String[dialogLength];
-        int[] peopleImage = lesson.getPeopleImage(); // 사람이미지 2개
-        String lessonId = lesson.getLessonId();
+        int[] peopleImage = activity.lesson.getPeopleImage(); // 사람이미지 2개
+        String lessonId = activity.lesson.getLessonId();
         String folder = "lesson/" + lessonId.toLowerCase();
 
         String packageName = activity.getPackageName();
-        String[] dialog = lesson.getDialog();
+        String[] dialog = activity.lesson.getDialog();
 
 
         // 저장소에서 대화오디오 가져오기
@@ -237,7 +235,7 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
 
                 // 완료리스트에 업데이트
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(activity);
-                userInformation.updateCompleteList(activity, lesson.getLessonId(), 100, false);
+                userInformation.updateCompleteList(activity, activity.lesson.getLessonId(), 100, false);
 
                 Intent intent = new Intent(activity, LessonFinish.class);
                 startActivity(intent);

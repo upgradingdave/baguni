@@ -14,7 +14,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.PlayMediaPlayer;
 
 public class CollectionStudy extends AppCompatActivity implements View.OnClickListener {
 
