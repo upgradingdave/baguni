@@ -77,37 +77,38 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutHangul"
-        android:elevation="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnsAssembly"
-        app:layout_constraintBottom_toTopOf="@id/btns"
         android:background="@drawable/bg_white_30_stroke_grey"
-        android:layout_width="0dp"
-        android:layout_height="0dp">
+        app:layout_constraintBottom_toTopOf="@id/btns"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnsAssembly"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/btnAudio"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/audio_big"
-            android:layout_margin="15dp"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="15dp"
+            android:src="@drawable/audio_big"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/assemblyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumgothic_regular"
             android:gravity="center"
             android:text="ㄱ"
             android:textSize="70dp"
             android:textStyle="bold"
-            android:fontFamily="@font/nanumgothic_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -317,5 +318,14 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/layoutHangul"
+        app:layout_constraintStart_toStartOf="@id/layoutHangul"
+        android:layout_margin="20dp"
+        android:indeterminateTint="@color/PURPLE"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

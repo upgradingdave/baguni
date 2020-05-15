@@ -9,11 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -49,6 +54,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     private String url;
 
+    private ProgressBar loading;
 
     TextView textViewIntro;
     TextView assemblyTextView;
@@ -135,7 +141,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         assemblyTextView = findViewById(R.id.assemblyTextView);
         btnClose = findViewById(R.id.btnClose);
         btnBack = findViewById(R.id.btnBack);
-
         btnIntro = findViewById(R.id.btnIntro);
         btnAudio = findViewById(R.id.btnAudio);
         cvH = findViewById(R.id.cvH);
@@ -144,7 +149,8 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         cvcV = findViewById(R.id.cvcV);
         btnConsonant = findViewById(R.id.btnConsonant);
         btnVowel = findViewById(R.id.btnVowel);
-        btnBatchim =  findViewById(R.id.btnBatchim);
+        btnBatchim = findViewById(R.id.btnBatchim);
+        loading = findViewById(R.id.loading);
         btnAudio.setOnClickListener(this);
         cvH.setOnClickListener(this);
         cvV.setOnClickListener(this);
@@ -195,6 +201,8 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     public void playAudioAssy(String audioFile) {
 
+        loading.setVisibility(VISIBLE);
+
         if(audioFile != null) {
 
             if (mediaPlayerManager != null) {
@@ -203,8 +211,15 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onSuccess(Uri uri) {
                         url = uri.toString();
-                        mediaPlayerManager.setMediaPlayerUrl(url);
-                        mediaPlayerManager.playMediaPlayer(false);
+                        mediaPlayerManager.setMediaPlayerUrl(false, url);
+                        loading.setVisibility(GONE);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.FAIL_LOAD_AUDIO), Toast.LENGTH_LONG).show();
+                        loading.setVisibility(GONE);
                     }
                 });
             }
@@ -463,6 +478,17 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         batchimBoxLayout2.setVisibility(batchimBoxLayout);
         batchimBoxLayout3.setVisibility(batchimBoxLayout);
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(mediaPlayerManager != null) {
+            mediaPlayerManager.releaseMediaPlayer();
+        }
+    }
+
 
     @Override
     public void onBackPressed() {

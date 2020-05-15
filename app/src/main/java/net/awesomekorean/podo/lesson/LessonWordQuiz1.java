@@ -147,8 +147,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
         btnText3.setText(lesson.getWordBack()[answerArray[2]]);
         btnText4.setText(lesson.getWordBack()[answerArray[3]]);
 
-        mediaPlayerManager.setMediaPlayerByte(activity.wordAudioByte.get(quizNoNow));
-        mediaPlayerManager.playMediaPlayer(false);
+        mediaPlayerManager.setMediaPlayerByte(false, activity.wordAudioByte.get(quizNoNow));
     }
 
 

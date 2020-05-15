@@ -282,9 +282,7 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
         if(mediaPlayerManager != null && audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
 
-            mediaPlayerManager.setMediaPlayerByte(audiosHangul.get(currentHangul));
-
-            mediaPlayerManager.playMediaPlayer(false);
+            mediaPlayerManager.setMediaPlayerByte(false, audiosHangul.get(currentHangul));
 
         } else {
 
@@ -428,5 +426,15 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     @Override
     public void onBackPressed() {
         openConfirmQuit();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(mediaPlayerManager != null) {
+            mediaPlayerManager.releaseMediaPlayer();
+        }
     }
 }

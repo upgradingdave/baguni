@@ -42,7 +42,6 @@
             android:id="@+id/readingTitle"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:text="읽기 타이틀"
             android:textSize="20dp"
             android:textColor="@color/BLACK"
             android:textStyle="bold"
@@ -64,16 +63,6 @@
                 android:background="@android:color/transparent"
                 android:gravity="left|top"
                 android:paddingTop="20dp"
-                android:text="2018 러시아 월드컵 '점쟁이'의 능력이 보통이 아니다.
-    월드컵 개막 이후 세 경기 결과를 모두 맞혔다.
-    이 고양이는 러시아 상트페테르부르크 에르미타주 박물관에 사는 '아킬레스'이다.
-    경기 결과를 맞히는 방식은 경기 전에 양 팀의 국기를 꽂은 먹이를 고양이에게 선택하게 하는 것이다.
-    러시아와 사우디아라비아의 개막전에서 '아킬레스'는 러시아 국기가 꽂힌 먹이를 먹었고
-    러시아는 사우디에 5:0으로 이겼다.
-    16일 이란과 모로코의 경기 전에는 이란 국기의 먹이를 먹었고,
-    20일 러시아와 이집트의 경기 전에는 러시아 국기의 먹이를 먹어서 이란과 러시아의 승리를 맞혔다.
-    에르미타주 박물관에서는 앞으로 상트페테르부르크에서 열리는 경기에만 '아킬레스'의 능력을 사용하기로 했다.
-    '아킬레스'는 22일 상트페테르부르크에서 열리는 브라질과 코스타리카의 경기 전에 네 번째 예언을 할 예정이다."
                 android:textSize="20dp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:textColor="@color/BLACK"/>
@@ -156,24 +145,44 @@
             android:text="@string/NORMAL"
             android:textColor="@color/PURPLE" />
 
-        <ImageView
-            android:id="@+id/btnPlay"
-            android:visibility="visible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/play" />
-
-        <ImageView
-            android:id="@+id/btnPause"
-            android:visibility="gone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/pause" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/btnPlay"
+                android:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play" />
+            <ProgressBar
+                android:id="@+id/loading"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:indeterminateTint="@color/PURPLE"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
 
+            <ImageView
+                android:id="@+id/btnPause"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pause" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/btnSlow"
@@ -186,8 +195,6 @@
             android:paddingBottom="5dp"
             android:text="@string/SPEED"
             android:textColor="@color/PURPLE" />
-
-
     </LinearLayout>
 
     <Button
@@ -237,5 +244,4 @@
                 />
         </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

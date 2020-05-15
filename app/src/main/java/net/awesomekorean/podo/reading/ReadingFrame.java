@@ -15,14 +15,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
@@ -64,10 +67,10 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     TextView btnNormal;
     ImageView btnPlay;
     ImageView btnPause;
+    ProgressBar loading;
     TextView btnSlow;
     Button btnFinish;
 
-    int playingTime; // 오디오 길이
     String unitId;
 
     Context context;
@@ -104,6 +107,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         btnNormal = findViewById(R.id.btnNormal);
         btnPlay = findViewById(R.id.btnPlay);
         btnPause = findViewById(R.id.btnPause);
+        loading = findViewById(R.id.loading);
         btnSlow = findViewById(R.id.btnSlow);
         btnFinish = findViewById(R.id.btnFinish);
         btnBack.setOnClickListener(this);
@@ -114,6 +118,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         btnSlow.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
 
+        btnSetting(View.VISIBLE, View.GONE, View.GONE);
+
         context = getApplicationContext();
 
         // 시크바 이벤트
@@ -123,10 +129,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                 readingProgress = Math.max(progress * 100 / seekBar.getMax(), readingProgress);
 
-                System.out.println("진행률 : " + readingProgress);
-
                 if(mediaPlayerManager != null && seekBar.getMax()==progress) {
-                    setVisibility(View.VISIBLE, View.GONE);
+                    btnSetting(View.VISIBLE, View.GONE, View.GONE);
                     mediaPlayerManager.pauseMediaPlayer();
                     mediaPlayerManager.resetPlayPosition();
                 }
@@ -144,10 +148,12 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 if(mediaPlayerManager != null) {
                     mediaPlayerManager.seek(seekBar.getProgress());
                     mediaPlayerManager.playMediaPlayer(true);
-                    setVisibility(View.GONE, View.VISIBLE);
+                    btnSetting(View.GONE, View.VISIBLE, View.GONE);
                 }
             }
         });
+
+
 
         reading = (Reading) getIntent().getSerializableExtra(getResources().getString(R.string.READING));
 
@@ -203,10 +209,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                         mediaPlayerManager.pauseMediaPlayer();
 
-                        mediaPlayerManager.setMediaPlayerByte(audiosWord.get(popUpIndex));
+                        mediaPlayerManager.setMediaPlayerByte(false, audiosWord.get(popUpIndex));
 
-                        mediaPlayerManager.playMediaPlayer(false);
-                        setVisibility(View.VISIBLE, View.GONE);
+                        btnSetting(View.VISIBLE, View.GONE, View.GONE);
 
                         // 프로그레스바 잠그기
                         seekBar.setEnabled(false);
@@ -244,7 +249,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 if(mediaPlayerManager != null) {
                     mediaPlayerManager.stopMediaPlayer();
                 }
-                setVisibility(View.VISIBLE, View.GONE);
+                btnSetting(View.VISIBLE, View.GONE, View.GONE);
                 seekBar.setProgress(0);
                 finish();
                 break;
@@ -269,34 +274,43 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnPlay:
+
+                btnSetting(View.INVISIBLE, View.GONE, View.VISIBLE);
+
                 // 최초 플레이 or 다시 플레이 시
                 if (mediaPlayerManager == null || url == null) {
                     StorageReference storageRef = storage.getReference().child("reading/"+unitId).child(unitId+".mp3");
                     storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            btnSetting(View.GONE, View.VISIBLE, View.GONE);
                             mediaPlayerManager = MediaPlayerManager.getInstance(seekBar);
                             url = uri.toString();
                             mediaPlayerManager.resetPlayPosition();
-                            mediaPlayerManager.setMediaPlayerUrl(url);
-                            playingTime = mediaPlayerManager.getDuration(); // 노래 재생시간
-                            seekBar.setMax(playingTime);
+                            mediaPlayerManager.setMediaPlayerUrl(true, url);
                             if(slowBtnClicked) {
                                 mediaPlayerManager.setSpeed(0.8f);
                             }
-                            mediaPlayerManager.playMediaPlayer(true);
-                            setVisibility(View.GONE, View.VISIBLE);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            btnSetting(View.VISIBLE, View.GONE, View.GONE);
+                            Toast.makeText(getApplicationContext(), getString(R.string.FAIL_LOAD_AUDIO), Toast.LENGTH_LONG).show();
                         }
                     });
 
+
                     // 뭠췄다가 플레이 시
                 } else {
-                    mediaPlayerManager.setMediaPlayerUrl(url);
+                    btnSetting(View.INVISIBLE, View.GONE, View.VISIBLE);
+
+                    mediaPlayerManager.setMediaPlayerUrl(true, url);
                     if(slowBtnClicked) {
                         mediaPlayerManager.setSpeed(0.8f);
                     }
-                    mediaPlayerManager.playMediaPlayer(true);
-                    setVisibility(View.GONE, View.VISIBLE);
+
+                    btnSetting(View.GONE, View.VISIBLE, View.GONE);
                 }
 
                 seekBar.setEnabled(true);
@@ -305,7 +319,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnPause :
                 mediaPlayerManager.pauseMediaPlayer();
-                setVisibility(View.VISIBLE, View.GONE);
+                btnSetting(View.VISIBLE, View.GONE, View.GONE);
                 break;
 
             case R.id.btnNormal :
@@ -328,12 +342,21 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnFinish :
 
-                setVisibility(View.VISIBLE, View.GONE);
+                btnSetting(View.VISIBLE, View.GONE, View.GONE);
                 seekBar.setProgress(0);
 
                 openConfirmQuit();
                 break;
         }
+    }
+
+    private void btnSetting(int setBtnPlay, int setBtnPause, int setProgressBar) {
+
+        btnPlay.setVisibility(setBtnPlay);
+
+        btnPause.setVisibility(setBtnPause);
+
+        loading.setVisibility(setProgressBar);
     }
 
 
@@ -375,8 +398,12 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     }
 
 
-    public void setVisibility(int a, int b) {
-        btnPlay.setVisibility(a);
-        btnPause.setVisibility(b);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(mediaPlayerManager != null) {
+            mediaPlayerManager.releaseMediaPlayer();
+        }
     }
 }

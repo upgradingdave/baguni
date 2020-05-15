@@ -172,8 +172,7 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
-        mediaPlayerManager.setMediaPlayerByte(sentenceAudioByte.get(lessonCount));
-        mediaPlayerManager.playMediaPlayer(false);
+        mediaPlayerManager.setMediaPlayerByte(false, sentenceAudioByte.get(lessonCount));
     }
 
 

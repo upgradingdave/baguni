@@ -154,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             }
             userImage = user.getPhotoUrl();
         }
+
+        SharedPreferencesInfo.setUserEmail(getApplicationContext(), userEmail);
+
         crashlytics.log("setting CustomKey");
         crashlytics.setCustomKey("userEmail", userEmail);
         crashlytics.setCustomKey("userName", userName);

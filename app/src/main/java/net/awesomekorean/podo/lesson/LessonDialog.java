@@ -105,6 +105,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_dialog", bundle);
 
+        setPlayBtn(View.VISIBLE, View.GONE);
+
         readyForLesson();
 
         LessonFrame.setNavigationColor(activity, LessonFrame.navigationDialog, R.drawable.bg_purple_10);
@@ -186,14 +188,11 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
             @Override
             public void onItemClick(View v, int pos) {
 
-                if(toggleButton != null) {
-                    setToggleBtnUnChecked();
-                }
+                setToggleBtnUnChecked();
 
                 toggleButton = (ToggleButton) v;
                 mediaPlayerManager.stopMediaPlayer();
-                mediaPlayerManager.setMediaPlayerByte(audiosDialog.get(pos));
-                mediaPlayerManager.playOneDialog();
+                mediaPlayerManager.setMediaPlayerByte(true, audiosDialog.get(pos));
                 setPlayBtn(View.VISIBLE, View.GONE);
             }
         });
@@ -202,7 +201,9 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
     }
 
     public static void setToggleBtnUnChecked() {
-        toggleButton.setChecked(false);
+        if(toggleButton != null) {
+            toggleButton.setChecked(false);
+        }
     }
 
 
@@ -218,20 +219,16 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         switch (view.getId()) {
 
             case R.id.btnPlay :
-                if(toggleButton != null) {
-                    setToggleBtnUnChecked();
-                }
+                setToggleBtnUnChecked();
                 setPlayBtn(View.GONE, View.VISIBLE);
                 mediaPlayerManager.setAndPlayAllDialog(audiosDialog);
                 break;
 
             case R.id.btnPause :
-                mediaPlayerManager.stopMediaPlayer();
                 setPlayBtn(View.VISIBLE, View.GONE);
                 break;
 
             case R.id.btnFinish :
-                mediaPlayerManager.stopMediaPlayer();
 
                 // 완료리스트에 업데이트
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(activity);
@@ -251,5 +248,11 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
         if(context instanceof LessonFrame) {
             activity = (LessonFrame) context;
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mediaPlayerManager.stopMediaPlayer();
     }
 }

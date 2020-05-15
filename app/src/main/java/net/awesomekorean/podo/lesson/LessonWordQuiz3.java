@@ -212,8 +212,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         answer.setText(lesson.getWordBack()[quizCount]);
         answerImage.setImageResource(wordImage[quizCount]);
 
-        mediaPlayerManager.setMediaPlayerByte(activity.wordAudioByte.get(quizCount));
-        mediaPlayerManager.playMediaPlayer(false);
+        mediaPlayerManager.setMediaPlayerByte(false, activity.wordAudioByte.get(quizCount));
     }
 
 

@@ -120,8 +120,8 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         // outOfMemoryError 방지용
         try {
             holder.readingImage.setImageResource(items.getReadingImage());
-        } catch (Exception e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
+        } catch (OutOfMemoryError e) {
+            FirebaseCrashlytics.getInstance().log("OutOfMemoryError");
         }
 
         holder.readingId.setText(items.getReadingId().substring(2));

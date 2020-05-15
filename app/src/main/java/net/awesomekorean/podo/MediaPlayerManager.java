@@ -8,7 +8,6 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import net.awesomekorean.podo.lesson.LessonDialog;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,7 +74,6 @@ public class MediaPlayerManager {
                 try {
                     currentPosition = mediaPlayer.getCurrentPosition();
                 } catch (IllegalStateException e) {
-                    System.out.println(e);
                     mediaPlayer.reset();
                     currentPosition = mediaPlayer.getCurrentPosition();
                 }
@@ -94,6 +92,14 @@ public class MediaPlayerManager {
 
     private void setSeekBar(SeekBar seekBar) {
         this.seekBar = seekBar;
+    }
+
+
+    // 미디어플레이어 해제
+    public void releaseMediaPlayer() {
+        if(mediaPlayer != null) {
+            mediaPlayer.reset();
+        }
     }
 
 
@@ -116,12 +122,21 @@ public class MediaPlayerManager {
 
 
     // 읽기 본문, 한글 조합 재생
-    public void setMediaPlayerUrl(String audioUrl) {
+    public void setMediaPlayerUrl(final boolean isReading, String audioUrl) {
 
         initialize();
 
         try {
             mediaPlayer.setDataSource(audioUrl);
+
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+
+                    playMediaPlayer(isReading);
+                }
+            });
+
             mediaPlayer.prepareAsync();
             isSet = true;
             isPlaying = false;
@@ -133,14 +148,13 @@ public class MediaPlayerManager {
             if(audioUrl == null) {
                 audioUrl = "null";
             }
-            FirebaseCrashlytics.getInstance().log("illegalStateException : " + e);
             FirebaseCrashlytics.getInstance().log("attempting to play : " + audioUrl);
         }
     }
 
 
     // 읽기 단어, 레슨 단어, 한글 레슨 재생
-    public void setMediaPlayerByte(byte[] bytes) {
+    public void setMediaPlayerByte(final boolean isOneDialog, byte[] bytes) {
 
         try {
             File tempMp3 = File.createTempFile("audio", "mp3");
@@ -156,7 +170,20 @@ public class MediaPlayerManager {
 
             try {
                 mediaPlayer.setDataSource(fis.getFD());
-                mediaPlayer.prepare();
+
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+
+                        if(isOneDialog) {
+                            playOneDialog();
+                        } else {
+                            playMediaPlayer(false);
+                        }
+                    }
+                });
+
+                mediaPlayer.prepareAsync();
                 isSet = true;
                 isPlaying = false;
 
@@ -207,9 +234,7 @@ public class MediaPlayerManager {
     // 레슨 dialog 전체 플레이
     public void setAndPlayAllDialog(final Map<Integer, byte[]> audiosDialog) {
 
-        setMediaPlayerByte(audiosDialog.get(dialogIndex));
-
-        playMediaPlayer(false);
+        setMediaPlayerByte(false, audiosDialog.get(dialogIndex));
 
         if(mediaPlayer != null) {
 
@@ -251,6 +276,7 @@ public class MediaPlayerManager {
 
                 if(seekBar != null) {
                     thread = new MediaPlayerThread(seekBar);
+                    seekBar.setMax(getDuration());
 
                 } else {
                     thread = new MediaPlayerThread();
@@ -270,7 +296,7 @@ public class MediaPlayerManager {
             thread.terminate();
         }
 
-        if(mediaPlayer != null && mediaPlayer.isPlaying()) {
+        if(mediaPlayer != null) {
 
             // 미디어플레이어 완료이벤트 리셋
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -305,7 +331,13 @@ public class MediaPlayerManager {
         playingPosition = position;
 
         if(seekBar != null) {
-            seekBar.setProgress(playingPosition);
+
+            if(position == seekBar.getMax()) {
+                seekBar.setProgress(0);
+
+            } else {
+                seekBar.setProgress(playingPosition);
+            }
         }
 
         if(mediaPlayer != null) {

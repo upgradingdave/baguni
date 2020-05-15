@@ -243,7 +243,12 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
         holder.lessonSubTitle.setText(lessonItem.getLessonSubTitle());
 
-        holder.lessonImage.setImageResource(lessonItem.getLessonImage());
+        try {
+            holder.lessonImage.setImageResource(lessonItem.getLessonImage());
+
+        }catch (OutOfMemoryError e) {
+            FirebaseCrashlytics.getInstance().log("OutOfMemoryError");
+        }
 
         if(lessonItem.getIsLock()) {
 

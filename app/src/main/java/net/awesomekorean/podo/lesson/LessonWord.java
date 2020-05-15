@@ -165,9 +165,7 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
                 mediaPlayerManager.stopMediaPlayer();
             }
 
-            mediaPlayerManager.setMediaPlayerByte(LessonFrame.wordAudioByte.get(lessonCount));
-
-            mediaPlayerManager.playMediaPlayer(false);
+            mediaPlayerManager.setMediaPlayerByte(false, LessonFrame.wordAudioByte.get(lessonCount));
         }
     }
 

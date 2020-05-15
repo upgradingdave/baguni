@@ -243,7 +243,6 @@ public class MainLesson extends Fragment{
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         if(adapter != null) {
-            System.out.println("하이");
             setUserPoint();
             setCompletedLessons();
             setUnlockedLessons();

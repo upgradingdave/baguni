@@ -262,9 +262,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
                 if(numberBack.getVisibility()==View.INVISIBLE) {
                     if(mediaPlayerManager != null && audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
 
-                        mediaPlayerManager.setMediaPlayerByte(audiosNumber.get(index));
-
-                        mediaPlayerManager.playMediaPlayer(false);
+                        mediaPlayerManager.setMediaPlayerByte(false, audiosNumber.get(index));
 
                     } else {
 
@@ -301,5 +299,14 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         openConfirmQuit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(mediaPlayerManager != null) {
+            mediaPlayerManager.releaseMediaPlayer();
+        }
     }
 }

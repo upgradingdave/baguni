@@ -119,7 +119,9 @@ public class UserInformation {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection(context.getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(context.getString(R.string.DB_INFORMATION)).document(context.getString(R.string.DB_INFORMATION))
+        String userEmail = SharedPreferencesInfo.getUserEmail(context);
+
+        db.collection(context.getString(R.string.DB_USERS)).document(userEmail).collection(context.getString(R.string.DB_INFORMATION)).document(context.getString(R.string.DB_INFORMATION))
                 .set(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

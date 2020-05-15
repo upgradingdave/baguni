@@ -285,5 +285,14 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     public void onBackPressed() {
         openConfirmQuit();
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+        mediaPlayerManager.releaseMediaPlayer();
+    }
 }
 

@@ -29,6 +29,22 @@ public class SharedPreferencesInfo {
         return userInformation;
     }
 
+    // 엡에서 유저 이메일 불러오기
+    public static String getUserEmail(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("userEmail", MODE_PRIVATE);
+        String stringFromSP = sp.getString("userEmail", "");
+        return stringFromSP;
+    }
+
+    // 엡에서 유저 이메일 저장하기
+    public static void setUserEmail(Context context, String userEmail) {
+        SharedPreferences sp = context.getSharedPreferences("userEmail", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("userEmail", userEmail);
+        editor.commit();
+    }
+
+
     // 마지막 동기화 날짜(UNIX 타임스탬프) 불러오기
     public static Long getDateLastSync(Context context) {
         SharedPreferences sp = context.getSharedPreferences("date", MODE_PRIVATE);
