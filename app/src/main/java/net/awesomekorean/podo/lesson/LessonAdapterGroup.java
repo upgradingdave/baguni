@@ -169,6 +169,20 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
             holder.lessonProgress.setProgress(groupProcess[groupPosition]);
 
             holder.lessonProgressPercent.setText(groupProcess[groupPosition] + "%");
+
+
+            if(groupPosition == groupTitle.length - 1) {
+
+                holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.GREY_DARK));
+
+                holder.lessonProgress.setVisibility(View.GONE);
+
+                holder.lessonProgressPercent.setVisibility(View.GONE);
+
+                holder.lessonComplete.setVisibility(View.GONE);
+
+                holder.lessonArrow.setVisibility(View.GONE);
+            }
         }
 
         return view;

@@ -106,9 +106,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_word", bundle);
 
-
-        FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
-
         LessonSwipeListener gestureListener = new LessonSwipeListener();
 
         gestureListener.setActivity(activity);
@@ -212,5 +209,9 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         if(context instanceof LessonFrame) {
             activity = (LessonFrame) context;
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
     }
 }

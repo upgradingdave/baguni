@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -49,6 +50,7 @@ import java.util.Map;
 public class LessonFrame extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
 
     static Lesson lesson;
 
@@ -82,6 +84,8 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
     static Map<Integer, byte[]> wordAudioByte = new HashMap<>();
 
+    LessonSwipeListener gestureListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +116,8 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         });
 
         lesson = (Lesson) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+
+        crashlytics.log("lessonId : " + lesson.getLessonId());
 
         totalPageNo = lesson.getWordFront().length * 3 + 1 + lesson.getSentenceFront().length + 2;
 
@@ -177,13 +183,31 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //Pass activity on touch event to the gesture detector
+        if(gestureDetectorCompat == null) {
+            if (context == null) {
+                crashlytics.log("context is null");
+            } else {
+                crashlytics.log("context : " + context);
+            }
+
+            if (gestureListener == null) {
+                crashlytics.log("gestureListener is null");
+            } else {
+                crashlytics.log("gestureListener : " + gestureListener);
+            }
+
+            crashlytics.log("gestureDetectorCompat is null");
+
+            gestureDetectorCompat.onTouchEvent(event);
+        }
+
         gestureDetectorCompat.onTouchEvent(event);
         return true;
     }
 
 
     public void replaceFragment(Fragment fragment) {
-        LessonSwipeListener gestureListener = new LessonSwipeListener();
+        gestureListener = new LessonSwipeListener();
         gestureListener.setActivity(this);
         gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
 
@@ -192,6 +216,8 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         ft.replace(R.id.lessonFrame, fragment);
         ft.commit();
     }
+
+
 
 
     // 프로그레스바 및 카운트 표시, true:다음, false:이전
@@ -290,9 +316,21 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        crashlytics.log("LessonFrame Destroy!!");
         MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
         mediaPlayerManager.releaseMediaPlayer();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        crashlytics.log("LessonFrame Pause!!");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        crashlytics.log("LessonFrame Stop!!");
     }
 }
 

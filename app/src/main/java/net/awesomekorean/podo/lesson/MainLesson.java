@@ -45,6 +45,11 @@ import net.awesomekorean.podo.lesson.lessons.Lesson00;
 import net.awesomekorean.podo.lesson.lessons.Lesson19;
 import net.awesomekorean.podo.lesson.lessons.Lesson20;
 import net.awesomekorean.podo.lesson.lessons.Lesson21;
+import net.awesomekorean.podo.lesson.lessons.Lesson22;
+import net.awesomekorean.podo.lesson.lessons.Lesson23;
+import net.awesomekorean.podo.lesson.lessons.Lesson24;
+import net.awesomekorean.podo.lesson.lessons.Lesson25;
+import net.awesomekorean.podo.lesson.lessons.Lesson26;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessons.QuizSentence00;
@@ -56,6 +61,7 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson06;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson07;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson08;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson09;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
@@ -82,12 +88,12 @@ public class MainLesson extends Fragment{
     String[] groupTitle = {
             "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Negative",
             "Range", "Listing/Contrast", "Time", "Ability", "Hope",
-            "Requests"
+            "Requests", "Supposition", "Experience", "Guess"
     };
 
     String[] groupSubTitle = {
             "Lesson 0", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5", "Lesson 6",
-            "Lesson 7", "Lesson 8", "Lesson 9", "Lesson 10", "Lesson 11"
+            "Lesson 7", "Lesson 8", "Lesson 9", "Lesson 10", "Lesson 11", "Lesson 12", "Lesson 13", "Coming soon!"
     };
 
     int[] groupProcess = new int[groupTitle.length];
@@ -101,10 +107,13 @@ public class MainLesson extends Fragment{
             {new Lesson07(), new Lesson08(), new S_Lesson08()},
             {new Lesson09(), new Lesson10(), new S_Lesson05()},
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
-            {new Lesson13(), new Lesson14(), new S_Lesson11()},
+            {new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson22()},
             {new Lesson15(), new Lesson16(), new S_Lesson12()},
             {new Lesson17(), new Lesson20(), new S_Lesson13()},
-            {new Lesson18(), new Lesson21(), new S_Lesson07()}
+            {new Lesson18(), new Lesson21(), new S_Lesson07()},
+            {new Lesson23(), new Lesson24(), new S_Lesson09()},
+            {new Lesson25(), new Lesson26()},
+            {}
     };
 
 

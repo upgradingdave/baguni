@@ -241,4 +241,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
             activity = (LessonFrame) context;
         }
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+    }
 }
