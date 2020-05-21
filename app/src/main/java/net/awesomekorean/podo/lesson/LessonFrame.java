@@ -94,6 +94,10 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
         context = getApplicationContext();
 
+        gestureListener = new LessonSwipeListener();
+        gestureListener.setActivity(this);
+        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
+
         navigationWord = findViewById(R.id.navigationWord);
         navigationQuiz = findViewById(R.id.navigationQuiz);
         navigationSentence = findViewById(R.id.navigationSentence);
@@ -183,34 +187,12 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //Pass activity on touch event to the gesture detector
-        if(gestureDetectorCompat == null) {
-            if (context == null) {
-                crashlytics.log("context is null");
-            } else {
-                crashlytics.log("context : " + context);
-            }
-
-            if (gestureListener == null) {
-                crashlytics.log("gestureListener is null");
-            } else {
-                crashlytics.log("gestureListener : " + gestureListener);
-            }
-
-            crashlytics.log("gestureDetectorCompat is null");
-
-            gestureDetectorCompat.onTouchEvent(event);
-        }
-
         gestureDetectorCompat.onTouchEvent(event);
         return true;
     }
 
 
     public void replaceFragment(Fragment fragment) {
-        gestureListener = new LessonSwipeListener();
-        gestureListener.setActivity(this);
-        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
-
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(R.id.lessonFrame, fragment);

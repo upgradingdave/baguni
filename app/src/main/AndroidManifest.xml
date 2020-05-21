@@ -18,6 +18,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service
+            android:name=".FirebaseCloudMessage"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".VocabularyQuiz"></activity>
         <activity
             android:name=".ConfirmQuit"
@@ -28,6 +37,14 @@
         <activity android:name=".lesson.lessonNumber.LessonNumberMenu" />
         <activity android:name=".lesson.lessonNumber.LessonNumber" />
         <activity android:name=".lesson.LessonSpecialFrame" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icon2" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/PURPLE" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -127,7 +127,14 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                readingProgress = Math.max(progress * 100 / seekBar.getMax(), readingProgress);
+                if(seekBar.getMax() <= 0) {
+
+                    readingProgress = 0;
+
+                } else {
+
+                    readingProgress = Math.max(progress * 100 / seekBar.getMax(), readingProgress);
+                }
 
                 if(mediaPlayerManager != null && seekBar.getMax()==progress) {
                     btnSetting(View.VISIBLE, View.GONE, View.GONE);

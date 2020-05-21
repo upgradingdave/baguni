@@ -169,8 +169,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
             case R.id.btnSubmit :
                 btnSubmit.setEnabled(false);
 
-                String code = intent.getStringExtra("code");
-
                 int newPoints = pointsHave - pointsNeed;
 
                 final UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
@@ -185,46 +183,46 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     }
                 });
 
-                // 교정요청일 때
-                if(code.equals("correction")) {
-                    WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
+                WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
 
-                    requestWriting.setUserEmail(userEmail);
-                    requestWriting.setUserName(userName);
-                    requestWriting.setTeacherName(teacherName);
-                    requestWriting.setTeacherId(teacherId);
-                    requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
-                    requestWriting.setStatus(1);
+                requestWriting.setUserEmail(userEmail);
+                requestWriting.setUserName(userName);
+                requestWriting.setTeacherName(teacherName);
+                requestWriting.setTeacherId(teacherId);
+                requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
+                requestWriting.setStatus(1);
 
-                    WritingRepository repository = new WritingRepository(this);
-                    repository.update(requestWriting);
+                WritingRepository repository = new WritingRepository(this);
+                repository.update(requestWriting);
 
-                    // 교정요청 DB에 저장하기
-                    db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
-                            .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            System.out.println("교정요청을 DB에 저장했습니다.");
-                            requestResult.setVisibility(View.VISIBLE);
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    requestResult.setVisibility(View.GONE);
-                                    Intent intent = new Intent(getApplication(), MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            }, 3000);
-                        }
-                    });
+                // 교정요청 DB에 저장하기
+                db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
+                        .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("교정요청을 DB에 저장했습니다.");
+                        requestResult.setVisibility(View.VISIBLE);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                requestResult.setVisibility(View.GONE);
+                                Intent intent = new Intent(getApplication(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }, 3000);
+                    }
+                });
 
-                    // analytics 로그 이벤트 얻기
-                    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
-                    Bundle bundle = new Bundle();
-                    bundle.putString("type", "correction");
-                    firebaseAnalytics.logEvent("point_use", bundle);
+                // analytics 로그 이벤트 얻기
+                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "correction");
+                firebaseAnalytics.logEvent("point_use", bundle);
 
+                break;
 
+/*
                     // 녹음요청일 떄
                 } else if(code.equals("record")) {
                     ArrayList<CollectionEntity> recordList = (ArrayList<CollectionEntity>) intent.getSerializableExtra("checkedList");
@@ -277,7 +275,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                             });
                 }
 
-                break;
+ */
         }
     }
 }
