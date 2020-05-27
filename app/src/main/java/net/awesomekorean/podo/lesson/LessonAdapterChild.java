@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -113,35 +114,35 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                                 switch (lessonId) {
 
-                                    case "H_consonant" :
+                                    case "H_consonant":
                                         startLearningHangul(context.getString(R.string.CONSONANT));
                                         break;
 
-                                    case "H_vowel" :
+                                    case "H_vowel":
                                         startLearningHangul(context.getString(R.string.VOWEL));
                                         break;
 
-                                    case "H_batchim" :
+                                    case "H_batchim":
                                         startLearningHangul(context.getString(R.string.BATCHIM));
                                         break;
 
-                                    case "H_assembly" :
+                                    case "H_assembly":
                                         startLearningHangul(context.getString(R.string.ASSEMBLY));
                                         break;
 
-                                    case "N_sino" :
+                                    case "N_sino":
                                         startLearningNumber(context.getString(R.string.SINO));
                                         break;
 
-                                    case "N_native" :
+                                    case "N_native":
                                         startLearningNumber(context.getString(R.string.NATIVE));
                                         break;
 
-                                    case "N_practice" :
+                                    case "N_practice":
                                         startLearningNumber(context.getString(R.string.PRACTICE));
                                         break;
 
-                                    default :
+                                    default:
                                         intent = new Intent(context, LessonSpecialFrame.class);
 
                                         intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
@@ -150,9 +151,20 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
                                         break;
                                 }
 
+                            } else if(lessonItem.getLessonTitle().equals("ranking")) {
+
+                            } else if(lessonItem.getLessonTitle().equals("sentence")) {
+
                             } else {
 
-                                intent = new Intent(context, LessonFrame.class);
+                                if(lessonItem.getLessonTitle().equals("word")) {
+
+                                    intent = new Intent(context, LessonReviewWord.class);
+
+                                } else {
+
+                                    intent = new Intent(context, LessonFrame.class);
+                                }
 
                                 intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
 
@@ -247,7 +259,7 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
             holder.lessonImage.setImageResource(lessonItem.getLessonImage());
 
         }catch (OutOfMemoryError e) {
-            FirebaseCrashlytics.getInstance().log("OutOfMemoryError");
+            System.out.println(e);
         }
 
         if(lessonItem.getIsLock()) {
@@ -258,9 +270,17 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
             setLessonStatus(holder, false, View.VISIBLE, View.GONE);
 
-        } else if(lessonItem.getLessonSubTitle().equals("quiz")) {
+        } else if(lessonItem.getLessonSubTitle().equals("review")) {
 
-            setLessonStatus(holder, false, View.GONE, View.GONE);
+            holder.lessonSubTitle.setVisibility(View.GONE);
+
+            setLessonStatus(holder, false, View.GONE, View.INVISIBLE);
+
+        } else if(lessonItem.getLessonSubTitle().equals("coming soon")) {
+
+            setLessonStatus(holder, true, View.VISIBLE, View.GONE);
+
+            holder.lessonComplete.setVisibility(View.INVISIBLE);
 
         } else {
 

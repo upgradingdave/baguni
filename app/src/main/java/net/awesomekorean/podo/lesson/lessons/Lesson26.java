@@ -11,13 +11,13 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~아/어 본 적 있다";
     private int lessonImage = R.drawable.l_26_word_3;
 
-    final static String[] wordFront = {"작년", "올해", "내년", "봄", "여름", "가을", "겨울"};
+    private String[] wordFront = {"작년", "올해", "내년", "봄", "여름", "가을", "겨울"};
 
-    final static String[] wordBack = {"last year", "this year", "next year", "spring", "summer", "fall", "winter"};
+    private String[] wordBack = {"last year", "this year", "next year", "spring", "summer", "fall", "winter"};
 
-    final static String[] wordPronunciation = {"[장년]", "-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"[장년]", "-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "가 본 적 있어요?",
             "한국에 가 본 적 있어요?",
             "가 본 적 있어요.",
@@ -30,7 +30,7 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
             "서울이랑 제주도에 가 봤어요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "Have you been there?",
             "Have you been to Korea?",
             "I've been there.",
@@ -43,7 +43,7 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
             "I've been to Seoul and Jeju Island."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "'가다' -> '가' + '본 적 있다' = '가 본 적 있다'",
             "-",
             "-",
@@ -56,14 +56,28 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
             "'울' in '서울' has a batchim, so '이랑' is added."
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "한국에 가 본 적 있어요?",
             "네, 작년 봄에 가 본 적 있어요.",
             "한국 어디에 가 봤어요?",
             "서울이랑 제주도에 가 봤어요."
     };
 
-    final static int[] peopleImage = {12,11};
+    private int[] peopleImage = {12,11};
+
+    private String[] reviewFront = {
+            "한국에 가 본 적 있어요?",
+            "작년 봄에 가 본 적 있어요.",
+            "한국 어디에 가 봤어요?",
+            "서울이랑 제주도에 가 봤어요."
+    };
+
+    private String[] reviewBack = {
+            "Have you been to Korea?",
+            "I've been there last spring.",
+            "Where have you been to Korea?",
+            "I've been to Seoul and Jeju Island."
+    };
 
 
     @Override
@@ -114,6 +128,16 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

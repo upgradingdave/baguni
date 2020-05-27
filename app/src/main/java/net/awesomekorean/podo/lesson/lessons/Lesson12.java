@@ -12,13 +12,13 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~지만";
     private int lessonImage = R.drawable.contrast;
 
-    final static String[] wordFront = {"어렵다", "말하다", "쓰다", "하지만", "읽다", "쉽다"};
+    private String[] wordFront = {"어렵다", "말하다", "쓰다", "하지만", "읽다", "쉽다"};
 
-    final static String[] wordBack = {"difficult", "to speak", "to write", "but", "to read", "easy"};
+    private String[] wordBack = {"difficult", "to speak", "to write", "but", "to read", "easy"};
 
-    final static String[] wordPronunciation = {"[어렵따]", "-", "-", "-", "[익따]", "[쉽따]"};
+    private String[] wordPronunciation = {"[어렵따]", "-", "-", "-", "[익따]", "[쉽따]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "어때요?",
             "한국어 공부 어때요?",
             "어렵다",
@@ -40,9 +40,9 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
             "말하기랑 쓰기가 어렵지만 읽기는 쉬워요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "How is it?",
-            "How's learnining Korean?",
+            "How's learning Korean?",
             "difficult",
             "It's difficult.",
             "Korean is difficult.",
@@ -62,7 +62,7 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
             "Speaking and writing are difficult but reading is easy."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "-",
@@ -84,14 +84,28 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "한국어 공부 어때요?",
             "한국어는 어려워요. 하지만 재미있어요.",
             "뭐가 제일 어려워요?",
             "말하기랑 쓰기가 어려워요.\n하지만 읽기는 쉬워요."
     };
 
-    final static int[] peopleImage = {12,11};
+    private int[] peopleImage = {12,11};
+
+    private String[] reviewFront = {
+            "한국어 공부 어때요?",
+            "한국어는 어렵지만 재미있어요.",
+            "뭐가 제일 어려워요?",
+            "말하기랑 쓰기가 어려워요."
+    };
+
+    private String[] reviewBack = {
+            "How's learning Korean?",
+            "Korean is difficult but interesting.",
+            "What is the most difficult?",
+            "Speaking and writing are difficult."
+    };
 
 
     @Override
@@ -142,6 +156,16 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

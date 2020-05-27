@@ -13,13 +13,13 @@ public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~있어요?";
     private int lessonImage = R.drawable.posession;
 
-    final static String[] wordFront = {"있다", "친구", "얘기하다", "어디", "한국어"};
+    private String[] wordFront = {"있다", "친구", "얘기하다", "어디", "한국어"};
 
-    final static String[] wordBack = {"there is / to have", "friend", "to talk", "where", "Korean language"};
+    private String[] wordBack = {"there is / to have", "friend", "to talk", "where", "Korean language"};
 
-    final static String[] wordPronunciation = {"[읻따]", "-", "-", "-", "[한구거]"};
+    private String[] wordPronunciation = {"[읻따]", "-", "-", "-", "[한구거]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "있다",
             "있어요?",
             "친구 있어요?",
@@ -34,7 +34,7 @@ public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializ
             "카카오톡에서 얘기해요"
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "There is",
             "is there?",
             "Do you have a friend?",
@@ -48,7 +48,7 @@ public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializ
             "in Kakao talk",
             "We talk in Kakao talk."
     };
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "You can say this when you 'have' something or someone 'exists'.\nIn Korean, we don't consider singular and plural that much\nand the meaning of 'There isn't' is '없다'.",
             "When you conjugate verbs or adjectives to the form of '아요/어요', if you say it with a lower intonation, it's a statement.\nBut if you raise the intonation at the end, it becomes a question.\n\nex)\n'있어요?' : is there?\n'있어요.' : there is.",
             "-",
@@ -64,14 +64,28 @@ public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "한국 친구 있어요?",
             "네, 한 명 있어요.",
             "어디에서 얘기해요?",
             "카카오톡에서 얘기해요."
     };
 
-    final static int[] peopleImage = {5,6};
+    private int[] peopleImage = {5,6};
+
+    private String[] reviewFront = {
+            "한국 친구 있어요?",
+            "네, 한 명 있어요.",
+            "어디에서 얘기해요?",
+            "카카오톡에서 얘기해요."
+    };
+
+    private String[] reviewBack = {
+            "Do you have a Korean friend?",
+            "네, 한 명 있어요.",
+            "Where are you talking?",
+            "We talk in Kakao talk."
+    };
 
 
     @Override
@@ -122,6 +136,16 @@ public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

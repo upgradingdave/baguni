@@ -130,7 +130,6 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="FAIL_LOAD_AUDIO">Failed to load the audio. Please try again.</string>
 
 
-
     <!--    읽기-->
     <string name="GET_MORE_READING">Get more readings</string>
     <string name="GO_BACK_MY_READING">Go back to my readings</string>
@@ -141,6 +140,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <!--    쓰기-->
     <string name="CORRECTION">Correction</string>
     <string name="WRITING_SAVED">Writing is saved</string>
+    <string name="WRITING_SHORT">Writing should be at least 10 letters. </string>
     <string name="WRITING_DELETE">Are you sure want to delete this writing?</string>
     <string name="LETTERS">letters</string>
     <string name="WRITE_HERE">Write here</string>
@@ -729,7 +729,7 @@ ex)
     <string name="DB_TEACHERS_WRITINGS">android/podo/teachers/requests/writings</string>
     <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
     <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>
-    <string name="LOADING">Loading</string>
+    <string name="LOADING">Loading...</string>
     <string name="SKU_100">podo_point_100</string>
     <string name="SKU_500">podo_point_500</string>
     <string name="SKU_1000">podo_point_1000</string>
@@ -739,8 +739,6 @@ ex)
     <string name="IS_READING">isReading</string>
     <string name="PROGRESS">progress</string>
     <string name="CONVOWBAT">conVowBat</string>
-
-
 
 
     <!--지울것-->

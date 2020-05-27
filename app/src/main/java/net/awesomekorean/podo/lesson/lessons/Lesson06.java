@@ -11,13 +11,13 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~고 있어요";
     private int lessonImage = R.drawable.progressive;
 
-    final static String[] wordFront = {"지금", "이따", "같이", "헬스장"};
+    private String[] wordFront = {"지금", "이따", "같이", "헬스장"};
 
-    final static String[] wordBack = {"now", "later (short time)", "together", "gym (weight training)"};
+    private String[] wordBack = {"now", "later (short time)", "together", "gym (weight training)"};
 
-    final static String[] wordPronunciation = {"-", "-", "[가치]", "[헬쓰장]"};
+    private String[] wordPronunciation = {"-", "-", "[가치]", "[헬쓰장]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "어디",
             "어디예요?",
             "지금 어디예요?",
@@ -32,7 +32,7 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
             "좋아요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "where",
             "Where are you?",
             "Where are you now?",
@@ -47,7 +47,7 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
             "Good."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "-",
@@ -62,14 +62,28 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "지금 어디예요?",
             "집에 가고 있어요.",
             "이따 같이 헬스장에 가요.",
             "좋아요."
     };
 
-    final static int[] peopleImage = {12,11};
+    private int[] peopleImage = {12,11};
+
+    private String[] reviewFront = {
+            "지금 어디예요?",
+            "집에 가고 있어요.",
+            "이따 같이 헬스장에 가요.",
+            "좋아요."
+    };
+
+    private String[] reviewBack = {
+            "Where are you now?",
+            "I'm going home.",
+            "Let's go the gym together later.",
+            "Good."
+    };
 
 
     @Override
@@ -121,6 +135,16 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

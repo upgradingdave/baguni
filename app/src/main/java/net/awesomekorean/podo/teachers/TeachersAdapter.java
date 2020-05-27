@@ -168,6 +168,9 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
         holder.teacherTag.setText(item.getTag());
         holder.pathAudio = item.getAudio();
 
+        Picasso.with(context).load(R.drawable.image_danny).into(holder.teacherImage);
+
+/*
         // 선생님 이미지 가져오기
         StorageReference reference = storage.getReference().child(item.getImage());
         reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -182,6 +185,8 @@ public class TeachersAdapter extends RecyclerView.Adapter<TeachersAdapter.ViewHo
                 System.out.println("선생님 이미지 로드를 실패 했습니다: "+e);
             }
         });
+
+ */
     }
 
     @Override

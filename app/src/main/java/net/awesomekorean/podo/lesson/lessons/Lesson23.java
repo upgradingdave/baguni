@@ -11,13 +11,13 @@ public class Lesson23 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~(으)면";
     private int lessonImage = R.drawable.l_23_word_1;
 
-    final static String[] wordFront = {"나중에", "돈을 벌다", "외국", "모든", "문화"};
+    private String[] wordFront = {"나중에", "돈을 벌다", "외국", "모든", "문화"};
 
-    final static String[] wordBack = {"later", "earn money", "foreign country", "every", "culture"};
+    private String[] wordBack = {"later", "make money", "foreign country", "every", "culture"};
 
-    final static String[] wordPronunciation = {"-", "[도늘 벌다]", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "[도늘 벌다]", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "뭐 하고 싶어요?",
             "돈을 벌면 뭐 하고 싶어요?",
             "나중에 돈을 많이 벌면 뭐 하고 싶어요?",
@@ -29,7 +29,7 @@ public class Lesson23 extends LessonInit implements Lesson, LessonItem, Serializ
             "그렇군요. 대단해요!"
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "What do you want to do?",
             "What do you want to do if you make money?",
             "What do you want to do if you make a lot of money later?",
@@ -41,7 +41,7 @@ public class Lesson23 extends LessonInit implements Lesson, LessonItem, Serializ
             "I See. Great!"
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "'하다' -> '하' + '고 싶다' = '하고 싶다'",
             "It is used as a meaning of 'if' or 'when'.\n\nex)\n'돈을 벌다' -> '돈을 벌' + '면' = '돈을 벌면'\n'피곤하다' -> '피곤하' + '면' = '피곤하면'\n'먹다' -> '먹' + '으면' = '먹으면'",
             "-",
@@ -53,13 +53,25 @@ public class Lesson23 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "나중에 돈을 많이 벌면 뭐 하고 싶어요?",
             "외국 여행을 많이 가고 싶어요.\n모든 나라의 문화를 다 배우고 싶어요.",
             "그렇군요. 대단해요!"
     };
 
-    final static int[] peopleImage = {6,5};
+    private int[] peopleImage = {6,5};
+
+    private String[] reviewFront = {
+            "나중에 돈을 많이 벌면 뭐 하고 싶어요?",
+            "외국 여행을 많이 가고 싶어요.",
+            "모든 나라의 문화를 다 배우고 싶어요.",
+    };
+
+    private String[] reviewBack = {
+            "What do you want to do if you make a lot of money later?",
+            "I want to go abroad a lot.",
+            "I want to learn about every culture in all countries."
+    };
 
 
     @Override
@@ -110,6 +122,16 @@ public class Lesson23 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

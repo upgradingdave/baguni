@@ -1,5 +1,6 @@
 package net.awesomekorean.podo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,8 +11,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import net.awesomekorean.podo.login.SignIn;
 
@@ -47,6 +53,15 @@ public class Logo extends AppCompatActivity {
         adsManager = AdsManager.getInstance();
         adsManager.loadFullAds(this);
         adsManager.loadRewardAds(this);
+
+
+        // 클라우드 메시지 토큰 가져오기
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                System.out.println("메시지 토큰 아이디: " + task.getResult().getToken());
+            }
+        });
 
 
         Handler handler = new Handler();

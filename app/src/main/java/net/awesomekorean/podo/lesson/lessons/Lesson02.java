@@ -11,13 +11,13 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "얼마예요?";
     private int lessonImage = R.drawable.shopping;
 
-    final static String[] wordFront = {"이거", "저거", "얼마", "세일", "그래서"};
+    private String[] wordFront = {"이거", "저거", "얼마", "세일", "그래서"};
 
-    final static String[] wordBack = {"this one", "that one", "how much", "discount", "so / therefore"};
+    private String[] wordBack = {"this one", "that one", "how much", "discount", "so / therefore"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "[쎄일]", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "[쎄일]", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "얼마",
             "얼마예요?",
             "이거 얼마예요?",
@@ -32,7 +32,7 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
             "그래서 5,000(오천)원이에요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "how much",
             "How much is it?",
             "How much is this?",
@@ -47,7 +47,7 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
             "So, it’s 5,000 won."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "‘이거’ is used a lot in the conversational language.\nAnd you should say ‘이것‘ in the formal situation.",
@@ -62,14 +62,31 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "이거 얼마예요?",
             "10,000(만)원이에요.",
             "저거는요?",
             "저거는 50% 세일이에요.\n 그래서 5,000(오천)원이에요."
     };
 
-    final static int[] peopleImage = {4,3};
+    private int[] peopleImage = {4,3};
+
+    private String[] reviewFront = {
+            "이거 얼마예요?",
+            "만 원이에요.",
+            "저거는요?",
+            "저거는 50% 세일이에요.",
+            "오천 원이에요."
+    };
+
+    private String[] reviewBack = {
+            "How much is this?",
+            "It’s 10,000 won.",
+            "What about that one?",
+            "That’s 50% off.",
+            "So, it’s 5,000 won."
+    };
+
 
     @Override
     public String getLessonSubTitle() {
@@ -119,6 +136,16 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

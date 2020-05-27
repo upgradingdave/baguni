@@ -13,13 +13,13 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~부터~까지";
     private int lessonImage = R.drawable.range2;
 
-    final static String[] wordFront = {"시간", "일하다", "몇", "오전", "오후", "점심", "언제"};
+    private String[] wordFront = {"시간", "일하다", "몇", "오전", "오후", "점심", "언제"};
 
-    final static String[] wordBack = {"time", "to work", "how many", "am.", "pm.", "noon / lunch", "when"};
+    private String[] wordBack = {"time", "to work", "how many", "am.", "pm.", "noon / lunch", "when"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "일하다",
             "일해요?",
             "몇 시간 일해요?",
@@ -32,7 +32,7 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
             "12시 반부터 1시 반까지예요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "to work",
             "Do you work?",
             "How many hours do you work?",
@@ -45,7 +45,7 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
             "It's from 12:30 to 1:30."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "Use '몇' when asking questions about numbers.",
@@ -58,15 +58,29 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
             "30 minutes can also be called '반'."
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "몇 시간 일해요?",
             "오전 9시부터 오후 6시까지 일해요.",
             "점심 시간은 언제예요?",
             "12시 반부터 1시 반까지예요."
     };
 
+    private int[] peopleImage = {8,7};
 
-    final static int[] peopleImage = {8,7};
+    private String[] reviewFront = {
+            "몇 시간 일해요?",
+            "오전 9시부터 오후 6시까지 일해요.",
+            "점심 시간은 언제예요?",
+            "12시 반부터 1시 반까지예요."
+    };
+
+    private String[] reviewBack = {
+            "How many hours do you work?",
+            "I work from 9 am to 6 pm.",
+            "When is the lunch break?",
+            "It's from 12:30 to 1:30."
+    };
+
 
     @Override
     public String getLessonSubTitle() {
@@ -116,6 +130,16 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

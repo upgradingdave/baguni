@@ -37,13 +37,23 @@ public class FirebaseCloudMessage extends FirebaseMessagingService {
     public void onNewToken(@NonNull String token) {
 
         System.out.println("Refreshed token : " + token);
-
-
     }
+
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
+
+        System.out.println("MESSAGE FROM : " + remoteMessage.getFrom());
+
+        if(remoteMessage.getData().size() > 0) {
+
+            System.out.println("MESSAGE DATA PAYLOAD : " + remoteMessage.getData());
+        }
+
+        if(remoteMessage.getNotification() != null) {
+
+            System.out.println("MESSAGE NOTIFICATION BODY : " + remoteMessage.getNotification().getBody());
+        }
     }
 }
 

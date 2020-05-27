@@ -13,13 +13,13 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~(으)ㄹ 수 있어요";
     private int lessonImage = R.drawable.posibility;
 
-    final static String[] wordFront = {"예전에", "언어교환", "배우다", "좋다", "비슷하다", "단어"};
+    private String[] wordFront = {"예전에", "언어교환", "배우다", "좋다", "비슷하다", "단어"};
 
-    final static String[] wordBack = {"in the past", "language exchange", "to learn", "good, nice", "similar", "vocabulary"};
+    private String[] wordBack = {"in the past", "language exchange", "to learn", "good, nice", "similar", "vocabulary"};
 
-    final static String[] wordPronunciation = {"[예저네]", "[어너교환]", "-", "[조타]", "[비스타다]", "[다너]"};
+    private String[] wordPronunciation = {"[예저네]", "[어너교환]", "-", "[조타]", "[비스타다]", "[다너]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "할 수 있어요?.",
             "한국어 할 수 있어요?",
             "네, 저는 한국 사람이에요.",
@@ -41,7 +41,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
             "그래서 다른 언어보다 쉬울 수 있어요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "Can you do it?",
             "Can you speak Korean?",
             "Yes, I'm a Korean.",
@@ -63,7 +63,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
             "Therefore, it could be easier than other languages."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "We've learned in the last lesson that this means 'ability'.",
             "-",
             "-",
@@ -85,7 +85,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
             "When comparing, use '~보다'."
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "한국어 할 수 있어요?",
             "네, 저는 한국 사람이에요.",
             "저는 일본 사람이에요.\n요즘 한국어 배우고 있어요.\n언어교환 할 수 있어요?",
@@ -94,7 +94,27 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
             "한국어에 일본어랑 비슷한 단어\n많이 있어요. 그래서 다른 언어보다\n쉬울 수 있어요."
     };
 
-    final static int[] peopleImage = {2,1};
+    private int[] peopleImage = {2,1};
+
+    private String[] reviewFront = {
+            "한국어 할 수 있어요?",
+            "요즘 한국어 배우고 있어요.",
+            "언어교환 할 수 있어요?",
+            "저도 일본어 배우고 있어요.",
+            "한국어 공부 어때요?",
+            "비슷한 단어 많이 있어요.",
+            "쉬울 수 있어요."
+    };
+
+    private String[] reviewBack = {
+            "Can you speak Korean?",
+            "I'm learning Korean recently.",
+            "Can you exchange language?",
+            "I'm learning Japanese too.",
+            "How's learning Korean?",
+            "There's a lot of similar words.",
+            "It could be easy."
+    };
 
 
     @Override
@@ -145,6 +165,16 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

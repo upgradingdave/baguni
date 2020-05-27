@@ -19,4 +19,8 @@ public interface Lesson {
     String[] getDialog();
 
     int[] getPeopleImage();
+
+    String[] getReviewFront();
+
+    String[] getReviewBack();
 }

@@ -196,7 +196,7 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.replace(R.id.lessonFrame, fragment);
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
 

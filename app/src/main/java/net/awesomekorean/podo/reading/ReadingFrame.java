@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -394,6 +395,13 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             if(mediaPlayerManager != null ) {
                 mediaPlayerManager.stopMediaPlayer();
             }
+
+            // analytics 로그 이벤트 얻기
+            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            Bundle bundle = new Bundle();
+            bundle.putString("readingId", reading.getReadingId());
+            firebaseAnalytics.logEvent("reading_finish", bundle);
+
             finish();
         }
     }

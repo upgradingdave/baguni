@@ -11,13 +11,13 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~았/었으면 좋겠어요";
     private int lessonImage = R.drawable.thankyou;
 
-    final static String[] wordFront = {"덥다", "시원하다", "곳", "들어가다", "저기", "크다", "예쁘다", "유명하다", "마시다"};
+    private String[] wordFront = {"덥다", "시원하다", "곳", "들어가다", "저기", "크다", "예쁘다", "유명하다", "마시다"};
 
-    final static String[] wordBack = {"hot", "cool", "place", "enter", "there", "big", "pretty", "famous", "to drink"};
+    private String[] wordBack = {"hot", "cool", "place", "enter", "there", "big", "pretty", "famous", "to drink"};
 
-    final static String[] wordPronunciation = {"[덥따]", "-", "[곧]", "[드러가다]", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"[덥따]", "-", "[곧]", "[드러가다]", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "너무 더워요.",
             "여기 너무 더워요.",
             "들어갔으면 좋겠어요.",
@@ -35,11 +35,11 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
             "좋아요. 거기에서 시원한 주스 마셔요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "It's too hot.",
             "It's too hot here.",
-            "I want to enter.",
-            "I want to enter a cool place.",
+            "I want to go inside.",
+            "I want to go to a cool place.",
             "big shopping mall",
             "Let's go into the big shopping mall.",
             "Let's go into the big shopping mall there.",
@@ -53,7 +53,7 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
             "Great. Let's drink a cool juice there."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "덥다' -> '덥어요' -> '더워요' (irregular)",
             "-",
             "conjugate 'V-았/었으면 좋겠어요'\n'들어가다' -> '들어갔다'\n'들어갔다' -> '들어갔' + '으면 좋겠어요' = '들어갔으면 좋겠어요'",
@@ -71,13 +71,29 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "여기 너무 더워요. \n 시원한 곳에 들어갔으면 좋겠어요.",
             "저기 큰 쇼핑몰에 들어가요. \n 거기에 예쁘고 유명한 카페가 있어요.",
             "좋아요. \n 거기에서 시원한 주스 마셔요."
     };
 
-    final static int[] peopleImage = {11,12};
+    private int[] peopleImage = {11,12};
+
+    private String[] reviewFront = {
+            "여기 너무 더워요.",
+            "시원한 곳에 들어갔으면 좋겠어요.",
+            "저기 큰 쇼핑몰에 들어가요.",
+            "예쁘고 유명한 카페가 있어요.",
+            "시원한 주스 마셔요."
+    };
+
+    private String[] reviewBack = {
+            "It's too hot here.",
+            "I want to go to a cool place.",
+            "Let's go into the big shopping mall there.",
+            "There's a pretty and famous cafe.",
+            "Let's drink a cool juice."
+    };
 
 
     @Override
@@ -128,6 +144,16 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

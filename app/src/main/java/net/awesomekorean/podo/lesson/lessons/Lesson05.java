@@ -11,13 +11,13 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~(으)ㄹ 거예요";
     private int lessonImage = R.drawable.futuretense;
 
-    final static String[] wordFront = {"내일", "식당", "주말", "재미있다", "영화"};
+    private String[] wordFront = {"내일", "식당", "주말", "재미있다", "영화"};
 
-    final static String[] wordBack = {"tomorrow", "restaurant", "weekend", "fun / interesting", "movie"};
+    private String[] wordBack = {"tomorrow", "restaurant", "weekend", "fun / interesting", "movie"};
 
-    final static String[] wordPronunciation = {"-", "[식땅]", "-", "[재미읻따]", "-"};
+    private String[] wordPronunciation = {"-", "[식땅]", "-", "[재미읻따]", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "하다",
             "할 거예요?",
             "뭐 할 거예요?",
@@ -34,7 +34,7 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
             "재미있는 영화를 볼 거예요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "to do",
             "Will you do it?",
             "What will you do?",
@@ -51,7 +51,7 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
             "I will watch an interesting movie."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "When we say future tense, we conjugate 'ㄹ 거예요/을 거예요' form.\nIf there is no batchim, add 'ㄹ 거예요'.\nIf there is a batchim, add '을 거예요'.\n\nconjugate 'ㄹ 거예요/을 거예요'\n: '하다' -> '하' + 'ㄹ 거예요' = '할 거예요'",
             "-",
@@ -68,14 +68,28 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "내일 뭐 할 거예요?",
             "친구랑 한국 식당에 갈 거예요.",
             "주말에는요?",
             "재미있는 영화를 볼 거예요."
     };
 
-    final static int[] peopleImage = {9,10};
+    private int[] peopleImage = {9,10};
+
+    private String[] reviewFront = {
+            "내일 뭐 할 거예요?",
+            "친구랑 한국 식당에 갈 거예요.",
+            "주말에는요?",
+            "재미있는 영화를 볼 거예요."
+    };
+
+    private String[] reviewBack = {
+            "What will you do tomorrow.",
+            "I will go to a Korean restaurant with my friend.",
+            "What about on the weekend?",
+            "I will watch an interesting movie."
+    };
 
 
     @Override
@@ -126,6 +140,16 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

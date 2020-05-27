@@ -11,13 +11,13 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~(으)ㄹ 수 있어요";
     private int lessonImage = R.drawable.ability;
 
-    final static String[] wordFront = {"아직", "자막", "이해하다", "괜찮다"};
+    private String[] wordFront = {"아직", "자막", "이해하다", "괜찮다"};
 
-    final static String[] wordBack = {"yet", "subtitles", "understand", "all right, OK"};
+    private String[] wordBack = {"yet", "subtitles", "understand", "all right, OK"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "[괜찬타]"};
+    private String[] wordPronunciation = {"-", "-", "-", "[괜찬타]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "재미있어요.",
             "이 드라마 재미있어요",
             "그런데",
@@ -33,7 +33,7 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
             "두 번 볼 거예요"
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "It's interesting.",
             "This drama is interesting.",
             "However",
@@ -49,7 +49,7 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
             "I'll watch it twice."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "same meaning with '하지만'",
@@ -65,12 +65,30 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
             "The unit noun representing the number of times is '번'."
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "이 드라마 재미있어요.\n그런데 아직 자막이 없어요.\n어때요?\n이해할 수 있어요?",
             "괜찮아요.\n조금 이해할 수 있어요.\n두 번 볼 거예요."
     };
 
-    final static int[] peopleImage = {4,3};
+    private int[] peopleImage = {4,3};
+
+    private String[] reviewFront = {
+            "이 드라마 재미있어요",
+            "아직 자막이 없어요.",
+            "이해할 수 있어요?",
+            "괜찮아요.",
+            "조금 이해할 수 있어요.",
+            "두 번 볼 거예요"
+    };
+
+    private String[] reviewBack = {
+            "This drama is interesting.",
+            "There's no subtitles yet.",
+            "Can you understand?",
+            "That's OK.",
+            "I can understand a little bit.",
+            "I'll watch it twice."
+    };
 
 
     @Override
@@ -121,6 +139,16 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

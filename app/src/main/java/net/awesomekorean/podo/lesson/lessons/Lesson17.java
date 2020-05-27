@@ -11,13 +11,13 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~고 싶어요";
     private int lessonImage = R.drawable.hope;
 
-    final static String[] wordFront = {"휴가", "여행", "음식", "연습", "그동안", "공부", "열심히"};
+    private String[] wordFront = {"휴가", "여행", "음식", "연습", "그동안", "공부", "열심히"};
 
-    final static String[] wordBack = {"vacation", "travel", "food", "practice", "so far", "study", "hardly"};
+    private String[] wordBack = {"vacation", "travel", "food", "practice", "so far", "study", "hardly"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "가고 싶어요.",
             "한국 여행 가고 싶어요.",
             "다음 휴가 때 한국 여행 가고 싶어요.",
@@ -36,7 +36,7 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
             "좋아요. 그동안 한국어 공부 열심히 해서 잘 할 수 있을 거예요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "I want to go.",
             "I want to travel to Korea.",
             "I want to travel to Korea on next vacation.",
@@ -55,7 +55,7 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
             "Cool! You will be able to do it well because you learned Korean very well."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "Use the 'V-고 싶다' form to tell the wishes or hopes of the speaker.\n\nconjugate 'V-고 싶다'\n'가다' -> '가' + '고 싶다' = '가고 싶다'",
             "-",
             "이번 : this time\n저번 : last time\n다음 : next time",
@@ -74,14 +74,30 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "이번 휴가에 한국 여행 가고 싶어요.",
             "한국에서 뭐 하고 싶어요?",
             "한국 음식 많이 먹고 싶어요.\n그리고 한국어 연습도 하고 싶어요.",
             "좋아요.\n그동안 한국어 공부 열심히 해서 잘 할 수 있을 거예요."
     };
 
-    final static int[] peopleImage = {5,6};
+    private int[] peopleImage = {5,6};
+
+    private String[] reviewFront = {
+            "이번 휴가에 한국 여행 가고 싶어요.",
+            "한국에서 뭐 하고 싶어요?",
+            "한국 음식 많이 먹고 싶어요.",
+            "한국어 연습도 하고 싶어요.",
+            "잘 할 수 있을 거예요."
+    };
+
+    private String[] reviewBack = {
+            "I want to travel to Korea on next vacation.",
+            "What do you want to do in Korea?",
+            "I want to eat Korean food a lot.",
+            "And I want to practice Korean too.",
+            "You will be able to do it well."
+    };
 
 
     @Override
@@ -132,6 +148,16 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
     // 레슨어뎁터 아이템

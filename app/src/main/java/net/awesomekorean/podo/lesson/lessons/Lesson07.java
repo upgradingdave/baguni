@@ -13,13 +13,13 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "안~";
     private int lessonImage = R.drawable.negative1;
 
-    final static String[] wordFront = {"날씨", "어때요?", "여기", "조금", "춥다", "눈", "오다", "별로"};
+    private String[] wordFront = {"날씨", "어때요?", "여기", "조금", "춥다", "눈", "오다", "별로"};
 
-    final static String[] wordBack = {"weather", "How is it?", "here", "a bit", "cold", "snow", "to come", "not that much"};
+    private String[] wordBack = {"weather", "How is it?", "here", "a bit", "cold", "snow", "to come", "not that much"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "[춥따]", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "[춥따]", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "어때요?",
             "날씨가 어때요?",
             "한국 날씨가 어때요?",
@@ -35,7 +35,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
             "눈은 별로 안 와요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "How is it?",
             "How's the weather?",
             "How's the weather in Korea?",
@@ -43,15 +43,15 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
             "It's cold.",
             "It's a bit cold.",
             "to come",
-            "Is it comming?",
+            "Is it coming?",
             "Is it snowing?",
-            "It's comming.",
-            "It's not comming.",
+            "It's coming.",
+            "It's not coming.",
             "It's not snowing.",
             "It's not snowing a lot."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "-",
@@ -67,14 +67,28 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "한국 날씨가 어때요?",
             "조금 추워요.",
             "눈이 와요?",
             "눈은 별로 안 와요."
     };
 
-    final static int[] peopleImage = {1,2};
+    private int[] peopleImage = {1,2};
+
+    private String[] reviewFront = {
+            "한국 날씨가 어때요?",
+            "조금 추워요.",
+            "눈이 와요?",
+            "눈은 별로 안 와요."
+    };
+
+    private String[] reviewBack = {
+            "How's the weather in Korea?",
+            "It's a bit cold.",
+            "Is it snowing?",
+            "It's not snowing a lot."
+    };
 
 
     @Override
@@ -126,6 +140,16 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

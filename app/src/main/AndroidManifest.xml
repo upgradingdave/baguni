@@ -9,15 +9,17 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-        android:largeHeap="true"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:fullBackupOnly="false"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".lesson.LessonReviewSentence"></activity>
+        <activity android:name=".lesson.LessonReviewWord" />
 
         <service
             android:name=".FirebaseCloudMessage"
@@ -27,7 +29,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".VocabularyQuiz"></activity>
+        <activity android:name=".VocabularyQuiz" />
         <activity
             android:name=".ConfirmQuit"
             android:theme="@style/DialogFullScreen" />
@@ -40,12 +42,10 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon2" />
-
+            android:resource="@drawable/happy" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/PURPLE" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

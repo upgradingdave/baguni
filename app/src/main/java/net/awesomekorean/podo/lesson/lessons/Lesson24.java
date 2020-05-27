@@ -11,13 +11,13 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~아/어도";
     private int lessonImage = R.drawable.l_24_word_1;
 
-    final static String[] wordFront = {"얼굴", "아프다", "자다", "계속", "병원", "평일"};
+    private String[] wordFront = {"얼굴", "아프다", "자다", "계속", "병원", "평일"};
 
-    final static String[] wordBack = {"face", "painful / sick", "sleep", "continuously", "hospital", "weekday"};
+    private String[] wordBack = {"face", "painful / sick", "sleep", "continuously", "hospital", "weekday"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "어디 아파요?",
             "얼굴이 안 좋아요.",
             "계속 피곤해요.",
@@ -31,7 +31,7 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
             "주말에 갈 거예요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "Are you sick?",
             "You don't look well.",
             "I feel tired.",
@@ -45,7 +45,7 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
             "I'll go on the weekend."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "When somebody seems to be sick somewhere or seems to happen something bad, you can say this.",
             "-",
@@ -59,14 +59,32 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
             "'가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "얼굴이 안 좋아요. 어디 아파요?",
             "요즘 많이 자도 계속 피곤해요",
             "병원에 갔다 왔어요?",
             "아니요.\n평일에는 일이 많아서 시간이 없어요.\n주말에 갈 거예요."
     };
 
-    final static int[] peopleImage = {8,7};
+    private int[] peopleImage = {8,7};
+
+    private String[] reviewFront = {
+            "어디 아파요?",
+            "얼굴이 안 좋아요.",
+            "요즘 많이 자도 계속 피곤해요",
+            "병원에 갔다 왔어요?",
+            "평일에는 일이 많아서 시간이 없어요.",
+            "주말에 갈 거예요."
+    };
+
+    private String[] reviewBack = {
+            "You don't look well.",
+            "Are you sick?",
+            "I feel tired even though I sleep a lot these days.",
+            "Did you see a doctor?",
+            "Because I have a lot of work on weekdays I don't have time.",
+            "I'll go on the weekend."
+    };
 
 
     @Override
@@ -117,6 +135,16 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

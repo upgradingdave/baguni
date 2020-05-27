@@ -11,13 +11,13 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "못~";
     private int lessonImage = R.drawable.negative2;
 
-    final static String[] wordFront = {"요즘", "너무", "바쁘다", "많이", "피곤하다", "아침", "일찍", "일어나다"};
+    private String[] wordFront = {"요즘", "너무", "바쁘다", "많이", "피곤하다", "아침", "일찍", "일어나다"};
 
-    final static String[] wordBack = {"recently", "too much", "busy", "many / much", "tired", "morning / breakfast", "early", "wake up"};
+    private String[] wordBack = {"recently", "too much", "busy", "many / much", "tired", "morning / breakfast", "early", "wake up"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "[마니]", "-", "-", "-", "[이러나다]"};
+    private String[] wordPronunciation = {"-", "-", "-", "[마니]", "-", "-", "-", "[이러나다]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "바쁘다",
             "바빠요.",
             "너무 바빠요.",
@@ -39,7 +39,7 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
             "아침에 일찍 못 일어나서 아침도 못 먹어요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "busy",
             "I'm busy.",
             "I'm very busy.",
@@ -61,7 +61,7 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
             "I can't have breakfast as well because I can't wake up early in the morning."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "conjugate '아요/어요'\n: '바쁘다' -> '바쁘' + '아요' = '바쁘아요' -> '바빠요'",
             "-",
@@ -83,14 +83,28 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
             "conjugate '아서/어서'\n: '일어나요' -> '일어나' + '아서' = '일어나서'"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "요즘 너무 바빠요.",
             "그래서 많이 피곤해요.",
             "아침에 일찍 못 일어나요.",
             "그래서 아침도 못 먹어요."
     };
 
-    final static int[] peopleImage = {4,4};
+    private int[] peopleImage = {4,4};
+
+    private String[] reviewFront = {
+            "요즘 너무 바빠요.",
+            "그래서 많이 피곤해요.",
+            "아침에 일찍 못 일어나요.",
+            "그래서 아침도 못 먹어요."
+    };
+
+    private String[] reviewBack = {
+            "I'm very busy recently.",
+            "Therefore, I'm so tired.",
+            "I can't wake up early in the morning.",
+            "So I can't have breakfast as well."
+    };
 
 
     @Override
@@ -141,6 +155,16 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

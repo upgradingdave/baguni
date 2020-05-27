@@ -188,4 +188,7 @@ public class UserInformation {
     public void setDay(int today) {
         this.attendance.set(today, true);
     }
+
+
+
 }

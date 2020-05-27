@@ -11,13 +11,13 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~아/어 줄게요";
     private int lessonImage = R.drawable.thankyou;
 
-    final static String[] wordFront = {"글", "주다", "틀리다", "아주", "정말요?"};
+    private String[] wordFront = {"글", "주다", "틀리다", "아주", "정말요?"};
 
-    final static String[] wordBack = {"article", "to give", "wrong", "very", "really?"};
+    private String[] wordBack = {"article", "to give", "wrong", "very", "really?"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "썼어요",
             "글을 썼어요.",
             "한국어로 글을 썼어요.",
@@ -32,7 +32,7 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
             "정말요? 고마워요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "I wrote it.",
             "I wrote an article.",
             "I wrote an article in Korean.",
@@ -47,7 +47,7 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
             "really? thank you."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "쓰다' -> '썼어요' (past tense)",
             "-",
             "N(으)로' is used when expressing means of transport, tools, and materials used to make something.",
@@ -62,13 +62,27 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "제가 한국어로 글을 썼어요. \n 한 번 봐주세요.",
             "주세요. 제가 봐줄게요. \n 음... 조금 틀렸어요. \n 하지만 아주 잘했어요.",
             "정말요? 고마워요."
     };
 
-    final static int[] peopleImage = {1,2};
+    private int[] peopleImage = {1,2};
+
+    private String[] reviewFront = {
+            "제가 한국어로 글을 썼어요.",
+            "한 번 봐주세요.",
+            "제가 봐줄게요.",
+            "하지만 아주 잘했어요."
+    };
+
+    private String[] reviewBack = {
+            "I wrote an article in Korean.",
+            "please take once a look.",
+            "I'll take a look.",
+            "but very good."
+    };
 
 
     @Override
@@ -119,6 +133,16 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

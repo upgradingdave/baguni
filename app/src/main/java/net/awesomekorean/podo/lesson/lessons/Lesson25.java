@@ -11,13 +11,13 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~아/어 보다";
     private int lessonImage = R.drawable.l_25_word_0;
 
-    final static String[] wordFront = {"알다", "모르다", "쓰다", "가르치다", "선생님", "만들다", "받다"};
+    private String[] wordFront = {"알다", "모르다", "쓰다", "가르치다", "선생님", "만들다", "받다"};
 
-    final static String[] wordBack = {"know", "don't know", "to use", "to teach", "teacher", "to make", "to receive"};
+    private String[] wordBack = {"know", "don't know", "to use", "to teach", "teacher", "to make", "to receive"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "[받따]"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "[받따]"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "알아요?",
             "포도앱 알아요?",
             "아니요. 몰라요.",
@@ -30,7 +30,7 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
             "다운 받아 볼게요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "Do you know?",
             "Do you know the 'podo' app?",
             "No. I don't know.",
@@ -43,7 +43,7 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
             "I'll download it."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "Usually referred to as '앱' or '어플'",
             "Sometimes students are confused.\n\n'아니요' : no\n'아니에요' : not",
@@ -56,14 +56,30 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
             "We usually say '다운로드'(download) to '다운' to be more simple.\nAnd the verb '받다' goes well with this word.\n\n'보다' -> '보' + 'ㄹ 게요' = '볼게요'"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "포도앱 알아요?",
             "아니요. 몰라요.\n그게 뭐예요?",
             "한국어를 가르치는 선생님이 만든 앱이에요.\n한번 써 보세요.",
             "고마워요.\n다운 받아 볼게요"
     };
 
-    final static int[] peopleImage = {9,10};
+    private int[] peopleImage = {9,10};
+
+    private String[] reviewFront = {
+            "포도앱 알아요?",
+            "그게 뭐예요?",
+            "한국어를 가르치는 선생님이 만든 앱이에요.",
+            "한번 써 보세요.",
+            "다운 받아 볼게요"
+    };
+
+    private String[] reviewBack = {
+            "Do you know the 'podo' app?",
+            "What is it?",
+            "It's an app developed by a teacher who teaches Korean.",
+            "Try it once.",
+            "I'll download it."
+    };
 
 
     @Override
@@ -114,6 +130,16 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

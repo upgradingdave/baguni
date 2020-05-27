@@ -13,13 +13,13 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~아/어 주세요";
     private int lessonImage = R.drawable.request;
 
-    final static String[] wordFront = {"주", "호텔", "예약", "돕다", "처음", "아마", "기다리다"};
+    private String[] wordFront = {"주", "호텔", "예약", "돕다", "처음", "아마", "기다리다"};
 
-    final static String[] wordBack = {"week", "hotel", "reservation", "to help", "first time", "maybe", "to wait"};
+    private String[] wordBack = {"week", "hotel", "reservation", "to help", "first time", "maybe", "to wait"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "저 부산 여행 가요.",
             "다음 주에 저 부산 여행 가요.",
             "도와주세요.",
@@ -35,7 +35,7 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
             "조금 기다려주세요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "I am going to travel to Busan.",
             "I'll go to travel to Busan next week.",
             "Help me.",
@@ -46,12 +46,12 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
             "Yes.",
             "It'll be interesting.",
             "Maybe it'll be interesting.",
-            "I'll book a hotel now.",
+            "I'll book now.",
             "Please wait.",
             "Please wait a minute.",
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "Use '저' instead of '나' when you speak honorific.",
             "이번 주 : this week\n저번 주: last week\n다음 주: next week",
             "Use the 'V-아/어 주세요' form to ask something.\n\nconjugate 'V-아/어 주세요'\n'돕다' -> '돕아요' -> '도와요' (irregular)\n'도와요' -> '도와' + '주세요' = '도와주세요'",
@@ -67,7 +67,7 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "다음 주에 저 부산 여행 가요.\n호텔 예약 좀 도와주세요.",
             "부산에 처음 가요?",
             "네.",
@@ -75,7 +75,25 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
 
-    final static int[] peopleImage = {8,7};
+    private int[] peopleImage = {8,7};
+
+    private String[] reviewFront = {
+            "다음 주에 저 부산 여행 가요.",
+            "호텔 예약 좀 도와주세요.",
+            "부산에 처음 가요?",
+            "아마 재미있을 거예요.",
+            "지금 예약할게요.",
+            "조금 기다려주세요."
+    };
+
+    private String[] reviewBack = {
+            "I'll go to travel to Busan next week.",
+            "Please help me book a hotel.",
+            "Is it your first time to go to Busan?",
+            "Maybe it'll be interesting.",
+            "I'll book now.",
+            "Please wait a minute."
+    };
 
 
     @Override
@@ -126,6 +144,16 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
     // 레슨어뎁터 아이템

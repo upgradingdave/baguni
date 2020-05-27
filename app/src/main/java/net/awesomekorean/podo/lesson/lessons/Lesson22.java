@@ -11,13 +11,13 @@ public class Lesson22 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~을 때";
     private int lessonImage = R.drawable.l_22_word_1;
 
-    final static String[] wordFront = {"누구", "어리다", "사진을 찍다", "귀엽다", "그런데", "엄마", "아빠"};
+    private String[] wordFront = {"누구", "어리다", "사진을 찍다", "귀엽다", "그런데", "엄마", "아빠"};
 
-    final static String[] wordBack = {"who", "young", "take a picture", "cute", "by the way", "mom", "dad"};
+    private String[] wordBack = {"who", "young", "take a picture", "cute", "by the way", "mom", "dad"};
 
-    final static String[] wordPronunciation = {"-", "-", "[사지늘 찍따]", "[귀엽따]", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "[사지늘 찍따]", "[귀엽따]", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "누구예요?",
             "이 사진 누구예요?",
             "사진이에요.",
@@ -30,7 +30,7 @@ public class Lesson22 extends LessonInit implements Lesson, LessonItem, Serializ
             "엄마, 아빠랑 한국 여행 갔을 때 찍은 거예요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "who?",
             "Who is this picture?",
             "It's a picture.",
@@ -43,7 +43,7 @@ public class Lesson22 extends LessonInit implements Lesson, LessonItem, Serializ
             "It was taken when I went to travel to Korea with my mom and dad."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "-",
@@ -56,14 +56,30 @@ public class Lesson22 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "이 사진 누구예요?",
             "제 어릴 때 사진이에요.",
             "귀여워요.\n그런데 여기 어디예요?",
             "엄마, 아빠랑\n한국 여행 갔을 때\n찍은 거예요."
     };
 
-    final static int[] peopleImage = {3,4};
+    private int[] peopleImage = {3,4};
+
+    private String[] reviewFront = {
+            "이 사진 누구예요?",
+            "제 어릴 때 사진이에요.",
+            "귀여워요.",
+            "그런데 여기 어디예요?",
+            "한국 여행 갔을 때 찍은 거예요."
+    };
+
+    private String[] reviewBack = {
+            "Who is this picture?",
+            "It's a picture of my childhood.",
+            "cute.",
+            "By the way, where is here?",
+            "It was taken when I went to travel to Korea."
+    };
 
 
     @Override
@@ -114,6 +130,16 @@ public class Lesson22 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

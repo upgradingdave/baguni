@@ -11,13 +11,13 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~후에";
     private int lessonImage = R.drawable.timeexpression2;
 
-    final static String[] wordFront = {"오늘", "저녁", "끝나다", "후", "가족", "드라마", "추천하다"};
+    private String[] wordFront = {"오늘", "저녁", "끝나다", "후", "가족", "드라마", "추천하다"};
 
-    final static String[] wordBack = {"today", "night / dinner", "finish", "after", "family", "drama", "recommend"};
+    private String[] wordBack = {"today", "night / dinner", "finish", "after", "family", "drama", "recommend"};
 
-    final static String[] wordPronunciation = {"-", "-", "[끈나다]", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "[끈나다]", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "뭐 해요?",
             "저녁에 뭐 해요?",
             "오늘 저녁에 뭐 해요?",
@@ -41,7 +41,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
             "저도 추천해 주세요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "What do you do?",
             "What do you do at night?",
             "What will you do at night today?",
@@ -58,14 +58,14 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
             "to watch",
             "Do you watch?",
             "Do you watch dramas?",
-            "Did you watch any dramas recently?",
+            "Do you watch any dramas recently?",
             "recommend",
             "I recommend.",
             "Please recommend.",
             "Please recommend me too."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "You can also say '뭐 할거예요?' when using future tense like you learned in previous lesson.\nBut in situations where the content of the future is clear, such as 'tonight',\nyou can use the present tense.",
@@ -89,14 +89,28 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "일이 끝난 후에 가족이랑 저녁을 먹어요.",
             "저녁을 먹은 후에 드라마를 볼 거예요.",
             "요즘 드라마 봐요?",
             "저도 추천해 주세요."
     };
 
-    final static int[] peopleImage = {4,3};
+    private int[] peopleImage = {4,3};
+
+    private String[] reviewFront = {
+            "일이 끝난 후에 가족이랑 저녁을 먹어요.",
+            "저녁을 먹은 후에 드라마를 볼 거예요.",
+            "요즘 드라마 봐요?",
+            "추천해 주세요."
+    };
+
+    private String[] reviewBack = {
+            "I'll have a dinner after finishing work with my family.",
+            "I'll watch a drama after having dinner.",
+            "Do you watch any dramas recently?",
+            "Please recommend."
+    };
 
 
     @Override
@@ -147,6 +161,16 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

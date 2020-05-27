@@ -132,15 +132,21 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnCorrection :
-                WritingEntity entity = saveWriting();
-                if(entity == null) {
-                    entity = editWriting;
+
+                if(letters > 9) {
+                    WritingEntity entity = saveWriting();
+                    if(entity == null) {
+                        entity = editWriting;
+                    }
+                    Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SAVED), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this, Teachers.class);
+                    intent.putExtra(getString(R.string.EXTRA_ENTITY), entity);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SHORT), Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(getApplicationContext(), getString(R.string.WRITING_SAVED), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this, Teachers.class);
-                intent.putExtra(getString(R.string.EXTRA_ENTITY), entity);
-                startActivity(intent);
-                finish();
                 break;
 
             case R.id.btnBack :

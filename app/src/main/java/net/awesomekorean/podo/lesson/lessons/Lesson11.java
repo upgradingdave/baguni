@@ -11,13 +11,13 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~고";
     private int lessonImage = R.drawable.listing;
 
-    final static String[] wordFront = {"좋아하다", "네", "제일", "왜", "그리고", "잘", "노래를 부르다", "춤을 추다"};
+    private String[] wordFront = {"좋아하다", "네", "제일", "왜", "그리고", "잘", "노래를 부르다", "춤을 추다"};
 
-    final static String[] wordBack = {"like", "yes", "the most", "why", "and", "well", "sing a song", "dance"};
+    private String[] wordBack = {"like", "yes", "the most", "why", "and", "well", "sing a song", "dance"};
 
-    final static String[] wordPronunciation = {"[조아하다]", "-", "-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"[조아하다]", "-", "-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "좋아하다",
             "좋아해요?",
             "K-pop을 좋아해요?",
@@ -38,7 +38,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
             "BTS는 노래를 잘 부르고 춤도 잘 춰요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "like",
             "Do you like?",
             "Do you like K-pop?",
@@ -59,7 +59,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
             "BTS is good at singing and dancing as well."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "-",
@@ -80,14 +80,30 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
             "Use '~고' to combine two sentences together using '그리고'.\n\nex) '부르다' -> '부르' + '고' = '부르고'"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "K-pop을 좋아해요?",
             "네, 저는 BTS를 제일 좋아해요.",
             "BTS를 왜 좋아해요?",
             "BTS는 노래를 잘 불러요.\n그리고 춤도 잘 춰요."
     };
 
-    final static int[] peopleImage = {9,10};
+    private int[] peopleImage = {9,10};
+
+    private String[] reviewFront = {
+            "K-pop을 좋아해요?",
+            "네, 저는 BTS를 제일 좋아해요.",
+            "BTS를 왜 좋아해요?",
+            "BTS는 노래를 잘 불러요.",
+            "춤도 잘 춰요."
+    };
+
+    private String[] reviewBack = {
+            "Do you like K-pop?",
+            "Yes, I like BTS the most.",
+            "Why do you like BTS?",
+            "BTS sings a song well.",
+            "good at dancing as well."
+    };
 
 
     @Override
@@ -138,6 +154,16 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
     // 레슨어뎁터 아이템

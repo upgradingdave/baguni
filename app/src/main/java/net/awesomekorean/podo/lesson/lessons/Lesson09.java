@@ -11,13 +11,13 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~에서~까지";
     private int lessonImage = R.drawable.range1;
 
-    final static String[] wordFront = {"회사", "어떻게", "지하철", "걸리다"};
+    private String[] wordFront = {"회사", "어떻게", "지하철", "걸리다"};
 
-    final static String[] wordBack = {"company", "how", "subway", "take time"};
+    private String[] wordBack = {"company", "how", "subway", "take time"};
 
-    final static String[] wordPronunciation = {"-", "[어떠케]", "-", "-"};
+    private String[] wordPronunciation = {"-", "[어떠케]", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "가다",
             "가요?",
             "어떻게 가요?",
@@ -32,7 +32,7 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
             "30분 걸려요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "to go",
             "Do you go?",
             "How do you go?",
@@ -47,7 +47,7 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
             "It takes 30 mins."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "-",
             "-",
@@ -63,14 +63,28 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "집에서 회사까지 어떻게 가요?",
             "지하철을 타요.",
             "얼마나 걸려요?",
             "30분 걸려요."
     };
 
-    final static int[] peopleImage = {5,6};
+    private int[] peopleImage = {5,6};
+
+    private String[] reviewFront = {
+            "집에서 회사까지 어떻게 가요?",
+            "지하철을 타요.",
+            "얼마나 걸려요?",
+            "30분 걸려요."
+    };
+
+    private String[] reviewBack = {
+            "How do you get to the company from home.",
+            "I take a subway.",
+            "How long does it take?",
+            "It takes 30 mins."
+    };
 
 
     @Override
@@ -121,6 +135,16 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

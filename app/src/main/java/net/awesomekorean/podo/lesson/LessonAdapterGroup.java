@@ -133,9 +133,7 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
 
 
         // 단어 테스트 타이틀
-        if (groupTitle[groupPosition].equals("Quiz")) {
-
-            holder.lessonCategoryTitle.setText("Vocabulary Quiz");
+        if (groupTitle[groupPosition].equals("Review")) {
 
             holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
 
@@ -146,8 +144,6 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
             holder.lessonProgressPercent.setVisibility(View.GONE);
 
             holder.lessonComplete.setVisibility(View.GONE);
-
-            holder.lessonArrow.setVisibility(View.GONE);
 
 
         } else if (groupProcess[groupPosition] == 100) {

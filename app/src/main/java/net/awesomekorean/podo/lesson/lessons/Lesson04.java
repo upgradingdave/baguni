@@ -11,13 +11,13 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~았/었어요";
     private int lessonImage = R.drawable.pasttense;
 
-    final static String[] wordFront = {"어제", "집", "아니요", "쇼핑"};
+    private String[] wordFront = {"어제", "집", "아니요", "쇼핑"};
 
-    final static String[] wordBack = {"yesterday", "home", "no", "shopping"};
+    private String[] wordBack = {"yesterday", "home", "no", "shopping"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "있다",
             "있어요",
             "있었어요?",
@@ -32,7 +32,7 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
             "쇼핑 했어요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "to be",
             "to be",
             "were you?",
@@ -47,7 +47,7 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
             "I went shopping."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "conjugate '아요/어요'\n: '있다' -> '있' + '어요' = '있어요'",
             "When you say past tense, you only need to put 'ㅆ어' into the form of '아요/어요'.\nTherefore, we can call the past tense to '았어요/었어요' form.\n'있어요' -> '있어(ㅆ어)요' = '있었어요'",
@@ -62,14 +62,26 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "어제 집에 있었어요?",
             "아니요.",
             "어제 뭐 했어요?",
             "쇼핑 했어요."
     };
 
-    final static int[] peopleImage = {7,8};
+    private int[] peopleImage = {7,8};
+
+    private String[] reviewFront = {
+            "어제 집에 있었어요?",
+            "어제 뭐 했어요?",
+            "쇼핑 했어요."
+    };
+
+    private String[] reviewBack = {
+            "Were you at home yesterday?",
+            "What did you do yesterday?",
+            "I went shopping."
+    };
 
 
     @Override
@@ -120,6 +132,16 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

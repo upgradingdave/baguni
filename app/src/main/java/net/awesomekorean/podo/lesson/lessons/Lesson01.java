@@ -13,13 +13,13 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "저는 데니예요";
     private int lessonImage = R.drawable.selfintroduction;
 
-    final static String[] wordFront = {"이름", "뭐", "어느", "나라", "사람", "한국"};
+    private String[] wordFront = {"이름", "뭐", "어느", "나라", "사람", "한국"};
 
-    final static String[] wordBack = {"name", "what", "which", "country", "people", "Korea"};
+    private String[] wordBack = {"name", "what", "which", "country", "people", "Korea"};
 
-    final static String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "뭐",
             "뭐예요?",
             "이름이 뭐예요?",
@@ -31,7 +31,7 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
             "사람이에요",
             "한국 사람이에요."};
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "what",
             "what is it?",
             "What is your name?",
@@ -44,7 +44,7 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
             "I’m Korean."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "-",
             "This expression is very useful when you have questions.\nYou can point your finger at something you don't know and say ‘이거 뭐예요?’ (what's this?)\nWhen you point something out a little farther away, you can say '저거 뭐예요?' (what's that?)",
             "You may be wondering what '이' is after '이름'.\nThis is the main challenge for Korean language learners, called 'subject particle' but don't struggle to know it now.\nJust remember that you can also say '이름 뭐예요?' but '이름이 뭐예요?' is a better expression.\nIt is important to get used to it in this level.\n(See the special lesson ‘particles 1 : Why we use particles?)",
@@ -57,13 +57,26 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
             "Find out what your country is in Korean and make it into a sentence."
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "이름이 뭐예요?",
             "데니예요.",
             "어느 나라 사람이에요?",
-            "한국 사람이에요."};
+            "한국 사람이에요."
+    };
 
-    final static int[] peopleImage = {2,1};
+    private int[] peopleImage = {2,1};
+
+    private String[] reviewFront = {
+            "이름이 뭐예요?",
+            "어느 나라 사람이에요?",
+            "한국 사람이에요."
+    };
+
+    private String[] reviewBack = {
+            "What is your name?",
+            "Where are you from?",
+            "I’m Korean."
+    };
 
 
     @Override
@@ -114,6 +127,16 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 

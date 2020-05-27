@@ -11,13 +11,13 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~전에";
     private int lessonImage = R.drawable.timeexpression1;
 
-    final static String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
+    private String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
 
-    final static String[] wordBack = {"have a cold", "to eat", "medicine", "rice / meal", "before"};
+    private String[] wordBack = {"have a cold", "to eat", "medicine", "rice / meal", "before"};
 
-    final static String[] wordPronunciation = {"-", "[먹따]", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "[먹따]", "-", "-", "-"};
 
-    final static String[] sentenceFront = {
+    private String[] sentenceFront = {
             "감기에 걸리다",
             "감기에 걸렸어요.",
             "먹다",
@@ -30,7 +30,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
             "밥을 먹기 30분 전에 먹어요."
     };
 
-    final static String[] sentenceBack = {
+    private String[] sentenceBack = {
             "have a cold",
             "I had a cold.",
             "to eat",
@@ -43,7 +43,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
             "Take this medicine 30 minutes before you have a meal."
     };
 
-    final static String[] sentenceExplain = {
+    private String[] sentenceExplain = {
             "감기' and '걸리다' is a commonly used word, so it is good to memorize it together.",
             "-",
             "-",
@@ -56,14 +56,28 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
             "-"
     };
 
-    final static String[] dialog = {
+    private String[] dialog = {
             "감기에 걸렸어요.",
             "이 약을 먹어요.",
             "어떻게 먹어요?",
             "밥을 먹기 30분 전에 먹어요."
     };
 
-    final static int[] peopleImage = {1,2};
+    private int[] peopleImage = {1,2};
+
+    private String[] reviewFront = {
+            "감기에 걸렸어요.",
+            "이 약을 먹어요.",
+            "어떻게 먹어요?",
+            "밥을 먹기 30분 전에 먹어요."
+    };
+
+    private String[] reviewBack = {
+            "I had a cold.",
+            "Take this medicine.",
+            "How do I take it?",
+            "Take this medicine 30 minutes before you have a meal."
+    };
 
 
     @Override
@@ -114,6 +128,16 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String[] getSentenceExplain() {
         return sentenceExplain;
+    }
+
+    @Override
+    public String[] getReviewFront() {
+        return reviewFront;
+    }
+
+    @Override
+    public String[] getReviewBack() {
+        return reviewBack;
     }
 
 
