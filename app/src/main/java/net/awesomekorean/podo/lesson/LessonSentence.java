@@ -3,6 +3,7 @@ package net.awesomekorean.podo.lesson;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -86,8 +87,6 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
         lessonCount = 0;
 
-        LessonFrame.swipePage = getString(R.string.LESSON_SENTENCE);
-
         viewLeft = view.findViewById(R.id.viewLeft);
         viewRight = view.findViewById(R.id.viewRight);
         lessonLayout = view.findViewById(R.id.lessonLayout);
@@ -104,11 +103,10 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
         lesson = LessonFrame.lesson;
         folder = "lesson/" + lesson.getLessonId().toLowerCase();
 
-        LessonSwipeListener gestureListener = new LessonSwipeListener();
+        SwipeListenerSentence gestureListener = new SwipeListenerSentence();
         gestureListener.setActivity(activity);
         gestureDetectorCompat = new GestureDetectorCompat(activity, gestureListener);
 
-        lessonLayout.setOnTouchListener(this);
         scrollView.setOnTouchListener(this);
 
         // analytics 로그 이벤트 얻기

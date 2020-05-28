@@ -153,13 +153,15 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                             } else if(lessonItem.getLessonTitle().equals("ranking")) {
 
-                            } else if(lessonItem.getLessonTitle().equals("sentence")) {
-
                             } else {
 
                                 if(lessonItem.getLessonTitle().equals("word")) {
 
                                     intent = new Intent(context, LessonReviewWord.class);
+
+                                } else if(lessonItem.getLessonTitle().equals("sentence")) {
+
+                                    intent = new Intent(context, LessonReviewSentence.class);
 
                                 } else {
 

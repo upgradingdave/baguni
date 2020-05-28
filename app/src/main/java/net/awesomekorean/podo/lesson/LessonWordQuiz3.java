@@ -127,10 +127,10 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
                     if(tvAnswer.getText().toString().equals(word)) { // 정답
 
-                        answered(selectedBtn, 0, R.drawable.bg_white_10_stroke_purple);
+                        answered(0, R.drawable.bg_white_10_stroke_purple);
 
                     } else {  // 오답
-                        answered(selectedBtn, 1, R.drawable.bg_white_10_stroke_red);
+                        answered(1, R.drawable.bg_white_10_stroke_red);
                     }
 
                     Handler handler = new Handler();
@@ -173,7 +173,7 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
     }
 
 
-    private void answered(Button selectedBtn, int sound, int outline) {
+    private void answered(int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
         answerLayout.setBackground(ContextCompat.getDrawable(activity, outline));
     }

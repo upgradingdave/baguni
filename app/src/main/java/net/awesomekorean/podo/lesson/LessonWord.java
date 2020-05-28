@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
@@ -66,8 +67,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         return new LessonWord();
     }
 
-    private GestureDetectorCompat gestureDetectorCompat = null;
-
     MediaPlayerManager mediaPlayerManager;
 
     private LessonFrame activity;
@@ -79,7 +78,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
 
         view = inflater.inflate(R.layout.lesson_word, container, false);
 
-        activity.swipePage = getString(R.string.LESSONWORD);
         lessonCount = 0; // 레슨진도초기화
 
         viewLeft = view.findViewById(R.id.viewLeft);
@@ -105,20 +103,6 @@ public class LessonWord extends Fragment implements Button.OnClickListener{
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_word", bundle);
-
-        LessonSwipeListener gestureListener = new LessonSwipeListener();
-
-        gestureListener.setActivity(activity);
-
-        gestureDetectorCompat = new GestureDetectorCompat(activity, gestureListener);
-
-        lessonLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                gestureDetectorCompat.onTouchEvent(event);
-                return false;
-            }
-        });
 
         readyForLesson();
 

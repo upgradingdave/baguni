@@ -3,7 +3,6 @@ package net.awesomekorean.podo.lesson;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -12,37 +11,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.ConfirmQuit;
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.SettingStatusBar;
-import net.awesomekorean.podo.SharedPreferencesInfo;
-import net.awesomekorean.podo.UnlockActivity;
-import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
-import net.awesomekorean.podo.lesson.lessons.LessonItem;
-
-import org.w3c.dom.ls.LSException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,9 +52,6 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     public static TextView navigationSentence;
     public static TextView navigationDialog;
 
-    private GestureDetectorCompat gestureDetectorCompat = null;
-    public static String swipePage;
-
     FragmentManager fm;
     FragmentTransaction ft;
     LessonWord lessonWord = LessonWord.newInstance();
@@ -84,7 +66,13 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
     static Map<Integer, byte[]> wordAudioByte = new HashMap<>();
 
-    LessonSwipeListener gestureListener;
+    SwipeListenerWord gestureListenerWord;
+    SwipeListenerSentence gestureListenerSentence;
+
+    private GestureDetectorCompat gestureDetectorCompatWord = null;
+    private GestureDetectorCompat gestureDetectorCompatSentence = null;
+
+    Fragment currentFragment;
 
 
     @Override
@@ -94,9 +82,12 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
         context = getApplicationContext();
 
-        gestureListener = new LessonSwipeListener();
-        gestureListener.setActivity(this);
-        gestureDetectorCompat = new GestureDetectorCompat(this, gestureListener);
+        gestureListenerWord = new SwipeListenerWord();
+        gestureListenerSentence = new SwipeListenerSentence();
+        gestureListenerWord.setActivity(this);
+        gestureListenerSentence.setActivity(this);
+        gestureDetectorCompatWord = new GestureDetectorCompat(this, gestureListenerWord);
+        gestureDetectorCompatSentence = new GestureDetectorCompat(this, gestureListenerSentence);
 
         navigationWord = findViewById(R.id.navigationWord);
         navigationQuiz = findViewById(R.id.navigationQuiz);
@@ -186,8 +177,12 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //Pass activity on touch event to the gesture detector
-        gestureDetectorCompat.onTouchEvent(event);
+        if(currentFragment != null && currentFragment instanceof LessonWord) {
+            gestureDetectorCompatWord.onTouchEvent(event);
+
+        } else if (currentFragment != null && currentFragment instanceof LessonSentence) {
+            gestureDetectorCompatSentence.onTouchEvent(event);
+        }
         return true;
     }
 
@@ -197,6 +192,10 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         ft = fm.beginTransaction();
         ft.replace(R.id.lessonFrame, fragment);
         ft.commitAllowingStateLoss();
+
+        if(fragment instanceof LessonWord || fragment instanceof LessonSentence) {
+            currentFragment = fragment;
+        }
     }
 
 

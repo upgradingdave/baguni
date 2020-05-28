@@ -24,6 +24,8 @@ public class AdsManager {
 
     private String ADMOB_ID_REWARDED = "ca-app-pub-7371634469098812/2074896515";
 
+    private String ADMOB_ID_NATIVE = "ca-app-pub-7371634469098812/4870095522";
+
     Activity activity;
 
     public InterstitialAd interstitialAd;
@@ -45,7 +47,7 @@ public class AdsManager {
 
         interstitialAd = new InterstitialAd(context);
 
-        interstitialAd.setAdUnitId(ADMOB_ID_FULL_SCREEN);
+        interstitialAd.setAdUnitId(ADMOB_TEST_ID_FULL_SCREEN);
 
         interstitialAd.loadAd(new AdRequest.Builder().build());
 
@@ -102,7 +104,7 @@ public class AdsManager {
     // 리워드 광고 로드하기
     public RewardedAd loadRewardAds(Context context) {
 
-        rewardedAd = new RewardedAd(context, ADMOB_ID_REWARDED);
+        rewardedAd = new RewardedAd(context, ADMOB_TEST_ID_REWARDED);
 
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
 

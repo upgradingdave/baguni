@@ -134,10 +134,10 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
                     if(tvAnswer.getText().toString().equals(sentence)) { // 정답
 
-                        answered(selectedBtn, 0, R.drawable.bg_white_10_stroke_purple);
+                        answered(0, R.drawable.bg_white_10_stroke_purple);
 
                     } else {  // 오답
-                        answered(selectedBtn, 1, R.drawable.bg_white_10_stroke_red);
+                        answered(1, R.drawable.bg_white_10_stroke_red);
                     }
 
                     flexboxLayout.removeAllViews();
@@ -147,9 +147,18 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
                         @Override
                         public void run() {
 
-                            quizCount++;
+                            if(tvAnswer.getText().toString().equals(sentence)) { // 정답
 
-                            countText.setText(quizCount + " sentences");
+                                quizCount++;
+
+                                countText.setText(quizCount + " sentences");
+
+                                makeQuiz(false);
+
+                            } else {
+
+                                makeQuiz(true);
+                            }
 
                             tvAnswer.setText("");
 
@@ -157,7 +166,6 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
                             answerLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
 
-                            makeQuiz();
 
                         }
                     }, 2000);
@@ -169,8 +177,9 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
     }
 
 
-    private void answered(Button selectedBtn, int sound, int outline) {
+    private void answered(int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
+        meaning.setText(lesson.getFront().get(reviewIndex));
         answerLayout.setBackground(ContextCompat.getDrawable(this, outline));
     }
 
@@ -184,9 +193,11 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
 
     // word의 단어를 음절로 나누고 램덤으로 섞어서 버튼으로 만들어 줌
-    public void makeQuiz() {
+    public void makeQuiz(boolean isRepeat) {
 
-        reviewIndex = getRandomNum(lesson.getFront().size());
+        if(!isRepeat) {
+            reviewIndex = getRandomNum(lesson.getFront().size());
+        }
 
         sentence = lesson.getFront().get(reviewIndex);
 
@@ -253,7 +264,7 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
                         loadingLayout.setVisibility(View.GONE);
 
-                        makeQuiz();
+                        makeQuiz(false);
                     }
                 }
             });

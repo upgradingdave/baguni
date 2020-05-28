@@ -9,7 +9,7 @@ public class R_Sentence_Lesson00 extends LessonInit implements LessonReview, Les
 
     private String lessonId = "RS_00";
     private String lessonTitle = "sentence";
-    private String lessonSubTitle = "coming soon";
+    private String lessonSubTitle = "review";
     private int lessonImage = R.drawable.l_12_word_2;
 
     private List<String> front = new ArrayList<>();
