@@ -59,7 +59,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         adsManager = AdsManager.getInstance();
 
         if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
-            adsManager.loadFullAds(context);
+            adsManager.loadFullAds();
         }
 
         selectResult = findViewById(R.id.selectResult);

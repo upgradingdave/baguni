@@ -104,7 +104,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
 
-            adsManager.loadRewardAds(context);
+            adsManager.loadRewardAds();
         }
 
         btnBack = findViewById(R.id.btnBack);
@@ -334,7 +334,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
                     @Override
                     public void onRewardedAdClosed() {
-                        adsManager.loadRewardAds(context);
+                        adsManager.loadRewardAds();
                     }
                 };
                 adsManager.rewardedAd.show(Profile.this, adCallback);

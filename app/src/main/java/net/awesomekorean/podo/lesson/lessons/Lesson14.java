@@ -102,14 +102,14 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
             "일이 끝난 후에 가족이랑 저녁을 먹어요.",
             "저녁을 먹은 후에 드라마를 볼 거예요.",
             "요즘 드라마 봐요?",
-            "추천해 주세요."
+            "저도 추천해 주세요."
     };
 
     private String[] reviewBack = {
             "I'll have a dinner after finishing work with my family.",
             "I'll watch a drama after having dinner.",
             "Do you watch any dramas recently?",
-            "Please recommend."
+            "Please recommend me too."
     };
 
 

@@ -53,6 +53,9 @@ import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessons.R_Ranking_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson00;
+import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson01;
+import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson02;
+import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson03;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson02;
@@ -112,15 +115,15 @@ public class MainLesson extends Fragment{
             {new Lesson07(), new Lesson08(), new S_Lesson08()},
             {new Lesson09(), new Lesson10(), new S_Lesson05()},
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
-            {new R_Word_Lesson01(), new R_Sentence_Lesson00(), new R_Ranking_Lesson00() },
+            {new R_Word_Lesson01(), new R_Sentence_Lesson01(), new R_Ranking_Lesson00() },
             {new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson22()},
             {new Lesson15(), new Lesson16(), new S_Lesson12()},
             {new Lesson17(), new Lesson20(), new S_Lesson13()},
-            {new R_Word_Lesson02(), new R_Sentence_Lesson00(), new R_Ranking_Lesson00()},
+            {new R_Word_Lesson02(), new R_Sentence_Lesson02(), new R_Ranking_Lesson00()},
             {new Lesson18(), new Lesson21(), new S_Lesson07()},
             {new Lesson23(), new Lesson24(), new S_Lesson09()},
             {new Lesson25(), new Lesson26()},
-            {new R_Word_Lesson03(), new R_Sentence_Lesson00(), new R_Ranking_Lesson00()},
+            {new R_Word_Lesson03(), new R_Sentence_Lesson03(), new R_Ranking_Lesson00()},
             {}
     };
 

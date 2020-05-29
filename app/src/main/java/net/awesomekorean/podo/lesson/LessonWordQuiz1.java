@@ -152,7 +152,7 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
     }
 
 
-    public void makeNextQuiz(final View selectedBtn) {
+    public void makeNextQuiz(final View selectedBtn, final boolean isCorrect) {
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -167,8 +167,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                 answer.setVisibility(View.GONE);
                 btnAudio.setVisibility(View.VISIBLE);
 
-                LessonFrame.progressCount++;
-                LessonFrame.progressCount();
+                if(isCorrect) {
+                    LessonFrame.progressCount++;
+                    LessonFrame.progressCount();
+                }
 
                 if(solveWrongQuizAgain) {
                     // 오답이 있을 경우, 해당 문제 다시 출력
@@ -224,10 +226,10 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
                 }
 
                 if(lesson.getWordBack()[quizNoNow].equals(lesson.getWordBack()[answerArray[selectedBtnNo]])) {
-                    answered(view, 0, R.drawable.bg_white_10_stroke_purple);
+                    answered(view, 0, R.drawable.bg_white_10_stroke_purple, true);
                 } else {
                     wrongQuizList.add(quizNoNow);
-                    answered(view, 1, R.drawable.bg_white_10_stroke_red);
+                    answered(view, 1, R.drawable.bg_white_10_stroke_red, false);
                 }
                 break;
         }
@@ -235,13 +237,13 @@ public class LessonWordQuiz1 extends Fragment implements Button.OnClickListener 
 
 
     // 정답/오답 소리 출력하고 선택한 이미지에 파란색/빨간색 테두리
-    private void answered(View view, int sound, int outline) {
+    private void answered(View view, int sound, int outline, boolean isCorrect) {
         playSoundPool.playSoundLesson(sound);
         view.setBackground(ContextCompat.getDrawable(activity, outline));
         answer.setVisibility(View.VISIBLE);
         btnAudio.setVisibility(View.GONE);
 
-        makeNextQuiz(view);
+        makeNextQuiz(view, isCorrect);
     }
 
 

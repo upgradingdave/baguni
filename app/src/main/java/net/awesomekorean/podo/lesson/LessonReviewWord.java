@@ -1,22 +1,27 @@
 package net.awesomekorean.podo.lesson;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
@@ -44,8 +49,11 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
     ImageView btnAudio;
     ImageView btnClose;
     TextView countText;
-    LinearLayout loadingLayout;
+    ConstraintLayout loadingLayout;
     ProgressBar loading;
+    TemplateView templateView;
+    Button btnStart;
+    TextView loadingText;
 
 
     int[] answerList = new int[4]; // 정답 및 보기 리스트
@@ -65,6 +73,8 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
     Map<Integer, byte[]> wordAudioByte = new HashMap<>();
 
     int audioDownloadProgress;
+
+    AdsManager adsManager;
 
 
     @Override
@@ -88,12 +98,22 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
         countText = findViewById(R.id.countText);
         loadingLayout = findViewById(R.id.loadingLayout);
         loading = findViewById(R.id.loading);
+        templateView = findViewById(R.id.templateView);
+        btnStart = findViewById(R.id.btnStart);
+        loadingText = findViewById(R.id.loadingText);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
         btnAudio.setOnClickListener(this);
         btnClose.setOnClickListener(this);
+        btnStart.setOnClickListener(this);
+
+        adsManager = AdsManager.getInstance();
+
+        if (adsManager.unifiedNativeAd == null) {
+            adsManager.loadNativeAds();
+        }
 
         // analytics 로그 이벤트 얻기
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -169,7 +189,12 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
 
     public void setImageAndAudio() {
 
-        loadingLayout.setVisibility(View.VISIBLE);
+        setLoadingLayout(View.VISIBLE, View.VISIBLE, View.GONE);
+
+        // 네이티브 광고 출력
+        if(adsManager.unifiedNativeAd != null) {
+            templateView.setNativeAd(adsManager.unifiedNativeAd);
+        }
 
         audioDownloadProgress = 0;
 
@@ -196,13 +221,19 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                     // 오디오 다운로드 끝나면
                     if(audioDownloadProgress == lesson.getFront().size()) {
 
-                        loadingLayout.setVisibility(View.GONE);
-
-                        makeQuiz(true);
+                        setLoadingLayout(View.VISIBLE, View.GONE, View.VISIBLE);
                     }
                 }
             });
         }
+    }
+
+
+    public void setLoadingLayout(int layout, int text, int btn) {
+
+        loadingLayout.setVisibility(layout);
+        loadingText.setVisibility(text);
+        btnStart.setVisibility(btn);
     }
 
 
@@ -244,6 +275,16 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
             case R.id.btnClose :
 
                 finish();
+
+                break;
+
+            case R.id.btnStart :
+
+                loadingLayout.setVisibility(View.GONE);
+
+                adsManager.loadNativeAds();
+
+                makeQuiz(true);
 
                 break;
 

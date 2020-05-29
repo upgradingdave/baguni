@@ -16,12 +16,14 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
@@ -43,10 +45,6 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
     TextView meaning;
 
     ConstraintLayout answerLayout;
-
-    LinearLayout loadingLayout;
-
-    ProgressBar loading;
 
     TextView countText;
 
@@ -80,6 +78,19 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
     int reviewIndex;
 
+    ConstraintLayout loadingLayout;
+
+    ProgressBar loading;
+
+    TemplateView templateView;
+
+    Button btnStart;
+
+    TextView loadingText;
+
+    AdsManager adsManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +107,9 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
         flexboxLayout = findViewById(R.id.flexboxLayout);
         loadingLayout = findViewById(R.id.loadingLayout);
         loading = findViewById(R.id.loading);
+        templateView = findViewById(R.id.templateView);
+        btnStart = findViewById(R.id.btnStart);
+        loadingText = findViewById(R.id.loadingText);
         countText = findViewById(R.id.countText);
         btnAudio = findViewById(R.id.btnAudio);
         btnReset = findViewById(R.id.btnReset);
@@ -104,6 +118,14 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
         btnReset.setOnClickListener(this);
         btnTranslate.setOnClickListener(this);
         btnClose.setOnClickListener(this);
+        btnStart.setOnClickListener(this);
+
+        adsManager = AdsManager.getInstance();
+
+        if (adsManager.unifiedNativeAd == null) {
+            adsManager.loadNativeAds();
+        }
+
 
         // analytics 로그 이벤트 얻기
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -237,7 +259,12 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
     public void setImageAndAudio() {
 
-        loadingLayout.setVisibility(View.VISIBLE);
+        setLoadingLayout(View.VISIBLE, View.VISIBLE, View.GONE);
+
+        // 네이티브 광고 출력
+        if(adsManager.unifiedNativeAd != null) {
+            templateView.setNativeAd(adsManager.unifiedNativeAd);
+        }
 
         audioDownloadProgress = 0;
 
@@ -262,13 +289,19 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
                     // 오디오 다운로드 끝나면
                     if(audioDownloadProgress == lesson.getFront().size()) {
 
-                        loadingLayout.setVisibility(View.GONE);
-
-                        makeQuiz(false);
+                        setLoadingLayout(View.VISIBLE, View.GONE, View.VISIBLE);
                     }
                 }
             });
         }
+    }
+
+
+    public void setLoadingLayout(int layout, int text, int btn) {
+
+        loadingLayout.setVisibility(layout);
+        loadingText.setVisibility(text);
+        btnStart.setVisibility(btn);
     }
 
 
@@ -311,6 +344,16 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
             case R.id.btnClose :
 
                 finish();
+
+                break;
+
+            case R.id.btnStart :
+
+                loadingLayout.setVisibility(View.GONE);
+
+                adsManager.loadNativeAds();
+
+                makeQuiz(false);
 
                 break;
         }

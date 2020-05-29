@@ -114,6 +114,8 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
 
                 Button selectedBtn = (Button) view;
 
+                selectedBtn.setVisibility(View.INVISIBLE);
+
                 String selectedBtnText = selectedBtn.getText().toString();
 
                 if(tvAnswer.getText().length() != word.length()) {
@@ -133,26 +135,31 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
                         answered(1, R.drawable.bg_white_10_stroke_red);
                     }
 
+                    flexboxLayout.removeAllViews();
+
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
 
-                            if(tvAnswer.getText().toString().equals(word)) {
+                            if(tvAnswer.getText().toString().equals(word)) { // 정답
                                 quizCount++;
 
                                 LessonFrame.progressCount++;
                                 LessonFrame.progressCount();
 
                                 if (quizCount != lesson.getWordFront().length) {  // 문제가 남아있을 때
-                                    flexboxLayout.removeAllViews();
                                     makeQuiz();
 
                                 } else {  // 문제 다 풀었을 때
                                     quizCount = 0;
                                     activity.replaceFragment(LessonSentence.newInstance());
                                 }
+
+                            } else {
+                                makeQuiz();
                             }
+
                             tvAnswer.setText("");
                             btnReset.setVisibility(View.GONE);
                             try {
@@ -222,6 +229,15 @@ public class LessonWordQuiz3 extends Fragment implements Button.OnClickListener{
         switch (v.getId()) {
 
             case R.id.btnReset :
+                int childCount = flexboxLayout.getChildCount();
+
+                for(int i=0; i<childCount; i++) {
+
+                    View currentChild = flexboxLayout.getChildAt(i);
+
+                    currentChild.setVisibility(View.VISIBLE);
+                }
+
                 tvAnswer.setText("");
                 btnReset.setVisibility(View.GONE);
                 break;
