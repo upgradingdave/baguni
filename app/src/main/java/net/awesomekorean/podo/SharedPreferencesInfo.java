@@ -44,6 +44,22 @@ public class SharedPreferencesInfo {
         editor.commit();
     }
 
+    // 엡에서 유저 이름 불러오기
+    public static String getUserName(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("userName", MODE_PRIVATE);
+        String stringFromSP = sp.getString("userName", "");
+        return stringFromSP;
+    }
+
+    // 엡에서 유저 이름 저장하기
+    public static void setUserName(Context context, String userName) {
+        SharedPreferences sp = context.getSharedPreferences("userName", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("userName", userName);
+        editor.commit();
+    }
+
+
 
     // 마지막 동기화 날짜(UNIX 타임스탬프) 불러오기
     public static Long getDateLastSync(Context context) {

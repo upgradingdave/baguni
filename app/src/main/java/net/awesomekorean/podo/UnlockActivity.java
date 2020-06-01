@@ -80,7 +80,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
         if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
 
-            adsManager.loadRewardAds();
+            adsManager.loadRewardAds(context);
         }
 
         unlockFirst = findViewById(R.id.unlockFirst);
@@ -252,7 +252,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
                     @Override
                     public void onRewardedAdClosed() {
-                        adsManager.loadRewardAds();
+                        adsManager.loadRewardAds(context);
                     }
                 };
                 adsManager.rewardedAd.show(UnlockActivity.this, adCallback);

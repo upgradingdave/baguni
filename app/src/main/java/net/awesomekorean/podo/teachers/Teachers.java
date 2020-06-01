@@ -61,8 +61,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
     String teacherName;
     String teacherId;
     String teacherEmail;
-    String userName;
-    String userEmail;
 
     LinearLayout requestResult;
 
@@ -88,9 +86,6 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
         btnBack.setOnClickListener(this);
         btnTopUp.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
-
-        userName = MainActivity.userName;
-        userEmail = MainActivity.userEmail;
 
         int color = ContextCompat.getColor(this, R.color.PURPLE);
         progressBar.setIndeterminate(true);
@@ -169,12 +164,15 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
             case R.id.btnSubmit :
                 btnSubmit.setEnabled(false);
 
+                String userEmail = SharedPreferencesInfo.getUserEmail(this);
+                String userName = SharedPreferencesInfo.getUserName(this);
+
                 int newPoints = pointsHave - pointsNeed;
 
                 final UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 userInformation.setPoints(newPoints);
 
-                DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
                 informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

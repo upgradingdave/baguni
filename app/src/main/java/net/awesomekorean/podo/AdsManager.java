@@ -18,8 +18,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class AdsManager {
 
-    private Context context;
-
     private String ADMOB_APP_ID = "ca-app-pub-7371634469098812~7867291008";
 
     private String ADMOB_TEST_ID_FULL_SCREEN = "ca-app-pub-3940256099942544/1033173712";
@@ -49,14 +47,9 @@ public class AdsManager {
         return instance;
     }
 
-    public void initAdsManager(Context context) {
-
-        this.context = context;
-    }
-
 
     // 전면광고 로드
-    public void loadFullAds() {
+    public void loadFullAds(Context context) {
 
         MobileAds.initialize(context, ADMOB_APP_ID);
 
@@ -117,7 +110,9 @@ public class AdsManager {
 
 
     // 리워드 광고 로드하기
-    public void loadRewardAds() {
+    public void loadRewardAds(Context context) {
+
+        MobileAds.initialize(context, ADMOB_APP_ID);
 
         rewardedAd = new RewardedAd(context, ADMOB_ID_REWARDED);
 
@@ -141,7 +136,9 @@ public class AdsManager {
 
 
     // 네이티브 광고 로드하기
-    public void loadNativeAds() {
+    public void loadNativeAds(Context context) {
+
+        MobileAds.initialize(context, ADMOB_APP_ID);
 
         AdLoader adLoader = new AdLoader.Builder(context, ADMOB_ID_NATIVE)
 

@@ -112,13 +112,15 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
         adsManager = AdsManager.getInstance();
 
         if (adsManager.unifiedNativeAd == null) {
-            adsManager.loadNativeAds();
+            adsManager.loadNativeAds(this);
         }
 
         // analytics 로그 이벤트 얻기
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_review_word", bundle);
+        firebaseAnalytics.logEvent("native_watch", bundle);
+
 
         lesson = (LessonReview) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
 
@@ -282,7 +284,7 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
 
                 loadingLayout.setVisibility(View.GONE);
 
-                adsManager.loadNativeAds();
+                adsManager.loadNativeAds(this);
 
                 makeQuiz(true);
 

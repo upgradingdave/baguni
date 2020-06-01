@@ -123,7 +123,7 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
         adsManager = AdsManager.getInstance();
 
         if (adsManager.unifiedNativeAd == null) {
-            adsManager.loadNativeAds();
+            adsManager.loadNativeAds(this);
         }
 
 
@@ -131,6 +131,8 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_review_sentence", bundle);
+        firebaseAnalytics.logEvent("native_watch", bundle);
+
 
         playSoundPool = new PlaySoundPool(this);
 
@@ -351,7 +353,7 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
                 loadingLayout.setVisibility(View.GONE);
 
-                adsManager.loadNativeAds();
+                adsManager.loadNativeAds(this);
 
                 makeQuiz(false);
 

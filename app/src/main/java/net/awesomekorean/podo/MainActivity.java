@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
 
         SharedPreferencesInfo.setUserEmail(getApplicationContext(), userEmail);
+        SharedPreferencesInfo.setUserName(getApplicationContext(), userName);
 
         crashlytics.log("setting CustomKey");
         crashlytics.setCustomKey("userEmail", userEmail);

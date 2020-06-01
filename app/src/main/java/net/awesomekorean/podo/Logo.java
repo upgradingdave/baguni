@@ -51,10 +51,9 @@ public class Logo extends AppCompatActivity {
 
         // 광고 미리 로드하기
         adsManager = AdsManager.getInstance();
-        adsManager.initAdsManager(this);
-        adsManager.loadFullAds();
-        adsManager.loadRewardAds();
-        adsManager.loadNativeAds();
+        adsManager.loadFullAds(this);
+        adsManager.loadRewardAds(this);
+        adsManager.loadNativeAds(this);
 
 /*
         // 클라우드 메시지 토큰 가져오기

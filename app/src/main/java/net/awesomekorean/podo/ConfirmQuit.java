@@ -46,7 +46,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         adsManager = AdsManager.getInstance();
 
         if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
-            adsManager.loadFullAds();
+            adsManager.loadFullAds(context);
         }
 
         btnYes = findViewById(R.id.btnYes);

@@ -144,6 +144,7 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
         // * 구매 정보가 복원되었을때 호출
         // bp.loadOwnedPurchasesFromGoogle() 하면 호출 가능
         crashlytics.log("포인트 구매 복원!");
+        System.out.println("포인트 구매 복원!");
     }
 
     @Override
@@ -162,6 +163,7 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
     public void onBillingInitialized() {
         // * 처음에 초기화됬을때.
         crashlytics.log("포인트 구매 초기화!");
+        System.out.println("포인트 구매 초기화!");
     }
 
     @Override
