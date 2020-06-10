@@ -72,23 +72,7 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {4,3};
 
-    private String[] reviewFront = {
-            "이 드라마 재미있어요",
-            "아직 자막이 없어요.",
-            "이해할 수 있어요?",
-            "괜찮아요.",
-            "조금 이해할 수 있어요.",
-            "두 번 볼 거예요"
-    };
-
-    private String[] reviewBack = {
-            "This drama is interesting.",
-            "There's no subtitles yet.",
-            "Can you understand?",
-            "That's OK.",
-            "I can understand a little bit.",
-            "I'll watch it twice."
-    };
+    private int[] reviewId = {1,5,8,9,10,12};
 
 
     @Override
@@ -142,13 +126,8 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

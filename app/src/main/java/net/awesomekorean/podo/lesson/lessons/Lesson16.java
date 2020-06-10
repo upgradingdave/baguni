@@ -96,25 +96,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {2,1};
 
-    private String[] reviewFront = {
-            "한국어 할 수 있어요?",
-            "요즘 한국어 배우고 있어요.",
-            "언어교환 할 수 있어요?",
-            "저도 일본어 배우고 있어요.",
-            "한국어 공부 어때요?",
-            "비슷한 단어 많이 있어요.",
-            "쉬울 수 있어요."
-    };
-
-    private String[] reviewBack = {
-            "Can you speak Korean?",
-            "I'm learning Korean recently.",
-            "Can you exchange language?",
-            "I'm learning Japanese too.",
-            "How's learning Korean?",
-            "There's a lot of similar words.",
-            "It could be easy."
-    };
+    private int[] reviewId = {1,3,6,8,10,12,16,18};
 
 
     @Override
@@ -168,13 +150,8 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

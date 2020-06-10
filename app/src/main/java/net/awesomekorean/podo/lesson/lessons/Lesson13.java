@@ -65,19 +65,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {1,2};
 
-    private String[] reviewFront = {
-            "감기에 걸렸어요.",
-            "이 약을 먹어요.",
-            "어떻게 먹어요?",
-            "밥을 먹기 30분 전에 먹어요."
-    };
-
-    private String[] reviewBack = {
-            "I had a cold.",
-            "Take this medicine.",
-            "How do I take it?",
-            "Take this medicine 30 minutes before you have a meal."
-    };
+    private int[] reviewId = {1,4,5,9};
 
 
     @Override
@@ -131,13 +119,8 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

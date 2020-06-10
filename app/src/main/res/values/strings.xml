@@ -691,11 +691,109 @@ ex)
     </string>
 
 
-    <string name="SL_14_CONTENTS"><![CDATA[
-    <b>hello</b>
-<a href="https://firebasestorage.googleapis.com/v0/b/podo-705c6.appspot.com/o/lesson%2Fl_01%2Fl_01_dialog_1.mp3?alt=media&token=e38317e1-c90a-44e8-aa6f-8e1e571c4cb1" target="_blank">오디오재생</a>
+    <string name="SL_14_CONTENTS">
+        "1.
 
-]]></string>
+- Indirect expression
+
+
+You can speak your thoughts directly and strongly, but you can also express them indirectly.
+In this case, the '~(으)ㄴ/는 것 같다' form, which means guess, can also be used to indirectly say my thoughts.
+
+ex)
+
+한국 음식 맛있는 것 같아요. (I think Korean food is yummy.)
+한국 드라마 재미있는 것 같아요. (I think Korean drama is interesting.)
+한국어 공부 쉬운 것 같아요. (I think learning Korean is easy.)
+
+English speaking students usually say their thoughts, '저는 생각해요. blabla...'.
+Because in English, they say 'I think blabla...'.
+Of course we can understand that, but if you use the form '~(으)ㄴ/는 것 같다', you will be able to speak your thoughts in a more natural Korean language.
+
+
+2.
+
+- About negative answer
+
+
+We'd learned to use '안' or '못' to make negative statements.
+And we learned '~지 않아요' or '~지 못해요' in the same meaning.
+
+However, depending on the situation, these negative statements could be too direct expression.
+
+For example, if someone asks me and I say '못 해요' in the situation that I can't accept the request, it's too direct to be an excuse to the other person.
+In this case, if you use '~(으)ㄹ 것 같아요', you can speak negative sentences more polite.
+
+In other words,
+'못 해요' -> '못 할 것 같아요'
+'안 해요' -> '안 할 것 같아요'
+could be a better expression.
+
+ex)
+"이따가 헬스장에 같이 가요."
+"오늘 바빠서 못 갈 것 같아요."
+
+"내일 아침 같이 먹어요."
+"안 될 것 같아요."
+"피곤해서 일찍 못 일어날 것 같아요.""
+    </string>
+
+    <string name="SL_15_CONTENTS">
+        "1.
+
+The difference between '뭐' and '무슨' is not difficult.
+'뭐' + Verb
+'무슨' + Noun
+
+Let's Take a look at the conversation below.
+
+ex)
+
+어제 뭐 했어요? // 뭐 + 하다(Verb)
+공부했어요.
+무슨 공부 했어요? // 무슨 + 공부(Noun)
+한국어 공부 했어요.
+
+
+2.
+
+Now let's compare '무슨' and '어떤'.
+
+'무슨 공부 했어요?'
+'어떤 공부 했어요?'
+
+In real life, the above two sentences are almost same.
+
+However,
+
+In more detail,
+'무슨' is asking about what the object itself is.
+'어떤' is asking about it's characteristics, content, and personality etc.
+
+Therefore, depending on the situation, it may be necessary to distinguish between '무슨' and '어떤'.
+
+For example,
+
+'데니 씨는 무슨 사람이에요?'
+'데니 씨는 어떤 사람이에요?'
+
+Asking '무슨 사람' can be used in situations that you don't know who '데니 씨' is.
+However, it is more natural to use '누구'(who) rather than '무슨 사람'.
+Therefore, '데니 씨는 누구예요?' is correct.
+
+In situations that you know already who '데니 씨' is and ask about his personality or characteristics, you should use '어떤'.
+
+
+Let's take one more example.
+
+'어제 본 영화 무슨 영화예요?'
+'어제 본 영화 어떤 영화예요?'
+
+If you look at the answer to the above sentence, it will be easy to understand.
+
+'어제 본 영화 무슨 영화예요?' -> 'Lion king 이에요.'
+'어제 본 영화 어떤 영화예요?' -> '재미있는 영화예요.'"
+    </string>
 
 
     <!--번역 필요 없는 부분-->

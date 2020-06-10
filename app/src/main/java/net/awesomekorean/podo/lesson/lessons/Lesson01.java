@@ -66,17 +66,7 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {2,1};
 
-    private String[] reviewFront = {
-            "이름이 뭐예요?",
-            "어느 나라 사람이에요?",
-            "한국 사람이에요."
-    };
-
-    private String[] reviewBack = {
-            "What is your name?",
-            "Where are you from?",
-            "I’m Korean."
-    };
+    private int[] reviewId = {2,6,9};
 
 
     @Override
@@ -130,13 +120,8 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

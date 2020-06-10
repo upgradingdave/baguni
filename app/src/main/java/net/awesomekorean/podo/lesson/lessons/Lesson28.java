@@ -64,21 +64,7 @@ public class Lesson28 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {3,4};
 
-    private String[] reviewFront = {
-            "요즘 다이어트를 시작했어요.",
-            "매일 집에서 운동해요.",
-            "혼자 운동해요?",
-            "재미없지 않아요?",
-            "TV를 보면서 운동해요."
-    };
-
-    private String[] reviewBack = {
-            "I recently started to go on a diet.",
-            "I exercise at home every day.",
-            "Do you exercise alone?",
-            "It's not funny, isn't it?",
-            "I exercise while watching TV."
-    };
+    private int[] reviewId = {2,5,6,7,9};
 
 
     @Override
@@ -132,13 +118,8 @@ public class Lesson28 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

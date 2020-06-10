@@ -20,7 +20,5 @@ public interface Lesson {
 
     int[] getPeopleImage();
 
-    String[] getReviewFront();
-
-    String[] getReviewBack();
+    int[] getReviewId();
 }

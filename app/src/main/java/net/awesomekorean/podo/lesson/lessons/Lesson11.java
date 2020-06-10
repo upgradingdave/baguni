@@ -20,7 +20,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] sentenceFront = {
             "좋아하다",
             "좋아해요?",
-            "K-pop을 좋아해요?",
+            "케이팝을 좋아해요?",
             "네",
             "네, 좋아해요",
             "네, 저는 BTS를 좋아해요.",
@@ -81,7 +81,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] dialog = {
-            "K-pop을 좋아해요?",
+            "케이팝을 좋아해요?",
             "네, 저는 BTS를 제일 좋아해요.",
             "BTS를 왜 좋아해요?",
             "BTS는 노래를 잘 불러요.\n그리고 춤도 잘 춰요."
@@ -89,21 +89,7 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {9,10};
 
-    private String[] reviewFront = {
-            "K-pop을 좋아해요?",
-            "네, 저는 BTS를 제일 좋아해요.",
-            "BTS를 왜 좋아해요?",
-            "BTS는 노래를 잘 불러요.",
-            "춤도 잘 춰요."
-    };
-
-    private String[] reviewBack = {
-            "Do you like K-pop?",
-            "Yes, I like BTS the most.",
-            "Why do you like BTS?",
-            "BTS sings a song well.",
-            "good at dancing as well."
-    };
+    private int[] reviewId = {2,6,7,17};
 
 
     @Override
@@ -157,13 +143,8 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
     // 레슨어뎁터 아이템

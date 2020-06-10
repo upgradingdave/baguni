@@ -33,15 +33,17 @@ public class R_Sentence_Lesson00 extends LessonInit implements LessonReview, Les
 
             String lessonId = lessonsInReview[i].getLessonId().toLowerCase();
 
-            for(int j=0; j<lessonsInReview[i].getReviewFront().length; j++) {
+            for(int j=0; j<lessonsInReview[i].getReviewId().length; j++) {
 
-                this.front.add(lessonsInReview[i].getReviewFront()[j]);
+                int index = lessonsInReview[i].getReviewId()[j];
 
-                this.back.add(lessonsInReview[i].getReviewBack()[j]);
+                this.front.add(lessonsInReview[i].getSentenceFront()[index]);
 
-                this.audioString.add(lessonId + "_review_" + j + ".mp3");
+                this.back.add(lessonsInReview[i].getSentenceBack()[index]);
 
-                this.audioFolder.add("lesson/review/");
+                this.audioString.add(lessonId + "_sentence_" + index + ".mp3");
+
+                this.audioFolder.add("lesson/" + lessonId + "/");
             }
         }
     }

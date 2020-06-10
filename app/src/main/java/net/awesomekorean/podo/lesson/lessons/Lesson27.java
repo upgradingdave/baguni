@@ -60,19 +60,7 @@ public class Lesson27 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {1,2};
 
-    private String[] reviewFront = {
-            "저는 태국에서 살고 있어요",
-            "태국에는 망고가 아주 싸서 많이 사요.",
-            "한국에도 태국 망고를 팔아요.",
-            "너무 비싸서 못 사요."
-    };
-
-    private String[] reviewBack = {
-            "I live in thailand.",
-            "Mango is very cheap in Thailand so I buy it a lot.",
-            "It sells Thai mango in Korea as well.",
-            "It is very expensive so I can't buy."
-    };
+    private int[] reviewId = {1,4,6,8};
 
 
     @Override
@@ -126,13 +114,8 @@ public class Lesson27 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

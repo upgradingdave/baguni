@@ -71,21 +71,7 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {4,3};
 
-    private String[] reviewFront = {
-            "이거 얼마예요?",
-            "만 원이에요.",
-            "저거는요?",
-            "저거는 50% 세일이에요.",
-            "오천 원이에요."
-    };
-
-    private String[] reviewBack = {
-            "How much is this?",
-            "It’s 10,000 won.",
-            "What about that one?",
-            "That’s 50% off.",
-            "So, it’s 5,000 won."
-    };
+    private int[] reviewId = {2,5,9};
 
 
     @Override
@@ -139,13 +125,8 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

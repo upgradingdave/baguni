@@ -54,23 +54,8 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {1,2};
 
-    private String[] reviewFront = {
-            "안녕하세요?",
-            "반가워요.",
-            "오랜만이에요.",
-            "잘 지냈어요?",
-            "다음에 또 봐요.",
-            "안녕히 가세요."
-    };
+    private int[] reviewId = {1,2,3,4};
 
-    private String[] reviewBack = {
-            "Hello",
-            "Nice to meet you",
-            "Long time no see",
-            "How have you been?",
-            "See you again",
-            "Good bye"
-    };
 
 
     @Override
@@ -124,14 +109,10 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
-    }
 
     // 레슨어뎁터 아이템
 

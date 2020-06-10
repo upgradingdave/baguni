@@ -65,19 +65,7 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {12,11};
 
-    private String[] reviewFront = {
-            "한국에 가 본 적 있어요?",
-            "작년 봄에 가 본 적 있어요.",
-            "한국 어디에 가 봤어요?",
-            "서울이랑 제주도에 가 봤어요."
-    };
-
-    private String[] reviewBack = {
-            "Have you been to Korea?",
-            "I've been there last spring.",
-            "Where have you been to Korea?",
-            "I've been to Seoul and Jeju Island."
-    };
+    private int[] reviewId = {1,3,6,9};
 
 
     @Override
@@ -131,13 +119,8 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

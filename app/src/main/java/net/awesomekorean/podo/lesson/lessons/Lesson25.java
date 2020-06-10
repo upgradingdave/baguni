@@ -65,21 +65,7 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {9,10};
 
-    private String[] reviewFront = {
-            "포도앱 알아요?",
-            "그게 뭐예요?",
-            "한국어를 가르치는 선생님이 만든 앱이에요.",
-            "한번 써 보세요.",
-            "다운 받아 볼게요"
-    };
-
-    private String[] reviewBack = {
-            "Do you know the 'podo' app?",
-            "What is it?",
-            "It's an app developed by a teacher who teaches Korean.",
-            "Try it once.",
-            "I'll download it."
-    };
+    private int[] reviewId = {1,4,6,8,9};
 
 
     @Override
@@ -133,13 +119,8 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

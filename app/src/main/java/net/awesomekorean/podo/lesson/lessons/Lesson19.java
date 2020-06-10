@@ -52,13 +52,7 @@ public class Lesson19 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {9,10};
 
-    private String[] reviewFront = {
-
-    };
-
-    private String[] reviewBack = {
-
-    };
+    private int[] reviewId = {0,4,5};
 
 
     @Override
@@ -112,13 +106,8 @@ public class Lesson19 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

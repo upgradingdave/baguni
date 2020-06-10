@@ -50,6 +50,11 @@ import net.awesomekorean.podo.lesson.lessons.Lesson23;
 import net.awesomekorean.podo.lesson.lessons.Lesson24;
 import net.awesomekorean.podo.lesson.lessons.Lesson25;
 import net.awesomekorean.podo.lesson.lessons.Lesson26;
+import net.awesomekorean.podo.lesson.lessons.Lesson27;
+import net.awesomekorean.podo.lesson.lessons.Lesson28;
+import net.awesomekorean.podo.lesson.lessons.Lesson29;
+import net.awesomekorean.podo.lesson.lessons.Lesson30;
+import net.awesomekorean.podo.lesson.lessons.Lesson31;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessons.R_Ranking_Lesson00;
@@ -73,6 +78,8 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson13;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson14;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson15;
 
 import java.util.List;
 

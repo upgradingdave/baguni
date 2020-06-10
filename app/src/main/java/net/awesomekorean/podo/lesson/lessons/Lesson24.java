@@ -68,23 +68,7 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {8,7};
 
-    private String[] reviewFront = {
-            "어디 아파요?",
-            "얼굴이 안 좋아요.",
-            "요즘 많이 자도 계속 피곤해요",
-            "병원에 갔다 왔어요?",
-            "평일에는 일이 많아서 시간이 없어요.",
-            "주말에 갈 거예요."
-    };
-
-    private String[] reviewBack = {
-            "You don't look well.",
-            "Are you sick?",
-            "I feel tired even though I sleep a lot these days.",
-            "Did you see a doctor?",
-            "Because I have a lot of work on weekdays I don't have time.",
-            "I'll go on the weekend."
-    };
+    private int[] reviewId = {0,1,4,6,9,10};
 
 
     @Override
@@ -138,13 +122,8 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
 

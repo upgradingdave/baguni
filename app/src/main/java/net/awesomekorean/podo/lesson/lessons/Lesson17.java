@@ -83,21 +83,7 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {5,6};
 
-    private String[] reviewFront = {
-            "다음 휴가 때 한국 여행 가고 싶어요.",
-            "한국에서 뭐 하고 싶어요?",
-            "한국 음식 많이 먹고 싶어요.",
-            "한국어 연습도 하고 싶어요.",
-            "잘 할 수 있을 거예요."
-    };
-
-    private String[] reviewBack = {
-            "I want to travel to Korea on next vacation.",
-            "What do you want to do in Korea?",
-            "I want to eat Korean food a lot.",
-            "And I want to practice Korean too.",
-            "You will be able to do it well."
-    };
+    private int[] reviewId = {5,8,11,13};
 
 
     @Override
@@ -151,13 +137,8 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public String[] getReviewFront() {
-        return reviewFront;
-    }
-
-    @Override
-    public String[] getReviewBack() {
-        return reviewBack;
+    public int[] getReviewId() {
+        return reviewId;
     }
 
     // 레슨어뎁터 아이템
