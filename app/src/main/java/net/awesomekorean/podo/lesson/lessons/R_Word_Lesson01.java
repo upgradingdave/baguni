@@ -25,7 +25,8 @@ public class R_Word_Lesson01 extends LessonInit implements LessonReview, LessonI
 
 
     private Lesson[] lessonsInReview = {
-            new Lesson07(), new Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(), new Lesson12()
+            new Lesson07(), new Lesson08(), new Lesson27(), new Lesson09(), new Lesson10(),
+            new Lesson11(), new Lesson12()
     };
 
 

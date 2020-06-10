@@ -16,11 +16,14 @@ import android.widget.Toast;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.Constants;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -78,7 +81,7 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
         Bundle params = new Bundle();
         firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
         firebaseAnalytics.logEvent("purchase_page_open", params);
-
+        FirebaseMessaging.getInstance().subscribeToTopic("purchase_open");
 
         bp = new BillingProcessor(this, KEY, this);
         bp.initialize();
@@ -116,6 +119,9 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
                     @Override
                     public void onSuccess(Void aVoid) {
                         System.out.println("DB에 구매한 포인트 저장을 성공했습니다.");
+
+                        FirebaseMessaging.getInstance().subscribeToTopic("purchase_point");
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

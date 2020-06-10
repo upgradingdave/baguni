@@ -23,8 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -34,6 +36,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import net.awesomekorean.podo.collection.MainCollection;
 import net.awesomekorean.podo.lesson.LessonAdapterChild;
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
 
         // 유저정보 가져오기 (Email, Name, Image)
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
             userEmail = user.getEmail();
@@ -188,9 +192,23 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
 
+        // 클라우드 메시티 토큰값 없으면 저장하기
+        if(userInformation.getCloudMessageToken() == null) {
+            // 클라우드 메시지 토큰 가져오기
+            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                @Override
+                public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                    if(task.isSuccessful()) {
+                        String token = task.getResult().getToken();
+                        System.out.println("메시지 토큰 아이디: " + token);
+                        userInformation.setCloudMessageToken(token);
+                    }
+                }
+            });
+        }
+
         final Calendar cal = Calendar.getInstance();
         final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일
-
 
         // 오늘 출석체크 안했으면 출석부 업데이트 (버그: 요일이 같으면 일주일만에 접속해도 초기화 안됨)
         if (!userInformation.getAttendance().get(today)) {

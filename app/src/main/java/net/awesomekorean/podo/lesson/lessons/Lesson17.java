@@ -70,7 +70,7 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
             "-",
             "A 'V-(으)ㄹ 수 있다' form was used to represent the 'ability' that we learned in the previous lesson.",
             "Used future tense to express the speaker's expectations.",
-            "Use the 'A/V-(으)니까' form to tell the 'reason'.\nYou can also use the 'A/V-아/어서' form that you learned in the 'negative' lesson.\n\n'공부 열심히 했으니까' = '공부 열심히 해서'\n(See the special lesson 'Confusing expression3 - ~아/어서 vs. ~으니까')",
+            "Use the 'A/V-(으)니까' form to tell the 'reason'.\nYou can also use the 'A/V-아/어서' form that you learned in the 'negative' lesson.\n\n'공부 열심히 했으니까' = '공부 열심히 해서'\n(See the Lesson 6 'Confusing expression - ~아/어서 vs. ~으니까')",
             "-"
     };
 

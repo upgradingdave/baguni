@@ -207,6 +207,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
                             Bundle bundle = new Bundle();
                             bundle.putString("type", extra);
+                            bundle.putInt("points", specialLessonPrice);
                             firebaseAnalytics.logEvent("point_use", bundle);
 
                         }

@@ -53,7 +53,7 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
             "-",
             "-",
             "conjugate '고 있다'\n: '가다' -> '가' + '고 있다' = '가고 있다'\nconjugate '아요/어요'\n: '가고 있다' -> '가고 있' + '어요' = '가고 있어요'",
-            "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)\nwe add '에' after the noun that is the destination.\nWe can also omit \"\"에\"\" when speaking\n(See the special lesson '에 vs. 에서')",
+            "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...)\nwe add '에' after the noun that is the destination.\nWe can also omit \"\"에\"\" when speaking\n(See the Lesson 4 - 'confusing expression : '에 vs. 에서')",
             "-",
             "conjugate '아요/어요'\n: '가다' -> '가' + '아요' = '가아요' -> '가요'",
             "-",

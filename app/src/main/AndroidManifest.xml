@@ -18,8 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lesson.LessonReviewSentence"></activity>
-        <activity android:name=".lesson.LessonReviewWord" />
+        <activity
+            android:name=".lesson.LessonReviewSentence"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".lesson.LessonReviewWord"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".FirebaseCloudMessage"
@@ -29,16 +32,23 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".VocabularyQuiz" />
         <activity
             android:name=".ConfirmQuit"
-            android:theme="@style/DialogFullScreen" />
+            android:theme="@style/DialogFullScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UnlockActivity"
-            android:theme="@style/DialogFullScreen" />
-        <activity android:name=".lesson.lessonNumber.LessonNumberMenu" />
-        <activity android:name=".lesson.lessonNumber.LessonNumber" />
-        <activity android:name=".lesson.LessonSpecialFrame" />
+            android:theme="@style/DialogFullScreen"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".lesson.lessonNumber.LessonNumberMenu"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".lesson.lessonNumber.LessonNumber"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".lesson.LessonSpecialFrame"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -62,40 +72,68 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".writing.WritingCorrection" />
-        <activity android:name=".purchase.TopUp" />
-        <activity android:name=".profile.Profile" />
-        <activity android:name=".message.Message" />
-        <activity android:name=".lesson.LessonFinish" />
-        <activity android:name=".Logo">
+        <activity
+            android:name=".writing.WritingCorrection"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".purchase.TopUp"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".profile.Profile"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".message.Message"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".lesson.LessonFinish"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Logo"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.SignUp" />
-        <activity android:name=".teachers.Teachers" />
-        <activity android:name=".login.SignIn" />
-        <activity android:name=".collection.CollectionStudy" />
-        <activity android:name=".collection.CollectionFlashCard" />
+        <activity
+            android:name=".login.SignUp"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".teachers.Teachers"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".login.SignIn"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".collection.CollectionStudy"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".collection.CollectionFlashCard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".writing.WritingFrame"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".reading.ReadingFrame" />
-        <activity android:name=".lesson.LessonFrame" />
-        <activity android:name=".lesson.lessonHangul.LessonHangulAssembly" />
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".reading.ReadingFrame"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".lesson.LessonFrame"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".lesson.lessonHangul.LessonHangulAssembly"
+            android:screenOrientation="portrait"/>
         <activity android:name=".lesson.lessonHangul.LessonHangul" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

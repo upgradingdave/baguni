@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.VocabularyQuiz;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
-
-import java.util.Arrays;
 
 public class LessonAdapterGroup extends BaseExpandableListAdapter {
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecial, Serializable {
 
     private String lessonId = "SL_13";
-    private String lessonTitle = "confusing expression 4";
+    private String lessonTitle = "confusing expression";
     private String lessonSubTitle = "'here' and 'there'";
     private int lessonImage = R.drawable.confusingexpression3;
 

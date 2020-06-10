@@ -58,7 +58,7 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
             "-",
             "-",
             "-",
-            "Use it when you have the ability to do something.\nOn the contrary, when you don't have an ability to do something, you can say 'V-(으)ㄹ 수 없다'.\nYou can also use '못' learned from 'negative2'.\n\nconjugate 'V-(으)ㄹ 수 있다/없다'\n: '이해하다' -> '이해하' + 'ㄹ 수 있다' = '이해할 수 있다'\n: '이해하다' ->' 이해하' + 'ㄹ 수 없다' = '이해할 수 없다'\n\nnegative '못'\n: '이해하다' -> '이해 못 하다'",
+            "Use it when you have the ability to do something.\nOn the contrary, when you don't have an ability to do something, you can say 'V-(으)ㄹ 수 없다'.\nYou can also use '못' learned from Lesson 5 'Negative'.\n\nconjugate 'V-(으)ㄹ 수 있다/없다'\n: '이해하다' -> '이해하' + 'ㄹ 수 있다' = '이해할 수 있다'\n: '이해하다' ->' 이해하' + 'ㄹ 수 없다' = '이해할 수 없다'\n\nnegative '못'\n: '이해하다' -> '이해 못 하다'",
             "It can be used when it's not very good but not that bad.",
             "-",
             "Used for future tense.",

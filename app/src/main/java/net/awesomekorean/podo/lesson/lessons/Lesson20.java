@@ -64,7 +64,7 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
             "유명하다' -> '유명하' + 'ㄴ' = '유명한'",
             "~고' form is used.",
             "-",
-            "여기 : here\n저기 : there\n거기 : there\n(See the special lesson 'confusing expression 4 : here and there')",
+            "여기 : here\n저기 : there\n거기 : there\n(See the Lesson 11 -  'confusing expression : here and there')",
             "시원하다' -> '시원하' + 'ㄴ' = '시원한'",
             "-",
             "-",

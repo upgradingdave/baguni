@@ -22,6 +22,7 @@ public class UserInformation {
     private Boolean isPremium;
     private Long datePurchase;
     private Long dateExpire;
+    private String cloudMessageToken;
 
     public UserInformation() {
         for(int i=0; i<7; i++) {
@@ -189,6 +190,11 @@ public class UserInformation {
         this.attendance.set(today, true);
     }
 
+    public String getCloudMessageToken() {
+        return this.cloudMessageToken;
+    }
 
-
+    public void setCloudMessageToken(String token) {
+        this.cloudMessageToken = token;
+    }
 }

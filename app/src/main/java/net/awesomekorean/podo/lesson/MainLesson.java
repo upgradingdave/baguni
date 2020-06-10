@@ -22,6 +22,7 @@ import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulConsonant;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulVowel;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberNative;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberSino;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
 import net.awesomekorean.podo.lesson.lessons.Lesson03;
@@ -92,15 +93,15 @@ public class MainLesson extends Fragment{
     int lastExpandedPosition = -1;
 
     String[] groupTitle = {
-            "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Review", "Negative",
-            "Range", "Listing/Contrast", "Review", "Time", "Ability", "Hope", "Review", "Requests",
-            "Supposition", "Experience", "Review", "Guess"
+            "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Review", "Negative", "Reason",
+            "Range", "Listing/Contrast", "Review", "Ability", "Time", "Review", "Hope", "Requests",
+            "Supposition", "Review", "Experience", "Guess", "Permission"
     };
 
     String[] groupSubTitle = {
             "Lesson 0", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 1~4", "Lesson 5", "Lesson 6",
-            "Lesson 7", "Lesson 5~7", "Lesson 8", "Lesson 9", "Lesson 10", "Lesson 8~10",
-            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 11~13", "Coming soon!"
+            "Lesson 7", "Lesson 8", "Lesson 5~7", "Lesson 9", "Lesson 10", "Lesson 8~10",
+            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 11~13", "Lesson 14", "Lesson 15", "Coming soon!"
     };
 
     int[] groupProcess = new int[groupTitle.length];
@@ -112,18 +113,20 @@ public class MainLesson extends Fragment{
             {new NumberSino(), new NumberNative(), new NumberPractice()},
             {new S_Lesson04(), new Lesson04(), new Lesson05(), new Lesson06(), new S_Lesson06()},
             {new R_Word_Lesson00(), new R_Sentence_Lesson00(), new R_Ranking_Lesson00()},
-            {new Lesson07(), new Lesson08(), new S_Lesson08()},
+            {new Lesson07(), new Lesson08()},
+            {new Lesson27(), new S_Lesson08(), new S_Lesson12()},
             {new Lesson09(), new Lesson10(), new S_Lesson05()},
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
             {new R_Word_Lesson01(), new R_Sentence_Lesson01(), new R_Ranking_Lesson00() },
-            {new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson22()},
             {new Lesson15(), new Lesson16()},
-            {new Lesson17(), new S_Lesson12(), new Lesson20(), new S_Lesson13()},
+            {new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson22(), new Lesson28(), new Lesson29(), new S_Lesson15()},
             {new R_Word_Lesson02(), new R_Sentence_Lesson02(), new R_Ranking_Lesson00()},
+            {new Lesson17(), new Lesson20(), new S_Lesson13()},
             {new Lesson18(), new Lesson21(), new S_Lesson07()},
             {new Lesson23(), new Lesson24(), new S_Lesson09()},
-            {new Lesson25(), new Lesson26()},
             {new R_Word_Lesson03(), new R_Sentence_Lesson03(), new R_Ranking_Lesson00()},
+            {new Lesson25(), new Lesson26()},
+            {new Lesson30(), new Lesson31(), new S_Lesson14()},
             {}
     };
 

@@ -23,7 +23,8 @@ public class R_Sentence_Lesson01 extends LessonInit implements LessonReview, Les
 
 
     private Lesson[] lessonsInReview = {
-            new Lesson07(), new Lesson08(), new Lesson09(), new Lesson10(), new Lesson11(), new Lesson12()
+            new Lesson07(), new Lesson08(), new Lesson27(), new Lesson09(), new Lesson10(),
+            new Lesson11(), new Lesson12()
     };
 
 

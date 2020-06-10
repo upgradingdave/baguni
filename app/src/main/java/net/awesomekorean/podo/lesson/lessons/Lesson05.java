@@ -58,7 +58,7 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
             "-",
             "-",
             "conjugate 'ㄹ 거예요/을 거예요'\n: '가다' -> '가' + 'ㄹ 거예요' = '갈 거예요'",
-            "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...) we add '에' after the noun that is the destination.\nWe can also omit '에' in the conversation.\n(See the special lesson '에 vs. 에서')",
+            "If you use verbs related to movement ('가다', '오다', '들어가다' etc ...) we add '에' after the noun that is the destination.\nWe can also omit '에' in the conversation.\n(See the Lesson 4 - 'confusing expression1 : '에 vs. 에서')",
             "-",
             "We can say ‘랑/이랑’ for the conversational language.",
             "-",

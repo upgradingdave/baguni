@@ -49,8 +49,8 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
             "Sometimes students are confused.\n\n'아니요' : no\n'아니에요' : not",
             "-",
             "'그게' = '그 것이'",
-            "When you want to describe a noun with an adjective or verb, use the '~ (으) ㄴ / 은 / (으) ㄹ' form.\nHowever, it is recommended to learn in the sentence rather than memorizing it grammatically because the changing forms are so diverse and there are many exceptions.\n\n'만들다' -> '만들' + '은' = '만들은' -> '만든' (irregular)\n\nex)\n'읽다' -> '읽은'\n'먹다' -> '먹은'\n'배우다' -> '배운'",
-            "However, it is good to learn the '~ (으) ㄴ / 은 / (으) ㄹ' form that changes according to the verb tense.\n\npast tense : (으)ㄴ\npresent tense : 는\nfuture tense : (으)ㄹ\n\nex)\n'가르치다' \n-> '가르친' (past tense) : 한국어를 가르친 선생님 (The teacher who taught Korean)\n-> '가르치는' (present tense) : 한국어를 가르치는 선생님 (The teacher  who is teaching Korean)\n-> '가르칠' (future tense) : 한국어를 가르칠 선생님 (The teacher who will teach Korean)",
+            "When you want to describe a noun with an adjective or verb, use the '~ (으) ㄴ / 는 / (으) ㄹ' form.\nHowever, it is recommended to learn in the sentence rather than memorizing it grammatically because the changing forms are so diverse and there are many exceptions.\n\n'만들다' -> '만들' + '은' = '만들은' -> '만든' (irregular)\n\nex)\n'읽다' -> '읽은'\n'먹다' -> '먹은'\n'배우다' -> '배운'",
+            "However, it is good to learn the '~ (으) ㄴ / 는 / (으) ㄹ' form that changes according to the verb tense.\n\npast tense : (으)ㄴ\npresent tense : 는\nfuture tense : (으)ㄹ\n\nex)\n'가르치다' \n-> '가르친' (past tense) : 한국어를 가르친 선생님 (The teacher who taught Korean)\n-> '가르치는' (present tense) : 한국어를 가르치는 선생님 (The teacher  who is teaching Korean)\n-> '가르칠' (future tense) : 한국어를 가르칠 선생님 (The teacher who will teach Korean)",
             "'쓰다' -> '써요' -> '써 보다'",
             "-",
             "We usually say '다운로드'(download) to '다운' to be more simple.\nAnd the verb '받다' goes well with this word.\n\n'보다' -> '보' + 'ㄹ 게요' = '볼게요'"

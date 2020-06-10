@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class S_Lesson05 extends S_LessonInit implements LessonItem, LessonSpecial, Serializable {
 
     private String lessonId = "SL_05";
-    private String lessonTitle = "speaking naturally 1";
+    private String lessonTitle = "speaking naturally";
     private String lessonSubTitle = "basic rules";
     private int lessonImage = R.drawable.speakingnaturally1;
 

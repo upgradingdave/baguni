@@ -216,6 +216,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
                 Bundle bundle = new Bundle();
                 bundle.putString("type", "correction");
+                bundle.putInt("points", pointsNeed);
                 firebaseAnalytics.logEvent("point_use", bundle);
 
                 break;

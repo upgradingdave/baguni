@@ -40,11 +40,11 @@ public class Logo extends AppCompatActivity {
 
         // Crashlytics 초기화
         crashlytics = FirebaseCrashlytics.getInstance();
-        crashlytics.setCrashlyticsCollectionEnabled(true);
+        crashlytics.setCrashlyticsCollectionEnabled(false);
 
         // 애널리스트 초기화
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        firebaseAnalytics.setAnalyticsCollectionEnabled(true);
+        firebaseAnalytics.setAnalyticsCollectionEnabled(false);
 
         // 애드몹 초기화
         MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
@@ -54,17 +54,6 @@ public class Logo extends AppCompatActivity {
         adsManager.loadFullAds(this);
         adsManager.loadRewardAds(this);
         adsManager.loadNativeAds(this);
-
-/*
-        // 클라우드 메시지 토큰 가져오기
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                System.out.println("메시지 토큰 아이디: " + task.getResult().getToken());
-            }
-        });
-
- */
 
 
         Handler handler = new Handler();
@@ -92,7 +81,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 2);
 
     }
 

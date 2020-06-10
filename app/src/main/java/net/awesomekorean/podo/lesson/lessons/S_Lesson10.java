@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class S_Lesson10 extends S_LessonInit implements LessonItem, LessonSpecial, Serializable {
 
     private String lessonId = "SL_10";
-    private String lessonTitle = "simple Chinese 1";
+    private String lessonTitle = "simple Chinese";
     private String lessonSubTitle = "人";
     private int lessonImage = R.drawable.hanja1;
 

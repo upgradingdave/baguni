@@ -8,7 +8,7 @@ public class S_Lesson04 extends S_LessonInit implements LessonItem, LessonSpecia
 
     private String lessonId = "SL_04";
     private String lessonTitle = "particles";
-    private String lessonSubTitle = "why use it?";
+    private String lessonSubTitle = "why use them?";
     private int lessonImage = R.drawable.particles1;
 
     private int contents = R.string.SL_04_CONTENTS;

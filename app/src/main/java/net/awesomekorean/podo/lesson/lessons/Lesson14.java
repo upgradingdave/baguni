@@ -68,7 +68,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] sentenceExplain = {
             "-",
             "-",
-            "You can also say '뭐 할거예요?' when using future tense like you learned in previous lesson.\nBut in situations where the content of the future is clear, such as 'tonight',\nyou can use the present tense.",
+            "You can also say '뭐 할거예요?' using future tense.\nBut in situations where the content of the future is clear, such as 'tonight',\nyou can use the present tense.",
             "-",
             "If the verb doesn't have a batchim, use 'V-ㄴ 후에' and use 'V-은 후에' when it has a batchim.\n'끝나다' -> '끝나' + 'ㄴ 후에' = '끝난 후에'\nYou can also use 'N + 후에' instead.\nOf course, nouns that can only be uses as 'N + 하다'\n(nouns that represent actions) are possible like 'N + 전에'.\n\nex) '운동' + '하다' = '운동하다' (o)\n운동 한 후에~\n운동 후에~",
             "-",
@@ -90,6 +90,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] dialog = {
+            "오늘 저녁에 뭐 해요?",
             "일이 끝난 후에 가족이랑 저녁을 먹어요.",
             "저녁을 먹은 후에 드라마를 볼 거예요.",
             "요즘 드라마 봐요?",
@@ -101,8 +102,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] reviewFront = {
             "일이 끝난 후에 가족이랑 저녁을 먹어요.",
             "저녁을 먹은 후에 드라마를 볼 거예요.",
-            "요즘 드라마 봐요?",
-            "저도 추천해 주세요."
+            "요즘 드라마 봐요?\n저도 추천해 주세요."
     };
 
     private String[] reviewBack = {
