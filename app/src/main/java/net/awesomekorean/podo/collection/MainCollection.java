@@ -37,6 +37,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
+import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -172,7 +173,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                     msgNoCollection.setVisibility(View.GONE);
                 }
 
-                if (collectionEntities.size() > 10) {
+                if (listAllData.size() > 10) {
                     list = new ArrayList<>(listAllData.subList(0, 10));
                 } else {
                     list = new ArrayList<>();
@@ -521,7 +522,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                                         System.out.println("다운로드 할 아이템을 찾았습니다");
                                         for (QueryDocumentSnapshot snapshot : task.getResult()) {
                                             CollectionEntity download = snapshot.toObject(CollectionEntity.class);
-                                            repository.insertDownloadItem(download);
+                                            repository.insertDownloadItem(getContext(), download);
                                             System.out.println("아이템을 다운로드 했습니다 : " + download.getFront());
                                         }
                                     } else {

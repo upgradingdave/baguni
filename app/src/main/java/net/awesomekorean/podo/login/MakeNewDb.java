@@ -30,6 +30,9 @@ public class MakeNewDb {
 
     public void makeNewDb(final Activity activity, final Context context, final String userEmail, final String method) {
         final UserInformation userInformation = new UserInformation();
+        String userToken = SharedPreferencesInfo.getUserToken(getApplicationContext());
+        userInformation.setUserToken(userToken);
+
         CollectionReference userRef = db.collection(activity.getString(R.string.DB_USERS)).document(userEmail).collection(activity.getString(R.string.DB_INFORMATION));
         userRef.document(activity.getString(R.string.DB_INFORMATION)).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -39,7 +42,6 @@ public class MakeNewDb {
                 SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
                 SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
                 System.out.println("앱에 유저 데이터를 저장했습니다.");
-
 
                 final MessageItems messageItems = new MessageItems();
                 messageItems.setMessage(activity.getString(R.string.WELCOME_MSG));

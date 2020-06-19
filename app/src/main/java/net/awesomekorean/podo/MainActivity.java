@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -192,21 +194,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
 
-        // 클라우드 메시티 토큰값 없으면 저장하기
-        if(userInformation.getCloudMessageToken() == null) {
-            // 클라우드 메시지 토큰 가져오기
-            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                @Override
-                public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                    if(task.isSuccessful()) {
-                        String token = task.getResult().getToken();
-                        System.out.println("메시지 토큰 아이디: " + token);
-                        userInformation.setCloudMessageToken(token);
-                    }
-                }
-            });
-        }
-
         final Calendar cal = Calendar.getInstance();
         final int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0:일요일 ~ 6:토요일
 
@@ -250,8 +237,76 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         } else {
             System.out.println("오늘의 출석체크가 이미 끝났습니다.");
         }
+
+        checkPlayService();
+
+        // 유저토큰 없으면 업데이트 하기
+        String token = userInformation.getUserToken();
+
+        if(token == null || token == "") {
+
+            System.out.println("앱에 토큰이 저장되어 있지 않습니다.");
+
+            updateUserToken();
+
+        } else {
+
+            System.out.println("앱에 토큰이 저장되어 있습니다." + token);
+        }
     }
 
+
+    // 유저토큰 업데이트 하기
+    public void updateUserToken() {
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+
+                if(!task.isSuccessful()) {
+
+                    System.out.println("토큰 얻기 실패");
+                }
+
+                String token = task.getResult().getToken();
+
+                System.out.println("토큰 아이디 : " + token);
+
+                userInformation.setUserToken(token);
+
+                SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
+
+                DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                reference.update("userToken", token).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("DB에 토큰을 업데이트 했습니다");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("토큰 업데이트를 실패했습니다:" + e);
+                    }
+                });
+            }
+        });
+    }
+
+
+    public void checkPlayService() {
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(this);
+
+        if(result != ConnectionResult.SUCCESS) {
+            googleAPI.makeGooglePlayServicesAvailable(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayService();
+    }
 
     @Override
     public void onClick(View view) {

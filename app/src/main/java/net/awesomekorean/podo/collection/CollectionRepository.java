@@ -10,6 +10,7 @@ import androidx.room.Room;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import net.awesomekorean.podo.DownloadAudio;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.UnixTimeStamp;
 
@@ -86,11 +87,21 @@ public class CollectionRepository {
         }.execute();
     }
 
-    public void insertDownloadItem (final CollectionEntity entity) {
+    public void insertDownloadItem (final Context context, final CollectionEntity entity) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 db.collectionDao().insert(entity);
+
+                // 오디오가 있으면 다운로드 하기
+                if(entity.getAudio() != null) {
+                    String[] array = entity.getAudio().split("_");
+                    String folder = "lesson/l_" + array[1];
+
+                    DownloadAudio downloadAudio = new DownloadAudio(context, folder, entity.getAudio());
+                    downloadAudio.downloadAudio();
+                }
+
                 return null;
             }
         }.execute();

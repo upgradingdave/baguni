@@ -36,7 +36,7 @@ public class SharedPreferencesInfo {
         return stringFromSP;
     }
 
-    // 엡에서 유저 이메일 저장하기
+    // 엡에 유저 이메일 저장하기
     public static void setUserEmail(Context context, String userEmail) {
         SharedPreferences sp = context.getSharedPreferences("userEmail", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -51,13 +51,29 @@ public class SharedPreferencesInfo {
         return stringFromSP;
     }
 
-    // 엡에서 유저 이름 저장하기
+    // 엡에 유저 이름 저장하기
     public static void setUserName(Context context, String userName) {
         SharedPreferences sp = context.getSharedPreferences("userName", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("userName", userName);
         editor.commit();
     }
+
+    // 엡에서 유저 토큰 불러오기
+    public static String getUserToken(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("userToken", MODE_PRIVATE);
+        String stringFromSP = sp.getString("userToken", "");
+        return stringFromSP;
+    }
+
+    // 엡에 유저 토큰 저장하기
+    public static void setUserToken(Context context, String userToken) {
+        SharedPreferences sp = context.getSharedPreferences("userToken", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("userToken", userToken);
+        editor.commit();
+    }
+
 
 
 

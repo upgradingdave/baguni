@@ -6,12 +6,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
 
 public class FirebaseCloudMessage extends FirebaseMessagingService {
 
@@ -19,57 +25,22 @@ public class FirebaseCloudMessage extends FirebaseMessagingService {
 
     FirebaseInstanceId firebaseInstanceId = FirebaseInstanceId.getInstance();
 
+    FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
 
-    public void getId() {
 
-        firebaseInstanceId.getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-
-                if(!task.isSuccessful()) {
-
-                    System.out.println("getInstanceId failed");
-                }
-
-                String token = "토큰 아이디 : " + task.getResult().getToken();
-
-                System.out.println(token);
-            }
-        });
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        System.out.println("클라우드 메시지 시작!!");
     }
 
 
     @Override
-    public void onNewToken(@NonNull String token) {
+    public void onNewToken(String token) {
 
-        System.out.println("Refreshed token : " + token);
+        System.out.println("새 토큰 : " + token);
 
-        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
-
-        userInformation.setCloudMessageToken(token);
-
-        SharedPreferencesInfo.setUserInfo(this, userInformation);
-
-        String userEmail = SharedPreferencesInfo.getUserEmail(this);
-
-        if(userEmail != null) {
-
-            // DB 에 새로운 토큰 업데이트 하기
-            DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-
-            reference.update("cloudMessageToken", userInformation.getCloudMessageToken()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("DB에 새로운 cloudMessageToken 을 업데이트 했습니다");
-                }
-
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    System.out.println("새로운 cloudMessageToken 업데이트를 실패했습니다:" + e);
-                }
-            });
-        }
+        SharedPreferencesInfo.setUserToken(getApplicationContext(), token);
     }
 
 

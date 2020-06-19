@@ -42,6 +42,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -229,7 +231,9 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                     System.out.println("유저정보가 있습니다");
                     UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
-
+                    String userToken = SharedPreferencesInfo.getUserToken(getApplicationContext());
+                    userInformation.setUserToken(userToken);
+                    updateUserToken(userEmail, userToken);
                     SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
                     SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
                     System.out.println("앱에 유저 데이터를 저장했습니다.");
@@ -251,6 +255,24 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
             public void onFailure(@NonNull Exception e) {
                 System.out.println("유저정보 불러오기를 실패했습니다: " + e);
                 progressBarLayout.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+    // 유저토큰 DB에 업데이트 하기
+    public void updateUserToken(String userEmail, String userToken) {
+
+        DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+        reference.update("userToken", userToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                System.out.println("DB에 토큰을 업데이트 했습니다");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("토큰 업데이트를 실패했습니다:" + e);
             }
         });
     }

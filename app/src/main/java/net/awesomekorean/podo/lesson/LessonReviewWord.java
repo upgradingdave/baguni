@@ -223,7 +223,7 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                     // 오디오 다운로드 끝나면
                     if(audioDownloadProgress == lesson.getFront().size()) {
 
-                        setLoadingLayout(View.VISIBLE, View.GONE, View.VISIBLE);
+                        setLoadingLayout(View.VISIBLE, View.INVISIBLE, View.VISIBLE);
                     }
                 }
             });
@@ -275,6 +275,12 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.btnClose :
+
+                if(quizCount > 5) {
+                    if(adsManager.interstitialAd.isLoaded()) {
+                        adsManager.playFullAds(this);
+                    }
+                }
 
                 finish();
 

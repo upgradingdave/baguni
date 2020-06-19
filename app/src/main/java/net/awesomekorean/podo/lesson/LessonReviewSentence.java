@@ -291,7 +291,7 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
                     // 오디오 다운로드 끝나면
                     if(audioDownloadProgress == lesson.getFront().size()) {
 
-                        setLoadingLayout(View.VISIBLE, View.GONE, View.VISIBLE);
+                        setLoadingLayout(View.VISIBLE, View.INVISIBLE, View.VISIBLE);
                     }
                 }
             });
@@ -344,6 +344,12 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.btnClose :
+
+                if(quizCount > 10) {
+                    if(adsManager.interstitialAd.isLoaded()) {
+                        adsManager.playFullAds(this);
+                    }
+                }
 
                 finish();
 

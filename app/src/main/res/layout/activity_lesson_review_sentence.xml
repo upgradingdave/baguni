@@ -102,7 +102,7 @@
                 android:id="@+id/btnTranslate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sync" />
+                android:src="@drawable/translation" />
         </LinearLayout>
 
         <ScrollView
@@ -130,7 +130,7 @@
         android:visibility="visible">
 
         <LinearLayout
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -139,7 +139,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/templateView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp">
 
             <ProgressBar
                 android:id="@+id/loading"
