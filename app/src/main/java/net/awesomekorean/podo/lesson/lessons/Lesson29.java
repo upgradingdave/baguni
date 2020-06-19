@@ -9,7 +9,7 @@ public class Lesson29 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_29";
     private String lessonTitle = "during";
     private String lessonSubTitle = "동안";
-    private int lessonImage = R.drawable.l_26_word_3;
+    private int lessonImage = R.drawable.l_29_word_0;
 
     private String[] wordFront = {"영어", "무슨", "주로", "여행"};
 

@@ -91,13 +91,11 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] dialog = {
             "오늘 저녁에 뭐 해요?",
-            "일이 끝난 후에 가족이랑 저녁을 먹어요.",
-            "저녁을 먹은 후에 드라마를 볼 거예요.",
-            "요즘 드라마 봐요?",
-            "저도 추천해 주세요."
+            "일이 끝난 후에 가족이랑 저녁을 먹어요.\n저녁을 먹은 후에 드라마를 볼 거예요.",
+            "요즘 드라마 봐요?\n저도 추천해 주세요."
     };
 
-    private int[] peopleImage = {4,3};
+    private int[] peopleImage = {3,4};
 
     private int[] reviewId = {2,7,12,16,20};
 

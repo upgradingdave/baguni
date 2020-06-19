@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
 
-
         // 유저정보 가져오기 (Email, Name, Image)
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -240,56 +239,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         checkPlayService();
 
-        // 유저토큰 없으면 업데이트 하기
-        String token = userInformation.getUserToken();
-
-        if(token == null || token == "") {
-
-            System.out.println("앱에 토큰이 저장되어 있지 않습니다.");
-
-            updateUserToken();
-
-        } else {
-
-            System.out.println("앱에 토큰이 저장되어 있습니다." + token);
-        }
-    }
-
-
-    // 유저토큰 업데이트 하기
-    public void updateUserToken() {
-
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-
-                if(!task.isSuccessful()) {
-
-                    System.out.println("토큰 얻기 실패");
-                }
-
-                String token = task.getResult().getToken();
-
-                System.out.println("토큰 아이디 : " + token);
-
-                userInformation.setUserToken(token);
-
-                SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-
-                DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-                reference.update("userToken", token).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        System.out.println("DB에 토큰을 업데이트 했습니다");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        System.out.println("토큰 업데이트를 실패했습니다:" + e);
-                    }
-                });
-            }
-        });
+        Intent intent = new Intent(this, FirebaseCloudMessage.class);
+        startService(intent);
     }
 
 

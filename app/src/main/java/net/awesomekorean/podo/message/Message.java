@@ -60,10 +60,10 @@ public class Message extends AppCompatActivity {
                                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
                                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                                 layoutManager.setReverseLayout(true);
-                                layoutManager.setStackFromEnd(true);
                                 recyclerView.setLayoutManager(layoutManager);
 
                                 adapter = new MessageAdapter(list);
+                                recyclerView.scrollToPosition(adapter.getItemCount() - 1);
                                 recyclerView.setAdapter(adapter);
 
                                 if(item.getIsNew()) {

@@ -8,7 +8,6 @@
 
     <LinearLayout
         android:id="@+id/title"
-        android:background="@color/WHITE"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -80,6 +79,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/answerLayout"
                 app:layout_constraintEnd_toEndOf="@id/answerLayout"
                 android:src="@drawable/close_red"
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -100,6 +100,7 @@
 
             <ImageView
                 android:id="@+id/btnTranslate"
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/translation" />

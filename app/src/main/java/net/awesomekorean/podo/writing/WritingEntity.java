@@ -1,11 +1,14 @@
 package net.awesomekorean.podo.writing;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
 
 import java.io.Serializable;
@@ -25,6 +28,7 @@ public class WritingEntity implements Serializable {
     private int letters;
     private Long writingDate;
     private int status = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
+    private String userToken;
 
     private String teacherName;
     private String teacherId;
@@ -41,8 +45,6 @@ public class WritingEntity implements Serializable {
 
     public WritingEntity(String contents, int letters) {
         this.guid = UUID.randomUUID().toString();
-        this.userEmail = MainActivity.userEmail;
-        this.userName = MainActivity.userName;
         this.contents = contents;
         this.letters = letters;
         this.writingDate = UnixTimeStamp.getTimeNow();
@@ -159,5 +161,13 @@ public class WritingEntity implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
     }
 }

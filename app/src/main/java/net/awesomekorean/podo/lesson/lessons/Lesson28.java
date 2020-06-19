@@ -9,7 +9,7 @@ public class Lesson28 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_28";
     private String lessonTitle = "while";
     private String lessonSubTitle = "~(으)면서";
-    private int lessonImage = R.drawable.l_26_word_3;
+    private int lessonImage = R.drawable.l_28_word_0;
 
     private String[] wordFront = {"다이어트", "시작하다", "매일", "운동하다", "혼자", "재미없다"};
 

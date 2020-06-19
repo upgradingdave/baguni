@@ -120,7 +120,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 WritingEntity download = documentSnapshot.toObject(WritingEntity.class);
-                                if (download.getStatus() > 1) {
+                                if (download != null && download.getStatus() > 1) {
                                     System.out.println("글쓰기 교정이 완료되었습니다");
                                     WritingRepository repository = new WritingRepository(getContext());
                                     repository.update(download);

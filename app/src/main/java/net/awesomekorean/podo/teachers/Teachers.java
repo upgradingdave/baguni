@@ -27,6 +27,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
@@ -164,8 +166,8 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
             case R.id.btnSubmit :
                 btnSubmit.setEnabled(false);
 
-                String userEmail = SharedPreferencesInfo.getUserEmail(this);
-                String userName = SharedPreferencesInfo.getUserName(this);
+                final String userEmail = SharedPreferencesInfo.getUserEmail(this);
+                final String userName = SharedPreferencesInfo.getUserName(this);
 
                 int newPoints = pointsHave - pointsNeed;
 
@@ -173,7 +175,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 userInformation.setPoints(newPoints);
 
                 DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
-                informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                informationRef.update("points", newPoints).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
@@ -181,34 +183,45 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     }
                 });
 
-                WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
+                final WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
 
-                requestWriting.setUserEmail(userEmail);
-                requestWriting.setUserName(userName);
-                requestWriting.setTeacherName(teacherName);
-                requestWriting.setTeacherId(teacherId);
-                requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
-                requestWriting.setStatus(1);
-
-                WritingRepository repository = new WritingRepository(this);
-                repository.update(requestWriting);
-
-                // 교정요청 DB에 저장하기
-                db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
-                        .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        System.out.println("교정요청을 DB에 저장했습니다.");
-                        requestResult.setVisibility(View.VISIBLE);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                requestResult.setVisibility(View.GONE);
-                                Intent intent = new Intent(getApplication(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                        }, 3000);
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(task.isSuccessful()) {
+
+                            String token = task.getResult().getToken();
+
+                            requestWriting.setUserEmail(userEmail);
+                            requestWriting.setUserName(userName);
+                            requestWriting.setTeacherName(teacherName);
+                            requestWriting.setTeacherId(teacherId);
+                            requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
+                            requestWriting.setStatus(1);
+                            requestWriting.setUserToken(token);
+
+                            WritingRepository repository = new WritingRepository(getApplicationContext());
+                            repository.update(requestWriting);
+
+                            // 교정요청 DB에 저장하기
+                            db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
+                                    .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    System.out.println("교정요청을 DB에 저장했습니다.");
+                                    requestResult.setVisibility(View.VISIBLE);
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            requestResult.setVisibility(View.GONE);
+                                            Intent intent = new Intent(getApplication(), MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 3000);
+                                }
+                            });
+                        }
                     }
                 });
 

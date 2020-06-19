@@ -68,6 +68,7 @@
     <string name="CANCEL">Cancel</string>
 
 
+
     <!--    레슨-->
     <string name="CONFIRM_QUIT_LESSON">"Do you want to go back to main?\n(You can be rewarded points when you finish the lesson)"</string>
     <string name="CONFIRM_QUIT">"Do you want to go back to main?"</string>

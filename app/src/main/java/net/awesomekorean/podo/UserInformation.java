@@ -22,7 +22,6 @@ public class UserInformation {
     private Boolean isPremium;
     private Long datePurchase;
     private Long dateExpire;
-    private String userToken;
 
     public UserInformation() {
         for(int i=0; i<7; i++) {
@@ -188,13 +187,5 @@ public class UserInformation {
 
     public void setDay(int today) {
         this.attendance.set(today, true);
-    }
-
-    public String getUserToken() {
-        return this.userToken;
-    }
-
-    public void setUserToken(String token) {
-        this.userToken = token;
     }
 }

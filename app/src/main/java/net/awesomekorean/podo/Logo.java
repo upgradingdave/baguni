@@ -40,11 +40,11 @@ public class Logo extends AppCompatActivity {
 
         // Crashlytics 초기화
         crashlytics = FirebaseCrashlytics.getInstance();
-        crashlytics.setCrashlyticsCollectionEnabled(false);
+        crashlytics.setCrashlyticsCollectionEnabled(true);
 
         // 애널리스트 초기화
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        firebaseAnalytics.setAnalyticsCollectionEnabled(false);
+        firebaseAnalytics.setAnalyticsCollectionEnabled(true);
 
         // 애드몹 초기화
         MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
@@ -81,7 +81,7 @@ public class Logo extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2);
+        }, 2000);
 
     }
 

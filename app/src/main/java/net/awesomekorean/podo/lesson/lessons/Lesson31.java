@@ -9,13 +9,13 @@ public class Lesson31 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_31";
     private String lessonTitle = "future tense";
     private String lessonSubTitle = "~(으)ㄹ 것 같다";
-    private int lessonImage = R.drawable.l_26_word_3;
+    private int lessonImage = R.drawable.l_31_word_5;
 
-    private String[] wordFront = {"역", "방금", "기차", "내리다", "도착하다", "타다", "늦다"};
+    private String[] wordFront = {"역", "방금", "기차", "내리다", "도착하다", "늦다"};
 
-    private String[] wordBack = {"station", "a minute ago", "train", "get off", "arrive", "get on", "late"};
+    private String[] wordBack = {"station", "a minute ago", "train", "get off", "arrive", "late"};
 
-    private String[] wordPronunciation = {"-", "-", "-", "-", "[도차카다]", "-", "[늗따]"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "[도차카다]", "[늗따]"};
 
     private String[] sentenceFront = {
             "지금 어디예요?",
@@ -73,10 +73,10 @@ public class Lesson31 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] dialog = {
             "지금 어디예요?",
-            "서울역이에요. 방금 기차에서 내렸어요.",
+            "서울역이에요.\n방금 기차에서 내렸어요.",
             "언제 도착해요?",
             "10분 후에 도착할 것 같아요.",
-            "미안해요. 저는 방금 택시 탔어요. 조금 늦을 것 같아요."
+            "미안해요.\n저는 방금 택시 탔어요.\n조금 늦을 것 같아요."
     };
 
     private int[] peopleImage = {9,10};

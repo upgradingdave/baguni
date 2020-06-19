@@ -1,5 +1,7 @@
 package net.awesomekorean.podo;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,13 +23,6 @@ import net.awesomekorean.podo.UserInformation;
 
 public class FirebaseCloudMessage extends FirebaseMessagingService {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    FirebaseInstanceId firebaseInstanceId = FirebaseInstanceId.getInstance();
-
-    FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,27 +32,25 @@ public class FirebaseCloudMessage extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String token) {
-
-        System.out.println("새 토큰 : " + token);
-
-        SharedPreferencesInfo.setUserToken(getApplicationContext(), token);
     }
 
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
-        System.out.println("MESSAGE FROM : " + remoteMessage.getFrom());
+        Intent intent = new Intent(getApplicationContext(), CloudMessageReceiver.class);
 
-        if(remoteMessage.getData().size() > 0) {
+        intent.putExtra("title", remoteMessage.getNotification().getTitle());
 
-            System.out.println("MESSAGE DATA PAYLOAD : " + remoteMessage.getData());
-        }
+        intent.putExtra("contents", remoteMessage.getNotification().getBody());
 
-        if(remoteMessage.getNotification() != null) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            System.out.println("MESSAGE NOTIFICATION BODY : " + remoteMessage.getNotification().getBody());
-        }
+        System.out.println("메시지 타이틀 : " + remoteMessage.getNotification().getTitle());
+
+        System.out.println("메시지 내용 :  " + remoteMessage.getNotification().getBody());
+
+        startActivity(intent);
     }
 
 

@@ -11,11 +11,11 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~고 싶어요";
     private int lessonImage = R.drawable.hope;
 
-    private String[] wordFront = {"휴가", "여행", "음식", "연습", "그동안", "공부", "열심히"};
+    private String[] wordFront = {"휴가", "음식", "연습", "그동안", "공부", "열심히"};
 
-    private String[] wordBack = {"vacation", "travel", "food", "practice", "so far", "study", "hardly"};
+    private String[] wordBack = {"vacation", "food", "practice", "so far", "study", "hardly"};
 
-    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
+    private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
 
     private String[] sentenceFront = {
             "가고 싶어요.",
