@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -49,6 +51,13 @@ public class WritingEntity implements Serializable {
         this.letters = letters;
         this.writingDate = UnixTimeStamp.getTimeNow();
     }
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE WRITINGENTITY ADD COLUMN userToken VARCHAR(100)");
+        }
+    };
 
 
     public String getTeacherName() {

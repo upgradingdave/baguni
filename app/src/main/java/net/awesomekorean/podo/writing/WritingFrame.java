@@ -161,14 +161,14 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
         if(code.equals(getString(R.string.REQUEST_ADD))) {
             WritingEntity entity = new WritingEntity(contents, letters);
             guid = entity.getGuid();
-            repository = new WritingRepository(this);
+            repository = new WritingRepository(getApplicationContext());
             repository.insert(entity);
             return entity;
 
         }else{
             editWriting.setContents(contents);
             editWriting.setLetters(letters);
-            repository = new WritingRepository(this);
+            repository = new WritingRepository(getApplicationContext());
             repository.editByGuid(guid, contents, letters);
             return null;
         }

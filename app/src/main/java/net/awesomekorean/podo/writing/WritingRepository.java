@@ -18,7 +18,9 @@ public class WritingRepository {
     private WritingDb db;
 
     public WritingRepository(Context context) {
-        db = Room.databaseBuilder(context, WritingDb.class, DB_NAME).build();
+        db = Room.databaseBuilder(context, WritingDb.class, DB_NAME)
+                .addMigrations(WritingEntity.MIGRATION_1_2)
+                .build();
     }
 
     public void insert(final WritingEntity entity) {
