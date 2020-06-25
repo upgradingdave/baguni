@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.writing;
 
 import android.content.Context;
+import android.database.SQLException;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -29,7 +30,7 @@ public class WritingEntity implements Serializable {
     private String contents;
     private int letters;
     private Long writingDate;
-    private int status = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 99:거부됨
+    private int status = 0; // 0:교정요청없음, 1:검토중, 2:교정됨, 3:학생피드백보냄, 99:거부됨
     private String userToken;
 
     private String teacherName;
@@ -55,7 +56,11 @@ public class WritingEntity implements Serializable {
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE WRITINGENTITY ADD COLUMN userToken VARCHAR(100)");
+            try {
+                database.execSQL("ALTER TABLE WRITINGENTITY ADD COLUMN userToken VARCHAR(100)");
+            }catch (Exception e) {
+
+            }
         }
     };
 

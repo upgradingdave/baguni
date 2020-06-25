@@ -141,7 +141,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <!--    쓰기-->
     <string name="CORRECTION">Correction</string>
     <string name="WRITING_SAVED">Writing is saved</string>
-    <string name="WRITING_SHORT">Writing should be at least 10 letters. </string>
+    <string name="WRITING_SHORT">Writing should be at least 20 letters. </string>
     <string name="WRITING_DELETE">Are you sure want to delete this writing?</string>
     <string name="LETTERS">letters</string>
     <string name="WRITE_HERE">Write here</string>
@@ -795,6 +795,58 @@ If you look at the answer to the above sentence, it will be easy to understand.
 '어제 본 영화 무슨 영화예요?' -> 'Lion king 이에요.'
 '어제 본 영화 어떤 영화예요?' -> '재미있는 영화예요.'"
     </string>
+
+    <string name="SL_16_CONTENTS">
+        "'가게 밖으로 나가서 오른쪽으로 가세요.'
+
+In the last lesson, we learned '(으)로' as a direction.
+However, in addition to the direction, there are a lot of other meanings.
+Let's learn only 3 more meanings  with some examples that are often used in daily life.
+
+1. way, method
+ a. 버스로 왔어요. (I came by bus.)
+ b. 비행기로 1시간 걸려요. (It takes a hour by plane.)
+ c. 한국어로 말해요. (Speak in Korean.)
+ d. 숟가락으로 아이스크림을 먹어요. (I eat ice cream with a spoon.)
+
+2. material, ingredient
+ a. 안 입는 옷으로 가방을 만들었어요. (I made a bag with clothes that I don't wear.)
+ b. 오렌지로 주스를 만들었어요. (I made juice from orange.)
+ c. 떡볶이는 쌀로 만들어요. (Tteokbokki is made from rice.)
+
+3. reason, cause
+ a. 코로나 바이러스로 많은 사람들이 힘들었어요. (The corona virus made it difficult for many people.)
+ b. 맛있는 음식으로 스트레스가 풀렸어요. (The stress had been relieved by the delicious food.)
+ c. 한국 드라마로 한국에 흥미가 생겼어요. (I got interested in Korea by a Korean drama.)
+"
+    </string>
+
+    <string name="SL_17_CONTENTS">
+        "- 이따 전화 할게요.
+- 이따 전화 할 거예요.
+
+What's difference of 2 sentences above?
+When translated into English, they are both 'will' or 'be going to'.
+Therefore, students often misuse them.
+
+The difference between the two is very simple.
+- '~(으)ㄹ게요' : Promise between the speaker and the listener
+- '~(으)ㄹ 거예요' : Only the speaker's plan, will / future tense
+
+In other words, when using'~(으)ㄹ게요', it is natural in the situation where a consensus is formed between the speaker and the listener.
+- ""조용히 좀 해주세요."" (Please be quiet.)
+  ""미안해요. 밖에 나갈게요."" (I'm sorry. I'll go out.)
+- ""지금 좀 바빠요."" (I'm a little busy now.)
+  ""그럼 나중에 다시 전화 할게요."" (Then, I'll call you again later.)
+- ""맛있게 드세요."" (Please enjoy this food.)
+  ""고마워요. 잘 먹을게요."" (Thank you. I'll eat well.)
+
+And when you want to express your will, such as a simple future or a new year goal, it is good to use '~(으)ㄹ 거예요' as follows..
+- 내일 비가 올 거예요. (It will rain tomorrow.)
+- 새해에는 한국어를 열심히 공부할 거예요! (I'll study Korean hard in the new year!)
+- 한국 여행을 가면 떡볶이를 먹을 거예요. (When I go on a trip to Korea, I'll eat Tteokbokki.)"
+    </string>
+
 
 
     <!--번역 필요 없는 부분-->

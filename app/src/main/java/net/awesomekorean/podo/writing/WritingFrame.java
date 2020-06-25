@@ -133,7 +133,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnCorrection :
 
-                if(letters > 9) {
+                if(letters > 19) {
                     WritingEntity entity = saveWriting();
                     if(entity == null) {
                         entity = editWriting;

@@ -113,7 +113,7 @@ public class WritingCorrection extends AppCompatActivity implements View.OnClick
 
                 DocumentReference reference = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(guid);
                 reference
-                        .update("studentFeedback", studentFeedback)
+                        .update("studentFeedback", studentFeedback, "status", 3)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

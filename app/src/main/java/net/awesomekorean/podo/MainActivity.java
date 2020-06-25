@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -66,9 +67,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     TextView tvTitle;
 
     ImageView btnProfile;
+    ImageView btnDailyMission;
     ImageView btnBugReport;
     ImageView btnMessage;
     ImageView redDot;
+
+    ConstraintLayout dailyMissionPage;
+    LinearLayout dailyMissionTransparent;
 
     LinearLayout layoutLesson;
     LinearLayout layoutReading;
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
+        btnDailyMission = findViewById(R.id.btnDailyMission);
         btnBugReport = findViewById(R.id.btnBugReport);
         btnMessage = findViewById(R.id.btnMessage);
         redDot = findViewById(R.id.redDot);
@@ -121,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading = findViewById(R.id.btnReading);
         btnWriting = findViewById(R.id.btnWriting);
         btnCollection = findViewById(R.id.btnCollection);
+        dailyMissionPage = findViewById(R.id.dailyMissionPage);
+        dailyMissionTransparent = findViewById(R.id.dailyMissionTransparent);
         textLesson = findViewById(R.id.textLesson);
         textReading = findViewById(R.id.textReading);
         textWriting = findViewById(R.id.textWriting);
@@ -130,8 +138,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnYes = findViewById(R.id.btnYes);
         btnNo = findViewById(R.id.btnNo);
         btnProfile.setOnClickListener(this);
+        btnDailyMission.setOnClickListener(this);
         btnBugReport.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
+        dailyMissionTransparent.setOnClickListener(this);
         layoutLesson.setOnClickListener(this);
         layoutReading.setOnClickListener(this);
         layoutWriting.setOnClickListener(this);
@@ -188,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     }
                 });
 
+        dailyMissionPage.setVisibility(View.GONE);
 
         // 앱에서 유저 데이터 가져오기
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
@@ -198,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         // 오늘 출석체크 안했으면 출석부 업데이트 (버그: 요일이 같으면 일주일만에 접속해도 초기화 안됨)
         if (!userInformation.getAttendance().get(today)) {
+            dailyMissionPage.setVisibility(View.VISIBLE);
             System.out.println("출석체크를 시작합니다.");
             int yesterday;
             if (today == 0) {
@@ -267,6 +279,18 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             case R.id.btnProfile:
                 intent = new Intent(this, Profile.class);
                 startActivity(intent);
+                break;
+
+            case R.id.btnDailyMission :
+                if(dailyMissionPage.getVisibility() == View.GONE) {
+                    dailyMissionPage.setVisibility(View.VISIBLE);
+                } else {
+                    dailyMissionPage.setVisibility(View.GONE);
+                }
+                break;
+
+            case R.id.dailyMissionTransparent :
+                dailyMissionPage.setVisibility(View.GONE);
                 break;
 
             case R.id.btnBugReport :

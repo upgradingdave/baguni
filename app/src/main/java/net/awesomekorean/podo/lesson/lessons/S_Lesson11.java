@@ -9,7 +9,7 @@ public class S_Lesson11 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_11";
     private String lessonTitle = "confusing expression";
     private String lessonSubTitle = "'좋아요' vs '좋아해요'";
-    private int lessonImage = R.drawable.confusingexpression2;
+    private int lessonImage = R.drawable.confusing_expression;
 
     private int contents = R.string.SL_11_CONTENTS;
 

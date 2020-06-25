@@ -12,11 +12,11 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonSubTitle = "~지만";
     private int lessonImage = R.drawable.contrast;
 
-    private String[] wordFront = {"어렵다", "말하다", "쓰다", "하지만", "읽다", "쉽다"};
+    private String[] wordFront = {"어렵다", "말하다", "쓰다", "읽다", "쉽다"};
 
-    private String[] wordBack = {"difficult", "to speak", "to write", "but", "to read", "easy"};
+    private String[] wordBack = {"difficult", "to speak", "to write", "to read", "easy"};
 
-    private String[] wordPronunciation = {"[어렵따]", "-", "-", "-", "[익따]", "[쉽따]"};
+    private String[] wordPronunciation = {"[어렵따]", "-", "-", "[익따]", "[쉽따]"};
 
     private String[] sentenceFront = {
             "어때요?",

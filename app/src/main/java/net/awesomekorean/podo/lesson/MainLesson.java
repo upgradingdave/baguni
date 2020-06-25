@@ -55,6 +55,10 @@ import net.awesomekorean.podo.lesson.lessons.Lesson28;
 import net.awesomekorean.podo.lesson.lessons.Lesson29;
 import net.awesomekorean.podo.lesson.lessons.Lesson30;
 import net.awesomekorean.podo.lesson.lessons.Lesson31;
+import net.awesomekorean.podo.lesson.lessons.Lesson32;
+import net.awesomekorean.podo.lesson.lessons.Lesson33;
+import net.awesomekorean.podo.lesson.lessons.Lesson34;
+import net.awesomekorean.podo.lesson.lessons.Lesson35;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
 import net.awesomekorean.podo.lesson.lessons.R_Ranking_Lesson00;
@@ -62,10 +66,12 @@ import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson02;
 import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson03;
+import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson04;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson02;
 import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson03;
+import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson04;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson03;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson04;
@@ -80,6 +86,8 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson13;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson14;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson15;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson16;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson17;
 
 import java.util.List;
 
@@ -102,13 +110,14 @@ public class MainLesson extends Fragment{
     String[] groupTitle = {
             "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Review", "Negative", "Reason",
             "Range", "Listing/Contrast", "Review", "Ability", "Time", "Review", "Hope", "Requests",
-            "Supposition", "Review", "Experience", "Guess", "Permission"
+            "Supposition", "Review", "Experience", "Guess", "Permission", "Review", "Prohibition"
     };
 
     String[] groupSubTitle = {
             "Lesson 0", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 1~4", "Lesson 5", "Lesson 6",
             "Lesson 7", "Lesson 8", "Lesson 5~8", "Lesson 9", "Lesson 10", "Lesson 9~10",
-            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 11~13", "Lesson 14", "Lesson 15", "Coming soon!"
+            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 11~13", "Lesson 14", "Lesson 15", "Lesson 16",
+            "Lesson 14~16", "Coming soon!"
     };
 
     int[] groupProcess = new int[groupTitle.length];
@@ -130,10 +139,12 @@ public class MainLesson extends Fragment{
             {new R_Word_Lesson02(), new R_Sentence_Lesson02(), new R_Ranking_Lesson00()},
             {new Lesson17(), new Lesson20(), new S_Lesson13()},
             {new Lesson18(), new Lesson21(), new S_Lesson07()},
-            {new Lesson23(), new Lesson24(), new S_Lesson09()},
+            {new Lesson23(), new Lesson35(), new Lesson24(), new S_Lesson09()},
             {new R_Word_Lesson03(), new R_Sentence_Lesson03(), new R_Ranking_Lesson00()},
             {new Lesson25(), new Lesson26()},
             {new Lesson30(), new Lesson31(), new S_Lesson14()},
+            {new Lesson32(), new Lesson33(), new Lesson34(), new S_Lesson16(), new S_Lesson17()},
+            {new R_Word_Lesson04(), new R_Sentence_Lesson04(), new R_Ranking_Lesson00()},
             {}
     };
 
