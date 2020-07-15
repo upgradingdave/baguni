@@ -15,6 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import net.awesomekorean.podo.AdsManager;
+import net.awesomekorean.podo.DailyMissionInfo;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -97,11 +98,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
                 // 포인트 합산하기
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                int oldPoints = userInformation.getPoints();
-                int newPoints = oldPoints + reward;
-                userInformation.setPoints(newPoints);
-                SharedPreferencesInfo.setUserInfo(context, userInformation);
-                userInformation.updateDb(context);
+                userInformation.addRewardPoints(context, reward);
 
                 if(isFromProfile) {
                     Intent intent = new Intent();
@@ -118,6 +115,12 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
                     Bundle bundle = new Bundle();
                     bundle.putString("lessonId", lessonId);
                     firebaseAnalytics.logEvent("lesson_finish", bundle);
+
+
+                    // 일일미션에 추가하기
+                    DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(context);
+                    dailyMissionInfo.addLessonComplete(lessonId);
+                    SharedPreferencesInfo.setDailyMissionInfo(context, dailyMissionInfo);
 
 
                     // 레슨완료 정보 업데이트 하기

@@ -35,6 +35,7 @@
     <string name="DONT_HAVE_ACCOUNT"> Don\'t have an account?</string>
     <string name="SIGNUP"> Sign up</string>
     <string name="NAME">Name</string>
+    <string name="TELL_US_YOUR_OPINION">Please tell us your opinion</string>
     <string name="CONFIRM_PASS">Confirm Password</string>
     <string name="ALREADY_HAVE_ACCOUNT"> Already have an account?</string>
     <string name="GOOGLE_FAILED">Google sign in failed</string>
@@ -67,6 +68,20 @@
     <string name="SAVE">Save</string>
     <string name="CANCEL">Cancel</string>
 
+
+    <!--    일일미션-->
+    <string name="DAILY_MISSION">Daily Mission</string>
+    <string name="MISSION_FIRST">Complete 5 general lessons</string>
+    <string name="MISSION_SECOND">Complete 50 words review</string>
+    <string name="MISSION_THIRD">Use podo for 20 minutes</string>
+    <string name="GET_BONUS_POINTS">Get bonus points</string>
+    <string name="DAILY_MISSION_INFO">How it works?</string>
+    <string name="DAILY_MISSION_INFO_FIRST">You can get 3 points for every mission you complete.</string>
+    <string name="DAILY_MISSION_INFO_SECOND">If you complete all missions, you will get an additional 5 points.</string>
+    <string name="DAILY_MISSION_INFO_THIRD">Missions will reset every day.</string>
+    <string name="GET_POINTS">You got the reward points!</string>
+    <string name="POINTS">POINTS</string>
+    <string name="GOT_IT">Got it!</string>
 
 
     <!--    레슨-->
@@ -198,6 +213,8 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="UPDATED_USERNAME_FAILED">User name update failed</string>
     <string name="SIGN_OUT">Sign Out</string>
     <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
+    <string name="REPORT_RESULT">Thank you for your valuable opinion.
+        I will review your comment and improve my App in the near future.</string>
 
 
     <!--    구매-->
@@ -848,7 +865,6 @@ And when you want to express your will, such as a simple future or a new year go
     </string>
 
 
-
     <!--번역 필요 없는 부분-->
     <string name="facebook_app_id">3034621716562505</string>
     <string name="fb_login_protocol_scheme">fb3034621716562505</string>
@@ -873,6 +889,7 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="LESSONSENTENCE">lessonSentence</string>
     <string name="LESSON_SENTENCE">lessonSentence</string>
     <string name="DB_USERS">android/podo/users</string>
+    <string name="DB_REPORTS">android/podo/reports</string>
     <string name="DB_INFORMATION">information</string>
     <string name="DB_COLLECTIONS">collections</string>
     <string name="DB_MESSAGES">messages</string>

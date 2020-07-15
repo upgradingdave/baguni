@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -50,7 +52,12 @@ import net.awesomekorean.podo.profile.Profile;
 import net.awesomekorean.podo.reading.MainReading;
 import net.awesomekorean.podo.writing.MainWriting;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
@@ -68,12 +75,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     ImageView btnProfile;
     ImageView btnDailyMission;
-    ImageView btnBugReport;
     ImageView btnMessage;
     ImageView redDot;
-
-    ConstraintLayout dailyMissionPage;
-    LinearLayout dailyMissionTransparent;
 
     LinearLayout layoutLesson;
     LinearLayout layoutReading;
@@ -105,10 +108,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     Animation animation;
 
+    DailyMissionInfo dailyMissionInfo;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         SettingStatusBar.setStatusBar(this);
@@ -116,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
         btnDailyMission = findViewById(R.id.btnDailyMission);
-        btnBugReport = findViewById(R.id.btnBugReport);
         btnMessage = findViewById(R.id.btnMessage);
         redDot = findViewById(R.id.redDot);
         layoutLesson = findViewById(R.id.layoutLesson);
@@ -127,8 +132,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading = findViewById(R.id.btnReading);
         btnWriting = findViewById(R.id.btnWriting);
         btnCollection = findViewById(R.id.btnCollection);
-        dailyMissionPage = findViewById(R.id.dailyMissionPage);
-        dailyMissionTransparent = findViewById(R.id.dailyMissionTransparent);
+
         textLesson = findViewById(R.id.textLesson);
         textReading = findViewById(R.id.textReading);
         textWriting = findViewById(R.id.textWriting);
@@ -139,9 +143,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnNo = findViewById(R.id.btnNo);
         btnProfile.setOnClickListener(this);
         btnDailyMission.setOnClickListener(this);
-        btnBugReport.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
-        dailyMissionTransparent.setOnClickListener(this);
+
         layoutLesson.setOnClickListener(this);
         layoutReading.setOnClickListener(this);
         layoutWriting.setOnClickListener(this);
@@ -154,6 +157,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         mainWriting = new MainWriting();
         mainCollection = new MainCollection();
         setFrag(mainLesson);
+
+        // 일일미션 초기화하기
+        dailyMissionInfo = new DailyMissionInfo();
+        SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
+
+        Timer timer = new Timer();
+        timer.schedule(new DailyMissionTimer(dailyMissionInfo.getCheckInTime()), 0, 1000);
+
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
 
@@ -198,8 +209,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     }
                 });
 
-        dailyMissionPage.setVisibility(View.GONE);
-
         // 앱에서 유저 데이터 가져오기
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
@@ -209,7 +218,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         // 오늘 출석체크 안했으면 출석부 업데이트 (버그: 요일이 같으면 일주일만에 접속해도 초기화 안됨)
         if (!userInformation.getAttendance().get(today)) {
-            dailyMissionPage.setVisibility(View.VISIBLE);
             System.out.println("출석체크를 시작합니다.");
             int yesterday;
             if (today == 0) {
@@ -245,6 +253,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     System.out.println("출석부 업데이트를 실패했습니다:" + e);
                 }
             });
+
+
         } else {
             System.out.println("오늘의 출석체크가 이미 끝났습니다.");
         }
@@ -265,10 +275,30 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
+    // 완료한 일일 미션이 있는지 확인
+    public void checkMissionComplete() {
+        dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
+        System.out.println("미션완료_레슨 : " + dailyMissionInfo.getLessonComplete());
+        System.out.println("미션완료_단어리뷰 : " + dailyMissionInfo.getWordReviewComplete());
+        int rewardPoints = dailyMissionInfo.isThereMissionCompleted();
+        SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
+        System.out.println("미션1 : " + dailyMissionInfo.getIsCompleted()[0]);
+        System.out.println("미션2 : " + dailyMissionInfo.getIsCompleted()[1]);
+        System.out.println("미션3 : " + dailyMissionInfo.getIsCompleted()[2]);
+        System.out.println("미션완료_보너스 : " + rewardPoints);
+        if(rewardPoints > 0) {
+            Intent intent = new Intent(this, DailyMission.class);
+            intent.putExtra("rewardPoints", rewardPoints);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         checkPlayService();
+        System.out.println("메인 보임!");
+        checkMissionComplete();
     }
 
     @Override
@@ -282,20 +312,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnDailyMission :
-                if(dailyMissionPage.getVisibility() == View.GONE) {
-                    dailyMissionPage.setVisibility(View.VISIBLE);
-                } else {
-                    dailyMissionPage.setVisibility(View.GONE);
-                }
-                break;
-
-            case R.id.dailyMissionTransparent :
-                dailyMissionPage.setVisibility(View.GONE);
-                break;
-
-            case R.id.btnBugReport :
-                confirmText.setText(getResources().getString(R.string.CONFIRM_REPORT));
-                confirmWindow.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(this, DailyMission.class);
+                intent.putExtra("rewardPoints", 0);
+                startActivity(intent);
                 break;
 
             case R.id.btnMessage:
@@ -326,21 +345,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnYes :
-                if(confirmText.getText().equals(getResources().getString(R.string.CONFIRM_REPORT))) {
-                    Uri uriGoogle = Uri.parse("https://forms.gle/eSB4JKFpYNbJFuzx6");
-                    intent = new Intent(Intent.ACTION_VIEW, uriGoogle);
-                    if (intent.resolveActivity(getPackageManager()) != null) {
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
-                    }
-                    confirmWindow.setVisibility(View.GONE);
-
-                } else {
-                    finishAffinity();
-                    System.runFinalization();
-                    System.exit(0);
-                }
+                finishAffinity();
+                System.runFinalization();
+                System.exit(0);
                 break;
 
             case R.id.btnNo :

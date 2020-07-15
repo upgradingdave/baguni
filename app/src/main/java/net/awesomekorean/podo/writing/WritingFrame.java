@@ -69,6 +69,8 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             editText.setFocusable(false);
         }
 
+        editWriting = new WritingEntity();
+
         // EDIT 일 때, 기존의 글을 출력
         if(code.equals(getString(R.string.REQUEST_EDIT))) {
             editWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));

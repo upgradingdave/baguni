@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DailyMission">
+
+<!--        일일 미션 페이지-->
+    <LinearLayout
+        android:id="@+id/linearLayoutDM"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_10"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/DAILY_MISSION"
+            android:textSize="20dp"
+            android:textColor="@color/BLACK"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iconComplete1"
+                android:src="@drawable/complete_gradation_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/MISSION_FIRST"
+                android:textColor="@color/GREY_DARK"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/gradation"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iconComplete2"
+                android:src="@drawable/complete_gradation_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="@string/MISSION_SECOND"
+                android:textSize="15dp"
+                android:textColor="@color/GREY_DARK"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/gradation"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iconComplete3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/complete_gradation_no" />
+                <TextView
+                    android:id="@+id/tvTimer"
+                    android:textColor="@color/PURPLE"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:text="@string/MISSION_THIRD"
+                android:textSize="15dp"
+                android:textColor="@color/GREY_DARK"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGetBonus"
+            android:layout_gravity="center"
+            android:text="@string/GET_BONUS_POINTS"
+            android:textColor="@color/WHITE"
+            android:textSize="15dp"
+            android:textAllCaps="false"
+            android:enabled="false"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:background="@drawable/bg_grey_30"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnInformationDM"
+        android:src="@drawable/question"
+        app:layout_constraintTop_toTopOf="@id/btnCloseDM"
+        app:layout_constraintBottom_toBottomOf="@id/btnCloseDM"
+        app:layout_constraintEnd_toStartOf="@+id/btnCloseDM"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/btnCloseDM"
+        android:src="@drawable/close_purple"
+        app:layout_constraintTop_toTopOf="@id/linearLayoutDM"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutDM"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!--        일일 미션 설명 페이지-->
+    <LinearLayout
+        android:id="@+id/dailyMissionPageInfo"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_10"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutDM"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutDM"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:text="@string/DAILY_MISSION_INFO"
+            android:textSize="20dp"
+            android:textColor="@color/BLACK"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/purple_dot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/DAILY_MISSION_INFO_FIRST"
+                        android:textColor="@color/GREY_DARK"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/pink_dot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/DAILY_MISSION_INFO_SECOND"
+                        android:textColor="@color/GREY_DARK"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/purple_dot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/DAILY_MISSION_INFO_THIRD"
+                        android:textColor="@color/GREY_DARK"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnCloseInformationDM"
+            android:layout_gravity="center"
+            android:text="@string/GOT_IT"
+            android:textColor="@color/WHITE"
+            android:textSize="15dp"
+            android:textAllCaps="false"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingLeft="65dp"
+            android:paddingRight="65dp"
+            android:background="@drawable/bg_purple_30"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <!--         보상포인트 받기 화면-->
+    <LinearLayout
+        android:id="@+id/dailyMissionComplete"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_10"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutDM"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutDM"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:text="@string/CONGRATULATION"
+            android:textSize="20dp"
+            android:textColor="@color/PURPLE"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <ImageView
+                android:src="@drawable/mission_clear"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/tvRewardPoints"
+                android:gravity="center"
+                android:text="2"
+                android:textSize="70dp"
+                android:textColor="@color/BLUE_PURPLE"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+            <TextView
+                android:id="@+id/textView"
+                android:gravity="center"
+                android:text="@string/POINTS"
+                android:textColor="@color/PURPLE"
+                android:textSize="18dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/GET_POINTS"
+            android:textSize="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnCloseMissionComplete"
+            android:layout_gravity="center"
+            android:text="@string/GOT_IT"
+            android:textColor="@color/WHITE"
+            android:textSize="15dp"
+            android:textAllCaps="false"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingLeft="65dp"
+            android:paddingRight="65dp"
+            android:background="@drawable/bg_purple_30"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:elevation="1dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bubbles_bg_short"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutDM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

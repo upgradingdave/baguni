@@ -12,7 +12,25 @@ public class SharedPreferencesInfo {
 
     static Gson gson = new GsonBuilder().create();
 
-    // 앱에 유저 데이터 저장하기
+    // 앱에 일일미션 데이터 저장하기
+    public static void setDailyMissionInfo(Context context, DailyMissionInfo dailyMissionInfo) {
+        String stringToSP = gson.toJson(dailyMissionInfo, DailyMissionInfo.class);
+        SharedPreferences sp = context.getSharedPreferences("dailyMission", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("info", stringToSP);
+        editor.commit();
+    }
+
+    // 엡에서 일일미션 데이터 불러오기
+    public static DailyMissionInfo getDailyMissionInfo(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("dailyMission", MODE_PRIVATE);
+        String stringFromSP = sp.getString("info", "");
+        DailyMissionInfo dailyMissionInfo = gson.fromJson(stringFromSP, DailyMissionInfo.class);
+        return dailyMissionInfo;
+    }
+
+
+        // 앱에 유저 데이터 저장하기
     public static void setUserInfo(Context context, UserInformation userInformation) {
         String stringToSP = gson.toJson(userInformation, UserInformation.class);
         SharedPreferences sp = context.getSharedPreferences("user", MODE_PRIVATE);

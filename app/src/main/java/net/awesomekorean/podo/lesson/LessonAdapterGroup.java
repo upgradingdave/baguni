@@ -107,7 +107,7 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
 
         if (isExpanded) {
 
-            holder.groupView.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_purple_10_transparent));
+            holder.groupView.setBackground(ContextCompat.getDrawable(context, R.drawable.gradation));
 
             holder.lessonArrow.setImageResource(R.drawable.arrow_down_purple_full);
 

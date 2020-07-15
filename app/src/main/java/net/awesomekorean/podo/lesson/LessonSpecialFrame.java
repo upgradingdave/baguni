@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.ConfirmQuit;
+import net.awesomekorean.podo.DailyMissionInfo;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;

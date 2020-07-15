@@ -14,7 +14,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,11 +36,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.login.SignIn;
@@ -50,9 +56,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ImageView btnBack;
     ImageView userImage;
@@ -66,13 +77,21 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     EditText editName;
     Button btnSave;
 
+    LinearLayout reportBug;
+    LinearLayout reportBugOpen;
+    EditText reportBugText;
+    Button btnSend;
+
     LinearLayout evaluation;
     LinearLayout recommend;
     LinearLayout getPointByAd;
     LinearLayout getPointByPurchasing;
     LinearLayout logout;
 
+    LinearLayout reportResult;
+
     ImageView arrowEditProfile;
+    ImageView arrowReportBug;
 
     Intent intent;
 
@@ -81,7 +100,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     int attendanceCount = 0; // 출석체크 카운트 (연속출석 7번 했는지 확인)
 
-    boolean btnExtendClicked = false;
+    LinearLayout extendedLayout;
 
     Bitmap bitmap;
 
@@ -119,18 +138,27 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         editName = findViewById(R.id.editName);
         btnSave = findViewById(R.id.btnSave);
 
+        reportBug = findViewById(R.id.reportBug);
+        reportBugOpen = findViewById(R.id.reportBugOpen);
+        reportBugText = findViewById(R.id.reportBugText);
+        btnSend = findViewById(R.id.btnSend);
+
         evaluation = findViewById(R.id.evaluation);
         recommend = findViewById(R.id.recommend);
         getPointByAd = findViewById(R.id.getPointsByAd);
         getPointByPurchasing = findViewById(R.id.getPointsByPurchasing);
         logout = findViewById(R.id.logout);
+        reportResult = findViewById(R.id.reportResult);
 
         arrowEditProfile = findViewById(R.id.arrowEditProfile);
+        arrowReportBug = findViewById(R.id.arrowReportBug);
 
         btnBack.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
         layoutEditName.setOnClickListener(this);
         btnSave.setOnClickListener(this);
+        reportBug.setOnClickListener(this);
+        btnSend.setOnClickListener(this);
         evaluation.setOnClickListener(this);
         recommend.setOnClickListener(this);
         getPointByAd.setOnClickListener(this);
@@ -139,7 +167,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
-        userName.setText(MainActivity.userName);
+        userName.setText(SharedPreferencesInfo.getUserName(context));
         userPoint.setText(String.valueOf(userInformation.getPoints()));
 
         // 유저프로필사진 가져오기
@@ -292,6 +320,54 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 }
 
                 setExtendableButton(arrowEditProfile, layoutEditNameOpen);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(editName.getWindowToken(), 0);
+                break;
+
+            case R.id.reportBug :
+                setExtendableButton(arrowReportBug, reportBugOpen);
+                break;
+
+            case R.id.btnSend :
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(task.isSuccessful()) {
+
+                            String token = task.getResult().getToken();
+                            String comments = reportBugText.getText().toString();
+                            if(comments.getBytes().length > 0) {
+                                Map<String, Object> report = new HashMap<>();
+                                report.put("date", UnixTimeStamp.getTimeNow());
+                                report.put("userEmail", SharedPreferencesInfo.getUserEmail(context));
+                                report.put("userName", SharedPreferencesInfo.getUserName(context));
+                                report.put("comments", comments);
+                                report.put("userToken", token);
+                                report.put("status", 0);  // 0:신규, 1:읽음, 2:답변함
+
+                                db.collection(getString(R.string.DB_REPORTS)).document(UUID.randomUUID().toString())
+                                        .set(report).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        reportResult.setVisibility(View.VISIBLE);
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                reportResult.setVisibility(View.GONE);
+                                            }
+                                        }, 3000);
+
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+
+                setExtendableButton(arrowReportBug, reportBugOpen);
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(reportBugText.getWindowToken(), 0);
                 break;
 
             case R.id.evaluation :
@@ -398,16 +474,23 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    // editProfile 이랑 language 펼치기/접기 메소드
-    private void setExtendableButton(ImageView arrow, LinearLayout closedLayout) {
-        if(!btnExtendClicked) {
-            arrow.setImageResource(R.drawable.arrow_down_grey);
-            closedLayout.setVisibility(View.VISIBLE);
-            btnExtendClicked = true;
-        } else {
+    // editProfile 이랑 reportBug 펼치기/접기 메소드
+    private void setExtendableButton(ImageView arrow, LinearLayout clickedLayout) {
+        boolean isClicked = false;
+        if(clickedLayout.getVisibility() == View.VISIBLE) {
+            isClicked = true;
+        }
+        layoutEditNameOpen.setVisibility(View.GONE);
+        reportBugOpen.setVisibility(View.GONE);
+        arrowEditProfile.setImageResource(R.drawable.arrow_right_grey);
+        arrowReportBug.setImageResource(R.drawable.arrow_right_grey);
+
+        arrow.setImageResource(R.drawable.arrow_down_grey);
+        clickedLayout.setVisibility(View.VISIBLE);
+
+        if(isClicked) {
             arrow.setImageResource(R.drawable.arrow_right_grey);
-            closedLayout.setVisibility(View.GONE);
-            btnExtendClicked = false;
+            clickedLayout.setVisibility(View.GONE);
         }
     }
 }

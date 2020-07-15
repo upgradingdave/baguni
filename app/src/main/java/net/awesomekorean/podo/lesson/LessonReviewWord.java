@@ -22,9 +22,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.AdsManager;
+import net.awesomekorean.podo.DailyMissionInfo;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.lesson.lessons.LessonReview;
 
 import java.util.ArrayList;
@@ -280,6 +282,13 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                     if(adsManager.interstitialAd.isLoaded()) {
                         adsManager.playFullAds(this);
                     }
+                }
+
+                if(quizCount > 5) {
+                    // 일일미션에 추가하기
+                    DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
+                    dailyMissionInfo.setWordReviewComplete();
+                    SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
                 }
 
                 finish();

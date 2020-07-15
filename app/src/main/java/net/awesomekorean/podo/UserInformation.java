@@ -114,6 +114,16 @@ public class UserInformation {
     }
 
 
+    // 포인트 합산하기
+    public void addRewardPoints(Context context, int rewardPoints){
+        int oldPoints = getPoints();
+        int newPoints = oldPoints + rewardPoints;
+        setPoints(newPoints);
+        SharedPreferencesInfo.setUserInfo(context, this);
+        this.updateDb(context);
+    }
+
+
     // DB 에 유저 정보 업데이드 하기
     public void updateDb(final Context context) {
 
