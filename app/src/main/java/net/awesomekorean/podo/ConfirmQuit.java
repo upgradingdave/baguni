@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import net.awesomekorean.podo.lesson.LessonAdapterChild;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
@@ -20,6 +21,8 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
     Button btnNo;
 
+    TextView confirmText;
+
     Intent intent;
 
     Integer progress = null;
@@ -31,6 +34,8 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
     boolean isNumberPractice = false;
 
     boolean isReading = false;
+
+    boolean isMain = false;
 
     AdsManager adsManager;
 
@@ -53,6 +58,8 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
         btnNo = findViewById(R.id.btnNo);
 
+        confirmText = findViewById(R.id.confirmText);
+
         btnYes.setOnClickListener(this);
 
         btnNo.setOnClickListener(this);
@@ -68,6 +75,14 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         isNumberPractice = intent.getExtras().getBoolean("isNumberPractice");
 
         isReading = intent.getExtras().getBoolean(getResources().getString(R.string.IS_READING));
+
+        isMain = intent.getExtras().getBoolean(getResources().getString(R.string.IS_MAIN));
+
+        if(isMain) {
+            confirmText.setText(getResources().getString(R.string.CONFIRM_EXIT));
+        } else {
+            confirmText.setText(getResources().getString(R.string.CONFIRM_QUIT));
+        }
     }
 
 
@@ -90,7 +105,12 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
                 String unitId;
 
-                if(progress != null) {
+                if(isMain) {
+                    finishAffinity();
+                    System.runFinalization();
+                    System.exit(0);
+
+                } else if(progress != null) {
 
                     if (isReading) {
 
@@ -125,10 +145,9 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
                             adsManager.playFullAds(this);
                         }
                     }
+
+                    sendResultOk();
                 }
-
-                sendResultOk();
-
                 break;
 
 

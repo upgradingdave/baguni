@@ -138,7 +138,8 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="FINISH">Finish</string>
     <string name="SELECT_BOX">Select a box</string>
     <string name="CONGRATULATION">Congratulation</string>
-    <string name="GET_POINT">Get the points</string>
+    <string name="GET_POINT">Get the points by watching ads</string>
+    <string name="GO_TO_MAIN">Go to main</string>
     <string name="UNLOCK">Do you want to unlock this by using points?</string>
     <string name="UNLOCK_FAILED">You don\'t have points enough.</string>
     <string name="UNLOCK_SUCCEEDED">Unlock succeeded</string>
@@ -905,6 +906,7 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="LESSON_ID">lessonId</string>
     <string name="READING_ID">readingId</string>
     <string name="IS_READING">isReading</string>
+    <string name="IS_MAIN">isMain</string>
     <string name="PROGRESS">progress</string>
     <string name="CONVOWBAT">conVowBat</string>
 

@@ -100,8 +100,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     int attendanceCount = 0; // 출석체크 카운트 (연속출석 7번 했는지 확인)
 
-    LinearLayout extendedLayout;
-
     Bitmap bitmap;
 
     UserInformation userInformation;
@@ -171,7 +169,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         userPoint.setText(String.valueOf(userInformation.getPoints()));
 
         // 유저프로필사진 가져오기
-        final Uri profileImage = MainActivity.userImage;
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final Uri profileImage = user.getPhotoUrl();
+
         if(profileImage != null) {
             // 프로필이미지 불러오기
             Thread mThread = new Thread() {
@@ -388,6 +389,10 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
             case R.id.getPointsByAd :
+                intent = new Intent(Profile.this, LessonFinish.class);
+                intent.putExtra("isReward", true);
+                startActivityForResult(intent, 200);
+                /*
                 RewardedAdCallback adCallback = new RewardedAdCallback() {
 
                     @Override
@@ -414,6 +419,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                     }
                 };
                 adsManager.rewardedAd.show(Profile.this, adCallback);
+
+                 */
                 break;
 
             case R.id.getPointsByPurchasing :

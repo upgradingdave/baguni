@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -15,6 +16,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextPaint;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +41,9 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
     Button btnGetBonusPoint;
     Button btnCloseInformationDM;
     Button btnCloseMissionComplete;
-    static TextView tvTimer;
+    TextView tvTimer;
+    PlaySoundPool playSoundPool;
+
 
     DailyMissionInfo dailyMissionInfo;
 
@@ -46,11 +51,21 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
 
 
     public static class HandlerMission extends Handler {
+
+        private Activity activity;
+        private TextView tvTimer;
+
+        public HandlerMission(Activity activity, TextView tvTimer) {
+            super();
+            this.activity = activity;
+            this.tvTimer = tvTimer;
+        }
+
         @Override
         public void handleMessage(Message msg) {
             if(msg.what == 100) {
                 tvTimer.setVisibility(View.GONE);
-
+                activity.finish();
             } else {
                 tvTimer.setText(msg.obj.toString());
             }
@@ -62,6 +77,8 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_mission);
+
+        playSoundPool = new PlaySoundPool(getApplicationContext());
 
         dailyMissionPageInfo = findViewById(R.id.dailyMissionPageInfo);
         dailyMissionComplete = findViewById(R.id.dailyMissionComplete);
@@ -100,7 +117,7 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
             tvTimer.setVisibility(View.GONE);
 
         } else {
-            handlerMission = new HandlerMission();
+            handlerMission = new HandlerMission(this, tvTimer);
             tvTimer.setVisibility(View.VISIBLE);
         }
 
@@ -108,6 +125,9 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
         if(dailyMissionInfo.canUserGetBonusPoint()) {
             btnGetBonusPoint.setEnabled(true);
             btnGetBonusPoint.setBackgroundResource(R.drawable.bg_purple_30);
+        } else {
+            btnGetBonusPoint.setEnabled(false);
+            btnGetBonusPoint.setBackgroundResource(R.drawable.bg_grey_30);
         }
     }
 
@@ -115,6 +135,10 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
     public void getRewards(int rewards) {
         tvRewardPoints.setText(Integer.toString(rewards));
         dailyMissionComplete.setVisibility(View.VISIBLE);
+        playSoundPool.playSoundLesson(2);
+        Animation aniScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_1000);
+        tvRewardPoints.startAnimation(aniScale);
+
         // 포인트 합산하기
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
         userInformation.addRewardPoints(getApplicationContext(), rewards);
@@ -156,7 +180,6 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnCloseMissionComplete:
-                // todo : 포인트 적립하기
                 dailyMissionComplete.setVisibility(View.GONE);
                 break;
         }

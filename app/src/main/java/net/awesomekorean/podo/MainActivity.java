@@ -1,5 +1,8 @@
 package net.awesomekorean.podo;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -15,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -55,6 +59,7 @@ import net.awesomekorean.podo.writing.MainWriting;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -101,14 +106,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     UserInformation userInformation;
 
-    LinearLayout confirmWindow;
-    TextView confirmText;
-    Button btnYes;
-    Button btnNo;
-
     Animation animation;
 
     DailyMissionInfo dailyMissionInfo;
+
+    CountDownTimer timer;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -137,10 +139,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         textReading = findViewById(R.id.textReading);
         textWriting = findViewById(R.id.textWriting);
         textCollection = findViewById(R.id.textCollection);
-        confirmWindow = findViewById(R.id.confirmWindow);
-        confirmText = findViewById(R.id.confirmText);
-        btnYes = findViewById(R.id.btnYes);
-        btnNo = findViewById(R.id.btnNo);
         btnProfile.setOnClickListener(this);
         btnDailyMission.setOnClickListener(this);
         btnMessage.setOnClickListener(this);
@@ -149,22 +147,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         layoutReading.setOnClickListener(this);
         layoutWriting.setOnClickListener(this);
         layoutCollection.setOnClickListener(this);
-        btnYes.setOnClickListener(this);
-        btnNo.setOnClickListener(this);
 
         mainLesson = new MainLesson();
         mainReading = new MainReading();
         mainWriting = new MainWriting();
         mainCollection = new MainCollection();
         setFrag(mainLesson);
-
-        // 일일미션 초기화하기
-        dailyMissionInfo = new DailyMissionInfo();
-        SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
-
-        Timer timer = new Timer();
-        timer.schedule(new DailyMissionTimer(dailyMissionInfo.getCheckInTime()), 0, 1000);
-
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
 
@@ -209,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     }
                 });
 
+
         // 앱에서 유저 데이터 가져오기
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
@@ -218,6 +207,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         // 오늘 출석체크 안했으면 출석부 업데이트 (버그: 요일이 같으면 일주일만에 접속해도 초기화 안됨)
         if (!userInformation.getAttendance().get(today)) {
+
+            initDailyMission();
+
             System.out.println("출석체크를 시작합니다.");
             int yesterday;
             if (today == 0) {
@@ -259,10 +251,32 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             System.out.println("오늘의 출석체크가 이미 끝났습니다.");
         }
 
+
+        // 일일미션 정보 가져오기 (기기에 dailyMissionInfo 가 없는 경우 문제발생 방지용.)
+        dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
+        if(dailyMissionInfo == null) {
+            initDailyMission();
+        }
+
+        // 일일미션 타이머 작동하기
+        long leftTime = dailyMissionInfo.getMissionTime() - dailyMissionInfo.getRunningTime() + 1;
+        System.out.println("레프트타임 : " + leftTime);
+        if(leftTime >= 0) {
+            timer = new DailyMissionTimer(getApplicationContext(), leftTime * 1000, 1000, dailyMissionInfo.getRunningTime());
+            timer.start();
+        }
+
         checkPlayService();
 
         Intent intent = new Intent(this, FirebaseCloudMessage.class);
         startService(intent);
+    }
+
+
+    // 일일미션 초기화하기
+    public void initDailyMission() {
+        dailyMissionInfo = new DailyMissionInfo();
+        SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
     }
 
 
@@ -299,6 +313,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         checkPlayService();
         System.out.println("메인 보임!");
         checkMissionComplete();
+
+        // todo : 온라인 상태인지 체크하고 아니면 로그인페이지로 넘기기
     }
 
     @Override
@@ -343,17 +359,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 setFrag(mainCollection);
                 setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
                 break;
-
-            case R.id.btnYes :
-                finishAffinity();
-                System.runFinalization();
-                System.exit(0);
-                break;
-
-            case R.id.btnNo :
-                confirmWindow.setVisibility(View.GONE);
-                break;
-
         }
     }
 
@@ -386,10 +391,17 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         tvTitle.setText(getString(title));
     }
 
+
+    public void openConfirmQuit() {
+        Intent intent = new Intent(this, ConfirmQuit.class);
+        intent.putExtra(getResources().getString(R.string.IS_MAIN), true);
+        startActivity(intent);
+    }
+
+
     @Override
     public void onBackPressed() {
-        confirmText.setText(getResources().getString(R.string.CONFIRM_EXIT));
-        confirmWindow.setVisibility(View.VISIBLE);
+        openConfirmQuit();
     }
 
     @Override
@@ -404,7 +416,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onStop();
         crashlytics.log("메인액티비티 Stop!!");
         System.out.println("메인액티비티 Stop!!");
-
     }
 
     @Override
@@ -412,7 +423,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onDestroy();
         crashlytics.log("메인액티비티 Destroy!!");
         System.out.println("메인액티비티 Destroy!!");
-
     }
 }
 

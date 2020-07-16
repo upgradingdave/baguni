@@ -8,7 +8,7 @@
             android:thickness="4dp"
             android:useLevel="true">
 
-            <solid android:color="@color/BLUE_TRANSPARENT"/>
+            <solid android:color="@color/BACK_GRADATION_PROGRESSBAR"/>
         </shape>
     </item>
 
@@ -32,8 +32,12 @@
                     android:pivotY="50%"
                     android:toDegrees="360" />
 
-                <solid android:color="@color/PURPLE"/>
-
+                <gradient
+                    android:angle="0"
+                    android:type="sweep"
+                    android:startColor="@color/BLUE_GRADATION_PROGRESSBAR"
+                    android:centerColor="@color/PINK_GRADATION_PROGRESSBAR"
+                    android:endColor="@color/PURPLE_GRADATION_PROGRESSBAR"/>
             </shape>
         </rotate>
     </item>

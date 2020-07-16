@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
@@ -11,16 +12,22 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.DailyMissionInfo;
+import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
+import net.awesomekorean.podo.profile.Profile;
 
 public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +42,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
     ImageView imageCoin;
 
     Button btnGetPoint;
+    Button btnGoToMain;
 
     int reward;
 
@@ -59,8 +67,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
         adsManager = AdsManager.getInstance();
 
-        if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
-            adsManager.loadFullAds(context);
+        if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
+            adsManager.loadRewardAds(context);
         }
 
         selectResult = findViewById(R.id.selectResult);
@@ -71,10 +79,12 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         tvPoint = findViewById(R.id.tvPoint);
         imageCoin = findViewById(R.id.imageCoin);
         btnGetPoint = findViewById(R.id.btnGetPoint);
+        btnGoToMain = findViewById(R.id.btnGoToMain);
         box1.setOnClickListener(this);
         box2.setOnClickListener(this);
         box3.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
+        btnGoToMain.setOnClickListener(this);
 
         playSoundPool = new PlaySoundPool(context);
         playSoundPool.playSoundYay();
@@ -84,7 +94,38 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         isFromProfile = getIntent().getBooleanExtra("isReward", false);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
+
+        if(isFromProfile) {
+            btnGoToMain.setVisibility(View.GONE);
+        } else {
+            btnGoToMain.setVisibility(View.VISIBLE);
+        }
     }
+
+
+    private void setLessonFinish() {
+
+        String lessonId = lesson.getLessonId();
+        FirebaseCrashlytics.getInstance().log("lessonId : " + lessonId);
+
+        System.out.println("레슨아이디 : " + lessonId);
+
+        // analytics 로그 이벤트 얻기
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        Bundle bundle = new Bundle();
+        bundle.putString("lessonId", lessonId);
+        firebaseAnalytics.logEvent("lesson_finish", bundle);
+
+        // 일일미션에 추가하기
+        DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(context);
+        dailyMissionInfo.addLessonComplete(lessonId);
+        SharedPreferencesInfo.setDailyMissionInfo(context, dailyMissionInfo);
+
+        // 레슨완료 정보 업데이트 하기
+        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+        userInformation.updateCompleteList(context, lessonId, 100, false);
+    }
+
 
 
     @Override
@@ -96,43 +137,43 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
                 System.out.println("리워드 : " + reward);
 
-                // 포인트 합산하기
-                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                userInformation.addRewardPoints(context, reward);
+                // 애드몹 광고 보여주기
+                if(adsManager.rewardedAd.isLoaded()) {
+                    RewardedAdCallback adCallback = new RewardedAdCallback() {
 
-                if(isFromProfile) {
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK, intent);
-                    finish();
+                        @Override
+                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                            System.out.println("보상을 받습니다.");
 
-                } else {
-                    FirebaseCrashlytics.getInstance().log("lessonId : " + lesson.getLessonId());
-                    String lessonId = lesson.getLessonId();
+                            // 포인트 합산하기
+                            UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+                            userInformation.addRewardPoints(context, reward);
+                        }
 
+                        @Override
+                        public void onRewardedAdFailedToShow(int i) {
+                            Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
+                        }
 
-                    // analytics 로그 이벤트 얻기
-                    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("lessonId", lessonId);
-                    firebaseAnalytics.logEvent("lesson_finish", bundle);
-
-
-                    // 일일미션에 추가하기
-                    DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(context);
-                    dailyMissionInfo.addLessonComplete(lessonId);
-                    SharedPreferencesInfo.setDailyMissionInfo(context, dailyMissionInfo);
-
-
-                    // 레슨완료 정보 업데이트 하기
-                    userInformation.updateCompleteList(context, lessonId, 100, false);
-
-                    // 애드몹 광고 보여주기
-                    if(adsManager.interstitialAd.isLoaded()) {
-                        adsManager.playFullAds(this);
-                    }
+                        @Override
+                        public void onRewardedAdClosed() {
+                            if(isFromProfile) {
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+                            } else {
+                                setLessonFinish();
+                            }
+                            adsManager.loadRewardAds(context);
+                            finish();
+                        }
+                    };
+                    adsManager.rewardedAd.show(LessonFinish.this, adCallback);
                 }
                 break;
 
+            case R.id.btnGoToMain :
+                finish();
+                break;
 
             default:
                 v.startAnimation(animation);

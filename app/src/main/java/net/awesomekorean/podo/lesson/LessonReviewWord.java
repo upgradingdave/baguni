@@ -188,6 +188,8 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
         btnText2.setText(lesson.getBack().get(answerList[1]));
         btnText3.setText(lesson.getBack().get(answerList[2]));
         btnText4.setText(lesson.getBack().get(answerList[3]));
+
+        setAllbtnEnable(true);
     }
 
 
@@ -284,7 +286,7 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                     }
                 }
 
-                if(quizCount > 5) {
+                if(quizCount >= 50) {
                     // 일일미션에 추가하기
                     DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
                     dailyMissionInfo.setWordReviewComplete();
@@ -306,6 +308,8 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                 break;
 
             default:
+
+                setAllbtnEnable(false);
 
                 int selectedBtnNo;
 
@@ -340,6 +344,13 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                 }
                 break;
         }
+    }
+
+    private void setAllbtnEnable(boolean b) {
+        btn1.setEnabled(b);
+        btn2.setEnabled(b);
+        btn3.setEnabled(b);
+        btn4.setEnabled(b);
     }
 
 
