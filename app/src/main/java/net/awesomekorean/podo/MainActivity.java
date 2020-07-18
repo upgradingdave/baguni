@@ -1,5 +1,6 @@
 package net.awesomekorean.podo;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -111,6 +112,28 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     DailyMissionInfo dailyMissionInfo;
 
     CountDownTimer timer;
+
+    public static HandleBackground handleBackground;
+
+    // 5분 이상 백그라운드 상태일 때 앱 종료하는 핸들러
+    public static class HandleBackground extends Handler {
+
+        private Activity activity;
+
+        public HandleBackground(Activity activity) {
+            super();
+            this.activity = activity;
+        }
+
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            if(msg.what == 100) {
+                activity.finishAffinity();
+                System.runFinalization();
+                System.exit(0);
+            }
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -262,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         long leftTime = dailyMissionInfo.getMissionTime() - dailyMissionInfo.getRunningTime() + 1;
         System.out.println("레프트타임 : " + leftTime);
         if(leftTime >= 0) {
-            timer = new DailyMissionTimer(getApplicationContext(), leftTime * 1000, 1000, dailyMissionInfo.getRunningTime());
+            timer = new DailyMissionTimer(getApplicationContext(), 3600 * 1000, 1000, dailyMissionInfo.getRunningTime());
             timer.start();
         }
 
@@ -416,6 +439,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onStop();
         crashlytics.log("메인액티비티 Stop!!");
         System.out.println("메인액티비티 Stop!!");
+
+        // 5분 이상 백그라운드 상태이면 앱 종료
+        if(IsAppInBackground.isAppInBackground(getApplicationContext())) {
+            handleBackground = new HandleBackground(this);
+            CountDownTimer backgroundTimer = new BackgroundTimer(this, 300000, 1000);
+            backgroundTimer.start();
+        }
     }
 
     @Override
