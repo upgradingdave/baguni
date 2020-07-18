@@ -286,12 +286,11 @@ public class LessonReviewWord extends AppCompatActivity implements View.OnClickL
                     }
                 }
 
-                if(quizCount >= 50) {
-                    // 일일미션에 추가하기
-                    DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
-                    dailyMissionInfo.setWordReviewComplete();
-                    SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
-                }
+                // 일일미션에 추가하기
+                DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
+                int newCount = dailyMissionInfo.getWordReviewComplete() + quizCount;
+                dailyMissionInfo.setWordReviewComplete(newCount);
+                SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
 
                 finish();
 

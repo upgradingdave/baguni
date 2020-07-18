@@ -41,6 +41,8 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
     Button btnGetBonusPoint;
     Button btnCloseInformationDM;
     Button btnCloseMissionComplete;
+    TextView tvLessonCount;
+    TextView tvReviewCount;
     TextView tvTimer;
     PlaySoundPool playSoundPool;
 
@@ -92,6 +94,8 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
         btnCloseInformationDM = findViewById(R.id.btnCloseInformationDM);
         btnCloseMissionComplete = findViewById(R.id.btnCloseMissionComplete);
         tvTimer = findViewById(R.id.tvTimer);
+        tvLessonCount = findViewById(R.id.tvLessonCount);
+        tvReviewCount = findViewById(R.id.tvReviewCount);
 
         btnInformationDM.setOnClickListener(this);
         btnCloseDM.setOnClickListener(this);
@@ -112,6 +116,21 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
         setCheckComplete(iconComplete1, missionComplete[0]);
         setCheckComplete(iconComplete2, missionComplete[1]);
         setCheckComplete(iconComplete3, missionComplete[2]);
+
+
+        if (missionComplete[0]) {
+            tvLessonCount.setVisibility(View.GONE);
+
+        } else {
+            tvLessonCount.setText(String.valueOf(dailyMissionInfo.getLessonComplete().size()));
+        }
+
+        if(missionComplete[1]) {
+            tvReviewCount.setVisibility(View.GONE);
+
+        } else {
+            tvReviewCount.setText(String.valueOf(dailyMissionInfo.getWordReviewComplete()));
+        }
 
         if (missionComplete[2]) {
             tvTimer.setVisibility(View.GONE);

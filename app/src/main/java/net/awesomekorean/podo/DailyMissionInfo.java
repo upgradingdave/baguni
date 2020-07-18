@@ -7,7 +7,7 @@ public class DailyMissionInfo {
 
     private List<String> lessonComplete;
 
-    private boolean wordReviewComplete;
+    private int wordReviewComplete;
 
     private long runningTime;
 
@@ -17,14 +17,16 @@ public class DailyMissionInfo {
 
     private int lessonCompleteRequired = 5;  // 미션 1 : 일반레슨 5개 완료
 
+    private int reviewCompleteRequired = 50; // 미션 2 : 단어리뷰 50개 완료
+
     private int missionTime = 1200; // 미션 3 : 20분 이상 앱 사용
 
 
     public DailyMissionInfo() {
 
-        lessonComplete = new ArrayList<>();
+        this.lessonComplete = new ArrayList<>();
 
-        wordReviewComplete = false;
+        this.wordReviewComplete = 0;
 
         this.runningTime = 0;
 
@@ -39,19 +41,19 @@ public class DailyMissionInfo {
         }
     }
 
-    public void setWordReviewComplete() {
-        this.wordReviewComplete = true;
+    public void setWordReviewComplete(int count) {
+        this.wordReviewComplete = count;
     }
 
     public int isThereMissionCompleted() {
         int rewardPoints = 0;
 
-        if(lessonComplete.size() == lessonCompleteRequired && !isCompleted[0]) {
+        if(lessonComplete.size() >= lessonCompleteRequired && !isCompleted[0]) {
             setComplete(0);
             rewardPoints = rewardPoints + 3;
         }
 
-        if(wordReviewComplete && !isCompleted[1]) {
+        if(wordReviewComplete >= reviewCompleteRequired && !isCompleted[1]) {
             setComplete(1);
             rewardPoints = rewardPoints + 3;
         }
@@ -95,11 +97,10 @@ public class DailyMissionInfo {
         this.runningTime = runningTime;
     }
 
-    // 개발용 (지우기)
     public List<String> getLessonComplete() {
         return this.lessonComplete;
     }
-    public boolean getWordReviewComplete() {
+    public int getWordReviewComplete() {
         return this.wordReviewComplete;
     }
     public boolean[] getIsCompleted() {

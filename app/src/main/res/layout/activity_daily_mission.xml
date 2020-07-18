@@ -37,11 +37,27 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iconComplete1"
-                android:src="@drawable/complete_gradation_no"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iconComplete1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/complete_gradation_no" />
+                <TextView
+                    android:id="@+id/tvLessonCount"
+                    android:textColor="@color/PURPLE"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,11 +80,28 @@
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/iconComplete2"
-                android:src="@drawable/complete_gradation_no"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iconComplete2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/complete_gradation_no" />
+                <TextView
+                    android:id="@+id/tvReviewCount"
+                    android:textColor="@color/PURPLE"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
                 android:text="@string/MISSION_SECOND"
                 android:textSize="15dp"
