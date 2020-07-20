@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".DailyMission"
-            android:screenOrientation="portrait"
+            android:screenOrientation="unspecified"
             android:theme="@style/DialogFullScreen"/>
 
         <service
