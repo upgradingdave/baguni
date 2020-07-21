@@ -280,9 +280,16 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btnGetPoint :
-                intent = new Intent(this, LessonFinish.class);
-                intent.putExtra("isReward", true);
-                startActivityForResult(intent, 100);
+                // 오늘 출석만 남기고 다 초기화
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+                Calendar cal = Calendar.getInstance();
+                int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
+                userInformation.resetDays(today);
+                setAttendance(userInformation.getAttendance());
+                System.out.println("출석부를 초기화 했습니다");
+
+                userInformation.addRewardPoints(context, 20);
+                userPoint.setText(String.valueOf(userInformation.getPoints()));
                 break;
 
             case R.id.layoutEditName :
@@ -392,35 +399,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 intent = new Intent(Profile.this, LessonFinish.class);
                 intent.putExtra("isReward", true);
                 startActivityForResult(intent, 200);
-                /*
-                RewardedAdCallback adCallback = new RewardedAdCallback() {
-
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        System.out.println("보상을 받습니다.");
-                        intent = new Intent(Profile.this, LessonFinish.class);
-                        intent.putExtra("isReward", true);
-                        startActivityForResult(intent, 200);
-
-                        // analytics 로그 이벤트 얻기
-                        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                        Bundle bundle = new Bundle();
-                        firebaseAnalytics.logEvent("reward_watch", bundle);
-                    }
-
-                    @Override
-                    public void onRewardedAdFailedToShow(int i) {
-                        Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onRewardedAdClosed() {
-                        adsManager.loadRewardAds(context);
-                    }
-                };
-                adsManager.rewardedAd.show(Profile.this, adCallback);
-
-                 */
                 break;
 
             case R.id.getPointsByPurchasing :
@@ -457,25 +435,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
-
             userInformation = SharedPreferencesInfo.getUserInfo(context);
-
-            // 일주일 출석 보상일 때
-            if(requestCode == 100) {
-                // 오늘 출석만 남기고 다 초기화
-                Calendar cal = Calendar.getInstance();
-                int today = cal.get(Calendar.DAY_OF_WEEK) - 1; // 1:일요일 ~ 7:토요일
-                userInformation.resetDays(today);
-                setAttendance(userInformation.getAttendance());
-                SharedPreferencesInfo.setUserInfo(context, userInformation);
-
-                userInformation.updateDb(context);
-                System.out.println("출석부를 초기화 했습니다");
-
-
-            // 광고 보상일 때
-            }
-
             userPoint.setText(String.valueOf(userInformation.getPoints()));
         }
     }
