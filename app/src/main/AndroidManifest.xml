@@ -19,10 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".writing.WritingReturned"></activity>
         <activity
             android:name=".DailyMission"
             android:screenOrientation="unspecified"
-            android:theme="@style/DialogFullScreen"/>
+            android:theme="@style/DialogFullScreen" />
 
         <service
             android:name=".FirebaseCloudMessage"
@@ -90,7 +91,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".writing.WritingCorrection"
+            android:name=".writing.WritingCorrected"
             android:screenOrientation="portrait" />
         <activity
             android:name=".purchase.TopUp"

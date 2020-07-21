@@ -55,7 +55,7 @@ public class AdsManager {
 
         interstitialAd = new InterstitialAd(context);
 
-        interstitialAd.setAdUnitId(ADMOB_ID_FULL_SCREEN);
+        interstitialAd.setAdUnitId(ADMOB_TEST_ID_FULL_SCREEN);
 
         interstitialAd.loadAd(new AdRequest.Builder().build());
 
@@ -114,7 +114,7 @@ public class AdsManager {
 
         MobileAds.initialize(context, ADMOB_APP_ID);
 
-        rewardedAd = new RewardedAd(context, ADMOB_ID_REWARDED);
+        rewardedAd = new RewardedAd(context, ADMOB_TEST_ID_REWARDED);
 
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
 
@@ -140,7 +140,7 @@ public class AdsManager {
 
         MobileAds.initialize(context, ADMOB_APP_ID);
 
-        AdLoader adLoader = new AdLoader.Builder(context, ADMOB_ID_NATIVE)
+        AdLoader adLoader = new AdLoader.Builder(context, ADMOB_TEST_ID_NATIVE)
 
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override

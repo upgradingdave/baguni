@@ -5,6 +5,7 @@
     android:layout_height="180dp"
     android:orientation="vertical"
     android:weightSum="1"
+    android:elevation="1dp"
     android:background="@drawable/bg_white_10"
     android:descendantFocusability="blocksDescendants"
     >
@@ -67,7 +68,10 @@
             android:id="@+id/reviewed"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:background="@drawable/bg_green_15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -94,7 +98,10 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_gravity="center"
-            android:padding="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:background="@drawable/bg_blue_15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -103,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/check_white" />
+                android:src="@drawable/waiting" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,12 +123,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/rejected"
+            android:id="@+id/returned"
             android:visibility="visible"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:padding="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:background="@drawable/bg_red_15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -131,14 +141,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/check_white" />
+                android:src="@drawable/returned" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:text="@string/REJECTED"
+                android:text="@string/RETURNED"
                 android:textColor="@color/WHITE"
                 android:textSize="12dp" />
         </LinearLayout>

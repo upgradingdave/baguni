@@ -30,7 +30,7 @@ public class SharedPreferencesInfo {
     }
 
 
-        // 앱에 유저 데이터 저장하기
+    // 앱에 유저 데이터 저장하기
     public static void setUserInfo(Context context, UserInformation userInformation) {
         String stringToSP = gson.toJson(userInformation, UserInformation.class);
         SharedPreferences sp = context.getSharedPreferences("user", MODE_PRIVATE);

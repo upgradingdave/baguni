@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,27 +18,20 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
-import static androidx.constraintlayout.widget.Constraints.TAG;
-import static net.awesomekorean.podo.MainActivity.btnWriting;
-import static net.awesomekorean.podo.MainActivity.textWriting;
-import static net.awesomekorean.podo.MainActivity.userEmail;
 
 public class MainWriting extends Fragment implements View.OnClickListener {
 
@@ -120,7 +112,20 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 WritingEntity download = documentSnapshot.toObject(WritingEntity.class);
+
                                 if (download != null && download.getStatus() > 1) {
+
+                                    // 재작성 요청 시 포인트 반환
+                                    if(download.getStatus() == 99) {
+                                        System.out.println("컨텐츠 : " + download.getContents());
+                                        int returnPoint = download.getLetters();
+                                        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getContext());
+                                        System.out.println("기존포인트 : " + userInformation.getPoints());
+
+                                        userInformation.addRewardPoints(getContext(), returnPoint);
+                                        System.out.println("포인트를 반환했습니다 : " + returnPoint);
+                                    }
+
                                     System.out.println("글쓰기 교정이 완료되었습니다");
                                     WritingRepository repository = new WritingRepository(getContext());
                                     repository.update(download);
@@ -154,18 +159,22 @@ public class MainWriting extends Fragment implements View.OnClickListener {
                 WritingEntity item = (WritingEntity) adapterView.getItemAtPosition(i);
 
                 // 교정완료 된 아이템
-                if(item.getStatus()==2 || item.getStatus()==3) {
-                    Intent intent = new Intent(getContext(), WritingCorrection.class);
-                    intent.putExtra(getString(R.string.EXTRA_ENTITY), item);
-                    startActivityForResult(intent, 300);
-
-
-                } else {
+                if(item.getStatus() == 0) {
                     Intent intent = new Intent(getContext(), WritingFrame.class);
                     intent.putExtra(getString(R.string.EXTRA_ENTITY), item);
                     intent.putExtra(getString(R.string.REQUEST), getString(R.string.REQUEST_EDIT));
                     intent.putExtra(getString(R.string.STATUS), item.getStatus());
                     startActivityForResult(intent, getResources().getInteger(R.integer.REQUEST_CODE_EDIT));
+
+                } else if (item.getStatus() == 99) {
+                    Intent intent = new Intent(getContext(), WritingReturned.class);
+                    intent.putExtra(getString(R.string.EXTRA_ENTITY), item);
+                    startActivityForResult(intent, 300);
+
+                } else {
+                    Intent intent = new Intent(getContext(), WritingCorrected.class);
+                    intent.putExtra(getString(R.string.EXTRA_ENTITY), item);
+                    startActivityForResult(intent, 300);
                 }
             }
         });

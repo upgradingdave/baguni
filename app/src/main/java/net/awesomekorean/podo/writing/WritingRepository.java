@@ -70,6 +70,21 @@ public class WritingRepository {
         }.execute();
     }
 
+    public void editReturnedWriting(final String guid, final String article, final int letters) {
+
+        new AsyncTask<Void, Void, WritingEntity>() {
+            @Override
+            protected WritingEntity doInBackground(Void... voids) {
+                WritingEntity entity = db.writingDao().getByGuid(guid);
+                entity.setCorrection(article);
+                entity.setLetters(letters);
+                db.writingDao().update(entity);
+                return null;
+            }
+        }.execute();
+    }
+
+
 
     public void deleteByGuid(final String guid) {
 

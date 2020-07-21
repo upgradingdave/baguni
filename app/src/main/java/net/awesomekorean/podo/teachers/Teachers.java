@@ -169,7 +169,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 final String userEmail = SharedPreferencesInfo.getUserEmail(this);
                 final String userName = SharedPreferencesInfo.getUserName(this);
 
-                int newPoints = pointsHave - pointsNeed;
+                final int newPoints = pointsHave - pointsNeed;
 
                 final UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 userInformation.setPoints(newPoints);
@@ -179,7 +179,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                     @Override
                     public void onSuccess(Void aVoid) {
                         SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                        System.out.println("포인트를 업데이트 했습니다.");
+                        System.out.println("포인트를 업데이트 했습니다. : " + newPoints);
                     }
                 });
 
@@ -191,6 +191,13 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                         if(task.isSuccessful()) {
 
                             String token = task.getResult().getToken();
+
+                            // 재요청 일 때
+                            if(requestWriting.getStatus() == 99) {
+                                requestWriting.setContents(requestWriting.getCorrection());
+                                requestWriting.setCorrection("");
+                                requestWriting.setTeacherFeedback("");
+                            }
 
                             requestWriting.setUserEmail(userEmail);
                             requestWriting.setUserName(userName);
@@ -231,63 +238,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 bundle.putString("type", "correction");
                 bundle.putInt("points", pointsNeed);
                 firebaseAnalytics.logEvent("point_use", bundle);
-
                 break;
-
-/*
-                    // 녹음요청일 떄
-                } else if(code.equals("record")) {
-                    ArrayList<CollectionEntity> recordList = (ArrayList<CollectionEntity>) intent.getSerializableExtra("checkedList");
-
-                    List<String> guid = new ArrayList();
-                    List<String> front = new ArrayList();
-                    List<String> back = new ArrayList();
-                    List<String> audio = new ArrayList();
-
-                    for (final CollectionEntity entity : recordList) {
-
-                        guid.add(entity.getGuid());
-                        front.add(entity.getFront());
-                        back.add(entity.getBack());
-                    }
-
-                    // 녹음요청 DB에 저장하기
-                    Map<String, Object> request = new HashMap<>();
-                    request.put("guid", guid);
-                    request.put("front", front);
-                    request.put("back", back);
-                    request.put("audio", audio);
-                    Long timeNow = UnixTimeStamp.getTimeNow();
-                    request.put("dateRequest", timeNow);
-                    request.put("dateAnswer", "");
-                    request.put("status", 1);
-                    request.put("teacherId", teacherId);
-                    request.put("teacherName", teacherName);
-                    request.put("userEmail", userEmail);
-                    request.put("userName", userName);
-
-                    String requestGuid = UUID.randomUUID().toString();
-
-                    db.collection(getString(R.string.DB_TEACHERS_COLLECTIONS)).document(requestGuid)
-                            .set(request)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    requestResult.setVisibility(View.VISIBLE);
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            requestResult.setVisibility(View.GONE);
-                                            Intent intent = new Intent(getApplication(), MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    }, 3000);
-                                }
-                            });
-                }
-
- */
         }
     }
 }

@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -192,6 +194,11 @@ public class DailyMission extends AppCompatActivity implements View.OnClickListe
                 btnGetBonusPoint.setBackgroundResource(R.drawable.bg_grey_30);
                 dailyMissionInfo.setGotBonusPoint();
                 SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
+
+                // analytics 로그 이벤트 얻기
+                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
+                Bundle bundle = new Bundle();
+                firebaseAnalytics.logEvent("dailyMission_Complete", bundle);
                 break;
 
             case R.id.btnCloseInformationDM:

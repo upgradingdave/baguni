@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.awesomekorean.podo.R;
 
-public class WritingCorrection extends AppCompatActivity implements View.OnClickListener {
+public class WritingCorrected extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -50,7 +50,7 @@ public class WritingCorrection extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_writing_correction);
+        setContentView(R.layout.activity_writing_corrected);
 
         writingOriginal = findViewById(R.id.writingOriginal);
         writingCorrected = findViewById(R.id.writingCorrected);

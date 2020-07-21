@@ -32,74 +32,79 @@
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_margin="20dp"
-        android:padding="20dp"
-        android:background="@drawable/bg_white_10_stroke_grey"
+    <ScrollView
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintBottom_toTopOf="@+id/btnGiveUsFeedback"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/ORIGINAL_WRITING"
-            android:textSize="15dp" />
-        <TextView
-            android:id="@+id/writingOriginal"
-            android:layout_marginTop="10dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/nanumgothic_regular"
-            android:lineSpacingExtra="7dp"
-            android:padding="15dp"
-            android:scrollbars="vertical"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_margin="20dp"
+            android:padding="20dp"
             android:background="@drawable/bg_white_10_stroke_grey"
-            android:layout_weight="1"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
-        <TextView
-            android:layout_marginTop="10dp"
-            android:text="@string/CORRECTED_WRITING"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/writingCorrected"
-            android:layout_marginTop="10dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/nanumgothic_regular"
-            android:lineSpacingExtra="7dp"
-            android:padding="15dp"
-            android:scrollbars="vertical"
-            android:background="@drawable/bg_white_10_stroke_grey"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-        <TextView
-            android:layout_marginTop="10dp"
-            android:text="@string/FEEDBACK"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/feedbackTeacher"
-            android:layout_marginTop="10dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/nanumgothic_regular"
-            android:lineSpacingExtra="7dp"
-            android:padding="15dp"
-            android:scrollbars="vertical"
-            android:background="@drawable/bg_white_10_stroke_grey"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-    </LinearLayout>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/ORIGINAL_WRITING"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/writingOriginal"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/BLACK"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:lineSpacingExtra="7dp"
+                android:padding="15dp"
+                android:background="@drawable/bg_white_10_stroke_grey"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="@string/CORRECTED_WRITING"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/writingCorrected"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/BLACK"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:lineSpacingExtra="7dp"
+                android:padding="15dp"
+                android:background="@drawable/bg_white_10_stroke_grey"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="@string/FEEDBACK"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/feedbackTeacher"
+                android:layout_marginTop="10dp"
+                android:textSize="15dp"
+                android:textColor="@color/BLACK"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:lineSpacingExtra="7dp"
+                android:padding="15dp"
+                android:background="@drawable/bg_white_10_stroke_grey"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnGiveUsFeedback"

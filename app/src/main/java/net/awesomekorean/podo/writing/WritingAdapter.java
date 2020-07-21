@@ -58,7 +58,7 @@ public class WritingAdapter extends BaseAdapter {
             holder.article = view.findViewById(R.id.article);
             holder.reviewed = view.findViewById(R.id.reviewed);
             holder.reviewing = view.findViewById(R.id.reviewing);
-            holder.rejected = view.findViewById(R.id.rejected);
+            holder.returned = view.findViewById(R.id.returned);
             holder.btnDelete = view.findViewById(R.id.btnDelete);
             view.setTag(holder);
 
@@ -76,9 +76,9 @@ public class WritingAdapter extends BaseAdapter {
             setVisibility(holder, View.GONE, View.GONE, View.GONE);
         } else if(items.getStatus() == 1) {
             setVisibility(holder, View.VISIBLE, View.GONE, View.GONE);
-        } else if(items.getStatus() == 2) {
+        } else if(items.getStatus() == 2 || items.getStatus() == 3) {
             setVisibility(holder, View.GONE, View.VISIBLE, View.GONE);
-        } else if(items.getStatus() == 3) {
+        } else if(items.getStatus() == 99) {
             setVisibility(holder, View.GONE, View.GONE, View.VISIBLE);
         }
 
@@ -92,10 +92,10 @@ public class WritingAdapter extends BaseAdapter {
         return view;
     }
 
-    private void setVisibility(ViewHolder holder, int reviewing, int corrected, int rejected) {
+    private void setVisibility(ViewHolder holder, int reviewing, int corrected, int returned) {
         holder.reviewing.setVisibility(reviewing);
         holder.reviewed.setVisibility(corrected);
-        holder.rejected.setVisibility(rejected);
+        holder.returned.setVisibility(returned);
     }
 
 
@@ -106,7 +106,7 @@ public class WritingAdapter extends BaseAdapter {
         TextView article;
         LinearLayout reviewed;
         LinearLayout reviewing;
-        LinearLayout rejected;
+        LinearLayout returned;
         ImageView btnDelete;
     }
 }

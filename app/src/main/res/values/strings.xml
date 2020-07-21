@@ -166,6 +166,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="REQUEST_RESULT">Request is submitted. You\'ll get the feedback in 2days.</string>
     <string name="ORIGINAL_WRITING">Original Writing</string>
     <string name="CORRECTED_WRITING">Corrected Writing</string>
+    <string name="REWRITE">Rewrite</string>
     <string name="FEEDBACK">Feedback</string>
     <string name="STUDENT_FEEDBACK">Student\'s Feedback</string>
     <string name="GIVE_US_FEEDBACK">Give us your feedback</string>
@@ -919,7 +920,7 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="CATEGORY">Category</string>
     <string name="GRAMMAR">Grammar</string>
     <string name="CONFIRMED">Confirmed</string>
-    <string name="REJECTED">Rejected</string>
+    <string name="RETURNED">Returned</string>
     <string name="QUESTION">Question</string>
     <string name="ASK_YOUR_QUESTION">Ask your question here</string>
     <string name="MSG_SEND">Your question has been sent. We\'ll let you know if your question have been selected.</string>
