@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -159,7 +160,9 @@ public class MainLesson extends Fragment{
 
         userPoint = view.findViewById(R.id.userPoint);
 
-        setUserPoint();
+//        setUserPoint();
+        userInformation = SharedPreferencesInfo.getUserInfo(context);
+
 
         setCompletedLessons();
 
@@ -199,6 +202,8 @@ public class MainLesson extends Fragment{
     }
 
 
+/*
+
     // 유저 포인트 세팅하기
     private void setUserPoint() {
 
@@ -207,6 +212,8 @@ public class MainLesson extends Fragment{
         userPoint.setText(String.valueOf(userInformation.getPoints()));
     }
 
+
+ */
 
     // 레슨 진도율 세팅하기
     private void setCompletedLessons() {
@@ -284,7 +291,7 @@ public class MainLesson extends Fragment{
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         if(adapter != null) {
-            setUserPoint();
+            //setUserPoint();
             setCompletedLessons();
             setUnlockedLessons();
             adapter.notifyDataSetChanged();

@@ -18,7 +18,6 @@
         app:layout_constraintStart_toEndOf="@id/senderImage"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/WELCOME_MSG"
         android:textSize="15dp"
         android:textColor="@color/BLACK"
         android:paddingTop="10dp"

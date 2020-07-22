@@ -5,6 +5,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 
@@ -81,8 +82,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     ImageView btnProfile;
     ImageView btnDailyMission;
-    ImageView btnMessage;
-    ImageView redDot;
+    TextView userPoint;
+    LinearLayout layoutPoint;
+    ConstraintLayout layoutPointInfo;
+    ImageView btnClosePointInfo;
 
     LinearLayout layoutLesson;
     LinearLayout layoutReading;
@@ -147,8 +150,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
         btnDailyMission = findViewById(R.id.btnDailyMission);
-        btnMessage = findViewById(R.id.btnMessage);
-        redDot = findViewById(R.id.redDot);
+        userPoint = findViewById(R.id.userPoint);
+        layoutPoint = findViewById(R.id.layoutPoint);
+        layoutPointInfo = findViewById(R.id.layoutPointInfo);
+        btnClosePointInfo = findViewById(R.id.btnClosePointInfo);
         layoutLesson = findViewById(R.id.layoutLesson);
         layoutReading = findViewById(R.id.layoutReading);
         layoutWriting = findViewById(R.id.layoutWriting);
@@ -164,7 +169,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         textCollection = findViewById(R.id.textCollection);
         btnProfile.setOnClickListener(this);
         btnDailyMission.setOnClickListener(this);
-        btnMessage.setOnClickListener(this);
+        layoutPoint.setOnClickListener(this);
+        btnClosePointInfo.setOnClickListener(this);
 
         layoutLesson.setOnClickListener(this);
         layoutReading.setOnClickListener(this);
@@ -199,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         crashlytics.setCustomKey("userEmail", userEmail);
         crashlytics.setCustomKey("userName", userName);
 
-
+/*
         // 알림 메시지 실시간 리스너
         db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_MESSAGES))
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -221,7 +227,32 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 });
 
 
-        // 앱에서 유저 데이터 가져오기
+ */
+        getAttendanceInfo();
+
+        // 일일미션 정보 가져오기 (기기에 dailyMissionInfo 가 없는 경우 문제발생 방지용.)
+        dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
+        if(dailyMissionInfo == null) {
+            initDailyMission();
+        }
+
+        // 일일미션 타이머 작동하기
+        long leftTime = dailyMissionInfo.getMissionTime() - dailyMissionInfo.getRunningTime() + 1;
+        System.out.println("레프트타임 : " + leftTime);
+        if(leftTime >= 0) {
+            timer = new DailyMissionTimer(getApplicationContext(), 3600 * 1000, 1000, dailyMissionInfo.getRunningTime());
+            timer.start();
+        }
+
+        checkPlayService();
+
+        Intent intent = new Intent(this, FirebaseCloudMessage.class);
+        startService(intent);
+    }
+
+
+    // 앱에서 유저 데이터 가져오기
+    public void getAttendanceInfo() {
         System.out.println("앱에서 유저 데이터를 가져옵니다.");
         userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
 
@@ -273,26 +304,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         } else {
             System.out.println("오늘의 출석체크가 이미 끝났습니다.");
         }
-
-
-        // 일일미션 정보 가져오기 (기기에 dailyMissionInfo 가 없는 경우 문제발생 방지용.)
-        dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
-        if(dailyMissionInfo == null) {
-            initDailyMission();
-        }
-
-        // 일일미션 타이머 작동하기
-        long leftTime = dailyMissionInfo.getMissionTime() - dailyMissionInfo.getRunningTime() + 1;
-        System.out.println("레프트타임 : " + leftTime);
-        if(leftTime >= 0) {
-            timer = new DailyMissionTimer(getApplicationContext(), 3600 * 1000, 1000, dailyMissionInfo.getRunningTime());
-            timer.start();
-        }
-
-        checkPlayService();
-
-        Intent intent = new Intent(this, FirebaseCloudMessage.class);
-        startService(intent);
     }
 
 
@@ -331,16 +342,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        checkPlayService();
-        System.out.println("메인 보임!");
-        checkMissionComplete();
-
-        // todo : 온라인 상태인지 체크하고 아니면 로그인페이지로 넘기기
-    }
-
-    @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -351,16 +352,25 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnDailyMission :
-                Intent intent = new Intent(this, DailyMission.class);
+                intent = new Intent(this, DailyMission.class);
                 intent.putExtra("rewardPoints", 0);
                 startActivity(intent);
                 break;
-
+/*
             case R.id.btnMessage:
                 redDot.setVisibility(View.GONE);
                 intent = new Intent(this, Message.class);
                 intent.putExtra(getResources().getString(R.string.EMAIL), userEmail);
                 startActivity(intent);
+                break;
+
+ */
+            case R.id.layoutPoint :
+                layoutPointInfo.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.btnClosePointInfo :
+                layoutPointInfo.setVisibility(View.GONE);
                 break;
 
             case R.id.layoutLesson:
@@ -387,13 +397,9 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
 
     public void setFrag(Fragment frag) {
-
         fm = getSupportFragmentManager();
-
         tran = fm.beginTransaction();
-
         tran.replace(R.id.frameLayout, frag);
-
         tran.commit();
     }
 
@@ -423,9 +429,25 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayService();
+        System.out.println("메인 보임!");
+        if(userInformation != null) {
+            userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+            userPoint.setText(String.valueOf(userInformation.getPoints()));
+        }
+        checkMissionComplete();
+
+        // todo : 온라인 상태인지 체크하고 아니면 로그인페이지로 넘기기
+    }
+
+
+    @Override
     public void onBackPressed() {
         openConfirmQuit();
     }
+
 
     @Override
     protected void onPause() {
@@ -433,6 +455,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         crashlytics.log("메인액티비티 Pause!!");
         System.out.println("메인액티비티 Pause!!");
     }
+
 
     @Override
     protected void onStop() {
@@ -447,6 +470,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             backgroundTimer.start();
         }
     }
+
 
     @Override
     protected void onDestroy() {

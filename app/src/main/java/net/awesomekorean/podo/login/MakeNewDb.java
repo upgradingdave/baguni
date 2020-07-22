@@ -41,6 +41,20 @@ public class MakeNewDb {
                 SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
                 System.out.println("앱에 유저 데이터를 저장했습니다.");
 
+                Toast.makeText(context, activity.getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                MainActivity.userEmail = userEmail;
+                activity.finish();
+                activity.startActivity(intent);
+
+
+                // SignUp 로그 이벤트 얻기
+                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.METHOD, method);
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
+
+                /*
                 final MessageItems messageItems = new MessageItems();
                 messageItems.setMessage(activity.getString(R.string.WELCOME_MSG));
                 CollectionReference messageRef = db.collection(activity.getString(R.string.DB_USERS)).document(userEmail).collection(activity.getString(R.string.DB_MESSAGES));
@@ -62,6 +76,8 @@ public class MakeNewDb {
                         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
                     }
                 });
+
+                 */
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

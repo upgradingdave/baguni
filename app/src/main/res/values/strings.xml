@@ -6,18 +6,6 @@
 
     <!--    로그인-->
     <string name="WELCOME"> Welcome to Podo</string>
-    <string name="WELCOME_MSG">"Received 20 points as a sign up gift.
-
-- Things you can do with points
-1. Lesson: Unlock Special Lessons
-2. Reading: Unlock Readings
-3. Writing: Ask a Korean teacher for correction
-
-- How to collect points
-1. Complete General Lessons
-2. Watch video ads (in profile page)
-3. Attend for 7 days in a row
-4. Purchase"</string>
     <string name="EMAIL"> Email</string>
     <string name="PASSWORD"> Password</string>
     <string name="PASSWORD_SIX_CHARACTERS_LONG">Should be at least 6 characters</string>
@@ -60,6 +48,19 @@
     <string name="MESSAGE">Message</string>
     <string name="CONFIRM_EXIT">Do you want to exit podo?</string>
     <string name="CONFIRM_REPORT">Do you have something to tell \'podo\'? \n (bug report or suggestions)</string>
+    <string name="WHAT_POINT">What is the point?</string>
+    <string name="POINT_INTRO">
+        "- Things you can do with points
+1. Lesson: Unlock Special Lessons
+2. Reading: Unlock Readings
+3. Writing: Ask a Korean teacher for correction
+
+- How to collect points
+1. Complete General Lessons
+2. Watch video ads (in profile page)
+3. Attend for 7 days in a row
+4. Complete Daily Mission
+5. Purchase"</string>
 
 
     <!--    주요버튼-->
