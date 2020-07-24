@@ -23,14 +23,9 @@ import net.awesomekorean.podo.login.SignIn;
 
 public class Logo extends AppCompatActivity {
 
-    public static final String WIFI_STATE = "WIFE";
-    public static final String MOBILE_STATE = "MOBILE";
-    public static final String NONE_STATE = "NONE";
 
     private FirebaseAnalytics firebaseAnalytics;
-
     private FirebaseCrashlytics crashlytics;
-
     private AdsManager adsManager;
 
     @Override
@@ -64,7 +59,7 @@ public class Logo extends AppCompatActivity {
 
                 boolean isSignIn = SharedPreferencesInfo.getSignIn(getApplicationContext());
                 if(isSignIn) {
-                    if(getWhatKindOfNetwork(getApplicationContext()) != NONE_STATE) {
+                    if(IsOnline.isOnline(getApplicationContext())) {
                         intent = new Intent(getApplicationContext(), MainActivity.class);
 
                         // 재접속 로그
@@ -85,17 +80,4 @@ public class Logo extends AppCompatActivity {
 
     }
 
-    // 인터넷 연결상태 확인하기
-    public static String getWhatKindOfNetwork(Context context){
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork != null) {
-            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-                return WIFI_STATE;
-            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                return MOBILE_STATE;
-            }
-        }
-        return NONE_STATE;
-    }
 }

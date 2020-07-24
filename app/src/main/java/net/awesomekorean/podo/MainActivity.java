@@ -53,6 +53,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import net.awesomekorean.podo.collection.MainCollection;
 import net.awesomekorean.podo.lesson.LessonAdapterChild;
 import net.awesomekorean.podo.lesson.MainLesson;
+import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
 import net.awesomekorean.podo.reading.MainReading;
@@ -446,7 +447,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
         checkMissionComplete();
 
-        // todo : 온라인 상태인지 체크하고 아니면 로그인페이지로 넘기기
+        if(!IsOnline.isOnline(getApplicationContext())) {
+            Toast.makeText(getApplicationContext(), "Internet connection required.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, SignIn.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 
