@@ -20,6 +20,7 @@ public class UserInformation {
     private List<String> specialLessonUnlock = new ArrayList<>();
     private List<String> readingUnlock = new ArrayList<>();
     private Boolean isPremium;
+    private Long lastVisit;
     private Long datePurchase;
     private Long dateExpire;
 
@@ -29,6 +30,7 @@ public class UserInformation {
         }
         this.points = 20;
         this.isPremium = false;
+        this.lastVisit = UnixTimeStamp.getTimeNow();
     }
 
     public List<Boolean> getAttendance() {
@@ -198,4 +200,6 @@ public class UserInformation {
     public void setDay(int today) {
         this.attendance.set(today, true);
     }
+
+    public void setLastVisit(Long lastVisit) { this.lastVisit = lastVisit;}
 }

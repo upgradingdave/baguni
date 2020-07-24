@@ -300,6 +300,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 }
             });
 
+            reference.update("lastVisit", UnixTimeStamp.getTimeNow()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    System.out.println("DB에 마지막 방문시간을 업데이트 했습니다");
+                }
+            });
+
 
         } else {
             System.out.println("오늘의 출석체크가 이미 끝났습니다.");
