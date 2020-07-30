@@ -31,6 +31,7 @@ import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
 import net.awesomekorean.podo.lesson.lessons.LessonReview;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,6 +91,8 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
     AdsManager adsManager;
 
+    ArrayList<Button> clickedBtns;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +129,8 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
             adsManager.loadNativeAds(this);
         }
 
+        clickedBtns = new ArrayList<>();
+
 
         // analytics 로그 이벤트 얻기
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -143,6 +148,8 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
                 Button selectedBtn = (Button) view;
 
+                clickedBtns.add(selectedBtn);
+
                 selectedBtn.setVisibility(View.INVISIBLE);
 
                 String selectedBtnText = selectedBtn.getText().toString();
@@ -155,6 +162,8 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
                 btnReset.setVisibility(View.VISIBLE);
 
                 if(tvAnswer.getText().length() == sentence.length()) {
+
+                    clickedBtns.clear();
 
                     if(tvAnswer.getText().toString().equals(sentence)) { // 정답
 
@@ -313,18 +322,19 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
         switch (v.getId()) {
 
             case R.id.btnReset :
+                if(clickedBtns.size() > 0) {
+                    Button button = clickedBtns.get(clickedBtns.size() - 1);
+                    button.setVisibility(View.VISIBLE);
+                    clickedBtns.remove(clickedBtns.size() - 1);
 
-                int childCount = flexboxLayout.getChildCount();
+                    String text = tvAnswer.getText().toString();
+                    String newText = text.substring(0, text.length() - 1);
+                    tvAnswer.setText(newText);
 
-                for(int i=0; i<childCount; i++) {
-
-                    View currentChild = flexboxLayout.getChildAt(i);
-
-                    currentChild.setVisibility(View.VISIBLE);
+                    if(clickedBtns.size() == 0) {
+                        btnReset.setVisibility(View.GONE);
+                    }
                 }
-
-                tvAnswer.setText("");
-                btnReset.setVisibility(View.GONE);
                 break;
 
             case R.id.btnAudio :
