@@ -121,13 +121,13 @@ public class MediaPlayerManager {
     }
 
 
-    // 읽기 본문, 한글 조합 재생
-    public void setMediaPlayerUrl(final boolean isReading, String audioUrl) {
+    // 읽기 본문, 한글 조합, 컬렉션 재생
+    public void setMediaPlayer(final boolean isReading, String audioPath) {
 
         initialize();
 
         try {
-            mediaPlayer.setDataSource(audioUrl);
+            mediaPlayer.setDataSource(audioPath);
 
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
@@ -145,10 +145,10 @@ public class MediaPlayerManager {
             e.printStackTrace();
 
         } catch (IllegalStateException e) {
-            if(audioUrl == null) {
-                audioUrl = "null";
+            if(audioPath == null) {
+                audioPath = "null";
             }
-            FirebaseCrashlytics.getInstance().log("attempting to play : " + audioUrl);
+            FirebaseCrashlytics.getInstance().log("attempting to play : " + audioPath);
         }
     }
 

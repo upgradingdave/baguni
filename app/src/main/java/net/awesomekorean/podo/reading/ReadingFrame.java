@@ -295,7 +295,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                             mediaPlayerManager = MediaPlayerManager.getInstance(seekBar);
                             url = uri.toString();
                             mediaPlayerManager.resetPlayPosition();
-                            mediaPlayerManager.setMediaPlayerUrl(true, url);
+                            mediaPlayerManager.setMediaPlayer(true, url);
                             if(slowBtnClicked) {
                                 mediaPlayerManager.setSpeed(0.8f);
                             }
@@ -313,7 +313,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 } else {
                     btnSetting(View.INVISIBLE, View.GONE, View.VISIBLE);
 
-                    mediaPlayerManager.setMediaPlayerUrl(true, url);
+                    mediaPlayerManager.setMediaPlayer(true, url);
                     if(slowBtnClicked) {
                         mediaPlayerManager.setSpeed(0.8f);
                     }

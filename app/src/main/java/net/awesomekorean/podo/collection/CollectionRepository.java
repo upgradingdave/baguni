@@ -11,6 +11,7 @@ import androidx.room.Room;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.awesomekorean.podo.DownloadAudio;
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.UnixTimeStamp;
 
@@ -209,8 +210,8 @@ public class CollectionRepository {
     private void setCollectionStudy(CollectionEntity entity) {
         String studyAudio = entity.getAudio();
         if(studyAudio != null) {
-            playSoundPool = new PlaySoundPool(context);
-            playSoundPool.playSoundCollection(context.getFilesDir() + "/" + studyAudio);
+            MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+            mediaPlayerManager.setMediaPlayer(false, context.getFilesDir() + "/" + studyAudio);
             CollectionStudy.btnAudio.setVisibility(View.VISIBLE);
         } else {
             CollectionStudy.btnAudio.setVisibility(View.GONE);

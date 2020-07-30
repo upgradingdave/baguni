@@ -211,7 +211,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onSuccess(Uri uri) {
                         url = uri.toString();
-                        mediaPlayerManager.setMediaPlayerUrl(false, url);
+                        mediaPlayerManager.setMediaPlayer(false, url);
                         loading.setVisibility(GONE);
 
                     }

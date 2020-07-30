@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 
@@ -34,8 +35,6 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
     int index = 0; // 최신 플래시 카드부터 공부할 때의 인덱스
 
-    PlaySoundPool playSoundPool;
-
     Context context;
 
     @Override
@@ -57,7 +56,6 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
         btnNext.setOnClickListener(this);
 
         context = getApplicationContext();
-        playSoundPool = new PlaySoundPool(context);
 
         // analytics 로그 이벤트 얻기
         FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
@@ -71,12 +69,18 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
     // 랜덤 학습 모드
     public void randomStudy() {
+        studyBack.setVisibility(View.INVISIBLE);
+        btnNext.setText(getString(R.string.ANSWER));
+
         repository.getRandomForStudy();
     }
 
 
     // 최신부터 학습 모드
     public void newCollectionFirstStudy() {
+        studyBack.setVisibility(View.INVISIBLE);
+        btnNext.setText(getString(R.string.ANSWER));
+
         if(index < MainCollection.size) {
             repository.getDescForStudy(index);
             index++;
@@ -115,7 +119,8 @@ public class CollectionStudy extends AppCompatActivity implements View.OnClickLi
 
             case R.id.btnAudio :
                 if(studyAudio != null) {
-                    playSoundPool.playSoundCollection(context.getFilesDir() + "/" + studyAudio);
+                    MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+                    mediaPlayerManager.setMediaPlayer(false, context.getFilesDir() + "/" + studyAudio);
                 }
                 break;
 

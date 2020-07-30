@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.collection;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CollectionAdapter extends BaseAdapter {
@@ -110,7 +113,8 @@ public class CollectionAdapter extends BaseAdapter {
             public void onClick(View v) {
                 System.out.println("Audio button clicked");
                 String audioFile = items.getAudio();
-                playSoundPool.playSoundCollection(context.getFilesDir() + "/" + audioFile);
+                MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+                mediaPlayerManager.setMediaPlayer(false, context.getFilesDir() + "/" + audioFile);
             }
         });
         return view;
