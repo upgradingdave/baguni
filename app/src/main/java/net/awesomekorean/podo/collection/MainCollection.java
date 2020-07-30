@@ -44,6 +44,7 @@ import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
 import net.awesomekorean.podo.teachers.Teachers;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -420,6 +421,12 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                     for (CollectionEntity item : checkedList) {
                         String guid = item.getGuid();
                         repository.setDeletedByGuid(guid);
+
+                        // 파일 삭제
+                        File file = new File(getContext().getFilesDir() + "/" + item.getAudio());
+                        if(file.exists()) {
+                            file.delete();
+                        }
                     }
                 }
                 ItemLongClicked(false, View.INVISIBLE, View.VISIBLE, View.GONE);
