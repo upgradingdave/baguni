@@ -146,6 +146,11 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="UNLOCK_SUCCEEDED">Unlock succeeded</string>
     <string name="AUDIO_LOADING">Audio is loading now. Please try again.</string>
     <string name="FAIL_LOAD_AUDIO">Failed to load the audio. Please try again.</string>
+    <string name="CONJUGATE_CORRECTLY">Conjugate correctly</string>
+    <string name="CHOOSE_BASE_FORM">Choose the right base form</string>
+    <string name="CHOOSE_CONJUGATION">Choose the right conjugation</string>
+
+
 
 
     <!--    읽기-->
