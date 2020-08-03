@@ -78,7 +78,7 @@ public class WritingFrame extends AppCompatActivity implements View.OnClickListe
             contents = editWriting.getContents();
             letters = editWriting.getLetters();
             editText.setText(contents);
-            textCount.setText(letters + "letters");
+            textCount.setText(letters + " letters");
         }
 
         // 글을 쓸 때 바로바로 글자수를 가져옴
