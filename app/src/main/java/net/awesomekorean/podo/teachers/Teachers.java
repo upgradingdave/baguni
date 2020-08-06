@@ -103,7 +103,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
         // DB 에서 선생님 정보들 가져와서 아래 리스트에 넣을 것
         list = new ArrayList<>();
-        db.collection(getString(R.string.DB_TEACHERS_INFORMATION)).whereGreaterThan("status", 0)
+        db.collection(getString(R.string.DB_TEACHERS)).whereGreaterThan("status", 0)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -211,7 +211,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                             repository.update(requestWriting);
 
                             // 교정요청 DB에 저장하기
-                            db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(requestWriting.getGuid())
+                            db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
                                     .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

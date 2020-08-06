@@ -107,7 +107,7 @@ public class MainWriting extends Fragment implements View.OnClickListener {
 
                     // 교정 중인 writing 이 있으면, DB 접속
                     if (items.getStatus() == 1) {
-                        DocumentReference docRef = db.collection(getString(R.string.DB_TEACHERS_WRITINGS)).document(items.getGuid());
+                        DocumentReference docRef = db.collection(getString(R.string.DB_WRITINGS)).document(items.getGuid());
                         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {

@@ -352,6 +352,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                 report.put("comments", comments);
                                 report.put("userToken", token);
                                 report.put("status", 0);  // 0:신규, 1:읽음, 2:답변함
+                                report.put("answer", "");
 
                                 db.collection(getString(R.string.DB_REPORTS)).document(UUID.randomUUID().toString())
                                         .set(report).addOnSuccessListener(new OnSuccessListener<Void>() {

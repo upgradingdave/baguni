@@ -216,7 +216,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="UPDATED_USERNAME_FAILED">User name update failed</string>
     <string name="SIGN_OUT">Sign Out</string>
     <string name="SIGN_OUT_MESSAGE">Do you want to sign out?</string>
-    <string name="REPORT_RESULT">Thank you for your valuable opinion.
+    <string name="REPORT_RESULT">Thank you for your valuable opinion.\n
         I will review your comment and improve my App in the near future.</string>
 
 
@@ -897,9 +897,10 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="DB_COLLECTIONS">collections</string>
     <string name="DB_MESSAGES">messages</string>
     <string name="DB_REQUESTS">requests</string>
-    <string name="DB_TEACHERS_WRITINGS">android/podo/teachers/requests/writings</string>
+    <string name="DB_WRITINGS">android/podo/writings</string>
     <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
     <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>
+    <string name="DB_TEACHERS">android/podo/teachers/</string>
     <string name="LOADING">Loading...</string>
     <string name="SKU_100">podo_point_100</string>
     <string name="SKU_500">podo_point_500</string>

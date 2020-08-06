@@ -502,7 +502,6 @@
                 android:text="@string/REPORT_RESULT"
                 android:textSize="20dp"
                 android:textColor="@color/BLACK"
-                android:textStyle="bold"
                 android:layout_marginTop="50dp"
                 />
         </LinearLayout>
