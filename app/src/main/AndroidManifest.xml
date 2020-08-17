@@ -21,12 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".lesson.LessonTestFrame">
         </activity>
-        <activity android:name=".lesson.TestGrammar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".lesson.LessonReviewConjugation">
         </activity>
         <activity android:name=".writing.WritingReturned" />
         <activity
@@ -116,7 +111,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Logo"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".login.SignUp"
             android:screenOrientation="portrait" />

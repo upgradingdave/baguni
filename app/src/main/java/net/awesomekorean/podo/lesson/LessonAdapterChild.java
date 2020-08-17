@@ -163,6 +163,10 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                                     intent = new Intent(context, LessonReviewSentence.class);
 
+                                } else if(lessonItem.getLessonTitle().equals("conjugation")) {
+
+                                    intent = new Intent(context, LessonReviewConjugation.class);
+
                                 } else {
 
                                     intent = new Intent(context, LessonFrame.class);

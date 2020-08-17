@@ -22,6 +22,7 @@ import com.google.android.gms.common.util.ArrayUtils;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.R_Conjugation_Lesson00;
 
 import java.util.Arrays;
 
@@ -39,7 +40,7 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
     FlexboxLayout flexConjugation;
     Button btnConfirm;
 
-    TestGrammarItem testItem;
+    R_Conjugation_Lesson00 testItem;
     int baseFormSize;
     int conjugationSize;
     int baseFormIndex;
@@ -73,7 +74,7 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
 
         playSoundPool = new PlaySoundPool(getContext());
 
-        testItem = new TestGrammarItem();
+        testItem = new R_Conjugation_Lesson00();
 
         baseFormSize = testItem.getBaseForm().length;
         conjugationSize = testItem.getConjugate()[0].length;

@@ -355,7 +355,7 @@ public class LessonReviewSentence extends AppCompatActivity implements View.OnCl
 
             case R.id.btnClose :
 
-                if(quizCount > 10) {
+                if(quizCount > 5) {
                     if(adsManager.interstitialAd.isLoaded()) {
                         adsManager.playFullAds(this);
                     }
