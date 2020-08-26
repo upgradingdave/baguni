@@ -6,6 +6,7 @@ import android.widget.SeekBar;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
+import net.awesomekorean.podo.lesson.IntermediateFrame;
 import net.awesomekorean.podo.lesson.LessonDialog;
 
 import java.io.BufferedOutputStream;
@@ -196,6 +197,59 @@ public class MediaPlayerManager {
     }
 
 
+    // 중급레슨 오디오 플레이
+    public void playIntermediateAudio(byte[] bytes, final IntermediateFrame frame, final int playMode) {
+        try {
+            File tempMp3 = File.createTempFile("audio", "mp3");
+            tempMp3.deleteOnExit();
+            FileOutputStream fos = new FileOutputStream(tempMp3);
+            BufferedOutputStream bfos = new BufferedOutputStream(fos);
+            bfos.write(bytes);
+            fos.close();
+
+            FileInputStream fis = new FileInputStream(tempMp3);
+
+            initialize();
+
+            try {
+                mediaPlayer.setDataSource(fis.getFD());
+
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        if(playMode == 0) { // 다음 대화 재생
+                            frame.dialogCount++;
+                            frame.addDialog();
+
+                        } else if (playMode == 1) { // 대화 1개만 재생
+
+                        } else if (playMode == 2) { // 전체 재생
+                            frame.dialogCount++;
+                            frame.playAudio(2);
+                        }
+                    }
+                });
+
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        playMediaPlayer(false);
+                    }
+                });
+
+                mediaPlayer.prepareAsync();
+                isSet = true;
+                isPlaying = false;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public int getDuration() {
         if(mediaPlayer != null) {
             int duration = mediaPlayer.getDuration();
@@ -313,7 +367,6 @@ public class MediaPlayerManager {
 
 
     public void pauseMediaPlayer() {
-
         if(thread != null) {
             thread.terminate();
         }

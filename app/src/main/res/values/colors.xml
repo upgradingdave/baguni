@@ -13,12 +13,16 @@
     <color name="GREY">#E6E6E6</color>
     <color name="GREY_DARK">#979797</color>
     <color name="GREY_LIGHT">#D6D7D7</color>
+    <color name="GREY_LIGHT_LIGHT">#F6F7F7</color>
     <color name="YELLOW">#FFC300</color>
     <color name="RED">#FF5A5F</color>
     <color name="TRANSPARENT">#00000000</color>
     <color name="BLUE">#518EF8</color>
     <color name="BLUE_TRANSPARENT">#EDEEFD</color>
     <color name="BROWN_TRANSPARENT">#26F5A623</color>
+    <color name="MINT">#07A484</color>
+    <color name="MINT_TRANSPARENT">#C4FFF3</color>
+    <color name="PINK">#F7C7DC</color>
     <color name="PINK_GRADATION">#F6E8E8</color>
     <color name="BLUE_GRADATION">#E9E9F4</color>
     <color name="BLUE_PURPLE">#B9B9ED</color>

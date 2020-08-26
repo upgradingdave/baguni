@@ -19,6 +19,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".CollectResult"
+            android:screenOrientation="unspecified"
+            android:theme="@style/DialogFullScreen" />
+        <activity
+            android:name=".LoadingPage"
+            android:screenOrientation="unspecified"
+            android:theme="@style/DialogFullScreen" />
+        <activity
+            android:name=".lesson.IntermediateFrame"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".writing.WritingReturned" />
         <activity
             android:name=".DailyMission"
@@ -107,13 +124,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Logo"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.SignUp"
             android:screenOrientation="portrait" />

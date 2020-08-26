@@ -137,6 +137,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="PLAY">Play</string>
     <string name="STOP">Stop</string>
     <string name="FINISH">Finish</string>
+    <string name="PLAY_AGAIN">Play again</string>
     <string name="SELECT_BOX">Select a box</string>
     <string name="CONGRATULATION">Congratulation</string>
     <string name="GET_POINT">Get the points by watching ads</string>
@@ -146,6 +147,9 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="UNLOCK_SUCCEEDED">Unlock succeeded</string>
     <string name="AUDIO_LOADING">Audio is loading now. Please try again.</string>
     <string name="FAIL_LOAD_AUDIO">Failed to load the audio. Please try again.</string>
+    <string name="SELECT_ANSWER">Select your answer</string>
+    <string name="LESSON_COMPLETE">Lesson Complete!</string>
+    <string name="PLAY_ALL_AUDIO">Play all audio</string>
 
 
     <!--    읽기-->
@@ -912,6 +916,12 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="IS_MAIN">isMain</string>
     <string name="PROGRESS">progress</string>
     <string name="CONVOWBAT">conVowBat</string>
+
+    <string name="COLLECT_FRONT">front</string>
+    <string name="COLLECT_BACK">back</string>
+    <string name="COLLECT_FOLDER">folder</string>
+    <string name="COLLECT_AUDIO">audio</string>
+
 
 
     <!--지울것-->
