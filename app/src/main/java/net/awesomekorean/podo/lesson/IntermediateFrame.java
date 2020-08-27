@@ -77,8 +77,6 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
     Button btnPlayAgain;
     Button btnFinish;
 
-    Intent intent;
-
     public LinearLayout collectResult;
 
 
@@ -120,7 +118,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
         layoutAnswer.setVisibility(View.GONE);
         layoutCompleted.setVisibility(View.GONE);
 
-        intent = new Intent(getApplicationContext(), LoadingPage.class);
+        Intent intent = new Intent(getApplicationContext(), LoadingPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         lesson = new I_Lesson00();
@@ -142,13 +140,10 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
 
     // 답변버튼 만들기
     public void makeAnswerBtns() {
-
         sentenceSplit = correctAnswer.split(" ");
-
         RandomArray.randomArrayString(sentenceSplit);
 
         for(int i=0; i<sentenceSplit.length; i++) {
-
             btnSelector = new Button(this);
 
             DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();

@@ -28,6 +28,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.LoadingPage;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -116,9 +117,10 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
     }
 
     private void readyForLesson() {
-        if(activity != null) {
-            activity.onLoadingLayout(true);
-        }
+        Intent intent = new Intent(getContext(), LoadingPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+
         dialogLength = activity.lesson.getDialog().length;
         String[] dialogAudio = new String[dialogLength];
         int[] peopleImage = activity.lesson.getPeopleImage(); // 사람이미지 2개
@@ -143,7 +145,8 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                     audiosDialog.put(audioIndexDialog, bytes);
                     if(audiosDialog.size() == dialogLength) {
                         if(activity != null) {
-                            activity.onLoadingLayout(false);
+                            LoadingPage loadingPage = (LoadingPage)LoadingPage.activity;
+                            loadingPage.finish();
                         }
                     }
                 }

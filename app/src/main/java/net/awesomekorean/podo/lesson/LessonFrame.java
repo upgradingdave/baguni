@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.ConfirmQuit;
+import net.awesomekorean.podo.LoadingPage;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
@@ -111,9 +112,7 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         });
 
         lesson = (Lesson) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
-
         crashlytics.log("lessonId : " + lesson.getLessonId());
-
         totalPageNo = lesson.getWordFront().length * 3 + 1 + lesson.getSentenceFront().length + 2;
 
         readyForImageAndAudio();
@@ -121,51 +120,36 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
     // DB에서 레슨 오디오랑 이미지 불러오기
     private void readyForImageAndAudio() {
-
-        onLoadingLayout(true);
+        Intent intent = new Intent(getApplicationContext(), LoadingPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
 
         int lessonWordLength = lesson.getWordFront().length;
-
         String lessonId = lesson.getLessonId();
-
         String folder = "lesson/" + lessonId.toLowerCase();
-
         wordImage = new int[lessonWordLength];
 
-
         for(int i=0; i<lessonWordLength; i++) {
-
             String stringWordImage = lessonId.toLowerCase() + "_word_" + i;
-
             int intWordImage = getResources().getIdentifier(stringWordImage, "drawable", getPackageName());
-
             wordImage[i] = intWordImage;
         }
-
 
         wordAudioString = new String[lessonWordLength];
 
         for(int i=0; i<lessonWordLength; i++) {
-
             final Integer index = i;
-
             wordAudioString[i] = lessonId.toLowerCase() + "_word_" + i + ".mp3";
-
             StorageReference storageRef = storage.getReference().child(folder).child(wordAudioString[i]);
-
             final long ONE_MEGABYTE = 1024 * 1024;
-
             storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
-
                     System.out.println("오디오를 로드했습니다.");
-
                     wordAudioByte.put(index, bytes);
-
                     if(index == 0) {
-
-                        onLoadingLayout(false);
+                        LoadingPage loadingPage = (LoadingPage)LoadingPage.activity;
+                        loadingPage.finish();
 
                         replaceFragment(lessonWord);
                     }
@@ -205,15 +189,6 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
     public static void progressCount() {
         progressBar.setProgress(progressCount*100/totalPageNo);
         progressTextView.setText(progressCount + " / " + totalPageNo);
-    }
-
-
-    public void onLoadingLayout(boolean b) {
-        if(b) {
-            loadingLayout.setVisibility(View.VISIBLE);
-        } else {
-            loadingLayout.setVisibility(View.GONE);
-        }
     }
 
 

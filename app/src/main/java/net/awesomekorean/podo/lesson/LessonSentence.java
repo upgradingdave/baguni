@@ -1,6 +1,7 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
@@ -25,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import net.awesomekorean.podo.DownloadAudio;
+import net.awesomekorean.podo.LoadingPage;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.collection.CollectionRepository;
@@ -129,9 +131,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
 
 
     private void readyForLesson() {
-        if(activity != null) {
-            activity.onLoadingLayout(true);
-        }
+        Intent intent = new Intent(getContext(), LoadingPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
 
         int sentenceLength = lesson.getSentenceFront().length;
         sentenceAudio = new String[sentenceLength];
@@ -163,9 +165,9 @@ public class LessonSentence extends Fragment implements Button.OnClickListener, 
     }
 
     public void displaySentence() {
-        if(activity != null) {
-            activity.onLoadingLayout(false);
-        }
+        LoadingPage loadingPage = (LoadingPage)LoadingPage.activity;
+        loadingPage.finish();
+
         tvSentenceFront.setText(sentenceFront[lessonCount]);
         tvSentenceBack.setText(sentenceBack[lessonCount]);
         tvSentenceExplain.setText(sentenceExplain[lessonCount]);
