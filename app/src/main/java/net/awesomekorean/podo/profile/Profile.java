@@ -40,6 +40,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 import net.awesomekorean.podo.AdsManager;
+import net.awesomekorean.podo.GetRandomPoint;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -397,8 +398,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
             case R.id.getPointsByAd :
-                intent = new Intent(Profile.this, LessonFinish.class);
-                intent.putExtra("isReward", true);
+                intent = new Intent(Profile.this, GetRandomPoint.class);
                 startActivityForResult(intent, 200);
                 break;
 

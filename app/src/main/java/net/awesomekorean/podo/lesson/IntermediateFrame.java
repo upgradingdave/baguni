@@ -34,6 +34,8 @@ import net.awesomekorean.podo.lesson.intermediateLessons.I_Lesson;
 import net.awesomekorean.podo.lesson.intermediateLessons.I_Lesson00;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -208,6 +210,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
             layoutAnswer.setVisibility(View.GONE);
             layoutCompleted.setVisibility(View.VISIBLE);
         }
+        recyclerView.smoothScrollToPosition(list.size()-1);
     }
 
 

@@ -394,7 +394,7 @@
     <ImageView
         android:elevation="1dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bubbles_bg_short"
+        android:src="@drawable/bubbles1"
         app:layout_constraintTop_toTopOf="@+id/linearLayoutDM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

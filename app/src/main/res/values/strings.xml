@@ -140,7 +140,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="PLAY_AGAIN">Play again</string>
     <string name="SELECT_BOX">Select a box</string>
     <string name="CONGRATULATION">Congratulation</string>
-    <string name="GET_POINT">Get the points by watching ads</string>
+    <string name="GET_POINT">Get the points</string>
     <string name="GO_TO_MAIN">Go to main</string>
     <string name="UNLOCK">Do you want to unlock this by using points?</string>
     <string name="UNLOCK_FAILED">You don\'t have points enough.</string>
@@ -921,7 +921,6 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="COLLECT_BACK">back</string>
     <string name="COLLECT_FOLDER">folder</string>
     <string name="COLLECT_AUDIO">audio</string>
-
 
 
     <!--지울것-->

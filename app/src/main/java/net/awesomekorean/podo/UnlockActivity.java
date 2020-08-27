@@ -231,32 +231,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
 
             case R.id.btnWatchAds :
-                RewardedAdCallback adCallback = new RewardedAdCallback() {
-
-                    @Override
-                    public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                        System.out.println("보상을 받습니다.");
-                        Intent intent = new Intent(context, LessonFinish.class);
-                        intent.putExtra("isReward", true);
-                        startActivityForResult(intent, 200);
-
-                        // analytics 로그 이벤트 얻기
-                        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                        Bundle bundle = new Bundle();
-                        firebaseAnalytics.logEvent("reward_watch", bundle);
-                    }
-
-                    @Override
-                    public void onRewardedAdFailedToShow(int i) {
-                        Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onRewardedAdClosed() {
-                        adsManager.loadRewardAds(context);
-                    }
-                };
-                adsManager.rewardedAd.show(UnlockActivity.this, adCallback);
+                Intent intent = new Intent(context, GetRandomPoint.class);
+                startActivityForResult(intent, 200);
                 break;
 
             default: // btnNo, btnClose

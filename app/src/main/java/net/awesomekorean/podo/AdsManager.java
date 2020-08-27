@@ -2,7 +2,11 @@ package net.awesomekorean.podo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
@@ -12,7 +16,9 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -133,6 +139,29 @@ public class AdsManager {
 
         rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
     }
+
+
+    public void playRewardAds(final Context context, final boolean isFromProfile) {
+        RewardedAdCallback adCallback = new RewardedAdCallback() {
+
+            @Override
+            public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+            }
+
+            @Override
+            public void onRewardedAdFailedToShow(int i) {
+                Toast.makeText(context, "Failed to load ad. Please try it again.", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onRewardedAdClosed() {
+                Intent intent = new Intent(context, GetRandomPoint.class);
+                intent.putExtra("isFromProfile", isFromProfile);
+                context.startActivity(intent);
+                loadRewardAds(context);
+            }
+        };
+        rewardedAd.show(activity, adCallback);    }
 
 
     // 네이티브 광고 로드하기
