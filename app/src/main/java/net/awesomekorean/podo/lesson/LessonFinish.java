@@ -62,11 +62,7 @@ public class LessonFinish extends AppCompatActivity {
         btnComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 애드몹 광고 보여주고 종료
-                if(adsManager.interstitialAd.isLoaded()) {
-                    adsManager.playFullAds(LessonFinish.this);
-                }
-                finish();
+                playAds();
             }
         });
 
@@ -106,5 +102,19 @@ public class LessonFinish extends AppCompatActivity {
         // 레슨완료 정보 업데이트 하기
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
         userInformation.updateCompleteList(context, lessonId, 100, false);
+    }
+
+
+    // 애드몹 광고 보여주고 종료
+    private void playAds() {
+        if(adsManager.interstitialAd.isLoaded()) {
+            adsManager.playFullAds(this);
+        }
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        playAds();
     }
 }

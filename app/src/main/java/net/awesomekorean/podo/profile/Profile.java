@@ -398,8 +398,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
             case R.id.getPointsByAd :
-                intent = new Intent(Profile.this, GetRandomPoint.class);
-                startActivityForResult(intent, 200);
+                adsManager.playRewardAds(this);
                 break;
 
             case R.id.getPointsByPurchasing :

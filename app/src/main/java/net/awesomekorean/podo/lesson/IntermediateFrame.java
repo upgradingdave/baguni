@@ -121,6 +121,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
         layoutCompleted.setVisibility(View.GONE);
 
         intent = new Intent(getApplicationContext(), LoadingPage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         lesson = new I_Lesson00();
         title.setText(lesson.getLessonTitle());

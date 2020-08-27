@@ -61,12 +61,10 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     int unlockPrice;
 
     String extra;
-
     Intent intent;
-
     Context context;
-
     AdsManager adsManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +73,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_unlock);
 
         context = getApplicationContext();
-
         adsManager = AdsManager.getInstance();
-
         if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
-
             adsManager.loadRewardAds(context);
         }
 
@@ -102,8 +97,10 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         userPoint = userInformation.getPoints();
 
         extra = getIntent().getStringExtra(getResources().getString(R.string.EXTRA_ID));
+
         if(extra.equals(getResources().getString(R.string.SPECIAL_LESSON))) {
             unlockPrice = specialLessonPrice;
+
         } else {
             unlockPrice = readingPrice;
         }
@@ -140,12 +137,14 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
 
             case R.id.btnYes :
+
                 if(userPoint >= unlockPrice) {
                     unlockFirst.setVisibility(View.GONE);
 
                     // 포인트 차감하고 specialLessonUnlock 에 레슨아이디 추가, 해당 레슨에 unlock = true 세팅
                     int newPoint = userPoint - unlockPrice;
                     userInformation.setPoints(newPoint);
+
                     if(extra.equals(getResources().getString(R.string.SPECIAL_LESSON))) {
 
                         String lessonId = getIntent().getStringExtra(getResources().getString(R.string.LESSON_ID));
@@ -153,43 +152,29 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                         switch (lessonId) {
 
                             case "H_assembly" :
-
                                 intent = new Intent(context, LessonHangulAssembly.class);
-
                                 break;
 
                             case "N_practice" :
-
                                 intent = new Intent(context, LessonNumberMenu.class);
-
                                 break;
 
                             default :
-
                                 LessonSpecial lesson = (LessonSpecial) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
-
                                 intent = new Intent(context, LessonSpecialFrame.class);
-
                                 intent.putExtra(getResources().getString(R.string.LESSON), (Serializable) lesson);
-
                                 break;
                         }
 
                         userInformation.addSpecialLessonUnlock(lessonId);
-
                         startActivity(intent);
 
 
                     } else {
-
                         Reading reading = (Reading) getIntent().getSerializableExtra(getResources().getString(R.string.READING));
-
                         userInformation.addReadingUnlock(reading.getReadingId());
-
                         intent = new Intent(context, ReadingFrame.class);
-
                         intent.putExtra(getResources().getString(R.string.READING), (Serializable) reading);
-
                         startActivity(intent);
                     }
 
@@ -231,8 +216,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
 
             case R.id.btnWatchAds :
-                Intent intent = new Intent(context, GetRandomPoint.class);
-                startActivityForResult(intent, 200);
+                adsManager.playRewardAds(this);
                 break;
 
             default: // btnNo, btnClose

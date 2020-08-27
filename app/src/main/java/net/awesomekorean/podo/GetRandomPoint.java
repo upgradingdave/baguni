@@ -42,10 +42,7 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
     int reward;
     PlaySoundPool playSoundPool;
     Context context;
-    AdsManager adsManager;
     Animation animation;
-
-    boolean isFromProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +50,6 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_get_random_point);
 
         context = getApplicationContext();
-
-        isFromProfile = getIntent().getBooleanExtra("isFromProfile", true);
-
-        adsManager = AdsManager.getInstance();
-
-        if(adsManager.rewardedAd == null || !adsManager.rewardedAd.isLoaded()) {
-            adsManager.loadRewardAds(context);
-        }
 
         selectResult = findViewById(R.id.selectResult);
         box1 = findViewById(R.id.box1);
@@ -96,55 +85,9 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
                 userInformation.addRewardPoints(context, reward);
 
-                // analytics 로그 이벤트 얻기
-                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                Bundle bundle = new Bundle();
-                firebaseAnalytics.logEvent("reward_watch", bundle);
-
                 Intent intent = new Intent();
-                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 setResult(RESULT_OK, intent);
-                adsManager.loadRewardAds(context);
                 finish();
-
-
-                /*
-
-                // 애드몹 광고 보여주기
-                if(adsManager.rewardedAd.isLoaded()) {
-                    RewardedAdCallback adCallback = new RewardedAdCallback() {
-
-                        @Override
-                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                            System.out.println("보상을 받습니다.");
-
-                            // 포인트 합산하기
-                            UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                            userInformation.addRewardPoints(context, reward);
-
-                            // analytics 로그 이벤트 얻기
-                            FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
-                            Bundle bundle = new Bundle();
-                            firebaseAnalytics.logEvent("reward_watch", bundle);
-                        }
-
-                        @Override
-                        public void onRewardedAdFailedToShow(int i) {
-                            Toast.makeText(context, getString(R.string.AD_LOAD_FAILED), Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onRewardedAdClosed() {
-                            Intent intent = new Intent();
-                            setResult(RESULT_OK, intent);
-                            adsManager.loadRewardAds(context);
-                            finish();
-                        }
-                    };
-                    adsManager.rewardedAd.show(this, adCallback);
-                }
-
-                 */
                 break;
 
             default:

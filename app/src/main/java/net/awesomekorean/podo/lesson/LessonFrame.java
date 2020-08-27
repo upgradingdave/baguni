@@ -218,13 +218,9 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
 
     public void openConfirmQuit() {
-
         Intent intent = new Intent(context, ConfirmQuit.class);
-
         intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
-
         intent.putExtra(getResources().getString(R.string.LESSON_ID), lesson.getLessonId());
-
         startActivityForResult(intent, 200);
     }
 
@@ -246,8 +242,6 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
-            MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
-            mediaPlayerManager.stopMediaPlayer();
             finish();
         }
     }
@@ -290,6 +284,8 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
+        MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+        mediaPlayerManager.stopMediaPlayer();
         openConfirmQuit();
     }
 
