@@ -51,7 +51,7 @@
                     android:id="@+id/btnAudio"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/play_small_purple"
+                    android:src="@drawable/play_small_pink"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
                 <ImageView

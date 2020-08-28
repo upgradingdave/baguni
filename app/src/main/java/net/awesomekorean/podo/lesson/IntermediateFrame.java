@@ -46,7 +46,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
     ImageView btnClose;
     TextView title;
     RecyclerView recyclerView;
-    LinearLayout layoutAnswer;
+    ConstraintLayout layoutAnswer;
     TextView tvAnswer;
     ImageView btnCancel;
     FlexboxLayout flexboxLayout;
@@ -69,7 +69,8 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
     PlaySoundPool playSoundPool;
 
     ConstraintLayout layoutCompleted;
-    ProgressBar progressBar;
+    ProgressBar progress;
+    ProgressBar progressAudio;
     ImageView btnPrevious;
     ImageView btnPlay;
     ImageView btnPause;
@@ -94,7 +95,8 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
         btnCancel = findViewById(R.id.btnCancel);
         flexboxLayout = findViewById(R.id.flexboxLayout);
         layoutCompleted = findViewById(R.id.layoutCompleted);
-        progressBar = findViewById(R.id.progressBar);
+        progress = findViewById(R.id.progress);
+        progressAudio = findViewById(R.id.progressAudio);
         btnPrevious = findViewById(R.id.btnPrevious);
         btnPlay = findViewById(R.id.btnPlay);
         btnPause = findViewById(R.id.btnPause);
@@ -125,6 +127,10 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
         title.setText(lesson.getLessonTitle());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        int size = lesson.getDialog().length;
+        progressAudio.setMax(size);
+        progress.setMax(size);
 
         dialogCount = 0;
         getAudios();
@@ -216,14 +222,13 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
             mediaPlayerManager.stopMediaPlayer();
             mediaPlayerManager.playIntermediateAudio(audiosDialog.get(dialogCount), this, playMode);
             if (playMode == 2) {
-                progressBar.setMax(audiosDialog.size());
-                progressBar.setProgress(dialogCount + 1);
+                progressAudio.setProgress(dialogCount + 1);
             }
 
         // 오디오 끝! 버튼 초기화
         } else {
             dialogCount = 0;
-            progressBar.setProgress(0);
+            progressAudio.setProgress(0);
             btnPlay.setVisibility(View.VISIBLE);
             btnPause.setVisibility(View.GONE);
         }
@@ -283,6 +288,13 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
     }
 
 
+    private void stopAudio() {
+        setAudioButtons(View.VISIBLE, View.GONE);
+        MediaPlayerManager.getInstance().stopMediaPlayer();
+        progressAudio.setProgress(0);
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -306,10 +318,9 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
                     if (dialogCount > 0) {
                         dialogCount--;
                         playAudio(2);
+
                     } else {
-                        setAudioButtons(View.VISIBLE, View.GONE);
-                        MediaPlayerManager.getInstance().stopMediaPlayer();
-                        progressBar.setProgress(0);
+                        stopAudio();
                     }
                 }
                 break;
@@ -321,8 +332,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.btnPause :
-                setAudioButtons(View.VISIBLE, View.GONE);
-                MediaPlayerManager.getInstance().pauseMediaPlayer();
+                stopAudio();
                 break;
 
             case R.id.btnNext :
@@ -330,10 +340,9 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
                     if (dialogCount < audiosDialog.size() - 1) {
                         dialogCount++;
                         playAudio(2);
+
                     } else {
-                        MediaPlayerManager.getInstance().stopMediaPlayer();
-                        setAudioButtons(View.VISIBLE, View.GONE);
-                        progressBar.setProgress(0);
+                        stopAudio();
                     }
                 }
                 break;
@@ -368,6 +377,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
 
                     if(tvAnswer.getText().toString().equals(correctAnswer)) { // 정답
                         answered(0, R.drawable.bg_mint_10_stroke_mint, ContextCompat.getColor(getApplicationContext(), R.color.MINT));
+                        progress.setProgress(dialogCount + 1);
 
                     } else {  // 오답
                         answered(1, R.drawable.bg_red_10_stroke_red, ContextCompat.getColor(getApplicationContext(), R.color.RED));
