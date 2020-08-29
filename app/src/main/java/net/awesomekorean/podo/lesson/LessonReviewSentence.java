@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,22 +18,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.flexbox.FlexboxLayout;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LessonReviewSentence extends Fragment implements View.OnClickListener {
 
@@ -48,7 +38,6 @@ public class LessonReviewSentence extends Fragment implements View.OnClickListen
     TextView meaning;
     ConstraintLayout answerLayout;
     TextView tvAnswer; // 입력한 정답이 표시되는 텍스트뷰
-    ImageView btnTranslate;
     FlexboxLayout flexboxLayout; // 정답을 입력하는 버튼이 들어가는 layout
     Button btnSelector; // 정답을 입력하기 위해 만들어진 한글 버튼
     ImageView btnAudio;
@@ -67,20 +56,18 @@ public class LessonReviewSentence extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.activity_lesson_review_sentence, container, false);
+        view = inflater.inflate(R.layout.lesson_review_sentence, container, false);
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
         meaning = view.findViewById(R.id.meaning);
         answerLayout = view.findViewById(R.id.answerLayout);
         tvAnswer = view.findViewById(R.id.tvAnswer);
-        btnTranslate = view.findViewById(R.id.btnTranslate);
         flexboxLayout = view.findViewById(R.id.flexboxLayout);
         btnAudio = view.findViewById(R.id.btnAudio);
         btnReset = view.findViewById(R.id.btnReset);
         btnAudio.setOnClickListener(this);
         btnReset.setOnClickListener(this);
-        btnTranslate.setOnClickListener(this);
 
         clickedBtns = new ArrayList<>();
         playSoundPool = new PlaySoundPool(getContext());
@@ -120,7 +107,6 @@ public class LessonReviewSentence extends Fragment implements View.OnClickListen
 
     private void answered(int sound, int outline, final boolean isCorrect) {
         playSoundPool.playSoundLesson(sound);
-        meaning.setText(activity.sentenceFront.get(quizIndex));
         answerLayout.setBackground(ContextCompat.getDrawable(getContext(), outline));
         flexboxLayout.removeAllViews();
 
@@ -132,10 +118,10 @@ public class LessonReviewSentence extends Fragment implements View.OnClickListen
                 btnReset.setVisibility(View.GONE);
                 answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
                 activity.progressCount(isCorrect);
-                if(activity.progressCount < 15) {
+                if(activity.progressCount < 20) {
                     makeQuiz();
                 } else {
-                    activity.replaceFragment(LessonReviewConjugate.newInstance());
+                    activity.replaceFragment(LessonReviewWord.newInstance());
                 }
             }
         }, 2000);
@@ -208,16 +194,6 @@ public class LessonReviewSentence extends Fragment implements View.OnClickListen
 
             case R.id.btnAudio :
                 mediaPlayerManager.playMediaPlayer(false);
-                break;
-
-
-            case R.id.btnTranslate :
-                if(meaning.getText().equals(activity.sentenceBack.get(quizIndex))) {
-                    meaning.setText(activity.sentenceFront.get(quizIndex));
-
-                } else {
-                    meaning.setText(activity.sentenceBack.get(quizIndex));
-                }
                 break;
         }
     }

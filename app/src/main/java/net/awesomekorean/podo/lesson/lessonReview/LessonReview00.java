@@ -21,7 +21,7 @@ public class LessonReview00 extends LessonInit implements LessonItem, LessonRevi
 
     private String lessonId = "LR_00";
     private String lessonTitle = "review";
-    private String lessonSubTitle = "00";
+    private String lessonSubTitle = "";
     private int lessonImage = R.drawable.l_16_word_5;
 
     private Lesson[] lessons = {

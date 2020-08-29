@@ -193,6 +193,8 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
 
     public void openConfirmQuit() {
+        MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
+        mediaPlayerManager.stopMediaPlayer();
         Intent intent = new Intent(context, ConfirmQuit.class);
         intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
         intent.putExtra(getResources().getString(R.string.LESSON_ID), lesson.getLessonId());
@@ -259,8 +261,6 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
-        MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
-        mediaPlayerManager.stopMediaPlayer();
         openConfirmQuit();
     }
 

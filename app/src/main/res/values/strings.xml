@@ -139,7 +139,10 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="FINISH">Finish</string>
     <string name="PLAY_AGAIN">Play again</string>
     <string name="SELECT_BOX">Select a box</string>
-    <string name="CONGRATULATION">Congratulation</string>
+    <string name="CONGRATULATION">Congratulation!</string>
+    <string name="GOOD_JOB">Good job! Let\'s keep going!</string>
+    <string name="YOU_CAN_DO_BETTER">You can do better next time!</string>
+    <string name="TRY_AGAIN">Try again?</string>
     <string name="GET_POINT">Get the points</string>
     <string name="GO_TO_MAIN">Go to main</string>
     <string name="UNLOCK">Do you want to unlock this by using points?</string>

@@ -28,7 +28,6 @@ public class PlaySoundPool {
     // 컬렉션 단어 플레이
     public void playSoundCollection(String path) {
         volume = getDeviceVolume();
-        System.out.println("볼륨 : " + volume);
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
@@ -78,6 +77,20 @@ public class PlaySoundPool {
     }
 
 
+    // 딩딩~ 플레이
+    public void playSoundDingDing() {
+        volume = getDeviceVolume();
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(soundId, volume, volume, 0, 0, 1f);
+            }
+        });
+        soundId = soundPool.load(context, R.raw.dingding, 1);
+    }
+
+
+
     // 디바이스 볼륨
     public float getDeviceVolume() {
         AudioManager mgr = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -87,7 +100,6 @@ public class PlaySoundPool {
         //DecimalFormat format = new DecimalFormat("#.#");
 
         //return Float.parseFloat(format.format(streamVolume));
-        System.out.println("스트림볼륨 : " + streamVolume);
         return streamVolume;
     }
 }
