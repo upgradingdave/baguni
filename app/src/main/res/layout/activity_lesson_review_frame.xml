@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".lesson.LessonTestFrame">
+    tools:context=".lesson.LessonReviewFrame">
 
     <LinearLayout
         android:id="@+id/title"
@@ -54,8 +54,8 @@
         android:layout_height="0dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/WHITE"
         android:id="@+id/loadingLayout"
+        android:background="@color/WHITE"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

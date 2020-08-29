@@ -1,20 +1,16 @@
 package net.awesomekorean.podo.lesson;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.common.util.ArrayUtils;
@@ -29,20 +25,14 @@ import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
-import net.awesomekorean.podo.lesson.lessons.LessonReview;
+import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LessonTestWord extends Fragment implements View.OnClickListener {
-
-    View view;
-
-    public static LessonTestWord newInstance() {
-        return new LessonTestWord();
-    }
+public class LR_Word extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -56,6 +46,8 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
     TextView btnText3;
     TextView btnText4;
     ImageView btnAudio;
+    ImageView btnClose;
+    TextView countText;
     ConstraintLayout loadingLayout;
     ProgressBar loading;
     TemplateView templateView;
@@ -83,58 +75,60 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
 
     AdsManager adsManager;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_test_conjugate, container, false);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lesson_review_word);
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
-        answer = view.findViewById(R.id.answer);
-        btn1 = view.findViewById(R.id.btn1);
-        btn2 = view.findViewById(R.id.btn2);
-        btn3 = view.findViewById(R.id.btn3);
-        btn4 = view.findViewById(R.id.btn4);
-        btnText1 = view.findViewById(R.id.btnText1);
-        btnText2 = view.findViewById(R.id.btnText2);
-        btnText3 = view.findViewById(R.id.btnText3);
-        btnText4 = view.findViewById(R.id.btnText4);
-        btnAudio = view.findViewById(R.id.btnAudio);
-        loadingLayout = view.findViewById(R.id.loadingLayout);
-        loading = view.findViewById(R.id.loading);
-        templateView = view.findViewById(R.id.templateView);
-        btnStart = view.findViewById(R.id.btnStart);
-        loadingText = view.findViewById(R.id.loadingText);
+        answer = findViewById(R.id.answer);
+        btn1 = findViewById(R.id.btn1);
+        btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
+        btn4 = findViewById(R.id.btn4);
+        btnText1 = findViewById(R.id.btnText1);
+        btnText2 = findViewById(R.id.btnText2);
+        btnText3 = findViewById(R.id.btnText3);
+        btnText4 = findViewById(R.id.btnText4);
+        btnAudio = findViewById(R.id.btnAudio);
+        btnClose = findViewById(R.id.btnClose);
+        countText = findViewById(R.id.countText);
+        loadingLayout = findViewById(R.id.loadingLayout);
+        loading = findViewById(R.id.loading);
+        templateView = findViewById(R.id.templateView);
+        btnStart = findViewById(R.id.btnStart);
+        loadingText = findViewById(R.id.loadingText);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
         btnAudio.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
         btnStart.setOnClickListener(this);
 
         adsManager = AdsManager.getInstance();
 
         if (adsManager.unifiedNativeAd == null) {
-            adsManager.loadNativeAds(getContext());
+            adsManager.loadNativeAds(this);
         }
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_review_word", bundle);
         firebaseAnalytics.logEvent("native_watch", bundle);
 
 
-        //lesson = (LessonReview) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+        lesson = (LessonReview) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
 
         // 정답, 오답 오디오 미리 로드해놓기
-        playSoundPool = new PlaySoundPool(getContext());
+        playSoundPool = new PlaySoundPool(this);
 
-        setImageAndAudio();
-
-        return view;
+        //setImageAndAudio();
     }
+
 
     public int getRandomNum(int size) {
 
@@ -170,7 +164,7 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
             }
         }
     }
-
+/*
 
     public void makeQuiz(boolean isCorrect) {
 
@@ -209,7 +203,7 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
 
         for(int i=0; i<lesson.getFront().size(); i++) {
 
-            wordImage.add(getResources().getIdentifier(lesson.getImageString().get(i), "drawable", getContext().getPackageName()));
+            wordImage.add(getResources().getIdentifier(lesson.getImageString().get(i), "drawable", getPackageName()));
 
             StorageReference storageRef = storage.getReference().child(lesson.getAudioFolder().get(i)).child(lesson.getAudioString().get(i));
 
@@ -254,7 +248,7 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
             public void run() {
 
                 try {
-                    selectedBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.ripple_custom));
+                    selectedBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ripple_custom));
 
                 } catch (NullPointerException e) {
                     System.out.println(e);
@@ -270,6 +264,8 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
     }
 
 
+ */
+
     @Override
     public void onClick(View view) {
 
@@ -281,13 +277,31 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
 
                 break;
 
+            case R.id.btnClose :
+
+                if(quizCount > 5) {
+                    if(adsManager.interstitialAd.isLoaded()) {
+                        adsManager.playFullAds(this);
+                    }
+                }
+
+                // 일일미션에 추가하기
+                DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
+                int newCount = dailyMissionInfo.getWordReviewComplete() + quizCount;
+                dailyMissionInfo.setWordReviewComplete(newCount);
+                SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
+
+                finish();
+
+                break;
+
             case R.id.btnStart :
 
                 loadingLayout.setVisibility(View.GONE);
 
-                adsManager.loadNativeAds(getContext());
+                adsManager.loadNativeAds(this);
 
-                makeQuiz(true);
+                //makeQuiz(true);
 
                 break;
 
@@ -318,6 +332,8 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
 
                     quizCount++;
 
+                    countText.setText(quizCount + " words");
+
                     answered(view, 0, R.drawable.bg_white_10_stroke_purple, true);
 
                 } else {
@@ -341,12 +357,15 @@ public class LessonTestWord extends Fragment implements View.OnClickListener {
 
         playSoundPool.playSoundLesson(sound);
 
-        view.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        view.setBackground(ContextCompat.getDrawable(this, outline));
 
         answer.setVisibility(View.VISIBLE);
 
         btnAudio.setVisibility(View.GONE);
 
-        makeNextQuiz(view, isCorrect);
+        //makeNextQuiz(view, isCorrect);
     }
+
 }
+
+

@@ -1,7 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulConsonant;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulVowel;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberNative;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberSino;
-import net.awesomekorean.podo.lesson.lessons.Lesson;
+import net.awesomekorean.podo.lesson.lessonReview.LessonReview00;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
 import net.awesomekorean.podo.lesson.lessons.Lesson03;
@@ -62,18 +61,18 @@ import net.awesomekorean.podo.lesson.lessons.Lesson34;
 import net.awesomekorean.podo.lesson.lessons.Lesson35;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
-import net.awesomekorean.podo.lesson.lessons.R_Conjugation_Lesson00;
-import net.awesomekorean.podo.lesson.lessons.R_Ranking_Lesson00;
-import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson00;
-import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson01;
-import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson02;
-import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson03;
-import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson04;
-import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson00;
-import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson01;
-import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson02;
-import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson03;
-import net.awesomekorean.podo.lesson.lessons.R_Word_Lesson04;
+import net.awesomekorean.podo.lesson.lessonReview.R_Conjugation_Lesson00;
+import net.awesomekorean.podo.lesson.lessonReview.R_Ranking_Lesson00;
+import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson00;
+import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson01;
+import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson02;
+import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson03;
+import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson04;
+import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson00;
+import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson01;
+import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson02;
+import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson03;
+import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson04;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson03;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson04;
@@ -130,23 +129,23 @@ public class MainLesson extends Fragment{
             {new S_Lesson01(), new Lesson01(), new S_Lesson03(), new Lesson02(), new Lesson03()},
             {new NumberSino(), new NumberNative(), new NumberPractice()},
             {new S_Lesson04(), new Lesson04(), new Lesson05(), new Lesson06(), new S_Lesson06()},
-            {new R_Word_Lesson00(), new R_Sentence_Lesson00(), new R_Conjugation_Lesson00()},
+            {new LessonReview00()},
             {new Lesson07(), new Lesson08()},
             {new Lesson27(), new S_Lesson08(), new S_Lesson12()},
             {new Lesson09(), new Lesson10(), new S_Lesson05()},
             {new Lesson11(), new Lesson12(), new S_Lesson10()},
-            {new R_Word_Lesson01(), new R_Sentence_Lesson01(), new R_Ranking_Lesson00() },
+            {new LessonReview00()},
             {new Lesson15(), new Lesson16()},
             {new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson22(), new Lesson28(), new Lesson29(), new S_Lesson15()},
-            {new R_Word_Lesson02(), new R_Sentence_Lesson02(), new R_Ranking_Lesson00()},
+            {new LessonReview00()},
             {new Lesson17(), new Lesson20(), new S_Lesson13()},
             {new Lesson18(), new Lesson21(), new S_Lesson07()},
             {new Lesson23(), new Lesson35(), new Lesson24(), new S_Lesson09()},
-            {new R_Word_Lesson03(), new R_Sentence_Lesson03(), new R_Ranking_Lesson00()},
+            {new LessonReview00()},
             {new Lesson25(), new Lesson26()},
             {new Lesson30(), new Lesson31(), new S_Lesson14()},
             {new Lesson32(), new Lesson33(), new Lesson34(), new S_Lesson16(), new S_Lesson17()},
-            {new R_Word_Lesson04(), new R_Sentence_Lesson04(), new R_Ranking_Lesson00()},
+            {new LessonReview00()},
             {}
     };
 

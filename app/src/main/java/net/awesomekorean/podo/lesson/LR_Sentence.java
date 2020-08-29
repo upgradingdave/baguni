@@ -1,9 +1,12 @@
 package net.awesomekorean.podo.lesson;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,12 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.flexbox.FlexboxLayout;
@@ -29,91 +26,117 @@ import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.lessons.LessonReview;
+import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LessonTestSentence extends Fragment implements View.OnClickListener {
-
-    View view;
-
-    public static LessonTestSentence newInstance() {
-        return new LessonTestSentence();
-    }
+public class LR_Sentence extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+
     LessonReview lesson;
+
     String[] syllables; // wordInIndex의 단어를 각 음절로 나눔
+
     TextView meaning;
+
     ConstraintLayout answerLayout;
+
+    TextView countText;
+
     TextView tvAnswer; // 입력한 정답이 표시되는 텍스트뷰
+
     ImageView btnTranslate;
+
     FlexboxLayout flexboxLayout; // 정답을 입력하는 버튼이 들어가는 layout
+
     Button btnSelector; // 정답을 입력하기 위해 만들어진 한글 버튼
+
     ImageView btnAudio;
+
     ImageView btnReset;
+
+    ImageView btnClose;
+
     int quizCount = 0;
+
     PlaySoundPool playSoundPool;
+
     MediaPlayerManager mediaPlayerManager;
+
     View.OnClickListener selectorButtonClick; // 정답 입력 버튼 클릭 시 작동하는 함수
+
     String sentence;
+
     Map<Integer, byte[]> sentenceAudioByte = new HashMap<>();
+
     int audioDownloadProgress;
+
     int reviewIndex;
+
     ConstraintLayout loadingLayout;
+
     ProgressBar loading;
+
     TemplateView templateView;
+
     Button btnStart;
+
     TextView loadingText;
+
     AdsManager adsManager;
+
     ArrayList<Button> clickedBtns;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lesson_review_sentence);
 
-        view = inflater.inflate(R.layout.lesson_test_conjugate, container, false);
-
-        //lesson = (LessonReview) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+        lesson = (LessonReview) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
-        meaning = view.findViewById(R.id.meaning);
-        answerLayout = view.findViewById(R.id.answerLayout);
-        tvAnswer = view.findViewById(R.id.tvAnswer);
-        btnTranslate = view.findViewById(R.id.btnTranslate);
-        flexboxLayout = view.findViewById(R.id.flexboxLayout);
-        loadingLayout = view.findViewById(R.id.loadingLayout);
-        loading = view.findViewById(R.id.loading);
-        templateView = view.findViewById(R.id.templateView);
-        btnStart = view.findViewById(R.id.btnStart);
-        loadingText = view.findViewById(R.id.loadingText);
-        btnAudio = view.findViewById(R.id.btnAudio);
-        btnReset = view.findViewById(R.id.btnReset);
+        meaning = findViewById(R.id.meaning);
+        answerLayout = findViewById(R.id.answerLayout);
+        tvAnswer = findViewById(R.id.tvAnswer);
+        btnTranslate = findViewById(R.id.btnTranslate);
+        flexboxLayout = findViewById(R.id.flexboxLayout);
+        loadingLayout = findViewById(R.id.loadingLayout);
+        loading = findViewById(R.id.loading);
+        templateView = findViewById(R.id.templateView);
+        btnStart = findViewById(R.id.btnStart);
+        loadingText = findViewById(R.id.loadingText);
+        countText = findViewById(R.id.countText);
+        btnAudio = findViewById(R.id.btnAudio);
+        btnReset = findViewById(R.id.btnReset);
+        btnClose = findViewById(R.id.btnClose);
         btnAudio.setOnClickListener(this);
         btnReset.setOnClickListener(this);
         btnTranslate.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
         btnStart.setOnClickListener(this);
 
         adsManager = AdsManager.getInstance();
 
         if (adsManager.unifiedNativeAd == null) {
-            adsManager.loadNativeAds(getContext());
+            adsManager.loadNativeAds(this);
         }
 
         clickedBtns = new ArrayList<>();
 
 
         // analytics 로그 이벤트 얻기
-        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         firebaseAnalytics.logEvent("lesson_review_sentence", bundle);
         firebaseAnalytics.logEvent("native_watch", bundle);
 
 
-        playSoundPool = new PlaySoundPool(getContext());
+        playSoundPool = new PlaySoundPool(this);
 
         selectorButtonClick = new View.OnClickListener() {
 
@@ -141,10 +164,10 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
 
                     if(tvAnswer.getText().toString().equals(sentence)) { // 정답
 
-                        answered(0, R.drawable.bg_white_10_stroke_purple);
+                        //answered(0, R.drawable.bg_white_10_stroke_purple);
 
                     } else {  // 오답
-                        answered(1, R.drawable.bg_white_10_stroke_red);
+                        //answered(1, R.drawable.bg_white_10_stroke_red);
                     }
 
                     flexboxLayout.removeAllViews();
@@ -158,18 +181,20 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
 
                                 quizCount++;
 
-                                makeQuiz(false);
+                                countText.setText(quizCount + " sentences");
+
+                               // makeQuiz(false);
 
                             } else {
 
-                                makeQuiz(true);
+                                //makeQuiz(true);
                             }
 
                             tvAnswer.setText("");
 
                             btnReset.setVisibility(View.GONE);
 
-                            answerLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                            answerLayout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
 
 
                         }
@@ -178,15 +203,14 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
             }
         };
 
-        setImageAndAudio();
-
-        return view;
+        //setImageAndAudio();
     }
 
+/*
     private void answered(int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
         meaning.setText(lesson.getFront().get(reviewIndex));
-        answerLayout.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        answerLayout.setBackground(ContextCompat.getDrawable(this, outline));
     }
 
 
@@ -218,9 +242,9 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
 
         for(int i=0; i<syllables.length; i++) {
 
-            btnSelector = new Button(getContext());
+            btnSelector = new Button(this);
 
-            DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
+            DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
             int width = dm.widthPixels;
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width *18 /100, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -229,7 +253,7 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
             params.bottomMargin = width * 2 / 100;
 
             btnSelector.setLayoutParams(params);
-            btnSelector.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.ripple_custom));
+            btnSelector.setBackground(ContextCompat.getDrawable(this, R.drawable.ripple_custom));
             btnSelector.setText(syllables[i]);
             btnSelector.setOnClickListener(selectorButtonClick);
             flexboxLayout.addView(btnSelector);
@@ -289,6 +313,8 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
     }
 
 
+
+ */
     @Override
     public void onClick(View v) {
 
@@ -315,7 +341,7 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.btnTranslate :
-
+/*
                 if(meaning.getText().equals(lesson.getBack().get(reviewIndex))) {
 
                     meaning.setText(lesson.getFront().get(reviewIndex));
@@ -324,17 +350,32 @@ public class LessonTestSentence extends Fragment implements View.OnClickListener
 
                     meaning.setText(lesson.getBack().get(reviewIndex));
                 }
+
+ */
+                break;
+
+            case R.id.btnClose :
+
+                if(quizCount > 5) {
+                    if(adsManager.interstitialAd.isLoaded()) {
+                        adsManager.playFullAds(this);
+                    }
+                }
+
+                finish();
+
                 break;
 
             case R.id.btnStart :
 
                 loadingLayout.setVisibility(View.GONE);
 
-                adsManager.loadNativeAds(getContext());
+                adsManager.loadNativeAds(this);
 
-                makeQuiz(false);
+                //makeQuiz(false);
 
                 break;
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package net.awesomekorean.podo.lesson;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,16 +23,17 @@ import com.google.android.gms.common.util.ArrayUtils;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.lessons.R_Conjugation_Lesson00;
+import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
+import net.awesomekorean.podo.lesson.lessonReview.R_Conjugation_Lesson00;
 
 import java.util.Arrays;
 
-public class LessonTestConjugate extends Fragment implements View.OnClickListener {
+public class LessonReviewConjugate extends Fragment implements View.OnClickListener {
 
     View view;
 
-    public static LessonTestConjugate newInstance() {
-        return new LessonTestConjugate();
+    public static LessonReviewConjugate newInstance() {
+        return new LessonReviewConjugate();
     }
 
     TextView tvEnglish;
@@ -40,7 +42,6 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
     FlexboxLayout flexConjugation;
     Button btnConfirm;
 
-    R_Conjugation_Lesson00 testItem;
     int baseFormSize;
     int conjugationSize;
     int baseFormIndex;
@@ -59,11 +60,14 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
     String stringBaseForm = "baseForm";
     String stringConjugation = "conjugation";
 
+    LessonReviewFrame activity;
+    LessonReview lessonReview;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.lesson_test_conjugate, container, false);
+        view = inflater.inflate(R.layout.activity_lesson_review_conjugation, container, false);
 
         tvEnglish = view.findViewById(R.id.tvEnglish);
         tvAnswer = view.findViewById(R.id.tvAnswer);
@@ -74,21 +78,35 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
 
         playSoundPool = new PlaySoundPool(getContext());
 
-        testItem = new R_Conjugation_Lesson00();
-
-        baseFormSize = testItem.getBaseForm().length;
-        conjugationSize = testItem.getConjugate()[0].length;
+        lessonReview = activity.lessonReview;
+        baseFormSize = activity.lessonReview.getBaseForm().length;
+        conjugationSize = activity.lessonReview.getConjugation()[0].length;
 
         isBaseForm = true;
-        makeTest();
+        makeQuiz();
 
         return view;
     }
 
 
-    private void answered(int sound, int outline) {
+    private void answered(int sound, int outline, final boolean isCorrect) {
         playSoundPool.playSoundLesson(sound);
         tvAnswer.setBackground(ContextCompat.getDrawable(getContext(), outline));
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                isBaseForm = true;
+                tvAnswer.setText("");
+                tvAnswer.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
+                activity.progressCount(isCorrect);
+                if(activity.progressCount < 20) {
+                    makeQuiz();
+                } else {
+                    activity.replaceFragment(LessonReviewWord.newInstance());
+                }
+            }
+        }, 2000);
     }
 
 
@@ -101,7 +119,6 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
     // 정답을 제외한 보기 2개를 중복되지 않게 넣기
     private void getAnswerList(int[] answerList, int size, int index) {
         answerList[0] = index;
-
         int count = 1;
 
         while (count < answerList.length) {
@@ -140,17 +157,17 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
             toggleButton.setOnClickListener(this);
 
             if(isBaseForm) {
-                toggleButton.setText(testItem.getBaseForm()[answerListBaseForm[i]]);
-                toggleButton.setTextOn(testItem.getBaseForm()[answerListBaseForm[i]]);
-                toggleButton.setTextOff(testItem.getBaseForm()[answerListBaseForm[i]]);
+                toggleButton.setText(lessonReview.getBaseForm()[answerListBaseForm[i]]);
+                toggleButton.setTextOn(lessonReview.getBaseForm()[answerListBaseForm[i]]);
+                toggleButton.setTextOff(lessonReview.getBaseForm()[answerListBaseForm[i]]);
                 toggleButton.setTag(stringBaseForm);
                 toggleButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.toggle_pink_transparent));
                 flexBaseForm.addView(toggleButton);
 
             } else {
-                toggleButton.setText(testItem.getConjugate()[selectedBaseFormIndex][answerListConjugation[i]]);
-                toggleButton.setTextOn(testItem.getConjugate()[selectedBaseFormIndex][answerListConjugation[i]]);
-                toggleButton.setTextOff(testItem.getConjugate()[selectedBaseFormIndex][answerListConjugation[i]]);
+                toggleButton.setText(lessonReview.getConjugation()[selectedBaseFormIndex][answerListConjugation[i]]);
+                toggleButton.setTextOn(lessonReview.getConjugation()[selectedBaseFormIndex][answerListConjugation[i]]);
+                toggleButton.setTextOff(lessonReview.getConjugation()[selectedBaseFormIndex][answerListConjugation[i]]);
                 toggleButton.setTag(stringConjugation);
                 toggleButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.toggle_purple_transparent));
                 flexConjugation.addView(toggleButton);
@@ -159,50 +176,29 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
     }
 
 
-    private void makeTest() {
+    private void makeQuiz() {
         btnConfirm.setEnabled(false);
         flexBaseForm.removeAllViews();
         flexConjugation.removeAllViews();
         baseFormIndex = getRandomNum(baseFormSize - 1);
         conjugationIndex = getRandomNum(conjugationSize - 1);
-        tvEnglish.setText(testItem.getTranslate()[baseFormIndex][conjugationIndex]);
+        tvEnglish.setText(lessonReview.getTranslate()[baseFormIndex][conjugationIndex]);
         makeBtns();
     }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.btnClose :
-                break;
-
-
             case R.id.btnConfirm :
                 btnConfirm.setEnabled(false);
                 if(baseFormIndex == selectedBaseFormIndex && conjugationIndex == selectedConjugationIndex) {
-                    isCorrect = true;
-                    answered(0, R.drawable.bg_lavendar_10_stroke_lavendar);
+                    answered(0, R.drawable.bg_lavendar_10_stroke_lavendar, true);
 
                 } else {
-                    isCorrect = false;
-                    answered(1, R.drawable.bg_pink_10_stroke_red);
+                    answered(1, R.drawable.bg_pink_10_stroke_red, false);
                 }
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if(isCorrect) {
-                            LessonTestFrame.numberOfCorrect++;
-                        }
-                        LessonTestFrame.progressCount();
-                        isBaseForm = true;
-                        tvAnswer.setText("");
-                        tvAnswer.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
-                        makeTest();
-                    }
-                }, 2000);
                 break;
 
 
@@ -214,7 +210,7 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
                     tvAnswer.setText(selectedBtnText);
 
                     if (selectedBtn.getTag().equals(stringBaseForm)) {
-                        selectedBaseFormIndex = Arrays.asList(testItem.getBaseForm()).indexOf(selectedBtnText);
+                        selectedBaseFormIndex = Arrays.asList(lessonReview.getBaseForm()).indexOf(selectedBtnText);
                         if (selectedBaseToggle != null && !selectedBtn.equals(selectedBaseToggle)) {
                             selectedBaseToggle.setChecked(false);
                             selectedBaseToggle.setTextColor(Color.GRAY);
@@ -226,7 +222,7 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
 
                     } else {
                         btnConfirm.setEnabled(true);
-                        selectedConjugationIndex = Arrays.asList(testItem.getConjugate()[selectedBaseFormIndex]).indexOf(selectedBtnText);
+                        selectedConjugationIndex = Arrays.asList(lessonReview.getConjugation()[selectedBaseFormIndex]).indexOf(selectedBtnText);
                         if (selectedConjugationToggle != null && !selectedBtn.equals(selectedConjugationToggle)) {
                             selectedConjugationToggle.setChecked(false);
                             selectedConjugationToggle.setTextColor(Color.GRAY);
@@ -246,6 +242,16 @@ public class LessonTestConjugate extends Fragment implements View.OnClickListene
                     tvAnswer.setText("");
                 }
                 break;
+        }
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof LessonReviewFrame) {
+            activity = (LessonReviewFrame) context;
         }
     }
 }

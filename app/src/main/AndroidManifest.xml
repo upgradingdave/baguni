@@ -19,10 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".lesson.LessonTestFrame">
-        </activity>
-        <activity android:name=".lesson.LessonReviewConjugation">
-        </activity>
+        <activity android:name=".lesson.LessonReviewFrame"></activity>
+        <activity android:name=".lesson.LR_Conjugation"></activity>
         <activity android:name=".writing.WritingReturned" />
         <activity
             android:name=".DailyMission"
@@ -42,10 +40,10 @@
             android:screenOrientation="unspecified"
             android:theme="@style/DialogFullScreen" />
         <activity
-            android:name=".lesson.LessonReviewSentence"
+            android:name=".lesson.LR_Sentence"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".lesson.LessonReviewWord"
+            android:name=".lesson.LR_Word"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConfirmQuit"
@@ -117,7 +115,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".login.SignUp"
