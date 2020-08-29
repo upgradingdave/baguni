@@ -75,7 +75,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
 
     ProgressBar progressBar;
 
-    ImageView btnSync; // DB와 동기화 버튼
+    //ImageView btnSync; // DB와 동기화 버튼
     Button btnStudy;    // 컬렉션을 flash card 로 공부
     static Button btnDelete;   // 컬렉션 삭제 버튼
     static Button btnRecord;   // 녹음 요청 버튼
@@ -129,7 +129,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
         btnNo = view.findViewById(R.id.btnNo);
         collectionNo = view.findViewById(R.id.collectionNo);
         msgNoCollection = view.findViewById(R.id.msgNoCollection);
-        btnSync = view.findViewById(R.id.btnSync);
+        //btnSync = view.findViewById(R.id.btnSync);
         selectAll.setOnClickListener(this);
         btnStudy.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -138,7 +138,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
         searchCancel.setOnClickListener(this);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
-        btnSync.setOnClickListener(this);
+        //btnSync.setOnClickListener(this);
 
         listView = view.findViewById(R.id.listViewCollection);
 
@@ -463,7 +463,7 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
             case R.id.searchCancel:
                 searchEdit.setText("");
                 break;
-
+/*
             case R.id.btnSync:
 
                 // Room 에서 dateEdit 가 dateLastSync 보다 뒤에 있는 아이템들 가져오기
@@ -550,6 +550,8 @@ public class MainCollection extends Fragment implements Button.OnClickListener {
                 SharedPreferencesInfo.setDateLastSync(getContext(), timeNow);
                 Toast.makeText(getContext(), getString(R.string.COLLECTION_SYNCHRONISED), Toast.LENGTH_LONG).show();
                 break;
+
+ */
         }
     }
 
