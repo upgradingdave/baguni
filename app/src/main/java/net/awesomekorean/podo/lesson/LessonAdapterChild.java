@@ -151,20 +151,12 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
                                         break;
                                 }
 
-                            } else if(lessonItem.getLessonTitle().equals("ranking")) {
-
                             } else {
 
-                                if(lessonItem.getLessonTitle().equals("word")) {
-
-                                    intent = new Intent(context, LessonReviewWord.class);
-
-                                } else if(lessonItem.getLessonTitle().equals("sentence")) {
-
-                                    intent = new Intent(context, LessonReviewSentence.class);
+                                if(lessonItem.getLessonTitle().equals("review")) {
+                                    intent = new Intent(context, LessonReviewFrame.class);
 
                                 } else {
-
                                     intent = new Intent(context, LessonFrame.class);
                                 }
 

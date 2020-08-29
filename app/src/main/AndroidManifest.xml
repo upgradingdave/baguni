@@ -31,13 +31,9 @@
         <activity
             android:name=".lesson.IntermediateFrame"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
+        <activity android:name=".lesson.LessonReviewFrame"></activity>
         <activity android:name=".writing.WritingReturned" />
         <activity
             android:name=".DailyMission"
@@ -56,12 +52,6 @@
             android:name=".CloudMessageReceiver"
             android:screenOrientation="unspecified"
             android:theme="@style/DialogFullScreen" />
-        <activity
-            android:name=".lesson.LessonReviewSentence"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".lesson.LessonReviewWord"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".ConfirmQuit"
             android:screenOrientation="unspecified"
@@ -127,6 +117,12 @@
         <activity
             android:name=".Logo"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".login.SignUp"

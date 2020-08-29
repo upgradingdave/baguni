@@ -1,12 +1,22 @@
-package net.awesomekorean.podo.lesson.lessons;
+package net.awesomekorean.podo.lesson.lessonReview;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
+import net.awesomekorean.podo.lesson.lessons.Lesson07;
+import net.awesomekorean.podo.lesson.lessons.Lesson08;
+import net.awesomekorean.podo.lesson.lessons.Lesson09;
+import net.awesomekorean.podo.lesson.lessons.Lesson10;
+import net.awesomekorean.podo.lesson.lessons.Lesson11;
+import net.awesomekorean.podo.lesson.lessons.Lesson12;
+import net.awesomekorean.podo.lesson.lessons.Lesson27;
+import net.awesomekorean.podo.lesson.lessons.LessonInit;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class R_Sentence_Lesson01 extends LessonInit implements LessonReview, LessonItem, Serializable {
+public class R_Sentence_Lesson01 extends LessonInit implements LessonItem, Serializable {
 
     private String lessonId = "RS_01";
     private String lessonTitle = "sentence";
@@ -58,31 +68,6 @@ public class R_Sentence_Lesson01 extends LessonInit implements LessonReview, Les
     @Override
     public String getLessonId() {
         return lessonId;
-    }
-
-    @Override
-    public List<String> getFront() {
-        return front;
-    }
-
-    @Override
-    public List<String> getBack() {
-        return back;
-    }
-
-    @Override
-    public List<String> getImageString() {
-        return null;
-    }
-
-    @Override
-    public List<String> getAudioString() {
-        return audioString;
-    }
-
-    @Override
-    public List<String> getAudioFolder() {
-        return audioFolder;
     }
 
 
