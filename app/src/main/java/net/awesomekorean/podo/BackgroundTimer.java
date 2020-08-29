@@ -22,7 +22,7 @@ public class BackgroundTimer extends CountDownTimer {
             sleepingTime++;
 
             if (sleepingTime >= killingTime) {
-                MainActivity.handleBackground.sendEmptyMessage(100);
+                //MainActivity.handleBackground.sendEmptyMessage(100);
                 System.out.println("백그라운드 상태 5분 초과됨");
             }
         }

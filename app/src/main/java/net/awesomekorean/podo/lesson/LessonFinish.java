@@ -93,11 +93,13 @@ public class LessonFinish extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("lessonId", lessonId);
         firebaseAnalytics.logEvent("lesson_finish", bundle);
-
+/*
         // 일일미션에 추가하기
         DailyMissionInfo dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(context);
         dailyMissionInfo.addLessonComplete(lessonId);
         SharedPreferencesInfo.setDailyMissionInfo(context, dailyMissionInfo);
+
+ */
 
         // 레슨완료 정보 업데이트 하기
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);

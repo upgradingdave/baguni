@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     TextView tvTitle;
 
     ImageView btnProfile;
-    ImageView btnDailyMission;
+    //ImageView btnDailyMission;
     TextView userPoint;
     LinearLayout layoutPoint;
     ConstraintLayout layoutPointInfo;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     UserInformation userInformation;
 
     Animation animation;
-
+/*
     DailyMissionInfo dailyMissionInfo;
 
     CountDownTimer timer;
@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             }
         }
     }
+ */
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         tvTitle = findViewById(R.id.tvTitle);
         btnProfile = findViewById(R.id.btnProfile);
-        btnDailyMission = findViewById(R.id.btnDailyMission);
+        //btnDailyMission = findViewById(R.id.btnDailyMission);
         userPoint = findViewById(R.id.userPoint);
         layoutPoint = findViewById(R.id.layoutPoint);
         layoutPointInfo = findViewById(R.id.layoutPointInfo);
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         textWriting = findViewById(R.id.textWriting);
         textCollection = findViewById(R.id.textCollection);
         btnProfile.setOnClickListener(this);
-        btnDailyMission.setOnClickListener(this);
+        //btnDailyMission.setOnClickListener(this);
         layoutPoint.setOnClickListener(this);
         btnClosePointInfo.setOnClickListener(this);
 
@@ -231,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
  */
         getAttendanceInfo();
-
+/*
         // 일일미션 정보 가져오기 (기기에 dailyMissionInfo 가 없는 경우 문제발생 방지용.)
         dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
         if(dailyMissionInfo == null) {
@@ -245,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             timer = new DailyMissionTimer(getApplicationContext(), 3600 * 1000, 1000, dailyMissionInfo.getRunningTime());
             timer.start();
         }
+ */
 
         checkPlayService();
 
@@ -264,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         // 오늘 출석체크 안했으면 출석부 업데이트 (버그: 요일이 같으면 일주일만에 접속해도 초기화 안됨)
         if (!userInformation.getAttendance().get(today)) {
 
-            initDailyMission();
+            //initDailyMission();
 
             System.out.println("출석체크를 시작합니다.");
             int yesterday;
@@ -315,12 +317,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
-
+/*
     // 일일미션 초기화하기
     public void initDailyMission() {
         dailyMissionInfo = new DailyMissionInfo();
         SharedPreferencesInfo.setDailyMissionInfo(getApplicationContext(), dailyMissionInfo);
     }
+
+ */
 
 
     public void checkPlayService() {
@@ -331,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             googleAPI.makeGooglePlayServicesAvailable(this);
         }
     }
-
+/*
     // 완료한 일일 미션이 있는지 확인
     public void checkMissionComplete() {
         dailyMissionInfo = SharedPreferencesInfo.getDailyMissionInfo(getApplicationContext());
@@ -349,6 +353,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             startActivity(intent);
         }
     }
+ */
 
     @Override
     public void onClick(View view) {
@@ -359,13 +364,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 intent = new Intent(this, Profile.class);
                 startActivity(intent);
                 break;
-
+/*
             case R.id.btnDailyMission :
                 intent = new Intent(this, DailyMission.class);
                 intent.putExtra("rewardPoints", 0);
                 startActivity(intent);
                 break;
-/*
+
             case R.id.btnMessage:
                 redDot.setVisibility(View.GONE);
                 intent = new Intent(this, Message.class);
@@ -446,7 +451,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
             userPoint.setText(String.valueOf(userInformation.getPoints()));
         }
-        checkMissionComplete();
+        //checkMissionComplete();
 
         if(!IsOnline.isOnline(getApplicationContext())) {
             Toast.makeText(getApplicationContext(), "Internet connection required.", Toast.LENGTH_LONG).show();
@@ -476,13 +481,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onStop();
         crashlytics.log("메인액티비티 Stop!!");
         System.out.println("메인액티비티 Stop!!");
-
+/*
         // 5분 이상 백그라운드 상태이면 앱 종료
         if(IsAppInBackground.isAppInBackground(getApplicationContext())) {
             handleBackground = new HandleBackground(this);
             CountDownTimer backgroundTimer = new BackgroundTimer(this, 300000, 1000);
             backgroundTimer.start();
         }
+ */
     }
 
 
