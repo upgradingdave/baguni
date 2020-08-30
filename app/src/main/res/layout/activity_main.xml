@@ -166,58 +166,322 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutPointInfo"
+        android:id="@+id/layoutPointDetail"
         android:visibility="gone"
         android:background="@color/BLACK_TRANSPARENT"
         android:elevation="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/btnClosePointInfo"
-            app:layout_constraintBottom_toTopOf="@+id/layout"
-            app:layout_constraintStart_toStartOf="@+id/layout"
-            android:src="@drawable/close_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:id="@+id/layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutGetPoint"
+            android:background="@drawable/bg_white_10"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="25dp"
-            android:orientation="vertical"
-            android:background="@drawable/bg_white_32_top"
-            android:layout_marginTop="150dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:gravity="center"
+            <ImageView
+                android:src="@drawable/bubbles1"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/WHAT_POINT"
-                android:textSize="25dp"
-                android:textColor="@color/PURPLE"
-                android:textStyle="bold"
-                />
+                android:layout_height="wrap_content"/>
 
-            <ScrollView
-                android:layout_weight="1"
-                android:layout_marginTop="25dp"
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="match_parent">
+
                 <TextView
-                    android:textColor="@color/GREY_TEXT"
+                    android:text="@string/GET_POINT"
                     android:textSize="20dp"
-                    android:text="@string/POINT_INTRO"
-                    android:lineSpacingExtra="7dp"
+                    android:textColor="@color/BLACK"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </ScrollView>
-        </LinearLayout>
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btnWatchAds"
+                    android:layout_gravity="center"
+                    android:text="@string/GET_POINTS_BY_AD"
+                    android:textColor="@color/WHITE"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:background="@drawable/bg_pink_25"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/btnPurchasePoints"
+                    android:layout_gravity="center"
+                    android:text="@string/GET_POINTS_BY_PURCHASING"
+                    android:textColor="@color/WHITE"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:background="@drawable/bg_purple_25"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnPointInfo"
+                android:src="@drawable/question"
+                app:layout_constraintTop_toTopOf="@id/btnClosePointDetail"
+                app:layout_constraintBottom_toBottomOf="@id/btnClosePointDetail"
+                app:layout_constraintEnd_toStartOf="@+id/btnClosePointDetail"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/btnClosePointDetail"
+                android:src="@drawable/close_purple"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        포인트 설명 페이지-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutPointInfo"
+            android:background="@drawable/bg_white_10"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/bubbles1"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="@string/WHAT_POINT"
+                    android:textSize="20dp"
+                    android:textColor="@color/BLACK"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <ScrollView
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/pink_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/THINGS_YOU_CAN_DO_WITH_POINTS"
+                                android:textStyle="bold"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/purple_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/UNLOCK_SPECIAL_LESSONS"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/purple_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/UNLOCK_READINGS"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/purple_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/ASK_CORRECTION"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/pink_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/HOW_TO_COLLECT_POINTS"
+                                android:textStyle="bold"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/purple_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/WATCH_REWARD_ADS"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/purple_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/ATTEND_FOR_7DAYS"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@drawable/purple_dot"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/PURCHASE"
+                                android:textColor="@color/GREY_DARK"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+
+                <Button
+                    android:id="@+id/btnClosePointInfo"
+                    android:layout_gravity="center"
+                    android:text="@string/GOT_IT"
+                    android:textColor="@color/WHITE"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:paddingLeft="65dp"
+                    android:paddingRight="65dp"
+                    android:background="@drawable/bg_purple_30"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
