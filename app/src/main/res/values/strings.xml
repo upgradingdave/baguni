@@ -49,18 +49,14 @@
     <string name="CONFIRM_EXIT">Do you want to exit podo?</string>
     <string name="CONFIRM_REPORT">Do you have something to tell \'podo\'? \n (bug report or suggestions)</string>
     <string name="WHAT_POINT">What is the point?</string>
-    <string name="POINT_INTRO">
-        "- Things you can do with points
-1. Lesson: Unlock Special Lessons
-2. Reading: Unlock Readings
-3. Writing: Ask a Korean teacher for correction
-
-- How to collect points
-1. Complete General Lessons
-2. Watch video ads (in profile page)
-3. Attend for 7 days in a row
-4. Complete Daily Mission
-5. Purchase"</string>
+    <string name="THINGS_YOU_CAN_DO_WITH_POINTS">Things you can do with points</string>
+    <string name="UNLOCK_SPECIAL_LESSONS">Lesson: Unlock Special Lessons</string>
+    <string name="UNLOCK_READINGS">Reading: Unlock Readings</string>
+    <string name="ASK_CORRECTION">Writing: Ask a Korean teacher for correction</string>
+    <string name="HOW_TO_COLLECT_POINTS">How to collect points</string>
+    <string name="WATCH_REWARD_ADS">Watch the Reward ads</string>
+    <string name="ATTEND_FOR_7DAYS">Attend for 7 days in a row (see profile page)</string>
+    <string name="PURCHASE">Purchase</string>
 
 
     <!--    주요버튼-->

@@ -57,6 +57,7 @@ import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
+import net.awesomekorean.podo.purchase.TopUp;
 import net.awesomekorean.podo.reading.MainReading;
 import net.awesomekorean.podo.writing.MainWriting;
 
@@ -86,8 +87,15 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     //ImageView btnDailyMission;
     TextView userPoint;
     LinearLayout layoutPoint;
+
+    ConstraintLayout layoutPointDetail;
+    ConstraintLayout layoutGetPoint;
     ConstraintLayout layoutPointInfo;
-    ImageView btnClosePointInfo;
+    ImageView btnPointInfo;
+    ImageView btnClosePointDetail;
+    Button btnWatchAds;
+    Button btnPurchasePoints;
+    Button btnClosePointInfo;
 
     LinearLayout layoutLesson;
     LinearLayout layoutReading;
@@ -155,7 +163,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         //btnDailyMission = findViewById(R.id.btnDailyMission);
         userPoint = findViewById(R.id.userPoint);
         layoutPoint = findViewById(R.id.layoutPoint);
+        layoutPointDetail = findViewById(R.id.layoutPointDetail);
+        layoutGetPoint = findViewById(R.id.layoutGetPoint);
         layoutPointInfo = findViewById(R.id.layoutPointInfo);
+        btnPointInfo = findViewById(R.id.btnPointInfo);
+        btnClosePointDetail = findViewById(R.id.btnClosePointDetail);
+        btnWatchAds = findViewById(R.id.btnWatchAds);
+        btnPurchasePoints = findViewById(R.id.btnPurchasePoints);
         btnClosePointInfo = findViewById(R.id.btnClosePointInfo);
         layoutLesson = findViewById(R.id.layoutLesson);
         layoutReading = findViewById(R.id.layoutReading);
@@ -173,8 +187,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnProfile.setOnClickListener(this);
         //btnDailyMission.setOnClickListener(this);
         layoutPoint.setOnClickListener(this);
+        btnPointInfo.setOnClickListener(this);
+        btnClosePointDetail.setOnClickListener(this);
+        btnWatchAds.setOnClickListener(this);
+        btnPurchasePoints.setOnClickListener(this);
         btnClosePointInfo.setOnClickListener(this);
-
         layoutLesson.setOnClickListener(this);
         layoutReading.setOnClickListener(this);
         layoutWriting.setOnClickListener(this);
@@ -380,12 +397,34 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
  */
             case R.id.layoutPoint :
+                layoutPointDetail.setVisibility(View.VISIBLE);
+                layoutGetPoint.setVisibility(View.VISIBLE);
+                layoutPointInfo.setVisibility(View.GONE);
+                break;
+
+            case R.id.btnWatchAds :
+                AdsManager.getInstance().playRewardAds(this);
+                break;
+
+            case R.id.btnPurchasePoints :
+                intent = new Intent(getApplicationContext(), TopUp.class);
+                startActivityForResult(intent, 300);
+                break;
+
+            case R.id.btnPointInfo :
+                layoutGetPoint.setVisibility(View.GONE);
                 layoutPointInfo.setVisibility(View.VISIBLE);
                 break;
 
+            case R.id.btnClosePointDetail :
+                layoutPointDetail.setVisibility(View.GONE);
+                break;
+
             case R.id.btnClosePointInfo :
+                layoutGetPoint.setVisibility(View.VISIBLE);
                 layoutPointInfo.setVisibility(View.GONE);
                 break;
+
 
             case R.id.layoutLesson:
                 setFrag(mainLesson);
@@ -439,6 +478,17 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         Intent intent = new Intent(this, ConfirmQuit.class);
         intent.putExtra(getResources().getString(R.string.IS_MAIN), true);
         startActivity(intent);
+    }
+
+
+    @Override
+    protected void onActivityResult(final int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+            userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+            userPoint.setText(String.valueOf(userInformation.getPoints()));
+        }
     }
 
 

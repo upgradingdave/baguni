@@ -305,9 +305,7 @@ public class LessonReviewFrame extends AppCompatActivity implements View.OnClick
 
 
             case R.id.btnComplete :
-                if(adsManager.interstitialAd.isLoaded()) {
-                    adsManager.playFullAds(getApplicationContext());
-                }
+                adsManager.playFullAds(getApplicationContext());
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 userInformation.updateCompleteList(getApplicationContext(), lessonReview.getLessonId(), 100, false);
                 finish();
@@ -322,9 +320,7 @@ public class LessonReviewFrame extends AppCompatActivity implements View.OnClick
 
 
             case R.id.btnNo :
-                if(adsManager.interstitialAd.isLoaded()) {
-                    adsManager.playFullAds(getApplicationContext());
-                }
+                adsManager.playFullAds(getApplicationContext());
                 finish();
                 break;
         }
