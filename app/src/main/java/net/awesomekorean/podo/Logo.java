@@ -50,6 +50,23 @@ public class Logo extends AppCompatActivity {
         adsManager.loadRewardAds(this);
         adsManager.loadNativeAds(this);
 
+        // 기기 토큰 얻기
+        String token = SharedPreferencesInfo.getUserToken(getApplicationContext());
+        if(token == null) {
+            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                @Override
+                public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                    if (task.isSuccessful()) {
+                        String token = task.getResult().getToken();
+                        SharedPreferencesInfo.setUserToken(getApplicationContext(), token);
+                        System.out.println("토큰을 저장했습니다 : " + token);
+                    }
+                }
+            });
+        } else {
+            System.out.println("토큰 : " + token);
+        }
+
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

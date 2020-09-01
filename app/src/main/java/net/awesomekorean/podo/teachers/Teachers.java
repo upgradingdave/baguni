@@ -185,50 +185,42 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
 
                 final WritingEntity requestWriting = (WritingEntity) intent.getSerializableExtra(getString(R.string.EXTRA_ENTITY));
 
-                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                String token = SharedPreferencesInfo.getUserToken(getApplicationContext());
+
+                // 재요청 일 때
+                if(requestWriting.getStatus() == 99) {
+                    requestWriting.setContents(requestWriting.getCorrection());
+                    requestWriting.setCorrection("");
+                    requestWriting.setTeacherFeedback("");
+                }
+
+                requestWriting.setUserEmail(userEmail);
+                requestWriting.setUserName(userName);
+                requestWriting.setTeacherName(teacherName);
+                requestWriting.setTeacherId(teacherId);
+                requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
+                requestWriting.setStatus(1);
+                requestWriting.setUserToken(token);
+
+                WritingRepository repository = new WritingRepository(getApplicationContext());
+                repository.update(requestWriting);
+
+                // 교정요청 DB에 저장하기
+                db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
+                        .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if(task.isSuccessful()) {
-
-                            String token = task.getResult().getToken();
-
-                            // 재요청 일 때
-                            if(requestWriting.getStatus() == 99) {
-                                requestWriting.setContents(requestWriting.getCorrection());
-                                requestWriting.setCorrection("");
-                                requestWriting.setTeacherFeedback("");
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("교정요청을 DB에 저장했습니다.");
+                        requestResult.setVisibility(View.VISIBLE);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                requestResult.setVisibility(View.GONE);
+                                Intent intent = new Intent(getApplication(), MainActivity.class);
+                                startActivity(intent);
                             }
-
-                            requestWriting.setUserEmail(userEmail);
-                            requestWriting.setUserName(userName);
-                            requestWriting.setTeacherName(teacherName);
-                            requestWriting.setTeacherId(teacherId);
-                            requestWriting.setDateRequest(UnixTimeStamp.getTimeNow());
-                            requestWriting.setStatus(1);
-                            requestWriting.setUserToken(token);
-
-                            WritingRepository repository = new WritingRepository(getApplicationContext());
-                            repository.update(requestWriting);
-
-                            // 교정요청 DB에 저장하기
-                            db.collection(getString(R.string.DB_WRITINGS)).document(requestWriting.getGuid())
-                                    .set(requestWriting).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    System.out.println("교정요청을 DB에 저장했습니다.");
-                                    requestResult.setVisibility(View.VISIBLE);
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            requestResult.setVisibility(View.GONE);
-                                            Intent intent = new Intent(getApplication(), MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    }, 3000);
-                                }
-                            });
-                        }
+                        }, 3000);
                     }
                 });
 

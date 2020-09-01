@@ -203,6 +203,25 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="COLLECTION_SYNCHRONISED">Collection is synchronized</string>
 
 
+    <!--    Q&A-->
+    <string name="QUESTION">Question</string>
+    <string name="ASK_QUESTION">Ask a question</string>
+    <string name="MSG_SEND">Your question has been sent. We\'ll let you know if your question have been selected.</string>
+    <string name="QNA">Q&amp;A</string>
+    <string name="QNA_INFO_TITLE">Do you have a question?</string>
+    <string name="QNA_INFO">
+        This is only for challengers who have applied for podo challenge program.
+        During the podo challenge, you can ask questions about learning Korean.
+        A Korean teacher will give you an answer.
+        (Inappropriate question may be rejected)
+    </string>
+    <string name="QNA_DELETE">Are you sure want to delete this question?</string>
+    <string name="REPLIED">Replied</string>
+    <string name="QNA_HINT">Ask your question here</string>
+
+
+
+
     <!--    프로필/옵션-->
     <string name="PROFILE">Profile / Option</string>
     <string name="ATTENDANCE">Attendance (sunday-saturday)</string>
@@ -897,6 +916,7 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="LESSONWORD">lessonWord</string>
     <string name="LESSONSENTENCE">lessonSentence</string>
     <string name="LESSON_SENTENCE">lessonSentence</string>
+
     <string name="DB_USERS">android/podo/users</string>
     <string name="DB_REPORTS">android/podo/reports</string>
     <string name="DB_INFORMATION">information</string>
@@ -907,6 +927,8 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
     <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>
     <string name="DB_TEACHERS">android/podo/teachers/</string>
+    <string name="DB_QNA">android/podo/qna/</string>
+
     <string name="LOADING">Loading...</string>
     <string name="SKU_100">podo_point_100</string>
     <string name="SKU_500">podo_point_500</string>
@@ -934,12 +956,6 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="GRAMMAR">Grammar</string>
     <string name="CONFIRMED">Confirmed</string>
     <string name="RETURNED">Returned</string>
-    <string name="QUESTION">Question</string>
-    <string name="ASK_YOUR_QUESTION">Ask your question here</string>
-    <string name="MSG_SEND">Your question has been sent. We\'ll let you know if your question have been selected.</string>
-    <string name="QNA">Q&amp;A</string>
-    <string name="NO_QUESTIONS">You didn\'t ask a question yet</string>
-    <string name="TIPS_QUESTION">Please ask a good question about Korean learning or Korean culture. The question which is selected will be shared to every learners and rewarded with 0 points.</string>
     <string name="FINISH_READING">Finish Reading</string>
 
 </resources>

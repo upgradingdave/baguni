@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/FOGGY"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:text="@string/QNA"
+        android:textSize="18dp"
+        android:textColor="@color/BLACK"
+        android:background="@color/WHITE"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btnQuit"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title"
+        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/textQuestion"
+        android:gravity="left|top"
+        android:padding="15dp"
+        android:hint="@string/QNA_HINT"
+        android:textSize="15dp"
+        android:lineSpacingExtra="8dp"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideInset"
+        android:overScrollMode="always"
+        android:background="@drawable/bg_white_10_stroke_grey"
+        android:layout_margin="20dp"
+        android:elevation="3dp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toTopOf="@id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:text="@string/SEND"
+        android:textSize="15dp"
+        android:textColor="@color/WHITE"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_purple_30"
+        android:layout_marginLeft="5dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

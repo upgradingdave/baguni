@@ -58,6 +58,7 @@ import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.Message;
 import net.awesomekorean.podo.profile.Profile;
 import net.awesomekorean.podo.purchase.TopUp;
+import net.awesomekorean.podo.qna.MainQnA;
 import net.awesomekorean.podo.reading.MainReading;
 import net.awesomekorean.podo.writing.MainWriting;
 
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     Fragment mainReading;
     Fragment mainWriting;
     Fragment mainCollection;
+    Fragment mainQnA;
 
     TextView tvTitle;
 
@@ -101,16 +103,19 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     LinearLayout layoutReading;
     LinearLayout layoutWriting;
     LinearLayout layoutCollection;
+    LinearLayout layoutQnA;
+
 
     public static ImageView btnLesson;
     public static ImageView btnReading;
     public static ImageView btnWriting;
     public static ImageView btnCollection;
+    public static ImageView btnQnA;
     public static TextView textLesson;
     public static TextView textReading;
     public static TextView textWriting;
     public static TextView textCollection;
-
+    public static TextView textQnA;
 
     Intent intent;
 
@@ -175,15 +180,17 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         layoutReading = findViewById(R.id.layoutReading);
         layoutWriting = findViewById(R.id.layoutWriting);
         layoutCollection = findViewById(R.id.layoutCollection);
+        layoutQnA = findViewById(R.id.layoutQnA);
         btnLesson = findViewById(R.id.btnLesson);
         btnReading = findViewById(R.id.btnReading);
         btnWriting = findViewById(R.id.btnWriting);
         btnCollection = findViewById(R.id.btnCollection);
-
+        btnQnA = findViewById(R.id.btnQnA);
         textLesson = findViewById(R.id.textLesson);
         textReading = findViewById(R.id.textReading);
         textWriting = findViewById(R.id.textWriting);
         textCollection = findViewById(R.id.textCollection);
+        textQnA = findViewById(R.id.textQnA);
         btnProfile.setOnClickListener(this);
         //btnDailyMission.setOnClickListener(this);
         layoutPoint.setOnClickListener(this);
@@ -196,11 +203,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         layoutReading.setOnClickListener(this);
         layoutWriting.setOnClickListener(this);
         layoutCollection.setOnClickListener(this);
+        layoutQnA.setOnClickListener(this);
+
 
         mainLesson = new MainLesson();
         mainReading = new MainReading();
         mainWriting = new MainWriting();
         mainCollection = new MainCollection();
+        mainQnA = new MainQnA();
         setFrag(mainLesson);
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_200);
@@ -445,6 +455,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 setFrag(mainCollection);
                 setMainBtns(btnCollection, textCollection, R.drawable.collection_active, R.string.COLLECTION);
                 break;
+
+            case R.id.layoutQnA:
+                setFrag(mainQnA);
+                setMainBtns(btnQnA, textQnA, R.drawable.qna_active, R.string.QNA);
+                break;
         }
     }
 
@@ -462,10 +477,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnReading.setImageResource(R.drawable.reading);
         btnWriting.setImageResource(R.drawable.writing);
         btnCollection.setImageResource(R.drawable.collection);
+        btnQnA.setImageResource(R.drawable.qna);
+
         textLesson.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
         textReading.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
         textWriting.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
         textCollection.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
+        textQnA.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.GREY_DARK));
 
         btn.setImageResource(active);
         text.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.PURPLE));

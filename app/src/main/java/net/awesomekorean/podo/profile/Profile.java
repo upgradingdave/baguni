@@ -338,42 +338,33 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btnSend :
-                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if(task.isSuccessful()) {
+                String token = SharedPreferencesInfo.getUserToken(context);
+                String comments = reportBugText.getText().toString();
+                if (comments.getBytes().length > 0) {
+                    Map<String, Object> report = new HashMap<>();
+                    report.put("date", UnixTimeStamp.getTimeNow());
+                    report.put("userEmail", SharedPreferencesInfo.getUserEmail(context));
+                    report.put("userName", SharedPreferencesInfo.getUserName(context));
+                    report.put("comments", comments);
+                    report.put("userToken", token);
+                    report.put("status", 0);  // 0:신규, 1:읽음, 2:답변함
+                    report.put("answer", "");
 
-                            String token = task.getResult().getToken();
-                            String comments = reportBugText.getText().toString();
-                            if(comments.getBytes().length > 0) {
-                                Map<String, Object> report = new HashMap<>();
-                                report.put("date", UnixTimeStamp.getTimeNow());
-                                report.put("userEmail", SharedPreferencesInfo.getUserEmail(context));
-                                report.put("userName", SharedPreferencesInfo.getUserName(context));
-                                report.put("comments", comments);
-                                report.put("userToken", token);
-                                report.put("status", 0);  // 0:신규, 1:읽음, 2:답변함
-                                report.put("answer", "");
-
-                                db.collection(getString(R.string.DB_REPORTS)).document(UUID.randomUUID().toString())
-                                        .set(report).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        reportResult.setVisibility(View.VISIBLE);
-                                        Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                reportResult.setVisibility(View.GONE);
-                                            }
-                                        }, 3000);
-
-                                    }
-                                });
-                            }
+                    db.collection(getString(R.string.DB_REPORTS)).document(UUID.randomUUID().toString())
+                            .set(report).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            reportResult.setVisibility(View.VISIBLE);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    reportResult.setVisibility(View.GONE);
+                                }
+                            }, 3000);
                         }
-                    }
-                });
+                    });
+                }
 
                 setExtendableButton(arrowReportBug, reportBugOpen);
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
