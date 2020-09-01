@@ -15,7 +15,7 @@ public class UnixTimeStamp {
     // 유닉스 시간을 시간 포멧으로 전환
     public static String unixTimeFormat(Long unixTime) {
         Date date = new Date(unixTime * 1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = sdf.format(date);
         return formattedDate;
     }

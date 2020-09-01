@@ -174,7 +174,7 @@
             <ImageView
                 android:id="@+id/btnPause"
                 android:visibility="gone"
-                android:src="@drawable/pause_grey"
+                android:src="@drawable/stop_grey"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
                 android:layout_width="wrap_content"

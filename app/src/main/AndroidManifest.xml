@@ -19,6 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".qna.QnAReplied"></activity>
+        <activity android:name=".qna.QnAFrame" />
         <activity android:name=".GetRandomPoint" />
         <activity
             android:name=".CollectResult"
@@ -30,7 +32,7 @@
             android:theme="@style/DialogFullScreen" />
         <activity
             android:name=".lesson.IntermediateFrame"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".lesson.LessonReviewFrame" />
         <activity android:name=".writing.WritingReturned" />
         <activity

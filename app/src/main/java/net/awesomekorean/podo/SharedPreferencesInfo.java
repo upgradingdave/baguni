@@ -80,7 +80,7 @@ public class SharedPreferencesInfo {
     // 엡에서 유저 토큰 불러오기
     public static String getUserToken(Context context) {
         SharedPreferences sp = context.getSharedPreferences("userToken", MODE_PRIVATE);
-        String stringFromSP = sp.getString("userToken", "");
+        String stringFromSP = sp.getString("userToken", null);
         return stringFromSP;
     }
 
