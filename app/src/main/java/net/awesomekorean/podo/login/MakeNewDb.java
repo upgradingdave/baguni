@@ -31,8 +31,8 @@ public class MakeNewDb {
     public void makeNewDb(final Activity activity, final Context context, final String userEmail, final String method) {
         final UserInformation userInformation = new UserInformation();
 
-        CollectionReference userRef = db.collection(activity.getString(R.string.DB_USERS)).document(userEmail).collection(activity.getString(R.string.DB_INFORMATION));
-        userRef.document(activity.getString(R.string.DB_INFORMATION)).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
+        CollectionReference userRef = db.collection(activity.getString(R.string.DB_USERS));
+        userRef.document(userEmail).set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 System.out.println("유저정보 DB를 만들었습니다");

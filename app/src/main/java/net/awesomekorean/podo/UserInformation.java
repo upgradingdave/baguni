@@ -133,7 +133,7 @@ public class UserInformation {
 
         String userEmail = SharedPreferencesInfo.getUserEmail(context);
 
-        db.collection(context.getString(R.string.DB_USERS)).document(userEmail).collection(context.getString(R.string.DB_INFORMATION)).document(context.getString(R.string.DB_INFORMATION))
+        db.collection(context.getString(R.string.DB_USERS)).document(userEmail)
                 .set(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

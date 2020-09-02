@@ -95,17 +95,10 @@ import java.util.List;
 public class MainLesson extends Fragment{
 
     Context context;
-
     View view;
-
     UserInformation userInformation;
-
-    TextView userPoint;
-
     ExpandableListView listView;
-
     LessonAdapterGroup adapter;
-
     int lastExpandedPosition = -1;
 
     String[] groupTitle = {
@@ -153,67 +146,35 @@ public class MainLesson extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.main_lesson, container, false);
-
         context = getContext();
-
-        userPoint = view.findViewById(R.id.userPoint);
-
-//        setUserPoint();
         userInformation = SharedPreferencesInfo.getUserInfo(context);
-
-
         setCompletedLessons();
-
         setUnlockedLessons();
-
         adapter = new LessonAdapterGroup(context, groupTitle, groupSubTitle, groupProcess, childList);
-
         listView = view.findViewById(R.id.listView);
-
         listView.setAdapter(adapter);
-
         listView.setDivider(null);
-
         listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
             public void onGroupExpand(int groupPosition) {
 
                 if(lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
-
                     listView.collapseGroup(lastExpandedPosition);
                 }
 
                 SharedPreferencesInfo.setLastClickItem(context, true, groupPosition);
-
                 lastExpandedPosition = groupPosition;
             }
         });
 
         int lastClickItem = SharedPreferencesInfo.getLastClickItem(context, true);
-
         listView.setSelection(lastClickItem);
-
         listView.expandGroup(lastClickItem);
-
         return view;
     }
 
-
-/*
-
-    // 유저 포인트 세팅하기
-    private void setUserPoint() {
-
-        userInformation = SharedPreferencesInfo.getUserInfo(context);
-
-        userPoint.setText(String.valueOf(userInformation.getPoints()));
-    }
-
-
- */
 
     // 레슨 진도율 세팅하기
     private void setCompletedLessons() {
@@ -221,38 +182,28 @@ public class MainLesson extends Fragment{
         System.out.println("LESSON_COMPLETE:" + lessonComplete);
 
         if(lessonComplete != null) {
-
             // 레슨 진도율 가져오기
             UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, false);
-
             String lessonId;
-
             int sumOfComplete = 0;  // 카테고리 진도율
-
 
             for(int i=0; i<groupTitle.length; i++) {
 
                 for(int j=0; j<childList[i].length; j++) {
-
                     lessonId = childList[i][j].getLessonId();
-
                     int progress = unitProgressInfo.getProgress(lessonId);
 
                     if(progress != -1) {
-
                         childList[i][j].setLessonProgress(progress);
-
                         sumOfComplete += progress;
                     }
                 }
 
                 // 단어 테스트일 때
                 if(childList[i].length == 0) {
-
                     groupProcess[i] = 0;
 
                 } else {
-
                     groupProcess[i] = Math.round(sumOfComplete / childList[i].length);
                 }
 
@@ -264,9 +215,7 @@ public class MainLesson extends Fragment{
 
     // 구매된 스페셜 레슨 세팅하기
     private void setUnlockedLessons() {
-
         List<String> lessonUnlock = userInformation.getSpecialLessonUnlock();
-
         System.out.println("LESSON_UNLOCK:" + lessonUnlock);
 
         if(lessonUnlock != null) {
@@ -276,7 +225,6 @@ public class MainLesson extends Fragment{
                 for(int j=0; j<childList[i].length; j++) {
 
                     if(lessonUnlock.contains(childList[i][j].getLessonId())) {
-
                         childList[i][j].setIsLocked(false);
                     }
                 }
@@ -291,7 +239,6 @@ public class MainLesson extends Fragment{
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         if(adapter != null) {
-            //setUserPoint();
             setCompletedLessons();
             setUnlockedLessons();
             adapter.notifyDataSetChanged();

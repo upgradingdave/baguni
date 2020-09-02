@@ -45,6 +45,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import net.awesomekorean.podo.Logo;
 import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SettingStatusBar;
@@ -223,27 +224,42 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     }
 
     private void getUserInfoAndGoToMain(final String userEmail, final String method) {
-        DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+        DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
         informationRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()) {
+                SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
 
-                    System.out.println("유저정보가 있습니다");
+                if(documentSnapshot.exists()) {
+                    System.out.println("신DB가 있습니다");
                     UserInformation userInformation = documentSnapshot.toObject(UserInformation.class);
                     SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
-                    SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
                     System.out.println("앱에 유저 데이터를 저장했습니다.");
 
                     intent = new Intent(getApplicationContext(), MainActivity.class);
-                    finish();
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), getString(R.string.WELCOME), Toast.LENGTH_LONG).show();
+                    finish();
 
                 } else {
-                    System.out.println("유저 DB가 없습니다. 새로운 DB를 만듭니다");
-                    MakeNewDb makeNewDb = new MakeNewDb();
-                    makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail, method);
+                    System.out.println("신DB가 없습니다. 구DB가 있는지 확인합니다");
+                    DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                    reference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                System.out.println("구DB가 있습니다. 로고 페이지로 이동하여 신DB로 옮깁니다.");
+                                intent = new Intent(getApplicationContext(), Logo.class);
+                                startActivity(intent);
+                                finish();
+
+                            } else {
+                                System.out.println("구DB도 없습니다. 유저정보를 새로 만듭니다.");
+                                MakeNewDb makeNewDb = new MakeNewDb();
+                                makeNewDb.makeNewDb(SignIn.this, getApplicationContext(), userEmail, method);
+                            }
+                        }
+                    });
                 }
                 progressBarLayout.setVisibility(View.GONE);
             }
