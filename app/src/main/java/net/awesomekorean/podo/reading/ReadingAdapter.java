@@ -127,17 +127,17 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         holder.readingId.setText(items.getReadingId().substring(2));
 
         if (items.getReadingProgress() == 100) {
-            holder.progressBar.setVisibility(View.INVISIBLE);
+            holder.progressBar.setVisibility(View.GONE);
             holder.complete.setVisibility(View.VISIBLE);
 
         } else {
             holder.progressBar.setProgress(items.getReadingProgress());
-            holder.progressBar.setVisibility(View.VISIBLE);
+            holder.progressBar.setVisibility(View.GONE);
             holder.complete.setVisibility(View.INVISIBLE);
         }
 
         if (items.getIsLock()) {
-            holder.progressBar.setVisibility(View.INVISIBLE);
+            holder.progressBar.setVisibility(View.GONE);
             holder.readingImage.setColorFilter(holder.filterGrey);
             holder.rocket.setColorFilter(holder.filterGrey);
             holder.iconLock.setVisibility(View.VISIBLE);

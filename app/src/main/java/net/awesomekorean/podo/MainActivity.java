@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             System.out.println("앱에 출석부를 업데이트 했습니다");
 
             // DB 에 출석부 업데이트하기
-            DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+            DocumentReference reference = db.collection(getString(R.string.DB_USERS)).document(userEmail);
             reference.update("attendance", userInformation.getAttendance()).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {

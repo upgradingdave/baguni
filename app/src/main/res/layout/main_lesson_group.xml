@@ -53,14 +53,13 @@
                 android:id="@+id/lessonComplete"
                 android:visibility="gone"
                 android:src="@drawable/complete_gradation2"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="0dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
 
             <ProgressBar
+                android:visibility="gone"
                 android:id="@+id/lessonProgress"
                 style="?android:progressBarStyleHorizontal"
                 android:progress="70"
@@ -76,6 +75,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/lessonProgressPercent"
                 android:text="30%"
                 android:textSize="15dp"

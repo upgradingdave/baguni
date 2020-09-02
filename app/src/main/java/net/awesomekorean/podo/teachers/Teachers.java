@@ -130,7 +130,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 adapter.setOnItemClickListener(new TeachersAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int pos) {
-                        if(pointsHave >= pointsNeed) {
+                        if(list.get(pos).getStatus() == 1 && pointsHave >= pointsNeed) {
                             btnSubmit.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_30));
                             btnSubmit.setEnabled(true);
                         }
