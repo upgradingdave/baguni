@@ -15,6 +15,7 @@ public class UserInformation {
 
     private List<Boolean> attendance = new ArrayList<>(7); // [0]~[6], 일~토
     private int points;
+    private int pointsPurchased;
     private List<String> lessonComplete = new ArrayList<>();
     private List<String> readingComplete = new ArrayList<>();
     private List<String> specialLessonUnlock = new ArrayList<>();
@@ -29,6 +30,7 @@ public class UserInformation {
             this.attendance.add(false);
         }
         this.points = 20;
+        this.pointsPurchased = 0;
         this.isPremium = false;
         this.lastVisit = UnixTimeStamp.getTimeNow();
     }
@@ -53,7 +55,7 @@ public class UserInformation {
         return lessonComplete;
     }
 
-    // 신규 완료정보 변경을 위해 만듦 (L_00 --> L_00%100)
+    // 신규 완료정보 변경을 위해 만듦 (L_00%100 --> L_00)
     public void setLessonComplete(List<String> lessonComplete) {
         this.lessonComplete = lessonComplete;
     }
@@ -63,56 +65,16 @@ public class UserInformation {
 
 
     // 완료리스트 업데이트하고 앱이랑 DB도 바로 업데이트 함
-    public void updateCompleteList(Context context, String unitId, int thisProgress, boolean isReading) {
-
-        UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, isReading);
-
-        int previousProgress = unitProgressInfo.getProgress(unitId);
-
-        System.out.println("유닛 아이디 : " + unitId);
-
-        System.out.println("기존 진행률 : " + previousProgress);
-
-        System.out.println("현재 진행률 : " + thisProgress);
-
-
-        if(thisProgress > previousProgress) {
-
-            if(previousProgress == -1) {
-
-                // 기존진행률이 0일 때 -> 완료리스트에 추가
-                if(isReading) {
-
-                    readingComplete.add(unitId + "%" + thisProgress);
-
-                } else {
-
-                    lessonComplete.add(unitId + "%" + thisProgress);
-                }
-
-                // 기존진행률이 있을 때 -> 완료리스트 수정
-            } else {
-
-                int index = unitProgressInfo.getIndex(unitId);
-
-                if(isReading) {
-
-                    readingComplete.set(index, unitId + "%" + thisProgress);
-
-                } else {
-
-                    lessonComplete.set(index, unitId + "%" + thisProgress);
-                }
-            }
-
-            SharedPreferencesInfo.setUserInfo(context, this);
-
-            updateDb(context);
+    public void updateCompleteList(Context context, String unitId, boolean isReading) {
+        if(isReading) {
+            readingComplete.add(unitId);
 
         } else {
-
-            System.out.println("기존 진행률이 더 높습니다. DB에 유저 정보를 업데이트하지 않습니다.");
+            lessonComplete.add(unitId);
         }
+
+        SharedPreferencesInfo.setUserInfo(context, this);
+        updateDb(context);
     }
 
 
@@ -128,9 +90,7 @@ public class UserInformation {
 
     // DB 에 유저 정보 업데이드 하기
     public void updateDb(final Context context) {
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         String userEmail = SharedPreferencesInfo.getUserEmail(context);
 
         db.collection(context.getString(R.string.DB_USERS)).document(userEmail)
@@ -202,4 +162,12 @@ public class UserInformation {
     }
 
     public void setLastVisit(Long lastVisit) { this.lastVisit = lastVisit;}
+
+    public int getPointsPurchased() {
+        return this.pointsPurchased;
+    }
+
+    public void setPointsPurchased(int pointsPurchased) {
+        this.pointsPurchased += pointsPurchased;
+    }
 }

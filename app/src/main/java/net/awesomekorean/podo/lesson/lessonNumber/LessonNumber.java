@@ -161,25 +161,18 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
 
     private void displayNumber() {
-
         numberFront.setText(number.getFront()[index]);
-
         numberBack.setText(number.getBack()[index]);
-
         checkProgress[index] = true;
-
         int count = 0;
 
         for(int i=0; i<numberLength; i++) {
-
             if(checkProgress[i]) {
-
                 count++;
             }
         }
 
         progressBar.setProgress(count * 100 / numberLength);
-
         progressTextView.setText(count + "/" + numberLength);
     }
 
@@ -194,22 +187,8 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
 
     public void openConfirmQuit() {
-
         Intent intent = new Intent(getApplicationContext(), ConfirmQuit.class);
-
-        intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
-
         intent.putExtra(getResources().getString(R.string.LESSON_ID), number.getLessonId());
-
-        if(!numberTitle.equals(getString(R.string.SINO)) && !numberTitle.equals(getString(R.string.NATIVE))) {
-
-            intent.putExtra("isNumberPractice", true);
-
-        } else {
-
-            intent.putExtra("isNumber", true);
-        }
-
         startActivityForResult(intent, 200);
     }
 
@@ -253,19 +232,17 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnAudio :
                 if(audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
-
                     mediaPlayerManager.playMediaPlayer(false);
                 }
                 break;
 
             case R.id.btnNext :
                 if(numberBack.getVisibility()==View.INVISIBLE) {
-                    if(mediaPlayerManager != null && audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
 
+                    if(mediaPlayerManager != null && audiosNumber.get(index) != null && audiosNumber.get(index).length > 0) {
                         mediaPlayerManager.setMediaPlayerByte(false, audiosNumber.get(index));
 
                     } else {
-
                         Toast.makeText(getApplicationContext(), getString(R.string.AUDIO_LOADING), Toast.LENGTH_LONG).show();
                     }
 

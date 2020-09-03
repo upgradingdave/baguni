@@ -174,7 +174,7 @@ public class Teachers extends AppCompatActivity implements View.OnClickListener 
                 final UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
                 userInformation.setPoints(newPoints);
 
-                DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
                 informationRef.update("points", newPoints).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

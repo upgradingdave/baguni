@@ -14,8 +14,6 @@ import net.awesomekorean.podo.lesson.lessons.LessonInit;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LessonReview00 extends LessonInit implements LessonItem, LessonReview, Serializable {
 

@@ -22,11 +22,15 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import net.awesomekorean.podo.login.SignIn;
+
+import java.util.List;
 
 public class Logo extends AppCompatActivity {
 
@@ -104,16 +108,33 @@ public class Logo extends AppCompatActivity {
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     if (documentSnapshot.exists()) {
                                         final UserInformation information = documentSnapshot.toObject(UserInformation.class);
-                                        db.collection(getString(R.string.DB_USERS)).document(userEmail).set(information).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        final UserInformation newInformation = removeProgress(information);
+
+                                        db.collection(getString(R.string.DB_USERS)).document(userEmail).set(newInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 System.out.println("유저정보를 신DB로 복사했습니다.");
+
                                                 db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
                                                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         System.out.println("구DB를 삭제했습니다.");
-                                                        goToMain(information);
+
+                                                        db.collection(getString(R.string.DB_USERS)).document(userEmail).collection(getString(R.string.DB_MESSAGES))
+                                                                .get()
+                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                        if(task.isSuccessful()) {
+                                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                                document.getReference().delete();
+                                                                            }
+                                                                            System.out.println("메시지DB를 삭제했습니다.");
+                                                                            goToMain(newInformation);
+                                                                        }
+                                                                    }
+                                                                });
                                                     }
                                                 });
                                             }
@@ -170,6 +191,26 @@ public class Logo extends AppCompatActivity {
         }, 2);
 */
     }
+
+    // lessonComplete 에서 progress 제거
+    private UserInformation removeProgress(UserInformation userInformation) {
+        List<String> lessonComplete = userInformation.getLessonComplete();
+        for (int i=0; i<lessonComplete.size(); i++) {
+            String[] split = lessonComplete.get(i).split("%");
+            lessonComplete.set(i, split[0]);
+        }
+
+        List<String> readingComplete = userInformation.getReadingComplete();
+        for (int i=0; i<readingComplete.size(); i++) {
+            String[] split = readingComplete.get(i).split("%");
+            readingComplete.set(i, split[0]);
+        }
+
+        userInformation.setLessonComplete(lessonComplete);
+        userInformation.setReadingComplete(readingComplete);
+        return userInformation;
+    }
+
 
     private void goToMain(UserInformation userInformation) {
         SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);

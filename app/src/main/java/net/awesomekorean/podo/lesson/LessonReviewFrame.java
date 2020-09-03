@@ -307,7 +307,7 @@ public class LessonReviewFrame extends AppCompatActivity implements View.OnClick
             case R.id.btnComplete :
                 adsManager.playFullAds(getApplicationContext());
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
-                userInformation.updateCompleteList(getApplicationContext(), lessonReview.getLessonId(), 100, false);
+                userInformation.updateCompleteList(getApplicationContext(), lessonReview.getLessonId(), false);
                 finish();
                 break;
 
@@ -343,7 +343,6 @@ public class LessonReviewFrame extends AppCompatActivity implements View.OnClick
         MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
         mediaPlayerManager.stopMediaPlayer();
         Intent intent = new Intent(getApplicationContext(), ConfirmQuit.class);
-        intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
         intent.putExtra(getResources().getString(R.string.LESSON_ID), lessonReview.getLessonId());
         startActivityForResult(intent, 200);
     }

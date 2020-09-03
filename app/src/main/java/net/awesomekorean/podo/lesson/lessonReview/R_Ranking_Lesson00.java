@@ -4,10 +4,6 @@ import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.LessonInit;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 public class R_Ranking_Lesson00 extends LessonInit implements LessonItem {
 
     private String lessonId = "RR_00";

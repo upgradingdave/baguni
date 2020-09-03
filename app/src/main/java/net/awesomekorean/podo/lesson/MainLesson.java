@@ -90,6 +90,7 @@ import net.awesomekorean.podo.lesson.lessons.S_Lesson15;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson16;
 import net.awesomekorean.podo.lesson.lessons.S_Lesson17;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainLesson extends Fragment{
@@ -113,8 +114,6 @@ public class MainLesson extends Fragment{
             "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 11~13", "Lesson 14", "Lesson 15", "Lesson 16",
             "Lesson 14~16", "Coming soon!"
     };
-
-    int[] groupProcess = new int[groupTitle.length];
 
     LessonItem[][] childList = {
             {new LessonHangulConsonant(), new LessonHangulVowel(), new LessonHangulBatchim(), new LessonHangulAssembly()},
@@ -151,7 +150,7 @@ public class MainLesson extends Fragment{
         userInformation = SharedPreferencesInfo.getUserInfo(context);
         setCompletedLessons();
         setUnlockedLessons();
-        adapter = new LessonAdapterGroup(context, groupTitle, groupSubTitle, groupProcess, childList);
+        adapter = new LessonAdapterGroup(context, groupTitle, groupSubTitle, childList);
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setDivider(null);
@@ -176,38 +175,24 @@ public class MainLesson extends Fragment{
     }
 
 
-    // 레슨 진도율 세팅하기
+    // 레슨 완료 세팅하기
     private void setCompletedLessons() {
         List<String> lessonComplete = userInformation.getLessonComplete();
         System.out.println("LESSON_COMPLETE:" + lessonComplete);
 
         if(lessonComplete != null) {
-            // 레슨 진도율 가져오기
-            UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, false);
-            String lessonId;
-            int sumOfComplete = 0;  // 카테고리 진도율
 
             for(int i=0; i<groupTitle.length; i++) {
 
                 for(int j=0; j<childList[i].length; j++) {
-                    lessonId = childList[i][j].getLessonId();
-                    int progress = unitProgressInfo.getProgress(lessonId);
+                    String lessonId = childList[i][j].getLessonId();
 
-                    if(progress != -1) {
-                        childList[i][j].setLessonProgress(progress);
-                        sumOfComplete += progress;
+                    if(lessonComplete.contains(lessonId)) {
+                        childList[i][j].setIsCompleted(true);
+                    } else {
+                        childList[i][j].setIsCompleted(false);
                     }
                 }
-
-                // 단어 테스트일 때
-                if(childList[i].length == 0) {
-                    groupProcess[i] = 0;
-
-                } else {
-                    groupProcess[i] = Math.round(sumOfComplete / childList[i].length);
-                }
-
-                sumOfComplete = 0;
             }
         }
     }

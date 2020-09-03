@@ -180,7 +180,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
                     SharedPreferencesInfo.setUserInfo(context, userInformation);
 
-                    DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION));
+                    DocumentReference informationRef = db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail);
                     informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

@@ -120,7 +120,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
         btnFinish.setOnClickListener(this);
 
         btnSetting(View.VISIBLE, View.GONE, View.GONE);
-
         context = getApplicationContext();
 
         // 시크바 이벤트
@@ -129,11 +128,9 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
                 if(seekBar.getMax() <= 0) {
-
                     readingProgress = 0;
 
                 } else {
-
                     readingProgress = Math.max(progress * 100 / seekBar.getMax(), readingProgress);
                 }
 
@@ -161,10 +158,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             }
         });
 
-
-
         reading = (Reading) getIntent().getSerializableExtra(getResources().getString(R.string.READING));
-
         readyForReading();
     }
 
@@ -214,11 +208,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
 
                         // 단어 오디오 재생
                         mediaPlayerManager = MediaPlayerManager.getInstance();
-
                         mediaPlayerManager.pauseMediaPlayer();
-
                         mediaPlayerManager.setMediaPlayerByte(false, audiosWord.get(popUpIndex));
-
                         btnSetting(View.VISIBLE, View.GONE, View.GONE);
 
                         // 프로그레스바 잠그기
@@ -257,6 +248,7 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 if(mediaPlayerManager != null) {
                     mediaPlayerManager.stopMediaPlayer();
                 }
+
                 btnSetting(View.VISIBLE, View.GONE, View.GONE);
                 seekBar.setProgress(0);
                 finish();
@@ -349,40 +341,28 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnFinish :
-
                 btnSetting(View.VISIBLE, View.GONE, View.GONE);
                 seekBar.setProgress(0);
-
                 openConfirmQuit();
                 break;
         }
     }
 
     private void btnSetting(int setBtnPlay, int setBtnPause, int setProgressBar) {
-
         btnPlay.setVisibility(setBtnPlay);
-
         btnPause.setVisibility(setBtnPause);
-
         loading.setVisibility(setProgressBar);
     }
 
 
     public void openConfirmQuit() {
-
         if(mediaPlayerManager != null) {
-
             mediaPlayerManager.pauseMediaPlayer();
         }
 
         Intent intent = new Intent(context, ConfirmQuit.class);
-
-        intent.putExtra(getResources().getString(R.string.PROGRESS), readingProgress);
-
         intent.putExtra(getResources().getString(R.string.IS_READING), true);
-
         intent.putExtra(getResources().getString(R.string.READING_ID), reading.getReadingId());
-
         startActivityForResult(intent, 200);
     }
 
@@ -401,7 +381,6 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
             Bundle bundle = new Bundle();
             bundle.putString("readingId", reading.getReadingId());
             firebaseAnalytics.logEvent("reading_finish", bundle);
-
             finish();
         }
     }

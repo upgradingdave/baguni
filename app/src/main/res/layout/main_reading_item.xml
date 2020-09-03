@@ -54,29 +54,17 @@
                 android:src="@drawable/lock"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
-
-            <LinearLayout
-                android:id="@+id/layoutCompleted"
+            <View
                 android:layout_weight="1"
-                android:gravity="right|center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@+id/complete"
+                android:src="@drawable/complete"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:visibility="gone"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:progressDrawable="@drawable/progressbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="6dp" />
-
-                <ImageView
-                    android:id="@+id/complete"
-                    android:src="@drawable/complete"
-                    android:visibility="visible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <TextView

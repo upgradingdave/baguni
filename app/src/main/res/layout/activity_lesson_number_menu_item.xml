@@ -34,51 +34,6 @@
             android:textColor="@color/BLACK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/numberComplete"
-                android:visibility="gone"
-                android:src="@drawable/complete_white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <ProgressBar
-                android:id="@+id/numberProgress"
-                style="?android:progressBarStyleHorizontal"
-                android:progress="70"
-                android:max="100"
-                android:indeterminate="false"
-                android:secondaryProgress="100"
-                android:progressDrawable="@drawable/progress_circle"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-            <TextView
-                android:id="@+id/numberProgressText"
-                android:text="30%"
-                android:textSize="15dp"
-                android:textColor="@color/PURPLE"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

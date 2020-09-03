@@ -35,26 +35,16 @@ import static android.view.View.VISIBLE;
 public class LessonHangulAssembly extends AppCompatActivity implements View.OnClickListener, LessonItem {
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-
     private String lessonId = "H_assembly";
-
     private String lessonTitle = "assembly";
-
     private String lessonSubTitle = "";
-
     private int lessonImage = R.drawable.hangul_menu_assembly;
-
-    private int lessonProgress = 0;
-
     private boolean isSpecial = true;
-
     private boolean isLock = true;
-
     private MediaPlayerManager mediaPlayerManager;
-
     private String url;
-
     private ProgressBar loading;
+    private boolean isCompleted;
 
     TextView textViewIntro;
     TextView assemblyTextView;
@@ -336,12 +326,9 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
 
     private void setLessonComplete() {
-
         // 레슨완료리스트에 업데이트
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-
-        userInformation.updateCompleteList(context, "H_assembly", 100, false);
-
+        userInformation.updateCompleteList(context, "H_assembly", false);
         finish();
     }
 
@@ -354,7 +341,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     }
 
     public void initialization() {
-
         assemblyTextView.setText("");
         btnConsonant.callOnClick();
         consonantSelected = false;
@@ -400,9 +386,11 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         if (conVow == consonant) {
             selectedConsonant = selectedHangul;
             consonantSelected = true;
+
         } else if (conVow == vowel) {
             selectedVowel = selectedHangul;
             vowelSelected = true;
+
         } else if (conVow == batchim) {
             selectedBatchim = selectedHangul;
             batchimSelected = true;
@@ -411,9 +399,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
 
     public void makeHangulBox(String[] consonant, String[] vowel, String[] batchim) {
-
         removeAllView();
-
         makeHangulBoxIterate(consonant, consonantBoxLayout1, consonantBoxLayout2, consonantBoxLayout3);
         makeHangulBoxIterate(vowel, vowelBoxLayout1, vowelBoxLayout2, vowelBoxLayout3);
         makeHangulBoxIterate(batchim, batchimBoxLayout1, batchimBoxLayout2, batchimBoxLayout3);
@@ -433,22 +419,17 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
 
     private void makeHangulBoxIterate(String[] hangul, LinearLayout hangulBoxLayout1, LinearLayout hangulBoxLayout2, LinearLayout hangulBoxLayout3) {
-
         int numberOfBox = 0;
 
         for(String addHangul : hangul) {
-
             Button hangulBoxBtn = new Button(this);
-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, DpToPx.getDpToPx(getResources(), 40));
-
             params.rightMargin = DpToPx.getDpToPx(getResources(),10);
             params.weight = 1;
             hangulBoxBtn.setLayoutParams(params);
             hangulBoxBtn.setBackground(ContextCompat.getDrawable(this, R.drawable.bg_white_10));
             hangulBoxBtn.setText(addHangul);
             hangulBoxBtn.setOnClickListener(hangulBoxBtnSelected);
-
             numberOfBox++;
 
             if (numberOfBox <= 7) {
@@ -507,16 +488,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public int getLessonProgress() {
-        return lessonProgress;
-    }
-
-    @Override
-    public void setLessonProgress(int progress) {
-        this.lessonProgress = progress;
-    }
-
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }
@@ -541,6 +512,15 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         return lessonSubTitle;
     }
 
+    @Override
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+    @Override
+    public void setIsCompleted(boolean b) {
+        isCompleted = b;
+    }
 }
 
 
