@@ -259,33 +259,24 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
 
     public void setHangul() {
-
         checkProgress[currentHangul] = true;
-
         int count = 0;
 
         for(int i=0; i<hangulLength; i++) {
-
             if(checkProgress[i]) {
-
                 count++;
             }
         }
 
         progressBar.setProgress(count * 100 /hangulLength);
-
         textViewHangul.setText(hangul[currentHangul]);
-
         textViewHangulExplain.setText(hangulExplain[currentHangul]);
-
         progressTextView.setText(count + "/" + hangulLength);
 
         if(mediaPlayerManager != null && audiosHangul.get(currentHangul) != null && audiosHangul.get(currentHangul).length > 0) {
-
             mediaPlayerManager.setMediaPlayerByte(false, audiosHangul.get(currentHangul));
 
         } else {
-
             Toast.makeText(getApplicationContext(), getString(R.string.AUDIO_LOADING), Toast.LENGTH_LONG).show();
         }
     }
@@ -336,17 +327,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
 
     public void openConfirmQuit() {
-
-        // 오디오 끄기
-
         Intent intent = new Intent(context, ConfirmQuit.class);
-
-        intent.putExtra("isHangul", true);
-
-        intent.putExtra(getResources().getString(R.string.PROGRESS), progressBar.getProgress());
-
         intent.putExtra(getResources().getString(R.string.LESSON_ID), thisHangul.getLessonId());
-
         startActivityForResult(intent, 200);
     }
 
@@ -358,18 +340,15 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
 
             case R.id.btnAudio :
                 if(mediaPlayerManager != null) {
-
                     mediaPlayerManager.playMediaPlayer(false);
                 }
                 break;
 
             case R.id.btnWriting :
-
                 iconWriting.startAnimation(btnAnimation);
 
                 if(writingBtnClicked == 0) {
                     imageViewHangul.setImageResource(resIDWriting);
-
                     visible(GONE, VISIBLE);
                     writingBtnClicked = 1;
                     hintBtnClicked = 0;

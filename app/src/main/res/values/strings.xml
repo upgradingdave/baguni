@@ -924,8 +924,6 @@ And when you want to express your will, such as a simple future or a new year go
     <string name="DB_MESSAGES">messages</string>
     <string name="DB_REQUESTS">requests</string>
     <string name="DB_WRITINGS">android/podo/writings</string>
-    <string name="DB_TEACHERS_COLLECTIONS">android/podo/teachers/requests/collections</string>
-    <string name="DB_TEACHERS_INFORMATION">android/podo/teachers/information/information</string>
     <string name="DB_TEACHERS">android/podo/teachers/</string>
     <string name="DB_QNA">android/podo/qna/</string>
 

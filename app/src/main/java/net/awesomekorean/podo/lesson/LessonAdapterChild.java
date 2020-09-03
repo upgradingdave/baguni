@@ -56,7 +56,6 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
         private TextView lessonSubTitle;
         private ImageView lessonComplete;
         private ImageView lessonImage;
-        private ProgressBar lessonProgress;
         private ColorMatrixColorFilter filter;
 
 
@@ -66,7 +65,6 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
             lessonSubTitle = view.findViewById(R.id.lessonSubTitle);
             lessonComplete = view.findViewById(R.id.lessonComplete);
             lessonImage = view.findViewById(R.id.lessonImage);
-            lessonProgress = view.findViewById(R.id.lessonProgress);
             ColorMatrix matrix = new ColorMatrix();
             matrix.setSaturation(0);
             filter = new ColorMatrixColorFilter(matrix);
@@ -205,28 +203,27 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
         }
 
         if(lessonItem.getIsLock()) {
-            setLessonStatus(holder, true, View.VISIBLE, View.GONE);
+            setLessonStatus(holder, true, View.VISIBLE);
 
-        } else if(lessonItem.getLessonProgress() == 100) {
-            setLessonStatus(holder, false, View.VISIBLE, View.GONE);
+        } else if(lessonItem.getIsCompleted()) {
+            setLessonStatus(holder, false, View.VISIBLE);
 
         } else if(lessonItem.getLessonSubTitle().equals("review")) {
             holder.lessonSubTitle.setVisibility(View.GONE);
-            setLessonStatus(holder, false, View.GONE, View.INVISIBLE);
+            setLessonStatus(holder, false, View.GONE);
 
         } else if(lessonItem.getLessonSubTitle().equals("coming soon")) {
-            setLessonStatus(holder, true, View.VISIBLE, View.GONE);
+            setLessonStatus(holder, true, View.VISIBLE);
             holder.lessonComplete.setVisibility(View.INVISIBLE);
 
         } else {
-            holder.lessonProgress.setProgress(lessonItem.getLessonProgress());
-            setLessonStatus(holder, false, View.GONE, View.VISIBLE);
+            setLessonStatus(holder, false, View.GONE);
         }
     }
 
 
-    // Lock, complete, progress 이미지 세팅하기
-    private void setLessonStatus(HorizontalViewHolder holder, boolean isLock, int imageView, int progressBar) {
+    // Lock, complete 이미지 세팅하기
+    private void setLessonStatus(HorizontalViewHolder holder, boolean isLock, int imageView) {
         if(isLock) {
             holder.lessonComplete.setImageResource(R.drawable.lock);
             holder.lessonImage.setColorFilter(holder.filter);
@@ -236,7 +233,6 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
         }
 
         holder.lessonComplete.setVisibility(imageView);
-        holder.lessonProgress.setVisibility(View.GONE);
     }
 
 

@@ -15,102 +15,44 @@ import net.awesomekorean.podo.lesson.lessons.LessonItem;
 public class LessonNumberMenuAdapter extends BaseAdapter {
 
     private LessonItem[] numbers;
-
     private LessonItem number;
-
-    private Context context;
-
     private ViewHolder holder;
-
     private LayoutInflater inflater;
 
 
     public LessonNumberMenuAdapter(Context context, LessonItem[] numbers) {
-
         super();
-
-        this.context = context;
-
         this.numbers = numbers;
-
         this.inflater = LayoutInflater.from(context);
     }
 
 
     public class ViewHolder {
-
         private ImageView numberImage;
-
         private TextView numberTitle;
-
-        private ProgressBar numberProgress;
-
-        private TextView numberProgressText;
-
-        private ImageView numberComplete;
     }
 
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
         View view = convertView;
 
         if(view == null) {
-
             holder = new ViewHolder();
-
             view = inflater.inflate(R.layout.activity_lesson_number_menu_item, parent, false);
-
             holder.numberImage = view.findViewById(R.id.numberImage);
-
             holder.numberTitle = view.findViewById(R.id.numberTitle);
-
-            holder.numberProgress = view.findViewById(R.id.numberProgress);
-
-            holder.numberProgressText = view.findViewById(R.id.numberProgressText);
-
-            holder.numberComplete = view.findViewById(R.id.numberComplete);
-
             view.setTag(holder);
 
         } else {
-
             holder = (ViewHolder) view.getTag();
         }
 
         number = numbers[position];
-
         holder.numberImage.setImageResource(number.getLessonImage());
-
         holder.numberTitle.setText(number.getLessonTitle());
 
-        int progress = number.getLessonProgress();
-
-        if(progress == 100) {
-
-            setNumberStatus(holder, View.GONE, View.GONE, View.VISIBLE);
-
-        } else {
-
-            setNumberStatus(holder, View.VISIBLE, View.VISIBLE, View.GONE);
-
-            holder.numberProgress.setProgress(number.getLessonProgress());
-
-            holder.numberProgressText.setText(number.getLessonProgress() + "%");
-        }
-
         return view;
-    }
-
-
-    private void setNumberStatus(ViewHolder holder, int progress, int progressText, int complete) {
-
-        holder.numberProgress.setVisibility(progress);
-
-        holder.numberProgressText.setVisibility(progressText);
-
-        holder.numberComplete.setVisibility(complete);
     }
 
 

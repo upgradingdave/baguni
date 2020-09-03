@@ -55,14 +55,6 @@
                 android:src="@drawable/complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <ProgressBar
-                android:visibility="gone"
-                android:id="@+id/lessonProgress"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:progressDrawable="@drawable/progressbar"
-                android:progress="50"
-                android:layout_width="wrap_content"
-                android:layout_height="6dp" />
             <ImageView
                 android:id="@+id/lessonImage"
                 android:layout_weight="1"

@@ -78,15 +78,10 @@ public class MainReading extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.main_reading, container, false);
-
         context = getContext();
-
         userInformation = SharedPreferencesInfo.getUserInfo(context);
-
         list = new ArrayList<>();
-
         isClicked = false;
 
         items[0].setIsLocked(false);
@@ -101,41 +96,30 @@ public class MainReading extends Fragment {
             }
         }
 
-
         adapter = new ReadingAdapter(getContext(), list);
-
         adapter.setOnItemClickListener(new ReadingAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-
                 readingUnit = list.get(pos);
-
                 FirebaseCrashlytics.getInstance().setCustomKey("readingId", readingUnit.getReadingId());
 
                 if(!readingUnit.getIsLock()) {
-
                     intent = new Intent(context, ReadingFrame.class);
 
-
                 } else {
-
                     // 포인트 사용 확인창 띄우기
                     intent = new Intent(context, UnlockActivity.class);
-
                     intent.putExtra(getResources().getString(R.string.EXTRA_ID), getResources().getString(R.string.READING));
                 }
 
                 intent.putExtra(getResources().getString(R.string.READING), (Serializable) readingUnit);
-
                 startActivity(intent);
             }
         });
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         recyclerView.setAdapter(adapter);
-
 
         btnGetReading = view.findViewById(R.id.btnGetReading);
         btnGetReading.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +137,7 @@ public class MainReading extends Fragment {
                     btnGetReading.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_white_30_stroke_purple));
                     btnGetReading.setTextColor(ContextCompat.getColorStateList(context, R.color.PURPLE));
                     isClicked = true;
+
                 } else {
                     for(Reading item : items) {
                         if(!item.getIsLock()) {
@@ -179,20 +164,13 @@ public class MainReading extends Fragment {
 
         if(readingComplete != null) {
 
-            // 읽기 진도율 가져오기
-            UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, true);
-
-            String readingId;
-
             for(int i=0; i<items.length; i++) {
+                String readingId = items[i].getReadingId();
 
-                readingId = items[i].getReadingId();
-
-                int progress = unitProgressInfo.getProgress(readingId);
-
-                if(progress != -1) {
-
-                    items[i].setReadingProgress(progress);
+                if(readingComplete.contains(readingId)) {
+                    items[i].setIsCompleted(true);
+                } else {
+                    items[i].setIsCompleted(false);
                 }
             }
         }

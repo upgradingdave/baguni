@@ -55,7 +55,6 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
         TextView readingId;
         ImageView iconLock;
         ImageView rocket;
-        ProgressBar progressBar;
         ImageView complete;
 
         private ColorMatrixColorFilter filterGrey;
@@ -70,18 +69,12 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
             readingId = itemView.findViewById(R.id.readingId);
             iconLock = itemView.findViewById(R.id.iconLock);
             rocket = itemView.findViewById(R.id.rocket);
-            progressBar = itemView.findViewById(R.id.progressBar);
             complete = itemView.findViewById(R.id.complete);
 
-
             ColorMatrix matrix = new ColorMatrix();
-
             matrix.setSaturation(0);
-
             filterGrey = new ColorMatrixColorFilter(matrix);
-
             matrix.setSaturation(1);
-
             filterNormal = new ColorMatrixColorFilter(matrix);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +106,7 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         Reading items = list.get(position);
-
         holder.title.setText(items.getTitle());
         // outOfMemoryError 방지용
         try {
@@ -126,18 +117,14 @@ public class ReadingAdapter extends RecyclerView.Adapter<ReadingAdapter.ViewHold
 
         holder.readingId.setText(items.getReadingId().substring(2));
 
-        if (items.getReadingProgress() == 100) {
-            holder.progressBar.setVisibility(View.GONE);
+        if (items.getIsCompleted()) {
             holder.complete.setVisibility(View.VISIBLE);
 
         } else {
-            holder.progressBar.setProgress(items.getReadingProgress());
-            holder.progressBar.setVisibility(View.GONE);
             holder.complete.setVisibility(View.INVISIBLE);
         }
 
         if (items.getIsLock()) {
-            holder.progressBar.setVisibility(View.GONE);
             holder.readingImage.setColorFilter(holder.filterGrey);
             holder.rocket.setColorFilter(holder.filterGrey);
             holder.iconLock.setVisibility(View.VISIBLE);

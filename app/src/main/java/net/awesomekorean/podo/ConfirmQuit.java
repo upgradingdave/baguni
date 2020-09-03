@@ -21,7 +21,6 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
     Button btnNo;
     TextView confirmText;
     Intent intent;
-    Integer progress = null;
 
     boolean isHangul = false;
     boolean isNumber = false;
@@ -52,10 +51,6 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         btnNo.setOnClickListener(this);
 
         intent = getIntent();
-        progress = intent.getExtras().getInt(getResources().getString(R.string.PROGRESS));
-        isHangul = intent.getExtras().getBoolean("isHangul");
-        isNumber = intent.getExtras().getBoolean("isNumber");
-        isNumberPractice = intent.getExtras().getBoolean("isNumberPractice");
         isReading = intent.getExtras().getBoolean(getResources().getString(R.string.IS_READING));
         isMain = intent.getExtras().getBoolean(getResources().getString(R.string.IS_MAIN));
 
@@ -87,7 +82,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
                     System.runFinalization();
                     System.exit(0);
 
-                } else if(progress != null) {
+                } else {
 
                     if (isReading) {
                         unitId = intent.getStringExtra(getResources().getString(R.string.READING_ID));
@@ -101,7 +96,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
 
                     // 완료리스트에 업데이트
                     UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                    userInformation.updateCompleteList(context, unitId, progress, isReading);
+                    userInformation.updateCompleteList(context, unitId, isReading);
                     sendResultOk();
                 }
                 break;

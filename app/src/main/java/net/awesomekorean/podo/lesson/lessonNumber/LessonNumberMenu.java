@@ -70,18 +70,13 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
         btnIntro.setOnClickListener(this);
         btnClose.setOnClickListener(this);
 
-        setCompletedLessons();
-
         adapter = new LessonNumberMenuAdapter(context, numberPractices);
-
         listView.setAdapter(adapter);
-
         listView.setDivider(null);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 numberPractice = (LessonItem) parent.getItemAtPosition(position);
 
                 switch (numberPractice.getLessonTitle()) {
@@ -108,57 +103,10 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
 
 
     private void openLessonNumber(String value) {
-
         Intent intent = new Intent(context, LessonNumber.class);
-
         intent.putExtra(getString(R.string.EXTRA_ID), value);
-
         intent.putExtra("isNumberPractice", true);
-
         startActivity(intent);
-    }
-
-
-    private void setCompletedLessons() {
-
-        UnitProgressInfo unitProgressInfo = new UnitProgressInfo(context, false);
-
-        int sumOfNumberPractice = 0;  // 레슨연습 전체 진도율
-
-        String lessonId;
-
-        for(int i=0; i<numberPractices.length; i++) {
-
-            lessonId = numberPractices[i].getLessonId();
-
-            int progress = unitProgressInfo.getProgress(lessonId);
-
-            if(progress != -1) {
-
-                numberPractices[i].setLessonProgress(progress);
-
-                sumOfNumberPractice += progress;
-            }
-        }
-
-
-        // 레슨연습 전체 진도율 업데이트
-        int totalProgress = sumOfNumberPractice / numberPractices.length;
-
-        userInformation = SharedPreferencesInfo.getUserInfo(context);
-
-        userInformation.updateCompleteList(context, "N_practice", totalProgress, false);
-    }
-
-
-    @Override
-    public void onResume() {
-
-        super.onResume();
-        if(adapter != null) {
-            setCompletedLessons();
-            adapter.notifyDataSetChanged();
-        }
     }
 
 

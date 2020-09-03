@@ -108,13 +108,17 @@ public class TopUp extends AppCompatActivity implements View.OnClickListener, Bi
         }
 
         userInformation.setPoints(newPoint);
+        userInformation.setPointsPurchased(newPoint);
 
         SharedPreferencesInfo.setUserInfo(getApplicationContext(), userInformation);
 
         crashlytics.log("포인트 구매 성공!");
 
-        db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail).collection(getString(R.string.DB_INFORMATION)).document(getString(R.string.DB_INFORMATION))
-                .set(userInformation)
+        db.collection(getString(R.string.DB_USERS)).document(MainActivity.userEmail)
+                .update(
+                        "points", userInformation.getPoints(),
+                        "pointsPurchased", userInformation.getPointsPurchased()
+                )
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

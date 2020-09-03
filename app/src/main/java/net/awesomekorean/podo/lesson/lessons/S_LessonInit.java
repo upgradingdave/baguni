@@ -2,12 +2,18 @@ package net.awesomekorean.podo.lesson.lessons;
 
 public class S_LessonInit {
 
-    private int lessonProgress = 0;
+    private boolean isCompleted = false;
     private Boolean isSpecial = true;
     private Boolean isLock = true;
 
-    public int getLessonProgress() { return lessonProgress; }
-    public void setLessonProgress(int progress) { this.lessonProgress = progress; }
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+    public void setIsCompleted(boolean b) {
+        isCompleted = b;
+    }
+
     public boolean getIsSpecial() {
         return isSpecial;
     }
@@ -17,4 +23,5 @@ public class S_LessonInit {
     public void setIsLocked(boolean b) {
         this.isLock = b;
     }
+
 }

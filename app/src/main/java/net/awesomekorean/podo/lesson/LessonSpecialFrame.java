@@ -70,13 +70,8 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
 
 
     public void openConfirmQuit() {
-
         Intent intent = new Intent(context, ConfirmQuit.class);
-
-        intent.putExtra(getResources().getString(R.string.PROGRESS), 100);
-
         intent.putExtra(getResources().getString(R.string.LESSON_ID), lessonSpecial.getLessonId());
-
         startActivityForResult(intent, 200);
     }
 
@@ -105,14 +100,10 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
                 break;
 
             case R.id.btnYes :
-
                 // 레슨완료 정보 업데이트 하기
                 String lessonId = lessonSpecial.getLessonId();
-
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-
-                userInformation.updateCompleteList(context, lessonId, 100, false);
-
+                userInformation.updateCompleteList(context, lessonId, false);
                 finish();
                 break;
         }

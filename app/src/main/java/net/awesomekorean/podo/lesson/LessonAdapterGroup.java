@@ -22,19 +22,17 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
     private Context context;
     private String[] groupTitle;
     private String[] groupSubTitle;
-    private int[] groupProcess;
     private LessonItem[][] childList;
     private LayoutInflater inflater;
     private ViewHolder holder;
 
 
-    public LessonAdapterGroup(Context context, String[] groupTitle, String[] groupSubTitle, int[] groupProcess, LessonItem[][] childList) {
+    public LessonAdapterGroup(Context context, String[] groupTitle, String[] groupSubTitle, LessonItem[][] childList) {
         super();
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.groupTitle = groupTitle;
         this.groupSubTitle = groupSubTitle;
-        this.groupProcess = groupProcess;
         this.childList = childList;
     }
 
@@ -43,9 +41,6 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
         private LinearLayout groupView;
         private TextView lessonCategoryTitle;
         private TextView lessonNumber;
-        private ProgressBar lessonProgress;
-        private TextView lessonProgressPercent;
-        private ImageView lessonComplete;
         private ImageView lessonArrow;
         private RecyclerView lessonRecyclerView;
     }
@@ -61,9 +56,6 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
             holder.groupView = view.findViewById(R.id.groupView);
             holder.lessonCategoryTitle = view.findViewById(R.id.lessonCategoryTitle);
             holder.lessonNumber = view.findViewById(R.id.lessonNumber);
-            holder.lessonProgress = view.findViewById(R.id.lessonProgress);
-            holder.lessonProgressPercent = view.findViewById(R.id.lessonProgressPercent);
-            holder.lessonComplete = view.findViewById(R.id.lessonComplete);
             holder.lessonArrow = view.findViewById(R.id.lessonArrow);
             view.setTag(holder);
 
@@ -89,29 +81,11 @@ public class LessonAdapterGroup extends BaseExpandableListAdapter {
         if (groupTitle[groupPosition].equals("Review")) {
             holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
             holder.lessonNumber.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
-            holder.lessonProgress.setVisibility(View.GONE);
-            holder.lessonProgressPercent.setVisibility(View.GONE);
-            holder.lessonComplete.setVisibility(View.GONE);
+        }
 
-        } else if (groupProcess[groupPosition] == 100) {
-            holder.lessonProgress.setVisibility(View.GONE);
-            holder.lessonProgressPercent.setVisibility(View.GONE);
-            holder.lessonComplete.setVisibility(View.VISIBLE);
-
-        } else {
-            holder.lessonProgress.setVisibility(View.GONE);
-            holder.lessonProgressPercent.setVisibility(View.GONE);
-            holder.lessonComplete.setVisibility(View.GONE);
-            holder.lessonProgress.setProgress(groupProcess[groupPosition]);
-            holder.lessonProgressPercent.setText(groupProcess[groupPosition] + "%");
-
-            if(groupPosition == groupTitle.length - 1) {
-                holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.GREY_DARK));
-                holder.lessonProgress.setVisibility(View.GONE);
-                holder.lessonProgressPercent.setVisibility(View.GONE);
-                holder.lessonComplete.setVisibility(View.GONE);
-                holder.lessonArrow.setVisibility(View.GONE);
-            }
+        if(groupPosition == groupTitle.length - 1) {
+            holder.lessonCategoryTitle.setTextColor(ContextCompat.getColor(context, R.color.GREY_DARK));
+            holder.lessonArrow.setVisibility(View.GONE);
         }
 
         return view;

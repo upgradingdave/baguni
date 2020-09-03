@@ -233,10 +233,9 @@ public class LessonDialog extends Fragment implements Button.OnClickListener {
                 break;
 
             case R.id.btnFinish :
-
                 // 완료리스트에 업데이트
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(activity);
-                userInformation.updateCompleteList(activity, activity.lesson.getLessonId(), 100, false);
+                userInformation.updateCompleteList(activity, activity.lesson.getLessonId(), false);
 
                 Intent intent = new Intent(activity, LessonFinish.class);
                 startActivity(intent);
