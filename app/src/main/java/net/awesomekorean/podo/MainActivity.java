@@ -53,6 +53,7 @@ import com.google.firebase.iid.InstanceIdResult;
 
 import net.awesomekorean.podo.collection.MainCollection;
 import net.awesomekorean.podo.lesson.LessonAdapterChild;
+import net.awesomekorean.podo.lesson.LessonProgress;
 import net.awesomekorean.podo.lesson.MainLesson;
 import net.awesomekorean.podo.login.SignIn;
 import net.awesomekorean.podo.message.Message;

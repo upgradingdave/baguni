@@ -3,9 +3,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/secondaryProgress">
         <shape
-            android:innerRadius="20dp"
+            android:innerRadius="50dp"
             android:shape="ring"
-            android:thickness="4dp"
+            android:thickness="10dp"
             android:useLevel="true">
 
             <solid android:color="@color/BACK_GRADATION_PROGRESSBAR"/>
@@ -20,9 +20,9 @@
             android:toDegrees="270">
 
             <shape
-                android:innerRadius="20dp"
+                android:innerRadius="50dp"
                 android:shape="ring"
-                android:thickness="4dp"
+                android:thickness="10dp"
                 android:useLevel="true">
 
 
