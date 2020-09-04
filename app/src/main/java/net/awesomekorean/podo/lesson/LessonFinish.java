@@ -3,6 +3,8 @@ package net.awesomekorean.podo.lesson;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -33,16 +35,34 @@ import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
 import net.awesomekorean.podo.profile.Profile;
 
-public class LessonFinish extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
+public class LessonFinish extends AppCompatActivity implements View.OnClickListener {
+
+    TextView tvWord;
+    TextView tvSentence;
+    Button btnMyWords;
+    Button btnMySentences;
     ProgressBar progressBar;
-    TextView tvMessage;
+    TextView tvProgress;
     Button btnComplete;
     PlaySoundPool playSoundPool;
     Context context;
     AdsManager adsManager;
 
     Lesson lesson = LessonFrame.lesson;
+
+    LessonProgress lessonProgress;
+    RecyclerView recyclerView;
+    ArrayList<LessonFinishItems> list;
+    LessonFinishItems items;
+    LessonFinishAdapter adapter;
+    boolean btnMyWordsClicked;
+    boolean btnMySentencesClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,26 +76,62 @@ public class LessonFinish extends AppCompatActivity {
             adsManager.loadFullAds(context);
         }
 
+        tvWord = findViewById(R.id.tvWord);
+        tvSentence = findViewById(R.id.tvSentence);
+        btnMyWords = findViewById(R.id.btnMyWords);
+        btnMySentences = findViewById(R.id.btnMySentences);
         progressBar = findViewById(R.id.progressBar);
-        tvMessage = findViewById(R.id.tvMessage);
+        tvProgress = findViewById(R.id.tvProgress);
         btnComplete = findViewById(R.id.btnComplete);
-        btnComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playAds();
-            }
-        });
+        recyclerView = findViewById(R.id.recyclerView);
+        btnMyWords.setOnClickListener(this);
+        btnMySentences.setOnClickListener(this);
+        btnComplete.setOnClickListener(this);
+
+        btnMyWordsClicked = false;
+        btnMySentencesClicked = false;
+        list = new ArrayList<>();
+        adapter = new LessonFinishAdapter(list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
         playSoundPool = new PlaySoundPool(context);
         playSoundPool.playSoundYay();
 
-        ObjectAnimator animator = ObjectAnimator.ofInt(progressBar, "progress", 0, 100);
+        List<String> lessonComplete = SharedPreferencesInfo.getUserInfo(context).getLessonComplete();
+        lessonProgress = new LessonProgress(lessonComplete);
+
+        if (lessonComplete.contains(lesson.getLessonId())) {
+            tvWord.setText("+"+0);
+            tvSentence.setText("+"+0);
+            System.out.println("이미완료한레슨입니다.");
+
+        } else {
+            int getWordNo = lesson.getWordFront().length;
+            int getSentenceNo = lesson.getReviewId().length;
+            tvWord.setText("+"+getWordNo);
+            tvSentence.setText("+"+getSentenceNo);
+        }
+
+        int getTotalWordNo = lessonProgress.getTotalWordNo();
+        int getTotalSentenceNo = lessonProgress.getTotalSentenceNo();
+        int getMyWordNo = lessonProgress.getMyWords().size();
+        int getMySentenceNo = lessonProgress.getMySentences().size();
+        int progress = ((getMyWordNo + getMySentenceNo) * 100 /(getTotalWordNo + getTotalSentenceNo));
+
+        tvProgress.setText(progress + "%");
+
+        ObjectAnimator animator = ObjectAnimator.ofInt(progressBar, "progress", 0, progress);
         animator.setDuration(1500);
         animator.setInterpolator(new DecelerateInterpolator());
         animator.start();
 
         Animation aniScale = AnimationUtils.loadAnimation(context, R.anim.scale_1000);
-        tvMessage.startAnimation(aniScale);
+        tvProgress.startAnimation(aniScale);
+
+        Animation aniMoveDown = AnimationUtils.loadAnimation(context, R.anim.move_up_small);
+        tvWord.startAnimation(aniMoveDown);
+        tvSentence.startAnimation(aniMoveDown);
 
         setLessonFinish();
     }
@@ -107,6 +163,67 @@ public class LessonFinish extends AppCompatActivity {
         }
         finish();
     }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.btnMyWords :
+                if(!btnMyWordsClicked) {
+                    Map<String, String> myWords = lessonProgress.getMyWords();
+                    setList(myWords);
+                    setBtns(true, false);
+
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                    setBtns(false, false);
+                }
+                break;
+
+
+            case R.id.btnMySentences :
+                if(!btnMySentencesClicked) {
+                    Map<String, String> mySentences = lessonProgress.getMySentences();
+                    setList(mySentences);
+                    setBtns(false, true);
+
+                } else {
+                    recyclerView.setVisibility(View.GONE);
+                    setBtns(false, false);
+                }
+                break;
+
+
+            case R.id.btnComplete :
+                playAds();
+                break;
+        }
+    }
+
+
+    private void setList(Map<String, String> my) {
+        list.clear();
+        Iterator<String> keys = my.keySet().iterator();
+
+        while (keys.hasNext()) {
+            String front = keys.next();
+            items = new LessonFinishItems();
+            items.setFront(front);
+            items.setBack(my.get(front));
+            list.add(items);
+        }
+
+        adapter.notifyDataSetChanged();
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+
+    private void setBtns(boolean myWords, boolean mySentences) {
+        btnMyWordsClicked = myWords;
+        btnMySentencesClicked = mySentences;
+    }
+
 
     @Override
     public void onBackPressed() {

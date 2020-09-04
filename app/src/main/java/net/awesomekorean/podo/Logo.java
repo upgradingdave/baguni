@@ -52,11 +52,14 @@ public class Logo extends AppCompatActivity {
 
         // Crashlytics 초기화
         crashlytics = FirebaseCrashlytics.getInstance();
-        crashlytics.setCrashlyticsCollectionEnabled(false);
+        crashlytics.setCrashlyticsCollectionEnabled(BuildConfig.CRASHLYTICS);
+        System.out.println("크레쉴리틱스 : " + BuildConfig.CRASHLYTICS);
 
         // 애널리스트 초기화
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        firebaseAnalytics.setAnalyticsCollectionEnabled(false);
+        firebaseAnalytics.setAnalyticsCollectionEnabled(BuildConfig.ANALYTICS);
+        System.out.println("애널리틱스 : " + BuildConfig.ANALYTICS);
+
 
         // 애드몹 초기화
         MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));

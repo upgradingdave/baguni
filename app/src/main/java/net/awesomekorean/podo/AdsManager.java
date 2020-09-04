@@ -47,7 +47,7 @@ public class AdsManager {
     public void loadFullAds(Context context) {
         MobileAds.initialize(context, ADMOB_APP_ID);
         interstitialAd = new InterstitialAd(context);
-        interstitialAd.setAdUnitId(ADMOB_TEST_ID_FULL_SCREEN);
+        interstitialAd.setAdUnitId(BuildConfig.ADMOB_FULL_ID);
         interstitialAd.loadAd(new AdRequest.Builder().build());
         interstitialAd.setAdListener(new AdListener() {
 
@@ -90,7 +90,7 @@ public class AdsManager {
     // 리워드 광고 로드하기
     public void loadRewardAds(Context context) {
         MobileAds.initialize(context, ADMOB_APP_ID);
-        rewardedAd = new RewardedAd(context, ADMOB_TEST_ID_REWARDED);
+        rewardedAd = new RewardedAd(context, BuildConfig.ADMOB_REWARD_ID);
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
 
             @Override
@@ -139,7 +139,7 @@ public class AdsManager {
     // 네이티브 광고 로드하기
     public void loadNativeAds(Context context) {
         MobileAds.initialize(context, ADMOB_APP_ID);
-        AdLoader adLoader = new AdLoader.Builder(context, ADMOB_TEST_ID_NATIVE)
+        AdLoader adLoader = new AdLoader.Builder(context, BuildConfig.ADMOB_NATIVE_ID)
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd ad) {
