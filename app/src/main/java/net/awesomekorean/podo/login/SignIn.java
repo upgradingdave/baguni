@@ -147,7 +147,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
     // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
     // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증합니다.
     private void handleFacebookAccessToken(final AccessToken accessToken) {
-
+        System.out.println("로그인 페이스북!");
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
@@ -156,7 +156,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
                         if (task.isSuccessful()) {
                             // 페이스북 로그인 성공
                             progressBarLayout.setVisibility(View.VISIBLE);
-
+                            System.out.println("로그인 페이스북 성공!");
                             final String userEmail = task.getResult().getUser().getEmail();
 
                             //출석부 확인 후 메인페이지로 넘어가기
@@ -164,6 +164,8 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
 
                         } else {
                             // 로그인 실패
+                            System.out.println("로그인 페이스북 실패!");
+
                             Toast.makeText(getApplicationContext(), getString(R.string.FACEBOOK_FAILED), Toast.LENGTH_LONG).show();
                             progressBarLayout.setVisibility(View.GONE);
                         }

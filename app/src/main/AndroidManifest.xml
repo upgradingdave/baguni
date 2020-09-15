@@ -49,12 +49,6 @@
             android:screenOrientation="unspecified"
             android:theme="@style/DialogFullScreen" />
         <activity
-            android:name=".lesson.LR_Sentence"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".lesson.LR_Word"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ConfirmQuit"
             android:screenOrientation="unspecified"
             android:theme="@style/DialogFullScreen" />
