@@ -67,14 +67,23 @@ public class UserInformation {
     // 완료리스트 업데이트하고 앱이랑 DB도 바로 업데이트 함
     public void updateCompleteList(Context context, String unitId, boolean isReading) {
         if(isReading) {
-            readingComplete.add(unitId);
+            if(!readingComplete.contains(unitId)) {
+                readingComplete.add(unitId);
+                SharedPreferencesInfo.setUserInfo(context, this);
+                updateDb(context);
+            } else {
+                System.out.println("이미 완료한 읽기입니다.");
+            }
 
         } else {
-            lessonComplete.add(unitId);
+            if(!lessonComplete.contains(unitId)) {
+                lessonComplete.add(unitId);
+                SharedPreferencesInfo.setUserInfo(context, this);
+                updateDb(context);
+            } else {
+                System.out.println("이미 완료한 레슨입니다.");
+            }
         }
-
-        SharedPreferencesInfo.setUserInfo(context, this);
-        updateDb(context);
     }
 
 

@@ -123,6 +123,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="INTRO">Intro</string>
     <string name="HINT">Hint</string>
     <string name="SPECIAL_LESSON">Special lesson</string>
+    <string name="INTERMEDIATE_LESSON">Intermediate lesson</string>
     <string name="COMPLETED">Completed</string>
     <string name="PRONUNCIATION">Pronunciation: </string>
     <string name="ANTONYMS">Antonyms: </string>
@@ -152,6 +153,15 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="CONJUGATE_CORRECTLY">Conjugate correctly</string>
     <string name="CHOOSE_BASE_FORM">Choose the right base form</string>
     <string name="CHOOSE_CONJUGATION">Choose the right conjugation</string>
+    <string name="NEXT_LEVEL">Next Level</string>
+    <string name="BEGINNER_LEVEL">Beginner Level</string>
+    <string name="INTERMEDIATE_LEVEL">Intermediate Level</string>
+    <string name="REVIEW">REVIEW</string>
+    <string name="REWARDS">REWARDS</string>
+    <string name="PLEASE_COMPLETE_PREVIOUS_LESSON">Please complete previous lesson</string>
+
+
+
 
 
     <!--    읽기-->

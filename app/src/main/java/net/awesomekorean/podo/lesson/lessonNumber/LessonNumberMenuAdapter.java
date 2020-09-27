@@ -49,7 +49,7 @@ public class LessonNumberMenuAdapter extends BaseAdapter {
         }
 
         number = numbers[position];
-        holder.numberImage.setImageResource(number.getLessonImage());
+        //holder.numberImage.setImageResource(number.getLessonImage());
         holder.numberTitle.setText(number.getLessonTitle());
 
         return view;

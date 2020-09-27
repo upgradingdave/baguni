@@ -147,7 +147,24 @@ public class SharedPreferencesInfo {
             lastPos = sp.getInt("reading", 0);
         }
         System.out.println("클릭 위치를 불러옵니다: "+lastPos);
-
         return lastPos;
     }
+
+
+    // 마지막으로 클릭한 레슨 레벨 저장하기
+    public static void setLastClickLevel(Context context, int level) { // 0:초급, 1:중급, 2:고급
+        SharedPreferences sp = context.getSharedPreferences("lastClickedLevel", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("level", level);
+        editor.commit();
+        System.out.println("클릭 레벨을 저장했습니다: "+level);
+    }
+
+    public static int getLastClickLevel(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("lastClickedLevel", MODE_PRIVATE);
+        int level = sp.getInt("level", 0);
+        System.out.println("클릭 레벨을 불러옵니다: "+level);
+        return level;
+    }
+
 }

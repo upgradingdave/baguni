@@ -40,7 +40,6 @@ public class NumberNative extends S_LessonInit_Unlock implements Number, LessonI
         return lessonTitle;
     }
 
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }

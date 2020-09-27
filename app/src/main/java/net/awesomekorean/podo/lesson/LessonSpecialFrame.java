@@ -72,6 +72,7 @@ public class LessonSpecialFrame extends AppCompatActivity implements Button.OnCl
     public void openConfirmQuit() {
         Intent intent = new Intent(context, ConfirmQuit.class);
         intent.putExtra(getResources().getString(R.string.LESSON_ID), lessonSpecial.getLessonId());
+        intent.putExtra(getResources().getString(R.string.FINISH), true);
         startActivityForResult(intent, 200);
     }
 

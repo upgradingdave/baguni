@@ -9,7 +9,6 @@ public class S_Lesson01 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_01";
     private String lessonTitle = "conjugation";
     private String lessonSubTitle = "what is it?";
-    private int lessonImage = R.drawable.conjugation;
 
     private int contents = R.string.SL_01_CONTENTS;
 
@@ -26,11 +25,6 @@ public class S_Lesson01 extends S_LessonInit implements LessonItem, LessonSpecia
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

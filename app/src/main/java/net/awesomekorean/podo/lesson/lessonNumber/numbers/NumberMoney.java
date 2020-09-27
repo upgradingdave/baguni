@@ -50,7 +50,6 @@ public class NumberMoney extends LessonInit implements Number, LessonItem {
         return lessonTitle;
     }
 
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }

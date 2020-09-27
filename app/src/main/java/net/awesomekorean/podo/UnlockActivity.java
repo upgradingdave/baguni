@@ -57,6 +57,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
     int userPoint; // 유저 포인트
 
     int specialLessonPrice = 15;
+    int lessonPrice = 20;
     int readingPrice = 15;
     int unlockPrice;
 
@@ -100,7 +101,8 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
 
         if(extra.equals(getResources().getString(R.string.SPECIAL_LESSON))) {
             unlockPrice = specialLessonPrice;
-
+        } else if(extra.equals(getResources().getString(R.string.LESSON))) {
+            unlockPrice = lessonPrice;
         } else {
             unlockPrice = readingPrice;
         }

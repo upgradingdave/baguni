@@ -32,8 +32,4 @@ public class NumberPractice extends S_LessonInit implements LessonItem, Serializ
         return lessonTitle;
     }
 
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
-    }
 }

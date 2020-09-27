@@ -56,7 +56,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     Lesson lesson = LessonFrame.lesson;
 
-    LessonProgress lessonProgress;
+    //LessonProgress lessonProgress;
     RecyclerView recyclerView;
     ArrayList<LessonFinishItems> list;
     LessonFinishItems items;
@@ -99,7 +99,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         playSoundPool.playSoundYay();
 
         List<String> lessonComplete = SharedPreferencesInfo.getUserInfo(context).getLessonComplete();
-        lessonProgress = new LessonProgress(lessonComplete);
+        //lessonProgress = new LessonProgress(lessonComplete);
 
         if (lessonComplete.contains(lesson.getLessonId())) {
             tvWord.setText("+"+0);
@@ -112,7 +112,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
             tvWord.setText("+"+getWordNo);
             tvSentence.setText("+"+getSentenceNo);
         }
-
+/*
         int getTotalWordNo = lessonProgress.getTotalWordNo();
         int getTotalSentenceNo = lessonProgress.getTotalSentenceNo();
         int getMyWordNo = lessonProgress.getMyWords().size();
@@ -134,6 +134,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         tvSentence.startAnimation(aniMoveDown);
 
         setLessonFinish();
+
+ */
     }
 
 
@@ -171,8 +173,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnMyWords :
                 if(!btnMyWordsClicked) {
-                    Map<String, String> myWords = lessonProgress.getMyWords();
-                    setList(myWords);
+                    //Map<String, String> myWords = lessonProgress.getMyWords();
+                    //setList(myWords);
                     setBtns(true, false);
 
                 } else {
@@ -184,8 +186,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnMySentences :
                 if(!btnMySentencesClicked) {
-                    Map<String, String> mySentences = lessonProgress.getMySentences();
-                    setList(mySentences);
+                    //Map<String, String> mySentences = lessonProgress.getMySentences();
+                    //setList(mySentences);
                     setBtns(false, true);
 
                 } else {

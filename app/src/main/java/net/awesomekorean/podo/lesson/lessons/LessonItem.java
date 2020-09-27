@@ -8,15 +8,17 @@ public interface LessonItem {
 
     String getLessonSubTitle();
 
-    int getLessonImage();
+    boolean getIsActive();
+    boolean setIsActive(boolean b);
 
-    boolean getIsSpecial();
+    boolean getIsCurrent();
+    void setIsCurrent(boolean b);
 
-    boolean getIsLock();
+    LessonItem getSLesson();
 
+    boolean getIsLocked();
     void setIsLocked(boolean b);
 
     boolean getIsCompleted();
-
     void setIsCompleted(boolean b);
 }

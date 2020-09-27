@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class I_Lesson00 extends S_LessonInit implements I_Lesson, LessonItem, Serializable {
 
-    private String lessonId = "il_00";
+    private String lessonId = "IL_00";
     private String lessonTitle = "호텔예약";
     private String lessonSubTitle = "";
     private int lessonImage = R.drawable.posession;
@@ -63,8 +63,4 @@ public class I_Lesson00 extends S_LessonInit implements I_Lesson, LessonItem, Se
         return lessonTitle;
     }
 
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
-    }
 }
