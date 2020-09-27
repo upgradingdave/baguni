@@ -41,7 +41,6 @@ public class NumberTime extends LessonInit implements Number, LessonItem {
         return lessonTitle;
     }
 
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }

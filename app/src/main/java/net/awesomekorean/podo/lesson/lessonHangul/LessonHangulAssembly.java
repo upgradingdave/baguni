@@ -39,8 +39,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     private String lessonTitle = "assembly";
     private String lessonSubTitle = "";
     private int lessonImage = R.drawable.hangul_menu_assembly;
-    private boolean isSpecial = true;
-    private boolean isLock = true;
+    private boolean isLocked = true;
     private MediaPlayerManager mediaPlayerManager;
     private String url;
     private ProgressBar loading;
@@ -107,6 +106,9 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     String audioFile;
 
+    private boolean isActive;
+    private LessonItem specialLesson;
+    private boolean isCurrent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -487,24 +489,19 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         return lessonTitle;
     }
 
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }
 
-    @Override
-    public boolean getIsSpecial() {
-        return isSpecial;
-    }
 
     @Override
-    public boolean getIsLock() {
-        return isLock;
+    public boolean getIsLocked() {
+        return isLocked;
     }
 
     @Override
     public void setIsLocked(boolean isLock) {
-        this.isLock = isLock;
+        this.isLocked = isLock;
     }
 
     @Override
@@ -520,6 +517,30 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     @Override
     public void setIsCompleted(boolean b) {
         isCompleted = b;
+    }
+    @Override
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    @Override
+    public boolean setIsActive(boolean isActive) {
+        return this.isActive = isActive;
+    }
+
+    @Override
+    public LessonItem getSLesson() {
+        return null;
+    }
+
+    @Override
+    public boolean getIsCurrent() {
+        return isCurrent;
+    }
+
+    @Override
+    public void setIsCurrent(boolean b) {
+        this.isCurrent = b;
     }
 }
 

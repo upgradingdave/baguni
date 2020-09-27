@@ -5,218 +5,183 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import net.awesomekorean.podo.UnitProgressInfo;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulAssembly;
-import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulBatchim;
-import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulConsonant;
-import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulVowel;
-import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberNative;
-import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberSino;
+import net.awesomekorean.podo.lesson.intermediateLessons.I_Lesson00;
 import net.awesomekorean.podo.lesson.lessonReview.LessonReview00;
+import net.awesomekorean.podo.lesson.lessonReview.Rewards00;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
-import net.awesomekorean.podo.lesson.lessons.Lesson03;
-import net.awesomekorean.podo.lesson.lessons.Lesson04;
-import net.awesomekorean.podo.lesson.lessons.Lesson05;
-import net.awesomekorean.podo.lesson.lessons.Lesson06;
-import net.awesomekorean.podo.lesson.lessons.Lesson07;
-import net.awesomekorean.podo.lesson.lessons.Lesson08;
-import net.awesomekorean.podo.lesson.lessons.Lesson09;
-import net.awesomekorean.podo.lesson.lessons.Lesson10;
-import net.awesomekorean.podo.lesson.lessons.Lesson11;
-import net.awesomekorean.podo.lesson.lessons.Lesson12;
-import net.awesomekorean.podo.lesson.lessons.Lesson13;
-import net.awesomekorean.podo.lesson.lessons.Lesson14;
-import net.awesomekorean.podo.lesson.lessons.Lesson15;
-import net.awesomekorean.podo.lesson.lessons.Lesson16;
-import net.awesomekorean.podo.lesson.lessons.Lesson17;
-import net.awesomekorean.podo.lesson.lessons.Lesson18;
 import net.awesomekorean.podo.lesson.lessons.Lesson00;
-import net.awesomekorean.podo.lesson.lessons.Lesson19;
-import net.awesomekorean.podo.lesson.lessons.Lesson20;
-import net.awesomekorean.podo.lesson.lessons.Lesson21;
-import net.awesomekorean.podo.lesson.lessons.Lesson22;
-import net.awesomekorean.podo.lesson.lessons.Lesson23;
-import net.awesomekorean.podo.lesson.lessons.Lesson24;
-import net.awesomekorean.podo.lesson.lessons.Lesson25;
-import net.awesomekorean.podo.lesson.lessons.Lesson26;
-import net.awesomekorean.podo.lesson.lessons.Lesson27;
-import net.awesomekorean.podo.lesson.lessons.Lesson28;
-import net.awesomekorean.podo.lesson.lessons.Lesson29;
-import net.awesomekorean.podo.lesson.lessons.Lesson30;
-import net.awesomekorean.podo.lesson.lessons.Lesson31;
-import net.awesomekorean.podo.lesson.lessons.Lesson32;
-import net.awesomekorean.podo.lesson.lessons.Lesson33;
-import net.awesomekorean.podo.lesson.lessons.Lesson34;
-import net.awesomekorean.podo.lesson.lessons.Lesson35;
+import net.awesomekorean.podo.lesson.lessons.Lesson03;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
-import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
-import net.awesomekorean.podo.lesson.lessonReview.R_Conjugation_Lesson00;
-import net.awesomekorean.podo.lesson.lessonReview.R_Ranking_Lesson00;
-import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson00;
-import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson01;
-import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson02;
-import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson03;
-import net.awesomekorean.podo.lesson.lessonReview.R_Sentence_Lesson04;
-import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson00;
-import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson01;
-import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson02;
-import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson03;
-import net.awesomekorean.podo.lesson.lessonReview.R_Word_Lesson04;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson03;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson04;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson05;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson06;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson07;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson08;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson09;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson10;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson11;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson12;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson13;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson14;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson15;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson16;
-import net.awesomekorean.podo.lesson.lessons.S_Lesson17;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class MainLesson extends Fragment{
+public class MainLesson extends Fragment implements View.OnClickListener {
 
     Context context;
     View view;
+    ImageView btnBack;
+    TextView tvLevel;
+    Button btnNextLevel;
+
     UserInformation userInformation;
-    ExpandableListView listView;
-    LessonAdapterGroup adapter;
-    int lastExpandedPosition = -1;
+    RecyclerView recyclerView;
+    LessonAdapter adapter;
+    SeekBar seekBar;
 
-    String[] groupTitle = {
-            "Hangul", "Greetings", "Conjugation", "Numbers", "Tenses", "Review", "Negative", "Reason",
-            "Range", "Listing/Contrast", "Review", "Ability", "Time", "Review", "Hope", "Requests",
-            "Supposition", "Review", "Experience", "Guess", "Permission", "Review", "Prohibition"
+    LessonItem[] beginner = {
+            new Lesson00(), new Lesson01(), new Lesson02(), new Lesson03(), new LessonReview00(), new Rewards00()
     };
 
-    String[] groupSubTitle = {
-            "Lesson 0", "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 1~4", "Lesson 5", "Lesson 6",
-            "Lesson 7", "Lesson 8", "Lesson 5~8", "Lesson 9", "Lesson 10", "Lesson 9~10",
-            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 11~13", "Lesson 14", "Lesson 15", "Lesson 16",
-            "Lesson 14~16", "Coming soon!"
+    LessonItem[] intermediate = {
+            new I_Lesson00()
     };
 
-    LessonItem[][] childList = {
-            {new LessonHangulConsonant(), new LessonHangulVowel(), new LessonHangulBatchim(), new LessonHangulAssembly()},
-            {new Lesson00(), new Lesson19()},
-            {new S_Lesson01(), new Lesson01(), new S_Lesson03(), new Lesson02(), new Lesson03()},
-            {new NumberSino(), new NumberNative(), new NumberPractice()},
-            {new S_Lesson04(), new Lesson04(), new Lesson05(), new Lesson06(), new S_Lesson06()},
-            {new LessonReview00()},
-            {new Lesson07(), new Lesson08()},
-            {new Lesson27(), new S_Lesson08(), new S_Lesson12()},
-            {new Lesson09(), new Lesson10(), new S_Lesson05()},
-            {new Lesson11(), new Lesson12(), new S_Lesson10()},
-            {new LessonReview00()},
-            {new Lesson15(), new Lesson16()},
-            {new Lesson13(), new Lesson14(), new S_Lesson11(), new Lesson22(), new Lesson28(), new Lesson29(), new S_Lesson15()},
-            {new LessonReview00()},
-            {new Lesson17(), new Lesson20(), new S_Lesson13()},
-            {new Lesson18(), new Lesson21(), new S_Lesson07()},
-            {new Lesson23(), new Lesson35(), new Lesson24(), new S_Lesson09()},
-            {new LessonReview00()},
-            {new Lesson25(), new Lesson26()},
-            {new Lesson30(), new Lesson31(), new S_Lesson14()},
-            {new Lesson32(), new Lesson33(), new Lesson34(), new S_Lesson16(), new S_Lesson17()},
-            {new LessonReview00()},
-            {}
-    };
+    LessonItem[] list;
+
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.main_lesson, container, false);
+        btnBack = view.findViewById(R.id.btnBack);
+        tvLevel = view.findViewById(R.id.tvLevel);
+        btnNextLevel = view.findViewById(R.id.btnNextLevel);
+        btnBack.setOnClickListener(this);
+        btnNextLevel.setOnClickListener(this);
+
         context = getContext();
         userInformation = SharedPreferencesInfo.getUserInfo(context);
         setCompletedLessons();
-        setUnlockedLessons();
-        adapter = new LessonAdapterGroup(context, groupTitle, groupSubTitle, childList);
-        listView = view.findViewById(R.id.listView);
-        listView.setAdapter(adapter);
-        listView.setDivider(null);
-        listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
+        adapter = new LessonAdapter(context, list);
+        seekBar = view.findViewById(R.id.seekBar);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
-            public void onGroupExpand(int groupPosition) {
-
-                if(lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
-                    listView.collapseGroup(lastExpandedPosition);
-                }
-
-                SharedPreferencesInfo.setLastClickItem(context, true, groupPosition);
-                lastExpandedPosition = groupPosition;
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
             }
         });
 
-        int lastClickItem = SharedPreferencesInfo.getLastClickItem(context, true);
-        listView.setSelection(lastClickItem);
-        listView.expandGroup(lastClickItem);
+        seekBar.setMax(list.length);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                recyclerView.smoothScrollToPosition(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+//        int lastClickItem = SharedPreferencesInfo.getLastClickItem(context, true);
+//        recyclerView.setSelection(lastClickItem);
+//        recyclerView.expandGroup(lastClickItem);
         return view;
     }
 
 
-    // 레슨 완료 세팅하기
+    // 레슨 활성/완료 세팅하기
     private void setCompletedLessons() {
-        List<String> lessonComplete = userInformation.getLessonComplete();
-        System.out.println("LESSON_COMPLETE:" + lessonComplete);
+        int lastClickLevel = SharedPreferencesInfo.getLastClickLevel(context);
+        if(lastClickLevel == 0) {
+            list = beginner.clone();
+        } else if(lastClickLevel == 1) {
+            list = intermediate.clone();
+        }
+//        List<String> lessonComplete = userInformation.getLessonComplete();
+//        System.out.println("LESSON_COMPLETE:" + lessonComplete);
+        List<String> lessonComplete = new ArrayList<>(); //todo: 테스트용임. 삭제할 것
+        lessonComplete.clear();
+        lessonComplete.add("L_00");
+        lessonComplete.add("L_01");
+        lessonComplete.add("SL_01");
 
-        if(lessonComplete != null) {
+        if(lessonComplete.size() > 0) {
 
-            for(int i=0; i<groupTitle.length; i++) {
+            for(int i=0; i<list.length; i++) {
 
-                for(int j=0; j<childList[i].length; j++) {
-                    String lessonId = childList[i][j].getLessonId();
+                if(lessonComplete.contains(list[i].getLessonId())) {
+                    list[i].setIsCompleted(true);
+                    list[i].setIsActive(true);
+                    list[i+1].setIsActive(true);
+                    list[i].setIsCurrent(false);
+                    list[i+1].setIsCurrent(true);
 
-                    if(lessonComplete.contains(lessonId)) {
-                        childList[i][j].setIsCompleted(true);
-                    } else {
-                        childList[i][j].setIsCompleted(false);
+                    // 스페셜레슨 세팅
+                    if(list[i].getSLesson() != null) {
+                        list[i].getSLesson().setIsActive(true);
+
+                        if(lessonComplete.contains(list[i].getSLesson().getLessonId())) {
+                            list[i].getSLesson().setIsCompleted(true);
+                        }
                     }
                 }
             }
+
+        // 완료한 레슨이 하나도 없는 상태
+        } else {
+            list[0].setIsActive(true);
+            list[0].setIsCurrent(true);
         }
+        setUnlockedLessons();
     }
 
 
     // 구매된 스페셜 레슨 세팅하기
     private void setUnlockedLessons() {
-        List<String> lessonUnlock = userInformation.getSpecialLessonUnlock();
-        System.out.println("LESSON_UNLOCK:" + lessonUnlock);
+//        List<String> lessonUnlock = userInformation.getSpecialLessonUnlock();
+//        System.out.println("LESSON_UNLOCK:" + lessonUnlock);
+        List<String> lessonUnlock = new ArrayList<>(); //todo: 테스트용임. 삭제할 것
+        lessonUnlock.clear();
+        lessonUnlock.add("SL_01");
 
         if(lessonUnlock != null) {
+            for(int i=0; i<list.length; i++) {
 
-            for(int i=0; i<groupTitle.length; i++) {
-
-                for(int j=0; j<childList[i].length; j++) {
-
-                    if(lessonUnlock.contains(childList[i][j].getLessonId())) {
-                        childList[i][j].setIsLocked(false);
-                    }
+                if (list[i].getSLesson() != null && lessonUnlock.contains(list[i].getSLesson().getLessonId())) {
+                    list[i].getSLesson().setIsLocked(false);
                 }
             }
         }
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnBack :
+                break;
+
+            case R.id.btnNextLevel :
+                break;
+        }
+    }
 
     @Override
     public void onResume() {
@@ -224,8 +189,8 @@ public class MainLesson extends Fragment{
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         if(adapter != null) {
+            System.out.println("메인레슨 보임!");
             setCompletedLessons();
-            setUnlockedLessons();
             adapter.notifyDataSetChanged();
         }
     }

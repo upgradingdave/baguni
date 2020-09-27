@@ -25,6 +25,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
     boolean isHangul = false;
     boolean isNumber = false;
     boolean isNumberPractice = false;
+    boolean isFinish = false;
     boolean isReading = false;
     boolean isMain = false;
 
@@ -51,6 +52,7 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
         btnNo.setOnClickListener(this);
 
         intent = getIntent();
+        isFinish = intent.getExtras().getBoolean(getResources().getString(R.string.FINISH));
         isReading = intent.getExtras().getBoolean(getResources().getString(R.string.IS_READING));
         isMain = intent.getExtras().getBoolean(getResources().getString(R.string.IS_MAIN));
 
@@ -83,21 +85,27 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
                     System.exit(0);
 
                 } else {
+                    if(isFinish) {
 
-                    if (isReading) {
-                        unitId = intent.getStringExtra(getResources().getString(R.string.READING_ID));
+                        if (isReading) {
+                            unitId = intent.getStringExtra(getResources().getString(R.string.READING_ID));
+
+                        } else {
+                            unitId = intent.getStringExtra(getResources().getString(R.string.LESSON_ID));
+                            if (adsManager.interstitialAd.isLoaded()) {
+                                adsManager.playFullAds(context);
+                            }
+                        }
+
+                        // 완료리스트에 업데이트
+                        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+                        userInformation.updateCompleteList(context, unitId, isReading);
+                        sendResultOk();
 
                     } else {
-                        unitId = intent.getStringExtra(getResources().getString(R.string.LESSON_ID));
-                        if(adsManager.interstitialAd.isLoaded()) {
-                            adsManager.playFullAds(context);
-                        }
+                        System.out.println("레슨/읽기를 완료하지 않고 메인으로 나갑니다.");
+                        sendResultOk();
                     }
-
-                    // 완료리스트에 업데이트
-                    UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                    userInformation.updateCompleteList(context, unitId, isReading);
-                    sendResultOk();
                 }
                 break;
 

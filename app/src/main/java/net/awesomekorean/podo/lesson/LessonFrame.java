@@ -196,7 +196,7 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         MediaPlayerManager mediaPlayerManager = MediaPlayerManager.getInstance();
         mediaPlayerManager.stopMediaPlayer();
         Intent intent = new Intent(context, ConfirmQuit.class);
-        intent.putExtra(getResources().getString(R.string.LESSON_ID), lesson.getLessonId());
+        intent.putExtra(getResources().getString(R.string.FINISH), false);
         startActivityForResult(intent, 200);
     }
 

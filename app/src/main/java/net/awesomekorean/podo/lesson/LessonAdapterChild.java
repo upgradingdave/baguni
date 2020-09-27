@@ -77,8 +77,8 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
 
                     if(position != RecyclerView.NO_POSITION) {
 
-                        if(!lessonItem.getIsLock()) {
-
+                        if(!lessonItem.getIsLocked()) {
+/*
                             if(lessonItem.getIsSpecial()) {
                                 String lessonId = lessonItem.getLessonId();
                                 switch (lessonId) {
@@ -130,6 +130,8 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
                                 intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) lessonItem);
                                 context.startActivity(intent);
                             }
+
+ */
 
                         // 포인트 사용 확인창 띄우기
                         } else {
@@ -196,13 +198,13 @@ public class LessonAdapterChild extends RecyclerView.Adapter<LessonAdapterChild.
         holder.lessonSubTitle.setText(lessonItem.getLessonSubTitle());
 
         try {
-            holder.lessonImage.setImageResource(lessonItem.getLessonImage());
+            //holder.lessonImage.setImageResource(lessonItem.getLessonImage());
 
         }catch (OutOfMemoryError e) {
             System.out.println(e);
         }
 
-        if(lessonItem.getIsLock()) {
+        if(lessonItem.getIsLocked()) {
             setLessonStatus(holder, true, View.VISIBLE);
 
         } else if(lessonItem.getIsCompleted()) {

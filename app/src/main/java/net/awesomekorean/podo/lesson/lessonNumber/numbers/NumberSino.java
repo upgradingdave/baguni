@@ -40,7 +40,6 @@ public class NumberSino extends S_LessonInit_Unlock implements Number, LessonIte
         return lessonTitle;
     }
 
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }

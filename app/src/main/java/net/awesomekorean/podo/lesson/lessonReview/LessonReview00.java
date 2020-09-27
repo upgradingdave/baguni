@@ -6,10 +6,6 @@ import net.awesomekorean.podo.lesson.lessons.Lesson00;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
 import net.awesomekorean.podo.lesson.lessons.Lesson03;
-import net.awesomekorean.podo.lesson.lessons.Lesson04;
-import net.awesomekorean.podo.lesson.lessons.Lesson05;
-import net.awesomekorean.podo.lesson.lessons.Lesson06;
-import net.awesomekorean.podo.lesson.lessons.Lesson19;
 import net.awesomekorean.podo.lesson.lessons.LessonInit;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
@@ -18,13 +14,11 @@ import java.io.Serializable;
 public class LessonReview00 extends LessonInit implements LessonItem, LessonReview, Serializable {
 
     private String lessonId = "LR_00";
-    private String lessonTitle = "review";
+    private String lessonTitle = "";
     private String lessonSubTitle = "";
-    private int lessonImage = R.drawable.l_16_word_5;
 
     private Lesson[] lessons = {
-            new Lesson00(), new Lesson19(), new Lesson01(), new Lesson02(), new Lesson03(),
-            new Lesson04(), new Lesson05(), new Lesson06()
+            new Lesson00(), new Lesson01(), new Lesson02(), new Lesson03(),
     };
 
     private String[] baseForm = {"가다", "먹다", "오다", "사다", "팔다"};
@@ -77,8 +71,4 @@ public class LessonReview00 extends LessonInit implements LessonItem, LessonRevi
         return lessonSubTitle;
     }
 
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
-    }
 }

@@ -47,7 +47,6 @@ public class LessonHangulConsonant extends S_LessonInit_Unlock implements Hangul
         return lessonTitle;
     }
 
-    @Override
     public int getLessonImage() {
         return lessonImage;
     }
