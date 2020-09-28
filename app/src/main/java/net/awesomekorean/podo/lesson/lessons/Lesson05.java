@@ -9,7 +9,6 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_05";
     private String lessonTitle = "future";
     private String lessonSubTitle = "~(으)ㄹ 거예요";
-    private int lessonImage = R.drawable.futuretense;
 
     private String[] wordFront = {"내일", "식당", "주말", "재미있다", "영화"};
 
@@ -141,10 +140,5 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }

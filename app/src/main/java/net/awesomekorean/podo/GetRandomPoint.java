@@ -23,7 +23,9 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.lesson.LessonFrame;
 import net.awesomekorean.podo.lesson.RandomRewards;
+import net.awesomekorean.podo.lesson.lessonReviewRewards.LessonReview;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 public class GetRandomPoint extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +45,8 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
     PlaySoundPool playSoundPool;
     Context context;
     Animation animation;
+
+    LessonItem lessonItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,8 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
         box3.setOnClickListener(this);
         btnGetPoint.setOnClickListener(this);
 
+        lessonItem = (LessonItem) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+
         playSoundPool = new PlaySoundPool(context);
         playSoundPool.playSoundYay();
 
@@ -83,7 +89,8 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
 
                 // 포인트 합산하기
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                userInformation.addRewardPoints(context, reward);
+                userInformation.addRewardPointsWithoutDB(reward);
+                userInformation.updateCompleteList(context, lessonItem.getLessonId(), false);
 
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);

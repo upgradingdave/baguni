@@ -22,9 +22,6 @@ public class ConfirmQuit extends AppCompatActivity implements View.OnClickListen
     TextView confirmText;
     Intent intent;
 
-    boolean isHangul = false;
-    boolean isNumber = false;
-    boolean isNumberPractice = false;
     boolean isFinish = false;
     boolean isReading = false;
     boolean isMain = false;

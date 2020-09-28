@@ -7,10 +7,8 @@ import java.io.Serializable;
 public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_02";
-    private String lessonTitle = "shopping";
+    private String lessonTitle = "how much";
     private String lessonSubTitle = "얼마예요?";
-    private LessonItem specialLesson = new S_Lesson01();
-
 
     private String[] wordFront = {"이거", "저거", "얼마", "세일", "그래서"};
 
@@ -136,10 +134,5 @@ public class Lesson02 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public LessonItem getSLesson() {
-        return specialLesson;
     }
 }

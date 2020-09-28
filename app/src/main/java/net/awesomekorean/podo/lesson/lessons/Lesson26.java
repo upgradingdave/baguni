@@ -9,7 +9,6 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_26";
     private String lessonTitle = "have done";
     private String lessonSubTitle = "~아/어 본 적 있다";
-    private int lessonImage = R.drawable.l_26_word_3;
 
     private String[] wordFront = {"작년", "올해", "내년", "봄", "여름", "가을", "겨울"};
 
@@ -129,10 +128,5 @@ public class Lesson26 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }

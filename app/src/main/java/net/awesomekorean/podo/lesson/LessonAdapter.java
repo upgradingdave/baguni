@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.GetRandomPoint;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnlockActivity;
 import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangul;
@@ -39,18 +40,17 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         this.list = list;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ConstraintLayout layout;
         ConstraintLayout layoutItem;
-        ConstraintLayout layoutItemSpecial;
+        ConstraintLayout layoutItemLeft;
+        ConstraintLayout layoutItemRight;
         ImageView currentItem;
         LinearLayout layoutGoal;
         TextView tvItemNo;
         TextView tvItemTitle;
         TextView tvItemSubTitle;
-        TextView tvItemSpecialTitle;
         TextView tvWeekCount;
-        ImageView lineSpecial;
         ImageView lineLeftTop;
         ImageView lineLeftBottom;
         ImageView lineRightTop;
@@ -61,27 +61,33 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
             layout = itemView.findViewById(R.id.layout);
             layoutItem = itemView.findViewById(R.id.layoutItem);
-            layoutItemSpecial = itemView.findViewById(R.id.layoutItemSpecial);
+            layoutItemLeft = itemView.findViewById(R.id.layoutItemLeft);
+            layoutItemRight = itemView.findViewById(R.id.layoutItemRight);
             currentItem = itemView.findViewById(R.id.currentItem);
             layoutGoal = itemView.findViewById(R.id.layoutGoal);
             tvItemNo = itemView.findViewById(R.id.tvItemNo);
             tvItemTitle = itemView.findViewById(R.id.tvItemTitle);
             tvItemSubTitle = itemView.findViewById(R.id.tvItemSubTitle);
-            tvItemSpecialTitle = itemView.findViewById(R.id.tvItemSpecialTitle);
             tvWeekCount = itemView.findViewById(R.id.tvWeekCount);
-            lineSpecial = itemView.findViewById(R.id.lineSpecial);
             lineLeftTop = itemView.findViewById(R.id.lineLeftTop);
             lineLeftBottom = itemView.findViewById(R.id.lineLeftBottom);
             lineRightTop = itemView.findViewById(R.id.lineRightTop);
             lineRightBottom = itemView.findViewById(R.id.lineRightBottom);
 
+            layoutItem.setOnClickListener(this);
+            layoutItemLeft.setOnClickListener(this);
+            layoutItemRight.setOnClickListener(this);
+        }
 
-            // 레슨/리뷰/리워드 클릭 이벤트
-            layoutItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    LessonItem item = list[position];
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            LessonItem item = list[position];
+
+            switch (v.getId()) {
+
+                // 레슨/리뷰/리워드 클릭 이벤트
+                case R.id.layoutItem :
 
                     if(item.getIsActive()) {
                         if (!item.getIsLocked()) {
@@ -100,10 +106,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                                     startLearningHangul(context.getString(R.string.BATCHIM));
                                     break;
 
-                                case "H_assembly":
-                                    startLearningHangul(context.getString(R.string.ASSEMBLY));
-                                    break;
-
                                 case "N_sino":
                                     startLearningNumber(context.getString(R.string.SINO));
                                     break;
@@ -112,16 +114,17 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                                     startLearningNumber(context.getString(R.string.NATIVE));
                                     break;
 
-                                case "N_practice":
-                                    startLearningNumber(context.getString(R.string.PRACTICE));
-                                    break;
-
                                 default:
                                     String type = item.getLessonId().split("_")[0];
                                     if (type.equals("LR")) {
                                         intent = new Intent(context, LessonReviewFrame.class);
                                     } else if (type.equals("RW")) {
-                                        intent = new Intent(context, GetRandomPoint.class);
+                                        if(item.getIsCompleted()) {
+                                            Toast.makeText(context, context.getString(R.string.ALREADY_REWARDED), Toast.LENGTH_LONG).show();
+                                            break;
+                                        } else {
+                                            intent = new Intent(context, GetRandomPoint.class);
+                                        }
                                     } else if (type.equals("IL")) {
                                         //todo: 중급레슨 프레임
                                     } else if (type.equals("AL")) {
@@ -134,54 +137,55 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                                     break;
                             }
 
-                        // 포인트 사용 확인창 띄우기
+                            // 포인트 사용 확인창 띄우기
                         } else {
                             intent = new Intent(context, UnlockActivity.class);
                             intent.putExtra(context.getResources().getString(R.string.EXTRA_ID), context.getResources().getString(R.string.LESSON));
                             intent.putExtra(context.getResources().getString(R.string.LESSON_ID), item.getLessonId());
                             context.startActivity(intent);
                         }
+                        SharedPreferencesInfo.setLastClickItem(context, true, position);
 
-                    // 활성화되지 않은 레슨을 클릭했을 때
+                        // 활성화되지 않은 레슨을 클릭했을 때
                     } else {
                         Toast.makeText(context, context.getString(R.string.PLEASE_COMPLETE_PREVIOUS_LESSON), Toast.LENGTH_LONG).show();
                     }
-                }
-            });
+                    break;
 
-
-            // 스페셜레슨 클릭 이벤트
-            layoutItemSpecial.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    LessonItem item = list[position];
-
+                // 스페셜레슨 클릭 이벤트
+                default:
                     if(item.getSLesson().getIsActive()) {
                         if (!item.getSLesson().getIsLocked()) {
-                            intent = new Intent(context, LessonSpecialFrame.class);
-                            intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) item.getSLesson());
-                            context.startActivity(intent);
+
+                            if(item.getSLesson().getLessonId() == "H_assembly") {
+                                startLearningHangul(context.getString(R.string.ASSEMBLY));
+
+                            }else if(item.getSLesson().getLessonId() == "N_practice") {
+                                startLearningNumber(context.getString(R.string.PRACTICE));
+
+                            } else {
+                                intent = new Intent(context, LessonSpecialFrame.class);
+                                intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) item.getSLesson());
+                                context.startActivity(intent);
+                            }
 
                         // 포인트 사용 확인창 띄우기
                         } else {
                             intent = new Intent(context, UnlockActivity.class);
                             intent.putExtra(context.getResources().getString(R.string.EXTRA_ID), context.getResources().getString(R.string.SPECIAL_LESSON));
                             intent.putExtra(context.getResources().getString(R.string.LESSON_ID), item.getSLesson().getLessonId());
-
-                            if(item.getLessonId() != "H_assembly") {
+                            if(!item.getSLesson().getLessonId().equals("H_assembly") && !item.getSLesson().getLessonId().equals("N_practice")) {
                                 intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) item.getSLesson());
                             }
-
                             context.startActivity(intent);
                         }
 
-                    // 활성화되지 않은 스페셜레슨을 클릭했을 때
+                        // 활성화되지 않은 스페셜레슨을 클릭했을 때
                     } else {
                         Toast.makeText(context, context.getString(R.string.PLEASE_COMPLETE_PREVIOUS_LESSON), Toast.LENGTH_LONG).show();
                     }
-                }
-            });
+                    break;
+            }
         }
     }
 
@@ -229,50 +233,25 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         LessonItem item = list[position];
         holder.tvItemNo.setText(String.valueOf(position + 1));
         if(!item.getIsLocked()) {
-            holder.tvItemTitle.setText(item.getLessonTitle());
+            if(!item.getLessonTitle().contains(" ")) {
+                holder.tvItemTitle.setMaxLines(1);
+            } else {
+                holder.tvItemTitle.setMaxLines(2);
+            }
+        holder.tvItemTitle.setText(item.getLessonTitle());
         } else {
             holder.tvItemTitle.setText("");
         }
         holder.tvItemSubTitle.setText(item.getLessonSubTitle());
+        holder.layoutItemLeft.setVisibility(View.GONE);
+        holder.layoutItemRight.setVisibility(View.GONE);
 
         if(item.getSLesson() != null) {
-            ConstraintSet set = new ConstraintSet();
-            set.clone(holder.layout);
-            int gap20 = DpToPx.getDpToPx(context.getResources(), 20);
-
-            // 홀수번째 스페셜레슨 오른쪽에
-            if(position%2 == 0) {
-                set.connect(R.id.layoutItemSpecial, ConstraintSet.START, R.id.layoutItem, ConstraintSet.END);
-                set.connect(R.id.lineSpecial, ConstraintSet.START, R.id.layoutItem, ConstraintSet.END);
-                set.connect(R.id.lineSpecial, ConstraintSet.END, R.id.layoutItemSpecial, ConstraintSet.START);
-                set.setMargin(R.id.layoutItemSpecial, ConstraintSet.START, gap20);
-
-            // 홀수번째 스페셜레슨 왼쪽에
-            } else {
-                set.connect(R.id.layoutItemSpecial, ConstraintSet.END, R.id.layoutItem, ConstraintSet.START);
-                set.connect(R.id.lineSpecial, ConstraintSet.START, R.id.layoutItemSpecial, ConstraintSet.END);
-                set.connect(R.id.lineSpecial, ConstraintSet.END, R.id.layoutItem, ConstraintSet.START);
-                set.setMargin(R.id.layoutItemSpecial, ConstraintSet.END, gap20);
-            }
-            set.applyTo(holder.layout);
-
-            holder.lineSpecial.setVisibility(View.VISIBLE);
-            holder.layoutItemSpecial.setVisibility(View.VISIBLE);
-            if(!item.getSLesson().getIsLocked()) {
-                holder.tvItemSpecialTitle.setText(item.getSLesson().getLessonTitle());
-            } else {
-                holder.tvItemSpecialTitle.setText("");
-            }
-            setItemBackground(holder, item.getSLesson());
-
-        } else {
-            holder.lineSpecial.setVisibility(View.GONE);
-            holder.layoutItemSpecial.setVisibility(View.GONE);
-            holder.tvItemSpecialTitle.setVisibility(View.GONE);
+            setItemBackground(holder, item.getSLesson(), position);
         }
 
         setLines(holder, position);
-        setItemBackground(holder, item);
+        setItemBackground(holder, item, position);
     }
 
 
@@ -305,7 +284,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
 
     // 아이템 백그라운드 세팅
-    private void setItemBackground(ViewHolder holder, LessonItem item) {
+    private void setItemBackground(ViewHolder holder, LessonItem item, int position) {
         String type = item.getLessonId().split("_")[0];
         Drawable drawable = null;
 
@@ -324,19 +303,50 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 holder.tvItemTitle.setText(R.string.REVIEW);
                 holder.tvItemTitle.setMaxLines(1);
             }
-            if(item.getIsActive()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.circle_active_beginner);
 
-            } else if(item.getIsLocked()) {
+            if(item.getIsLocked()) {
                 drawable = ContextCompat.getDrawable(context, R.drawable.circle_locked_beginner);
+
+            } else if(item.getIsActive()) {
+                drawable = ContextCompat.getDrawable(context, R.drawable.circle_active_beginner);
 
             } else {
                 drawable = ContextCompat.getDrawable(context, R.drawable.circle_inactive_beginner);
             }
         }
 
-        if(type.equals("SL")) {
-            holder.layoutItemSpecial.setBackground(drawable);
+
+        if(type.equals("SL") || item.getLessonId().equals("H_assembly") || item.getLessonId().equals("N_practice")) {
+            TextView title;
+            TextView subTitle;
+
+            // 짝수번째 스페셜레슨 오른쪽에
+            if(position % 2 == 0) {
+                holder.layoutItemRight.getChildAt(1).setBackground(drawable);
+                title = (TextView)((ConstraintLayout)holder.layoutItemRight.getChildAt(1)).getChildAt(0);
+                subTitle = (TextView) holder.layoutItemRight.getChildAt(2);
+                subTitle.setText(item.getLessonSubTitle());
+                if (item.getIsLocked()) {
+                    title.setText("");
+                } else {
+                    title.setText(item.getLessonTitle());
+                }
+                holder.layoutItemRight.setVisibility(View.VISIBLE);
+
+            // 홀수번째 스페셜레슨 왼쪽에
+            } else {
+                holder.layoutItemLeft.getChildAt(1).setBackground(drawable);
+                title = (TextView)((ConstraintLayout)holder.layoutItemLeft.getChildAt(1)).getChildAt(0);
+                subTitle = (TextView) holder.layoutItemLeft.getChildAt(2);
+                subTitle.setText(item.getLessonSubTitle());
+                if (item.getIsLocked()) {
+                    title.setText("");
+                } else {
+                    title.setText(item.getLessonTitle());
+                }
+                holder.layoutItemLeft.setVisibility(View.VISIBLE);
+            }
+
         } else {
             holder.layoutItem.setBackground(drawable);
         }

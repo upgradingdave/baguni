@@ -11,7 +11,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_16";
     private String lessonTitle = "possibility";
     private String lessonSubTitle = "~(으)ㄹ 수 있어요";
-    private int lessonImage = R.drawable.posibility;
+    private LessonItem specialLesson = new S_Lesson10();
 
     private String[] wordFront = {"예전에", "언어교환", "배우다", "좋다", "비슷하다", "단어"};
 
@@ -163,7 +163,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public int getLessonImage() {
-        return lessonImage;
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }

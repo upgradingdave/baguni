@@ -8,7 +8,7 @@ public class S_Lesson01 extends S_LessonInit implements LessonItem, LessonSpecia
 
     private String lessonId = "SL_01";
     private String lessonTitle = "conjugation";
-    private String lessonSubTitle = "what is it?";
+    private String lessonSubTitle = "conjugation?";
 
     private int contents = R.string.SL_01_CONTENTS;
 

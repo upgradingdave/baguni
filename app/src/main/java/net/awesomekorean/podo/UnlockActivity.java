@@ -186,7 +186,6 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     informationRef.set(userInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            finish();
                             System.out.println("레슨/읽기를 포인트로 구매했습니다.");
                             Toast.makeText(context, getString(R.string.UNLOCK_SUCCEEDED), Toast.LENGTH_LONG).show();
 
@@ -196,6 +195,7 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                             bundle.putString("type", extra);
                             bundle.putInt("points", specialLessonPrice);
                             firebaseAnalytics.logEvent("point_use", bundle);
+                            finish();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {

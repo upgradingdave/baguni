@@ -16,7 +16,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,7 +32,7 @@ import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
-import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
+import net.awesomekorean.podo.lesson.lessonReviewRewards.LessonReview;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
 
 import java.util.ArrayList;

@@ -9,9 +9,9 @@ import java.io.Serializable;
 public class Lesson03 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_03";
-    private String lessonTitle = "possession/existence";
+    private String lessonTitle = "possession, existence";
     private String lessonSubTitle = "~있어요?";
-    private LessonItem specialLesson = new S_Lesson03();
+    private LessonItem specialLesson = new S_Lesson04();
 
     private String[] wordFront = {"있다", "친구", "얘기하다", "어디", "한국어"};
 

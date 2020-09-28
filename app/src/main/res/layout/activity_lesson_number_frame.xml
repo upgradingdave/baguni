@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/btnClose"
+            android:id="@+id/btnBack"
             android:src="@drawable/close_big"
             android:padding="20dp"
             app:layout_constraintStart_toStartOf="@id/title"
@@ -115,6 +115,16 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/btnIntro"
+        android:src="@drawable/question"
+        app:layout_constraintTop_toTopOf="@id/layoutStudy"
+        app:layout_constraintStart_toStartOf="@id/layoutStudy"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btnNext"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -150,5 +160,57 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutIntro"
+        android:visibility="gone"
+        android:background="@color/BLACK_TRANSPARENT"
+        android:elevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            app:layout_constraintBottom_toTopOf="@+id/layout"
+            app:layout_constraintStart_toStartOf="@+id/layout"
+            android:src="@drawable/close_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/layout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="25dp"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_32_top"
+            android:layout_marginTop="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NUMBERS_INTRO_TITLE"
+                android:textSize="25dp"
+                android:textColor="@color/PURPLE"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/textViewIntro"
+                android:text="@string/NUMBERS_INTRO"
+                android:textColor="@color/GREY_TEXT"
+                android:textSize="20dp"
+                android:lineSpacingExtra="7dp"
+                android:scrollbars="vertical"
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

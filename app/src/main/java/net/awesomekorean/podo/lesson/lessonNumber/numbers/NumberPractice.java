@@ -14,8 +14,6 @@ public class NumberPractice extends S_LessonInit implements LessonItem, Serializ
 
     private String lessonSubTitle = "time, date, age...";
 
-    private int lessonImage = R.drawable.numberpractice;
-
 
     @Override
     public String getLessonSubTitle() {

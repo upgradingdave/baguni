@@ -9,9 +9,9 @@ import javax.annotation.meta.When;
 public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_01";
-    private String lessonTitle = "self-introduction";
-    private String lessonSubTitle = "저는 데니예요";
-    private LessonItem specialLesson = new S_Lesson01();
+    private String lessonTitle = "introduce";
+    private String lessonSubTitle = "저는~";
+    private LessonItem specialLesson = new S_Lesson03();
 
     private String[] wordFront = {"이름", "뭐", "어느", "나라", "사람", "한국"};
 

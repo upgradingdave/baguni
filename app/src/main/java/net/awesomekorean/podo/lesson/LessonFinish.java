@@ -3,6 +3,7 @@ package net.awesomekorean.podo.lesson;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +57,7 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
     Lesson lesson = LessonFrame.lesson;
 
-    //LessonProgress lessonProgress;
+    LessonProgress lessonProgress;
     RecyclerView recyclerView;
     ArrayList<LessonFinishItems> list;
     LessonFinishItems items;
@@ -98,8 +99,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         playSoundPool = new PlaySoundPool(context);
         playSoundPool.playSoundYay();
 
-        List<String> lessonComplete = SharedPreferencesInfo.getUserInfo(context).getLessonComplete();
-        //lessonProgress = new LessonProgress(lessonComplete);
+        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
+        List<String> lessonComplete = userInformation.getLessonComplete();
 
         if (lessonComplete.contains(lesson.getLessonId())) {
             tvWord.setText("+"+0);
@@ -112,7 +113,12 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
             tvWord.setText("+"+getWordNo);
             tvSentence.setText("+"+getSentenceNo);
         }
-/*
+
+        // 레슨완료 정보 업데이트 하기
+        userInformation.updateCompleteList(context, lesson.getLessonId(), false);
+
+        lessonProgress = new LessonProgress(userInformation.getLessonComplete());
+
         int getTotalWordNo = lessonProgress.getTotalWordNo();
         int getTotalSentenceNo = lessonProgress.getTotalSentenceNo();
         int getMyWordNo = lessonProgress.getMyWords().size();
@@ -134,8 +140,6 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         tvSentence.startAnimation(aniMoveDown);
 
         setLessonFinish();
-
- */
     }
 
 
@@ -151,10 +155,6 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         bundle.putString("lessonId", lessonId);
         firebaseAnalytics.logEvent("lesson_finish", bundle);
-
-        // 레슨완료 정보 업데이트 하기
-        UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-        userInformation.updateCompleteList(context, lessonId, false);
     }
 
 
@@ -173,8 +173,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnMyWords :
                 if(!btnMyWordsClicked) {
-                    //Map<String, String> myWords = lessonProgress.getMyWords();
-                    //setList(myWords);
+                    Map<String, String> myWords = lessonProgress.getMyWords();
+                    setList(myWords);
                     setBtns(true, false);
 
                 } else {
@@ -186,8 +186,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnMySentences :
                 if(!btnMySentencesClicked) {
-                    //Map<String, String> mySentences = lessonProgress.getMySentences();
-                    //setList(mySentences);
+                    Map<String, String> mySentences = lessonProgress.getMySentences();
+                    setList(mySentences);
                     setBtns(false, true);
 
                 } else {
@@ -224,6 +224,19 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
     private void setBtns(boolean myWords, boolean mySentences) {
         btnMyWordsClicked = myWords;
         btnMySentencesClicked = mySentences;
+        if(myWords) {
+            setBtnsColor(R.drawable.bg_pink_25, R.drawable.bg_pink_transparent_25);
+        } else if(mySentences) {
+            setBtnsColor(R.drawable.bg_pink_transparent_25, R.drawable.bg_pink_25);
+        } else {
+            setBtnsColor(R.drawable.bg_pink_25, R.drawable.bg_pink_25);
+        }
+    }
+
+
+    private void setBtnsColor(int myWords, int mySentences) {
+        btnMyWords.setBackground(ContextCompat.getDrawable(context, myWords));
+        btnMySentences.setBackground(ContextCompat.getDrawable(context, mySentences));
     }
 
 

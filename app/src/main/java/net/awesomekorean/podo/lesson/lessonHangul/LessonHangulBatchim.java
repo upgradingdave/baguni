@@ -2,6 +2,7 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
+import net.awesomekorean.podo.lesson.lessons.S_Lesson01;
 import net.awesomekorean.podo.lesson.lessons.S_LessonInit_Unlock;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ public class LessonHangulBatchim extends S_LessonInit_Unlock implements Hangul, 
 
     private String lessonSubTitle = "ㄱ, ㄴ, ㄷ...";
 
-    private int lessonImage = R.drawable.hangul_menu_batchim;
+    private LessonItem specialLesson = new LessonHangulAssembly();
 
     private String[] hangul = { "ㄱ", "역", "한국", "한국", "ㄲ", "ㅋ", "박, 밖, 밬", "ㄴ", "은", "ㄷ", "귿", "ㅌ", "ㅅ", "ㅆ", "ㅈ", "ㅊ", "ㅎ", "낟, 낱, 낫, 났, 낮, 낯, 낳", "ㄹ", "을", "ㅁ", "음", "ㅂ", "읍", "ㅍ", "압, 앞", "ㅇ", "응"};
 
@@ -76,10 +77,6 @@ public class LessonHangulBatchim extends S_LessonInit_Unlock implements Hangul, 
         return lessonTitle;
     }
 
-    public int getLessonImage() {
-        return lessonImage;
-    }
-
     @Override
     public String[] getHangul() {
         return hangul;
@@ -99,5 +96,10 @@ public class LessonHangulBatchim extends S_LessonInit_Unlock implements Hangul, 
     public String getHangulAudio(int index) {
         String batchim = "batchim_" + index;
         return batchim;
+    }
+
+    @Override
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }

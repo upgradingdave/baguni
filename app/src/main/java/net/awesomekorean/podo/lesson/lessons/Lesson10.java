@@ -9,9 +9,8 @@ import javax.annotation.meta.When;
 public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_10";
-    private String lessonTitle = "for time";
+    private String lessonTitle = "from to(time)";
     private String lessonSubTitle = "~부터~까지";
-    private int lessonImage = R.drawable.range2;
 
     private String[] wordFront = {"시간", "일하다", "몇", "오전", "오후", "점심", "언제"};
 
@@ -131,10 +130,5 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }

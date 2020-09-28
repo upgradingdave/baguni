@@ -14,8 +14,6 @@ public class LessonHangulConsonant extends S_LessonInit_Unlock implements Hangul
 
     private String lessonSubTitle = "ㄱ, ㄴ, ㄷ...";
 
-    private int lessonImage = R.drawable.hangul_menu_consonant;
-
     private String[] hangul = {"ㄱ", "ㄴ", "ㄷ", "ㄹ", "ㅁ", "ㅂ", "ㅅ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㄲ", "ㄸ", "ㅃ", "ㅆ", "ㅉ"};
 
     private String[] hangulExplain = {"기역", "니은", "디귿", "리을", "미음", "비읍", "시옷", "이응, No sound", "지읒", "치읓", "키읔", "티읕", "피읖", "히읗", "쌍기역 \n '쌍' means double.", "쌍디귿", "쌍비읍", "쌍시옷", "쌍지읒"};
@@ -45,10 +43,6 @@ public class LessonHangulConsonant extends S_LessonInit_Unlock implements Hangul
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

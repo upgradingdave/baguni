@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,19 +38,15 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
     };
 
     ImageView btnBack;
-    Button btnIntro;
-
-    ImageView btnClose;
-    ConstraintLayout layoutIntro;
-    TextView textViewIntro;
-
-    ListView listView;
 
     Context context;
 
     UserInformation userInformation;
 
-    LessonNumberMenuAdapter adapter;
+    LinearLayout layoutDate;
+    LinearLayout layoutAge;
+    LinearLayout layoutMoney;
+    LinearLayout layoutTime;
 
 
     @Override
@@ -62,43 +59,15 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
         userInformation = SharedPreferencesInfo.getUserInfo(context);
 
         btnBack = findViewById(R.id.btnBack);
-        btnIntro = findViewById(R.id.btnIntro);
-        btnClose = findViewById(R.id.btnClose);
-        layoutIntro = findViewById(R.id.layoutIntro);
-        listView = findViewById(R.id.listView);
+        layoutDate = findViewById(R.id.layoutDate);
+        layoutAge = findViewById(R.id.layoutAge);
+        layoutMoney = findViewById(R.id.layoutMoney);
+        layoutTime = findViewById(R.id.layoutTime);
         btnBack.setOnClickListener(this);
-        btnIntro.setOnClickListener(this);
-        btnClose.setOnClickListener(this);
-
-        adapter = new LessonNumberMenuAdapter(context, numberPractices);
-        listView.setAdapter(adapter);
-        listView.setDivider(null);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                numberPractice = (LessonItem) parent.getItemAtPosition(position);
-
-                switch (numberPractice.getLessonTitle()) {
-
-                    case "time" :
-                        openLessonNumber(getString(R.string.TIME));
-                        break;
-
-                    case "money" :
-                        openLessonNumber(getString(R.string.MONEY));
-                        break;
-
-                    case "date" :
-                        openLessonNumber(getString(R.string.DATE));
-                        break;
-
-                    case "age" :
-                        openLessonNumber(getString(R.string.AGE));
-                        break;
-                }
-            }
-        });
+        layoutDate.setOnClickListener(this);
+        layoutAge.setOnClickListener(this);
+        layoutMoney.setOnClickListener(this);
+        layoutTime.setOnClickListener(this);
     }
 
 
@@ -115,18 +84,24 @@ public class LessonNumberMenu extends AppCompatActivity implements View.OnClickL
 
         switch (v.getId()) {
 
-            case R.id.btnIntro :
-                textViewIntro = findViewById(R.id.textViewIntro);
-                textViewIntro.setMovementMethod(new ScrollingMovementMethod());
-                layoutIntro.setVisibility(VISIBLE);
-                break;
-
-            case R.id.btnClose :
-                layoutIntro.setVisibility(GONE);
-                break;
-
             case R.id.btnBack :
                 finish();
+                break;
+
+            case R.id.layoutDate :
+                openLessonNumber(getString(R.string.DATE));
+                break;
+
+            case R.id.layoutAge :
+                openLessonNumber(getString(R.string.AGE));
+                break;
+
+            case R.id.layoutMoney :
+                openLessonNumber(getString(R.string.MONEY));
+                break;
+
+            case R.id.layoutTime :
+                openLessonNumber(getString(R.string.TIME));
                 break;
         }
     }

@@ -7,9 +7,9 @@ import java.io.Serializable;
 public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_09";
-    private String lessonTitle = "for place";
+    private String lessonTitle = "from to(place)";
     private String lessonSubTitle = "~에서~까지";
-    private int lessonImage = R.drawable.range1;
+    private LessonItem specialLesson = new S_Lesson12();
 
     private String[] wordFront = {"회사", "어떻게", "지하철", "걸리다"};
 
@@ -139,7 +139,7 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public int getLessonImage() {
-        return lessonImage;
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }
