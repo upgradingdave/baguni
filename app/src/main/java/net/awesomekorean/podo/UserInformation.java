@@ -97,6 +97,14 @@ public class UserInformation {
     }
 
 
+    // 포인트 합산하기 (DB 업데이트 안함)
+    public void addRewardPointsWithoutDB(int rewardPoints){
+        int oldPoints = getPoints();
+        int newPoints = oldPoints + rewardPoints;
+        setPoints(newPoints);
+    }
+
+
     // DB 에 유저 정보 업데이드 하기
     public void updateDb(final Context context) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

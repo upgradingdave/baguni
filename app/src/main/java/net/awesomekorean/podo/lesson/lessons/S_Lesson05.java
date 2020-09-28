@@ -7,9 +7,8 @@ import java.io.Serializable;
 public class S_Lesson05 extends S_LessonInit implements LessonItem, LessonSpecial, Serializable {
 
     private String lessonId = "SL_05";
-    private String lessonTitle = "speaking naturally";
-    private String lessonSubTitle = "basic rules";
-    private int lessonImage = R.drawable.speakingnaturally1;
+    private String lessonTitle = "basic rules";
+    private String lessonSubTitle = "speak naturally";
 
     private int contents = R.string.SL_05_CONTENTS;
 
@@ -26,11 +25,6 @@ public class S_Lesson05 extends S_LessonInit implements LessonItem, LessonSpecia
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

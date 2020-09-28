@@ -51,7 +51,6 @@ public class LessonFinishAdapter extends RecyclerView.Adapter<LessonFinishAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         LessonFinishItems items = list.get(position);
-        System.out.println("하이!");
         if(position %2 == 0) {
             holder.dot.setImageResource(R.drawable.purple_dot);
         } else {

@@ -1,4 +1,4 @@
-package net.awesomekorean.podo.lesson.lessonReview;
+package net.awesomekorean.podo.lesson.lessonReviewRewards;
 
 import net.awesomekorean.podo.lesson.lessons.Lesson;
 

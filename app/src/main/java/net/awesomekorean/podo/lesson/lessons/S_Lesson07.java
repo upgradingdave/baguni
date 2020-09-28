@@ -9,7 +9,6 @@ public class S_Lesson07 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_07";
     private String lessonTitle = "speaking naturally 2";
     private String lessonSubTitle = "식당? 집?";
-    private int lessonImage = R.drawable.speakingnaturally2;
 
     private int contents = R.string.SL_07_CONTENTS;
 
@@ -26,11 +25,6 @@ public class S_Lesson07 extends S_LessonInit implements LessonItem, LessonSpecia
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

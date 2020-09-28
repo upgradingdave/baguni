@@ -8,9 +8,7 @@ public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecia
 
     private String lessonId = "SL_13";
     private String lessonTitle = "confusing expression";
-    private String lessonSubTitle = "'here' and 'there'";
-    private int lessonImage = R.drawable.confusing_expression;
-
+    private String lessonSubTitle = "여기/저기/거기";
     private int contents = R.string.SL_13_CONTENTS;
 
     @Override
@@ -26,11 +24,6 @@ public class S_Lesson13 extends S_LessonInit implements LessonItem, LessonSpecia
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

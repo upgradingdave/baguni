@@ -10,7 +10,7 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_12";
     private String lessonTitle = "but";
     private String lessonSubTitle = "~지만";
-    private int lessonImage = R.drawable.contrast;
+    private LessonItem specialLesson = new S_Lesson05();
 
     private String[] wordFront = {"어렵다", "말하다", "쓰다", "읽다", "쉽다"};
 
@@ -160,7 +160,7 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public int getLessonImage() {
-        return lessonImage;
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }

@@ -7,9 +7,9 @@ import java.io.Serializable;
 public class Lesson31 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_31";
-    private String lessonTitle = "future tense";
+    private String lessonTitle = "guess (future)";
     private String lessonSubTitle = "~(으)ㄹ 것 같다";
-    private int lessonImage = R.drawable.l_31_word_5;
+    private LessonItem specialLesson = new S_Lesson14();
 
     private String[] wordFront = {"역", "방금", "기차", "내리다", "도착하다", "늦다"};
 
@@ -148,7 +148,7 @@ public class Lesson31 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public int getLessonImage() {
-        return lessonImage;
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }

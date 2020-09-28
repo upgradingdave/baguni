@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
@@ -37,8 +38,7 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private String lessonId = "H_assembly";
     private String lessonTitle = "assembly";
-    private String lessonSubTitle = "";
-    private int lessonImage = R.drawable.hangul_menu_assembly;
+    private String lessonSubTitle = "Let's assemble!";
     private boolean isLocked = true;
     private MediaPlayerManager mediaPlayerManager;
     private String url;
@@ -110,6 +110,8 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     private LessonItem specialLesson;
     private boolean isCurrent = false;
 
+    AdsManager adsManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +156,11 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
         btnIntro.setOnClickListener(this);
         btnClose.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+
+        adsManager = AdsManager.getInstance();
+        if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
+            adsManager.loadFullAds(context);
+        }
 
         hangulBoxBtnSelected = new View.OnClickListener() {
 
@@ -329,6 +336,9 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
 
     private void setLessonComplete() {
         // 레슨완료리스트에 업데이트
+        if (adsManager.interstitialAd.isLoaded()) {
+            adsManager.playFullAds(context);
+        }
         UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
         userInformation.updateCompleteList(context, "H_assembly", false);
         finish();
@@ -488,11 +498,6 @@ public class LessonHangulAssembly extends AppCompatActivity implements View.OnCl
     public String getLessonTitle() {
         return lessonTitle;
     }
-
-    public int getLessonImage() {
-        return lessonImage;
-    }
-
 
     @Override
     public boolean getIsLocked() {

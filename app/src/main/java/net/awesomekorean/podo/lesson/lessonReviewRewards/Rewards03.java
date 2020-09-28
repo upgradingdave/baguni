@@ -1,13 +1,13 @@
-package net.awesomekorean.podo.lesson.lessonReview;
+package net.awesomekorean.podo.lesson.lessonReviewRewards;
 
 import net.awesomekorean.podo.lesson.lessons.LessonInit;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.io.Serializable;
 
-public class Rewards00 extends LessonInit implements LessonItem, Serializable {
+public class Rewards03 extends LessonInit implements LessonItem, Serializable {
 
-    private String lessonId = "RW_00";
+    private String lessonId = "RW_03";
     private String lessonTitle = "";
     private String lessonSubTitle = "";
 

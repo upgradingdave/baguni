@@ -7,9 +7,8 @@ import java.io.Serializable;
 public class Lesson30 extends LessonInit implements Lesson, LessonItem, Serializable {
 
     private String lessonId = "L_30";
-    private String lessonTitle = "present, past tense";
+    private String lessonTitle = "guess (past,present)";
     private String lessonSubTitle = "~(으)ㄴ/는 것 같다";
-    private int lessonImage = R.drawable.l_30_word_2;
 
     private String[] wordFront = {"소리", "들리다", "비가 내리다", "우산", "가져오다"};
 
@@ -123,10 +122,5 @@ public class Lesson30 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }

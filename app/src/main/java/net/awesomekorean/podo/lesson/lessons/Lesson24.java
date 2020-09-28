@@ -9,7 +9,7 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_24";
     private String lessonTitle = "even though";
     private String lessonSubTitle = "~아/어도";
-    private int lessonImage = R.drawable.l_24_word_1;
+    private LessonItem specialLesson = new S_Lesson09();
 
     private String[] wordFront = {"얼굴", "아프다", "자다", "계속", "병원", "평일"};
 
@@ -135,7 +135,7 @@ public class Lesson24 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public int getLessonImage() {
-        return lessonImage;
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }

@@ -7,9 +7,8 @@ import java.io.Serializable;
 public class S_Lesson09 extends S_LessonInit implements LessonItem, LessonSpecial, Serializable {
 
     private String lessonId = "SL_09";
-    private String lessonTitle = "Newly-coined word";
-    private String lessonSubTitle = "";
-    private int lessonImage = R.drawable.newlycoinedword;
+    private String lessonTitle = "coinage";
+    private String lessonSubTitle = "coinage";
 
     private int contents = R.string.SL_09_CONTENTS;
 
@@ -26,11 +25,6 @@ public class S_Lesson09 extends S_LessonInit implements LessonItem, LessonSpecia
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

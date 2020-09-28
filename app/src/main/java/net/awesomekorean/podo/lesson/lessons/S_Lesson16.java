@@ -9,7 +9,6 @@ public class S_Lesson16 extends S_LessonInit implements LessonItem, LessonSpecia
     private String lessonId = "SL_16";
     private String lessonTitle = "more expression";
     private String lessonSubTitle = "~(으)로";
-    private int lessonImage = R.drawable.more_expression;
 
     private int contents = R.string.SL_16_CONTENTS;
 
@@ -26,11 +25,6 @@ public class S_Lesson16 extends S_LessonInit implements LessonItem, LessonSpecia
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

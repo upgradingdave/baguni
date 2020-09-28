@@ -14,8 +14,6 @@ public class LessonHangulVowel extends S_LessonInit_Unlock implements Hangul, Le
 
     private String lessonSubTitle = "ㅏ, ㅑ, ㅓ...";
 
-    private int lessonImage = R.drawable.hangul_menu_vowel;
-
     private String[] hangul = {"ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ", "ㅐ", "ㅒ", "ㅔ", "ㅖ", "ㅘ", "ㅝ", "ㅙ", "ㅞ", "ㅚ", "ㅟ", "ㅢ"};
 
     private String[] hangulExplain = {"Make your mouth bigger.", "If you feel difficult to pronounce double stroke vowel, you can try to pronounce it slowly as \n'ㅣ' + 'single stroke'. \n\nFor example, \n'ㅑ' = 'ㅣ' + 'ㅏ'.\nThen, you may understand how to move your mouth to pronounce double stroke vowel clearly.", "Say 'Uh-oh'. vowel 'ㅓ' has a similar mouth shape with 'uh'." , "'ㅣ' + 'ㅓ'", "make your lips circle.", "'ㅣ' + 'ㅗ'", "make your lips like an octopus.", "'ㅣ' + 'ㅜ'", "Say 'cheese'. The mouth shape is similar when you sound [z] in 'cheese'.", "Say 'smile' imagine you are taking a picture. That mouth shape is 'ㅣ'.", "", "'ㅣ' + 'ㅐ'", "almost same with [ㅐ]", "almost same with [ㅒ]", "ㅗ + ㅏ", "ㅜ + ㅓ", "ㅗ + ㅐ", "ㅜ + ㅔ\nalmost same with [ㅙ]", "ㅗ + ㅣ\n[ㅙ] also available (recommend)", "ㅜ + ㅣ", "ㅡ + ㅣ"};
@@ -39,10 +37,6 @@ public class LessonHangulVowel extends S_LessonInit_Unlock implements Hangul, Le
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    public int getLessonImage() {
-        return lessonImage;
     }
 
     @Override

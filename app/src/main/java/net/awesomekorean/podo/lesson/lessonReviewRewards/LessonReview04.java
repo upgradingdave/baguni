@@ -1,24 +1,33 @@
-package net.awesomekorean.podo.lesson.lessonReview;
+package net.awesomekorean.podo.lesson.lessonReviewRewards;
 
-import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
 import net.awesomekorean.podo.lesson.lessons.Lesson00;
 import net.awesomekorean.podo.lesson.lessons.Lesson01;
 import net.awesomekorean.podo.lesson.lessons.Lesson02;
 import net.awesomekorean.podo.lesson.lessons.Lesson03;
+import net.awesomekorean.podo.lesson.lessons.Lesson19;
+import net.awesomekorean.podo.lesson.lessons.Lesson24;
+import net.awesomekorean.podo.lesson.lessons.Lesson25;
+import net.awesomekorean.podo.lesson.lessons.Lesson26;
+import net.awesomekorean.podo.lesson.lessons.Lesson30;
+import net.awesomekorean.podo.lesson.lessons.Lesson31;
+import net.awesomekorean.podo.lesson.lessons.Lesson32;
+import net.awesomekorean.podo.lesson.lessons.Lesson33;
+import net.awesomekorean.podo.lesson.lessons.Lesson34;
 import net.awesomekorean.podo.lesson.lessons.LessonInit;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.io.Serializable;
 
-public class LessonReview00 extends LessonInit implements LessonItem, LessonReview, Serializable {
+public class LessonReview04 extends LessonInit implements LessonItem, LessonReview, Serializable {
 
-    private String lessonId = "LR_00";
+    private String lessonId = "LR_04";
     private String lessonTitle = "";
     private String lessonSubTitle = "";
 
     private Lesson[] lessons = {
-            new Lesson00(), new Lesson01(), new Lesson02(), new Lesson03(),
+            new Lesson24(), new Lesson25(), new Lesson26(), new Lesson30(), new Lesson31(), new Lesson32(),
+            new Lesson33(), new Lesson34()
     };
 
     private String[] baseForm = {"가다", "먹다", "오다", "사다", "팔다"};

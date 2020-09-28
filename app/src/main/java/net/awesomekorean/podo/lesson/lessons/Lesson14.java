@@ -9,7 +9,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_14";
     private String lessonTitle = "after";
     private String lessonSubTitle = "~후에";
-    private int lessonImage = R.drawable.timeexpression2;
+    private LessonItem specialLesson = new S_Lesson11();
 
     private String[] wordFront = {"오늘", "저녁", "끝나다", "후", "가족", "드라마", "추천하다"};
 
@@ -164,7 +164,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
     }
 
     @Override
-    public int getLessonImage() {
-        return lessonImage;
+    public LessonItem getSLesson() {
+        return specialLesson;
     }
 }

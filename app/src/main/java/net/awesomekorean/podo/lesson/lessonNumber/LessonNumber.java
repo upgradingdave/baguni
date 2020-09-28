@@ -2,10 +2,12 @@ package net.awesomekorean.podo.lesson.lessonNumber;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,11 +34,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class LessonNumber extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    ImageView btnClose;
+    ImageView btnBack;
     ProgressBar progressBar;
     TextView progressTextView;
 
@@ -67,6 +72,11 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
     boolean[] checkProgress;
 
+    ImageView btnIntro;
+    ImageView btnClose;
+    ConstraintLayout layoutIntro;
+    TextView textViewIntro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +85,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
-        btnClose = findViewById(R.id.btnClose);
+        btnBack = findViewById(R.id.btnBack);
         progressBar = findViewById(R.id.progressBar);
         progressTextView = findViewById(R.id.progressTextView);
         btnRandom = findViewById(R.id.btnRandom);
@@ -84,11 +94,17 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
         btnNext = findViewById(R.id.btnNext);
         numberFront = findViewById(R.id.numberFront);
         numberBack = findViewById(R.id.numberBack);
-        btnClose.setOnClickListener(this);
+        btnIntro = findViewById(R.id.btnIntro);
+        btnClose = findViewById(R.id.btnClose);
+        layoutIntro = findViewById(R.id.layoutIntro);
+        textViewIntro = findViewById(R.id.textViewIntro);
+        btnBack.setOnClickListener(this);
         btnRandom.setOnClickListener(this);
         btnInOrder.setOnClickListener(this);
         btnAudio.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+        btnIntro.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
 
         Intent intent = getIntent();
 
@@ -189,6 +205,7 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     public void openConfirmQuit() {
         Intent intent = new Intent(getApplicationContext(), ConfirmQuit.class);
         intent.putExtra(getResources().getString(R.string.LESSON_ID), number.getLessonId());
+        intent.putExtra(getResources().getString(R.string.FINISH), true);
         startActivityForResult(intent, 200);
     }
 
@@ -207,8 +224,18 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btnClose :
+            case R.id.btnBack :
                 openConfirmQuit();
+                break;
+
+            case R.id.btnIntro :
+                textViewIntro = findViewById(R.id.textViewIntro);
+                textViewIntro.setMovementMethod(new ScrollingMovementMethod());
+                layoutIntro.setVisibility(VISIBLE);
+                break;
+
+            case R.id.btnClose :
+                layoutIntro.setVisibility(GONE);
                 break;
 
             case R.id.btnRandom :

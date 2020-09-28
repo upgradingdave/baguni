@@ -9,7 +9,6 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_15";
     private String lessonTitle = "ability";
     private String lessonSubTitle = "~(으)ㄹ 수 있어요";
-    private int lessonImage = R.drawable.ability;
 
     private String[] wordFront = {"아직", "자막", "이해하다", "괜찮다"};
 
@@ -136,10 +135,5 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }

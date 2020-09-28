@@ -11,7 +11,6 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_18";
     private String lessonTitle = "request";
     private String lessonSubTitle = "~아/어 주세요";
-    private int lessonImage = R.drawable.request;
 
     private String[] wordFront = {"주", "호텔", "예약", "돕다", "처음", "아마", "기다리다"};
 
@@ -140,10 +139,5 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }

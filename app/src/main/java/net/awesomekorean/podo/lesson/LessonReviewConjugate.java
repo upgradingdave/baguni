@@ -23,7 +23,7 @@ import com.google.android.gms.common.util.ArrayUtils;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
+import net.awesomekorean.podo.lesson.lessonReviewRewards.LessonReview;
 
 import java.util.Arrays;
 
@@ -133,14 +133,27 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
     }
 
 
-    private void makeBtns() {
+    private void setBtns() {
         if(isBaseForm) {
             getAnswerList(answerListBaseForm, baseFormSize, baseFormIndex);
         } else {
-            getAnswerList(answerListConjugation, conjugationSize, conjugationIndex);
+            if(conjugationSize < 4) {
+                answerListConjugation[0] = conjugationIndex;
+            } else {
+                getAnswerList(answerListConjugation, conjugationSize, conjugationIndex);
+            }
         }
 
-        for(int i=0; i<answerListBaseForm.length; i++) {
+        if(!isBaseForm && conjugationSize < 4) {
+            makeBtns(1);
+        } else {
+            makeBtns(3);
+        }
+    }
+
+
+    private void makeBtns(int leng) {
+        for(int i=0; i<leng; i++) {
             toggleButton = new ToggleButton(getContext());
             DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
             int width = dm.widthPixels;
@@ -182,7 +195,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
         baseFormIndex = getRandomNum(baseFormSize - 1);
         conjugationIndex = getRandomNum(conjugationSize - 1);
         tvEnglish.setText(lessonReview.getTranslate()[baseFormIndex][conjugationIndex]);
-        makeBtns();
+        setBtns();
     }
 
 
@@ -217,7 +230,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
                         selectedBaseToggle = selectedBtn;
                         isBaseForm = false;
                         flexConjugation.removeAllViews();
-                        makeBtns();
+                        setBtns();
 
                     } else {
                         btnConfirm.setEnabled(true);

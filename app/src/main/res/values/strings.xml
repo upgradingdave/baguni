@@ -139,6 +139,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="CONGRATULATION">Congratulation!</string>
     <string name="GOOD_JOB">Good job! Let\'s keep going!</string>
     <string name="YOU_CAN_DO_BETTER">You can do better next time!</string>
+    <string name="YOU_NEED">You need at least \'18/20\' to go to the next stage</string>
     <string name="TRY_AGAIN">Try again?</string>
     <string name="GET_POINT">Get the points</string>
     <string name="GO_TO_MAIN">Go to main</string>
@@ -159,6 +160,7 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="REVIEW">REVIEW</string>
     <string name="REWARDS">REWARDS</string>
     <string name="PLEASE_COMPLETE_PREVIOUS_LESSON">Please complete previous lesson</string>
+    <string name="ALREADY_REWARDED">You have already been rewarded</string>
 
 
 

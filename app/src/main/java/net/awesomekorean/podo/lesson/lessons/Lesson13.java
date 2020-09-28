@@ -9,7 +9,6 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
     private String lessonId = "L_13";
     private String lessonTitle = "before";
     private String lessonSubTitle = "~전에";
-    private int lessonImage = R.drawable.timeexpression1;
 
     private String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
 
@@ -129,10 +128,5 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
     @Override
     public String getLessonTitle() {
         return lessonTitle;
-    }
-
-    @Override
-    public int getLessonImage() {
-        return lessonImage;
     }
 }
