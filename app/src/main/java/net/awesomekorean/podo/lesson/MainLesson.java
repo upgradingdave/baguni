@@ -128,9 +128,12 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+
+                System.out.println("엑스 : " + dx);
+                System.out.println("와이 : " + dy);
             }
         });
 
