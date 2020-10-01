@@ -133,7 +133,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 
                 System.out.println("엑스 : " + dx);
-                System.out.println("와이 : " + dy);
+                System.out.println("와 : " + dy);
             }
         });
 
