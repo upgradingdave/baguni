@@ -31,10 +31,10 @@ public class LessonReview00 extends LessonInit implements LessonItem, LessonRevi
     };
 
     private String[][] translate = {
-            {"see / watch"},
+            {"see / look / watch"},
             {"go"},
             {"there is / have"},
-            {"talk"},
+            {"talk / tell"},
     };
 
 

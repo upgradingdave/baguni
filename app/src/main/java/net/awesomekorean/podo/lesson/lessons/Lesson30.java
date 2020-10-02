@@ -12,7 +12,7 @@ public class Lesson30 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"소리", "들리다", "비가 내리다", "우산", "가져오다"};
 
-    private String[] wordBack = {"sound", "hear", "rain", "umbrella", "bring"};
+    private String[] wordBack = {"sound", "hear", "raining", "umbrella", "bring"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-"};
 
@@ -31,11 +31,11 @@ public class Lesson30 extends LessonInit implements Lesson, LessonItem, Serializ
             "Can your hear?",
             "Can your hear the sound?",
             "The sound of rain",
-            "It sounds like rain.",
+            "It sounds like it's raining.",
             "Did you bring it?",
             "Did you bring an umbrella?",
-            "It doesn't rain much",
-            "I think it doesn't rain much."
+            "It isn't raining much.",
+            "I think it isn't raining much."
     };
 
     private String[] sentenceExplain = {

@@ -2,6 +2,7 @@ package net.awesomekorean.podo.lesson;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,6 +78,9 @@ import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class MainLesson extends Fragment implements View.OnClickListener {
 
     Context context;
@@ -107,7 +112,9 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
     LessonItem[] list;
 
-
+    ImageView btnInfo;
+    ConstraintLayout layoutInfo;
+    Button btnCloseInfo;
 
 
     @Nullable
@@ -117,8 +124,13 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         btnBack = view.findViewById(R.id.btnBack);
         tvLevel = view.findViewById(R.id.tvLevel);
         btnNextLevel = view.findViewById(R.id.btnNextLevel);
+        btnInfo = view.findViewById(R.id.btnInfo);
+        layoutInfo = view.findViewById(R.id.layoutInfo);
+        btnCloseInfo = view.findViewById(R.id.btnCloseInfo);
         btnBack.setOnClickListener(this);
         btnNextLevel.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
+        btnCloseInfo.setOnClickListener(this);
 
         context = getContext();
         userInformation = SharedPreferencesInfo.getUserInfo(context);
@@ -131,9 +143,8 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-
-                System.out.println("엑스 : " + dx);
-                System.out.println("와 : " + dy);
+//                System.out.println("엑스 : " + dx);
+//                System.out.println("와 : " + dy);
             }
         });
 
@@ -221,6 +232,14 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnBack :
+                break;
+
+            case R.id.btnInfo :
+                layoutInfo.setVisibility(VISIBLE);
+                break;
+
+            case R.id.btnCloseInfo :
+                layoutInfo.setVisibility(GONE);
                 break;
 
             case R.id.btnNextLevel :

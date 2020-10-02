@@ -22,6 +22,8 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.io.Serializable;
+
 public class AdsManager {
 
     private String ADMOB_APP_ID = "ca-app-pub-7371634469098812~7867291008";
@@ -123,7 +125,7 @@ public class AdsManager {
             @Override
             public void onRewardedAdClosed() {
                 Intent intent = new Intent(activity, GetRandomPoint.class);
-                activity.startActivityForResult(intent, 200);
+                activity.startActivity(intent);
                 loadRewardAds(activity);
 
                 // analytics 로그 이벤트 얻기

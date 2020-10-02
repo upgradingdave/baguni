@@ -12,7 +12,7 @@ public class Lesson35 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"타다", "선물", "화장품", "생일"};
 
-    private String[] wordBack = {"to ride", "gift", "cosmetics", "birthday"};
+    private String[] wordBack = {"ride", "gift", "cosmetics", "birthday"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-"};
 
@@ -37,7 +37,7 @@ public class Lesson35 extends LessonInit implements Lesson, LessonItem, Serializ
             "You can take the subway.",
             "Why are you going to Myeong-dong?",
             "It's my friend's birthday tomorrow.",
-            "I want to buy a cosmetic gift."
+            "I want to buy a cosmetic for a gift."
     };
 
     private String[] sentenceExplain = {

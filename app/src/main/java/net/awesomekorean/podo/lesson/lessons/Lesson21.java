@@ -13,7 +13,7 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"글", "주다", "틀리다", "아주", "정말요?"};
 
-    private String[] wordBack = {"article", "to give", "wrong", "very", "really?"};
+    private String[] wordBack = {"article", "give", "wrong", "very", "really?"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-"};
 
@@ -38,7 +38,7 @@ public class Lesson21 extends LessonInit implements Lesson, LessonItem, Serializ
             "I wrote an article in Korean.",
             "I wrote an article in Korean.",
             "please take a look.",
-            "please take once a look.",
+            "please take a look.",
             "give me.",
             "I'll take a look.",
             "It's wrong.",

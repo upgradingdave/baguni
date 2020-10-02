@@ -33,10 +33,10 @@ public class Lesson23 extends LessonInit implements Lesson, LessonItem, Serializ
             "What do you want to do if you make money?",
             "What do you want to do if you make a lot of money later?",
             "I want to go.",
-            "I want to go abroad.",
-            "I want to go abroad a lot.",
+            "I want to take a trip to abroad",
+            "I want to take a trip to abroad a lot",
             "I want to learn culture.",
-            "I want to learn about every culture in all countries.",
+            "I want to learn country cultures",
             "I See. Great!"
     };
 

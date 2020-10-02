@@ -32,12 +32,12 @@ public class Lesson32 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] sentenceBack = {
             "where is it?",
             "Where is the restroom?",
-            "Go outside.",
-            "Go outside the store.",
-            "Go outside the store and",
-            "go.",
-            "go to the right side.",
-            "Go out of the store and go right.",
+            "Go out.",
+            "Go out of the store.",
+            "Go out of the store and",
+            "Go.",
+            "Go to the right side.",
+            "Go out of the store and turn right.",
             "Thank you."
     };
 

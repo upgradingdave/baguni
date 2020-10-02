@@ -33,13 +33,13 @@ public class Lesson09 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] sentenceBack = {
-            "to go",
-            "Do you go?",
+            "go",
+            "go?",
             "How do you go?",
-            "How do you get to the company.",
-            "How do you get to the company from home.",
-            "to take / to ride",
-            "I take.",
+            "How do you go to work.",
+            "How do you go to work from home.",
+            "take / ride",
+            "take. / ride.",
             "I take a subway.",
             "It takes (time)",
             "Does it take?",

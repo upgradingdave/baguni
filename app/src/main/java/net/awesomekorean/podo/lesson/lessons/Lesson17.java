@@ -12,7 +12,7 @@ public class Lesson17 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"휴가", "음식", "연습", "그동안", "공부", "열심히"};
 
-    private String[] wordBack = {"vacation", "food", "practice", "so far", "study", "hardly"};
+    private String[] wordBack = {"vacation", "food", "practice", "so far", "study", "hard"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
 

@@ -33,7 +33,7 @@ public class Lesson34 extends LessonInit implements Lesson, LessonItem, Serializ
             "I left my wallet.",
             "I left my wallet at home.",
             "Please wait.",
-            "Please wait a second.",
+            "Please wait a moment.",
             "yes I'm okay.",
             "You can come.",
             "You can go.",

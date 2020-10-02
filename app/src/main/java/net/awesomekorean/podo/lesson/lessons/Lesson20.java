@@ -13,7 +13,7 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"덥다", "시원하다", "곳", "들어가다", "저기", "크다", "예쁘다", "유명하다", "마시다"};
 
-    private String[] wordBack = {"hot", "cool", "place", "enter", "there", "big", "pretty", "famous", "to drink"};
+    private String[] wordBack = {"hot", "cool", "place", "enter", "there", "big", "pretty", "famous", "drink"};
 
     private String[] wordPronunciation = {"[덥따]", "-", "[곧]", "[드러가다]", "-", "-", "-", "-", "-"};
 
@@ -46,11 +46,11 @@ public class Lesson20 extends LessonInit implements Lesson, LessonItem, Serializ
             "famous cafe",
             "pretty and famous cafe",
             "There's a pretty and famous cafe.",
-            "There's a pretty and famous cafe there.",
-            "cool juice",
-            "Let's drink a cool juice.",
-            "Let's drink a cool juice there.",
-            "Great. Let's drink a cool juice there."
+            "There's a pretty and famous cafe.",
+            "cold juice",
+            "Let's drink a cold juice.",
+            "Let's drink a cold juice there.",
+            "Great. Let's drink a cold juice there."
     };
 
     private String[] sentenceExplain = {

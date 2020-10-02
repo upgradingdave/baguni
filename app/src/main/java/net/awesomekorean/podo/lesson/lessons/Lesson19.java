@@ -29,8 +29,8 @@ public class Lesson19 extends LessonInit implements Lesson, LessonItem, Serializ
             "good night",
             "thank you",
             "I'm sorry",
-            "thank you (before having a meal)",
-            "thank you for the meal."
+            "Thank you for the meal",
+            "I had a good meal."
     };
 
     private String[] sentenceExplain = {

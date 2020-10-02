@@ -14,7 +14,7 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"시간", "일하다", "몇", "오전", "오후", "점심", "언제"};
 
-    private String[] wordBack = {"time", "to work", "how many", "am.", "pm.", "noon / lunch", "when"};
+    private String[] wordBack = {"time / hour", "work", "how many", "am / morning", "pm / afternoon", "noon / lunch", "when"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
 
@@ -32,7 +32,7 @@ public class Lesson10 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] sentenceBack = {
-            "to work",
+            "work",
             "Do you work?",
             "How many hours do you work?",
             "I work.",

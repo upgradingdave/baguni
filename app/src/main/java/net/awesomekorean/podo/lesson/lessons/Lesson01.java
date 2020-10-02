@@ -35,7 +35,7 @@ public class Lesson01 extends LessonInit implements Lesson, LessonItem, Serializ
             "what",
             "what is it?",
             "What is your name?",
-            "Danny / Megan",
+            "I'm Danny / I'm Megan",
             "country",
             "which country",
             "Where are you from?",

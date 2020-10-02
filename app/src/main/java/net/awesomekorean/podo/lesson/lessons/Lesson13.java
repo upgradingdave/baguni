@@ -12,7 +12,7 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"감기에 걸리다", "먹다", "약", "밥", "전"};
 
-    private String[] wordBack = {"have a cold", "to eat", "medicine", "rice / meal", "before"};
+    private String[] wordBack = {"catch a cold / get a cold", "eat", "medicine", "rice / meal", "before"};
 
     private String[] wordPronunciation = {"-", "[먹따]", "-", "-", "-"};
 
@@ -30,16 +30,16 @@ public class Lesson13 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] sentenceBack = {
-            "have a cold",
-            "I had a cold.",
-            "to eat",
-            "You eat.",
+            "get a cold",
+            "I've got a cold.",
+            "eat",
+            "eat.",
             "Take this medicine.",
             "How do I take it?",
             "have a meal",
             "having a meal",
-            "Take this medicine before you have a meal.",
-            "Take this medicine 30 minutes before you have a meal."
+            "Take this medicine before meals.",
+            "Take this medicine 30 minutes before meals."
     };
 
     private String[] sentenceExplain = {

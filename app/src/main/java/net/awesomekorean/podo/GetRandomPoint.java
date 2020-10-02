@@ -89,8 +89,12 @@ public class GetRandomPoint extends AppCompatActivity implements View.OnClickLis
 
                 // 포인트 합산하기
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
-                userInformation.addRewardPointsWithoutDB(reward);
-                userInformation.updateCompleteList(context, lessonItem.getLessonId(), false);
+                if(lessonItem != null) {
+                    userInformation.addRewardPointsWithoutDB(reward);
+                    userInformation.updateCompleteList(context, lessonItem.getLessonId(), false);
+                } else {
+                    userInformation.addRewardPoints(context, reward);
+                }
 
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
