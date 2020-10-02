@@ -13,7 +13,7 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"오늘", "저녁", "끝나다", "후", "가족", "드라마", "추천하다"};
 
-    private String[] wordBack = {"today", "night / dinner", "finish", "after", "family", "drama", "recommend"};
+    private String[] wordBack = {"today", "evening / dinner", "finish / end", "after", "family", "drama", "recommend"};
 
     private String[] wordPronunciation = {"-", "-", "[끈나다]", "-", "-", "-", "-"};
 
@@ -50,17 +50,17 @@ public class Lesson14 extends LessonInit implements Lesson, LessonItem, Serializ
             "after finishing work",
             "I'll have a dinner after finishing work.",
             "I'll have a dinner after finishing work with my family.",
-            "to eat",
+            "eat",
             "after having",
             "after having dinner",
             "I watch a drama after having dinner.",
             "I'll watch a drama after having dinner.",
-            "to watch",
+            "watch",
             "Do you watch?",
             "Do you watch dramas?",
-            "Do you watch any dramas recently?",
+            "Do you watch dramas these days?",
             "recommend",
-            "I recommend.",
+            "recommend.",
             "Please recommend.",
             "Please recommend me too."
     };

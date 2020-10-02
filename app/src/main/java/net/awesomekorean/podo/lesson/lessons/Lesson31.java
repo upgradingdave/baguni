@@ -49,8 +49,8 @@ public class Lesson31 extends LessonInit implements Lesson, LessonItem, Serializ
             "I took a taxi.",
             "I just took a taxi.",
             "late",
-            "I think I'm going to be late.",
-            "I think I'm going to be a little late."
+            "I think I will be late.",
+            "I think I will be a little late."
     };
 
     private String[] sentenceExplain = {

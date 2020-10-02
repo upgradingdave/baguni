@@ -12,7 +12,7 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"요즘", "너무", "바쁘다", "많이", "피곤하다", "아침", "일찍", "일어나다"};
 
-    private String[] wordBack = {"recently", "too much", "busy", "many / much", "tired", "morning / breakfast", "early", "wake up"};
+    private String[] wordBack = {"recently / lately", "too / too much", "busy", "many / much", "tired", "morning / breakfast", "early", "wake up"};
 
     private String[] wordPronunciation = {"-", "-", "-", "[마니]", "-", "-", "-", "[이러나다]"};
 
@@ -40,11 +40,11 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] sentenceBack = {
             "busy",
-            "I'm busy.",
+            "busy.",
             "I'm very busy.",
             "I'm very busy recently.",
             "tired",
-            "I'm tired.",
+            "tired.",
             "I'm so tired.",
             "Therefore, I'm so tired.",
             "I'm so tired because I'm very busy recently.",
@@ -53,8 +53,8 @@ public class Lesson08 extends LessonInit implements Lesson, LessonItem, Serializ
             "I can't wake up.",
             "I can't wake up early.",
             "I can't wake up early in the morning.",
-            "to eat",
-            "I eat.",
+            "eat",
+            "eat.",
             "I can't eat.",
             "So I can't have breakfast as well.",
             "I can't have breakfast as well because I can't wake up early in the morning."

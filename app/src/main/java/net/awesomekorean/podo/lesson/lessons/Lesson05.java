@@ -34,19 +34,19 @@ public class Lesson05 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] sentenceBack = {
-            "to do",
-            "Will you do it?",
+            "do",
+            "Will you do?",
             "What will you do?",
             "What will you do tomorrow.",
-            "to go",
+            "go",
             "I will go.",
-            "I will go to the restaurant.",
+            "I will go to a restaurant.",
             "I will go to a Korean restaurant.",
             "I will go to a Korean restaurant with my friend.",
             "What about on the weekend?",
-            "to see / to watch",
+            "see / watch / look",
             "I will watch.",
-            "I will watch a movie.",
+            "I will watch a fun movie.",
             "I will watch an interesting movie."
     };
 

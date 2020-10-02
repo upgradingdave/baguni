@@ -13,7 +13,7 @@ public class Lesson27 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"살다", "싸다", "비싸다", "사다", "팔다", "하지만"};
 
-    private String[] wordBack = {"to live", "cheap", "expensive", "to buy", "to sell", "however"};
+    private String[] wordBack = {"live in", "cheap", "expensive", "buy", "sell", "however"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-"};
 
@@ -35,8 +35,8 @@ public class Lesson27 extends LessonInit implements Lesson, LessonItem, Serializ
             "I buy it everyday.",
             "Mango is very cheap so I buy it a lot.",
             "Mango is very cheap in Thailand so I buy it a lot.",
-            "It sells Thai mango.",
-            "It sells Thai mango in Korea as well.",
+            "They sell Thai mango.",
+            "They sell Thai mango in Korea as well.",
             "I can't buy it.",
             "It is very expensive so I can't buy."
     };

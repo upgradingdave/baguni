@@ -14,7 +14,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"날씨", "어때요?", "여기", "조금", "춥다", "눈", "오다", "별로"};
 
-    private String[] wordBack = {"weather", "How is it?", "here", "a bit", "cold", "snow", "to come", "not that much"};
+    private String[] wordBack = {"weather", "How is it?", "here", "a bit", "cold", "snow", "come", "not that much(or many)"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "[춥따]", "-", "-", "-"};
 
@@ -41,7 +41,7 @@ public class Lesson07 extends LessonInit implements Lesson, LessonItem, Serializ
             "cold",
             "It's cold.",
             "It's a bit cold.",
-            "to come",
+            "come",
             "Is it coming?",
             "Is it snowing?",
             "It's coming.",

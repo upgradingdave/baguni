@@ -15,7 +15,7 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"예전에", "언어교환", "배우다", "좋다", "비슷하다", "단어"};
 
-    private String[] wordBack = {"in the past", "language exchange", "to learn", "good, nice", "similar", "vocabulary"};
+    private String[] wordBack = {"in the past", "language exchange", "learn", "good, nice", "similar", "vocabulary"};
 
     private String[] wordPronunciation = {"[예저네]", "[어너교환]", "-", "[조타]", "[비스타다]", "[다너]"};
 
@@ -44,13 +44,13 @@ public class Lesson16 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] sentenceBack = {
             "Can you do it?",
             "Can you speak Korean?",
-            "Yes, I'm a Korean.",
-            "I'm a Japanese.",
+            "Yes, I am Korean.",
+            "I am Japanese.",
             "I'm learning.",
             "I'm learning Korean.",
             "I'm learning Korean recently.",
             "Can you do it?",
-            "Can you exchange language?",
+            "Can you do a language exchange?",
             "Nice",
             "I'm learning Japanese too.",
             "How's it?",

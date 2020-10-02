@@ -14,7 +14,7 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"어렵다", "말하다", "쓰다", "읽다", "쉽다"};
 
-    private String[] wordBack = {"difficult", "to speak", "to write", "to read", "easy"};
+    private String[] wordBack = {"difficult", "speak", "write", "read", "easy"};
 
     private String[] wordPronunciation = {"[어렵따]", "-", "-", "[익따]", "[쉽따]"};
 
@@ -48,17 +48,17 @@ public class Lesson12 extends LessonInit implements Lesson, LessonItem, Serializ
             "Korean is difficult.",
             "interesting",
             "It's interesting.",
-            "Korean is difficult but interesting.",
+            "Korean is difficult. But it's interesting.",
             "Korean is difficult but interesting.",
             "Is it difficult?",
-            "What is difficult?",
-            "What is the most difficult?",
+            "What is the difficult part?",
+            "What is the most difficult part?",
             "It's difficult.",
             "Speaking is difficult.",
             "Speaking and writing are difficult.",
             "It's easy.",
             "Reading is easy.",
-            "Speaking and writing are difficult but reading is easy.",
+            "Speaking and writing are difficult. But reading is easy.",
             "Speaking and writing are difficult but reading is easy."
     };
 

@@ -12,7 +12,7 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"어제", "집", "아니요", "쇼핑"};
 
-    private String[] wordBack = {"yesterday", "home", "no", "shopping"};
+    private String[] wordBack = {"yesterday", "home / house", "no", "shopping"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-"};
 
@@ -38,9 +38,9 @@ public class Lesson04 extends LessonInit implements Lesson, LessonItem, Serializ
             "Were you at home?",
             "Were you at home yesterday?",
             "no",
-            "to do",
             "do",
-            "Did you do it?",
+            "do",
+            "Did you do?",
             "What did you do?",
             "What did you do yesterday?",
             "I went shopping."

@@ -12,7 +12,7 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"알다", "모르다", "쓰다", "가르치다", "선생님", "만들다", "받다"};
 
-    private String[] wordBack = {"know", "don't know", "to use", "to teach", "teacher", "to make", "to receive"};
+    private String[] wordBack = {"know", "don't know", "use", "teach", "teacher", "make", "receive"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "[받따]"};
 
@@ -34,7 +34,7 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
             "Do you know the 'podo' app?",
             "No. I don't know.",
             "What is it?",
-            "What is it?",
+            "What is that?",
             "It's an app developed by a teacher.",
             "It's an app developed by a teacher who teaches Korean.",
             "Try it.",

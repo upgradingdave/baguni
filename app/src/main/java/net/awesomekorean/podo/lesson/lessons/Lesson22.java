@@ -31,15 +31,15 @@ public class Lesson22 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] sentenceBack = {
             "who?",
-            "Who is this picture?",
+            "Who is it in the picture?",
             "It's a picture.",
-            "It's a picture of my childhood.",
+            "It's my childhood picture.",
             "cute.",
-            "Where is here?",
+            "Where is this?",
             "By the way, where is here?",
-            "It was taken.",
-            "It was taken when I went to travel to Korea.",
-            "It was taken when I went to travel to Korea with my mom and dad."
+            "I took the photo.",
+            "I took the photo when I went on a trip to Korea.",
+            "I took the photo when I went on a trip to Korea with my mom and dad."
     };
 
     private String[] sentenceExplain = {

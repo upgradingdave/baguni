@@ -12,7 +12,7 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"아직", "자막", "이해하다", "괜찮다"};
 
-    private String[] wordBack = {"yet", "subtitles", "understand", "all right, OK"};
+    private String[] wordBack = {"yet", "subtitles", "understand", "all right / okay"};
 
     private String[] wordPronunciation = {"-", "-", "-", "[괜찬타]"};
 
@@ -33,8 +33,8 @@ public class Lesson15 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] sentenceBack = {
-            "It's interesting.",
-            "This drama is interesting.",
+            "It's fun.",
+            "This drama is fun.",
             "However",
             "There isn't.",
             "There's no subtitles.",

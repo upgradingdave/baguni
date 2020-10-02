@@ -13,7 +13,7 @@ public class Lesson29 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"영어", "무슨", "주로", "여행"};
 
-    private String[] wordBack = {"English", "what kind of", "mostly", "travel"};
+    private String[] wordBack = {"English", "what kind of", "mostly", "travel / trip"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-"};
 
@@ -36,16 +36,16 @@ public class Lesson29 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] sentenceBack = {
             "I started.",
-            "I started language exchange.",
-            "I started language exchange with a Korean friend.",
+            "I started a language exchange.",
+            "I started a language exchange with a Korean friend.",
             "how many hours",
             "how many hours",
-            "How many hours do you do?",
+            "How many hours do you do it?",
             "We speak English.",
             "We speak Korean and English.",
             "We speak Korean and English for 1 hour.",
-            "During language exchange",
-            "What are you talking about?",
+            "During a language exchange",
+            "What do you talk?",
             "We talk a lot.",
             "We talk a lot about food, travel and exercise.",
             "Mostly we talk a lot about food, travel and exercise."

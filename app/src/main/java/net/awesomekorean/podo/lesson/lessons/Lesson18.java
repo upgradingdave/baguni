@@ -14,7 +14,7 @@ public class Lesson18 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"주", "호텔", "예약", "돕다", "처음", "아마", "기다리다"};
 
-    private String[] wordBack = {"week", "hotel", "reservation", "to help", "first time", "maybe", "to wait"};
+    private String[] wordBack = {"week", "hotel", "reservation / booking", "help", "first time", "maybe", "wait"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-", "-", "-"};
 

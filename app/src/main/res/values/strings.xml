@@ -50,7 +50,7 @@
     <string name="CONFIRM_REPORT">Do you have something to tell \'podo\'? \n (bug report or suggestions)</string>
     <string name="WHAT_POINT">What is the point?</string>
     <string name="THINGS_YOU_CAN_DO_WITH_POINTS">Things you can do with points</string>
-    <string name="UNLOCK_SPECIAL_LESSONS">Lesson: Unlock Special Lessons</string>
+    <string name="UNLOCK_LESSONS">Lesson: Unlock Lessons</string>
     <string name="UNLOCK_READINGS">Reading: Unlock Readings</string>
     <string name="ASK_CORRECTION">Writing: Ask a Korean teacher for correction</string>
     <string name="HOW_TO_COLLECT_POINTS">How to collect points</string>
@@ -157,12 +157,27 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="NEXT_LEVEL">Next Level</string>
     <string name="BEGINNER_LEVEL">Beginner Level</string>
     <string name="INTERMEDIATE_LEVEL">Intermediate Level</string>
+    <string name="ADVANCED_LEVEL">Advanced Level</string>
     <string name="REVIEW">REVIEW</string>
     <string name="REWARDS">REWARDS</string>
     <string name="PLEASE_COMPLETE_PREVIOUS_LESSON">Please complete previous lesson</string>
     <string name="ALREADY_REWARDED">You have already been rewarded</string>
-
-
+    <string name="PODO_LESSON_GOAL">podo lesson\'s goal</string>
+    <string name="BEGINNER">Beginner</string>
+    <string name="INTERMEDIATE">Intermediate (to be updated)</string>
+    <string name="ADVANCED">Advanced (to be updated)</string>
+    <string name="PODO_LESSON_GOAL_BEGINNER_1">
+        "Learn by minimizing the words and expressions you use most in everyday life."</string>
+    <string name="PODO_LESSON_GOAL_BEGINNER_2">
+        "Don't waste your time and effort learning something you don't use often."</string>
+    <string name="PODO_LESSON_GOAL_INTERMEDIATE_1">
+        "Focuses on practicing what you've learned so far."</string>
+    <string name="PODO_LESSON_GOAL_INTERMEDIATE_2">
+        "Pause learning new words and expressions for a while."</string>
+    <string name="PODO_LESSON_GOAL_INTERMEDIATE_3">
+        "Practice making conversations using only what you've learned in the beginner lessons."</string>
+    <string name="PODO_LESSON_GOAL_ADVANCED_1">
+        "It's time to upgrade your expressiveness by learning new(more advanced) words and expressions."</string>
 
 
 

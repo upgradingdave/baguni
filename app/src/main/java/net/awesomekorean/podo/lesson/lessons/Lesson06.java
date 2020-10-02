@@ -36,15 +36,15 @@ public class Lesson06 extends LessonInit implements Lesson, LessonItem, Serializ
             "where",
             "Where are you?",
             "Where are you now?",
-            "to go",
+            "go",
             "I'm going.",
             "I'm going home.",
-            "to go",
-            "I go.",
+            "go",
+            "go.",
             "I go to the gym.",
             "Let's go to the gym together.",
             "Let's go the gym together later.",
-            "Good."
+            "Great."
     };
 
     private String[] sentenceExplain = {

@@ -13,7 +13,7 @@ public class Lesson33 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"새", "듣다", "보내다", "빨리"};
 
-    private String[] wordBack = {"new", "listen", "to send", "quickly"};
+    private String[] wordBack = {"new", "listen", "send", "quickly"};
 
     private String[] wordPronunciation = {"-", "[듣따]", "-", "-"};
 
@@ -35,20 +35,20 @@ public class Lesson33 extends LessonInit implements Lesson, LessonItem, Serializ
     };
 
     private String[] sentenceBack = {
-            "take a listen to",
-            "Have you heard?",
-            "Have you heard the new song?",
-            "Have you heard the new BTS song?",
+            "Listen.",
+            "Have you listened to?",
+            "Have you listened to the new song?",
+            "Have you listened to the BTS new song?",
             "Not yet.",
-            "how is it?",
-            "really good.",
-            "You should take a listen to.",
+            "How is it?",
+            "Really good.",
+            "You should listen it.",
             "I'll send it.",
-            "I will send you a YouTube link.",
+            "I will send you the YouTube link.",
             "Thank you.",
             "I'll listen.",
             "I'll listen now.",
-            "I'll listen quickly now."
+            "I'll quickly listen it now."
     };
 
     private String[] sentenceExplain = {

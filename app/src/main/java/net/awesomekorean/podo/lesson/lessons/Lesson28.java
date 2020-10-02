@@ -12,7 +12,7 @@ public class Lesson28 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"다이어트", "시작하다", "매일", "운동하다", "혼자", "재미없다"};
 
-    private String[] wordBack = {"diet", "start", "everyday", "exercise", "alone", "not funny"};
+    private String[] wordBack = {"(be on a)diet", "start", "everyday", "exercise", "alone", "not fun"};
 
     private String[] wordPronunciation = {"-", "[시자카다]", "-", "-", "-", "[재미업따]"};
 
@@ -31,15 +31,15 @@ public class Lesson28 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] sentenceBack = {
             "I started.",
-            "I started to go on a diet.",
-            "I recently started to go on a diet.",
-            "I exercise.",
-            "I exercise at home.",
-            "I exercise at home every day.",
-            "Do you exercise alone?",
-            "It's not funny, isn't it?",
+            "I started a diet.",
+            "I just started a diet.",
+            "I work out.",
+            "I work out at home.",
+            "I work out at home every day.",
+            "Do you work out alone?",
+            "It's not fun, isn't it?",
             "Watch TV.",
-            "I exercise while watching TV."
+            "I watch TV while I am working out."
     };
 
     private String[] sentenceExplain = {

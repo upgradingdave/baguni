@@ -49,12 +49,12 @@ public class Lesson11 extends LessonInit implements Lesson, LessonItem, Serializ
             "sing a song",
             "sing a song.",
             "good at singing.",
-            "BTS sings a song well.",
+            "BTS is good at singing.",
             "dance",
             "dance",
             "good at dancing.",
             "good at dancing as well.",
-            "BTS is good at singing and dancing as well.",
+            "BTS is good at singing. And they are good at dancing as well.",
             "BTS is good at singing and dancing as well."
     };
 

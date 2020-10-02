@@ -12,7 +12,7 @@ public class Lesson00 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private String[] wordFront = {"안녕하세요", "다음", "또", "보다", "가다"};
 
-    private String[] wordBack = {"Hello", "next", "again", "to see / to watch", "to go"};
+    private String[] wordBack = {"Hello", "next", "again", "see / watch / look", "go"};
 
     private String[] wordPronunciation = {"-", "-", "-", "-", "-"};
 
