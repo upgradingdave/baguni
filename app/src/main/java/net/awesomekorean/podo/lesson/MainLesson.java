@@ -73,6 +73,11 @@ import net.awesomekorean.podo.lesson.lessons.Lesson32;
 import net.awesomekorean.podo.lesson.lessons.Lesson33;
 import net.awesomekorean.podo.lesson.lessons.Lesson34;
 import net.awesomekorean.podo.lesson.lessons.Lesson35;
+import net.awesomekorean.podo.lesson.lessons.Lesson36;
+import net.awesomekorean.podo.lesson.lessons.Lesson37;
+import net.awesomekorean.podo.lesson.lessons.Lesson38;
+import net.awesomekorean.podo.lesson.lessons.Lesson39;
+import net.awesomekorean.podo.lesson.lessons.Lesson40;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.util.ArrayList;
@@ -103,7 +108,8 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             new LessonReview02(), new Rewards02(), new Lesson22(), new Lesson28(), new Lesson29(), new Lesson17(),
             new Lesson20(), new Lesson18(), new Lesson21(), new Lesson23(), new Lesson35(), new LessonReview03(),
             new Rewards03(), new Lesson24(), new Lesson25(), new Lesson26(), new Lesson30(), new Lesson31(),
-            new Lesson32(), new Lesson33(), new Lesson34(), new LessonReview04(), new Rewards04()
+            new Lesson32(), new Lesson33(), new Lesson34(), new LessonReview04(), new Rewards04(),
+            new Lesson36(), new Lesson37(), new Lesson38(), new Lesson39()
     };
 
     LessonItem[] intermediate = {
