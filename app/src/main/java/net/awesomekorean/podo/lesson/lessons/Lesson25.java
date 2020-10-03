@@ -24,8 +24,8 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
             "그게 뭐예요?",
             "선생님이 만든 앱이에요.",
             "한국어를 가르치는 선생님이 만든 앱이에요.",
-            "써 보세요.",
-            "한번 써 보세요.",
+            "써 봐요.",
+            "한번 써 봐요.",
             "다운 받아 볼게요."
     };
 
@@ -58,7 +58,7 @@ public class Lesson25 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] dialog = {
             "포도앱 알아요?",
             "아니요. 몰라요.\n그게 뭐예요?",
-            "한국어를 가르치는 선생님이 만든 앱이에요.\n한번 써 보세요.",
+            "한국어를 가르치는 선생님이 만든 앱이에요.\n한번 써 봐요.",
             "고마워요.\n다운 받아 볼게요"
     };
 
