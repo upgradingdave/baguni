@@ -188,9 +188,11 @@ public class MainLesson extends Fragment implements View.OnClickListener {
                 if (lessonComplete.contains(list[i].getLessonId())) {
                     list[i].setIsCompleted(true);
                     list[i].setIsActive(true);
-                    list[i + 1].setIsActive(true);
                     list[i].setIsCurrent(false);
-                    list[i + 1].setIsCurrent(true);
+                    if(i < list.length - 1) {
+                        list[i + 1].setIsActive(true);
+                        list[i + 1].setIsCurrent(true);
+                    }
 
                     // 스페셜레슨 세팅
                     if (list[i].getSLesson() != null) {

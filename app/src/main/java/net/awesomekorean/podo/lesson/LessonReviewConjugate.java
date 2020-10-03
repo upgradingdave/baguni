@@ -47,8 +47,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
     int conjugationIndex;
     int selectedBaseFormIndex;
     int selectedConjugationIndex;
-    int[] answerListBaseForm = new int[3];
-    int[] answerListConjugation = new int[3];
+    int[] answerList = new int[3];
     ToggleButton toggleButton;
     boolean isBaseForm;
     PlaySoundPool playSoundPool;
@@ -79,7 +78,6 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
         lessonReview = activity.lessonReview;
         baseFormSize = activity.lessonReview.getBaseForm().length;
-        conjugationSize = activity.lessonReview.getConjugation()[0].length;
 
         isBaseForm = true;
         makeQuiz();
@@ -116,9 +114,23 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
 
     // 정답을 제외한 보기 2개를 중복되지 않게 넣기
-    private void getAnswerList(int[] answerList, int size, int index) {
-        answerList[0] = index;
-        int count = 1;
+    private void getAnswerList(int size) {
+        // answerList 초기화
+        for(int i=0; i<3; i++) {
+            answerList[i] = size;
+        }
+
+        int count = 0;
+
+        if(isBaseForm) {
+            answerList[0] = baseFormIndex;
+            count = 1;
+
+        // 선택한 기본형이 정답일 때
+        } else if(selectedBaseFormIndex == baseFormIndex) {
+            answerList[0] = conjugationIndex;
+            count = 1;
+        }
 
         while (count < answerList.length) {
             int number = getRandomNum(size);
@@ -135,16 +147,16 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
     private void setBtns() {
         if(isBaseForm) {
-            getAnswerList(answerListBaseForm, baseFormSize, baseFormIndex);
+            getAnswerList(baseFormSize);
         } else {
-            if(conjugationSize < 4) {
-                answerListConjugation[0] = conjugationIndex;
+            if(conjugationSize < 3) {
+                answerList[0] = conjugationIndex;
             } else {
-                getAnswerList(answerListConjugation, conjugationSize, conjugationIndex);
+                getAnswerList(lessonReview.getConjugation()[selectedBaseFormIndex].length);
             }
         }
 
-        if(!isBaseForm && conjugationSize < 4) {
+        if(!isBaseForm && conjugationSize < 3) {
             makeBtns(1);
         } else {
             makeBtns(3);
@@ -169,17 +181,17 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
             toggleButton.setOnClickListener(this);
 
             if(isBaseForm) {
-                toggleButton.setText(lessonReview.getBaseForm()[answerListBaseForm[i]]);
-                toggleButton.setTextOn(lessonReview.getBaseForm()[answerListBaseForm[i]]);
-                toggleButton.setTextOff(lessonReview.getBaseForm()[answerListBaseForm[i]]);
+                toggleButton.setText(lessonReview.getBaseForm()[answerList[i]]);
+                toggleButton.setTextOn(lessonReview.getBaseForm()[answerList[i]]);
+                toggleButton.setTextOff(lessonReview.getBaseForm()[answerList[i]]);
                 toggleButton.setTag(stringBaseForm);
                 toggleButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.toggle_pink_transparent));
                 flexBaseForm.addView(toggleButton);
 
             } else {
-                toggleButton.setText(lessonReview.getConjugation()[selectedBaseFormIndex][answerListConjugation[i]]);
-                toggleButton.setTextOn(lessonReview.getConjugation()[selectedBaseFormIndex][answerListConjugation[i]]);
-                toggleButton.setTextOff(lessonReview.getConjugation()[selectedBaseFormIndex][answerListConjugation[i]]);
+                toggleButton.setText(lessonReview.getConjugation()[selectedBaseFormIndex][answerList[i]]);
+                toggleButton.setTextOn(lessonReview.getConjugation()[selectedBaseFormIndex][answerList[i]]);
+                toggleButton.setTextOff(lessonReview.getConjugation()[selectedBaseFormIndex][answerList[i]]);
                 toggleButton.setTag(stringConjugation);
                 toggleButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.toggle_purple_transparent));
                 flexConjugation.addView(toggleButton);
@@ -192,8 +204,15 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
         btnConfirm.setEnabled(false);
         flexBaseForm.removeAllViews();
         flexConjugation.removeAllViews();
-        baseFormIndex = getRandomNum(baseFormSize - 1);
-        conjugationIndex = getRandomNum(conjugationSize - 1);
+
+        // 같은 문제 출제 방지
+        int randomNum = getRandomNum(baseFormSize - 1);
+        while(randomNum == baseFormIndex) {
+            randomNum = getRandomNum(baseFormSize - 1);
+        }
+
+        baseFormIndex = randomNum;
+        conjugationIndex = getRandomNum(lessonReview.getConjugation()[baseFormIndex].length - 1);
         tvEnglish.setText(lessonReview.getTranslate()[baseFormIndex][conjugationIndex]);
         setBtns();
     }
@@ -219,8 +238,8 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
                 if(selectedBtn.isChecked()) {
                     selectedBtn.setTextColor(Color.WHITE);
                     String selectedBtnText = selectedBtn.getText().toString();
-                    tvAnswer.setText(selectedBtnText);
 
+                    // 기본형 버튼 클릭
                     if (selectedBtn.getTag().equals(stringBaseForm)) {
                         selectedBaseFormIndex = Arrays.asList(lessonReview.getBaseForm()).indexOf(selectedBtnText);
                         if (selectedBaseToggle != null && !selectedBtn.equals(selectedBaseToggle)) {
@@ -230,9 +249,12 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
                         selectedBaseToggle = selectedBtn;
                         isBaseForm = false;
                         flexConjugation.removeAllViews();
+                        conjugationSize = lessonReview.getConjugation()[selectedBaseFormIndex].length;
                         setBtns();
 
+                    // 활용 버튼 클릭
                     } else {
+                        tvAnswer.setText(selectedBtnText);
                         btnConfirm.setEnabled(true);
                         selectedConjugationIndex = Arrays.asList(lessonReview.getConjugation()[selectedBaseFormIndex]).indexOf(selectedBtnText);
                         if (selectedConjugationToggle != null && !selectedBtn.equals(selectedConjugationToggle)) {
@@ -242,6 +264,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
                         selectedConjugationToggle = selectedBtn;
                     }
 
+                // 같은 버튼 한번 더 클릭
                 } else {
                     btnConfirm.setEnabled(false);
                     selectedBtn.setChecked(false);
