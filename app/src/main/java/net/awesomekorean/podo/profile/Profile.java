@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,6 +43,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.GetRandomPoint;
 import net.awesomekorean.podo.MainActivity;
+import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnixTimeStamp;
@@ -117,6 +119,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_profile);
 
         context = getApplicationContext();
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         adsManager = AdsManager.getInstance();
 
@@ -281,6 +285,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btnGetPoint :
+                PlaySoundPool playSoundPool = new PlaySoundPool(context);
+                playSoundPool.playSoundLesson(2);
+
                 // 오늘 출석만 남기고 다 초기화
                 UserInformation userInformation = SharedPreferencesInfo.getUserInfo(context);
                 Calendar cal = Calendar.getInstance();
@@ -316,6 +323,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                                             Toast.makeText(context, getString(R.string.UPDATED_USERNAME), Toast.LENGTH_SHORT).show();
                                             MainActivity.userName = user.getDisplayName();
                                             userName.setText(newName);
+                                            SharedPreferencesInfo.setUserName(context, newName);
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -420,17 +428,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    // 광고 보고 포인트 받아 왔을 때 userPoint 에 최신 포인트 반영
-    @Override
-    protected void onActivityResult(final int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK) {
-            userInformation = SharedPreferencesInfo.getUserInfo(context);
-            userPoint.setText(String.valueOf(userInformation.getPoints()));
-        }
-    }
-
 
     // editProfile 이랑 reportBug 펼치기/접기 메소드
     private void setExtendableButton(ImageView arrow, LinearLayout clickedLayout) {
@@ -449,6 +446,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         if(isClicked) {
             arrow.setImageResource(R.drawable.arrow_right_grey);
             clickedLayout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(userInformation != null) {
+            userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+            userPoint.setText(String.valueOf(userInformation.getPoints()));
         }
     }
 }

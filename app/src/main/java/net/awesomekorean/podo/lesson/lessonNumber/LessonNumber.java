@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -82,6 +83,8 @@ public class LessonNumber extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_number_frame);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 

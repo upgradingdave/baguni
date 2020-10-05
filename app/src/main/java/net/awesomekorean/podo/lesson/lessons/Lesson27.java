@@ -32,7 +32,7 @@ public class Lesson27 extends LessonInit implements Lesson, LessonItem, Serializ
     private String[] sentenceBack = {
             "I live.",
             "I live in thailand.",
-            "I buy it everyday.",
+            "I buy it a lot.",
             "Mango is very cheap so I buy it a lot.",
             "Mango is very cheap in Thailand so I buy it a lot.",
             "They sell Thai mango.",

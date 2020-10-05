@@ -76,6 +76,8 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
         playSoundPool = new PlaySoundPool(getContext());
 
+        setBtnConfirm(false);
+
         lessonReview = activity.lessonReview;
         baseFormSize = activity.lessonReview.getBaseForm().length;
 
@@ -241,6 +243,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
                     // 기본형 버튼 클릭
                     if (selectedBtn.getTag().equals(stringBaseForm)) {
+                        setBtnConfirm(false);
                         selectedBaseFormIndex = Arrays.asList(lessonReview.getBaseForm()).indexOf(selectedBtnText);
                         if (selectedBaseToggle != null && !selectedBtn.equals(selectedBaseToggle)) {
                             selectedBaseToggle.setChecked(false);
@@ -254,6 +257,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
                     // 활용 버튼 클릭
                     } else {
+                        setBtnConfirm(true);
                         tvAnswer.setText(selectedBtnText);
                         btnConfirm.setEnabled(true);
                         selectedConjugationIndex = Arrays.asList(lessonReview.getConjugation()[selectedBaseFormIndex]).indexOf(selectedBtnText);
@@ -266,6 +270,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
 
                 // 같은 버튼 한번 더 클릭
                 } else {
+                    setBtnConfirm(false);
                     btnConfirm.setEnabled(false);
                     selectedBtn.setChecked(false);
                     selectedBtn.setTextColor(Color.GRAY);
@@ -277,6 +282,15 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
                     tvAnswer.setText("");
                 }
                 break;
+        }
+    }
+
+
+    public void setBtnConfirm(boolean b) {
+        if(b) {
+            btnConfirm.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_purple_25));
+        } else {
+            btnConfirm.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_purple_25_transparent));
         }
     }
 

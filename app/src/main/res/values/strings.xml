@@ -97,8 +97,8 @@ Therefore whenever students say numbers, they are confused about which system of
 
 In general, each number system is used in the following situations:
 
-1.Sino-Korean number: Number itself
-2.Native-Korean number: Counting numbers
+1. Sino-Korean number: Number itself
+2. Native-Korean number: Counting numbers (that's why we should use this with an 'unit noun' together)
 
 But when you learn Korean numbers, you can see that this rule is not always correct.
 (For example, why the hour is Native-Korean number but the minute is Sino-Korean number?)
@@ -106,8 +106,7 @@ But when you learn Korean numbers, you can see that this rule is not always corr
 So I suggest to students
 'Just listen and follow the correct number a lot. Then you will feel something strange right before you try to use the wrong number.'
 
-This lesson is designed to learn Sino-Korean number and Native-Korean number
-as well as to practice the numbers repeatedly in different situations.
+This lesson is designed to learn Sino-Korean number and Native-Korean number as well as to practice the numbers repeatedly in different situations.
 
 Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="SINO_NUMBER">Sino-Korean number</string>
@@ -167,15 +166,15 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="INTERMEDIATE">Intermediate (to be updated)</string>
     <string name="ADVANCED">Advanced (to be updated)</string>
     <string name="PODO_LESSON_GOAL_BEGINNER_1">
-        "Learn by minimizing the words and expressions you use most in everyday life."</string>
+        "Learn minimum words and expressions that you mostly use everyday."</string>
     <string name="PODO_LESSON_GOAL_BEGINNER_2">
-        "Don't waste your time and effort learning something you don't use often."</string>
+        "Don't waste your time and effort to learn something you don't use often."</string>
     <string name="PODO_LESSON_GOAL_INTERMEDIATE_1">
         "Focuses on practicing what you've learned so far."</string>
     <string name="PODO_LESSON_GOAL_INTERMEDIATE_2">
-        "Pause learning new words and expressions for a while."</string>
+        "Stop learning new words and expressions for a while."</string>
     <string name="PODO_LESSON_GOAL_INTERMEDIATE_3">
-        "Practice making conversations using only what you've learned in the beginner lessons."</string>
+        "Make sentences using only what you've learned in the beginner lessons."</string>
     <string name="PODO_LESSON_GOAL_ADVANCED_1">
         "It's time to upgrade your expressiveness by learning new(more advanced) words and expressions."</string>
 

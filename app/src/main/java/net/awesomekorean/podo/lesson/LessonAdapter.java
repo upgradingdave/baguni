@@ -232,6 +232,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         LessonItem item = list[position];
         holder.tvItemNo.setText(String.valueOf(position + 1));
+
         if(!item.getIsLocked()) {
             if(!item.getLessonTitle().contains(" ")) {
                 holder.tvItemTitle.setMaxLines(1);
@@ -242,6 +243,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         } else {
             holder.tvItemTitle.setText("");
         }
+
         holder.tvItemSubTitle.setText(item.getLessonSubTitle());
         holder.layoutItemLeft.setVisibility(View.GONE);
         holder.layoutItemRight.setVisibility(View.GONE);
@@ -326,11 +328,19 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 title = (TextView)((ConstraintLayout)holder.layoutItemRight.getChildAt(1)).getChildAt(0);
                 subTitle = (TextView) holder.layoutItemRight.getChildAt(2);
                 subTitle.setText(item.getLessonSubTitle());
+
+                if(!item.getLessonTitle().contains(" ")) {
+                    title.setMaxLines(1);
+                } else {
+                    title.setMaxLines(2);
+                }
+
                 if (item.getIsLocked()) {
                     title.setText("");
                 } else {
                     title.setText(item.getLessonTitle());
                 }
+
                 holder.layoutItemRight.setVisibility(View.VISIBLE);
 
             // 홀수번째 스페셜레슨 왼쪽에
@@ -339,6 +349,13 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 title = (TextView)((ConstraintLayout)holder.layoutItemLeft.getChildAt(1)).getChildAt(0);
                 subTitle = (TextView) holder.layoutItemLeft.getChildAt(2);
                 subTitle.setText(item.getLessonSubTitle());
+
+                if(!item.getLessonTitle().contains(" ")) {
+                    title.setMaxLines(1);
+                } else {
+                    title.setMaxLines(2);
+                }
+
                 if (item.getIsLocked()) {
                     title.setText("");
                 } else {

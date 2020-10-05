@@ -91,7 +91,7 @@
         <Button
             android:id="@+id/btnConfirm"
             android:layout_gravity="center"
-            android:background="@drawable/bg_purple_25"
+            android:background="@drawable/bg_purple_25_transparent"
             android:text="Confirm"
             android:textColor="@color/WHITE"
             android:textStyle="bold"

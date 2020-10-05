@@ -69,7 +69,7 @@ public class WritingAdapter extends BaseAdapter {
         final WritingEntity items = list.get(i);
 
         holder.writingDate.setText(UnixTimeStamp.unixTimeFormat(items.getWritingDate()));
-        holder.letters.setText(Integer.toString(items.getLetters()) + " letters");
+        holder.letters.setText((items.getLetters()) + " letters");
         holder.article.setText(items.getContents());
 
         if(items.getStatus() == 0) {

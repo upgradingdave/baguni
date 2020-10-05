@@ -8,10 +8,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.formats.NativeAdOptions;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
@@ -47,7 +49,6 @@ public class AdsManager {
 
     // 전면광고 로드
     public void loadFullAds(Context context) {
-        MobileAds.initialize(context, ADMOB_APP_ID);
         interstitialAd = new InterstitialAd(context);
         interstitialAd.setAdUnitId(BuildConfig.ADMOB_FULL_ID);
         interstitialAd.loadAd(new AdRequest.Builder().build());
@@ -59,8 +60,8 @@ public class AdsManager {
             }
 
             @Override
-            public void onAdFailedToLoad(int i) {
-                System.out.println("전면 광고 로드에 실패했습니다.");
+            public void onAdFailedToLoad(LoadAdError loadAdError) {
+                System.out.println("보상형 광고 로드에 실패했습니다.");
             }
 
             @Override
@@ -91,7 +92,6 @@ public class AdsManager {
 
     // 리워드 광고 로드하기
     public void loadRewardAds(Context context) {
-        MobileAds.initialize(context, ADMOB_APP_ID);
         rewardedAd = new RewardedAd(context, BuildConfig.ADMOB_REWARD_ID);
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
 
@@ -101,7 +101,7 @@ public class AdsManager {
             }
 
             @Override
-            public void onRewardedAdFailedToLoad(int i) {
+            public void onRewardedAdFailedToLoad(LoadAdError loadAdError) {
                 System.out.println("보상형 광고 로드에 실패했습니다.");
             }
         };
@@ -109,38 +109,50 @@ public class AdsManager {
     }
 
 
+
+
     // 리워드 광고 재생
     public void playRewardAds(final Activity activity) {
-        RewardedAdCallback adCallback = new RewardedAdCallback() {
+        if(rewardedAd.isLoaded()) {
+            RewardedAdCallback adCallback = new RewardedAdCallback() {
 
-            @Override
-            public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-            }
+                @Override
+                public void onRewardedAdOpened() {
+                }
 
-            @Override
-            public void onRewardedAdFailedToShow(int i) {
-                Toast.makeText(activity, "Failed to load ad. Please try it again.", Toast.LENGTH_LONG).show();
-            }
+                @Override
+                public void onRewardedAdClosed() {
+                    loadRewardAds(activity);
+                }
 
-            @Override
-            public void onRewardedAdClosed() {
-                Intent intent = new Intent(activity, GetRandomPoint.class);
-                activity.startActivity(intent);
-                loadRewardAds(activity);
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    Intent intent = new Intent(activity, GetRandomPoint.class);
+                    activity.startActivity(intent);
+                    loadRewardAds(activity);
 
-                // analytics 로그 이벤트 얻기
-                FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
-                Bundle bundle = new Bundle();
-                firebaseAnalytics.logEvent("reward_watch", bundle);
-            }
-        };
-        rewardedAd.show(activity, adCallback);
+                    // analytics 로그 이벤트 얻기
+                    FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
+                    Bundle bundle = new Bundle();
+                    firebaseAnalytics.logEvent("reward_watch", bundle);
+                }
+
+                @Override
+                public void onRewardedAdFailedToShow(AdError adError) {
+                    Toast.makeText(activity, "Failed to load ad. Please try it again.", Toast.LENGTH_LONG).show();
+                }
+            };
+            rewardedAd.show(activity, adCallback);
+
+        } else {
+            Toast.makeText(activity, "Failed to load ad. Please try it again.", Toast.LENGTH_LONG).show();
+            loadRewardAds(activity);
+        }
     }
 
 
     // 네이티브 광고 로드하기
     public void loadNativeAds(Context context) {
-        MobileAds.initialize(context, ADMOB_APP_ID);
         AdLoader adLoader = new AdLoader.Builder(context, BuildConfig.ADMOB_NATIVE_ID)
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override

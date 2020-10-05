@@ -2,6 +2,7 @@ package net.awesomekorean.podo.lesson.lessonHangul;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -99,6 +100,8 @@ public class LessonHangul extends AppCompatActivity implements Button.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_hangul);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         context = getApplicationContext();
 

@@ -1,0 +1,7 @@
+<!-- drawable/bg_white_32_top.xmltop.xml -->
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/PURPLE_TRANSPARENT"/>
+    <corners android:radius="25dp" />
+</shape>

@@ -137,7 +137,12 @@ public class LessonReviewSentence extends Fragment implements View.OnClickListen
 
     // 문장을 음절로 나누고 랜덤으로 섞어서 버튼으로 만들어 줌
     public void makeQuiz() {
-        quizIndex = getRandomNum(activity.sentenceFront.size());
+        int rand = getRandomNum(activity.sentenceFront.size());
+        while (quizIndex == rand) {
+            System.out.println("같음! 다시!");
+            rand = getRandomNum(activity.sentenceFront.size());
+        }
+        quizIndex = rand;
         sentence = activity.sentenceFront.get(quizIndex);
         syllables = new String[sentence.length()];
 
