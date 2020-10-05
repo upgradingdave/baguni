@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,6 +83,8 @@ public class LessonFrame extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_lesson_frame);
 
         context = getApplicationContext();
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         gestureListenerWord = new SwipeListenerWord();
         gestureListenerSentence = new SwipeListenerSentence();

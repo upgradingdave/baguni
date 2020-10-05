@@ -1,6 +1,7 @@
 package net.awesomekorean.podo;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 
@@ -135,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         SettingStatusBar.setStatusBar(this);
 
@@ -471,17 +474,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         Intent intent = new Intent(this, ConfirmQuit.class);
         intent.putExtra(getResources().getString(R.string.IS_MAIN), true);
         startActivity(intent);
-    }
-
-
-    @Override
-    protected void onActivityResult(final int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK) {
-            userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
-            userPoint.setText(String.valueOf(userInformation.getPoints()));
-        }
     }
 
 

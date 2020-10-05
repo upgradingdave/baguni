@@ -25,18 +25,14 @@ public class CollectionRepository {
     private String front; // 플래시 카드 앞면
     private String back; // 플래시 카드 뒷면
 
-    PlaySoundPool playSoundPool;
-
     Context context;
 
     public CollectionRepository(Context context) {
-
         this.context = context;
         db = Room.databaseBuilder(context, CollectionDb.class, DB_NAME).build();
     }
 
     public LiveData<List<CollectionEntity>> getAll() {
-
         return db.collectionDao().getAll();
     }
 

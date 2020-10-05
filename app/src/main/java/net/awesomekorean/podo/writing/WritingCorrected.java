@@ -36,6 +36,7 @@ public class WritingCorrected extends AppCompatActivity implements View.OnClickL
     ImageView btnBack;
     Button btnGiveUsFeedback;
     Button btnSend;
+    ImageView btnCloseFeedback;
 
     LinearLayout sendFeedback;
     LinearLayout sendFeedbackResult;
@@ -62,13 +63,14 @@ public class WritingCorrected extends AppCompatActivity implements View.OnClickL
         btnBack = findViewById(R.id.btnBack);
         btnGiveUsFeedback = findViewById(R.id.btnGiveUsFeedback);
         btnSend = findViewById(R.id.btnSend);
+        btnCloseFeedback = findViewById(R.id.btnCloseFeedback);
         writingOriginal.setMovementMethod(new ScrollingMovementMethod());
         writingCorrected.setMovementMethod(new ScrollingMovementMethod());
         feedbackTeacher.setMovementMethod(new ScrollingMovementMethod());
         btnBack.setOnClickListener(this);
         btnGiveUsFeedback.setOnClickListener(this);
         btnSend.setOnClickListener(this);
-        sendFeedback.setOnClickListener(this);
+        btnCloseFeedback.setOnClickListener(this);
 
         intent = getIntent();
 
@@ -85,9 +87,16 @@ public class WritingCorrected extends AppCompatActivity implements View.OnClickL
         }
 
         writingOriginal.setText(article);
-        writingCorrected.setText(Html.fromHtml(correction));
-        feedbackTeacher.setText(feedbackT);
-        feedbackStudent.setText(feedbackS);
+        if(correction != null) {
+            writingCorrected.setText(Html.fromHtml(correction));
+        }
+        if(feedbackT != null) {
+            feedbackTeacher.setText(feedbackT);
+        }
+        if(feedbackS != null) {
+            btnGiveUsFeedback.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_purple_25_transparent));
+            btnGiveUsFeedback.setEnabled(false);
+        }
     }
 
     @Override
@@ -101,10 +110,6 @@ public class WritingCorrected extends AppCompatActivity implements View.OnClickL
 
             case R.id.btnGiveUsFeedback :
                 sendFeedback.setVisibility(View.VISIBLE);
-                break;
-
-            case R.id.sendFeedback :
-                sendFeedback.setVisibility(View.GONE);
                 break;
 
             case R.id.btnSend :
@@ -138,7 +143,10 @@ public class WritingCorrected extends AppCompatActivity implements View.OnClickL
                         finish();
                     }
                 }, 1000);
+                break;
 
+            case R.id.btnCloseFeedback :
+                sendFeedback.setVisibility(View.GONE);
                 break;
         }
     }

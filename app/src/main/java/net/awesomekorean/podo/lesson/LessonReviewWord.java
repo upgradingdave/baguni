@@ -87,8 +87,13 @@ public class LessonReviewWord extends Fragment implements View.OnClickListener {
 
     // 선택지에 들어갈 정답 및 보기 4개를 중복되지 않게 랜덤으로 뽑기
     public void getAnswerList(int size) {
-        quizIndex = getRandomNum(size); // 문제정답번호 입력
-        answerList[0] = quizIndex;
+        int rand = getRandomNum(size);
+        while(quizIndex == rand) {
+            System.out.println("같음! 다시!");
+            rand = getRandomNum(size);
+        }
+        quizIndex = rand;
+        answerList[0] = quizIndex;  // 문제정답번호 입력
 
         // 정답을 제외한 보기 3개를 중복되지 않게 찾기
         int count = 1;

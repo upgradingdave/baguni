@@ -59,7 +59,7 @@ public class Lesson34 extends LessonInit implements Lesson, LessonItem, Serializ
 
     private int[] peopleImage = {3,4};
 
-    private int[] reviewId = {2,4,5,8};
+    private int[] reviewId = {2,4,8};
 
 
     @Override

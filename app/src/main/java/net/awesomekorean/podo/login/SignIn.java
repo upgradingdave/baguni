@@ -229,6 +229,7 @@ public class SignIn extends AppCompatActivity implements Button.OnClickListener 
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 SharedPreferencesInfo.setSignIn(getApplicationContext(), true);
+                SharedPreferencesInfo.setUserEmail(getApplicationContext(), userEmail);
 
                 if(documentSnapshot.exists()) {
                     System.out.println("신DB가 있습니다");

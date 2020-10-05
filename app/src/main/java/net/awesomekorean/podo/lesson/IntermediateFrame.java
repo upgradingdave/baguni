@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -86,6 +87,8 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intermediate_frame);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         btnClose = findViewById(R.id.btnClose);
         title = findViewById(R.id.title);

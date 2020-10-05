@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +43,7 @@ public class Logo extends AppCompatActivity {
     private AdsManager adsManager;
     private Intent intent;
     private LinearLayout layoutUpdatingDB;
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,19 @@ public class Logo extends AppCompatActivity {
 
 
         // 애드몹 초기화
-        MobileAds.initialize(this, getString(R.string.ADMOB_APP_ID));
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                System.out.println("애드몹을 초기화했습니다");
+                // 광고 미리 로드하기
+                adsManager = AdsManager.getInstance();
+                adsManager.loadFullAds(getApplicationContext());
+                adsManager.loadRewardAds(getApplicationContext());
+                adsManager.loadNativeAds(getApplicationContext());
+            }
+        });
 
-        // 광고 미리 로드하기
-        adsManager = AdsManager.getInstance();
-        adsManager.loadFullAds(this);
-        adsManager.loadRewardAds(this);
-        adsManager.loadNativeAds(this);
+        userEmail = SharedPreferencesInfo.getUserEmail(getApplicationContext());
 
         // 기기 토큰 얻기
         String token = SharedPreferencesInfo.getUserToken(getApplicationContext());
@@ -89,10 +98,9 @@ public class Logo extends AppCompatActivity {
 
 
         boolean isSignIn = SharedPreferencesInfo.getSignIn(getApplicationContext());
-        if(isSignIn) {
+        if(isSignIn && userEmail!=null) {
 
             if (IsOnline.isOnline(getApplicationContext())) {
-                final String userEmail = SharedPreferencesInfo.getUserEmail(getApplicationContext());
                 DocumentReference docRef = db.collection(getString(R.string.DB_USERS)).document(userEmail);
                 docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -143,6 +151,11 @@ public class Logo extends AppCompatActivity {
                                             }
                                         });
                                     }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    System.out.println("실패!");
                                 }
                             });
                         }

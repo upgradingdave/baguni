@@ -2,6 +2,7 @@ package net.awesomekorean.podo.reading;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Bundle;
@@ -93,6 +94,8 @@ public class ReadingFrame extends AppCompatActivity implements Button.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading_frame);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         readingProgress = 0;
 

@@ -24,7 +24,7 @@ public class SharedPreferencesInfo {
     // 엡에서 일일미션 데이터 불러오기
     public static DailyMissionInfo getDailyMissionInfo(Context context) {
         SharedPreferences sp = context.getSharedPreferences("dailyMission", MODE_PRIVATE);
-        String stringFromSP = sp.getString("info", "");
+        String stringFromSP = sp.getString("info", null);
         DailyMissionInfo dailyMissionInfo = gson.fromJson(stringFromSP, DailyMissionInfo.class);
         return dailyMissionInfo;
     }
@@ -42,7 +42,7 @@ public class SharedPreferencesInfo {
     // 엡에서 유저 데이터 불러오기
     public static UserInformation getUserInfo(Context context) {
         SharedPreferences sp = context.getSharedPreferences("user", MODE_PRIVATE);
-        String stringFromSP = sp.getString("info", "");
+        String stringFromSP = sp.getString("info", null);
         UserInformation userInformation = gson.fromJson(stringFromSP, UserInformation.class);
         return userInformation;
     }
@@ -50,7 +50,7 @@ public class SharedPreferencesInfo {
     // 엡에서 유저 이메일 불러오기
     public static String getUserEmail(Context context) {
         SharedPreferences sp = context.getSharedPreferences("userEmail", MODE_PRIVATE);
-        String stringFromSP = sp.getString("userEmail", "");
+        String stringFromSP = sp.getString("userEmail", null);
         return stringFromSP;
     }
 
@@ -65,7 +65,7 @@ public class SharedPreferencesInfo {
     // 엡에서 유저 이름 불러오기
     public static String getUserName(Context context) {
         SharedPreferences sp = context.getSharedPreferences("userName", MODE_PRIVATE);
-        String stringFromSP = sp.getString("userName", "");
+        String stringFromSP = sp.getString("userName", null);
         return stringFromSP;
     }
 

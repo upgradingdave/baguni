@@ -50,9 +50,9 @@ public class Lesson19 extends LessonInit implements Lesson, LessonItem, Serializ
             "잘 먹었습니다"
     };
 
-    private int[] peopleImage = {9,10};
+    private int[] peopleImage = {9,9};
 
-    private int[] reviewId = {};
+    private int[] reviewId = {0,3,4};
 
 
     @Override

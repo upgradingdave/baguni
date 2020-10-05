@@ -25,18 +25,6 @@ public class PlaySoundPool {
         soundPool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(1).build();
     }
 
-    // 컬렉션 단어 플레이
-    public void playSoundCollection(String path) {
-        volume = getDeviceVolume();
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                soundPool.play(soundId, volume, volume, 0, 0, 1f);
-            }
-        });
-        soundId = soundPool.load(path, 1);
-    }
-
 
     // 퀴즈 정답/오답 플레이
     public void playSoundLesson(int sound) {
@@ -97,9 +85,6 @@ public class PlaySoundPool {
         int volumeLevel = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVolume = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         float streamVolume = (float) volumeLevel / maxVolume;
-        //DecimalFormat format = new DecimalFormat("#.#");
-
-        //return Float.parseFloat(format.format(streamVolume));
         return streamVolume;
     }
 }

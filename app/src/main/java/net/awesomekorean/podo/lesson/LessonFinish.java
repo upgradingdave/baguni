@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -72,6 +73,8 @@ public class LessonFinish extends AppCompatActivity implements View.OnClickListe
 
         context = getApplicationContext();
         adsManager = AdsManager.getInstance();
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         if(adsManager.interstitialAd == null || !adsManager.interstitialAd.isLoaded()) {
             adsManager.loadFullAds(context);

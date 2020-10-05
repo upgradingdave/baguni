@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -97,6 +98,8 @@ public class LessonReviewFrame extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_review_frame);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         btnClose = findViewById(R.id.btnClose);
         progressBar = findViewById(R.id.progressBar);
