@@ -9,11 +9,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import net.awesomekorean.podo.lesson.LessonAdapterChild;
-import net.awesomekorean.podo.lesson.LessonFinish;
-import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
-import net.awesomekorean.podo.reading.MainReading;
-
 public class ConfirmQuit extends AppCompatActivity implements View.OnClickListener {
 
     Context context;

@@ -1,15 +1,12 @@
 package net.awesomekorean.podo.lesson;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
@@ -17,28 +14,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.rewarded.RewardItem;
-import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import net.awesomekorean.podo.AdsManager;
-import net.awesomekorean.podo.DailyMissionInfo;
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.Lesson;
-import net.awesomekorean.podo.profile.Profile;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;

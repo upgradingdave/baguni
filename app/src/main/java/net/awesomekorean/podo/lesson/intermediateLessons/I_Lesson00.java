@@ -11,7 +11,6 @@ public class I_Lesson00 extends S_LessonInit implements I_Lesson, LessonItem, Se
     private String lessonId = "IL_00";
     private String lessonTitle = "호텔예약";
     private String lessonSubTitle = "";
-    private int lessonImage = R.drawable.posession;
 
     private String[] dialog = {
             "이름이 뭐예요?",

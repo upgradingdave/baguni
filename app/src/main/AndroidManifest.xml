@@ -35,10 +35,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".lesson.LessonReviewFrame" />
         <activity android:name=".writing.WritingReturned" />
-        <activity
-            android:name=".DailyMission"
-            android:screenOrientation="unspecified"
-            android:theme="@style/DialogFullScreen" />
 
         <service
             android:name=".FirebaseCloudMessage"

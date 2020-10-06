@@ -15,25 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.rewarded.RewardItem;
-import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import net.awesomekorean.podo.lesson.LessonAdapterChild;
-import net.awesomekorean.podo.lesson.LessonFinish;
 import net.awesomekorean.podo.lesson.LessonSpecialFrame;
-import net.awesomekorean.podo.lesson.lessonHangul.LessonHangul;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulAssembly;
-import net.awesomekorean.podo.lesson.lessonNumber.LessonNumber;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
-import net.awesomekorean.podo.lesson.lessons.Lesson;
 import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
 import net.awesomekorean.podo.purchase.TopUp;
-import net.awesomekorean.podo.reading.MainReading;
 import net.awesomekorean.podo.reading.Reading;
 import net.awesomekorean.podo.reading.ReadingFrame;
 
