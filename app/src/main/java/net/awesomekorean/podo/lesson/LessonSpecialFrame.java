@@ -6,23 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import net.awesomekorean.podo.ConfirmQuit;
-import net.awesomekorean.podo.DailyMissionInfo;
-import net.awesomekorean.podo.MainActivity;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
-
-import java.io.Serializable;
 
 public class LessonSpecialFrame extends AppCompatActivity implements Button.OnClickListener{
 

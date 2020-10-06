@@ -19,7 +19,6 @@
     <ImageView
         android:id="@+id/readingImage"
         android:layout_weight="0.3"
-        android:src="@drawable/hangul"
         android:layout_margin="10dp"
         android:layout_width="0dp"
         android:layout_height="match_parent" />

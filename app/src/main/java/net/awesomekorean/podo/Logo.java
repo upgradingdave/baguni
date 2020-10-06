@@ -176,36 +176,6 @@ public class Logo extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
-
-/*
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent;
-
-                boolean isSignIn = SharedPreferencesInfo.getSignIn(getApplicationContext());
-                if(isSignIn) {
-                    if(IsOnline.isOnline(getApplicationContext())) {
-                        intent = new Intent(getApplicationContext(), MainActivity.class);
-
-                        // 재접속 로그
-                        Bundle bundle = new Bundle();
-                        firebaseAnalytics.logEvent("revisit", bundle);
-
-                    } else {
-                        intent = new Intent(getApplicationContext(), SignIn.class);
-                        Toast.makeText(getApplicationContext(), "Internet connection required.", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    intent = new Intent(getApplicationContext(), SignIn.class);
-                }
-                startActivity(intent);
-                finish();
-            }
-        }, 2);
-*/
     }
 
     // lessonComplete 에서 progress 제거
