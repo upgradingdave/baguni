@@ -12,22 +12,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.gms.common.util.ArrayUtils;
-import com.google.firebase.storage.FirebaseStorage;
 
 import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.lessons.R_Conjugation_Lesson00;
+import net.awesomekorean.podo.lesson.lessonReview.R_Conjugation_Lesson00;
 
 import java.util.Arrays;
 
-public class LessonReviewConjugation extends AppCompatActivity implements View.OnClickListener {
+public class LR_Conjugation extends AppCompatActivity implements View.OnClickListener {
 
     AdsManager adsManager;
 

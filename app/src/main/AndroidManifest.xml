@@ -56,10 +56,10 @@
             android:screenOrientation="unspecified"
             android:theme="@style/DialogFullScreen" />
         <activity
-            android:name=".lesson.LessonReviewSentence"
+            android:name=".lesson.LR_Sentence"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".lesson.LessonReviewWord"
+            android:name=".lesson.LR_Word"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ConfirmQuit"
@@ -131,7 +131,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".login.SignUp"

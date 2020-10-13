@@ -1,13 +1,24 @@
-package net.awesomekorean.podo.lesson.lessons;
+package net.awesomekorean.podo.lesson.lessonReview;
 
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.Lesson;
+import net.awesomekorean.podo.lesson.lessons.Lesson17;
+import net.awesomekorean.podo.lesson.lessons.Lesson18;
+import net.awesomekorean.podo.lesson.lessons.Lesson20;
+import net.awesomekorean.podo.lesson.lessons.Lesson21;
+import net.awesomekorean.podo.lesson.lessons.Lesson23;
+import net.awesomekorean.podo.lesson.lessons.Lesson24;
+import net.awesomekorean.podo.lesson.lessons.Lesson35;
+import net.awesomekorean.podo.lesson.lessons.LessonInit;
+import net.awesomekorean.podo.lesson.lessons.LessonItem;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class R_Word_Lesson00 extends LessonInit implements LessonReview, LessonItem, Serializable {
+public class R_Word_Lesson03 extends LessonInit implements LessonItem, Serializable {
 
-    private String lessonId = "RW_00";
+    private String lessonId = "RW_03";
     private String lessonTitle = "word";
     private String lessonSubTitle = "review";
     private int lessonImage = R.drawable.l_16_word_5;
@@ -24,12 +35,12 @@ public class R_Word_Lesson00 extends LessonInit implements LessonReview, LessonI
 
 
     private Lesson[] lessonsInReview = {
-            new Lesson00(), new Lesson19(), new Lesson01(), new Lesson02(), new Lesson03(),
-            new Lesson04(), new Lesson05(), new Lesson06()
+            new Lesson17(), new Lesson20(), new Lesson18(), new Lesson21(), new Lesson23(), new Lesson35(),
+            new Lesson24()
     };
 
 
-    public R_Word_Lesson00() {
+    public R_Word_Lesson03() {
 
         for(int i=0; i<lessonsInReview.length; i++) {
 
@@ -61,30 +72,6 @@ public class R_Word_Lesson00 extends LessonInit implements LessonReview, LessonI
         return lessonId;
     }
 
-    @Override
-    public List<String> getFront() {
-        return front;
-    }
-
-    @Override
-    public List<String> getBack() {
-        return back;
-    }
-
-    @Override
-    public List<String> getImageString() {
-        return imageString;
-    }
-
-    @Override
-    public List<String> getAudioString() {
-        return audioString;
-    }
-
-    @Override
-    public List<String> getAudioFolder() {
-        return audioFolder;
-    }
 
 
     // 레슨어뎁터 아이템
