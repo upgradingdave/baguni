@@ -62,6 +62,7 @@ import net.awesomekorean.podo.lesson.lessons.Lesson34;
 import net.awesomekorean.podo.lesson.lessons.Lesson35;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 import net.awesomekorean.podo.lesson.lessonNumber.numbers.NumberPractice;
+import net.awesomekorean.podo.lesson.lessons.R_Conjugation_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Ranking_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson00;
 import net.awesomekorean.podo.lesson.lessons.R_Sentence_Lesson01;
@@ -129,7 +130,7 @@ public class MainLesson extends Fragment{
             {new S_Lesson01(), new Lesson01(), new S_Lesson03(), new Lesson02(), new Lesson03()},
             {new NumberSino(), new NumberNative(), new NumberPractice()},
             {new S_Lesson04(), new Lesson04(), new Lesson05(), new Lesson06(), new S_Lesson06()},
-            {new R_Word_Lesson00(), new R_Sentence_Lesson00(), new R_Ranking_Lesson00()},
+            {new R_Word_Lesson00(), new R_Sentence_Lesson00(), new R_Conjugation_Lesson00()},
             {new Lesson07(), new Lesson08()},
             {new Lesson27(), new S_Lesson08(), new S_Lesson12()},
             {new Lesson09(), new Lesson10(), new S_Lesson05()},

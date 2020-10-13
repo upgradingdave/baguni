@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".lesson.TestGrammar">
+    tools:context=".lesson.LessonReviewConjugation">
 
     <LinearLayout
         android:id="@+id/title"
-        android:background="@color/WHITE"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -25,25 +24,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:progressDrawable="@drawable/progressbar"
-            android:progress="50"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="30dp"
-            android:layout_width="0dp"
-            android:layout_height="6dp" />
-
         <TextView
-            android:id="@+id/tvProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/countText"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:text="0 conjugations"
+            android:textSize="15dp"
             android:layout_marginRight="20dp"
-            android:gravity="center_vertical"
-            android:text="8/10"
-            android:textSize="15dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout

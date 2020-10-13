@@ -1,6 +1,15 @@
-package net.awesomekorean.podo.lesson;
+package net.awesomekorean.podo.lesson.lessons;
 
-public class TestGrammarItem {
+import net.awesomekorean.podo.R;
+
+import java.io.Serializable;
+
+public class R_Conjugation_Lesson00 extends LessonInit implements LessonItem, Serializable {
+
+    private String lessonId = "RC_00";
+    private String lessonTitle = "conjugation";
+    private String lessonSubTitle = "review";
+    private int lessonImage = R.drawable.conjugation;
 
     private String[] baseForm = {"가다", "먹다", "오다", "사다", "팔다"};
 
@@ -31,5 +40,29 @@ public class TestGrammarItem {
 
     public String[][] getTranslate() {
         return translate;
+    }
+
+
+
+    // 레슨어뎁터 아이템
+
+    @Override
+    public String getLessonTitle() {
+        return lessonTitle;
+    }
+
+    @Override
+    public String getLessonSubTitle() {
+        return lessonSubTitle;
+    }
+
+    @Override
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    @Override
+    public int getLessonImage() {
+        return lessonImage;
     }
 }

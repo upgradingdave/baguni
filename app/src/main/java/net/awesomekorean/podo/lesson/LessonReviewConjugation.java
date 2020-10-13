@@ -20,17 +20,18 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.storage.FirebaseStorage;
 
+import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.lesson.lessons.R_Conjugation_Lesson00;
 
 import java.util.Arrays;
 
-public class TestGrammar extends AppCompatActivity implements View.OnClickListener {
+public class LessonReviewConjugation extends AppCompatActivity implements View.OnClickListener {
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+    AdsManager adsManager;
 
-    ProgressBar progressBar;
-    TextView tvProgress;
+    TextView countText;
     TextView tvEnglish;
     TextView tvAnswer;
     FlexboxLayout flexBaseForm;
@@ -38,7 +39,7 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
     ImageView btnClose;
     Button btnConfirm;
 
-    TestGrammarItem testItem;
+    R_Conjugation_Lesson00 testItem;
     int baseFormSize;
     int conjugationSize;
     int baseFormIndex;
@@ -51,9 +52,9 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
     boolean isBaseForm;
     PlaySoundPool playSoundPool;
     boolean isCorrect;
-    int progressCount = 1; // 문제 번호
-    int numberOfCorrect = 0; // 정답개수
-    int totalTestNo = 20;
+    int quizCount = 0; // 문제 번호
+    //int numberOfCorrect = 0; // 정답개수
+    //int totalTestNo = 20;
 
     ToggleButton selectedBaseToggle;
     ToggleButton selectedConjugationToggle;
@@ -65,10 +66,9 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_grammar);
+        setContentView(R.layout.activity_lesson_review_conjugation);
 
-        progressBar = findViewById(R.id.progressBar);
-        tvProgress = findViewById(R.id.tvProgress);
+        countText = findViewById(R.id.countText);
         tvEnglish = findViewById(R.id.tvEnglish);
         tvAnswer = findViewById(R.id.tvAnswer);
         flexBaseForm = findViewById(R.id.flexBaseForm);
@@ -78,9 +78,15 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
         btnClose.setOnClickListener(this);
         btnConfirm.setOnClickListener(this);
 
+        adsManager = AdsManager.getInstance();
+
+        if (adsManager.interstitialAd == null) {
+            adsManager.loadFullAds(this);
+        }
+
         playSoundPool = new PlaySoundPool(this);
 
-        testItem = new TestGrammarItem();
+        testItem = new R_Conjugation_Lesson00();
 
         baseFormSize = testItem.getBaseForm().length;
         conjugationSize = testItem.getConjugate()[0].length;
@@ -178,6 +184,15 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.btnClose :
+
+                if(quizCount > 5) {
+                    if(adsManager.interstitialAd.isLoaded()) {
+                        adsManager.playFullAds(this);
+                    }
+                }
+
+                finish();
+
                 break;
 
             case R.id.btnConfirm :
@@ -195,13 +210,14 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+/*
                         if(isCorrect) {
                             numberOfCorrect++;
                         }
-                        progressCount++;
-                        progressBar.setProgress(progressCount*100/totalTestNo);
-                        tvProgress.setText(progressCount + " / " + totalTestNo);
+                        progressBar.setProgress(quizCount*100/totalTestNo);
+ */
+                        quizCount++;
+                        countText.setText(quizCount + " conjugations");
                         isBaseForm = true;
                         tvAnswer.setText("");
                         tvAnswer.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
