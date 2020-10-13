@@ -150,6 +150,9 @@ Let's practice until '일시 오분' and '십살' seem strange!"</string>
     <string name="SELECT_ANSWER">Select your answer</string>
     <string name="LESSON_COMPLETE">Lesson Complete!</string>
     <string name="PLAY_ALL_AUDIO">Play all audio</string>
+    <string name="CONJUGATE_CORRECTLY">Conjugate correctly</string>
+    <string name="CHOOSE_BASE_FORM">Choose the right base form</string>
+    <string name="CHOOSE_CONJUGATION">Choose the right conjugation</string>
 
 
     <!--    읽기-->
