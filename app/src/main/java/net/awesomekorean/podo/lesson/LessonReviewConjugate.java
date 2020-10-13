@@ -24,7 +24,6 @@ import com.google.android.gms.common.util.ArrayUtils;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
-import net.awesomekorean.podo.lesson.lessonReview.R_Conjugation_Lesson00;
 
 import java.util.Arrays;
 
@@ -67,7 +66,7 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.activity_lesson_review_conjugation, container, false);
+        view = inflater.inflate(R.layout.lesson_review_conjugation, container, false);
 
         tvEnglish = view.findViewById(R.id.tvEnglish);
         tvAnswer = view.findViewById(R.id.tvAnswer);
@@ -100,10 +99,10 @@ public class LessonReviewConjugate extends Fragment implements View.OnClickListe
                 tvAnswer.setText("");
                 tvAnswer.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
                 activity.progressCount(isCorrect);
-                if(activity.progressCount < 20) {
+                if(activity.progressCount < 15) {
                     makeQuiz();
                 } else {
-                    activity.replaceFragment(LessonReviewWord.newInstance());
+                    activity.replaceFragment(LessonReviewSentence.newInstance());
                 }
             }
         }, 2000);

@@ -6,34 +6,19 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.common.util.ArrayUtils;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import net.awesomekorean.podo.AdsManager;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
-import net.awesomekorean.podo.lesson.lessonReview.LessonReview;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class LessonReviewWord extends Fragment implements View.OnClickListener {
 
@@ -67,7 +52,7 @@ public class LessonReviewWord extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.activity_lesson_review_word, container, false);
+        view = inflater.inflate(R.layout.lesson_review_word, container, false);
 
         mediaPlayerManager = MediaPlayerManager.getInstance();
 
@@ -205,10 +190,10 @@ public class LessonReviewWord extends Fragment implements View.OnClickListener {
                 answer.setVisibility(View.GONE);
                 btnAudio.setVisibility(View.VISIBLE);
                 activity.progressCount(isCorrect);
-                if(activity.progressCount <10) {
+                if(activity.progressCount < 10) {
                     makeQuiz();
                 } else {
-                    activity.replaceFragment(LessonReviewSentence.newInstance());
+                    activity.replaceFragment(LessonReviewConjugate.newInstance());
                 }
             }
         }, 2000);

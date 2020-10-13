@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GetRandomPoint"></activity>
+        <activity android:name=".GetRandomPoint" />
         <activity
             android:name=".CollectResult"
             android:screenOrientation="unspecified"
@@ -30,13 +30,8 @@
             android:theme="@style/DialogFullScreen" />
         <activity
             android:name=".lesson.IntermediateFrame"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".lesson.LessonReviewFrame" />
         <activity android:name=".writing.WritingReturned" />
         <activity
             android:name=".DailyMission"
