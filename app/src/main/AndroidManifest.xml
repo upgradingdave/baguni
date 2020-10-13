@@ -125,8 +125,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Logo"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".login.SignUp"
             android:screenOrientation="portrait" />

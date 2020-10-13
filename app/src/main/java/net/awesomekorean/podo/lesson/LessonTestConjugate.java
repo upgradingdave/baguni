@@ -1,41 +1,42 @@
 package net.awesomekorean.podo.lesson;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.gms.common.util.ArrayUtils;
-import com.google.firebase.storage.FirebaseStorage;
 
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
 
 import java.util.Arrays;
 
-public class TestGrammar extends AppCompatActivity implements View.OnClickListener {
+public class LessonTestConjugate extends Fragment implements View.OnClickListener {
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
+    View view;
 
-    ProgressBar progressBar;
-    TextView tvProgress;
+    public static LessonTestConjugate newInstance() {
+        return new LessonTestConjugate();
+    }
+
     TextView tvEnglish;
     TextView tvAnswer;
     FlexboxLayout flexBaseForm;
     FlexboxLayout flexConjugation;
-    ImageView btnClose;
     Button btnConfirm;
 
     TestGrammarItem testItem;
@@ -51,34 +52,26 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
     boolean isBaseForm;
     PlaySoundPool playSoundPool;
     boolean isCorrect;
-    int progressCount = 1; // 문제 번호
-    int numberOfCorrect = 0; // 정답개수
-    int totalTestNo = 20;
-
     ToggleButton selectedBaseToggle;
     ToggleButton selectedConjugationToggle;
 
     String stringBaseForm = "baseForm";
     String stringConjugation = "conjugation";
 
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_grammar);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        progressBar = findViewById(R.id.progressBar);
-        tvProgress = findViewById(R.id.tvProgress);
-        tvEnglish = findViewById(R.id.tvEnglish);
-        tvAnswer = findViewById(R.id.tvAnswer);
-        flexBaseForm = findViewById(R.id.flexBaseForm);
-        flexConjugation = findViewById(R.id.flexConjugation);
-        btnClose = findViewById(R.id.btnClose);
-        btnConfirm = findViewById(R.id.btnConfirm);
-        btnClose.setOnClickListener(this);
+        view = inflater.inflate(R.layout.lesson_test_conjugate, container, false);
+
+        tvEnglish = view.findViewById(R.id.tvEnglish);
+        tvAnswer = view.findViewById(R.id.tvAnswer);
+        flexBaseForm = view.findViewById(R.id.flexBaseForm);
+        flexConjugation = view.findViewById(R.id.flexConjugation);
+        btnConfirm = view.findViewById(R.id.btnConfirm);
         btnConfirm.setOnClickListener(this);
 
-        playSoundPool = new PlaySoundPool(this);
+        playSoundPool = new PlaySoundPool(getContext());
 
         testItem = new TestGrammarItem();
 
@@ -87,12 +80,14 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
 
         isBaseForm = true;
         makeTest();
+
+        return view;
     }
 
 
     private void answered(int sound, int outline) {
         playSoundPool.playSoundLesson(sound);
-        tvAnswer.setBackground(ContextCompat.getDrawable(getApplicationContext(), outline));
+        tvAnswer.setBackground(ContextCompat.getDrawable(getContext(), outline));
     }
 
 
@@ -129,8 +124,8 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
         }
 
         for(int i=0; i<answerListBaseForm.length; i++) {
-            toggleButton = new ToggleButton(getApplicationContext());
-            DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
+            toggleButton = new ToggleButton(getContext());
+            DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
             int width = dm.widthPixels;
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -148,7 +143,7 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
                 toggleButton.setTextOn(testItem.getBaseForm()[answerListBaseForm[i]]);
                 toggleButton.setTextOff(testItem.getBaseForm()[answerListBaseForm[i]]);
                 toggleButton.setTag(stringBaseForm);
-                toggleButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.toggle_pink_transparent));
+                toggleButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.toggle_pink_transparent));
                 flexBaseForm.addView(toggleButton);
 
             } else {
@@ -156,7 +151,7 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
                 toggleButton.setTextOn(testItem.getConjugate()[selectedBaseFormIndex][answerListConjugation[i]]);
                 toggleButton.setTextOff(testItem.getConjugate()[selectedBaseFormIndex][answerListConjugation[i]]);
                 toggleButton.setTag(stringConjugation);
-                toggleButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.toggle_purple_transparent));
+                toggleButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.toggle_purple_transparent));
                 flexConjugation.addView(toggleButton);
             }
         }
@@ -180,6 +175,7 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
             case R.id.btnClose :
                 break;
 
+
             case R.id.btnConfirm :
                 btnConfirm.setEnabled(false);
                 if(baseFormIndex == selectedBaseFormIndex && conjugationIndex == selectedConjugationIndex) {
@@ -197,14 +193,12 @@ public class TestGrammar extends AppCompatActivity implements View.OnClickListen
                     public void run() {
 
                         if(isCorrect) {
-                            numberOfCorrect++;
+                            LessonTestFrame.numberOfCorrect++;
                         }
-                        progressCount++;
-                        progressBar.setProgress(progressCount*100/totalTestNo);
-                        tvProgress.setText(progressCount + " / " + totalTestNo);
+                        LessonTestFrame.progressCount();
                         isBaseForm = true;
                         tvAnswer.setText("");
-                        tvAnswer.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_white_10));
+                        tvAnswer.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.bg_white_10));
                         makeTest();
                     }
                 }, 2000);

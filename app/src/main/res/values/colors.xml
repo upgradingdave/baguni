@@ -18,6 +18,8 @@
     <color name="RED">#FF5A5F</color>
     <color name="PINK">#F7C7DC</color>
     <color name="PINK_TRANSPARENT">#F6E8E9</color>
+    <color name="LAVENDAR">#21EEC5</color>
+    <color name="LAVENDAR_TRANSPARENT">#C4FFF3</color>
     <color name="TRANSPARENT">#00000000</color>
     <color name="BLUE">#518EF8</color>
     <color name="BLUE_TRANSPARENT">#EDEEFD</color>
