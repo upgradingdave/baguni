@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -90,9 +91,10 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
     Context context;
     View view;
-    ImageView btnBack;
+    ImageView btnPreLevel;
     TextView tvLevel;
-    Button btnNextLevel;
+    ImageView btnNextLevel;
+    ImageView ivBackGround;
 
     UserInformation userInformation;
     RecyclerView recyclerView;
@@ -127,13 +129,14 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.main_lesson, container, false);
-        btnBack = view.findViewById(R.id.btnBack);
+        btnPreLevel = view.findViewById(R.id.btnPreLevel);
+        ivBackGround = view.findViewById(R.id.ivBackGround);
         tvLevel = view.findViewById(R.id.tvLevel);
         btnNextLevel = view.findViewById(R.id.btnNextLevel);
         btnInfo = view.findViewById(R.id.btnInfo);
         layoutInfo = view.findViewById(R.id.layoutInfo);
         btnCloseInfo = view.findViewById(R.id.btnCloseInfo);
-        btnBack.setOnClickListener(this);
+        btnPreLevel.setOnClickListener(this);
         btnNextLevel.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
         btnCloseInfo.setOnClickListener(this);
@@ -146,13 +149,6 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                System.out.println("엑스 : " + dx);
-//                System.out.println("와 : " + dy);
-            }
-        });
 
         seekBar.setMax(list.length);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -182,8 +178,10 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         int lastClickLevel = SharedPreferencesInfo.getLastClickLevel(context);
         if(lastClickLevel == 0) {
             list = beginner.clone();
+            setLessonLevel(0);
         } else if(lastClickLevel == 1) {
             list = intermediate.clone();
+            setLessonLevel(1);
         }
         List<String> lessonComplete = userInformation.getLessonComplete();
         System.out.println("LESSON_COMPLETE:" + lessonComplete);
@@ -236,10 +234,35 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     }
 
 
+    // 레슨레벨 세팅하기
+    private void setLessonLevel(int thisLevel) {
+        switch (thisLevel) {
+            case 0 :    // 초급레슨
+                tvLevel.setText(getResources().getString(R.string.BEGINNER_LEVEL));
+                ivBackGround.setImageResource(R.drawable.bg_light_blue);
+                btnPreLevel.setVisibility(View.INVISIBLE);
+                btnNextLevel.setVisibility(VISIBLE);
+                break;
+
+            case 1 :    // 중급레슨
+                tvLevel.setText(getResources().getString(R.string.INTERMEDIATE_LEVEL));
+                ivBackGround.setImageResource(R.drawable.bg_blue);
+                btnPreLevel.setVisibility(VISIBLE);
+                btnNextLevel.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack :
+            case R.id.btnPreLevel :
+                setLessonLevel(0);
+                break;
+
+            case R.id.btnNextLevel :
+                setLessonLevel(1);
                 break;
 
             case R.id.btnInfo :
@@ -248,9 +271,6 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
             case R.id.btnCloseInfo :
                 layoutInfo.setVisibility(GONE);
-                break;
-
-            case R.id.btnNextLevel :
                 break;
         }
     }

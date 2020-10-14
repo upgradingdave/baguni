@@ -130,7 +130,7 @@
             android:layout_height="2dp" />
 
         <ImageView
-            android:src="@drawable/bubbles1"
+            android:src="@drawable/bubbles_pink_1"
             android:rotation="180"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
