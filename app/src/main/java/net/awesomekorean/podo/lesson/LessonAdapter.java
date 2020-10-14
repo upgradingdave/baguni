@@ -26,14 +26,15 @@ import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
 
     private Context context;
-    private LessonItem[] list;
+    private ArrayList<LessonItem> list;
     private Intent intent;
 
-    public LessonAdapter(Context context, LessonItem[] list) {
+    public LessonAdapter(Context context, ArrayList<LessonItem> list) {
         this.context = context;
         this.list = list;
     }
@@ -80,7 +81,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            LessonItem item = list[position];
+            LessonItem item = list.get(position);
 
             switch (v.getId()) {
 
@@ -232,7 +233,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         System.out.println("바인딩시작" + position);
-        LessonItem item = list[position];
+        LessonItem item = list.get(position);
         holder.tvItemNo.setText(String.valueOf(position + 1));
 
         if(!item.getIsLocked()) {
@@ -268,9 +269,9 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
         if(position == 0) {     // 첫 번째 아이템
             rightBottom = View.VISIBLE;
-        } else if(position == list.length - 1 && position%2 == 1) {   // 마지막 + 홀수 아이템
+        } else if(position == list.size() - 1 && position%2 == 1) {   // 마지막 + 홀수 아이템
             rightTop = View.VISIBLE;
-        } else if(position == list.length - 1 && position%2 == 0) {   // 마지막 + 짝수 아이템
+        } else if(position == list.size() - 1 && position%2 == 0) {   // 마지막 + 짝수 아이템
             leftTop = View.VISIBLE;
         } else if(position%2 == 1) {    // 홀수 아이템
             rightTop = View.VISIBLE;
@@ -296,27 +297,45 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
             holder.tvItemTitle.setText(R.string.REWARDS);
             holder.tvItemTitle.setMaxLines(1);
             if(item.getIsActive()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.reward_active_beginner);
+                drawable = ContextCompat.getDrawable(context, R.drawable.reward_active_purple);
 
             } else {
-                drawable = ContextCompat.getDrawable(context, R.drawable.reward_inactive_beginner);
+                drawable = ContextCompat.getDrawable(context, R.drawable.reward_inactive_purple);
             }
 
         } else {      // 레슨 & 리뷰 & 스페셜레슨
+
             if(type.equals("LR")) {     // 리뷰
                 holder.tvItemTitle.setText(R.string.REVIEW);
                 holder.tvItemTitle.setMaxLines(1);
             }
 
-            if(item.getIsLocked()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.locked_beginner);
+            if(type.equals("IL")) {     // 중급레슨
+                if (item.getIsLocked()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.locked_blue);
 
-            } else if(item.getIsActive()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.lesson_active_beginner);
+                } else if (item.getIsActive()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_active_blue);
+
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_inactive_blue);
+                }
+                holder.tvItemSubTitle.setTextColor(ContextCompat.getColor(context, R.color.BLUE));
+                holder.currentItem.setImageResource(R.drawable.circle_blue);
 
             } else {
-                drawable = ContextCompat.getDrawable(context, R.drawable.lesson_inactive_beginner);
+                if (item.getIsLocked()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.locked_purple);
+
+                } else if (item.getIsActive()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_active_purple);
+
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_inactive_purple);
+                }
             }
+            holder.tvItemSubTitle.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
+            holder.currentItem.setImageResource(R.drawable.circle_light_blue);
         }
 
 
@@ -380,6 +399,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return list.length;
+        return list.size();
     }
 }

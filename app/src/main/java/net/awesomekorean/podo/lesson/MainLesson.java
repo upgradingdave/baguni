@@ -119,7 +119,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             new I_Lesson00()
     };
 
-    LessonItem[] list;
+    ArrayList<LessonItem> list = new ArrayList<>();
 
     ImageView btnInfo;
     ConstraintLayout layoutInfo;
@@ -139,6 +139,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         btnInfo = view.findViewById(R.id.btnInfo);
         layoutInfo = view.findViewById(R.id.layoutInfo);
         btnCloseInfo = view.findViewById(R.id.btnCloseInfo);
+        seekBar = view.findViewById(R.id.seekBar);
         btnPreLevel.setOnClickListener(this);
         btnNextLevel.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
@@ -148,12 +149,10 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         userInformation = SharedPreferencesInfo.getUserInfo(context);
         setLessonItem(lastClickLevel);
         adapter = new LessonAdapter(context, list);
-        seekBar = view.findViewById(R.id.seekBar);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        seekBar.setMax(list.length);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -177,13 +176,20 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
 
     private void setLessonItem(int level) {
+        list.clear();
+
         if(level == 0) {
-            list = beginner.clone();
-            setLevelDesign(0);
+            for(LessonItem item : beginner) {
+                list.add(item);
+            }
+
         } else if(level == 1) {
-            list = intermediate.clone();
-            setLevelDesign(1);
+            for(LessonItem item : intermediate) {
+                list.add(item);
+            }
         }
+        seekBar.setMax(list.size());
+        setLevelDesign(level);
         setCompletedLessons();
         setUnlockedLessons();
     }
@@ -196,31 +202,31 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         if(lessonComplete.size() > 0) {
 
-            for (int i = 0; i < list.length; i++) {
-                if (lessonComplete.contains(list[i].getLessonId())) {
-                    list[i].setIsCompleted(true);
-                    list[i].setIsActive(true);
-                    list[i].setIsCurrent(false);
-                    if(i < list.length - 1) {
-                        list[i + 1].setIsActive(true);
-                        list[i + 1].setIsCurrent(true);
+            for (int i = 0; i < list.size(); i++) {
+                if (lessonComplete.contains(list.get(i).getLessonId())) {
+                    list.get(i).setIsCompleted(true);
+                    list.get(i).setIsActive(true);
+                    list.get(i).setIsCurrent(false);
+                    if(i < list.size() - 1) {
+                        list.get(i + 1).setIsActive(true);
+                        list.get(i + 1).setIsCurrent(true);
                     }
 
                     // 스페셜레슨 세팅
-                    if (list[i].getSLesson() != null) {
-                        list[i].getSLesson().setIsActive(true);
+                    if (list.get(i).getSLesson() != null) {
+                        list.get(i).getSLesson().setIsActive(true);
 
-                        if (lessonComplete.contains(list[i].getSLesson().getLessonId())) {
-                            list[i].getSLesson().setIsCompleted(true);
+                        if (lessonComplete.contains(list.get(i).getSLesson().getLessonId())) {
+                            list.get(i).getSLesson().setIsCompleted(true);
                         }
                     }
                 }
             }
 
         } else {
-            list[0].setIsCurrent(true);
+            list.get(0).setIsCurrent(true);
         }
-        list[0].setIsActive(true);
+        list.get(0).setIsActive(true);
     }
 
 
@@ -231,10 +237,10 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         if(lessonUnlock != null) {
 
-            for(int i=0; i<list.length; i++) {
-                if (list[i].getSLesson() != null && lessonUnlock.contains(list[i].getSLesson().getLessonId())) {
-                    list[i].getSLesson().setIsLocked(false);
-                    list[i].getSLesson().setIsActive(true);
+            for(int i=0; i<list.size(); i++) {
+                if (list.get(i).getSLesson() != null && lessonUnlock.contains(list.get(i).getSLesson().getLessonId())) {
+                    list.get(i).getSLesson().setIsLocked(false);
+                    list.get(i).getSLesson().setIsActive(true);
                 }
             }
         }
@@ -267,13 +273,11 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             case R.id.btnPreLevel :
                 setLessonItem(0);
                 adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter);
                 break;
 
             case R.id.btnNextLevel :
                 setLessonItem(1);
                 adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter);
                 break;
 
             case R.id.btnInfo :
