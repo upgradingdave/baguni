@@ -231,6 +231,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        System.out.println("바인딩시작" + position);
         LessonItem item = list[position];
         holder.tvItemNo.setText(String.valueOf(position + 1));
 

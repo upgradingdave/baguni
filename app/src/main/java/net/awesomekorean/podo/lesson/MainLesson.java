@@ -82,6 +82,7 @@ import net.awesomekorean.podo.lesson.lessons.Lesson40;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -124,6 +125,8 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     ConstraintLayout layoutInfo;
     Button btnCloseInfo;
 
+    int lastClickLevel;
+
 
     @Nullable
     @Override
@@ -143,7 +146,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         context = getContext();
         userInformation = SharedPreferencesInfo.getUserInfo(context);
-        setCompletedLessons();
+        setLessonItem(lastClickLevel);
         adapter = new LessonAdapter(context, list);
         seekBar = view.findViewById(R.id.seekBar);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -173,16 +176,21 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     }
 
 
+    private void setLessonItem(int level) {
+        if(level == 0) {
+            list = beginner.clone();
+            setLevelDesign(0);
+        } else if(level == 1) {
+            list = intermediate.clone();
+            setLevelDesign(1);
+        }
+        setCompletedLessons();
+        setUnlockedLessons();
+    }
+
+
     // 레슨 활성/완료 세팅하기
     private void setCompletedLessons() {
-        int lastClickLevel = SharedPreferencesInfo.getLastClickLevel(context);
-        if(lastClickLevel == 0) {
-            list = beginner.clone();
-            setLessonLevel(0);
-        } else if(lastClickLevel == 1) {
-            list = intermediate.clone();
-            setLessonLevel(1);
-        }
         List<String> lessonComplete = userInformation.getLessonComplete();
         System.out.println("LESSON_COMPLETE:" + lessonComplete);
 
@@ -213,7 +221,6 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             list[0].setIsCurrent(true);
         }
         list[0].setIsActive(true);
-        setUnlockedLessons();
     }
 
 
@@ -235,7 +242,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
 
     // 레슨레벨 세팅하기
-    private void setLessonLevel(int thisLevel) {
+    private void setLevelDesign(int thisLevel) {
         switch (thisLevel) {
             case 0 :    // 초급레슨
                 tvLevel.setText(getResources().getString(R.string.BEGINNER_LEVEL));
@@ -246,7 +253,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
             case 1 :    // 중급레슨
                 tvLevel.setText(getResources().getString(R.string.INTERMEDIATE_LEVEL));
-                ivBackGround.setImageResource(R.drawable.bg_blue);
+                ivBackGround.setImageResource(R.drawable.bg_pink);
                 btnPreLevel.setVisibility(VISIBLE);
                 btnNextLevel.setVisibility(View.INVISIBLE);
                 break;
@@ -258,11 +265,15 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPreLevel :
-                setLessonLevel(0);
+                setLessonItem(0);
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter);
                 break;
 
             case R.id.btnNextLevel :
-                setLessonLevel(1);
+                setLessonItem(1);
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter);
                 break;
 
             case R.id.btnInfo :
@@ -274,7 +285,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-
+/*
     @Override
     public void onResume() {
         super.onResume();
@@ -282,10 +293,13 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         if(adapter != null) {
             System.out.println("메인레슨 보임!");
-            setCompletedLessons();
+            lastClickLevel = SharedPreferencesInfo.getLastClickLevel(context);
+            setLessonItem(lastClickLevel);
             adapter.notifyDataSetChanged();
         }
     }
+
+ */
 }
 
 
