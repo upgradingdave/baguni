@@ -14,7 +14,7 @@
     <ImageView
         android:id="@+id/btnPreLevel"
         android:visibility="visible"
-        android:src="@drawable/btn_back_purple"
+        android:src="@drawable/btn_back_blue"
         android:layout_marginLeft="15dp"
         app:layout_constraintTop_toTopOf="@id/tvLevel"
         app:layout_constraintStart_toStartOf="@id/tvLevel"

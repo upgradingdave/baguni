@@ -230,17 +230,28 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     }
 
 
-    // 구매된 스페셜 레슨 세팅하기
+    // 구매된 스페셜 & 레슨 세팅하기
     private void setUnlockedLessons() {
-        List<String> lessonUnlock = userInformation.getSpecialLessonUnlock();
+        List<String> specialLessonUnlock = userInformation.getSpecialLessonUnlock();
+        List<String> lessonUnlock = userInformation.getLessonUnlock();
+        System.out.println("S_LESSON_UNLOCK:" + specialLessonUnlock);
         System.out.println("LESSON_UNLOCK:" + lessonUnlock);
 
-        if(lessonUnlock != null) {
 
+        if(specialLessonUnlock != null) {
             for(int i=0; i<list.size(); i++) {
-                if (list.get(i).getSLesson() != null && lessonUnlock.contains(list.get(i).getSLesson().getLessonId())) {
+                if (list.get(i).getSLesson() != null && specialLessonUnlock.contains(list.get(i).getSLesson().getLessonId())) {
                     list.get(i).getSLesson().setIsLocked(false);
                     list.get(i).getSLesson().setIsActive(true);
+                }
+            }
+        }
+
+        if(lessonUnlock != null) {
+            for(int i=0; i<list.size(); i++) {
+                if (lessonUnlock.contains(list.get(i).getLessonId())) {
+                    list.get(i).setIsLocked(false);
+                    list.get(i).setIsActive(true);
                 }
             }
         }
@@ -252,6 +263,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
         switch (thisLevel) {
             case 0 :    // 초급레슨
                 tvLevel.setText(getResources().getString(R.string.BEGINNER_LEVEL));
+                tvLevel.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
                 ivBackGround.setImageResource(R.drawable.bg_light_blue);
                 btnPreLevel.setVisibility(View.INVISIBLE);
                 btnNextLevel.setVisibility(VISIBLE);
@@ -259,6 +271,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
             case 1 :    // 중급레슨
                 tvLevel.setText(getResources().getString(R.string.INTERMEDIATE_LEVEL));
+                tvLevel.setTextColor(ContextCompat.getColor(context, R.color.BLUE));
                 ivBackGround.setImageResource(R.drawable.bg_pink);
                 btnPreLevel.setVisibility(VISIBLE);
                 btnNextLevel.setVisibility(View.INVISIBLE);
@@ -289,7 +302,7 @@ public class MainLesson extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-/*
+
     @Override
     public void onResume() {
         super.onResume();
@@ -302,8 +315,6 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             adapter.notifyDataSetChanged();
         }
     }
-
- */
 }
 
 

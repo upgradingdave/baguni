@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.awesomekorean.podo.GetRandomPoint;
+import net.awesomekorean.podo.OutlineTextView;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnlockActivity;
@@ -144,6 +145,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                             intent = new Intent(context, UnlockActivity.class);
                             intent.putExtra(context.getResources().getString(R.string.EXTRA_ID), context.getResources().getString(R.string.LESSON));
                             intent.putExtra(context.getResources().getString(R.string.LESSON_ID), item.getLessonId());
+                            intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) item);
                             context.startActivity(intent);
                         }
                         SharedPreferencesInfo.setLastClickItem(context, true, position);
@@ -232,7 +234,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        System.out.println("바인딩시작" + position);
         LessonItem item = list.get(position);
         holder.tvItemNo.setText(String.valueOf(position + 1));
 
@@ -321,7 +322,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                     drawable = ContextCompat.getDrawable(context, R.drawable.lesson_inactive_blue);
                 }
                 holder.tvItemSubTitle.setTextColor(ContextCompat.getColor(context, R.color.BLUE));
-                holder.currentItem.setImageResource(R.drawable.circle_blue);
+                holder.currentItem.setImageResource(R.drawable.circle_pink);
 
             } else {
                 if (item.getIsLocked()) {

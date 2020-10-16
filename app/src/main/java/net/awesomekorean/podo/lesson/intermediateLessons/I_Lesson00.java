@@ -9,12 +9,12 @@ import java.io.Serializable;
 public class I_Lesson00 extends S_LessonInit implements I_Lesson, LessonItem, Serializable {
 
     private String lessonId = "IL_00";
-    private String lessonTitle = "음식 주문하기";
-    private String lessonSubTitle = "order";
+    private String lessonTitle = "order";
+    private String lessonSubTitle = "식당 예약";
 
     private String[] dialog = {
-            "안녕하세요? 포도 식당입니다.",
-            "안녕하세요? 오늘 저녁에 예약할 수 있어요?",
+            "안녕하세요?\n포도 식당입니다.",
+            "안녕하세요?\n오늘 저녁에 예약할 수 있어요?",
             "네, 몇 시에요?",
             "저녁 6시요.",
             "몇 분이에요?",
@@ -26,8 +26,8 @@ public class I_Lesson00 extends S_LessonInit implements I_Lesson, LessonItem, Se
     };
 
     private String[] dialogEng = {
-            "Hello? This is ‘podo’ restaurant.",
-            "Hello? Can I make a reservation for this evening?",
+            "Hello?\nThis is ‘podo’ restaurant.",
+            "Hello?\nCan I make a reservation\nfor this evening?",
             "Yes, what time?",
             "6 o'clock in the evening.",
             "How many people?",
