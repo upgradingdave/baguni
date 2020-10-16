@@ -39,17 +39,18 @@ public class IntermediateAdapter extends RecyclerView.Adapter<IntermediateAdapte
         this.audiosDialog = audiosDialog;
     }
 
-    TextView tvDialog;
-    LinearLayout layoutOption;
-    ImageView btnAudio;
-    ImageView btnCollect;
-    ImageView btnTranslate;
-    ImageView peopleImage;
 
     int position;
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView tvDialog;
+        LinearLayout layoutOption;
+        ImageView btnAudio;
+        ImageView btnCollect;
+        ImageView btnTranslate;
+        ImageView peopleImage;
 
         ViewHolder(final View itemView) {
             super(itemView);
@@ -132,7 +133,6 @@ public class IntermediateAdapter extends RecyclerView.Adapter<IntermediateAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        System.out.println("리스트 사이즈 : " + list.size() + isFinish + position);
         this.position = position;
         IntermediateItems items = list.get(position);
 
@@ -141,21 +141,21 @@ public class IntermediateAdapter extends RecyclerView.Adapter<IntermediateAdapte
             items.setIsExpanded(false);
 
             if(list.size()%2 == 0) {
-                tvDialog.setText("...");
+                holder.tvDialog.setText("...");
             } else {
-                tvDialog.setText(items.getDialog());
+                holder.tvDialog.setText(items.getDialog());
             }
 
         } else {
-            tvDialog.setText(items.getDialog());
+            holder.tvDialog.setText(items.getDialog());
             items.setIsExpanded(true);
         }
 
-        peopleImage.setImageResource(items.getPeopleImage());
+        holder.peopleImage.setImageResource(items.getPeopleImage());
         if(items.getIsExpanded()) {
-            layoutOption.setVisibility(View.VISIBLE);
+            holder.layoutOption.setVisibility(View.VISIBLE);
         } else {
-            layoutOption.setVisibility(View.GONE);
+            holder.layoutOption.setVisibility(View.GONE);
         }
     }
 

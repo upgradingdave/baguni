@@ -194,7 +194,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/bubbles1"
+                android:src="@drawable/bubbles_pink_1"
                 android:scaleType="fitXY"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
@@ -280,7 +280,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/bubbles1"
+                android:src="@drawable/bubbles_pink_1"
                 android:scaleType="fitXY"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"

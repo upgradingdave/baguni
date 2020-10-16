@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,7 +78,6 @@ import net.awesomekorean.podo.lesson.lessons.Lesson36;
 import net.awesomekorean.podo.lesson.lessons.Lesson37;
 import net.awesomekorean.podo.lesson.lessons.Lesson38;
 import net.awesomekorean.podo.lesson.lessons.Lesson39;
-import net.awesomekorean.podo.lesson.lessons.Lesson40;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.util.ArrayList;
@@ -90,9 +90,10 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
     Context context;
     View view;
-    ImageView btnBack;
+    ImageView btnPreLevel;
     TextView tvLevel;
-    Button btnNextLevel;
+    ImageView btnNextLevel;
+    ImageView ivBackGround;
 
     UserInformation userInformation;
     RecyclerView recyclerView;
@@ -116,45 +117,39 @@ public class MainLesson extends Fragment implements View.OnClickListener {
             new I_Lesson00()
     };
 
-    LessonItem[] list;
+    ArrayList<LessonItem> list = new ArrayList<>();
 
     ImageView btnInfo;
     ConstraintLayout layoutInfo;
     Button btnCloseInfo;
 
+    int lastClickLevel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.main_lesson, container, false);
-        btnBack = view.findViewById(R.id.btnBack);
+        btnPreLevel = view.findViewById(R.id.btnPreLevel);
+        ivBackGround = view.findViewById(R.id.ivBackGround);
         tvLevel = view.findViewById(R.id.tvLevel);
         btnNextLevel = view.findViewById(R.id.btnNextLevel);
         btnInfo = view.findViewById(R.id.btnInfo);
         layoutInfo = view.findViewById(R.id.layoutInfo);
         btnCloseInfo = view.findViewById(R.id.btnCloseInfo);
-        btnBack.setOnClickListener(this);
+        seekBar = view.findViewById(R.id.seekBar);
+        btnPreLevel.setOnClickListener(this);
         btnNextLevel.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
         btnCloseInfo.setOnClickListener(this);
 
         context = getContext();
         userInformation = SharedPreferencesInfo.getUserInfo(context);
-        setCompletedLessons();
+        setLessonItem(lastClickLevel);
         adapter = new LessonAdapter(context, list);
-        seekBar = view.findViewById(R.id.seekBar);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                System.out.println("엑스 : " + dx);
-//                System.out.println("와 : " + dy);
-            }
-        });
 
-        seekBar.setMax(list.length);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -177,6 +172,26 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     }
 
 
+    private void setLessonItem(int level) {
+        list.clear();
+
+        if(level == 0) {
+            for(LessonItem item : beginner) {
+                list.add(item);
+            }
+
+        } else if(level == 1) {
+            for(LessonItem item : intermediate) {
+                list.add(item);
+            }
+        }
+        seekBar.setMax(list.size());
+        setLevelDesign(level);
+        setCompletedLessons();
+        setUnlockedLessons();
+    }
+
+
     // 레슨 활성/완료 세팅하기
     private void setCompletedLessons() {
         int lastClickLevel = SharedPreferencesInfo.getLastClickLevel(context);
@@ -190,48 +205,80 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         if(lessonComplete.size() > 0) {
 
-            for (int i = 0; i < list.length; i++) {
-                if (lessonComplete.contains(list[i].getLessonId())) {
-                    list[i].setIsCompleted(true);
-                    list[i].setIsActive(true);
-                    list[i].setIsCurrent(false);
-                    if(i < list.length - 1) {
-                        list[i + 1].setIsActive(true);
-                        list[i + 1].setIsCurrent(true);
+            for (int i = 0; i < list.size(); i++) {
+                if (lessonComplete.contains(list.get(i).getLessonId())) {
+                    list.get(i).setIsCompleted(true);
+                    list.get(i).setIsActive(true);
+                    list.get(i).setIsCurrent(false);
+                    if(i < list.size() - 1) {
+                        list.get(i + 1).setIsActive(true);
+                        list.get(i + 1).setIsCurrent(true);
                     }
 
                     // 스페셜레슨 세팅
-                    if (list[i].getSLesson() != null) {
-                        list[i].getSLesson().setIsActive(true);
+                    if (list.get(i).getSLesson() != null) {
+                        list.get(i).getSLesson().setIsActive(true);
 
-                        if (lessonComplete.contains(list[i].getSLesson().getLessonId())) {
-                            list[i].getSLesson().setIsCompleted(true);
+                        if (lessonComplete.contains(list.get(i).getSLesson().getLessonId())) {
+                            list.get(i).getSLesson().setIsCompleted(true);
                         }
                     }
                 }
             }
 
         } else {
-            list[0].setIsCurrent(true);
+            list.get(0).setIsCurrent(true);
         }
-        list[0].setIsActive(true);
-        setUnlockedLessons();
+        list.get(0).setIsActive(true);
     }
 
 
-    // 구매된 스페셜 레슨 세팅하기
+    // 구매된 스페셜 & 레슨 세팅하기
     private void setUnlockedLessons() {
-        List<String> lessonUnlock = userInformation.getSpecialLessonUnlock();
+        List<String> specialLessonUnlock = userInformation.getSpecialLessonUnlock();
+        List<String> lessonUnlock = userInformation.getLessonUnlock();
+        System.out.println("S_LESSON_UNLOCK:" + specialLessonUnlock);
         System.out.println("LESSON_UNLOCK:" + lessonUnlock);
 
-        if(lessonUnlock != null) {
 
-            for(int i=0; i<list.length; i++) {
-                if (list[i].getSLesson() != null && lessonUnlock.contains(list[i].getSLesson().getLessonId())) {
-                    list[i].getSLesson().setIsLocked(false);
-                    list[i].getSLesson().setIsActive(true);
+        if(specialLessonUnlock != null) {
+            for(int i=0; i<list.size(); i++) {
+                if (list.get(i).getSLesson() != null && specialLessonUnlock.contains(list.get(i).getSLesson().getLessonId())) {
+                    list.get(i).getSLesson().setIsLocked(false);
+                    list.get(i).getSLesson().setIsActive(true);
                 }
             }
+        }
+
+        if(lessonUnlock != null) {
+            for(int i=0; i<list.size(); i++) {
+                if (lessonUnlock.contains(list.get(i).getLessonId())) {
+                    list.get(i).setIsLocked(false);
+                    list.get(i).setIsActive(true);
+                }
+            }
+        }
+    }
+
+
+    // 레슨레벨 세팅하기
+    private void setLevelDesign(int thisLevel) {
+        switch (thisLevel) {
+            case 0 :    // 초급레슨
+                tvLevel.setText(getResources().getString(R.string.BEGINNER_LEVEL));
+                tvLevel.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
+                ivBackGround.setImageResource(R.drawable.bg_light_blue);
+                btnPreLevel.setVisibility(View.INVISIBLE);
+                btnNextLevel.setVisibility(VISIBLE);
+                break;
+
+            case 1 :    // 중급레슨
+                tvLevel.setText(getResources().getString(R.string.INTERMEDIATE_LEVEL));
+                tvLevel.setTextColor(ContextCompat.getColor(context, R.color.BLUE));
+                ivBackGround.setImageResource(R.drawable.bg_pink);
+                btnPreLevel.setVisibility(VISIBLE);
+                btnNextLevel.setVisibility(View.INVISIBLE);
+                break;
         }
     }
 
@@ -239,7 +286,14 @@ public class MainLesson extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnBack :
+            case R.id.btnPreLevel :
+                setLessonItem(0);
+                adapter.notifyDataSetChanged();
+                break;
+
+            case R.id.btnNextLevel :
+                setLessonItem(1);
+                adapter.notifyDataSetChanged();
                 break;
 
             case R.id.btnInfo :
@@ -248,9 +302,6 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
             case R.id.btnCloseInfo :
                 layoutInfo.setVisibility(GONE);
-                break;
-
-            case R.id.btnNextLevel :
                 break;
         }
     }
@@ -262,7 +313,8 @@ public class MainLesson extends Fragment implements View.OnClickListener {
 
         if(adapter != null) {
             System.out.println("메인레슨 보임!");
-            setCompletedLessons();
+            lastClickLevel = SharedPreferencesInfo.getLastClickLevel(context);
+            setLessonItem(lastClickLevel);
             adapter.notifyDataSetChanged();
         }
     }

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +19,6 @@ import net.awesomekorean.podo.GetRandomPoint;
 import net.awesomekorean.podo.R;
 import net.awesomekorean.podo.SharedPreferencesInfo;
 import net.awesomekorean.podo.UnlockActivity;
-import net.awesomekorean.podo.lesson.lessonHangul.DpToPx;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangul;
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulAssembly;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumber;
@@ -28,14 +26,15 @@ import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
 import net.awesomekorean.podo.lesson.lessons.LessonItem;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
 
     private Context context;
-    private LessonItem[] list;
+    private ArrayList<LessonItem> list;
     private Intent intent;
 
-    public LessonAdapter(Context context, LessonItem[] list) {
+    public LessonAdapter(Context context, ArrayList<LessonItem> list) {
         this.context = context;
         this.list = list;
     }
@@ -82,7 +81,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            LessonItem item = list[position];
+            LessonItem item = list.get(position);
 
             switch (v.getId()) {
 
@@ -90,6 +89,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 case R.id.layoutItem :
 
                     if(item.getIsActive()) {
+                        SharedPreferencesInfo.setLastClickLevel(context, 0);
                         if (!item.getIsLocked()) {
                             String lessonId = item.getLessonId();
                             switch (lessonId) {
@@ -127,6 +127,8 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                                         }
                                     } else if (type.equals("IL")) {
                                         //todo: 중급레슨 프레임
+                                        SharedPreferencesInfo.setLastClickLevel(context, 1);
+                                        intent = new Intent(context, IntermediateFrame.class);
                                     } else if (type.equals("AL")) {
                                         //todo: 고급레슨 프레임
                                     } else {
@@ -142,6 +144,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                             intent = new Intent(context, UnlockActivity.class);
                             intent.putExtra(context.getResources().getString(R.string.EXTRA_ID), context.getResources().getString(R.string.LESSON));
                             intent.putExtra(context.getResources().getString(R.string.LESSON_ID), item.getLessonId());
+                            intent.putExtra(context.getResources().getString(R.string.LESSON), (Serializable) item);
                             context.startActivity(intent);
                         }
                         SharedPreferencesInfo.setLastClickItem(context, true, position);
@@ -230,7 +233,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        LessonItem item = list[position];
+        LessonItem item = list.get(position);
         holder.tvItemNo.setText(String.valueOf(position + 1));
 
         if(!item.getIsLocked()) {
@@ -266,9 +269,9 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
         if(position == 0) {     // 첫 번째 아이템
             rightBottom = View.VISIBLE;
-        } else if(position == list.length - 1 && position%2 == 1) {   // 마지막 + 홀수 아이템
+        } else if(position == list.size() - 1 && position%2 == 1) {   // 마지막 + 홀수 아이템
             rightTop = View.VISIBLE;
-        } else if(position == list.length - 1 && position%2 == 0) {   // 마지막 + 짝수 아이템
+        } else if(position == list.size() - 1 && position%2 == 0) {   // 마지막 + 짝수 아이템
             leftTop = View.VISIBLE;
         } else if(position%2 == 1) {    // 홀수 아이템
             rightTop = View.VISIBLE;
@@ -294,27 +297,45 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
             holder.tvItemTitle.setText(R.string.REWARDS);
             holder.tvItemTitle.setMaxLines(1);
             if(item.getIsActive()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.circle_reward_active_beginner);
+                drawable = ContextCompat.getDrawable(context, R.drawable.reward_active_purple);
 
             } else {
-                drawable = ContextCompat.getDrawable(context, R.drawable.circle_reward_inactive_beginner);
+                drawable = ContextCompat.getDrawable(context, R.drawable.reward_inactive_purple);
             }
 
         } else {      // 레슨 & 리뷰 & 스페셜레슨
+
             if(type.equals("LR")) {     // 리뷰
                 holder.tvItemTitle.setText(R.string.REVIEW);
                 holder.tvItemTitle.setMaxLines(1);
             }
 
-            if(item.getIsLocked()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.circle_locked_beginner);
+            if(type.equals("IL")) {     // 중급레슨
+                if (item.getIsLocked()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.locked_blue);
 
-            } else if(item.getIsActive()) {
-                drawable = ContextCompat.getDrawable(context, R.drawable.circle_active_beginner);
+                } else if (item.getIsActive()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_active_blue);
+
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_inactive_blue);
+                }
+                holder.tvItemSubTitle.setTextColor(ContextCompat.getColor(context, R.color.BLUE));
+                holder.currentItem.setImageResource(R.drawable.circle_pink);
 
             } else {
-                drawable = ContextCompat.getDrawable(context, R.drawable.circle_inactive_beginner);
+                if (item.getIsLocked()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.locked_purple);
+
+                } else if (item.getIsActive()) {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_active_purple);
+
+                } else {
+                    drawable = ContextCompat.getDrawable(context, R.drawable.lesson_inactive_purple);
+                }
             }
+            holder.tvItemSubTitle.setTextColor(ContextCompat.getColor(context, R.color.PURPLE));
+            holder.currentItem.setImageResource(R.drawable.circle_light_blue);
         }
 
 
@@ -378,6 +399,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return list.length;
+        return list.size();
     }
 }

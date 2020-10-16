@@ -20,6 +20,7 @@ public class UserInformation {
     private List<String> readingComplete = new ArrayList<>();
     private List<String> specialLessonUnlock = new ArrayList<>();
     private List<String> readingUnlock = new ArrayList<>();
+    private List<String> lessonUnlock = new ArrayList<>();
     private Boolean isPremium;
     private Long lastVisit;
     private Long datePurchase;
@@ -165,6 +166,14 @@ public class UserInformation {
 
     public void addReadingUnlock(String readingId) {
         this.readingUnlock.add(readingId);
+    }
+
+    public List<String> getLessonUnlock() {
+        return lessonUnlock;
+    }
+
+    public void addLessonUnlock(String lessonId) {
+        this.lessonUnlock.add(lessonId);
     }
 
     public void resetDays(int today) {

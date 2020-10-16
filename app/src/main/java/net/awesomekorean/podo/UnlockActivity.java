@@ -21,7 +21,13 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+<<<<<<< HEAD
 import net.awesomekorean.podo.lesson.LessonSpecialFrame;
+=======
+import net.awesomekorean.podo.lesson.IntermediateFrame;
+import net.awesomekorean.podo.lesson.LessonSpecialFrame;
+import net.awesomekorean.podo.lesson.intermediateLessons.I_Lesson;
+>>>>>>> feature/ilesson
 import net.awesomekorean.podo.lesson.lessonHangul.LessonHangulAssembly;
 import net.awesomekorean.podo.lesson.lessonNumber.LessonNumberMenu;
 import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
@@ -139,21 +145,22 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                     int newPoint = userPoint - unlockPrice;
                     userInformation.setPoints(newPoint);
 
+                    // 스페셜레슨 구매
                     if(extra.equals(getResources().getString(R.string.SPECIAL_LESSON))) {
 
                         String lessonId = getIntent().getStringExtra(getResources().getString(R.string.LESSON_ID));
 
                         switch (lessonId) {
 
-                            case "H_assembly" :
+                            case "H_assembly":
                                 intent = new Intent(context, LessonHangulAssembly.class);
                                 break;
 
-                            case "N_practice" :
+                            case "N_practice":
                                 intent = new Intent(context, LessonNumberMenu.class);
                                 break;
 
-                            default :
+                            default:
                                 LessonSpecial lesson = (LessonSpecial) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
                                 intent = new Intent(context, LessonSpecialFrame.class);
                                 intent.putExtra(getResources().getString(R.string.LESSON), (Serializable) lesson);
@@ -164,6 +171,16 @@ public class UnlockActivity extends AppCompatActivity implements View.OnClickLis
                         startActivity(intent);
 
 
+                    // 중급레슨 구매
+                    } else if(extra.equals(getResources().getString(R.string.LESSON))) {
+                        I_Lesson lesson = (I_Lesson) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
+                        userInformation.addLessonUnlock(lesson.getLessonId());
+                        intent = new Intent(context, IntermediateFrame.class);
+                        intent.putExtra(getResources().getString(R.string.LESSON), (Serializable) lesson);
+                        startActivity(intent);
+
+
+                    // 읽기 구매
                     } else {
                         Reading reading = (Reading) getIntent().getSerializableExtra(getResources().getString(R.string.READING));
                         userInformation.addReadingUnlock(reading.getReadingId());

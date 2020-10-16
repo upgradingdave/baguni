@@ -9,7 +9,7 @@ public class RandomRewards {
 
         Random random = new Random();
 
-        int reward1 = 3;    // 60%
+        int reward1 = 4;    // 60%
         int reward2 = 5;   // 25%
         int reward3 = 7;   // 10%
         int reward4 = 10;   // 5%

@@ -31,8 +31,11 @@ import net.awesomekorean.podo.LoadingPage;
 import net.awesomekorean.podo.MediaPlayerManager;
 import net.awesomekorean.podo.PlaySoundPool;
 import net.awesomekorean.podo.R;
+import net.awesomekorean.podo.SharedPreferencesInfo;
+import net.awesomekorean.podo.UserInformation;
 import net.awesomekorean.podo.lesson.intermediateLessons.I_Lesson;
 import net.awesomekorean.podo.lesson.intermediateLessons.I_Lesson00;
+import net.awesomekorean.podo.lesson.lessons.LessonSpecial;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -120,13 +123,13 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
         playSoundPool = new PlaySoundPool(this);
         clickedBtns = new ArrayList<>();
 
-        layoutAnswer.setVisibility(View.GONE);
-        layoutCompleted.setVisibility(View.GONE);
+        layoutAnswer.setVisibility(View.INVISIBLE);
+        layoutCompleted.setVisibility(View.INVISIBLE);
 
         Intent intent = new Intent(getApplicationContext(), LoadingPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
-        lesson = new I_Lesson00();
+        lesson = (I_Lesson) getIntent().getSerializableExtra(getResources().getString(R.string.LESSON));
         title.setText(lesson.getLessonTitle());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -149,7 +152,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
 
     // 답변버튼 만들기
     public void makeAnswerBtns() {
-        sentenceSplit = correctAnswer.split(" ");
+        sentenceSplit = correctAnswer.split(" |\n");
         RandomArray.randomArrayString(sentenceSplit);
 
         for(int i=0; i<sentenceSplit.length; i++) {
@@ -184,7 +187,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
 
     // 리사이클러뷰에 대화 넣기
     public void addDialog() {
-        layoutAnswer.setVisibility(View.GONE);
+        layoutAnswer.setVisibility(View.INVISIBLE);
         flexboxLayout.removeAllViews();
         initAnswer();
 
@@ -197,6 +200,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
             } else {
                 item.setPeopleImage(lesson.getPeopleImage()[1]);
             }
+
             list.add(item);
             adapter.notifyDataSetChanged();
 
@@ -206,6 +210,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
             } else {
                 layoutAnswer.setVisibility(View.VISIBLE);
                 correctAnswer = list.get(dialogCount).getDialog();
+                correctAnswer = correctAnswer.replaceAll("\n", " "); // 줄바꿈을 공백으로 변경
                 makeAnswerBtns();
             }
 
@@ -225,6 +230,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
             mediaPlayerManager.stopMediaPlayer();
             mediaPlayerManager.playIntermediateAudio(audiosDialog.get(dialogCount), this, playMode);
             if (playMode == 2) {
+                recyclerView.scrollToPosition(dialogCount);
                 progressAudio.setProgress(dialogCount + 1);
             }
 
@@ -304,7 +310,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
 
             case R.id.btnClose :
                 Intent intent = new Intent(this, ConfirmQuit.class);
-                intent.putExtra(getResources().getString(R.string.PROGRESS), 0);
+                intent.putExtra(getResources().getString(R.string.FINISH), false);
                 intent.putExtra(getResources().getString(R.string.LESSON_ID), lesson.getLessonId());
                 startActivityForResult(intent, 200);
                 break;
@@ -351,6 +357,9 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.btnFinish :
+                UserInformation userInformation = SharedPreferencesInfo.getUserInfo(getApplicationContext());
+                userInformation.updateCompleteList(getApplicationContext(), lesson.getLessonId(), false);
+                finish();
                 break;
 
             case R.id.btnPlayAgain :
@@ -365,6 +374,8 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
 
             // 정답입력 버튼
             default:
+                btnCancel.setEnabled(true);
+
                 Button selectedBtn = (Button) v;
                 if(clickedBtns.size() == 0) {
                     tvAnswer.setText("");
@@ -377,6 +388,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
                 tvAnswer.append(selectedBtnText);
 
                 if(clickedBtns.size() == sentenceSplit.length) {
+                    btnCancel.setEnabled(false);
 
                     if(tvAnswer.getText().toString().equals(correctAnswer)) { // 정답
                         answered(0, R.drawable.bg_mint_10_stroke_mint, ContextCompat.getColor(getApplicationContext(), R.color.MINT));
@@ -401,7 +413,7 @@ public class IntermediateFrame extends AppCompatActivity implements View.OnClick
                             }
 
                         }
-                    }, 2000);
+                    }, 1500);
                 }
             break;
         }
